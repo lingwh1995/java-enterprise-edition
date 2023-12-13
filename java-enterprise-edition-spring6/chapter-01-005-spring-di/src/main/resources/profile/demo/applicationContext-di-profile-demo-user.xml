@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="userDao" class="org.bluebridge.profile.demo.user.dao.UserDao"/>
+    <!-- 测试使用setter方式为属性注入引用类型的值 -->
+    <bean id="userService" class="org.bluebridge.profile.demo.user.service.UserServiceImple">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+    <!-- 测试使用构造方式为属性注入引用类型的值 -->
+    <bean id="userController" class="org.bluebridge.profile.demo.user.controller.UserController">
+        <constructor-arg name="userService" ref="userService"/>
+    </bean>
+
+</beans>

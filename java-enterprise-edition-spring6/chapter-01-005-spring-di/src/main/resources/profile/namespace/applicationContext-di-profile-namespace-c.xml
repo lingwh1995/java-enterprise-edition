@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        第一步：在xml的配置文件头部添加c命名空间 xmlns:c="http://www.springframework.org/schema/c"
+        第二步：使用c:属性标签为简单类型属性赋值，如 c:name="sunqi"，或使用 c:属性-ref标签为引用类型数据赋值，如 c:friend-ref="friend"
+    -->
+    <!-- 普通方式进行注入 -->
+    <bean id="cat" class="org.bluebridge.profile.namespace.domain.Cat">
+        <property name="name" value="煤球"/>
+        <property name="age" value="1"/>
+    </bean>
+    <!-- C命名空间方式进行注入方式一：根据参数名称进行注入 -->
+    <bean id="userInjectValueByCNamespaceByParamName" class="org.bluebridge.profile.namespace.cnamespace.UserInjectValueByCNamespace"
+          c:name="构造方式注入的简化写法：C命名空间-根据参数名称注入" c:age="28" c:cat-ref="cat"/>
+    <!-- C命名空间方式进行注入方式一：根据参数索引顺序进行注入 -->
+    <bean id="userInjectValueByCNamespaceByParamIndex" class="org.bluebridge.profile.namespace.cnamespace.UserInjectValueByCNamespace"
+          c:_0="构造方式注入的简化写法：C命名空间-根据参数索引顺序进行注入" c:_1="28" c:_2-ref="cat"/>
+</beans>

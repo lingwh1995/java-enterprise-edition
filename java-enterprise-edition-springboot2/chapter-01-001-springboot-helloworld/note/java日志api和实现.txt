@@ -1,0 +1,16 @@
+1.日志接口:slf4j(Simple Logging Facade for Java)
+  日志实现:slf4j的第一代实现log4j,第二代实现:logback
+2.log4j和log4j2的关系:log4j2是apache借用log4j之名,开发的一个日志框架,与log4j并无直接关系
+3.slf4j和log4j的关系:最开始只有slf4j,后来有了log4j,但是log4j不能直接作为slf4j的实现,
+  需要在中甲加一个slf4j-log4j.jar,作为适配层
+5.SpringBoot选择slf4j接口和logback实现
+6.如何使用slf4j：
+    Logger logger = LoggerFactory.getLogger(Xxx.class);
+    logger.info("hello world!");
+7.jar和具体的jar名称
+    接口或者实现          jar包名
+    slf4j           slf4j-api.jar
+    logback         logback-core.jar、logback-classic.jar
+8.commons-logging:
+    commons-logging也是一个日志接口，俗称jcl,Spring框架就使用的是 commons-logging作为日志api
+

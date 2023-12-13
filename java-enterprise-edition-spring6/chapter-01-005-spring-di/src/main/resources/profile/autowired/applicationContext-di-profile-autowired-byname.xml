@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="orderDao" class="org.bluebridge.profile.autowire.byname.dao.OrderDao"/>
+
+    <!-- 测试set方式使用autowire根据属性名称注入，要求
+        1.OrderService中的OrderDao属性需要写setter方法
+        2.OrderDao这个javabean的id配置为OrderService中set方法去掉set后首字母小写
+    -->
+    <bean id="orderService"
+          class="org.bluebridge.profile.autowire.byname.service.OrderServiceImpl" autowire="byName"/>
+</beans>

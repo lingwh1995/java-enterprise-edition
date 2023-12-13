@@ -1,0 +1,44 @@
+server:
+  port: 8080
+person:
+  lastName: zhangsan
+  age: 18
+  boss: false
+  birthday: 2017/12/12
+  maps:
+    k1: v1
+    k2: 12
+  lists:
+    - lisi
+    - zhaoliu
+  dog:
+    name: xiaogou
+    age: 5
+spring:
+  profiles:
+    active: dev
+  output:
+    ansi:
+      enabled: always
+logging:
+  level:
+    com.dragonsoft: trace
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} -%5p ${PID:-} [%15.15t] %-30.30C{1.} : %m%n"
+  config:
+    classpath: classpath:/logback_.xml
+#  path: d:/springboot1-test.log
+#  file: springboot-test.log
+
+#会打印自动配置信息
+debug: true
+---
+server:
+  port: 8083
+spring:
+  profiles: dev
+---
+server:
+  port: 8084
+spring:
+  profiles: prod

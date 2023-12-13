@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SpringMVC6.x原生方式(RequestEntity方式)实现文件上传下载演示</title>
+</head>
+<body>
+    <h1>SpringMVC6.x原生方式(RequestEntity方式)实现文件上传下载演示</h1>
+    <h4>文件下载</h4>
+    <a th:href="@{/fileUploadAndDownload/download/riders.jpg}">下载 riders.jpg</a><br>
+    <a th:href="@{/fileUploadAndDownload/download/月亮代表我的心-邓丽君.wav}">下载 月亮代表我的心-邓丽君.wav</a><br>
+
+    <h4>单文件上传</h4>
+    <form th:action="@{/fileUploadAndDownload/upload/file}" method="post" enctype="multipart/form-data">
+        <!--上传文件的控件必须指定name属性,用来标识当前上传的文件-->
+        头像：<input type="file" name="uploadFile"><br>
+        <input type="submit" value="上传">
+    </form>
+
+    <h4>多文件上传</h4>
+    <form th:action="@{/fileUploadAndDownload/upload/files}" method="post" enctype="multipart/form-data">
+        <!--上传文件的控件必须指定name属性,用来标识当前上传的文件-->
+        头像：<input type="file" name="uploadFiles" multiple><br>
+        <input type="submit" value="上传">
+    </form>
+
+</body>
+</html>

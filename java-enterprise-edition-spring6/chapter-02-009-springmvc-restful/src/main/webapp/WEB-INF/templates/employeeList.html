@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>员工列表页面</title>
+    <style>
+        a {
+            text-decoration: none;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>员工列表页面</h1>
+    <table id="dataTable" border="1px solid red" cellspacing="0">
+        <tr>
+            <th colspan="5">员工信息列表</th>
+        </tr>
+        <tr>
+            <th>id</th>
+            <th>lastName</th>
+            <th>email</th>
+            <th>gender</th>
+            <th>操作-<a th:href="@{/restfulCase/toAddEmployee}">添加</a></th>
+        </tr>
+        <tr th:each="employee: ${employees}">
+            <th th:text="${employee.id}"></th>
+            <th th:text="${employee.lastName}"></th>
+            <th th:text="${employee.email}"></th>
+            <th th:text="${employee.gender}"></th>
+            <th>
+                <!-- thymeleaf拼接id方式一 -->
+                <a @click="deleteEmployee" th:href="@{|/restfulCase/employee/${employee.id}|}">删除</a>
+                <!-- thymeleaf拼接id方式二 -->
+                <a @click="deleteEmployee" th:href="@{'/restfulCase/employee/' + ${employee.id}}">删除</a>
+                <a th:href="@{|/restfulCase/toEditEmployee/${employee.id}|}">修改</a>
+            </th>
+        </tr>
+    </table>
+
+    <form id="deleteForm" method="post">
+        <input type="hidden" name="_method" value="delete"/>
+    </form>
+
+    <script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+    <script type="text/javascript">
+        var vue = new Vue({
+            el: "#dataTable",
+            methods: {
+                deleteEmployee: function (event) {
+                    var deleteForm = document.getElementById("deleteForm");
+                    deleteForm.action = event.target.href;
+                    //提交表单
+                    deleteForm.submit();
+                    //取消超链接的默认行为
+                    event.preventDefault();
+                }
+            }
+        })
+    </script>
+</body>
+</html>

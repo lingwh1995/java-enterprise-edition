@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--
+        使用context命名空间实现spring引入外部配置文件，可以实现在spring配置文件中引入外部properties文件
+        第一步：在xml的配置文件头部添加context命名空间
+            xmlns:context="http://www.springframework.org/schema/context"
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        第二步：使用 context:property-placeholder 引入外部的properties文件
+        第三步：使用 ${} 获取properties文件中的值
+        特别注意：Spring根据key获取properties属性的值时，如果配置文件中的key和系统环境变量的key的值相同，则获取的值是系统环境变量的值，而不是properties中的值
+        针对此种情况，应该对properties中key进行特殊处理，如 username 应该改为 jdbc.username
+    -->
+    <!-- key命名不规范的properties文件-->
+    <context:property-placeholder location="profile/introduceproperties/key-invalid/jdbc-key-invalid.properties"/>
+    <bean id="myDataSource4KeyInvalid" class="org.bluebridge.profile.introduceproperties.MyDataSource4">
+        <property name="driver" value="${driver}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+        <property name="url" value="${url}"/>
+    </bean>
+</beans>

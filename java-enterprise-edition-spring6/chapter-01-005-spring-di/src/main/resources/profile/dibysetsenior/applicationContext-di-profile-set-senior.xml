@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="friend1" class="org.bluebridge.profile.dibysetsenior.domain.Friend">
+        <property name="name" value="zhangsan"/>
+        <property name="age" value="18"/>
+    </bean>
+    <bean id="friend2" class="org.bluebridge.profile.dibysetsenior.domain.Friend">
+        <property name="name" value="lisi"/>
+        <property name="age" value="19"/>
+    </bean>
+    <bean id="friend3" class="org.bluebridge.profile.dibysetsenior.domain.Friend">
+        <property name="name" value="wangwu"/>
+        <property name="age" value="20"/>
+    </bean>
+
+    <!-- 测试使用set方式为属性注入数组类型的值 -->
+    <bean id="userInjectArrayBySetter" class="org.bluebridge.profile.dibysetsenior.UserInjectArrayBySetter">
+        <!-- 注入数组：数组元素数据类型为非引用类型数据 -->
+        <property name="hobbies">
+            <array>
+                <value>抽烟</value>
+                <value>喝酒</value>
+                <value>烫头</value>
+                <value>数组</value>
+            </array>
+        </property>
+        <!-- 注入数组：数组元素数据类型为引用类型数据 -->
+        <property name="friends">
+            <array>
+                <ref bean="friend1"/>
+                <ref bean="friend2"/>
+                <ref bean="friend3"/>
+            </array>
+        </property>
+    </bean>
+
+    <!-- 测试使用set方式为属性注入List类型的值 -->
+    <bean id="userInjectListBySetter" class="org.bluebridge.profile.dibysetsenior.UserInjectListBySetter">
+        <!-- 注入List集合：List集合元素数据类型为非引用类型数据 -->
+        <property name="hobbies">
+            <list>
+                <value>抽烟</value>
+                <value>喝酒</value>
+                <value>烫头</value>
+                <value>list</value>
+            </list>
+        </property>
+        <!-- 注入List集合：List集合元素数据类型为引用类型数据 -->
+        <property name="friends">
+            <list>
+                <ref bean="friend1"/>
+                <ref bean="friend2"/>
+                <ref bean="friend3"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 测试使用set方式为属性注入Set类型的值 -->
+    <bean id="userInjectSetBySetter" class="org.bluebridge.profile.dibysetsenior.UserInjectSetBySetter">
+        <!-- 注入Set集合：Set集合元素数据类型为非引用类型数据，Set集合会自动去重 -->
+        <property name="hobbies">
+            <set>
+                <value>抽烟</value>
+                <value>喝酒</value>
+                <value>烫头</value>
+                <value>set</value>
+                <value>set</value>
+            </set>
+        </property>
+        <!-- 注入Set集合：Set集合元素数据类型为引用类型数据，Set集合会自动去重 -->
+        <property name="friends">
+            <set>
+                <ref bean="friend1"/>
+                <ref bean="friend2"/>
+                <ref bean="friend3"/>
+            </set>
+        </property>
+    </bean>
+
+    <!-- 测试使用set方式为属性注入Map类型的值 -->
+    <bean id="userInjectMapBySetter" class="org.bluebridge.profile.dibysetsenior.UserInjectMapBySetter">
+        <!-- 注入Map集合：Map集合key和value的数据类型为非引用类型数据 -->
+        <property name="phones">
+            <map>
+                <entry key="China Union"   value="13382692083"/>
+                <entry key="China Mobile"  value="15291183358"/>
+                <entry key="China Telecom" value="17782692083"/>
+            </map>
+        </property>
+        <!-- 注入Map集合：
+            Map集合key的数据类型为非引用类型数据，value的数据类型为引用类型数据
+            如果key和value为非引用类型的数据则使用key和value进行配置
+            如果key和value为引用类型的数据则使用key-ref和value-ref进行配置
+        -->
+        <property name="friends">
+            <map>
+                <entry key="Primary school friend" value-ref="friend1"/>
+                <entry key="Junior high school friend" value-ref="friend2"/>
+                <entry key="Sunior high school friend" value-ref="friend3"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 测试使用set方式为属性注入Properties类型的值 -->
+    <bean id="userInjectPropertiesBySetter" class="org.bluebridge.profile.dibysetsenior.UserInjectPropertiesBySetter">
+        <!-- 注入Properties：Properties属性key和value的数据类型固定为String -->
+        <property name="properties">
+            <props>
+                <prop key="drive">com.mysql.cj.jdbc.Driver</prop>
+                <prop key="url">jdbc:mysql://localhost:3306/test</prop>
+                <prop key="username">root</prop>
+                <prop key="password">123456</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 测试使用set方式为属性注入NULL和空字符串的值 -->
+    <bean id="userInjectNULLAndEmptyStringBySetter" class="org.bluebridge.profile.dibysetsenior.UserInjectNULLAndEmptyStringBySetter">
+        <!-- 注入NULL方式一：自动注入NULL，只需要注释掉下面id属性配置代码即可 -->
+        <!--<property name="id" value="001"/>-->
+        <!-- 注入NULL方式二：手动注入NULL -->
+        <property name="name">
+            <null/>
+        </property>
+
+        <!-- 注入空字符串方式一 -->
+        <!--<property name="age" value=""/>-->
+        <!-- 注入空字符串方式二 -->
+        <property name="age">
+            <value/>
+        </property>
+    </bean>
+
+    <!-- 注入特殊符号 -->
+    <bean id="mathInjectSpecialsymbolsBySetter" class="org.bluebridge.profile.dibysetsenior.MathInjectSpecialsymbolsBySetter">
+        <!-- 使用转义符号代替 -->
+        <property name="expressionLt" value="2 &lt; 3"/>
+        <!-- 使用<![CDATA[]]>处理，注意：只能用value标签赋值，不能使用value属性赋值，<![CDATA[]]>是xml规范，不是Spring语法 -->
+        <property name="expressionGt">
+            <value><![CDATA[5 > 3]]]></value>
+        </property>
+    </bean>
+</beans>

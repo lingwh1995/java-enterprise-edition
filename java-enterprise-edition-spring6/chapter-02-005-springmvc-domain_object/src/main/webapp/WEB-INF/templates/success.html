@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <h1>success页面</h1>
+    获取存放在request域对象中的值:<span th:text="${requestScope}"/><br/>
+    获取存放在session域对象中的值:<span th:text="${session.sessionScope}"/><br/>
+    获取存放在servletContext域对象中的值:<span th:text="${application.servletContextScope}"/>
+<body>
+
+</body>
+</html>

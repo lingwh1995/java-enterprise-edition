@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+">
+	<!-- 配置自动扫描包 -->
+	<context:component-scan
+			base-package="com.dragonsoft.example.controller,
+						  com.dragonsoft.restfulcurd,
+						  com.dragonsoft.exception,
+						  com.dragonsoft.converter,
+						  com.dragonsoft.mvcsuperior,
+						  com.dragonsoft.springmvctest"/>
+	<!-- 配置视图解析器 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/views/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	<!--转发-->
+	<mvc:view-controller path="/testMVCView-controller" view-name="success" />
+
+	<!--重定向-->
+
+	<!--<mvc:view-controller path="/" view-name="redirect:success"></mvc:view-controller>-->
+	<!-- springmvc处理静态资源 -->
+	<mvc:default-servlet-handler/>
+
+	<!-- 配置国际化资源文件 -->
+	<bean id="messageSource"
+		  class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="valodator"></property>
+		<!--页面的提示信息是否乱码,取决于这里配置的字符编码格式-->
+		<property name="defaultEncoding" value="UTF-8"/>
+	</bean>
+
+	<!-- 配置自定义的拦截器 -->
+	<mvc:interceptors>
+		<bean class="com.dragonsoft.interceptor.FirstInterceptor"></bean>
+		<!-- 配置拦截器作用和不作用的路径 -->
+		<mvc:interceptor>
+			<!-- 配置拦截器作用的路径 -->
+			<!-- 进行拦截：/**表示拦截所有controller -->
+			<mvc:mapping path="/testInterceptor1" />
+			<!-- 配置拦截器不作用的路径 -->
+			<mvc:exclude-mapping path="/testInterceptor2"/>
+			<bean class="com.dragonsoft.interceptor.SecondInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!-- 配置一个注解驱动，如果配置此标签，那么就可以不用配置处理器映射器和处理器适配器 -->
+	<mvc:annotation-driven  conversion-service="conversionService"/>
+	<!-- 转换器的配置 -->
+	<bean id="conversionService"
+		  class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<set>
+				<bean class="com.dragonsoft.converter.converter.DateConverter"/>
+				<bean class="com.dragonsoft.converter.converter.EmployeeConverter"/>
+			</set>
+		</property>
+	</bean>
+</beans>

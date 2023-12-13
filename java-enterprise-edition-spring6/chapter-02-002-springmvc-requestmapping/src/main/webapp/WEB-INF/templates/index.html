@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SpringMVC的@RequestMapping注解功能演示</title>
+</head>
+<body>
+    <h1>SpringMVC的@RequestMapping注解功能演示</h1>
+    <h4>测试@RequestMapping注解的value属性</h4>
+    <a th:href="@{/requestMapping/valueProperty_1}">测试@RequestMapping注解的value属性[匹配方法:RequestMappingController.valueProperty()]</a><br/>
+    <a th:href="@{/requestMapping/valueProperty_2}">测试@RequestMapping注解的value属性[匹配方法:RequestMappingController.valueProperty()]</a><br/>
+
+    <h4>测试@RequestMapping注解的method属性</h4>
+    <a th:href="@{/requestMapping/methodProperty}">测试@RequestMapping注解的method属性[匹配方法:RequestMappingController.methodProperty()]</a><br/>
+    <form th:action="@{/requestMapping/methodProperty}" method="post">
+        <input type="submit"/>
+    </form><br/>
+
+    <h4>传统方式参数传递写法 + 测试@RequestMapping注解的params</h4>
+    <a th:href="@{/requestMapping/paramsProperty(username='admin',password=123456)}">测试@RequestMapping注解的params属性[匹配方法:RequestMappingController.paramsProperty()]</a><br/>
+    <h4>thymeleaf中的参数传递写法 + 测试@RequestMapping注解的params</h4>
+    <a th:href="@{/requestMapping/paramsProperty?username='admin'&password=123456}">测试@RequestMapping注解的params属性[匹配方法:RequestMappingController.paramsProperty()]</a><br/>
+
+    <h4>测试@RequestMapping注解的headers属性</h4>
+    <a th:href="@{/requestMapping/headersProperty}">测试@RequestMapping注解的headers属性[匹配方法:RequestMappingController.headersProperty()]</a><br/>
+
+    <h4>测试@RequestMapping注解的value属性支持ant风格的url路径</h4>
+    <a th:href="@{/requestMapping/ant/antStyle}">测试@RequestMapping注解的value属性支持ant风格的url路径[匹配方法:RequestMappingController.antStyle()]</a><br/>
+</body>
+</html>

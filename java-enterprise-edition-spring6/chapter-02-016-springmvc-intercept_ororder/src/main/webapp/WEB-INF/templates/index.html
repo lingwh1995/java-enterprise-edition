@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SpringMVC的多个拦截器演示</title>
+</head>
+<body>
+    <h1>SpringMVC的多个拦截器演示</h1>
+    <a th:href="@{/interceptor/executeInterceptor}">测试拦截器：访问这个路径拦截器会生效</a><br/>
+    <a th:href="@{/interceptor/notExecuteInterceptor}">测试拦截器：访问这个路径拦截器会不做任何操作</a>
+</body>
+</html>

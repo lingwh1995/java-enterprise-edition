@@ -1,0 +1,32 @@
+1.查看git相关信息(branch、commit)
+    1>.pom增加
+        <plugin>
+            <groupId>pl.project13.maven</groupId>
+            <artifactId>git-commit-id-plugin</artifactId>
+            <version>2.1.15</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>revision</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+            </configuration>
+        </plugin>
+    2>.YML中增加git相关配置
+        management:
+          info:
+            git:
+              mode: full
+    3>.生成git.properties
+        idea右侧manven面板->spring-boot-actuator
+            ->Plugins->git-commit-id->
+                点击 git-commit-id:revision
+    4>.启动项目
+        访问:
+            http://localhost:8080/actuator/info
+        查看其中git相关信息(branch、commit)
+    5>.特别注意:
+        要先使用插件生成git.properties访问才能查看到git相关信息(branch、commit),否则无法查看到git相关信息

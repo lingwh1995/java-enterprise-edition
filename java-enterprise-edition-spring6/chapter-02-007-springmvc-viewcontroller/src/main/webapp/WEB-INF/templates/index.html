@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SpringMVC配置文件中使用mvc:view-controller标签实现零代码完成页面跳转功能演示</title>
+    <style>
+        a {
+            text-decoration: none;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SpringMVC配置文件中使用mvc:view-controller标签实现零代码完成页面跳转功能演示</h1>
+    <h4>测试<mvc:view-controller/>和<mvc:annotation-driven/></h4>
+    <a th:href="@{/viewController/testAnnotationDriven}">测试<mvc:view-controller/>和<mvc:annotation-driven/></a>
+</body>
+</html>

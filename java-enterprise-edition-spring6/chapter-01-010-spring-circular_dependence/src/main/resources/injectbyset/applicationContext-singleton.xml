@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        singleton + setter模式下循环依赖
+        结论：不会出现循环依赖问题
+        为什么singleton + setter模式下循环依赖不会出问题?
+            在这种模式下，Spring对Bean的管理主要分为清晰的两个阶段
+            第一个阶段：在Spring容器加载的时候，调用无参构造方法实例化bean，此时可以先不给属性赋值，可以将该bean对象曝光给外界，其实是只要其中任意Bean实例化之后，马上进行“曝光”，不等属性赋值就曝光，因为这个bean是单例的，不管什么时候曝光效果都是一样的
+            第二个节点：Bean曝光之后，再进行属性赋值(再调用set方法)
+         核心解决方案是：把实例化对象和给对象属性的赋值分为两个阶段来完成，这两个操作是不在同一个时间点上去完成的
+         注意：只有在scope是singleton的情况下，bean才会采取“提前曝光”的措施
+    -->
+    <bean id="husband" class="org.bluebridge.circulardependence.injectbyset.singleton.Husband" scope="singleton">
+        <property name="name" value="丈夫-singleton"/>
+        <property name="wife" ref="wife"/>
+    </bean>
+    <bean id="wife" class="org.bluebridge.circulardependence.injectbyset.singleton.Wife" scope="singleton">
+        <property name="name" value="妻子-singleton"/>
+        <property name="husband" ref="husband"/>
+    </bean>
+</beans>

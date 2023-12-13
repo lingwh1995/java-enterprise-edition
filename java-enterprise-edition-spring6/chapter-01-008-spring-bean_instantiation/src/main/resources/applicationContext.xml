@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Spring示例化bean的第一种方式： 使用构造方法实例化bean -->
+    <bean id="springBean" class="org.bluebridge.beaninstantiation.constructionmethod.SpringBean"/>
+
+    <!-- Spring示例化bean的第二种方式： 使用简单(静态)工厂实例化bean -->
+    <bean id="car" class="org.bluebridge.beaninstantiation.simplefactory.CarFactory" factory-method="getCar"/>
+
+    <!-- Spring示例化bean的第三种方式： 通过工厂方法模式实例化bean，需要配置factory-bean属性和factory-method属性 -->
+    <bean id="gunFactory" class="org.bluebridge.beaninstantiation.factorymethod.GunFactory"/>
+    <bean id="gun" factory-bean="gunFactory" factory-method="get"/>
+
+    <!--
+        Spring示例化bean的第四种方式： 通过实现FactoryBean接口来实例化bean，这种方式是第三种方式的简化，只不过之前工厂
+        模式中的抽象类由Spring框架提供的FactoryBean代替了，在第三种实例化bean的方式中，这个抽象类需要由我们自己去创建，由
+        此可见， Spring框架为让开发人员更专注业务简化非必要部分做了很多细节上的努力 2023.11.2 星期四 南康新村 353号七天宾馆
+    -->
+    <bean id="tank" class="org.bluebridge.beaninstantiation.factorybeaninterface.TankFactoryBean"/>
+
+    <!-- Spring示例化bean的第四种方式： 实际应用 -->
+    <!-- 使用ref是可以直接将updateTime注入进去，但是问题是注入的updateTime属性的值固定为当前系统时间，并不能自定义-->
+    <bean id="updateTime" class="java.util.Date"/>
+    <!-- 实现了可以自定义date属性的值，而不是只能固定传入当前系统时间 -->
+    <bean id="dateFactoryBean" class="org.bluebridge.beaninstantiation.factorybeaninterface.demo.DateFactoryBean">
+        <property name="date" value="1995-09-17"/>
+    </bean>
+    <bean id="user" class="org.bluebridge.beaninstantiation.factorybeaninterface.demo.User">
+        <property name="id" value="001"/>
+        <property name="name" value="zhangsan"/>
+        <property name="age" value="25"/>
+        <property name="birthday" ref="dateFactoryBean"/>
+        <property name="updateTime" ref="updateTime"/>
+    </bean>
+</beans>

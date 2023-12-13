@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 目标对象 -->
+    <bean id="userDao" class="org.bluebridge.profile.base.dao.UserDao"/>
+    <bean id="userService" class="org.bluebridge.profile.base.service.UserServiceImpl">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+    <bean id="userController" class="org.bluebridge.profile.base.controller.UserController">
+        <property name="userService" ref="userService"/>
+    </bean>
+    <!-- 切面类 -->
+    <bean id="aspectConfigByXml" class="org.bluebridge.profile.base.aspect.AspectConfigByXmlUseAopAspectTag"/>
+
+    <!-- proxy-target-class属性决定代理的创建方式,true:启用cglib代理(基于类),false:启用jdk代理(基于接口) -->
+    <aop:aspectj-autoproxy proxy-target-class="false"/>
+    <aop:config>
+        <!-- 引入切面类 -->
+        <aop:aspect ref="aspectConfigByXml">
+            <!-- 配置前置通知 -->
+            <aop:before method="beforeAdvice" pointcut="execution(public * org.bluebridge.profile.base.service.UserServiceImpl.addUser(..))"/>
+            <!-- 配置后置通知 -->
+            <aop:after-returning method="afterReturningAdvice" returning="result" pointcut="execution(public * org.bluebridge.profile.base.service.UserServiceImpl.deleteUserById(..))"/>
+            <!-- 配置环绕通知 -->
+            <aop:around method="aroundAdvice" pointcut="execution(public * org.bluebridge.profile.base.service.UserServiceImpl.updateUser(..))"/>
+            <!-- 配置最终通知 -->
+            <aop:after method="afterAdvice" pointcut="execution(public * org.bluebridge.profile.base.service.UserServiceImpl.getUserById(..))"/>
+            <!-- 配置异常通知 -->
+            <aop:after-throwing method="afterThrowingAdvice" throwing="e" pointcut="execution(public * org.bluebridge.profile.base.service.UserServiceImpl.login(..))" />
+        </aop:aspect>
+    </aop:config>
+</beans>

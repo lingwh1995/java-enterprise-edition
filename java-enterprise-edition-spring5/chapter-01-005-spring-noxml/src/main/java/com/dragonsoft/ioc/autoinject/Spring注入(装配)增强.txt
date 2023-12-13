@@ -1,0 +1,11 @@
+1.注入基本类型的值
+    @Value
+2.注入引用类型的值
+    @Autowired
+    或: @Autowired + @Qualifier("")
+3.使用@Primary,让Spring进行自动装配的时候,默认使用首选的Bean
+    也就是说:使用@Qualifier("")或者@Primary都可以指定默认优先装配的Bean
+4.使用@Resource(name="") [JSR250规范]和@Inject [JSR330]这两个规范完成注入
+    @Resource:按照名称进行装配
+    @Inject:需要导入javax.inject包,功能和@AutoWired一样,只不过@Autowired有required=false/true的功能
+        @Inject没有required=false/true的功能

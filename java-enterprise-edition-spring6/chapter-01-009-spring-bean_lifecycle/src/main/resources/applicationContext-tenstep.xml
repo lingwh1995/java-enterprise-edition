@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- SpringBean的生命周期七步版 -->
+    <!-- 配置BeanPostProcessorc处理器：特别注意，这个BeanPostProcessor处理器是针对IOC容器中所有bean生效的，不是之针对某一个Bean生效的-->
+    <bean class="org.bluebridge.beanlifecycle.tenstep.LogBeanPostProcessor"/>
+    <bean id="springBeanLifeCycleTenStep" class="org.bluebridge.beanlifecycle.tenstep.SpringBeanLifeCycleTenStep" init-method="initBean" destroy-method="destoryBean" >
+        <property name="description" value="SpringBean的生命周期十步版"/>
+    </bean>
+</beans>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--
+        选择性实例化
+        1.use-default-filters="false"
+            代表该包下 @Component、@Repository、@Service、@Controller注解全部失效
+            context:include-filter        需要哪个注解生效就配置哪个注解
+        2.use-default-filters="true"
+            代表该包下 @Component、@Repository、@Service、@Controller注解全部生效
+            context:exclude-filter        需要让哪个注解失效就配置哪个注解
+    -->
+    <!--
+    <context:component-scan base-package="org.bluebridge.annotation.base.choicestatementbean" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    -->
+    <context:component-scan base-package="org.bluebridge.annotation.base.choicestatementbean" use-default-filters="true">
+        <!-- 如果放开下面注解则会报错 -->
+        <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Component"/>-->
+    </context:component-scan>
+</beans>

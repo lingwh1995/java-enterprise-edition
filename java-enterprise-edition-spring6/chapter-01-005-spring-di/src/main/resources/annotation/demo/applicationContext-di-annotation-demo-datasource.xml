@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--
+    1.Spring注解形式开发需要配置这一行代码
+    2.如果是多个包都要被扫描，则在base-package中配置时需要使用 逗号 隔开，如
+        base-package="org.bluebridge.annotation1,org.bluebridge.annotation2"
+-->
+    <context:component-scan base-package="org.bluebridge.annotation.demo.datasource"/>
+</beans>

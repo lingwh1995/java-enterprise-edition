@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 目标对象 -->
+    <bean id="catService" class="org.bluebridge.profile.aspectorder.service.CatServiceImpl"/>
+
+    <!-- 切面类 -->
+    <bean id="aspectConfigByXmlOrder1" class="org.bluebridge.profile.aspectorder.aspect.AspectConfigByXmlOrder1"/>
+    <bean id="aspectConfigByXmlOrder2" class="org.bluebridge.profile.aspectorder.aspect.AspectConfigByXmlOrder2"/>
+
+    <!-- proxy-target-class属性决定代理的创建方式,true:启用cglib代理(基于类),false:启用jdk代理(基于接口) -->
+    <aop:aspectj-autoproxy proxy-target-class="false"/>
+    <aop:config>
+        <!-- 引入切面类 -->
+        <aop:aspect ref="aspectConfigByXmlOrder1" order="1">
+            <!-- 配置前置通知 -->
+            <aop:before method="beforeAdvice" pointcut="execution(public * org.bluebridge.profile.aspectorder.service.CatServiceImpl.deleteCatById(..))"/>
+        </aop:aspect>
+        <!-- 引入切面类 -->
+        <aop:aspect ref="aspectConfigByXmlOrder2" order="2">
+            <!-- 配置前置通知 -->
+            <aop:before method="beforeAdvice" pointcut="execution(public * org.bluebridge.profile.aspectorder.service.CatServiceImpl.deleteCatById(..))"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

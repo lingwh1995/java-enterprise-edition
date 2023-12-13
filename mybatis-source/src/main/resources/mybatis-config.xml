@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.mapper.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--
+        引入外部配置文件
+		1、mybatis可以使用properties来引入外部properties配置文件的内容；
+		resource：引入类路径下的资源
+		url：引入网络路径或者磁盘路径下的资源
+	  -->
+    <properties resource="dbconfig.properties"/>
+
+    <environments default="home_dev_oracle">
+        <environment id="home_dev_oracle">
+            <transactionManager type="JDBC">
+                    <!--type:JDBC/MANAGED]")-->
+            </transactionManager>
+            <dataSource type="POOLED">
+                <!--从配置文件中获取的数据库连接信息-->
+                <property name="driver" value="${home.develop.oracle.jdbc.driver}"/>
+                <property name="url" value="${home.develop.oracle.jdbc.url}"/>
+                <property name="username" value="${home.develop.oracle.jdbc.username}"/>
+                <property name="password" value="${home.develop.oracle.jdbc.password}"/>
+            </dataSource>
+        </environment>
+        <environment id="home_dev_mysql">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${home.develop.mysql.jdbc.driver}"/>
+                <property name="url" value="${home.develop.mysql.jdbc.url}"/>
+                <property name="username" value="${home.develop.mysql.jdbc.username}"/>
+                <property name="password" value="${home.develop.mysql.jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--导入mapper-->
+    <mappers>
+        <!--mybatis.mapper helloworld-->
+        <mapper resource="mybatis_a/test/EmpMapper.xml"/>
+    </mappers>
+</configuration>

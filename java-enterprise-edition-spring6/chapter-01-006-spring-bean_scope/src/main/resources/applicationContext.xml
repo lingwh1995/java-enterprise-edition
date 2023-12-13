@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 默认情况下创建的bean是单例的-->
+    <bean id="springBeanScopeDefault" class="org.bluebridge.beanscope.SpringBeanScopeDefault"/>
+    <!-- bean的作用域配置为singleton-->
+    <bean id="springBeanScopeSingleton" class="org.bluebridge.beanscope.SpringBeanScopeSingleton" scope="singleton"/>
+    <!-- bean的作用域配置为prototype-->
+    <bean id="springBeanScopePrototype" class="org.bluebridge.beanscope.SpringBeanScopePrototype" scope="prototype"/>
+    <!--
+        bean的其他作用域：
+            request         一次请求中创建一个bean，要求项目是一个web项目
+            session         一次会话中创建一个bean，要求项目是一个web项目
+            globe session   porlet应用专用
+            application     一个应用中值创建一个，要求项目是一个web项目
+            websocket       一个websocket生命周期对应一个bean
+            自定义scope      如一个线程创建一个bean
+    -->
+</beans>

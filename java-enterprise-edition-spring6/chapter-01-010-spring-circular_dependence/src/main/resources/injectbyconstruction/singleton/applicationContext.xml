@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        singleton + 构造模式
+        为什么 singleton + 构造模式 一定会出现循环依赖问题?
+        这种情况下产生的循环依赖是无法解决的，因为构造方式无法把实例化对象和给对象属性的赋值分为两个阶段来完成，这两个操作是同时完成的
+    -->
+    <bean id="teacher" class="org.bluebridge.circulardependence.injectbyconstruction.singleton.Teacher" scope="singleton">
+        <constructor-arg name="name" value="老师"/>
+        <!-- 当给ref="student"赋值的时候，这个student还没有被曝光出来，所以无法给student赋值 -->
+        <constructor-arg name="student" ref="student"/>
+    </bean>
+    <bean id="student" class="org.bluebridge.circulardependence.injectbyconstruction.singleton.Student" scope="singleton">
+        <constructor-arg name="name" value="老师"/>
+        <constructor-arg name="teacher" ref="teacher"/>
+    </bean>
+</beans>

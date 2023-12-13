@@ -1,0 +1,18 @@
+创建bean:
+    单实例:创建IOC容器的时候创建bean
+    多实例:每次获取的时候才去创建bean
+初始化:
+    对象创建完成,并赋值好,调用初始化方法
+销毁:
+    单实例:容器关闭的时候销毁bean
+    多实例:容器不会管理这个bean,容器不会调用销毁方法
+给Bean设置生命周期的四种方法:
+    1.@Bean(initMethod = "init",destroyMethod ="destory")
+    2.通过让Bean实现InitializingBean(定义初始化逻辑)
+     让Bean实现DisposableBean(定义销毁逻辑)
+    3.使用jsr250规范里面定义的注解
+     @PostConstruct在bean创建完成,并且属性赋值完成
+    4.BeanPostProcessor:bean的后置处理器
+     在bean初始化前后进行一些处理工作
+     postProcessBeforeInitialization:在初始化之前进行工作
+     postProcessAfterInitialization:在初始化之后进行工作

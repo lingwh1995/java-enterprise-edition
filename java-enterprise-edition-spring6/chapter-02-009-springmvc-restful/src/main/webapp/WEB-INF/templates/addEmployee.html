@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加员工页面</title>
+    <style>
+        a {
+            text-decoration: none;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>添加员工页面</h1>
+    <form th:action="@{/restfulCase/employee}" method="post">
+        <table id="dataTable" border="1px solid red" cellspacing="0">
+            <tr>
+                <th colspan="4">添加员工信息</th>
+            </tr>
+            <tr>
+                <th>lastName</th>
+                <th>email</th>
+                <th>gender</th>
+            </tr>
+            <tr>
+                <td>姓名:<input type="text" name="lastName" value="孙七"/></td>
+                <td>邮箱:<input type="text" name="email" value="sunqi@gmail.com"/></td>
+                <td>
+                    男<input type="radio" name="gender" value="0" checked="checked"/>
+                    女<input type="radio" name="gender" value="1"/>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="添加"/></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

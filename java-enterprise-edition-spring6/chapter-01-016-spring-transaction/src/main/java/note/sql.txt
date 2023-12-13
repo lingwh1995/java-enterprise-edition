@@ -1,0 +1,7 @@
+create table account(
+    id varchar(32) primary key,
+    accountHolderName varchar(32),
+    balance double(10,2)
+);
+insert into account values('001','张三',1000.00);
+insert into account values('002','李四',1000.00);

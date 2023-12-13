@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        singleton + prototype + setter模式下循环依赖
+        结论：不会出现循环依赖问题
+    -->
+    <bean id="husband" class="org.bluebridge.circulardependence.injectbyset.singletonandprototype.Husband" scope="singleton">
+        <property name="name" value="丈夫-singleton"/>
+        <property name="wife" ref="wife"/>
+    </bean>
+    <bean id="wife" class="org.bluebridge.circulardependence.injectbyset.singletonandprototype.Wife" scope="prototype">
+        <property name="name" value="妻子-prototype"/>
+        <property name="husband" ref="husband"/>
+    </bean>
+</beans>

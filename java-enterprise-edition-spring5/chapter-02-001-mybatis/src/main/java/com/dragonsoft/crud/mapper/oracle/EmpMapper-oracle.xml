@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dragonsoft.crud.dao.IEmpDao">
+	<!--新增Emp:使用UUID/序列生成主键 -->
+	<insert id="addEmp" parameterType="com.dragonsoft.crud.domain.Emp" databaseId="oracle">
+		<!-- 设置主键生成策略:UUID方式
+		 	order:表示是当前查询主键SQL在插入数据SQL执行之前执行
+		 -->
+		<!--<selectKey keyProperty="id" resultType="String" order="BEFORE">-->
+			<!--SELECT REPLACE(SYS_GUID(),'-','') FROM DUAL-->
+		<!--</selectKey>-->
+
+		<!-- 设置主键生成策略:Oracle序列
+			order:表示是当前查询主键SQL在插入数据SQL执行之前执行
+		-->
+		<selectKey keyProperty="id" order="BEFORE" resultType="String">
+			SELECT TBL_EMPLOYEE_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO TBL_EMPLOYEE(ID,LAST_NAME,EMAIL,GENDER) VALUES(#{id},#{lastName},#{email},#{gender})
+	</insert>
+
+	<!--根据Id删除Emp -->
+	<delete id="deleteById" databaseId="oracle">
+		DELETE FROM TBL_EMPLOYEE WHERE ID = #{id}
+	</delete>
+
+	<!--根据Id修改Emp -->
+	<update id="updateById" databaseId="oracle">
+		UPDATE TBL_EMPLOYEE SET LAST_NAME = #{lastName},EMAIL = #{email},GENDER = #{gender} WHERE ID = #{id}
+	</update>
+
+	<!--根据id获取Emp -->
+	<select id="getEmpById" resultType="com.dragonsoft.crud.domain.Emp" databaseId="oracle">
+		SELECT ID,LAST_NAME LASTNAME,EMAIL,GENDER FROM TBL_EMPLOYEE WHERE ID = #{id}
+	</select>
+
+	<!--根据id获取Map:单条记录封装到一个Map中 -->
+	<select id="getMapById" resultType="map" databaseId="oracle">
+		SELECT ID,LAST_NAME LASTNAME,EMAIL,GENDER FROM TBL_EMPLOYEE WHERE ID = #{id}
+	</select>
+
+	<!--获取List<Map<String,Object>>-->
+	<select id="getEmpLsitMap" resultType="map" databaseId="oracle">
+		SELECT ID,LAST_NAME LASTNAME,EMAIL,GENDER FROM TBL_EMPLOYEE
+	</select>
+
+	<!--多条记录封装到一个Map中,并设置Map的key为主键,在接口中的方法上加上@MapKey(列名)就可以了 -->
+	<select id="getEmpsMap" resultType="java.util.Map" databaseId="oracle">
+		SELECT ID,LAST_NAME LASTNAME,EMAIL,GENDER FROM TBL_EMPLOYEE
+	</select>
+
+	<!--获取List<Emp> -->
+	<select id="getEmpList" resultType="com.dragonsoft.crud.domain.Emp" databaseId="oracle">
+		SELECT ID,LAST_NAME LASTNAME,EMAIL,GENDER FROM TBL_EMPLOYEE
+	</select>
+
+
+	<!--以上为单个参数，下面为多个参数-->
+
+	<!--根据id和lastName获取Emp:从Map中获取参数 -->
+	<!--<select id="getEmpByIdAndLastName" resultType="com.dragonsoft.crud.domain.Emp" databaseId="oracle">-->
+		<!--SELECT ID,LAST_NAME LASTNAME,EMAIL,GENDER FROM TBL_EMPLOYEE WHERE ID = #{param1} AND LAST_NAME = #{param2}-->
+	<!--</select>-->
+
+	<!--根据id和lastName获取Emp:命名参数方式 -->
+	<select id="getEmpByIdAndLastName" resultType="com.dragonsoft.crud.domain.Emp" databaseId="oracle">
+		SELECT ID,LAST_NAME LASTNAME,EMAIL,GENDER FROM TBL_EMPLOYEE WHERE ID = #{id} AND LAST_NAME = #{lastName}
+	</select>
+
+	<!--根据Emp(使用POJO作为参数)获取Emp -->
+	<select id="getEmpByEmp" resultType="com.dragonsoft.crud.domain.Emp" databaseId="oracle">
+		SELECT ID,LAST_NAME LASTNAME,EMAIL,GENDER FROM TBL_EMPLOYEE WHERE ID = #{id} AND LAST_NAME = #{lastName}
+	</select>
+
+	<!--根据Map(使用Map作为参数)获取Emp -->
+	<select id="getEmpByMap" resultType="com.dragonsoft.crud.domain.Emp" databaseId="oracle">
+		SELECT ID,LAST_NAME LASTNAME,EMAIL,GENDER FROM TBL_EMPLOYEE WHERE ID = #{id} AND LAST_NAME = #{lastName}
+	</select>
+</mapper>

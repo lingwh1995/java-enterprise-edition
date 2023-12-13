@@ -1,0 +1,4 @@
+1.attempted to return null from a method with a primitive return type (int).
+    标签和方法类不对应，如:新增应该使用insert标签,结果在xml中使用的是非insert标签,如使用了select标签
+2.必须为元素类型 "insert" 声明属性 "resultType"
+    insert标签没有resultType属性,写代码的时候确使用了这个属性,属于语法错误

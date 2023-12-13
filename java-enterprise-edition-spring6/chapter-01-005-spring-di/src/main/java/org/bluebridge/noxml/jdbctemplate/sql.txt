@@ -1,0 +1,8 @@
+create database javaee;
+use javaee;
+create table t_user (
+    id varchar(32) primary key,
+    name varchar(128),
+    age int
+);
+insert into user values('001','张三',18);

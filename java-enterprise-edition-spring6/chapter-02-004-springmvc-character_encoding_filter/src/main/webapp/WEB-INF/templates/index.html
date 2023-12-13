@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SpringMVC解决乱码演示</title>
+</head>
+<body>
+    <h1>SpringMVC解决乱码演示</h1>
+    <form th:action="@{/characterEncodingFilter/dealEncoding}" method="post">
+        账户: <input type="text" name="username" value="张三"/>
+        <input type="submit">
+    </form>
+</body>
+</html>

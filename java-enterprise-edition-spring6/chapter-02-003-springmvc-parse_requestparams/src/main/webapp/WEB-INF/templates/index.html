@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SpringMVC各种接收请求参数(请求头、请求体、Cookie)的方式演示</title>
+    <style>
+        a {
+            text-decoration: none;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SpringMVC各种接收请求参数(请求头、请求体、Cookie)的方式演示</h1>
+    <h4>使用Servlet提供的HttpServlet接收请求体中的参数</h4>
+    <form th:action="@{/parseRequestParams/servlet/httpServletRequest}" method="post">
+        账户:<input type="text" name="username" value="admin"/>
+        密码:<input type="text" name="password" value="123456"/>
+        篮球:<input type="checkbox" name="hobbies" value="basketball" checked="checked"/>
+        足球:<input type="checkbox" name="hobbies" value="football" checked="checked"/>
+        <input type="submit" value="测试解析请求体中的参数:使用原生HttpServletRequest提供的request.getParameter()进行解析[匹配方法:ServletHttpServletRequestParseRequestParamsController.parseRequestParamsByServletByHttpServletRequest()]">
+    </form>
+
+    <h4>使用SpringMVC提供的基础方式接收请求体中的参数</h4>
+    <form th:action="@{/parseRequestParams/springmvc/native}" method="post">
+        账户:<input type="text" name="username" value="admin"/>
+        密码:<input type="text" name="password" value="123456"/>
+        篮球:<input type="checkbox" name="hobbies" value="basketball" checked="checked"/>
+        足球:<input type="checkbox" name="hobbies" value="football" checked="checked"/>
+        红色:<input type="checkbox" name="colors" value="red" checked="checked"/>
+        蓝色:<input type="checkbox" name="colors" value="blue" checked="checked"/>
+        <input type="submit" value="测试解析请求体中的参数:使用SpringMVC提供的原生方式进行解析[匹配方法:SpringMVCNativeController.parseRequestParamsBySpringMVCByNative()]">
+    </form>
+
+    <h4>使用SpringMVC提供的@RequestParam注解接收请求体中的参数</h4>
+    <a th:href="@{/parseRequestParams/springmvc/requestParam(user_name='admin',password=123456)}">测试解析请求体中的参数:使用SpringMVC提供的@RequestParam注解进行解析[匹配方法:SpringMVCRequestParamAnnoController.parseRequestParamsBySpringMVCByRequestParamAnno()]</a><br/>
+
+    <h4>使用SpringMVC提供的@PathVariable注解接收请求路径中的参数</h4>
+    <a th:href="@{/parseRequestParams/springmvc/PathVariable/001}">测试解析请求路径中的参数:使用SpringMVC提供的@PathVariable注解进行解析[匹配方法:SpringMVCPathVariableAnnoController.parseRequestParamsBySpringMVCByPathVariableAnno()]</a><br/>
+
+    <h4>使用SpringMVC提供的解析POJO方式接收请求体中的参数</h4>
+    <form th:action="@{/testParseRequestParams/springmvc/encapsulationPojo}" method="post">
+        <input type="hidden" name="id" value="001"/>
+        账户:<input type="text" name="username" value="张三"/>
+        密码:<input type="text" name="password" value="123456"/>
+        <input type="submit" value="测试解析请求体中的参数:使用SpringMVC提供的解析POJO进行解析[匹配方法:SpringMVCEncapsulationPojoController.parseRequestParamsBySpringMVCByEncapsulationPojo()]">
+    </form>
+
+    <h4>使用Servlet提供的HttpServlet接收请求头中的参数</h4>
+    <a th:href="@{/parseRequestHeader/servlet/httpServletRequest}">测试解析请求头中的参数:使用原生HttpServletRequest提供的request.getHeader()进行解析[匹配方法:ServletHttpServletRequestParseRequestHeaderController.parseRequestHeaderByServletByHttpServletRequest()]</a><br/>
+    <h4>使用SpringMVC提供的@RequestHeader注解接收请求头中的参数</h4>
+    <a th:href="@{/parseRequestHeader/springmvc/requestHeader}">测试解析请求头中的参数:使用SpringMVC提供的@RequestHeader注解进行解析[匹配方法:SpringMVCRequesHeaderAnnoController.parseRequestHeaderBySpringMVCByRequestHeaderAnno()]</a><br/>
+
+    <h4>使用Servlet提供的HttpServlet接收Cookie中的参数</h4>
+    <a th:href="@{/parseCookie/servlet/httpServletRequest}">测试解析Cookie中的参数:使用原生HttpServletRequest提供的request.getCookies()进行解析[匹配方法:ServletHttpServletRequestParseCookieController.parseCookieByServletByHttpServletRequest()]</a><br/>
+    <h4>使用SpringMVC提供的@CookieValue注解接收Cookie中的参数</h4>
+    <a th:href="@{/parseCookie/springmvc/cookievalue}">测试解析Cookie中的参数:使用SpringMVC提供的@CookieValue注解进行解析[匹配方法:SpringMVCCookieValueAnnoController.parseCookieBySpringMVCByCookieValueAnno()]</a><br/>
+</body>
+</html>

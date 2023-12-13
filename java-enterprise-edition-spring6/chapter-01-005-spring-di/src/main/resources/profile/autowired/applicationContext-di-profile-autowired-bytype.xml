@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="personDao" class="org.bluebridge.profile.autowire.bytype.dao.PersonDao"/>
+
+    <!-- 测试set方式使用autowire根据属性类型注入，要求
+        1.PersonService中的PersonDao属性需要写setter方法
+        2.PersonDao这个javabean的id配置为PersonService中set方法去掉set后首字母小写
+    -->
+    <bean id="personService"
+          class="org.bluebridge.profile.autowire.bytype.service.PersonServiceImpl" autowire="byType"/>
+</beans>

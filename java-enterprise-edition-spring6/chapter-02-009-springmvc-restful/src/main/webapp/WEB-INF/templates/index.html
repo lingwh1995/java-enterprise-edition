@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SpringMVC提供的Restful风格和一个restful风格增删改查demo演示</title>
+    <style>
+        a {
+            text-decoration: none;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SpringMVC提供的Restful风格和一个restful风格增删改查demo演示</h1>
+    <h4>测试添加用户信息</h4>
+    <form th:action="@{/restful/user}" method="post">
+        <input type="hidden" name="id" value="001"/>
+        账户:<input type="text" name="username" value="张三"/>
+        密码:<input type="text" name="password" value="123456"/>
+        <input type="submit" value="添加"/>
+    </form>
+
+    <h4>测试删除用户信息</h4>
+    <form th:action="@{/restful/user/001}" method="post">
+        <input type="hidden" name="_method" value="delete"/>
+        <input type="submit" value="删除"/>
+    </form>
+
+    <h4>测试修改用户信息</h4>
+    <form th:action="@{/restful/user}" method="post">
+        <input type="hidden" name="_method" value="put"/>
+        <input type="hidden" name="id" value="001"/>
+        账户:<input type="text" name="username" value="张三"/>
+        密码:<input type="text" name="password" value="123456"/>
+        <input type="submit" value="修改"/>
+    </form>
+
+    <h4>测试查询所有用户信息</h4>
+    <a th:href="@{/restful/user}">测试查询所有用户信息</a><br/>
+
+    <h4>根据id查询所有用户信息</h4>
+    <a th:href="@{/restful/user(id='001')}">根据id查询所有用户信息</a><br/>
+
+    <h4>Restful风格增删改查案例</h4>
+    <a th:href="@{/restfulCase/employee}">Restful风格增删改查案例</a>
+</body>
+</html>

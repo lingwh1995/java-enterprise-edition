@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SpringMVC和Servlet提供的域对象演示</title>
+    <style>
+        a {
+            text-decoration: none;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SpringMVC和Servlet提供的域对象演示</h1>
+
+    <h4>使用Servlet提供的HttpServlet给Request域中存放值</h4>
+    <a th:href="@{/domainObject/servlet/requestScope/httpServletRequest}">测试基于Servlet提供的HttpServlet给request域中存放值[匹配方法:ServletRequestScopeController.requestScopeByServletByHttpServletRequest()]</a><br/>
+    <h4>使用Servlet提供的HttpServlet给Session域中存放值</h4>
+    <a th:href="@{/domainObject/servlet/sessionScope/httpServletRequest}">测试基于Servlet提供的HttpServlet给session域中存放值[匹配方法:ServletSessionScopeController.sessionScopeByServletByHttpServletRequest()]</a><br/>
+    <h4>使用Servlet提供的HttpSession给Session域中存放值</h4>
+    <a th:href="@{/domainObject/servlet/sessionScope/httpSession}">测试基于Servlet提供的HttpSession给session域中存放值[匹配方法:ServletSessionScopeController.sessionScopeByServletByHttpSession()]</a><br/>
+    <h4>使用Servlet提供的HttpServlet给Application域中存放值</h4>
+    <a th:href="@{/domainObject/servlet/applicationScope/httpServletRequest}">测试基于Servlet提供的HttpServlet给application域中存放值[匹配方法:ServletApplicationScopeController.applicationScopeByServletByHttpServletRequest()]</a><br/>
+    <h4>使用Servlet提供的HttpSession给Application域中存放值</h4>
+    <a th:href="@{/domainObject/servlet/applicationScope/httpSession}">测试基于Servlet提供的HttpSession给application域中存放值[匹配方法:ServletApplicationScopeController.applicationScopeByServletByHttpSession()]</a><br/>
+
+    <h4>使用SpringMVC提供的ModelAndView给Request域中存放值</h4>
+    <a th:href="@{/domainObject/springmvc/requestScope/modelAndView}">测试基于SpringMVC提供的ModelAndView给request域中存放值[匹配方法:SpringMVCRequestScopeController.requestScopeBySpringMVCByModelAndView()]</a><br/>
+    <h4>使用SpringMVC提供的Model给Request域中存放值</h4>
+    <a th:href="@{/domainObject/springmvc/requestScope/model}">测试基于SpringMVC提供的Model给request域中存放值[匹配方法:SpringMVCRequestScopeController.requestScopeBySpringMVCByModel()]</a><br/>
+    <h4>使用SpringMVC提供的Map给Request域中存放值</h4>
+    <a th:href="@{/domainObject/springmvc/requestScope/map}">测试基于SpringMVC提供的Map给request域中存放值[匹配方法:SpringMVCRequestScopeController.requestScopeBySpringMVCByMap()]</a><br/>
+    <h4>使用SpringMVC提供的ModelMap给Request域中存放值</h4>
+    <a th:href="@{/domainObject/springmvc/requestScope/modelMap}">测试基于SpringMVC提供的ModelMap给request域中存放值[匹配方法:SpringMVCRequestScopeController.requestScopeBySpringMVCByModelMap()]</a><br/>
+</body>
+</html>

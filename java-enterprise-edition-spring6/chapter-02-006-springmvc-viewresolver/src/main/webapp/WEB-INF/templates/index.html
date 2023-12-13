@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SpringMVC使用的和支持的视图解析器演示</title>
+    <style>
+        a {
+            text-decoration: none;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SpringMVC使用的和支持的视图解析器演示</h1>
+
+    <h4>测试ThymeleafViewResolver</h4>
+    <a th:href="@{/viewResolver/testThymeleafViewResolver}">测试ThymeleafViewResolver[匹配方法:ViewController.testThymeleafViewResolver()]</a><br/>
+    <h4>测试请求转发</h4>
+    <a th:href="@{/viewResolver/testRequestForward}">测试请求转发[匹配方法:ViewController.testRequestForward()]</a><br/>
+    <h4>测试请求重定向</h4>
+    <a th:href="@{/viewResolver/testRequestRedirectToBaidu}">测试请求重定向[匹配方法:ViewController.testRequestRedirectToBaidu()]</a><br/>
+    <h4>测试请求重定向</h4>
+    <a th:href="@{/viewResolver/testRequestRedirectToIndex}">测试请求重定向[匹配方法:ViewController.testRequestRedirectToIndex()]</a><br/>
+</body>
+</html>

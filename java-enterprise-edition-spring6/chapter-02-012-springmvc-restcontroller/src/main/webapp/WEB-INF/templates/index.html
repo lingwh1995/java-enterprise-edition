@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SpringMVC提供的@RestControlelr注解演示</title>
+</head>
+<body>
+    <h1>SpringMVC提供的@RestControlelr注解演示</h1>
+    <a th:href="@{/restcontroller/testRestControllerAnno}">测试@RestController注解(不会进行页面跳转，会直接返回一个字符串)</a><br/>
+    <a th:href="@{/restcontroller/success}">测试使用了@RestController注解后如何完成页面跳转</a><br/>
+    <a th:href="@{/restcontroller/employee/001}">测试解决使用了@RestController注解后处理返回的JSON字符串里面中文乱码问题</a>
+</body>
+</html>

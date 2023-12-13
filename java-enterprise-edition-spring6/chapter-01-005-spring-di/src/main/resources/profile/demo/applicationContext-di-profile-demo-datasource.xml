@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 测试使用set方式为MyDataSource中四个连接参数注入值，这个是set方式注入经典应用 -->
+    <bean id="myDataSource1" class="org.bluebridge.profile.demo.datasource.MyDataSource1">
+        <property name="driver" value="com.mysql.jdbc.Driver"/>
+        <property name="username" value="demo"/>
+        <property name="password" value="123456"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/mydataSource1"/>
+    </bean>
+</beans>

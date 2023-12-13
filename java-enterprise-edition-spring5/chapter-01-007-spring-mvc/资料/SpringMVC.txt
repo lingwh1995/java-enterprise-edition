@@ -1,0 +1,11 @@
+1.常用组合注解:
+@PostMapping        = @RequestMapping+method=RequestMethod.POST
+@GetMapping         = @RequestMapping+method=RequestMethod.GET
+@RestController     = @Controller+@ResponseBody
+2.
+public String get(@RequestParam("id") String id){}
+可以简写为:
+public String get(String id){}
+public String get(Integer id){}
+public String get(int id){}
+如果是数值类型，建议使用Integer,放弃使用int

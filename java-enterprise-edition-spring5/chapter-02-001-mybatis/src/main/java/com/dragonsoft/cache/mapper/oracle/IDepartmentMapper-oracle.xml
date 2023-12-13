@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dragonsoft.cache.dao.IDepartmentDao"><!-- 引用缓存：namespace：指定和哪个名称空间下的缓存一样 -->
+    <!--缓存设置和com.dragonsoft.cache.dao.IEmployeeDao这个命名空间相同-->
+    <cache-ref namespace="com.dragonsoft.cache.dao.IEmployeeDao"/>
+    <select id="getDeptById" resultType="com.dragonsoft.cache.domain.Department" databaseId="oracle">
+        SELECT ID,DNAME FROM TBL_DEPARTMENT WHERE ID = #{id}
+    </select>
+
+</mapper>

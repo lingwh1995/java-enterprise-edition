@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        第一步：在xml的配置文件头部添加p命名空间 xmlns:p="http://www.springframework.org/schema/p"
+        第二步：使用p:属性标签为简单类型属性赋值，如 p:name="sunqi"，或使用 p:属性-ref标签为引用类型数据赋值，如 p:friend-ref="friend"
+    -->
+    <bean id="cat" class="org.bluebridge.profile.namespace.domain.Cat" p:name="煤球" p:age="2"/>
+    <bean id="userInjectValueByPNamespace" class="org.bluebridge.profile.namespace.pnamespace.UserInjectValueByPNamespace"
+          p:name="set方式注入的简化写法：P命名空间注入" p:age="28" p:cat-ref="cat"/>
+</beans>
