@@ -12,10 +12,11 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
     <!-- 彩色日志格式 -->
     <!--<property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} ====> [%thread] ====> %-5level %logger{50} - %msg%n"/>-->
     <property name="CONSOLE_LOG_PATTERN" value="%highlight(%date{yyyy-MM-dd HH:mm:ss.SSS}) %boldYellow([%thread]) %highlight([%-5level])  %boldCyan([%replace(%caller{1}){'\t|Caller.{1}0|\r\n', ''}]) %msg%n"/>
-    <!-- 定义日志的根目录 -->
-    <property name="LOG_HOME" value="/tmp/springboot" />
+    <!--设置日志存放目录-->
+    <property name="LOG_HOME" value="java-enterprise-edition-springboot2/chapter-01-001-springboot-helloworld/logs" />
     <!-- 定义日志文件名称 -->
     <property name="appName" value="springboot-001-helloworld"></property>
+
     <!-- ch.qos.logback.core.ConsoleAppender 表示控制台输出 -->
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
         <!--
@@ -90,6 +91,6 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
     -->
     <root level="info">
         <appender-ref ref="stdout" />
-<!--        <appender-ref ref="appLogAppender" />-->
+        <appender-ref ref="appLogAppender" />
     </root>
 </configuration> 

@@ -21,14 +21,8 @@ spring:
     ansi:
       enabled: always
 logging:
-  level:
-    com.dragonsoft: trace
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} -%5p ${PID:-} [%15.15t] %-30.30C{1.} : %m%n"
   config:
-    classpath: classpath:/logback_.xml
-#  path: d:/springboot1-test.log
-#  file: springboot-test.log
+    classpath:logback-spring.xml
 
 #会打印自动配置信息
 debug: true
