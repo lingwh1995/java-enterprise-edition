@@ -1,14 +1,18 @@
-use javaee;
-CREATE TABLE TBL_EMPLOYEE (
-    ID VARCHAR(32) PRIMARY KEY,
-    LAST_NAME VARCHAR(50),
-    EMAIL VARCHAR(50),
-    GENDER VARCHAR(50)
+# 创建数据库
+create database mybatis;
+# 使用数据库
+use mybatis;
+# 创建雇员表
+create table t_employee (
+    id varchar(32) primary key,
+    last_name varchar(50),
+    email varchar(50),
+    gender varchar(50)
 );
-INSERT INTO TBL_EMPLOYEE (ID, LAST_NAME, EMAIL, GENDER) VALUES ('1', 'ZHANGSAN', '1458687169@QQ.COM', '男');
+insert into tbl_employee (id, last_name, email, gender) values ('1', 'zhangsan', '1458687169@qq.com', '男');
 
---使用id和TBL_EMPLOYEE中id相关联
-CREATE TABLE TBL_DEPARTMENT (
-    ID VARCHAR(32) PRIMARY KEY,
-    DNAME VARCHAR(50)
+-- 使用id和tbl_employee中id相关联
+create table t_department (
+    id varchar(32) primary key,
+    dname varchar(50)
 );
