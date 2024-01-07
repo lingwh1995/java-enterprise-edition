@@ -20,7 +20,7 @@ import org.mybatis.generator.internal.DefaultShellCallback;
 public class MyBatisGeneratorTest {
 
 	public SqlSessionFactory getSqlSessionFactory() throws IOException {
-		String resource = "mybatis-config.xml";
+		String resource = "mysql/mybatis-config.xml";
 		InputStream inputStream = Resources.getResourceAsStream(resource);
 		return new SqlSessionFactoryBuilder().build(inputStream);
 	}

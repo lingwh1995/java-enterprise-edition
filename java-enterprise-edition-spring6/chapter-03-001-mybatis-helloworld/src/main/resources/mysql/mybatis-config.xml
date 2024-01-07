@@ -9,7 +9,7 @@
 		resource：引入类路径下的资源
 		url：引入网络路径或者磁盘路径下的资源
 	  -->
-    <properties resource="db.properties"/>
+    <properties resource="mysql/db.properties"/>
 
     <!--
 		2、settings包含很多重要的设置项
@@ -43,7 +43,7 @@
         <!-- 2、package:为某个包下的所有类批量起别名
                 name：指定包名（为当前包以及下面所有的后代包的每一个类都起一个默认别名（类名小写），）
         -->
-        <typeAlias type="com.dragonsoft.interfacemapper.domain.Employee" alias="employeeX"/>
+<!--        <typeAlias type="com.dragonsoft.interfacemapper.domain.Employee" alias="employeeX"/>-->
     </typeAliases>
     <!--配置多环境:测试/生产-->
 
@@ -60,39 +60,27 @@
                                 |JNDI(JndiDataSourceFactory)
                     自定义数据源：实现DataSourceFactory接口，type是全类名
          -->
-    <environments default="home_dev_mysql">
-        <environment id="home_dev_oracle">
+    <environments default="env_dev">
+        <environment id="env_dev">
             <transactionManager type="JDBC">
                     <!--type:JDBC/MANAGED]")-->
             </transactionManager>
             <dataSource type="POOLED">
-                <!--写死的数据库连接信息-->
-                <!--<property name="driver" value="oracle.jdbc.OracleDriver"/>-->
-                <!--<property name="url" value="jdbc:oracle:thin:@192.168.1.100:1521:orcl"/>-->
-                <!--<property name="username" value="scott"/>-->
-                <!--<property name="password" value="tiger"/>-->
                 <!--从配置文件中获取的数据库连接信息-->
-                <property name="driver" value="${home.develop.oracle.jdbc.driver}"/>
-                <property name="url" value="${home.develop.oracle.jdbc.url}"/>
-                <property name="username" value="${home.develop.oracle.jdbc.username}"/>
-                <property name="password" value="${home.develop.oracle.jdbc.password}"/>
+                <property name="driver" value="${env.dev.jdbc.driver}"/>
+                <property name="url" value="${env.dev.jdbc.url}"/>
+                <property name="username" value="${env.dev.jdbc.username}"/>
+                <property name="password" value="${env.dev.jdbc.password}"/>
             </dataSource>
         </environment>
-        <environment id="home_dev_mysql">
+        <environment id="env_prod">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
-                <!-- 写死的数据库连接信息 -->
-                <!--
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://192.168.0.2:3306/test"/>
-                <property name="username" value="root"/>
-                <property name="password" value="123456"/>
-                -->
                 <!--从配置文件中获取的数据库连接信息-->
-                <property name="driver" value="${home.develop.mysql.jdbc.driver}"/>
-                <property name="url" value="${home.develop.mysql.jdbc.url}"/>
-                <property name="username" value="${home.develop.mysql.jdbc.username}"/>
-                <property name="password" value="${home.develop.mysql.jdbc.password}"/>
+                <property name="driver" value="${env.prod.jdbc.driver}"/>
+                <property name="url" value="${env.prod.jdbc.url}"/>
+                <property name="username" value="${env.prod.jdbc.username}"/>
+                <property name="password" value="${env.prod.jdbc.password}"/>
             </dataSource>
         </environment>
     </environments>
@@ -111,31 +99,6 @@
 
     <!-- 导入mapper -->
     <mappers>
-        <!--mybatis.mapper helloworld-->
-        <mapper resource="com/dragonsoft/helloworld/mapper/EmployeeMapper.xml"/>
-        <!--mybatis.mapper helloworld-->
-        <mapper resource="com/dragonsoft/bigdata/mapper/EmployeeMapper.xml"/>
-        <!--mybatis接口式编程-->
-        <mapper resource="com/dragonsoft/interfacemapper/mapper/oracle/EmployeeMapper-oracle.xml"/>
-        <mapper resource="com/dragonsoft/interfacemapper/mapper/mysql/EmployeeMapper-mysql.xml"/>
-        <!--Mybatis CRUD-->
-        <mapper resource="com/dragonsoft/crud/mapper/oracle/EmpMapper-oracle.xml"/>
-        <!--mybatis使用resultmap封装数据-->
-        <mapper resource="com/dragonsoft/resultmap/mapper/oracle/IEmployeeResultMap-oracle.xml"/>
-        <mapper resource="com/dragonsoft/resultmap/mapper/oracle/IDepartment-oracle.xml"/>
-        <!-- mybatis缓存-oracle版 -->
-        <!-- <mapper resource="com/dragonsoft/cache/mapper/oracle/IEmployeeMapper-oracle.xml"/>-->
-        <!-- <mapper resource="com/dragonsoft/cache/mapper/oracle/IDepartmentMapper-oracle.xml"/>-->
-        <!-- mybatis缓存-mysql版 -->
-        <mapper resource="com/dragonsoft/cache/mapper/mysql/IEmployeeMapper-mysql.xml"/>
-        <mapper resource="com/dragonsoft/cache/mapper/mysql/IDepartmentMapper-mysql.xml"/>
-        <!--动态sql-->
-        <mapper resource="com/dragonsoft/dynamicsql/mapper/oracle/EmpMapper-oracle.xml"/>
-        <!--mybatis两个内置参数-->
-        <mapper resource="com/dragonsoft/builtinparam/mapper/oracle/EmpMapper-oracle.xml"/>
-        <!--抽取可重用的sql片段-->
-        <mapper resource="com/dragonsoft/multiplexsql/mapper/oracle/EmpMapper-oracle.xml"/>
-        <!--mybatis generator生成的xml文件-->
-        <!--<mapper resource="com/dragonsoft/generator/sql/EmployeeMapper.xml"/>-->
+        <mapper resource="mysql/CarMapper.xml"/>
     </mappers>
 </configuration>

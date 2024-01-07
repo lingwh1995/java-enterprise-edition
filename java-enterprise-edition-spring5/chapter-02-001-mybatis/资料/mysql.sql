@@ -9,7 +9,7 @@ create table t_employee (
     email varchar(50),
     gender varchar(50)
 );
-insert into tbl_employee (id, last_name, email, gender) values ('1', 'zhangsan', '1458687169@qq.com', '男');
+insert into t_employee (id, last_name, email, gender) values ('1', 'zhangsan', '1458687169@qq.com', '男');
 
 -- 使用id和tbl_employee中id相关联
 create table t_department (

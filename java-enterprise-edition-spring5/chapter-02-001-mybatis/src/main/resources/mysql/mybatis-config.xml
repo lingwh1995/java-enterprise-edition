@@ -9,7 +9,7 @@
 		resource：引入类路径下的资源
 		url：引入网络路径或者磁盘路径下的资源
 	  -->
-    <properties resource="db.properties"/>
+    <properties resource="mysql/db.properties"/>
 
     <!--
 		2、settings包含很多重要的设置项
@@ -60,39 +60,27 @@
                                 |JNDI(JndiDataSourceFactory)
                     自定义数据源：实现DataSourceFactory接口，type是全类名
          -->
-    <environments default="home_dev_mysql">
-        <environment id="home_dev_oracle">
+    <environments default="env_dev">
+        <environment id="env_dev">
             <transactionManager type="JDBC">
                     <!--type:JDBC/MANAGED]")-->
             </transactionManager>
             <dataSource type="POOLED">
-                <!--写死的数据库连接信息-->
-                <!--<property name="driver" value="oracle.jdbc.OracleDriver"/>-->
-                <!--<property name="url" value="jdbc:oracle:thin:@192.168.1.100:1521:orcl"/>-->
-                <!--<property name="username" value="scott"/>-->
-                <!--<property name="password" value="tiger"/>-->
                 <!--从配置文件中获取的数据库连接信息-->
-                <property name="driver" value="${home.develop.oracle.jdbc.driver}"/>
-                <property name="url" value="${home.develop.oracle.jdbc.url}"/>
-                <property name="username" value="${home.develop.oracle.jdbc.username}"/>
-                <property name="password" value="${home.develop.oracle.jdbc.password}"/>
+                <property name="driver" value="${env.dev.jdbc.driver}"/>
+                <property name="url" value="${env.dev.jdbc.url}"/>
+                <property name="username" value="${env.dev.jdbc.username}"/>
+                <property name="password" value="${env.dev.jdbc.password}"/>
             </dataSource>
         </environment>
-        <environment id="home_dev_mysql">
+        <environment id="env_prod">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
-                <!-- 写死的数据库连接信息 -->
-                <!--
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://192.168.0.2:3306/test"/>
-                <property name="username" value="root"/>
-                <property name="password" value="123456"/>
-                -->
                 <!--从配置文件中获取的数据库连接信息-->
-                <property name="driver" value="${home.develop.mysql.jdbc.driver}"/>
-                <property name="url" value="${home.develop.mysql.jdbc.url}"/>
-                <property name="username" value="${home.develop.mysql.jdbc.username}"/>
-                <property name="password" value="${home.develop.mysql.jdbc.password}"/>
+                <property name="driver" value="${env.prod.jdbc.driver}"/>
+                <property name="url" value="${env.prod.jdbc.url}"/>
+                <property name="username" value="${env.prod.jdbc.username}"/>
+                <property name="password" value="${env.prod.jdbc.password}"/>
             </dataSource>
         </environment>
     </environments>
@@ -112,7 +100,7 @@
     <!-- 导入mapper -->
     <mappers>
         <!--mybatis.mapper helloworld-->
-        <mapper resource="com/dragonsoft/helloworld/mapper/EmployeeMapper.xml"/>
+        <mapper resource="com/dragonsoft/helloworld/mapper/mysql/EmployeeMapper.xml"/>
         <!--mybatis.mapper helloworld-->
         <mapper resource="com/dragonsoft/bigdata/mapper/EmployeeMapper.xml"/>
         <!--mybatis接口式编程-->

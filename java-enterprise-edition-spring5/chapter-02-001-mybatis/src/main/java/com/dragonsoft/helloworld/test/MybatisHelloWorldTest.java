@@ -26,7 +26,8 @@ public class MybatisHelloWorldTest {
      */
     private SqlSession getSqlSession() throws IOException {
         /**1.加载配置文件*/
-        InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+        //InputStream inputStream = Resources.getResourceAsStream("mysql/mybatis-config.xml");
+        InputStream inputStream = Resources.getResourceAsStream("oracle/mybatis-config.xml");
         /**2.获取SqlSession对象*/
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         return sqlSessionFactory.openSession();

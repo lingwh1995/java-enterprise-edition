@@ -27,7 +27,7 @@ public class MybatisBuiltinParamTest {
         /**
          * 1.加载配置文件
          */
-        InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+        InputStream inputStream = Resources.getResourceAsStream("mysql/mybatis-config.xml");
         /**
          * 2.获取SqlSession对象
          */

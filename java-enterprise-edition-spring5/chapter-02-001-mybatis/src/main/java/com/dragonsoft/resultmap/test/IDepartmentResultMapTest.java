@@ -1,7 +1,6 @@
 package com.dragonsoft.resultmap.test;
 
 import com.dragonsoft.resultmap.dao.IDept;
-import com.dragonsoft.resultmap.dao.IEmployeeDao;
 import com.dragonsoft.resultmap.domain.Department;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -22,7 +21,7 @@ public class IDepartmentResultMapTest {
         /**
          * 1.加载配置文件
          */
-        InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+        InputStream inputStream = Resources.getResourceAsStream("mysql/mybatis-config.xml");
         /**
          * 2.获取SqlSession对象
          */
