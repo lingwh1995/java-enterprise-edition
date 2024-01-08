@@ -37,7 +37,7 @@ public class MybatisHelloWorldTest {
     public void fun1() throws IOException {
         SqlSession sqlSession = getSqlSession();
         try {
-            Employee employee =  sqlSession.selectOne("com.dragonsoft.helloworld.domain.EmployeeMapper.getEmployeeById", "1");
+            Employee employee =  sqlSession.selectOne("com.dragonsoft.helloworld.domain.EmployeeMapper.getEmployeeById", "001");
             System.out.println(employee);
         } finally {
             sqlSession.close();

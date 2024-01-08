@@ -9,7 +9,7 @@
 		resource：引入类路径下的资源
 		url：引入网络路径或者磁盘路径下的资源
 	  -->
-    <properties resource="mysql/db.properties"/>
+    <properties resource="oracle/db.properties"/>
 
     <!--
 		2、settings包含很多重要的设置项

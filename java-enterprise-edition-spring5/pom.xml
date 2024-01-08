@@ -33,6 +33,7 @@
         <log4j-slf4j2.version>2.20.0</log4j-slf4j2.version>
         <c3p0.version>0.9.1.2</c3p0.version>
         <mysql-connector-java.version>8.0.33</mysql-connector-java.version>
+        <ojdbc6.version>11.2.0.4</ojdbc6.version>
         <servlet.version>3.1.0</servlet.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <jstl.version>1.2</jstl.version>
@@ -103,6 +104,11 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql-connector-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.oracle.database.jdbc</groupId>
+                <artifactId>ojdbc6</artifactId>
+                <version>${ojdbc6.version}</version>
             </dependency>
             <!-- mysql-connector结束 -->
 
