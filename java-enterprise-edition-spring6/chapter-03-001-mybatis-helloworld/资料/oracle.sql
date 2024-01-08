@@ -1,4 +1,19 @@
-create sequence t_car_seq
+create table t_employee (
+    id varchar2(32) primary key,
+    last_name varchar2(50),
+    email varchar2(50),
+    gender varchar2(50)
+);
+
+insert into t_employee (id,last_name,email,gender) values ('001','zhangsan','1458687169@qq.com','男');
+
+--使用id和tbl_employee中id相关联
+create table t_department (
+    id varchar2(32) primary key,
+    dname varchar2(50)
+);
+
+create sequence t_employee_seq
     minvalue 1  --最小值
     --nomaxvalue  --不设置最大值(由机器决定)，或 根据表字段的值范围设置 maxvalue
     maxvalue 999999999999999999999999  -- 最大值
@@ -6,17 +21,3 @@ create sequence t_car_seq
     increment by 1  --每次加1，数值可变
     nocycle  --一直累加，不循环；cycle：达到最大值后，将从头开始累加
     nocache;
-
--- 创建表 汽⻋表t_car
-create table t_car(
-    id number primary key,
-    car_num varchar2(255),
-    brand varchar2(255),
-    guide_price number(10, 2),
-    produce_time varchar2(10),
-    car_type varchar2(255)
-);
-
--- 添加数据
-insert into t_car (id,car_num,brand,guide_price,produce_time,car_type) values (t_car_seq.nextval,'1001','宝马520li',10,'2022-10-11','燃油车');
-insert into t_car (id,car_num,brand,guide_price,produce_time,car_type) values (t_car_seq.nextval,'1002','奔驰e300l',55,'2022-11-11','新能源');

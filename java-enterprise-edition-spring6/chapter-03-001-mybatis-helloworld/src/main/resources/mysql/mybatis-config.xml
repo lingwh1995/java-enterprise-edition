@@ -99,6 +99,6 @@
 
     <!-- 导入mapper -->
     <mappers>
-        <mapper resource="mysql/CarMapper.xml"/>
+        <mapper resource="mysql/EmployeeMapper.xml"/>
     </mappers>
 </configuration>
