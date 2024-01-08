@@ -102,27 +102,27 @@
         <!--mybatis.mapper helloworld-->
         <mapper resource="com/dragonsoft/helloworld/mapper/oracle/EmployeeMapper.xml"/>
         <!--mybatis.mapper helloworld-->
-        <mapper resource="com/dragonsoft/bigdata/mapper/EmployeeMapper.xml"/>
+<!--        <mapper resource="com/dragonsoft/bigdata/mapper/EmployeeMapper.xml"/>-->
         <!--mybatis接口式编程-->
-        <mapper resource="com/dragonsoft/interfacemapper/mapper/oracle/EmployeeMapper-oracle.xml"/>
-        <mapper resource="com/dragonsoft/interfacemapper/mapper/mysql/EmployeeMapper-mysql.xml"/>
+<!--        <mapper resource="com/dragonsoft/interfacemapper/mapper/oracle/EmployeeMapper-oracle.xml"/>-->
+<!--        <mapper resource="com/dragonsoft/interfacemapper/mapper/mysql/EmployeeMapper-mysql.xml"/>-->
         <!--Mybatis CRUD-->
-        <mapper resource="com/dragonsoft/crud/mapper/oracle/EmpMapper-oracle.xml"/>
+<!--        <mapper resource="com/dragonsoft/crud/mapper/oracle/EmpMapper-oracle.xml"/>-->
         <!--mybatis使用resultmap封装数据-->
-        <mapper resource="com/dragonsoft/resultmap/mapper/oracle/IEmployeeResultMap-oracle.xml"/>
-        <mapper resource="com/dragonsoft/resultmap/mapper/oracle/IDepartment-oracle.xml"/>
+<!--        <mapper resource="com/dragonsoft/resultmap/mapper/oracle/IEmployeeResultMap-oracle.xml"/>-->
+<!--        <mapper resource="com/dragonsoft/resultmap/mapper/oracle/IDepartment-oracle.xml"/>-->
         <!-- mybatis缓存-oracle版 -->
         <!-- <mapper resource="com/dragonsoft/cache/mapper/oracle/IEmployeeMapper-oracle.xml"/>-->
         <!-- <mapper resource="com/dragonsoft/cache/mapper/oracle/IDepartmentMapper-oracle.xml"/>-->
         <!-- mybatis缓存-mysql版 -->
-        <mapper resource="com/dragonsoft/cache/mapper/mysql/IEmployeeMapper-mysql.xml"/>
-        <mapper resource="com/dragonsoft/cache/mapper/mysql/IDepartmentMapper-mysql.xml"/>
+<!--        <mapper resource="com/dragonsoft/cache/mapper/mysql/IEmployeeMapper-mysql.xml"/>-->
+<!--        <mapper resource="com/dragonsoft/cache/mapper/mysql/IDepartmentMapper-mysql.xml"/>-->
         <!--动态sql-->
-        <mapper resource="com/dragonsoft/dynamicsql/mapper/oracle/EmpMapper-oracle.xml"/>
+<!--        <mapper resource="com/dragonsoft/dynamicsql/mapper/oracle/EmpMapper-oracle.xml"/>-->
         <!--mybatis两个内置参数-->
-        <mapper resource="com/dragonsoft/builtinparam/mapper/oracle/EmpMapper-oracle.xml"/>
+<!--        <mapper resource="com/dragonsoft/builtinparam/mapper/oracle/EmpMapper-oracle.xml"/>-->
         <!--抽取可重用的sql片段-->
-        <mapper resource="com/dragonsoft/multiplexsql/mapper/oracle/EmpMapper-oracle.xml"/>
+<!--        <mapper resource="com/dragonsoft/multiplexsql/mapper/oracle/EmpMapper-oracle.xml"/>-->
         <!--mybatis generator生成的xml文件-->
         <!--<mapper resource="com/dragonsoft/generator/sql/EmployeeMapper.xml"/>-->
     </mappers>

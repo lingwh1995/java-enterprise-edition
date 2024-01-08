@@ -7,11 +7,13 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import java.io.InputStream;
 
 public class MybatisHelloworldTest {
+    private static final String ENV = "oracle";
+
     public static void main(String[] args) {
         // 1. 创建SqlSessionFactoryBuilder对象
         SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
         // 2. 创建SqlSessionFactory对象
-        InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("mysql/mybatis-config.xml");
+        InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(ENV + "/mybatis-config.xml");
         SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBuilder.build(is);
         // 3. 创建SqlSession对象
         SqlSession sqlSession = sqlSessionFactory.openSession();

@@ -12,6 +12,7 @@ import java.io.InputStream;
 
 public class MybatisHelloWorldTest {
 
+    private static final String ENV = "oracle";
     /**
      * 1、根据xml配置文件（全局配置文件）创建一个SqlSessionFactory对象 有数据源一些运行环境信息
      * 2、sql映射文件；配置了每一个sql，以及sql的封装规则等。
@@ -26,8 +27,7 @@ public class MybatisHelloWorldTest {
      */
     private SqlSession getSqlSession() throws IOException {
         /**1.加载配置文件*/
-        //InputStream inputStream = Resources.getResourceAsStream("mysql/mybatis-config.xml");
-        InputStream inputStream = Resources.getResourceAsStream("oracle/mybatis-config.xml");
+        InputStream inputStream = Resources.getResourceAsStream( ENV + "/mybatis-config.xml");
         /**2.获取SqlSession对象*/
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         return sqlSessionFactory.openSession();

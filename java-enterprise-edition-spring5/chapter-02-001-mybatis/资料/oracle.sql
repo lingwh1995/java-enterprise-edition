@@ -15,9 +15,9 @@ create table t_department (
 
 create sequence t_employee_seq
     minvalue 1  --最小值
---nomaxvalue  --不设置最大值(由机器决定)，或 根据表字段的值范围设置 maxvalue
-    maxvalue 9999999  -- 最大值
+    --nomaxvalue  --不设置最大值(由机器决定)，或 根据表字段的值范围设置 maxvalue
+    maxvalue 999999999999999999999999  -- 最大值
     start with 1   --从1开始计数，数值可变
     increment by 1  --每次加1，数值可变
     nocycle  --一直累加，不循环；cycle：达到最大值后，将从头开始累加
-nocache;
+    nocache;
