@@ -36,11 +36,19 @@ public class MybatisHelloWorldTest {
     @Test
     public void fun1() throws IOException {
         SqlSession sqlSession = getSqlSession();
-        try {
+        try{
             Employee employee =  sqlSession.selectOne("emp.getEmployeeById", "1");
             System.out.println(employee);
-        } finally {
-            sqlSession.close();
+            sqlSession.commit();
+        }catch (Exception e){
+            if (sqlSession != null) {
+                sqlSession.rollback();
+            }
+            e.printStackTrace();
+        }finally {
+            if (sqlSession != null) {
+                sqlSession.close();
+            }
         }
     }
 
