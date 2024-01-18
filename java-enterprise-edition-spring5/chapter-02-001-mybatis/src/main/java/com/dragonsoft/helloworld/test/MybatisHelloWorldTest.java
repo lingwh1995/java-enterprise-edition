@@ -12,7 +12,7 @@ import java.io.InputStream;
 
 public class MybatisHelloWorldTest {
 
-    private static final String ENV = "oracle";
+    private static final String ENV = "mysql";
     /**
      * 1、根据xml配置文件（全局配置文件）创建一个SqlSessionFactory对象 有数据源一些运行环境信息
      * 2、sql映射文件；配置了每一个sql，以及sql的封装规则等。
