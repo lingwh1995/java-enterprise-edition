@@ -13,7 +13,6 @@
         <module>java-enterprise-edition-spring5</module>
         <module>java-enterprise-edition-spring6</module>
         <module>java-enterprise-edition-springboot2</module>
-        <module>java-enterprise-edition-spring6/chapter-03-002-mybatis-crud</module>
     </modules>
 
     <properties>
