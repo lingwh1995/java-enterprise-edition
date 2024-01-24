@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace先随意写一个-->
+<mapper namespace="crudByMap">
+    <!--insert sql：保存一个Employee信息-->
+    <insert id="insertEmployee">
+        insert into t_employee
+            (last_name, email, gender)
+        values
+            (#{last_name}, #{email}, #{gender})
+    </insert>
+
+    <!--update sql：更新一个Employee信息-->
+    <update id="updateEmployee">
+        update
+            t_employee
+        set
+            last_name = #{last_name},email = #{email},gender = #{gender}
+        where
+            id = #{id}
+    </update>
+
+    <!--delete sql：删除一个Employee信息-->
+    <delete id="deleteEmployee">
+        delete from
+            t_employee
+        where
+            id = #{id}
+    </delete>
+
+    <!--selectOne sql：查询一个Employee信息-->
+    <select id="selectOneEmployee" resultType="java.util.Map">
+        select
+            *
+        from
+            t_employee
+        where
+            id = #{id}
+    </select>
+
+    <!--selectList sql：查询多个Employee信息，特别注意：这里的查询多个Employee的resultType的类型和查询一个Employee的resultType的类型是一致的-->
+    <select id="selectEmployees" resultType="java.util.Map">
+        select
+            *
+        from
+            t_employee
+    </select>
+</mapper>
