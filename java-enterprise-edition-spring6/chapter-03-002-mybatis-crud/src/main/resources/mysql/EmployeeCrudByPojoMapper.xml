@@ -6,45 +6,45 @@
 <mapper namespace="crudByPojo">
     <!--insert sql：保存一个Employee信息-->
     <insert id="insertEmployee">
-        insert into t_employee
-            (last_name, email, gender)
-        values
+        INSERT INTO
+            t_employee (last_name, email, gender)
+        VALUES
             (#{lastName}, #{email}, #{gender})
     </insert>
 
     <!--update sql：更新一个Employee信息-->
     <update id="updateEmployee">
-        update
+        UPDATE
             t_employee
-        set
+        SET
             last_name = #{lastName},email = #{email},gender = #{gender}
-        where
+        WHERE
             id = #{id}
     </update>
 
     <!--delete sql：删除一个Employee信息-->
     <delete id="deleteEmployee">
-        delete from
+        DELETE FROM
             t_employee
-        where
+        WHERE
             id = #{id}
     </delete>
 
     <!--selectOne sql：查询一个Employee信息-->
     <select id="selectOneEmployee" resultType="org.bluebridge.domain.Employee">
-        select
+        SELECT
             *
-        from
+        FROM
             t_employee
-        where
+        WHERE
             id = #{id}
     </select>
 
     <!--selectList sql：查询多个Employee信息，特别注意：这里的查询多个Employee的resultType的类型和查询一个Employee的resultType的类型是一致的-->
     <select id="selectEmployees" resultType="org.bluebridge.domain.Employee">
-        select
+        SELECT
             *
-        from
+        FROM
             t_employee
     </select>
 </mapper>

@@ -11,7 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
  *
  */
 public class SqlSessionUtil {
-    private static final String ENV = "mysql";
+    private static final String ENV = "oracle";
     private static SqlSessionFactory sqlSessionFactory;
 
     private SqlSessionUtil() {}

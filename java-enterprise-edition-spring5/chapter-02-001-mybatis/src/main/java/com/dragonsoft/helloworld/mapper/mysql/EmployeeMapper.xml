@@ -12,6 +12,11 @@
 		public Employee getEmpById(Integer id);
 	-->
 	<select id="getEmployeeById" resultType="com.dragonsoft.helloworld.domain.Employee">
-		select id,last_name lastname,email,gender from t_employee where id = #{id}
+		SELECT
+		    id,last_name lastname,email,gender
+		FROM
+		    t_employee
+		WHERE
+		    id = #{id}
 	</select>
 </mapper>

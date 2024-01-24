@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 public class MybatisCrudByPojoTest {
-    private static final String ENV = "mysql";
 
     /**
      * 使用Map传递参数实现新增功能
@@ -47,7 +46,7 @@ public class MybatisCrudByPojoTest {
         try {
             sqlSession = SqlSessionUtil.openSession();
             Employee employee = new Employee();
-            employee.setId("15");
+            employee.setId("7");
             employee.setLastName("zs");
             employee.setEmail("1458687169@qq.com1");
             employee.setGender("男1");
@@ -74,7 +73,7 @@ public class MybatisCrudByPojoTest {
         SqlSession sqlSession = null;
         try {
             sqlSession = SqlSessionUtil.openSession();
-            int count = sqlSession.delete("crudByPojo.deleteEmployee",15);
+            int count = sqlSession.delete("crudByPojo.deleteEmployee",6);
             System.out.println("删除几条数据：" + count);
             sqlSession.commit();
         }catch (Exception e){
@@ -97,12 +96,7 @@ public class MybatisCrudByPojoTest {
         SqlSession sqlSession = null;
         try {
             sqlSession = SqlSessionUtil.openSession();
-            Employee employee = new Employee();
-            employee.setId("16");
-            //Employee result = (Employee)sqlSession.selectOne("crudByPojo.selectOneEmployee", employee);
-
-            //除了使用Pojo作为参数,也可以直接传递一个参数进去，xml中使用#{id}也是可以获取到的
-            Employee result = (Employee)sqlSession.selectOne("crudByPojo.selectOneEmployee", 16);
+            Employee result = (Employee)sqlSession.selectOne("crudByPojo.selectOneEmployee", 7);
             System.out.println("查询到的数据：" + result);
             sqlSession.commit();
         }catch (Exception e){

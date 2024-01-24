@@ -4,11 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--namespace先随意写一个-->
 <mapper namespace="emp">
-    <!--insert sql：保存一个Employee信息-->
+    <!--insert sql：保存一个Employee信息,这里的主键使用的是序列，但是不推荐这种写法，因为这个后期维护不是很方便-->
     <insert id="insertEmployee">
-        insert into t_employee
-            (id,last_name,email,gender)
-        values
+        INSERT INTO
+            t_employee (id,last_name,email,gender)
+        VALUES
             (t_employee_seq.nextval,'zhangsan','1458687169@qq.com','男')
     </insert>
 </mapper>
