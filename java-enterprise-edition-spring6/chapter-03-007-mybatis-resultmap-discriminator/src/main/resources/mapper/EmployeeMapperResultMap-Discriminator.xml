@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.bluebridge.dao.IEmployeeDao">
+    <!-- discriminator案例一  部门编号不等于10时就返回空的部门对象 -->
+    <!--
+        <discriminator javaType=""></discriminator>
+        鉴别器：mybatis可以使用discriminator判断某列的值，然后根据某列的值改变封装行为
+    -->
+    <resultMap type="org.bluebridge.domain.Employee" id="getEmployeeAndDepartmentByIdUseAssociationDiscriminatorResultMap">
+        <!--指定主键列，使得框架优化规则 -->
+        <id column="id" property="id"/>
+        <!-- 指定普通列 -->
+        <result column="last_name" property="lastName"/>
+        <result column="gender" property="gender"/>
+        <result column="email" property="email"/>
+        <result column="dept_no" property="deptNo"/>
+
+        <!--
+            association可以指定联合的javaBean对象
+            property="dept"：指定哪个属性是联合的对象
+            javaType:指定联合的javaBean对象的类型[不能省略]
+        -->
+        <discriminator javaType="String" column="dept_no">
+            <case value="10">
+                <association property="department" javaType="org.bluebridge.domain.Department">
+                    <!--指定主键列，使得框架优化规则 -->
+                    <id column="id" property="id"/>
+                    <!-- 指定普通列 -->
+                    <result column="dept_no" property="deptNo"/>
+                    <result column="dept_name" property="deptName"/>
+                </association>
+            </case>
+        </discriminator>
+    </resultMap>
+
+    <select id="getEmployeeAndDepartmentByIdUseAssociationDiscriminator" resultMap="getEmployeeAndDepartmentByIdUseAssociationDiscriminatorResultMap">
+        select
+            e.id,e.last_name ,e.email,e.gender,e.dept_no,d.dept_name,d.dept_no
+        from t_employee e
+                left join t_department d
+                    on e.dept_no = d.dept_no
+        where e.id=#{id}
+    </select>
+
+</mapper>

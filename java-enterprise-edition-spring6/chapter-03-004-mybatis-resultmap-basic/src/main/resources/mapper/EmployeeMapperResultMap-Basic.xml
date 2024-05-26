@@ -10,12 +10,6 @@
         id      这个规则的唯一标识
     -->
     <resultMap type="org.bluebridge.domain.Employee" id="getEmployeeByIdResultMap">
-        <!--
-            指定主键列的封装规则
-                <id/>               定义主键列封装规则
-                <result column/>    定义普通列封装规则
-            注意:其他不写的列会也会自动封装查询到的结果
-        -->
         <!--指定主键列，使得框架优化规则 -->
         <id column="id" property="id"/>
         <!-- 指定普通列 -->

@@ -102,6 +102,7 @@
 
     <!-- 导入mapper -->
     <mappers>
-        <mapper resource="mapper/EmployeeMapperResultMap-Basic.xml"/>
+        <mapper resource="mapper/EmployeeMapperResultMap-Discriminator.xml"/>
+        <mapper resource="mapper/DepartmentMapper-Discriminator.xml"/>
     </mappers>
 </configuration>

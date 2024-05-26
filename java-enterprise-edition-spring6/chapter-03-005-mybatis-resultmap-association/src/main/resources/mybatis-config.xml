@@ -102,7 +102,7 @@
 
     <!-- 导入mapper -->
     <mappers>
-        <mapper resource="mapper/EmployeeMapperResultMap-Basic.xml"/>
-<!--        <mapper resource="mapper/DepartmentMapper.xml"/>-->
+        <mapper resource="mapper/EmployeeMapperResultMap-Association.xml"/>
+        <mapper resource="mapper/DepartmentMapper-Association.xml"/>
     </mappers>
 </configuration>

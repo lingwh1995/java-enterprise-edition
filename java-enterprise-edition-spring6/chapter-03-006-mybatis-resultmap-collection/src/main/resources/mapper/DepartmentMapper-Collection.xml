@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.bluebridge.dao.IDeptDao">
+	<!-- ResultMap之Collecion案例一  使用ResultMap的Collecion完成多表一对多关联查询 -->
+	<!-- 以t_department为主表,t_employee为从表查询数据-->
+	<resultMap type="org.bluebridge.domain.Department" id="getDeptAndEmployeesByDeptIdUseCollectionResultMap">
+		<!--指定主键列，使得框架优化规则 -->
+		<id column="id" property="id"/>
+		<!-- 指定普通列 -->
+		<result column="dept_no" property="deptNo"/>
+		<result column="dept_name" property="deptName"/>
+		<!--
+			collection 	定义关联集合类型的属性的封装规则
+			property	关联集合的属性名
+			ofType		指定集合里面元素的类型
+		-->
+		<collection property="employees" ofType="org.bluebridge.domain.Employee">
+			<!-- 注意:如果这里面写了<id/>标签,那么查询结果会去重，最终只会查询处一条数据，所以不能写id标签-->
+			<!-- <id column="id" property="id"/> -->
+			<result column="last_name" property="lastName"/>
+			<result column="email" property="email"/>
+			<result column="gender" property="gender"/>
+			<result column="dept_no" property="deptNo"/>
+		</collection>
+	</resultMap>
+	<select id="getDeptAndEmployeesByDeptIdUseCollection" resultMap="getDeptAndEmployeesByDeptIdUseCollectionResultMap">
+		select
+			d.id,
+			d.dept_no,
+			d.dept_name,
+			e.last_name,
+			e.email email,
+			e.gender gender,
+			e.dept_no
+		from t_department d
+				 left join t_employee e
+						   on d.dept_no = e.dept_no
+		where d.id = #{id}
+	</select>
+
+
+	<!-- ResultMap之Collecion案例一  使用ResultMap的Collecion完成多表一对多关联查询 + 分步查询 -->
+	<!-- 以t_department为主表,t_employee为从表查询数据-->
+	<resultMap type="org.bluebridge.domain.Department" id="getDeptAndEmployeesByDeptIdUseCollectionByStepResultMap">
+		<id column="id" property="id"/>
+		<id column="dept_no" property="deptNo"/>
+		<id column="dept_name" property="deptName"/>
+		<!--
+            collection分步查询需要基础之上加上两个配置，ofType属性不用配置
+                select:表明当前属性是调用select指定的方法查出的结果
+                column:指定将哪一列的值传给这个方法
+				fetchType="lazy"：表示使用延迟加载；
+					- lazy：延迟
+					- eager：立即
+            流程		使用select指定的方法（传入column指定的这列参数的值）查出对象，并封装给property指定的属性
+		 	扩展		将多列的值封装map传递:	column="{key1=column1,key2=column2}"
+		 -->
+		<collection property="employees"
+					select="org.bluebridge.dao.IEmployeeDao.getEmployeesByDeptNo"
+					column="dept_no" fetchType="lazy">
+		</collection>
+	</resultMap>
+	<select id="getDeptAndEmployeesByDeptIdUseCollectionByStep" resultMap="getDeptAndEmployeesByDeptIdUseCollectionByStepResultMap">
+		select id,dept_no,dept_name from t_department where id=#{id}
+	</select>
+</mapper>

@@ -11,6 +11,8 @@ create table t_employee (
     dept_no varchar(2)
 );
 insert into t_employee (id, last_name, email, gender,dept_no) values (1, 'zhangsan', '1458687169@qq.com', '男','10');
+insert into t_employee (id, last_name, email, gender,dept_no) values (2, 'lisi', '1458687169@qq.com', '男','10');
+insert into t_employee (id, last_name, email, gender,dept_no) values (3, '王五', '2926517283@qq.com', '女','20');
 
 -- 使用deptNo和t_employee中id相关联
 create table t_department (
@@ -19,3 +21,4 @@ create table t_department (
     dept_name varchar(20)
 );
 insert into t_department(id,dept_no,dept_name) values (1,'10','研发部门');
+insert into t_department(id,dept_no,dept_name) values (2,'20','人事部门');
