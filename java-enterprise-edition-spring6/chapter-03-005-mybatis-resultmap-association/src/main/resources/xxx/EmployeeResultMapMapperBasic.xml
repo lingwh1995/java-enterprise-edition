@@ -2,75 +2,19 @@
 <!DOCTYPE mapper
 		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dragonsoft.resultmap.dao.IEmployeeDao">
-	<!--
-		简单查询时使用resultMap
-		自定义某个javaBean的封装规则
-		type：自定义规则的Java类型
-		id:唯一id方便引用
-	-->
-	<resultMap type="com.dragonsoft.resultmap.domain.Employee" id="simpleResultMapdemo">
-		<!--指定主键列的封装规则
-		id定义主键会底层有优化；
-		column：指定哪一列
-		property：指定对应的javaBean属性
-		  -->
-		<id column="id" property="id"/>
-		<!-- 定义普通列封装规则 -->
-		<result column="last_name" property="lastName"/>
-		<!-- 其他不指定的列会自动封装：我们只要写resultMap就把全部的映射规则都写上。 -->
-		<result column="email" property="email"/>
-		<result column="gender" property="gender"/>
-	</resultMap>
-	<!-- resultMap:自定义结果集映射规则；  -->
-	<select id="getEmployeeById"  resultMap="simpleResultMapdemo">
-		SELECT * FROM T_EMPLOYEE WHERE ID=#{id}
-	</select>
-
-
-
-
-	<!-- 查询List<Employee>  -->
-	<select id="getEmployeeListById"  resultType="com.dragonsoft.resultmap.domain.Employee">
-		SELECT * FROM TBL_EMPLOYEE WHERE ID=#{id}
-	</select>
+<mapper namespace="org.bluebridge.dao.IEmployeeDao">
 
 
 
 
 
-	<!--
-	场景一：
-		查询Employee的同时查询员工对应的部门
-		Employee===Department
-		一个员工有与之对应的部门信息；
-		id  last_name  gender    d_id     id  dname (private Department dept;)
-	 -->
 
-	<!--
-		复杂查询时使用resultMap
-		联合查询：嵌套结果集的方式(级联属性封装结果集)
-	  -->
-	<resultMap type="com.dragonsoft.resultmap.domain.Employee" id="diffResultMapdemo1">
-		<!--规定主键列-->
-		<id column="id" property="id"/>
-		<result column="last_name" property="lastName"/>
-		<result column="gender" property="gender"/>
-		<result column="email" property="email"/>
 
-		<!-- 使用级联属性把查询结果封装到JavaBean中-->
-		<result column="id" property="department.id"/>
-		<result column="dname" property="department.dname"/>
-	</resultMap>
-	<!-- resultMap:自定义结果集映射规则；  -->
-	<select id="getEmployeeAndDepartmentByIdUseCascade"  resultMap="diffResultMapdemo1">
-		SELECT
-			E.ID,E.LAST_NAME ,E.EMAIL,E.GENDER,D.DNAME
-		FROM TBL_EMPLOYEE E
-		LEFT JOIN TBL_DEPARTMENT D
-		ON E.ID = D.ID
-		WHERE E.ID=#{id}
-	</select>
+
+
+
+
+
 
 
 
@@ -120,7 +64,7 @@
 	 		分段查询的基础之上加上两个配置：
 	  -->
 	<!--  id  last_name  email   gender    id dname   -->
-	<resultMap type="com.dragonsoft.resultmap.domain.Employee" id="MyEmpByStep">
+	<resultMap type="org.bluebridge.domain.Employee" id="MyEmpByStep">
 		<id column="id" property="id"/>
 		<result column="last_name" property="lastName"/>
 		<result column="email" property="email"/>

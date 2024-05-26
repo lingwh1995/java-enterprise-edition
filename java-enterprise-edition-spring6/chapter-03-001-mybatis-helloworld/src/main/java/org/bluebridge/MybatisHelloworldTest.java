@@ -22,7 +22,7 @@ public class MybatisHelloworldTest {
             // 3. 创建SqlSession对象
             sqlSession = sqlSessionFactory.openSession();
             // 4. 执行sql
-            int count = sqlSession.insert("emp.insertEmployee"); // 这个"insertCar"必须是sql的id
+            int count = sqlSession.insert("emp.insertEmployee"); // 这个"insertEmployee"必须是sql的id
             System.out.println("插入几条数据：" + count);
             // 5. 提交（mybatis默认采用的事务管理器是JDBC，默认是不提交的，需要手动提交。）
             sqlSession.commit();
@@ -38,4 +38,5 @@ public class MybatisHelloworldTest {
             }
         }
     }
+
 }

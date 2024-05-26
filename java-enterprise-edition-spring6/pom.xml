@@ -50,8 +50,12 @@
         <module>chapter-02-016-springmvc-intercept_ororder</module>
         <module>chapter-02-017-springmvc-handler_exception_resolver</module>
         <module>chapter-02-018-springmvc-delay_get_vue</module>
-        <module>chapter-03-001-mybatis-helloworld</module>
         <module>chapter-02-019-springmvc-cors</module>
+        <module>chapter-03-001-mybatis-helloworld</module>
+        <module>chapter-03-002-mybatis-crud-basic</module>
+        <module>chapter-03-003-mybatis-crud-interface</module>
+        <module>chapter-03-004-mybatis-resultmap-basic</module>
+        <module>chapter-03-005-mybatis-resultmap-association</module>
     </modules>
 
     <properties>
