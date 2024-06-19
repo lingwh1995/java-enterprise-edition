@@ -57,3 +57,11 @@ insert into r_menu values(2,5);
 insert into r_menu values(2,6);
 insert into r_menu values(2,7);
 insert into r_menu values(2,8);
+
+#查询张三的所有一级菜单
+# 1.从t_user(用户信息表)中查询出张三的rid(角色id)
+select rid from t_user where uname = '张三' and pwd = '123';
+# 2.从r_menu(角色菜单中间表)中查询张三的rid(角色id)对应的mid(菜单id)
+select mid from r_menu where rid = 1;
+# 3.从菜单信息表(t_menu)中查询张三的rid(角色id)对应的mid(菜单id)对应的一级菜单名称
+select * from t_menu where mid in(1,5,6) and parentid = 0;
