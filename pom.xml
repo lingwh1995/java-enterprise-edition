@@ -15,6 +15,8 @@
         <module>java-enterprise-edition-springboot2</module>
         <module>java-enterprise-edition-workflow</module>
         <module>java-enterprise-edition-bigdate</module>
+        <module>java-enterprise-edition-authority</module>
+        <module>java-enterprise-edition-authority/chapter-01-001-security-helloworld</module>
     </modules>
 
     <properties>
