@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author ronin
  */
 @Controller
-public class HelloController {
+public class RepositoryController {
 
     @ResponseBody
     @RequestMapping("/repository")
