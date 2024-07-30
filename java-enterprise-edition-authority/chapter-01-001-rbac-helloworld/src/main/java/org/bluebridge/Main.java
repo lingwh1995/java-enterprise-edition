@@ -1,5 +1,8 @@
 package org.bluebridge;
 
+import com.sun.xml.internal.messaging.saaj.util.Base64;
+
+import java.nio.charset.Charset;
 import java.sql.SQLOutput;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
