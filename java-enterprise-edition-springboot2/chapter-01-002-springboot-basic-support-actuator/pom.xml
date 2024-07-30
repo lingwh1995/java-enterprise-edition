@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>chapter-01-002-springboot-basic-actuator</artifactId>
+    <artifactId>chapter-01-002-springboot-basic-support-actuator</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
