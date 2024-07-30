@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HelloController {
 
     @ResponseBody
-    @RequestMapping("/hello")
-    public String hello(){
-        return "hello devtools~";
+    @RequestMapping("/repository")
+    public String repository(){
+        return "springboot repository~[使用阿里云镜像仓库]";
     }
 
 }
