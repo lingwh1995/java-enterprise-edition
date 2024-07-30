@@ -17,6 +17,7 @@
         <module>chapter-01-003-springboot-basic-devtools</module>
         <module>chapter-01-004-springboot-basic-repository</module>
         <module>chapter-01-005-springboot-basic-configuration-processor</module>
+        <module>chapter-02-001-springboot-tools-mail</module>
     </modules>
 
     <properties>

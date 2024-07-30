@@ -1,0 +1,25 @@
+spring:
+    application:
+        name: spirng-boot-mail
+    mail:
+        default-encoding: UTF-8
+        host: smtp.163.com
+        username: lingwh1688@163.com
+        password: LRwq942133
+
+#        properties:
+#            mail:
+#                debug: true
+#                smtp:
+#                    socketFactory:
+#                        class: javax.net.ssl.SSLSocketFactory
+#                        port: 465
+#            smtp:
+#                auth: true
+#                starttls:
+#                    enable: true
+#                    required: true
+
+mail:
+    fromMail:
+        addr: lwh_ubuntu@163.com
