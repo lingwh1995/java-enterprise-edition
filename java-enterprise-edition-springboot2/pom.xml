@@ -18,6 +18,7 @@
         <module>chapter-01-004-springboot-basic-repository</module>
         <module>chapter-01-005-springboot-basic-configuration-processor</module>
         <module>chapter-02-001-springboot-tools-mail</module>
+        <module>chapter-03-001-springboot-senior-async</module>
     </modules>
 
     <properties>
