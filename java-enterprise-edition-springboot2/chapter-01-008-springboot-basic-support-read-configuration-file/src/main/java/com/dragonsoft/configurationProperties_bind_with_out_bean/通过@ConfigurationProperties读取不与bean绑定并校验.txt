@@ -1,0 +1,11 @@
+1.在LibraryProperties上添加注解
+    @ConfigurationProperties(prefix = "library")
+    public class LibraryProperties {}
+2.在主启动类Application上添加注解@EnableConfigurationProperties(LibraryProperties.class)
+    @SpringBootApplication
+    @EnableConfigurationProperties(LibraryProperties.class)
+    public class Application {
+        public static void main(String[] args) {
+            SpringApplication.run(Application.class,args);
+        }
+    }
