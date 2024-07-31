@@ -18,7 +18,7 @@ import javax.sql.DataSource;
  * SpringBoot(推荐)使用JAVA配置来完全代替XML配置
  *      1.使用@Configuration + @Bean + @Scope 代替XML配置
  *      2.@Configuration介绍
- *          @Configuration可理解为使用Spring框架时的XML文件中的<beans/>
+ *          @Configuration可理解为使用Spring框架时的XML文件中的<beans/>,一般用来声明配置类，可以使用 @Component注解替代，不过使用@Configuration注解声明配置类更加语义
  *          proxyBeanMethods = true  创建单实例对象
  *          proxyBeanMethods = false 不进行检查IOC容器中是否存在，而是简单的调用方法进行创建对象，无法保持单实例
  *      3.@Bean介绍
@@ -26,8 +26,10 @@ import javax.sql.DataSource;
  *          @Bean的name属性来指定id，相当于<bean/>标签的id属性
  *      4.@Scope介绍
  *          @Scope可理解为使用Spring框架时XML里面的<bean scope=""/>标签中的scope属性
- *          @Scope("singleton")                 单例，默认值
- *          @Scope("prototype")                 多例
+ *          @Scope("singleton")                 唯一 bean 实例，Spring 中的 bean 默认都是单例的。
+ *          @Scope("prototype")                 每次请求都会创建一个新的 bean 实例
+ *          @Scope("request")                   每一次 HTTP 请求都会产生一个新的 bean，该 bean 仅在当前 HTTP request 内有效
+ *          @Scope("session")                   每一个 HTTP Session 会产生一个新的 bean，该 bean 仅在当前 HTTP session 内有效
  */
 @Configuration
 public class Config {

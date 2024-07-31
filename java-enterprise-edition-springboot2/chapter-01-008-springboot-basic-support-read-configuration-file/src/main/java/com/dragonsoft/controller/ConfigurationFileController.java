@@ -1,7 +1,8 @@
-package com.dragonsoft.value;
+package com.dragonsoft.controller;
 
 import com.dragonsoft.configurationProperties_bind_with_bean.LibraryBindWithBean;
 import com.dragonsoft.configurationProperties_bind_with_out_bean.LibraryBindWithoutBean;
+import com.dragonsoft.propertySource.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,6 +59,11 @@ public class ConfigurationFileController {
     private LibraryBindWithoutBean libraryBindWithoutBean;
     //-----------使用@ConfigurationProperties读取配置文件(不和bean绑定)结束-----------
 
+    //-----------使用@PropertySource读取properties文件内容开始-----------
+    @Resource
+    private User user;
+    //-----------使用@PropertySource读取properties文件内容结束-----------
+
 
     /**
      * 访问   http://localhost:8080/configuration     查看效果
@@ -83,6 +89,10 @@ public class ConfigurationFileController {
         System.out.println("-----------使用@ConfigurationProperties读取配置文件(不和bean绑定)开始-----------");
         System.out.println(libraryBindWithoutBean);
         System.out.println("-----------使用@ConfigurationProperties读取配置文件(不和bean绑定)结束-----------");
+
+        //-----------使用@PropertySource读取properties文件内容开始-----------
+        System.out.println("user = " + user);
+        //-----------使用@PropertySource读取properties文件内容结束-----------
         return "请在控制台查看打印的配置文件内容~";
     }
 }
