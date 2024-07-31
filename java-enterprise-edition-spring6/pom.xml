@@ -74,7 +74,7 @@
         <jaxen.version>2.0.0</jaxen.version>
         <jakarta.annotation-api.version>2.1.1</jakarta.annotation-api.version>
         <druid.version>1.2.20</druid.version>
-        <mysql.version>8.0.33</mysql.version>
+        <mysql-connector.version>8.0.33</mysql-connector.version>
         <ojdbc6.version>11.2.0.4</ojdbc6.version>
         <cglib.version>3.3.0</cglib.version>
         <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
@@ -167,7 +167,7 @@
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.version}</version>
+                <version>${mysql-connector.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.oracle.database.jdbc</groupId>
