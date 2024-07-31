@@ -17,6 +17,7 @@
         <module>chapter-01-003-springboot-basic-support-devtools</module>
         <module>chapter-01-004-springboot-basic-support-repository</module>
         <module>chapter-01-005-springboot-basic-support-configuration-processor</module>
+        <module>chapter-01-006-springboot-basic-support-json-xml</module>
         <module>chapter-02-001-springboot-tools-mail</module>
         <module>chapter-03-001-springboot-senior-async</module>
         <module>chapter-03-002-springboot-senior-schedule</module>
