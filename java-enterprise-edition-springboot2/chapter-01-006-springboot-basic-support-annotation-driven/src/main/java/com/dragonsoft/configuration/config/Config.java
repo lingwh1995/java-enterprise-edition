@@ -1,9 +1,9 @@
-package com.dragonsoft.config;
+package com.dragonsoft.configuration.config;
 
-import com.dragonsoft.controller.UserController;
-import com.dragonsoft.dao.UserDao;
-import com.dragonsoft.service.IUserService;
-import com.dragonsoft.service.UserServiceImpl;
+import com.dragonsoft.configuration.controller.UserController;
+import com.dragonsoft.configuration.dao.UserDao;
+import com.dragonsoft.configuration.service.IUserService;
+import com.dragonsoft.configuration.service.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;

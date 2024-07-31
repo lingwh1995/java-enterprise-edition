@@ -1,0 +1,1 @@
+使用@Configuration + @Bean + @Scope 代替XML配置

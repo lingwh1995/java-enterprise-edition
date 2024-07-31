@@ -1,4 +1,4 @@
-package com.dragonsoft.controller;
+package com.dragonsoft.configuration.controller;
 
 import org.springframework.stereotype.Controller;
 

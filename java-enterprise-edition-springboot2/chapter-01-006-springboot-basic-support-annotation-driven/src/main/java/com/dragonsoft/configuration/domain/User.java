@@ -1,4 +1,4 @@
-package com.dragonsoft.domain;
+package com.dragonsoft.configuration.domain;
 
 public class User {
     private String username;

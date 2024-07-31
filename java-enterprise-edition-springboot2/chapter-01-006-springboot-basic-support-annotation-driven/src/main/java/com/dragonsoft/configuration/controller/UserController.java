@@ -1,7 +1,7 @@
-package com.dragonsoft.controller;
+package com.dragonsoft.configuration.controller;
 
-import com.dragonsoft.domain.User;
-import com.dragonsoft.service.IUserService;
+import com.dragonsoft.configuration.domain.User;
+import com.dragonsoft.configuration.service.IUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;

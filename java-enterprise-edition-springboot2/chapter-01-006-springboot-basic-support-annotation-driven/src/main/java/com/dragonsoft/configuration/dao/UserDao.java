@@ -1,6 +1,6 @@
-package com.dragonsoft.dao;
+package com.dragonsoft.configuration.dao;
 
-import com.dragonsoft.domain.User;
+import com.dragonsoft.configuration.domain.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class UserDao {

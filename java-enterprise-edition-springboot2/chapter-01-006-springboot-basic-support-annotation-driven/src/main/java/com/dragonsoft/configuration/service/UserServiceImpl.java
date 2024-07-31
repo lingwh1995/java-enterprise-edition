@@ -1,7 +1,7 @@
-package com.dragonsoft.service;
+package com.dragonsoft.configuration.service;
 
-import com.dragonsoft.dao.UserDao;
-import com.dragonsoft.domain.User;
+import com.dragonsoft.configuration.dao.UserDao;
+import com.dragonsoft.configuration.domain.User;
 
 public class UserServiceImpl implements IUserService{
 
