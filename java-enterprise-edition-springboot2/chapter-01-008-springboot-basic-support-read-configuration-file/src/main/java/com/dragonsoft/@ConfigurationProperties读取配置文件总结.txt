@@ -1,0 +1,91 @@
+@ConfigurationProperties的几种使用方式
+
+方式一：@Configuration/@Component + @ConfigurationProperties
+
+    @Configuration  //可以换成@Component
+    @ConfigurationProperties(prefix = "mail")
+    public class ConfigProperties {
+
+        private String hostName;
+        private int port;
+        private String from;
+
+        // standard getters and setters
+    }
+
+方式二：@ConfigurationProperties + @EnableConfigurationProperties
+
+    @ConfigurationProperties(prefix = "mail")
+    public class ConfigProperties {
+
+        private String hostName;
+        private int port;
+        private String from;
+
+        // standard getters and setters
+    }
+
+    @SpringBootApplication
+    @EnableConfigurationProperties(ConfigProperties.class)
+    public class EnableConfigurationDemoApplication {
+        public static void main(String[] args) {
+            SpringApplication.run(EnableConfigurationDemoApplication.class, args);
+        }
+    }
+
+注：未指定@Configuration注解，需要在启动类加@EnableConfigurationProperties注解
+
+方式三：@ConfigurationProperties + @ConfigurationPropertiesScan
+
+    @ConfigurationProperties(prefix = "mail")
+    public class ConfigProperties {
+
+        private String hostName;
+        private int port;
+        private String from;
+
+        // standard getters and setters
+    }
+
+    @SpringBootApplication
+    @ConfigurationPropertiesScan("com.baeldung.configurationproperties")
+    public class EnableConfigurationDemoApplication {
+
+        public static void main(String[] args) {
+            SpringApplication.run(EnableConfigurationDemoApplication.class, args);
+        }
+    }
+
+假设ConfigProperties类在com.baeldung.configurationproperties下，直接扫描该包下包含@ConfigurationProperties注解的类
+
+方式四：@Configuration + @Bean + @ConfigurationProperties
+
+    @Configuration
+    public class ConfigProperties {
+
+        @Bean
+        @ConfigurationProperties(prefix = "item")
+        public Item item() {
+            return new Item();
+        }
+    }
+
+方式五：@ConfigurationProperties + @ConstructorBinding
+
+    @ConfigurationProperties(prefix = "mail.credentials")
+    @ConstructorBinding
+    public class ConfigProperties {
+
+        private String hostName;
+        private int port;
+        private String from;
+
+        public ConfigProperties(String hostName,  int port, String from) {
+            this.hostName = hostName;
+            this.port = port;
+            this.from = from;
+        }
+        // standard getters and setters
+    }
+
+通过以上构造器参数绑定，还需要使用@EnableConfigurationProperties 或 @ConfigurationPropertiesScan显式启用我们的配置类

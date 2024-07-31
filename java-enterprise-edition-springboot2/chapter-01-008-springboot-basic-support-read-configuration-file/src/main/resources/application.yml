@@ -1,0 +1,15 @@
+version: V1.0
+
+user:
+  username: 张三
+  password: zhangsan
+
+library:
+  location: 陕西省图书馆
+  books:
+    - name: 钢铁是怎样练成的
+      description: 保尔·柯察金历险记
+    - name: 小王子
+      description: 小王子历险记
+    - name: 鲁滨孙漂流记
+      description: 鲁滨孙历险记

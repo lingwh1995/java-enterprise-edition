@@ -1,0 +1,3 @@
+1.通过@value读取比较简单的配置信息
+2.通过@ConfigurationProperties读取并与bean绑定
+3.通过@ConfigurationProperties读取不与bean绑定并校验
