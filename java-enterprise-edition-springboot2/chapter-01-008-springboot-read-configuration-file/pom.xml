@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>chapter-01-003-springboot-basic-support-devtools</artifactId>
+    <artifactId>chapter-01-008-springboot-read-configuration-file</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -28,6 +28,14 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <!-- 使用aliyun镜像 -->
+        <repository>
+            <id>aliyunmaven</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>

@@ -12,14 +12,14 @@
     <artifactId>java-enterprise-edition-springboot2</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>chapter-01-001-springboot-basic-support-helloworld</module>
-        <module>chapter-01-002-springboot-basic-support-actuator</module>
-        <module>chapter-01-003-springboot-basic-support-devtools</module>
-        <module>chapter-01-004-springboot-basic-support-repository</module>
-        <module>chapter-01-005-springboot-basic-support-configuration-processor</module>
-        <module>chapter-01-006-springboot-basic-support-annotation-driven</module>
-        <module>chapter-01-007-springboot-basic-support-json-xml</module>
-        <module>chapter-01-008-springboot-basic-support-read-configuration-file</module>
+        <module>chapter-01-001-springboot-helloworld</module>
+        <module>chapter-01-002-springboot-actuator</module>
+        <module>chapter-01-003-springboot-devtools</module>
+        <module>chapter-01-004-springboot-repository</module>
+        <module>chapter-01-005-springboot-configuration-processor</module>
+        <module>chapter-01-006-springboot-annotation-driven</module>
+        <module>chapter-01-007-springboot-json-xml</module>
+        <module>chapter-01-008-springboot-read-configuration-file</module>
         <module>chapter-02-001-springboot-tools-mail</module>
         <module>chapter-03-001-springboot-senior-async</module>
         <module>chapter-03-002-springboot-senior-schedule</module>

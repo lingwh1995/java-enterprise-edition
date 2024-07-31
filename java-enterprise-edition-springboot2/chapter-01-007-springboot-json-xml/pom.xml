@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>chapter-01-008-springboot-basic-support-read-configuration-file</artifactId>
+    <artifactId>chapter-01-007-springboot-json-xml</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -21,6 +21,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
