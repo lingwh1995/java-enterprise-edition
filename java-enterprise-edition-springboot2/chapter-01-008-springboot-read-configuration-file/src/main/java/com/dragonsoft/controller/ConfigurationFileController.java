@@ -66,11 +66,11 @@ public class ConfigurationFileController {
 
 
     /**
-     * 访问   http://localhost:8080/configuration     查看效果
+     * 访问   http://localhost:8080/read-configuration     查看效果
      * @return
      */
     @ResponseBody
-    @RequestMapping("/configuration")
+    @RequestMapping("/read-configuration")
     public String getConfiguration() {
         System.out.println("-----------使用@Value读取配置文件开始-----------");
         System.out.println("version = " + version);
