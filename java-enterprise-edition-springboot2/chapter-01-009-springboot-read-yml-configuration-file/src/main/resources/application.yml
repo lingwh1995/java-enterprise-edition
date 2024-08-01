@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   application:
-    name: yml
+    name: read-yml-configuration-file
 person:
   lastName: zhangsan
   age: 18
