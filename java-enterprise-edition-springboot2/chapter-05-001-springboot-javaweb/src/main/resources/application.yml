@@ -1,0 +1,21 @@
+
+server:
+  port: 8080
+  # 配置修改jsp可以及时刷新页面
+  servlet:
+    jsp:
+      init-parameters:
+        development: true
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  mvc:
+    view:
+      prefix: /view/
+      suffix: .jsp
+  output:
+    ansi:
+      enabled: always
+
+#会打印自动配置信息
+debug: true
