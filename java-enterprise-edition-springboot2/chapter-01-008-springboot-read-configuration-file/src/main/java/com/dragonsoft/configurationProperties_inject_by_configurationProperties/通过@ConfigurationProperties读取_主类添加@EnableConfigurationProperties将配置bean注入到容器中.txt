@@ -1,7 +1,7 @@
 1.在LibraryProperties上添加注解
     @ConfigurationProperties(prefix = "library")
     public class LibraryProperties {}
-2.在主启动类Application上添加注解@EnableConfigurationProperties(LibraryProperties.class)
+2.在主启动类Application上添加注解@EnableConfigurationProperties(LibraryBindWithoutBean.class)
     @SpringBootApplication
     @EnableConfigurationProperties(LibraryProperties.class)
     public class Application {
@@ -9,3 +9,7 @@
             SpringApplication.run(Application.class,args);
         }
     }
+
+
+注意：
+    如果不在POJO中使用@Configuration，需要在主Spring应用程序主启动类中添加@EnableConfigurationProperties(LibraryBindWithoutBean.class)以将属性绑定到POJO中

@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>chapter-03-001-springboot-senior-async</artifactId>
+    <artifactId>chapter-03-001-springboot-async</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

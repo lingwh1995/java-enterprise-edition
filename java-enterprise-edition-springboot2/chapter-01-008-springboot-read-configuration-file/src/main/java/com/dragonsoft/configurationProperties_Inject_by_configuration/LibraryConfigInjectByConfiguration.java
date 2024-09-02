@@ -1,11 +1,13 @@
-package com.dragonsoft.configurationProperties_bind_with_out_bean;
+package com.dragonsoft.configurationProperties_Inject_by_configuration;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
 @ConfigurationProperties(prefix = "library")
-public class LibraryBindWithoutBean {
+@Configuration  //一般用来声明配置类，可以使用@Component注解替代，不过使用@Configuration注解声明配置类更加语义
+public class LibraryConfigInjectByConfiguration {
     private String location;
     private List<Book> books;
 

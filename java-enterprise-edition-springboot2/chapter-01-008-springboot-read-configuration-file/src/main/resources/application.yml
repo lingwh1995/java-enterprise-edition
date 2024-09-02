@@ -13,3 +13,28 @@ library:
       description: 小王子历险记
     - name: 鲁滨孙漂流记
       description: 鲁滨孙历险记
+
+
+spring:
+  datasource:
+    #   数据源基本配置
+    driver-class-name: oracle.jdbc.OracleDriver
+
+    #   数据源其他配置
+    #   使用type来配置要选用的数据源,这里切换为druid
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,slf4j
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500

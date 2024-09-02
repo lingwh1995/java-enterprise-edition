@@ -21,10 +21,12 @@
         <module>chapter-01-007-springboot-json-xml</module>
         <module>chapter-01-008-springboot-read-configuration-file</module>
         <module>chapter-01-009-springboot-read-yml-configuration-file</module>
-        <module>chapter-02-001-springboot-tools-mail</module>
-        <module>chapter-03-001-springboot-senior-async</module>
-        <module>chapter-03-002-springboot-senior-schedule</module>
-        <module>chapter-03-003-springboot-senior-quartz</module>
+        <module>chapter-02-001-springboot-mail</module>
+        <module>chapter-03-001-springboot-async</module>
+        <module>chapter-03-002-springboot-schedule</module>
+        <module>chapter-02-002-springboot-quartz</module>
+        <module>chapter-03-003-springboot-cache</module>
+        <module>chapter-04-001-springboot-data-springdatajpa</module>
     </modules>
 
     <properties>

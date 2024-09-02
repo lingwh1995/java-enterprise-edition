@@ -44,6 +44,14 @@
         </dependency>
     </dependencies>
 
+    <repositories>
+        <!-- 使用aliyun镜像 -->
+        <repository>
+            <id>aliyunmaven</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+
     <build>
         <plugins>
             <plugin>

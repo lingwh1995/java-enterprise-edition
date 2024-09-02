@@ -1,7 +1,8 @@
 package com.dragonsoft.controller;
 
-import com.dragonsoft.configurationProperties_bind_with_bean.LibraryBindWithBean;
-import com.dragonsoft.configurationProperties_bind_with_out_bean.LibraryBindWithoutBean;
+import com.dragonsoft.configurationProperties_Inject_by_configuration.LibraryConfigInjectByConfiguration;
+import com.dragonsoft.configurationProperties_inject_by_configurationProperties.LibraryConfigInjectByEnableConfigurationProperties;
+import com.dragonsoft.configurationProperties_recommend_usage.LibraryConfigConfigurationPropertiesRecommendUsage;
 import com.dragonsoft.propertySource.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -49,15 +50,20 @@ public class ConfigurationFileController {
     private String book2description;
     //-----------使用@Value读取配置文件结束-----------
 
-    //-----------使用@ConfigurationProperties读取配置文件(和bean绑定)开始-----------
+    //-----------使用@ConfigurationProperties读取配置文件(@Configuration将配置bean注入到容器中)开始-----------
     @Resource
-    private LibraryBindWithBean libraryBindWithBean;
-    //-----------使用@ConfigurationProperties读取配置文件(和bean绑定)结束-----------
+    private LibraryConfigInjectByConfiguration libraryConfigInjectByConfiguration;
+    //-----------使用@ConfigurationProperties读取配置文件(@Configuration将配置bean注入到容器中)结束-----------
 
-    //-----------使用@ConfigurationProperties读取配置文件(不和bean绑定)开始-----------
+    //-----------使用@ConfigurationProperties读取配置文件(@EnableConfigurationProperties将配置bean注入到容器中)开始-----------
     @Resource
-    private LibraryBindWithoutBean libraryBindWithoutBean;
-    //-----------使用@ConfigurationProperties读取配置文件(不和bean绑定)结束-----------
+    private LibraryConfigInjectByEnableConfigurationProperties libraryConfigInjectByEnableConfigurationProperties;
+    //-----------使用@ConfigurationProperties读取配置文件(@EnableConfigurationProperties将配置bean注入到容器中)结束-----------
+
+    //-----------使用@ConfigurationProperties读取配置文件(推荐用法 @Configuration + @Bean + @ConfigurationProperties)开始-----------
+    @Resource
+    private LibraryConfigConfigurationPropertiesRecommendUsage libraryConfigConfigurationPropertiesRecommendUsage;
+    //-----------使用@ConfigurationProperties读取配置文件(推荐用法 @Configuration + @Bean + @ConfigurationProperties)结束-----------
 
     //-----------使用@PropertySource读取properties文件内容开始-----------
     @Resource
@@ -82,13 +88,17 @@ public class ConfigurationFileController {
         System.out.println("book2 = " + book2name + "-" + book2description);
         System.out.println("-----------使用@Value读取配置文件结束-----------");
 
-        System.out.println("-----------使用@ConfigurationProperties读取配置文件(和bean绑定)开始-----------");
-        System.out.println(libraryBindWithBean);
-        System.out.println("-----------使用@ConfigurationProperties读取配置文件(和bean绑定)结束-----------");
+        System.out.println("-----------使用@ConfigurationProperties读取配置文件(@Configuration将配置bean注入到容器中)开始-----------");
+        System.out.println(libraryConfigInjectByConfiguration);
+        System.out.println("-----------使用@ConfigurationProperties读取配置文件(@Configuration将配置bean注入到容器中)结束-----------");
 
-        System.out.println("-----------使用@ConfigurationProperties读取配置文件(不和bean绑定)开始-----------");
-        System.out.println(libraryBindWithoutBean);
-        System.out.println("-----------使用@ConfigurationProperties读取配置文件(不和bean绑定)结束-----------");
+        System.out.println("-----------使用@ConfigurationProperties读取配置文件(@EnableConfigurationProperties将配置bean注入到容器中)开始-----------");
+        System.out.println(libraryConfigInjectByEnableConfigurationProperties);
+        System.out.println("-----------使用@ConfigurationProperties读取配置文件(@EnableConfigurationProperties将配置bean注入到容器中)结束-----------");
+
+        System.out.println("-----------使用@ConfigurationProperties读取配置文件(推荐用法 @Configuration + @Bean + @ConfigurationProperties)开始-----------");
+        System.out.println(libraryConfigConfigurationPropertiesRecommendUsage);
+        System.out.println("-----------使用@ConfigurationProperties读取配置文件(推荐用法 @Configuration + @Bean + @ConfigurationProperties)结束-----------");
 
         //-----------使用@PropertySource读取properties文件内容开始-----------
         System.out.println("user = " + user);
