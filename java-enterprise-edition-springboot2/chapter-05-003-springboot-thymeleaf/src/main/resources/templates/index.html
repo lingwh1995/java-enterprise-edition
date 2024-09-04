@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+    <h1>thymeleaf表达式语法</h1>
+    <h1>th:text用法1</h1>
+    <h2>Hello,<span th:text="${company}"></span></h2>
+    <h1>th:text用法2</h1>
+    <h2><span th:text="${user.id}"/>---<span th:text="${user.username}"/>---<span th:text="${user.passwd}"/></h2>
+    <h1>th:text用法3</h1>
+    <h2><span th:text="${user}"/></h2>
+    <h1>th:object配合*{...}用法</h1>
+    <!-- 给这个div标签选定一个object:user-->
+    <div th:object="${user}">
+        <!-- 使用*{...}可以选取user的某个属性-->
+        <p>id: <span th:text="*{id}">Sebastian</span></p>
+        <p>username: <span th:text="*{username}">Pepper</span></p>
+        <p>passwd: <span th:text="*{passwd}">Saturn</span></p>
+    </div>
+    <h1>*{...}和${...}用法</h1>
+    <!-- 但如果没有th:object时，*{}作用就相当于${} -->
+    <div>
+        <h2>使用*{...}获取user的某个属性</h2>
+        <h2>id: <span th:text="*{user.id}"/></h2>
+        <h2>username: <span th:text="*{user.username}"/></h2>
+        <h2>passwd: <span th:text="*{user.passwd}"/></h2>
+        <hr/>
+        <h2>使用${...}获取user的某个属性</h2>
+        <h2>id: <span th:text="${user.id}"/></h2>
+        <h2>username: <span th:text="${user.username}"/></h2>
+        <h2>passwd: <span th:text="${user.passwd}"/></h2>
+    </div>
+
+    <hr>
+    <h2>th:action和th:method用法</h2>
+    <form id="login" th:action="@{/login}" th:method="post">
+        用户名：<input type="text" name="username"/><br/>
+        密码：<input type="password" name="passwd"/><br/>
+        <input type="submit" value="提交">
+    </form>
+
+    <hr>
+    <h2>th:href用法 + 参数拼接</h2>
+    <a th:href="@{/user/}+${user.id}">相对地址没有传参数</a>
+
+</body>
+</html>

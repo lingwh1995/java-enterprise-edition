@@ -29,6 +29,7 @@
         <module>chapter-03-001-springboot-data-springdatajpa</module>
         <module>chapter-05-001-springboot-javaweb</module>
         <module>chapter-05-002-springboot-freemarker</module>
+        <module>chapter-05-003-springboot-thymeleaf</module>
     </modules>
 
     <properties>
