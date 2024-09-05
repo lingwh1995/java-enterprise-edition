@@ -1,32 +1,31 @@
 ##创建用户信息表
 create table t_user(
-                       uid int(10) not null auto_increment,
-                       uname varchar(100) not null,
-                       pwd varchar(100) not null,
-                       rid int(10),
-                       PRIMARY key(uid)
+   uid int(10) not null auto_increment,
+   uname varchar(100) not null,
+   pwd varchar(100) not null,
+   rid int(10),
+   PRIMARY key(uid)
 );
 ##创建角色信息表
 create table t_role(
-                       rid int(10) not null auto_increment,
-                       rname varchar(100) not null,
-                       rdesc varchar(200),
-                       PRIMARY key(rid)
+   rid int(10) not null auto_increment,
+   rname varchar(100) not null,
+   rdesc varchar(200),
+   PRIMARY key(rid)
 );
 ##创建菜单信息表
 create table t_menu(
-                       mid int(10) not null auto_increment,
-                       mname varchar(100) not null,
-                       murl varchar(100),
-                       parentid int(10) not null,
-                       mdesc varchar(200),
-                       PRIMARY key(mid)
-
+   mid int(10) not null auto_increment,
+   mname varchar(100) not null,
+   murl varchar(100),
+   parentid int(10) not null,
+   mdesc varchar(200),
+   PRIMARY key(mid)
 );
 ##创建角色菜单中间表
 create table r_menu(
-                       rid int(10) not null,
-                       mid int(10) not null
+   rid int(10) not null,
+   mid int(10) not null
 );
 ##添加用户测试数据
 insert into t_user values(default,'张三','123',1);

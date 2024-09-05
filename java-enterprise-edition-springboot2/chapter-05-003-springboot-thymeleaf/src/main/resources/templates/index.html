@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
+    <!-- th:src使用 -->
+    <script type="text/javascript" th:src="@{/js/jquery-3.4.1.js}"></script>
+
 </head>
 <body>
     <h1>thymeleaf表达式语法</h1>
@@ -39,6 +42,7 @@
     <form id="login" th:action="@{/login}" th:method="post">
         用户名：<input type="text" name="username"/><br/>
         密码：<input type="password" name="passwd"/><br/>
+        <input type="reset" value="重置">
         <input type="submit" value="提交">
     </form>
 
@@ -46,5 +50,10 @@
     <h2>th:href用法 + 参数拼接</h2>
     <a th:href="@{/user/}+${user.id}">相对地址没有传参数</a>
 
+    <h2>th:style用法</h2>
+    <p th:style="'color:red'">测试th:style用法</p>
+
+    <h2>更多用法</h2>
+    <h5>更多用法请访问: https://blog.csdn.net/weixin_37833693/article/details/138487462 </h5>
 </body>
 </html>
