@@ -30,6 +30,7 @@
         <module>chapter-05-001-springboot-javaweb</module>
         <module>chapter-05-002-springboot-freemarker</module>
         <module>chapter-05-003-springboot-thymeleaf</module>
+        <module>chapter-01-010-springboot-multiyply-environment</module>
     </modules>
 
     <properties>
