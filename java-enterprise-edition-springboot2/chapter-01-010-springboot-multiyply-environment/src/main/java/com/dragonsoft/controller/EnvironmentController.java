@@ -1,4 +1,4 @@
-package dragonsoft.controller;
+package com.dragonsoft.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.PropertySource;
 public class Config {
 
     @Bean
-    public User person(){
+    public User user(){
         return new User();
     }
 }

@@ -4,9 +4,9 @@
 2.在主启动类Application上添加注解@EnableConfigurationProperties(LibraryBindWithoutBean.class)
     @SpringBootApplication
     @EnableConfigurationProperties(LibraryProperties.class)
-    public class Application {
+    public class com.dragonsoft.Application {
         public static void main(String[] args) {
-            SpringApplication.run(Application.class,args);
+            SpringApplication.run(com.dragonsoft.Application.class,args);
         }
     }
 

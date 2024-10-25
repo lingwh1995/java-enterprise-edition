@@ -1,0 +1,37 @@
+一.用途
+    常用于前后端分离开发时合并前端和后端部署文件，最终将前后端部署文件打成一个war包，可以部署在tomact容器中
+二.步骤
+    1.在pom.xml artifactId 下配置 <packaging>war</packaging>
+    2.在properties中添加如下配置
+        <properties>
+            <failOnMissingWebXml>false</failOnMissingWebXml>
+        </properties>
+    3.引入maven依赖
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    4.在pom.xml中build节点添加如下配置
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+            </plugins>
+        </build>
+    5.修改Application.java
+        @SpringBootApplication
+        public class Application extends SpringBootServletInitializer {
+            public static void main(String[] args) {
+                SpringApplication.run(Application.class, args);
+            }
+
+            @Override
+            protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+                return application.sources(Application.class);
+            }
+        }
+    6.将war包部署到tomcat后访问如下地址测试部署效果:
+        http://localhost:7500/springboot-jar-package-to-war/package-to-war

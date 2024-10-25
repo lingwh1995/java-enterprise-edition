@@ -31,13 +31,14 @@
         <module>chapter-05-002-springboot-freemarker</module>
         <module>chapter-05-003-springboot-thymeleaf</module>
         <module>chapter-01-010-springboot-multiyply-environment</module>
+        <module>chapter-01-011-springboot-package-to-war</module>
     </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.boot.version>2.4.0</spring.boot.version>
+        <spring.boot.version>2.7.6</spring.boot.version>
     </properties>
 
     <dependencyManagement>

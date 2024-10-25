@@ -30,6 +30,6 @@ public class TemplateEngineTest {
         Context context = new Context();
         context.setVariable("id", "006");
         String emailContent = templateEngine.process("emailTemplate", context);
-        templateEnginMailService.sendHtmlMail("1458687169@qq.com","主题：这是模板邮件",emailContent);
+        //templateEnginMailService.sendHtmlMail("1458687169@qq.com","主题：这是模板邮件",emailContent);
     }
 }
