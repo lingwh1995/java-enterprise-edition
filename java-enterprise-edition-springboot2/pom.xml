@@ -12,26 +12,26 @@
     <artifactId>java-enterprise-edition-springboot2</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>chapter-01-001-springboot-helloworld</module>
-        <module>chapter-01-002-springboot-actuator</module>
-        <module>chapter-01-003-springboot-devtools</module>
-        <module>chapter-01-004-springboot-repository</module>
-        <module>chapter-01-005-springboot-configuration-processor</module>
-        <module>chapter-01-006-springboot-annotation-driven</module>
-        <module>chapter-01-007-springboot-json-xml</module>
-        <module>chapter-01-008-springboot-read-configuration-file</module>
-        <module>chapter-01-009-springboot-read-yml-configuration-file</module>
-        <module>chapter-02-001-springboot-mail</module>
-        <module>chapter-04-001-springboot-async</module>
-        <module>chapter-04-002-springboot-schedule</module>
-        <module>chapter-02-002-springboot-quartz</module>
-        <module>chapter-04-003-springboot-cache</module>
-        <module>chapter-03-001-springboot-data-springdatajpa</module>
-        <module>chapter-05-001-springboot-javaweb</module>
-        <module>chapter-05-002-springboot-freemarker</module>
-        <module>chapter-05-003-springboot-thymeleaf</module>
-        <module>chapter-01-010-springboot-multiyply-environment</module>
-        <module>chapter-01-011-springboot-package-to-war</module>
+        <module>chapter-01-001-springboot-basic-helloworld</module>
+        <module>chapter-01-002-springboot-basic-actuator</module>
+        <module>chapter-01-003-springboot-basic-devtools</module>
+        <module>chapter-01-004-springboot-basic-repository</module>
+        <module>chapter-01-005-springboot-basic-configuration-processor</module>
+        <module>chapter-01-006-springboot-basic-annotation-driven</module>
+        <module>chapter-01-007-springboot-basic-json-xml</module>
+        <module>chapter-01-008-springboot-basic-read-configuration-file</module>
+        <module>chapter-01-009-springboot-basic-read-yml-configuration-file</module>
+        <module>chapter-02-001-springboot-tools-mail</module>
+        <module>chapter-02-003-springboot-tools-async</module>
+        <module>chapter-02-002-springboot-tools-schedule</module>
+        <module>chapter-03-001-springboot-framework-quartz</module>
+        <module>chapter-02-004-springboot-tools-cache</module>
+        <module>chapter-04-001-springboot-data-springdatajpa</module>
+        <module>chapter-05-001-springboot-production-javaweb</module>
+        <module>chapter-05-002-springboot-production-freemarker</module>
+        <module>chapter-05-003-springboot-production-thymeleaf</module>
+        <module>chapter-05-004-springboot-production-multiyply-environment</module>
+        <module>chapter-05-005-springboot-production-package-to-war</module>
     </modules>
 
     <properties>
