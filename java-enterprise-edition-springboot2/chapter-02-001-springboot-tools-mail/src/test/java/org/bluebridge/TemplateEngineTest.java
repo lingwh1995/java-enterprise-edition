@@ -1,6 +1,6 @@
 package org.bluebridge;
 
-import com.dragonsoft.service.ITemplateEnginMailService;
+import org.bluebridge.service.ITemplateEnginMailService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
