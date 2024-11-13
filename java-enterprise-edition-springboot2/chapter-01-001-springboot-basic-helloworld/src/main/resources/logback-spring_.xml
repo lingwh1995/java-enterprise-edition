@@ -4,7 +4,7 @@
     <!--<include resource="org/springframework/boot/logging/logback/base.xml" />-->
 
     <!--设置日志存放目录-->
-    <property name="LOG_HOME" value="java-enterprise-edition-springboot2/chapter-01-001-springboot-helloworld/logs" />
+    <property name="LOG_HOME" value="java-enterprise-edition-springboot2/chapter-01-001-springboot-basic-helloworld/logs" />
 
     <!-- 彩色日志 -->
     <!-- 彩色日志依赖的渲染类 -->

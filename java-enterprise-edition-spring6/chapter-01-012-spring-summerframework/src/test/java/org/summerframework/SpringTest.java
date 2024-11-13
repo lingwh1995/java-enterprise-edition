@@ -1,6 +1,6 @@
 package org.summerframework;
 
-import org.bluebridge.controller.UserController;
+import org.bluebridge.UserController;
 import org.bluebridge.domain.User;
 import org.dom4j.DocumentException;
 import org.junit.jupiter.api.Test;

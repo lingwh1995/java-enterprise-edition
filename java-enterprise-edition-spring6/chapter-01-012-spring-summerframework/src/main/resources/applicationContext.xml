@@ -9,7 +9,7 @@
     <bean id="userService" class="org.bluebridge.service.UserService">
         <property name="userDao" ref="userDao"/>
     </bean>
-    <bean id="userController" class="org.bluebridge.controller.UserController">
+    <bean id="userController" class="org.bluebridge.UserController">
         <property name="userService" ref="userService"/>
     </bean>
 </beans>

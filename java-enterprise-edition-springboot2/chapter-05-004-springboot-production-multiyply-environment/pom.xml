@@ -16,7 +16,6 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
-        <spring-boot-maven-plugin.version>2.2.2.RELEASE</spring-boot-maven-plugin.version>
         <project.name>springboot-multiyply-environment</project.name>
     </properties>
 
@@ -91,7 +90,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot-maven-plugin.version}</version>
                 <configuration>
                     <addResources>true</addResources>
                 </configuration>
@@ -115,16 +113,13 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
                 <excludes>
-                    <exclude>**/*.yml</exclude>
-                    <exclude>**/*.xml</exclude>
+                    <exclude>**/*</exclude>
                 </excludes>
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
+                <filtering>true</filtering>
                 <includes>
                     <include>application.yml</include>
                     <!--根据maven选择环境导入配置文件-->

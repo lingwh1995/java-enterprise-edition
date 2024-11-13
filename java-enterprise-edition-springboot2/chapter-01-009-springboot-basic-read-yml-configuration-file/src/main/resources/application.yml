@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: read-yml-configuration-file
+  main:
+    allow-circular-references: true
 person:
   lastName: zhangsan
   age: 18

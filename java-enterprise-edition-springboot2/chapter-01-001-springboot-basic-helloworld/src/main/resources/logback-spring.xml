@@ -13,7 +13,7 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
     <!--<property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} ====> [%thread] ====> %-5level %logger{50} - %msg%n"/>-->
     <property name="CONSOLE_LOG_PATTERN" value="%highlight(%date{yyyy-MM-dd HH:mm:ss.SSS}) %boldYellow([%thread]) %highlight([%-5level])  %boldCyan([%replace(%caller{1}){'\t|Caller.{1}0|\r\n', ''}]) %msg%n"/>
     <!--设置日志存放目录-->
-    <property name="LOG_HOME" value="java-enterprise-edition-springboot2/chapter-01-001-springboot-helloworld/logs" />
+    <property name="LOG_HOME" value="java-enterprise-edition-springboot2/chapter-01-001-springboot-basic-helloworld/logs" />
     <!-- 定义日志文件名称 -->
     <property name="appName" value="springboot-001-helloworld"></property>
 

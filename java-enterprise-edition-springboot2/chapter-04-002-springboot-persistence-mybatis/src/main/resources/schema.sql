@@ -1,8 +1,10 @@
-CREATE TABLE T_USER(
-  ID VARCHAR2(32),
-  USERNAME VARCHAR2(32),
-  PASSWORD VARCHAR2(32)
+create database test;
+use test;
+create table t_user(
+  id varchar(32),
+  username varchar(32),
+  password varchar(32)
 );
-INSERT INTO T_USER VALUES ('001','zhangsan','28');
-INSERT INTO T_USER VALUES ('002','lisi','38');
-INSERT INTO T_USER VALUES ('003','wangwu','48');
+insert into t_user values ('001','zhangsan','28');
+insert into t_user values ('002','lisi','38');
+insert into t_user values ('003','wangwu','48');

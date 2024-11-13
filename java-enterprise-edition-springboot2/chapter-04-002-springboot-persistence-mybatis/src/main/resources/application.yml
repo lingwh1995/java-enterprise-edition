@@ -1,11 +1,13 @@
 # 公共配置
 server:
-    port: 80
+    port: 8080
     tomcat:
       uri-encoding: UTF-8
 spring:
   profiles:
     active: dev
+  main:
+    allow-circular-references: true
   output:
     ansi:
       enabled: always
@@ -13,7 +15,7 @@ spring:
     config: classpath:logback-spring.xml
   datasource:
     #数据源基本配置
-    driver-class-name: oracle.jdbc.driver.OracleDriver
+    driver-class-name: com.mysql.jdbc.Driver
 
     #数据源其他配置
     #使用type来配置要选用的数据源,这里切换为druid
@@ -34,13 +36,6 @@ spring:
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 
-  #配置在启动时执行某些建表语句或者其他类型的sql语句
-  sql:
-    init:
-      schema-locations:
-        - classpath:schema.sql
-  #initialization-mode: always
-
 mybatis:
   #mapper-locations: classpath:/mybatis/mapper/*.xml
   config-location: classpath:/mybatis/mybatis-config.xml
@@ -53,9 +48,9 @@ debug: true
 spring:
   profiles: dev
   datasource:
-    username: scott
-    password: tiger
-    url: jdbc:oracle:thin:@192.168.1.102:1521:orcl
+    username: root
+    password: 123456
+    url: jdbc:mysql://host.docker.internal:3306/test
 
 ---
 spring:
