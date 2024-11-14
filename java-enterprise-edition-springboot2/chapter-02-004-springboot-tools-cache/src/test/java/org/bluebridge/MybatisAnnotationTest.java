@@ -1,7 +1,7 @@
-package com.dragonsoft;
+package org.bluebridge;
 
-import com.dragonsoft.controller.UserController;
-import com.dragonsoft.domain.User;
+import org.bluebridge.controller.UserController;
+import org.bluebridge.domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
