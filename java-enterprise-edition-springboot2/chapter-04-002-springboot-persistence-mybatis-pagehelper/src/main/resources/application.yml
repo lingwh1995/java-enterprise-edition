@@ -37,9 +37,9 @@ spring:
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 
 mybatis:
-  #mapper-locations: classpath:/mybatis/mapper/*.xml
+  mapper-locations: classpath:/mybatis/mapper/*.xml
   config-location: classpath:/mybatis/mybatis-config.xml
-  type-aliases-package: com.dragonsoft.domain
+  type-aliases-package: org.bluebridge.domain
 
 #会打印自动配置信息
 debug: true
@@ -50,7 +50,7 @@ spring:
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://host.docker.internal:3306/test
+    url: jdbc:mysql://host.docker.internal:3306/javaee
 
 ---
 spring:

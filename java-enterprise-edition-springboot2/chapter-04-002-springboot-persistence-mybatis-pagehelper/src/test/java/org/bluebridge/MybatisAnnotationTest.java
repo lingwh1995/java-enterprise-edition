@@ -26,10 +26,10 @@ public class MybatisAnnotationTest {
     public void fun(){
         System.out.println("-----------------------------");
         System.out.println(userDao);
-        User user = userDao.getUserById("002");
+        User user = userDao.getUserById(1);
         System.out.println(user);
         System.out.println("-----------------------------");
-        List<User> users = userDao.getUsers();
+        List<User> users = userDao.getAllUsers();
         users.forEach(item -> System.out.println(item));
         System.out.println("-----------------------------");
     }

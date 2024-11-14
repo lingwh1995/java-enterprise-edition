@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace先随意写一个-->
+<mapper namespace="org.bluebridge.dao.IUserDao">
+
+    <select id="getUserById" resultType="org.bluebridge.domain.User">
+        select * from t_user where id = #{id}
+    </select>
+
+    <select id="getAllUsers" resultType="org.bluebridge.domain.User">
+        select * from t_user
+    </select>
+</mapper>

@@ -32,7 +32,7 @@
         <module>chapter-05-003-springboot-production-thymeleaf</module>
         <module>chapter-05-004-springboot-production-multiyply-environment</module>
         <module>chapter-05-005-springboot-production-package-to-war</module>
-        <module>chapter-04-002-springboot-persistence-mybatis</module>
+        <module>chapter-04-002-springboot-persistence-mybatis-pagehelper</module>
     </modules>
 
     <properties>
