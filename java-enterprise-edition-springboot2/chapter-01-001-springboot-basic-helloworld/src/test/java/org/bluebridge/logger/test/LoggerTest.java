@@ -1,6 +1,6 @@
-package com.dragonsoft.logger.test;
+package org.bluebridge.logger.test;
 
-import com.dragonsoft.Application;
+import org.bluebridge.Application;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package com.dragonsoft.condition_family.domain;
+package org.bluebridge.condition_family.domain;
 
 /**
  * @author ronin

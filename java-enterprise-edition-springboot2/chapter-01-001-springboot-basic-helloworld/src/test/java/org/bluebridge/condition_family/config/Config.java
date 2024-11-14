@@ -1,9 +1,8 @@
-package com.dragonsoft.condition_family.config;
+package org.bluebridge.condition_family.config;
 
-import com.dragonsoft.condition_family.domain.Dog;
-import com.dragonsoft.condition_family.domain.Person;
+import org.bluebridge.condition_family.domain.Dog;
+import org.bluebridge.condition_family.domain.Person;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
