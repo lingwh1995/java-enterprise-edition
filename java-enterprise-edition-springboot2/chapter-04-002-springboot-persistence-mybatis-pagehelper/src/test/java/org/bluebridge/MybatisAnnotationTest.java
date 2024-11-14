@@ -1,6 +1,6 @@
 package org.bluebridge;
 
-import org.bluebridge.dao.IUserDao;
+import org.bluebridge.mapper.IUserDao;
 import org.bluebridge.domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;

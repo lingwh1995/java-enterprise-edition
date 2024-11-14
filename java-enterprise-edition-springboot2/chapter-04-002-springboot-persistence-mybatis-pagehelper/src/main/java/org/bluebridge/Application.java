@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * @author ronin
  */
-@MapperScan("org.bluebridge.dao")
+@MapperScan("org.bluebridge.mapper")
 @SpringBootApplication
 public class Application {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package org.bluebridge.dao;
+package org.bluebridge.mapper;
 
 import org.bluebridge.domain.User;
 

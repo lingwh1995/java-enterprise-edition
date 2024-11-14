@@ -1,6 +1,6 @@
 package org.bluebridge.service.impl;
 
-import org.bluebridge.dao.IUserDao;
+import org.bluebridge.mapper.IUserDao;
 import org.bluebridge.domain.User;
 import org.bluebridge.service.IUserService;
 import org.springframework.stereotype.Service;
