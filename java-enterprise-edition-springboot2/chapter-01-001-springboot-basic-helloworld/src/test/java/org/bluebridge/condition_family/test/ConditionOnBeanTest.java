@@ -1,6 +1,6 @@
-package com.dragonsoft.condition_family.test;
+package org.bluebridge.condition_family.test;
 
-import com.dragonsoft.condition_family.domain.Person;
+import org.bluebridge.condition_family.domain.Person;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
