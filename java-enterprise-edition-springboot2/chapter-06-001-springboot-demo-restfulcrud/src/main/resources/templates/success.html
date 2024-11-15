@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>thymeleaf语法</h1>
+    <h2>helloworld</h2>
+    <div th:id="${msg}" th:class="${msg}" th:text="${msg}">th:text="${msg}"这是原生数据！</div>
+    <hr/>
+    <h2>th:text(转义) th:utext(不转义)</h2>
+    <div th:text="${msg}"></div>
+    <div th:utext="${msg}"></div>
+    <h2>获取数组</h2>
+    <hr/>
+    <h4 th:text="${user}" th:each="user:${users}"></h4>
+    <h4>
+        <span th:text="${user}" th:each="user:${users}"></span>
+    </h4>
+</body>
+</html>

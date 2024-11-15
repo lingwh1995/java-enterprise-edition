@@ -7,7 +7,7 @@ import org.bluebridge.domain.User;
  * @version V1.0
  * @since 2019/11/18 14:56
  */
-public interface IUserService {
+public interface IUserServiceMaster {
 
     User getUserById(int id);
 }

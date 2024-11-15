@@ -1,12 +1,12 @@
 spring:
   datasource:
     master:
-      url: jdbc:mysql://localhost:3306/master_db
+      jdbc-url: jdbc:mysql://host.docker.internal:3306/master
       username: root
       password: 123456
       driver-class-name: com.mysql.cj.jdbc.Driver
     slave:
-      url: jdbc:mysql://localhost:3306/slave_db
+      jdbc-url: jdbc:mysql://host.docker.internal:3306/slave
       username: root
       password: 123456
       driver-class-name: com.mysql.cj.jdbc.Driver
