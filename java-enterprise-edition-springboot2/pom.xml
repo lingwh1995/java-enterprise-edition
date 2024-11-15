@@ -35,6 +35,7 @@
         <module>chapter-04-002-springboot-persistence-mybatis-pagehelper</module>
         <module>chapter-04-003-springboot-persistence-multiyply-datasource</module>
         <module>chapter-06-001-springboot-demo-restfulcrud</module>
+        <module>chapter-02-005-springboot-tools-rest-template</module>
     </modules>
 
     <properties>
