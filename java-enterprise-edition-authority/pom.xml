@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>chapter-01-001-rbac-helloworld</module>
+        <module>chapter-01-001-security-helloworld</module>
     </modules>
 
     <properties>

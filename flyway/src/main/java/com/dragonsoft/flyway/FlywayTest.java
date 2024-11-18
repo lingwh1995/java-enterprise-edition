@@ -1,4 +1,4 @@
-package com.dragonsoft.flyway;
+package org.dragonsoft.flyway;
 
 import org.flywaydb.core.Flyway;
 import org.junit.Test;

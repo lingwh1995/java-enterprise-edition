@@ -25,6 +25,6 @@ info:   #访问http://localhost:8080/actuator/info 时显示的应用信息
 spring:
   loging:
     level:
-      com.dragonsoft: debug
+      org.bluebridge: debug
   redis:
     host: 127.0.0.1 #不启动redis,访问http://localhost:8080/actuator/health,可以监控到redis状态为 DOWN
