@@ -1,0 +1,62 @@
+# 公共配置
+server:
+  port: 8080
+  tomcat:
+      uri-encoding: UTF-8
+
+spring:
+  profiles:
+    active: test
+  logging:
+    config: classpath:logback-spring.xml
+#   数据源其他配置
+#   使用type来配置要选用的数据源,这里切换为druid
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+#   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,slf4j
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+  redis:
+    host: host.docker.internal
+    port: 6379
+
+#mybatis:
+#  mapper-locations: classpath:/mybatis/mapper/*.xml
+#  config-location: classpath:/mybatis/mybatis-config.xml
+#  type-aliases-package: org.bluebridge.domain
+
+debug: false
+
+---
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: scott
+    password: tiger
+    url: jdbc:oracle:thin:@192.168.1.102:1521:orcl
+  config:
+    activate:
+      on-profile: dev
+
+---
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://host.docker.internal:3306/javaee
+  config:
+    activate:
+      on-profile: test

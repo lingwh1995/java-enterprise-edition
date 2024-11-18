@@ -37,6 +37,7 @@
         <module>chapter-06-001-springboot-demo-restfulcrud</module>
         <module>chapter-02-005-springboot-tools-rest-template</module>
         <module>chapter-02-006-springboot-tools-swagger</module>
+        <module>chapter-04-002-springboot-persistence-springdata-redis</module>
     </modules>
 
     <properties>
