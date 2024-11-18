@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>chapter-04-001-springboot-persistence-springdata-jpa</artifactId>
+    <artifactId>chapter-04-001-springboot-persistence-springdatajpa</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -18,6 +18,7 @@
         <druid.version>1.1.10</druid.version>
         <ojdbc6.version>11.2.0.3</ojdbc6.version>
         <junit.version>4.12</junit.version>
+        <mysql.connector.version>8.0.33</mysql.connector.version>
     </properties>
 
     <dependencies>
@@ -43,6 +44,11 @@
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>
             <version>${ojdbc6.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.connector.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

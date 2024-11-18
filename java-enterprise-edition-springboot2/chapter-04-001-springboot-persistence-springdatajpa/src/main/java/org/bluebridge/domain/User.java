@@ -17,7 +17,7 @@ import javax.persistence.*;
  */
 //类-->
 @Entity
-@Table(name="T_USER")
+@Table(name="t_user")
 public class User {
     //属性-->字段
     @Id
@@ -28,26 +28,20 @@ public class User {
     private String id;
 
     @Basic//--> 说明这个字段会被持久化到数据库中，可以省略
-    @Column(name="name")
-    private String name;
+    @Column(name="username")
+    private String username;
 
 //    @Basic
-//    @Column(name="age")
-    private Integer age;
-
-    @Basic
-    @Column(name="gender")
-    private String gender;
+//    @Column(name="password")
+    private String password;
 
     public User() {
-
     }
 
-    public User(String id, String name, Integer age, String gender) {
+    public User(String id, String username, String password) {
         this.id = id;
-        this.name = name;
-        this.age = age;
-        this.gender = gender;
+        this.username = username;
+        this.password = password;
     }
 
     public String getId() {
@@ -58,37 +52,28 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", gender='" + gender + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

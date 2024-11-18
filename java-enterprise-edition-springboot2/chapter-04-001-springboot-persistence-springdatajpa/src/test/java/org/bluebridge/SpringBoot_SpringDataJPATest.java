@@ -29,8 +29,15 @@ public class SpringBoot_SpringDataJPATest {
     @Test
     public void fun(){
         User user = userDao.findById("1").get();
+        System.out.println("============================");
+        System.out.println("============================");
+        System.out.println("============================");
+        System.out.println("============================");
         System.out.println(user);
+        System.out.println("============================");
+        System.out.println("============================");
+        System.out.println("============================");
+        System.out.println("============================");
     }
-
 
 }

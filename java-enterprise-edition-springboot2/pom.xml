@@ -26,7 +26,7 @@
         <module>chapter-02-002-springboot-tools-schedule</module>
         <module>chapter-03-001-springboot-framework-quartz</module>
         <module>chapter-02-004-springboot-tools-cache</module>
-        <module>chapter-04-001-springboot-persistence-springdata-jpa</module>
+        <module>chapter-04-001-springboot-persistence-springdatajpa</module>
         <module>chapter-05-001-springboot-production-javaweb</module>
         <module>chapter-05-002-springboot-production-freemarker</module>
         <module>chapter-05-003-springboot-production-thymeleaf</module>
