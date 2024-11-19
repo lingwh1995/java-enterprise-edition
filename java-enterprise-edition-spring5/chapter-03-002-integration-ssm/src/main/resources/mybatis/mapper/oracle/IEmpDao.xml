@@ -7,7 +7,7 @@
 
 	<!--根据id获取Emp：Oracle版 -->
 	<select id="getEmployeeById" parameterType="string" resultType="com.dragonsoft.ssm.domain.Emp" databaseId="oracle">
-		SELECT ID,LAST_NAME LASTNAME,EMAIL,GENDER,DATABASE_ID  FROM TBL_EMPLOYEE_SSM WHERE ID = #{id}
+		select id,lastname,email,gender  from emp where id = #{id}
 	</select>
 
 </mapper>

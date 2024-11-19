@@ -6,7 +6,6 @@ public class Emp {
 	private String lastName;
 	private String email;
 	private String gender;
-	private String databaseId;
 	public Emp() {
 
 	}
@@ -43,14 +42,6 @@ public class Emp {
 		this.gender = gender;
 	}
 
-	public String getDatabaseId() {
-		return databaseId;
-	}
-
-	public void setDatabaseId(String databaseId) {
-		this.databaseId = databaseId;
-	}
-
 	@Override
 	public String toString() {
 		return "Emp{" +
@@ -58,7 +49,6 @@ public class Emp {
 				", lastName='" + lastName + '\'' +
 				", email='" + email + '\'' +
 				", gender='" + gender + '\'' +
-				", databaseId='" + databaseId + '\'' +
 				'}';
 	}
 }

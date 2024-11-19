@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>测试Spring整合SpringMVC</h1>
+    <h1>测试ssm框架整合</h1>
     <a href="${_contextPath}/testSsm">testSsm</a>
 </body>
 </html>

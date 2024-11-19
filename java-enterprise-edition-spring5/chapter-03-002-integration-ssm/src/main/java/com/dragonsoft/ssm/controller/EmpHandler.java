@@ -1,4 +1,4 @@
-package com.dragonsoft.ssm.handler;
+package com.dragonsoft.ssm.controller;
 
 import com.dragonsoft.ssm.domain.Emp;
 import com.dragonsoft.ssm.service.IEmpServices;
@@ -13,7 +13,7 @@ public class EmpHandler {
 
     @RequestMapping("testSsm")
     public String testSsm(){
-        Emp employee = empServices.getEmployeeById("4");
+        Emp employee = empServices.getEmployeeById("001");
         System.out.println(employee);
         return "success";
     }

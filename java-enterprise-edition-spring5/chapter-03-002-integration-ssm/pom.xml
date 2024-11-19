@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>chapter-03-002-integration-ssm</artifactId>
+    <packaging>war</packaging>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -27,9 +28,9 @@
         <mybatis.version>3.5.1</mybatis.version>
         <c3p0.version>0.9.5.4</c3p0.version>
         <tomcat7-maven-plugin.version>2.2</tomcat7-maven-plugin.version>
-        <http-port>8098</http-port>
-        <jdk-source>1.7</jdk-source>
-        <jdk-target>1.7</jdk-target>
+        <http-port>8080</http-port>
+        <jdk-source>1.8</jdk-source>
+        <jdk-target>1.8</jdk-target>
     </properties>
 
     <dependencies>
@@ -185,7 +186,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.25</version>
+            <version>8.0.28</version>
         </dependency>
         <dependency>
             <groupId>com.oracle</groupId>

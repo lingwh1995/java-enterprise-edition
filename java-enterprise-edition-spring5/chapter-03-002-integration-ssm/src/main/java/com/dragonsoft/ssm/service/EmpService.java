@@ -12,7 +12,6 @@ public class EmpService implements IEmpServices {
 
     @Override
     public Emp getEmployeeById(String id) {
-        System.out.println(iEmpDao);
-        return iEmpDao.getEmployeeById("4");
+        return iEmpDao.getEmployeeById(id);
     }
 }
