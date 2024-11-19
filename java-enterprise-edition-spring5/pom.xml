@@ -19,8 +19,10 @@
         <module>chapter-01-005-spring-noxml</module>
         <module>chapter-01-007-spring-mvc</module>
         <module>chapter-01-006-spring-sourcecode</module>
-        <module>chapter-02-001-mybatis</module>
-        <module>chapter-03-001-springdata-redis</module>
+        <module>chapter-02-001-persistence-mybatis</module>
+        <module>chapter-02-002-persistence-springdata-redis</module>
+        <module>chapter-03-001-integration-ss</module>
+        <module>chapter-03-002-integration-ssm</module>
     </modules>
 
     <properties>
@@ -197,6 +199,11 @@
                 <groupId>javax.annotation</groupId>
                 <artifactId>javax.annotation-api</artifactId>
                 <version>${javax.annotation-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.0.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

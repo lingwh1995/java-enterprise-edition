@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+	<!--配置不扫描被@Controller和@ControllerAdvice标记的类-->
+	<context:component-scan base-package="com.dragonsoft.ssm.dao" use-default-filters="true">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller"/>
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+	</context:component-scan>
+
+	<context:property-placeholder location="classpath:db.properties" file-encoding="UTF-8"/>
+	<!--配置数据源-->
+	<!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+		<!--<property name="jdbcUrl" value="${home.develop.oracle.jdbc.url}"/>-->
+		<!--<property name="driverClass" value="${home.develop.oracle.jdbc.driver}"/>-->
+		<!--<property name="user" value="${home.develop.oracle.jdbc.username}"/>-->
+		<!--<property name="password" value="${home.develop.oracle.jdbc.password}"/>-->
+	<!--</bean>-->
+
+	<bean id="oracle" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="jdbcUrl" value="${home.develop.oracle.jdbc.url}"/>
+		<property name="driverClass" value="${home.develop.oracle.jdbc.driver}"/>
+		<property name="user" value="${home.develop.oracle.jdbc.username}"/>
+		<property name="password" value="${home.develop.oracle.jdbc.password}"/>
+	</bean>
+
+	<bean id="mysql" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="jdbcUrl" value="${home.develop.mysql.jdbc.url}"/>
+		<property name="driverClass" value="${home.develop.mysql.jdbc.driver}"/>
+		<property name="user" value="${home.develop.mysql.jdbc.username}"/>
+		<property name="password" value="${home.develop.mysql.jdbc.password}"/>
+	</bean>
+
+	<bean id="vendorProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="properties">
+			<props>
+				<prop key="Oracle">oracle</prop>
+				<prop key="MySQL">mysql</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="databaseIdProvider" class="org.apache.ibatis.mapping.VendorDatabaseIdProvider">
+		<property name="properties" ref="vendorProperties"/>
+	</bean>
+
+	<!--
+		整合mybatis
+			目的：1、spring管理所有组件。mapper的实现类。
+				service==>Dao   @Autowired:自动注入mapper；
+			2、spring用来管理事务，spring声明式事务
+	-->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="${environment.datasource}"></property>
+		<!-- configLocation指定全局配置文件的位置 -->
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+		<!--mapperLocations: 指定mapper文件的位置-->
+		<property name="mapperLocations" value="classpath:mybatis/*/*/*.xml"></property>
+		<!--多数据库环境-->
+		<property name="databaseIdProvider" ref="databaseIdProvider" />
+	</bean>
+
+	<!--配置一个可以进行批量执行的sqlSession  -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"></constructor-arg>
+		<constructor-arg name="executorType" value="BATCH"></constructor-arg>
+	</bean>
+
+	<!--
+		扫描所有的mapper接口的实现，让这些mapper能够自动注入；
+		base-package：指定mapper接口的包名
+	 -->
+	<mybatis-spring:scan base-package="com.dragonsoft.ssm.dao"/>
+	<!-- <bean class="org.mybatis.mapper.spring.mybatis.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.dragonsoft.ioc.hellowrold.dao"></property>
+	</bean> -->
+</beans>

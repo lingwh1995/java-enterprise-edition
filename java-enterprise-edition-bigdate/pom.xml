@@ -20,7 +20,7 @@
     </properties>
 
     <modules>
-        <module>chapter-01-001-kafka-helloworld</module>
+        <module>chapter-01-001-message_queuing-kafka-helloworld</module>
     </modules>
     <dependencyManagement>
         <dependencies>
