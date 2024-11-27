@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.bluebridge.dao.IEmployeeDao">
+    <!-- ResultMap之Associatio案例一  使用ResultMap的association完成多表一对一查询 -->
+    <!--
+        resultMap:使用association定义关联的单个对象的封装规则
+        type   写全类名和别名都可以（前提是写了别名）
+        id      这个规则的唯一标识
+    -->
+    <resultMap type="org.bluebridge.domain.Employee" id="getEmployeeAndDepartmentByIdUseAssociationResultMap">
+        <!--指定主键列，使得框架优化规则 -->
+        <id column="id" property="id"/>
+        <!-- 指定普通列 -->
+        <result column="last_name" property="lastName"/>
+        <result column="gender" property="gender"/>
+        <result column="email" property="email"/>
+        <result column="dept_no" property="deptNo"/>
+
+        <!--
+            association可以指定联合的javaBean对象
+            property="dept"：指定哪个属性是联合的对象
+            javaType:指定联合的javaBean对象的类型[不能省略]
+        -->
+        <association property="department" javaType="org.bluebridge.domain.Department">
+            <!--指定主键列，使得框架优化规则 -->
+            <id column="id" property="id"/>
+            <!-- 指定普通列 -->
+            <result column="dept_no" property="deptNo"/>
+            <result column="dept_name" property="deptName"/>
+        </association>
+    </resultMap>
+
+    <select id="getEmployeeAndDepartmentByIdUseAssociation" resultMap="getEmployeeAndDepartmentByIdUseAssociationResultMap">
+        select
+            e.id,e.last_name ,e.email,e.gender,e.dept_no,d.dept_name,d.dept_no
+        from t_employee e
+                left join t_department d
+                    on e.dept_no = d.dept_no
+        where e.id=#{id}
+    </select>
+
+
+    <!-- ResultMap之Associatio案例二  使用ResultMap的association完成多表一对一查询 + 分步查询 -->
+    <!--
+        resultMap:使用association定义关联的单个对象的封装规则
+        type   写全类名和别名都可以（前提是写了别名）
+        id      这个规则的唯一标识
+    -->
+    <resultMap type="org.bluebridge.domain.Employee" id="getEmployeeAndDepartmentByIdUseAssociationByStepResultMap">
+        <!--指定主键列，使得框架优化规则 -->
+        <id column="id" property="id"/>
+        <!-- 指定普通列 -->
+        <result column="last_name" property="lastName"/>
+        <result column="gender" property="gender"/>
+        <result column="email" property="email"/>
+        <result column="dept_no" property="deptNo"/>
+
+        <!--
+            使用association进行分步查询
+                1、先按照员工id查询员工信息
+                2、根据查询员工信息中的d_id值去部门表查出部门信息
+                3、部门信息设置到员工信息中
+            可以使用延迟加载(懒加载/按需加载)
+         -->
+        <!--
+            association非分步查询配置项
+                property="dept"：指定哪个属性是联合的对象
+                javaType:指定联合的javaBean对象的类型[可以省略]
+                fetchType:是否启用懒加载
+
+            association分步查询需要基础之上加上两个配置，javaType属性不用配置
+                select:表明当前属性是调用select指定的方法查出的结果
+                column:指定将哪一列的值传给这个方法
+                fetchType="lazy"：表示使用延迟加载；
+                    - lazy：延迟
+                    - eager：立即
+            流程：使用select指定的方法（传入column指定的这列参数的值）查出对象，并封装给property指定的属性
+        -->
+        <association
+            property="department"
+            select="org.bluebridge.dao.IDepartmentDao.getDeptByDeptNo"
+            column="dept_no"
+            fetchType="lazy">
+        </association>
+    </resultMap>
+
+    <select id="getEmployeeAndDepartmentByIdUseAssociationByStep" resultMap="getEmployeeAndDepartmentByIdUseAssociationByStepResultMap">
+        select * from t_employee where id = #{id}
+    </select>
+</mapper>
