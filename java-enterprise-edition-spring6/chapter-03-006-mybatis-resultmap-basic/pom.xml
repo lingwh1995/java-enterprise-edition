@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>chapter-03-005-mybatis-resultmap-basic</artifactId>
+    <artifactId>chapter-03-006-mybatis-resultmap-basic</artifactId>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>

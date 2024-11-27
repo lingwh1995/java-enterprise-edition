@@ -7,10 +7,11 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 /**
- * MyBatis工具类
+ * MyBatis工具类普通版
  *
  */
 public class SqlSessionUtil {
+
     private static SqlSessionFactory sqlSessionFactory;
 
     private SqlSessionUtil() {}
@@ -27,9 +28,8 @@ public class SqlSessionUtil {
     }
 
     /**
-     * 每调用一次openSession()可获取一个新的会话，该会话支持自动提交。
-     *
-     * @return 新的会话对象
+     * 打开会话
+     * @return
      */
     public static SqlSession openSession() {
         return sqlSessionFactory.openSession();
