@@ -52,13 +52,13 @@
         <module>chapter-02-018-springmvc-delay_get_vue</module>
         <module>chapter-02-019-springmvc-cors</module>
         <module>chapter-03-001-mybatis-helloworld</module>
+        <module>chapter-03-002-mybatis-create-sqlsession</module>
         <module>chapter-03-003-mybatis-crud-basic</module>
         <module>chapter-03-004-mybatis-crud-interface</module>
         <module>chapter-03-005-mybatis-resultmap-basic</module>
         <module>chapter-03-006-mybatis-resultmap-association</module>
         <module>chapter-03-007-mybatis-resultmap-collection</module>
         <module>chapter-03-008-mybatis-resultmap-discriminator</module>
-        <module>chapter-03-002-mybatis-create-sqlsession</module>
     </modules>
 
     <properties>

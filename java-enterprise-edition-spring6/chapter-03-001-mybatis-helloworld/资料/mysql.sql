@@ -1,7 +1,7 @@
 # 创建数据库
-create database mybatis;
+create database javaee;
 # 使用数据库
-use mybatis;
+use javaee;
 # 创建雇员表
 create table t_employee (
     id int(11) primary key auto_increment,
