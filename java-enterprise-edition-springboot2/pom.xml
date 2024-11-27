@@ -22,22 +22,22 @@
         <module>chapter-01-008-springboot-basic-read-configuration-file</module>
         <module>chapter-01-009-springboot-basic-read-yml-configuration-file</module>
         <module>chapter-02-001-springboot-tools-mail</module>
-        <module>chapter-02-003-springboot-tools-async</module>
         <module>chapter-02-002-springboot-tools-schedule</module>
-        <module>chapter-03-001-springboot-framework-quartz</module>
+        <module>chapter-02-003-springboot-tools-async</module>
         <module>chapter-02-004-springboot-tools-cache</module>
+        <module>chapter-02-005-springboot-tools-rest-template</module>
+        <module>chapter-02-006-springboot-tools-swagger</module>
+        <module>chapter-03-001-springboot-framework-quartz</module>
         <module>chapter-04-001-springboot-persistence-springdatajpa</module>
+        <module>chapter-04-002-springboot-persistence-mybatis-pagehelper</module>
+        <module>chapter-04-003-springboot-persistence-multiyply-datasource</module>
+        <module>chapter-04-004-springboot-persistence-springdata-redis</module>
         <module>chapter-05-001-springboot-production-javaweb</module>
         <module>chapter-05-002-springboot-production-freemarker</module>
         <module>chapter-05-003-springboot-production-thymeleaf</module>
         <module>chapter-05-004-springboot-production-multiyply-environment</module>
         <module>chapter-05-005-springboot-production-package-to-war</module>
-        <module>chapter-04-002-springboot-persistence-mybatis-pagehelper</module>
-        <module>chapter-04-003-springboot-persistence-multiyply-datasource</module>
         <module>chapter-06-001-springboot-demo-restfulcrud</module>
-        <module>chapter-02-005-springboot-tools-rest-template</module>
-        <module>chapter-02-006-springboot-tools-swagger</module>
-        <module>chapter-04-002-springboot-persistence-springdata-redis</module>
     </modules>
 
     <properties>
