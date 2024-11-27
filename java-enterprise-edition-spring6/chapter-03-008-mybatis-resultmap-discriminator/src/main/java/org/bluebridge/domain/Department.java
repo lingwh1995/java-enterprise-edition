@@ -1,7 +1,5 @@
 package org.bluebridge.domain;
 
-import java.util.List;
-
 public class Department {
     private String id;
     private String deptName;
