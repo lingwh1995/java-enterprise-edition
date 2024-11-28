@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 如果要使用面向接口的方式进行CRUD，则namespace的属性值必须为相应接口的全类名 -->
+<!-- SQL语句的id必须为方法名 -->
+<mapper namespace="org.bluebridge.mapper.EmpMapper">
+
+    <select id="selectByMultiCondition" resultType="emp">
+        select * from t_employee where last_name = #{lastName} and email = #{email} and gender = #{gender}
+    </select>
+</mapper>

@@ -61,6 +61,7 @@
         <module>chapter-03-008-mybatis-resultmap-collection</module>
         <module>chapter-03-009-mybatis-resultmap-discriminator</module>
         <module>chapter-03-010-mybatis-tips</module>
+        <module>chapter-03-011-mybatis-dynamicsql</module>
 
     </modules>
 

@@ -16,7 +16,7 @@
 			property	关联集合的属性名
 			ofType		指定集合里面元素的类型
 		-->
-		<collection property="employees" ofType="org.bluebridge.domain.Employee">
+		<collection property="employees" ofType="org.bluebridge.domain.Emp">
 			<!-- 注意:如果这里面写了<id/>标签,那么查询结果会去重，最终只会查询处一条数据，所以不能写id标签-->
 			<!-- <id column="id" property="id"/> -->
 			<result column="last_name" property="lastName"/>

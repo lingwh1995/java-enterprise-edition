@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.bluebridge.dao.IEmployeeDao">
     <!-- 根据deptNo查询多个Employee对象 -->
-    <select id="getEmployeesByDeptNo" resultType="org.bluebridge.domain.Employee">
+    <select id="getEmployeesByDeptNo" resultType="org.bluebridge.domain.Emp">
         select * from t_employee where dept_no = #{deptNo}
     </select>
 </mapper>

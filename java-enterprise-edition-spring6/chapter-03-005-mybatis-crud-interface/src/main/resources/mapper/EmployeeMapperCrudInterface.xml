@@ -5,7 +5,7 @@
 <!--namespace先随意写一个-->
 <mapper namespace="org.bluebridge.dao.IEmployeeDao">
     <!--insert sql：保存一个Employee信息-->
-    <insert id="insertEmployee" parameterType="org.bluebridge.domain.Employee">
+    <insert id="insertEmployee" parameterType="org.bluebridge.domain.Emp">
         insert into
             t_employee (last_name, email, gender,dept_no)
         values
@@ -21,7 +21,7 @@
     </delete>
 
     <!--update sql：更新一个Employee信息-->
-    <update id="updateEmployee" parameterType="org.bluebridge.domain.Employee">
+    <update id="updateEmployee" parameterType="org.bluebridge.domain.Emp">
         update
             t_employee
         set
@@ -31,7 +31,7 @@
     </update>
 
     <!--selectOne sql：查询一个Employee信息-->
-    <select id="getEmployeeById" resultType="org.bluebridge.domain.Employee">
+    <select id="getEmployeeById" resultType="org.bluebridge.domain.Emp">
         select
             *
         from
@@ -41,7 +41,7 @@
     </select>
 
     <!--selectList sql：查询多个Employee信息，特别注意：这里的查询多个Employee的resultType的类型和查询一个Employee的resultType的类型是一致的-->
-    <select id="getEmployees" resultType="org.bluebridge.domain.Employee">
+    <select id="getEmployees" resultType="org.bluebridge.domain.Emp">
         select
             *
         from

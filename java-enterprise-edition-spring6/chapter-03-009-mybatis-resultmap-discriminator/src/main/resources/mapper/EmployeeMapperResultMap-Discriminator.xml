@@ -8,7 +8,7 @@
         <discriminator javaType=""></discriminator>
         鉴别器：mybatis可以使用discriminator判断某列的值，然后根据某列的值改变封装行为
     -->
-    <resultMap type="org.bluebridge.domain.Employee" id="getEmployeeAndDepartmentByIdUseAssociationDiscriminatorResultMap">
+    <resultMap type="org.bluebridge.domain.Emp" id="getEmployeeAndDepartmentByIdUseAssociationDiscriminatorResultMap">
         <!--指定主键列，使得框架优化规则 -->
         <id column="id" property="id"/>
         <!-- 指定普通列 -->

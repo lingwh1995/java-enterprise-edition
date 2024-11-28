@@ -12,7 +12,7 @@ create table t_employee (
 );
 insert into t_employee (id, last_name, email, gender,dept_no) values (1, 'zhangsan', '1458687169@qq.com', '男','10');
 insert into t_employee (id, last_name, email, gender,dept_no) values (2, 'lisi', '1458687169@qq.com', '男','10');
-insert into t_employee (id, last_name, email, gender,dept_no) values (3, '王五', '2926517283@qq.com', '女','20');
+insert into t_employee (id, last_name, email, gender,dept_no) values (3, 'wangwu', '2926517283@qq.com', '女','20');
 
 -- 使用deptNo和t_employee中id相关联
 create table t_department (
