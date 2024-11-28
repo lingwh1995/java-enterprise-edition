@@ -19,7 +19,7 @@
     </select>
 
     <!-- 使用 $ 设置参数 -->
-    <select id="selectCarByIdSetParamsUseDollarSymbol" parameterType="String" resultType="org.bluebridge.domain.Car">
+    <select id="selectCarByIdSetParamsUseDollarSymbol" parameterType="string" resultType="org.bluebridge.domain.Car">
         select id,
                car_num      as carNum,
                brand,
@@ -31,7 +31,7 @@
     </select>
 
     <!-- 使用 $ 设置排序条件 -->
-    <select id="selectAllCarsSetParamsUseDollarSymbol" parameterType="String" resultType="org.bluebridge.domain.Car">
+    <select id="selectAllCarsSetParamsUseDollarSymbol" parameterType="string" resultType="org.bluebridge.domain.Car">
         select id,
                car_num      as carNum,
                brand,
@@ -43,7 +43,7 @@
     </select>
 
     <!-- 模糊查询实现方式一：使用mysql的concat()函数实现模糊查询 -->
-    <select id="selectCarByBrandFuzzyQueryUseMysqlConcat" parameterType="String" resultType="org.bluebridge.domain.Car">
+    <select id="selectCarByBrandFuzzyQueryUseMysqlConcat" parameterType="string" resultType="org.bluebridge.domain.Car">
         select id,
                car_num      as carNum,
                brand,
@@ -55,7 +55,7 @@
     </select>
 
     <!-- 模糊查询实现方式二：使用 双引号 + #{} 拼接实现模糊查询 -->
-    <select id="selectCarByBrandFuzzyQueryUseDoubleQuotationMarkAndHashSymbolConcat" parameterType="String" resultType="org.bluebridge.domain.Car">
+    <select id="selectCarByBrandFuzzyQueryUseDoubleQuotationMarkAndHashSymbolConcat" parameterType="string" resultType="org.bluebridge.domain.Car">
         select id,
                car_num      as carNum,
                brand,
@@ -67,7 +67,7 @@
     </select>
 
     <!-- 模糊查询实现方式三：使用 单引号 + || + #{} 拼接实现模糊查询 -->
-    <select id="selectCarByBrandFuzzyQueryUseSingleQuotationMarkAndHashSymbolConcat" parameterType="String" resultType="org.bluebridge.domain.Car">
+    <select id="selectCarByBrandFuzzyQueryUseSingleQuotationMarkAndHashSymbolConcat" parameterType="string" resultType="org.bluebridge.domain.Car">
         select id,
                car_num      as carNum,
                brand,
@@ -79,7 +79,7 @@
     </select>
 
     <!-- 模糊查询实现方式四：使用 mybatis的bind标签 拼接实现模糊查询 -->
-    <select id="selectCarByBrandFuzzyQueryUseMybatisBindTagConcat" parameterType="String" resultType="org.bluebridge.domain.Car">
+    <select id="selectCarByBrandFuzzyQueryUseMybatisBindTagConcat" parameterType="string" resultType="org.bluebridge.domain.Car">
         <bind name="pattern" value="'%' + brand + '%'"/>
         select id,
                car_num      as carNum,
@@ -92,7 +92,7 @@
     </select>
 
     <!-- 模糊查询实现方式五：直接传入拼接好的模糊查询参数 实现模糊查询 -->
-    <select id="selectCarByBrandFuzzyQueryUseCompleteFuzzyQueryParam" parameterType="String" resultType="org.bluebridge.domain.Car">
+    <select id="selectCarByBrandFuzzyQueryUseCompleteFuzzyQueryParam" parameterType="string" resultType="org.bluebridge.domain.Car">
         select id,
                car_num      as carNum,
                brand,
@@ -103,14 +103,109 @@
         where brand like #{pattern}
     </select>
 
-
-
-
-
-    <insert id="insert">
-        insert into t_car
-        values (null, #{carNum}, #{brand}, #{guidePrice}, #{produceTime}, #{carType})
+    <!--
+        Mysql插入数据时设置主键方式一(写法一): 使用Mysql自动设置主键，sql语句中不用出现主键
+            不推荐：插入数据成功后无法读取到Mysql生成的主键
+    -->
+    <insert id="insertUseMysqlAutoSetPrimaryKeyWhenInsert_1">
+        insert into t_car(car_num, brand, guide_price, produce_time, car_type) values (#{carNum}, #{brand}, #{guidePrice}, #{produceTime}, #{carType});
     </insert>
+
+    <!--
+        Mysql插入数据时设置主键方式一(写法二): 使用Mysql自动设置主键，sql语句中不用出现主键
+            不推荐：插入数据成功后无法读取到Mysql生成的主键
+    -->
+    <insert id="insertUseMysqlAutoSetPrimaryKeyWhenInsert_2">
+        insert into t_car values (null, #{carNum}, #{brand}, #{guidePrice}, #{produceTime}, #{carType});
+    </insert>
+
+    <!--
+        Mysql插入数据时设置主键方式二(写法一): 使用Mybatis读取Mysql生成的主键，在sql语句中使用，sql语句中要出现主键
+            推荐：插入数据成功后可以读取到Mysql生成的主键
+
+        useGeneratedKeys="true" 开启使用自动生成的主键
+        keyProperty="id" 指定要将自动生成的主键值保存到用于传递数据给SQL语句的对象的哪个属性上
+    -->
+    <insert id="insertUseMybatisReadMysqlGeneratedPrimaryKeyWhenInsert_1" useGeneratedKeys="true" keyProperty="id">
+        insert into t_car(car_num, brand, guide_price, produce_time, car_type) values (#{carNum}, #{brand}, #{guidePrice}, #{produceTime}, #{carType});
+    </insert>
+
+    <!--
+        Mysql插入数据时设置主键方式二(写法二): 使用Mybatis读取Mysql生成的主键，在sql语句中使用，sql语句中要出现主键
+            推荐：插入数据成功后可以读取到Mysql生成的主键
+
+        useGeneratedKeys="true" 开启使用自动生成的主键
+        keyProperty="id" 指定要将自动生成的主键值保存到用于传递数据给SQL语句的对象的哪个属性上
+    -->
+    <insert id="insertUseMybatisReadMysqlGeneratedPrimaryKeyWhenInsert_2" useGeneratedKeys="true" keyProperty="id">
+        insert into t_car values (null, #{carNum}, #{brand}, #{guidePrice}, #{produceTime}, #{carType});
+    </insert>
+
+    <!-- 使用@Param传递多个参数 -->
+    <select id="selectCarByBrandAndGuidePriceTransferMultiplyParamsUseParamAnnotation" resultType="org.bluebridge.domain.Car">
+        select id,
+               car_num      as carNum,
+               brand,
+               guide_price  as guidePrice,
+               produce_time as produceTime,
+               car_type     as carType
+        from t_car
+        where brand = #{brand} and guide_price = #{guidePrice}
+    </select>
+
+    <!-- 使用Map传递多个参数 -->
+    <select id="selectCarByBrandAndGuidePriceTransferMultiplyParamsUseMap" parameterType="map" resultType="org.bluebridge.domain.Car">
+        select id,
+               car_num      as carNum,
+               brand,
+               guide_price  as guidePrice,
+               produce_time as produceTime,
+               car_type     as carType
+        from t_car
+        where brand = #{brand} and guide_price = #{guidePrice}
+    </select>
+
+    <!-- 使用@Param + Map传递多个参数 -->
+    <select id="selectCarByBrandAndGuidePriceTransferMultiplyParamsUseParamAnnotationMap" parameterType="map" resultType="org.bluebridge.domain.Car">
+        select id,
+               car_num      as carNum,
+               brand,
+               guide_price  as guidePrice,
+               produce_time as produceTime,
+               car_type     as carType
+        from t_car
+        where brand = #{params.brand} and guide_price = #{params.guidePrice}
+    </select>
+
+
+    <!-- 读取使用@Param传递的多个参数 -->
+    <select id="selectCarByBrandAndGuidePriceReadTransferMultiplyParamsUseParamAnnotation" resultType="org.bluebridge.domain.Car">
+        select id,
+               car_num      as carNum,
+               brand,
+               guide_price  as guidePrice,
+               produce_time as produceTime,
+               car_type     as carType
+        from t_car
+        <!-- 读取直接@Param传递的多个参数方式一 -->
+        <!-- where brand = #{brand} and guide_price = #{guidePrice} -->
+        <!-- 读取直接@Param传递的多个参数方式二 -->
+        where brand = #{param1} and guide_price = #{param2}
+    </select>
+
+    <!-- 读取使用Map传递多个参数 -->
+    <select id="selectCarByBrandAndGuidePriceReadTransferMultiplyParamsUseMap" parameterType="map" resultType="org.bluebridge.domain.Car">
+        select id,
+               car_num      as carNum,
+               brand,
+               guide_price  as guidePrice,
+               produce_time as produceTime,
+               car_type     as carType
+        from t_car
+        <!-- 读取使用Map传递多个参数：只支持下面这种方式 -->
+        where brand = #{brand} and guide_price = #{guidePrice}
+    </select>
+
 
     <delete id="deleteById">
         delete

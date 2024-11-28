@@ -1,8 +1,10 @@
 package org.bluebridge.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.bluebridge.domain.Car;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CarMapper {
 
@@ -63,12 +65,71 @@ public interface CarMapper {
     List<Car> selectCarByBrandFuzzyQueryUseCompleteFuzzyQueryParam(String brand);
 
     /**
-     * 新增 car
-     *
-     * @param car 需要新增的 car 信息
-     * @return 影响数据库中的条数
+     * Mysql插入数据时设置主键方式一(写法一): 使用Mysql自动设置主键，sql语句中不用出现主键
+     * @param car
+     * @return
      */
-    int insert(Car car);
+    int insertUseMysqlAutoSetPrimaryKeyWhenInsert_1(Car car);
+
+    /**
+     * Mysql插入数据时设置主键方式一(写法二): 使用Mysql自动设置主键，sql语句中不用出现主键
+     * @param car
+     * @return
+     */
+    int insertUseMysqlAutoSetPrimaryKeyWhenInsert_2(Car car);
+
+    /**
+     * Mysql插入数据时设置主键方式二(写法一): 使用Mybatis读取Mysql生成的主键，在sql语句中使用，sql语句中要出现主键
+     * @param car
+     * @return
+     */
+    int insertUseMybatisReadMysqlGeneratedPrimaryKeyWhenInsert_1(Car car);
+
+    /**
+     * Mysql插入数据时设置主键方式二(写法二): 使用Mybatis读取Mysql生成的主键，在sql语句中使用，sql语句中要出现主键
+     * @param car
+     * @return
+     */
+    int insertUseMybatisReadMysqlGeneratedPrimaryKeyWhenInsert_2(Car car);
+
+    /**
+     * Mybatis 使用@Param传递多个参数
+     * @param brand
+     * @param guidePrice
+     * @return
+     */
+    List<Car> selectCarByBrandAndGuidePriceTransferMultiplyParamsUseParamAnnotation(@Param("brand") String brand, @Param("guidePrice") String guidePrice);
+
+    /**
+     * Mybatis 使用Map传递多个参数
+     * @param params
+     * @return
+     */
+    List<Car> selectCarByBrandAndGuidePriceTransferMultiplyParamsUseMap(Map<String,String> params);
+
+    /**
+     * Mybatis 使用Map传递多个参数
+     * @param params
+     * @return
+     */
+    List<Car> selectCarByBrandAndGuidePriceTransferMultiplyParamsUseParamAnnotationMap(@Param("params") Map<String,String> params);
+
+
+    /**
+     * Mybatis 读取使用@Param传递的多个参数
+     * @param brand
+     * @param guidePrice
+     * @return
+     */
+    List<Car> selectCarByBrandAndGuidePriceReadTransferMultiplyParamsUseParamAnnotation(@Param("brand") String brand, @Param("guidePrice") String guidePrice);
+
+
+    /**
+     * Mybatis 读取使用Map传递的多个参数
+     * @param params
+     * @return
+     */
+    List<Car> selectCarByBrandAndGuidePriceReadTransferMultiplyParamsUseMap(Map<String,String> params);
 
     /**
      * 根据 id 删除汽车信息
