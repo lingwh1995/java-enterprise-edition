@@ -41,7 +41,7 @@
 				type:指定要起别名的类型全类名;默认别名就是类名小写；employee
 				alias:指定新的别名
 		 -->
-        <typeAlias type="org.bluebridge.domain.Emp" alias="emp"/>
+        <typeAlias type="org.bluebridge.domain.Car" alias="car"/>
         <typeAlias type="java.lang.String" alias="string"/>
 
         <!-- 2、package:为某个包下的所有类批量起别名
@@ -103,7 +103,7 @@
 
     <!-- 导入mapper.xml -->
     <mappers>
-        <mapper resource="mapper/EmpMapper.xml"/>
+        <mapper resource="mapper/CarMapper.xml"/>
         <!-- 指定 xml 文件放在 org.bluebridge.mapper 包下 -->
         <!--  <package name="org.bluebridge.mapper"/> -->
     </mappers>
