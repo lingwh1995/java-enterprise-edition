@@ -9,7 +9,7 @@ import org.junit.Test;
 /**
  * Mybatis 插入数据时对主键的处理
  */
-public class MybatisDealPrimarykeyTest {
+public class MybatisGetMysqlGeneratedPrimarykeyTest {
 
     /**
      * Mysql插入数据时设置主键方式一(写法一): 使用Mysql自动设置主键，sql语句中不用出现主键

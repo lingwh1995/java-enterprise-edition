@@ -112,7 +112,7 @@ public class MybatisCrudInterfaceTest {
 
     /**
      * 接口式编程
-     *      查询单个测试
+     *      查询多个测试
      */
     @Test
     public void selectListTest() {

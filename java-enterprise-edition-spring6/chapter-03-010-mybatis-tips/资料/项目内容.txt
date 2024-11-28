@@ -1,9 +1,11 @@
-1.Mybatis #和$ 的区别和使用场景
-2.Mybatis实现模糊查询的5种方式
-3.在核心文件中的<typeAliases></typeAliases>标签中配置别名
+1. Mybatis #和$ 的区别和使用场景
+2. Mybatis实现模糊查询的5种方式
+3. 在核心文件中的<typeAliases></typeAliases>标签中配置别名
     注意事项：
-    1.别名不缺分大小写
-    2.namespace不能使用别名机制，必须写全限定接口名称，带有包名的。
-    3.typeAlias 标签中的 alias 属性是可以省略的，有默认的别名，省略alias之后，别名就是类的简名，比如：org.bluebridge.domain.Car 的别名就是 Car/car/cAR/cAr，不区分大小写。
-    4.<typeAliases> <package name="org.bluebridge.domain"/> </typeAliases>会自动为这个包下的所有的类全部起别名，别名就是类简名，不区分大小写。
-    5.导入mapper.xml配置文件
+    3.1. 别名不缺分大小写
+    3.2. namespace不能使用别名机制，必须写全限定接口名称，带有包名的。
+    3.3. typeAlias 标签中的 alias 属性是可以省略的，有默认的别名，省略alias之后，别名就是类的简名，比如：org.bluebridge.domain.Car 的别名就是 Car/car/cAR/cAr，不区分大小写。
+    3.4. <typeAliases> <package name="org.bluebridge.domain"/> </typeAliases>会自动为这个包下的所有的类全部起别名，别名就是类简名，不区分大小写。
+    3.5. 导入mapper.xml配置文件
+4. Mybatis使用多种方式传递和接收参数
+5. Mybatis使用pojo封装查询结果、使用map封装查询结果

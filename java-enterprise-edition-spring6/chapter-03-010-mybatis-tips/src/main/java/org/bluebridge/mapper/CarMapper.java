@@ -114,7 +114,6 @@ public interface CarMapper {
      */
     List<Car> selectCarByBrandAndGuidePriceTransferMultiplyParamsUseParamAnnotationMap(@Param("params") Map<String,String> params);
 
-
     /**
      * Mybatis 读取使用@Param传递的多个参数
      * @param brand
@@ -123,7 +122,6 @@ public interface CarMapper {
      */
     List<Car> selectCarByBrandAndGuidePriceReadTransferMultiplyParamsUseParamAnnotation(@Param("brand") String brand, @Param("guidePrice") String guidePrice);
 
-
     /**
      * Mybatis 读取使用Map传递的多个参数
      * @param params
@@ -131,13 +129,38 @@ public interface CarMapper {
      */
     List<Car> selectCarByBrandAndGuidePriceReadTransferMultiplyParamsUseMap(Map<String,String> params);
 
-
     /**
      * Mybatis 读取使用@Param + Map传递多个的参数
      * @param params
      * @return
      */
     List<Car> selectCarByBrandAndGuidePriceReadTransferMultiplyParamsUseParamAnnotationMap(@Param("params") Map<String,String> params);
+
+    /**
+     * 使用 Pojo 封装查询结果
+     * @param id
+     * @return
+     */
+    Car selectCarByIdUsePojoAsResultType(Long id);
+
+    /**
+     * 使用 Pojo 封装查询结果
+     * @return
+     */
+    List<Car> selectAllCarsUsePojoAsResultType();
+
+    /**
+     * 使用 map 封装查询结果
+     * @param id
+     * @return
+     */
+    Map<String,String> selectCarByIdUseMapAsResultType(Long id);
+
+    /**
+     * 使用 map 封装查询结果
+     * @return
+     */
+    List<Map<String,String>> selectAllCarsUseMapAsResultType();
 
     /**
      * 根据 id 删除汽车信息
