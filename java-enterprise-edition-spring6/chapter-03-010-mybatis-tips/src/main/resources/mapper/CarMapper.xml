@@ -7,7 +7,7 @@
 <mapper namespace="org.bluebridge.mapper.CarMapper">
 
     <!-- 使用 # 设置参数 -->
-    <select id="selectCarByIdSetParamsUseHashSymbol" resultType="org.bluebridge.domain.Car">
+    <select id="selectCarByIdSetParamsUseHashSymbol" parameterType="long" resultType="org.bluebridge.domain.Car">
         select id,
                car_num      as carNum,
                brand,
@@ -19,7 +19,7 @@
     </select>
 
     <!-- 使用 $ 设置参数 -->
-    <select id="selectCarByIdSetParamsUseDollarSymbol" resultType="org.bluebridge.domain.Car">
+    <select id="selectCarByIdSetParamsUseDollarSymbol" parameterType="String" resultType="org.bluebridge.domain.Car">
         select id,
                car_num      as carNum,
                brand,
@@ -31,7 +31,7 @@
     </select>
 
     <!-- 使用 $ 设置排序条件 -->
-    <select id="selectAllCarsSetParamsUseDollarSymbol" resultType="org.bluebridge.domain.Car">
+    <select id="selectAllCarsSetParamsUseDollarSymbol" parameterType="String" resultType="org.bluebridge.domain.Car">
         select id,
                car_num      as carNum,
                brand,
@@ -42,6 +42,67 @@
         order by id ${sortOrder}
     </select>
 
+    <!-- 模糊查询实现方式一：使用mysql的concat()函数实现模糊查询 -->
+    <select id="selectCarByBrandFuzzyQueryUseMysqlConcat" parameterType="String" resultType="org.bluebridge.domain.Car">
+        select id,
+               car_num      as carNum,
+               brand,
+               guide_price  as guidePrice,
+               produce_time as produceTime,
+               car_type     as carType
+        from t_car
+        where brand like concat('%',#{brand},'%')
+    </select>
+
+    <!-- 模糊查询实现方式二：使用 双引号 + #{} 拼接实现模糊查询 -->
+    <select id="selectCarByBrandFuzzyQueryUseDoubleQuotationMarkAndHashSymbolConcat" parameterType="String" resultType="org.bluebridge.domain.Car">
+        select id,
+               car_num      as carNum,
+               brand,
+               guide_price  as guidePrice,
+               produce_time as produceTime,
+               car_type     as carType
+        from t_car
+        where brand like "%"#{brand}"%"
+    </select>
+
+    <!-- 模糊查询实现方式三：使用 单引号 + || + #{} 拼接实现模糊查询 -->
+    <select id="selectCarByBrandFuzzyQueryUseSingleQuotationMarkAndHashSymbolConcat" parameterType="String" resultType="org.bluebridge.domain.Car">
+        select id,
+               car_num      as carNum,
+               brand,
+               guide_price  as guidePrice,
+               produce_time as produceTime,
+               car_type     as carType
+        from t_car
+        where brand like '%'||#{brand}||'%'
+    </select>
+
+    <!-- 模糊查询实现方式四：使用 mybatis的bind标签 拼接实现模糊查询 -->
+    <select id="selectCarByBrandFuzzyQueryUseMybatisBindTagConcat" parameterType="String" resultType="org.bluebridge.domain.Car">
+        <bind name="pattern" value="'%' + brand + '%'"/>
+        select id,
+               car_num      as carNum,
+               brand,
+               guide_price  as guidePrice,
+               produce_time as produceTime,
+               car_type     as carType
+        from t_car
+        where brand like #{pattern}
+    </select>
+
+    <!-- 模糊查询实现方式五：直接传入拼接好的模糊查询参数 实现模糊查询 -->
+    <select id="selectCarByBrandFuzzyQueryUseCompleteFuzzyQueryParam" parameterType="String" resultType="org.bluebridge.domain.Car">
+        select id,
+               car_num      as carNum,
+               brand,
+               guide_price  as guidePrice,
+               produce_time as produceTime,
+               car_type     as carType
+        from t_car
+        where brand like #{pattern}
+    </select>
+
 
 
 
@@ -50,7 +111,6 @@
         insert into t_car
         values (null, #{carNum}, #{brand}, #{guidePrice}, #{produceTime}, #{carType})
     </insert>
-
 
     <delete id="deleteById">
         delete

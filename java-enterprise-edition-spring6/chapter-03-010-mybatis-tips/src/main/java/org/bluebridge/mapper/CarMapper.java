@@ -27,6 +27,40 @@ public interface CarMapper {
      */
     List<Car> selectAllCarsSetParamsUseDollarSymbol(String sortOrder);
 
+    /**
+     * 模糊查询实现方式一：使用mysql的concat()函数实现模糊查询
+     * @param brand
+     * @return
+     */
+    List<Car> selectCarByBrandFuzzyQueryUseMysqlConcat(String brand);
+
+    /**
+     * 模糊查询实现方式二：使用 双引号 + #{} 拼接实现模糊查询
+     * @param brand
+     * @return
+     */
+    List<Car> selectCarByBrandFuzzyQueryUseDoubleQuotationMarkAndHashSymbolConcat(String brand);
+
+    /**
+     * 模糊查询实现方式三：使用 单引号 + || + #{} 拼接实现模糊查询
+     * @param brand
+     * @return
+     */
+    List<Car> selectCarByBrandFuzzyQueryUseSingleQuotationMarkAndHashSymbolConcat(String brand);
+
+    /**
+     * 模糊查询实现方式四：使用 mybatis的bind标签 拼接实现模糊查询
+     * @param brand
+     * @return
+     */
+    List<Car> selectCarByBrandFuzzyQueryUseMybatisBindTagConcat(String brand);
+
+    /**
+     * 模糊查询实现方式五：直接传入拼接好的模糊查询参数 实现模糊查询
+     * @param brand
+     * @return
+     */
+    List<Car> selectCarByBrandFuzzyQueryUseCompleteFuzzyQueryParam(String brand);
 
     /**
      * 新增 car

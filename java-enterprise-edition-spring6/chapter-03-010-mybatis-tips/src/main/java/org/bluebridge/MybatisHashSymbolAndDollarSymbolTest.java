@@ -14,7 +14,7 @@ import java.util.List;
  * mybatis Tips
  *
  */
-public class MybatisTipsTest {
+public class MybatisHashSymbolAndDollarSymbolTest {
 
     /**
      * 测试使用 #{} 设置参数和使用 ${} 设置参数的不同之处，观察控制台输出的sql可以发现
