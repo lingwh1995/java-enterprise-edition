@@ -48,17 +48,17 @@ public class MybatisReadTransferMultiplyParamsTest {
         sqlSession.close();
     }
     /**
-     * 使用@Param + @Param传递多个参数
+     * 使用@Param + @Param传递多个参数的两种方式
      * @throws Exception
      */
     @Test
-    public void testTransferMultiplyParamsUseParamAnnotationMap() throws Exception {
+    public void testReadTransferMultiplyParamsUseParamAnnotationMap() throws Exception {
         SqlSession sqlSession = SqlSessionUtil.openSession();
         CarMapper mapper = sqlSession.getMapper(CarMapper.class);
         HashMap<String, String> params = new HashMap<>();
         params.put("brand","卡罗拉");
         params.put("guidePrice","32.00");
-        List<Car> cars = mapper.selectCarByBrandAndGuidePriceTransferMultiplyParamsUseParamAnnotationMap(params);
+        List<Car> cars = mapper.selectCarByBrandAndGuidePriceReadTransferMultiplyParamsUseParamAnnotationMap(params);
         System.out.println("cars = " + cars);
         sqlSession.close();
     }

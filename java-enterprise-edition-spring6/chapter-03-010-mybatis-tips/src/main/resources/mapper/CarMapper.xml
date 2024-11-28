@@ -177,7 +177,6 @@
         where brand = #{params.brand} and guide_price = #{params.guidePrice}
     </select>
 
-
     <!-- 读取使用@Param传递的多个参数 -->
     <select id="selectCarByBrandAndGuidePriceReadTransferMultiplyParamsUseParamAnnotation" resultType="org.bluebridge.domain.Car">
         select id,
@@ -193,7 +192,7 @@
         where brand = #{param1} and guide_price = #{param2}
     </select>
 
-    <!-- 读取使用Map传递多个参数 -->
+    <!-- 读取使用Map传递的多个参数 -->
     <select id="selectCarByBrandAndGuidePriceReadTransferMultiplyParamsUseMap" parameterType="map" resultType="org.bluebridge.domain.Car">
         select id,
                car_num      as carNum,
@@ -202,10 +201,25 @@
                produce_time as produceTime,
                car_type     as carType
         from t_car
-        <!-- 读取使用Map传递多个参数：只支持下面这种方式 -->
+        <!-- 读取使用Map传递的多个参数：只支持下面这种方式 -->
         where brand = #{brand} and guide_price = #{guidePrice}
     </select>
 
+
+    <!-- 使用@Param + Map传递的多个参数 -->
+    <select id="selectCarByBrandAndGuidePriceReadTransferMultiplyParamsUseParamAnnotationMap" parameterType="map" resultType="org.bluebridge.domain.Car">
+        select id,
+               car_num      as carNum,
+               brand,
+               guide_price  as guidePrice,
+               produce_time as produceTime,
+               car_type     as carType
+        from t_car
+        <!-- 读取直接@Param传递的多个参数方式一 -->
+        <!-- where brand = #{params.brand} and guide_price = #{params.guidePrice} -->
+        <!-- 读取直接@Param传递的多个参数方式二 -->
+        where brand = #{param1.brand} and guide_price = #{param1.guidePrice}
+    </select>
 
     <delete id="deleteById">
         delete

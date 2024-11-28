@@ -108,7 +108,7 @@ public interface CarMapper {
     List<Car> selectCarByBrandAndGuidePriceTransferMultiplyParamsUseMap(Map<String,String> params);
 
     /**
-     * Mybatis 使用Map传递多个参数
+     * Mybatis 使用@Param + Map传递多个参数
      * @param params
      * @return
      */
@@ -130,6 +130,14 @@ public interface CarMapper {
      * @return
      */
     List<Car> selectCarByBrandAndGuidePriceReadTransferMultiplyParamsUseMap(Map<String,String> params);
+
+
+    /**
+     * Mybatis 读取使用@Param + Map传递多个的参数
+     * @param params
+     * @return
+     */
+    List<Car> selectCarByBrandAndGuidePriceReadTransferMultiplyParamsUseParamAnnotationMap(@Param("params") Map<String,String> params);
 
     /**
      * 根据 id 删除汽车信息
