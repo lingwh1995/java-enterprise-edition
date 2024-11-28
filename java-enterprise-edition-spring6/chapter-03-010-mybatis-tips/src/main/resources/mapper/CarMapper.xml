@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 如果要使用面向接口的方式进行CRUD，则namespace的属性值必须为相应接口的全类名 -->
 <!-- SQL语句的id必须为方法名 -->
-<mapper namespace="org.bluebridge.mapper.CarDao">
+<mapper namespace="org.bluebridge.mapper.CarMapper">
 
     <!-- 使用 # 设置参数 -->
     <select id="selectCarByIdSetParamsUseHashSymbol" parameterType="long" resultType="org.bluebridge.domain.Car">
