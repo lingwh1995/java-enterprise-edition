@@ -3,7 +3,7 @@ package org.bluebridge;
 import org.apache.ibatis.session.SqlSession;
 import org.bluebridge.domain.Car;
 import org.bluebridge.domain.Log;
-import org.bluebridge.mapper.CarMapper;
+import org.bluebridge.mapper.ICarMapper;
 import org.bluebridge.mapper.LogMapper;
 import org.bluebridge.utils.SqlSessionUtil;
 import org.junit.Test;
@@ -25,7 +25,7 @@ public class MybatisHashSymbolAndDollarSymbolTest {
     @Test
     public void testSetParamsUseHashSymbolOrDollarSymbol() {
         SqlSession sqlSession = SqlSessionUtil.openSession();
-        CarMapper mapper = sqlSession.getMapper(CarMapper.class);
+        ICarMapper mapper = sqlSession.getMapper(ICarMapper.class);
         System.out.println("----------------------------------------------------------------------");
         // 使用 # 设置参数
         Car car1 = mapper.selectCarByIdSetParamsUseHashSymbol(1l);
@@ -44,7 +44,7 @@ public class MybatisHashSymbolAndDollarSymbolTest {
     @Test
     public void testSetSortOrderUseDollarSymbol() {
         SqlSession sqlSession = SqlSessionUtil.openSession();
-        CarMapper mapper = sqlSession.getMapper(CarMapper.class);
+        ICarMapper mapper = sqlSession.getMapper(ICarMapper.class);
         System.out.println("----------------------------------------------------------------------");
         List<Car> carsAsc = mapper.selectAllCarsSetParamsUseDollarSymbol("asc");
         System.out.println("carsAsc = " + carsAsc);

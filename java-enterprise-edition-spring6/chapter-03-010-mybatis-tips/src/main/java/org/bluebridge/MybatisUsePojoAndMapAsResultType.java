@@ -2,7 +2,7 @@ package org.bluebridge;
 
 import org.apache.ibatis.session.SqlSession;
 import org.bluebridge.domain.Car;
-import org.bluebridge.mapper.CarMapper;
+import org.bluebridge.mapper.ICarMapper;
 import org.bluebridge.utils.SqlSessionUtil;
 import org.junit.Test;
 
@@ -20,7 +20,7 @@ public class MybatisUsePojoAndMapAsResultType {
     @Test
     public void testUsePojoAsResultType() {
         SqlSession sqlSession = SqlSessionUtil.openSession();
-        CarMapper mapper = sqlSession.getMapper(CarMapper.class);
+        ICarMapper mapper = sqlSession.getMapper(ICarMapper.class);
         Car car = mapper.selectCarByIdUsePojoAsResultType(1l);
         System.out.println("car = " + car);
         List<Car> cars = mapper.selectAllCarsUsePojoAsResultType();
@@ -34,7 +34,7 @@ public class MybatisUsePojoAndMapAsResultType {
     @Test
     public void testUseMapAsResultType() {
         SqlSession sqlSession = SqlSessionUtil.openSession();
-        CarMapper mapper = sqlSession.getMapper(CarMapper.class);
+        ICarMapper mapper = sqlSession.getMapper(ICarMapper.class);
         Map<String, String> car = mapper.selectCarByIdUseMapAsResultType(1l);
         System.out.println("car = " + car);
         List<Map<String, String>> cars = mapper.selectAllCarsUseMapAsResultType();

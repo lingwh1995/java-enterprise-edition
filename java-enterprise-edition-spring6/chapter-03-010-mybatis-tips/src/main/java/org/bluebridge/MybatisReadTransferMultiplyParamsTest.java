@@ -2,7 +2,7 @@ package org.bluebridge;
 
 import org.apache.ibatis.session.SqlSession;
 import org.bluebridge.domain.Car;
-import org.bluebridge.mapper.CarMapper;
+import org.bluebridge.mapper.ICarMapper;
 import org.bluebridge.utils.SqlSessionUtil;
 import org.junit.Test;
 
@@ -26,7 +26,7 @@ public class MybatisReadTransferMultiplyParamsTest {
     @Test
     public void testReadTransferMultiplyParamsUseParamAnnotation() throws Exception {
         SqlSession sqlSession = SqlSessionUtil.openSession();
-        CarMapper mapper = sqlSession.getMapper(CarMapper.class);
+        ICarMapper mapper = sqlSession.getMapper(ICarMapper.class);
         List<Car> cars = mapper.selectCarByBrandAndGuidePriceReadTransferMultiplyParamsUseParamAnnotation("卡罗拉", "32.00");
         System.out.println("cars = " + cars);
         sqlSession.close();
@@ -39,7 +39,7 @@ public class MybatisReadTransferMultiplyParamsTest {
     @Test
     public void testReadTransferMultiplyParamsUseMap() throws Exception {
         SqlSession sqlSession = SqlSessionUtil.openSession();
-        CarMapper mapper = sqlSession.getMapper(CarMapper.class);
+        ICarMapper mapper = sqlSession.getMapper(ICarMapper.class);
         HashMap<String, String> params = new HashMap<>();
         params.put("brand","卡罗拉");
         params.put("guidePrice","32.00");
@@ -54,7 +54,7 @@ public class MybatisReadTransferMultiplyParamsTest {
     @Test
     public void testReadTransferMultiplyParamsUseParamAnnotationMap() throws Exception {
         SqlSession sqlSession = SqlSessionUtil.openSession();
-        CarMapper mapper = sqlSession.getMapper(CarMapper.class);
+        ICarMapper mapper = sqlSession.getMapper(ICarMapper.class);
         HashMap<String, String> params = new HashMap<>();
         params.put("brand","卡罗拉");
         params.put("guidePrice","32.00");

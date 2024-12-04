@@ -2,7 +2,7 @@ package org.bluebridge;
 
 import org.apache.ibatis.session.SqlSession;
 import org.bluebridge.domain.Car;
-import org.bluebridge.mapper.CarMapper;
+import org.bluebridge.mapper.ICarMapper;
 import org.bluebridge.utils.SqlSessionUtil;
 import org.junit.Test;
 
@@ -18,7 +18,7 @@ public class MybatisGetMysqlGeneratedPrimarykeyTest {
     @Test
     public void testMysqlAutoSetPrimaryKeyWhenInsert_1() {
         SqlSession sqlSession = SqlSessionUtil.openSession();
-        CarMapper mapper = sqlSession.getMapper(CarMapper.class);
+        ICarMapper mapper = sqlSession.getMapper(ICarMapper.class);
         Car car = new Car(null, "9199", "凯美瑞", 32.0, "2020-11-12", "电车");
         mapper.insertUseMysqlAutoSetPrimaryKeyWhenInsert_1(car);
         System.out.println("car.getId() = " + car.getId());
@@ -33,7 +33,7 @@ public class MybatisGetMysqlGeneratedPrimarykeyTest {
     @Test
     public void testMysqlAutoSetPrimaryKeyWhenInsert_2() {
         SqlSession sqlSession = SqlSessionUtil.openSession();
-        CarMapper mapper = sqlSession.getMapper(CarMapper.class);
+        ICarMapper mapper = sqlSession.getMapper(ICarMapper.class);
         Car car = new Car(null, "8596", "卡罗拉", 32.0, "2020-11-12", "电车");
         mapper.insertUseMysqlAutoSetPrimaryKeyWhenInsert_2(car);
         System.out.println("car.getId() = " + car.getId());
@@ -48,7 +48,7 @@ public class MybatisGetMysqlGeneratedPrimarykeyTest {
     @Test
     public void testUseMybatisReadMysqlGeneratedPrimaryKeyWhenInsert_1() {
         SqlSession sqlSession = SqlSessionUtil.openSession();
-        CarMapper mapper = sqlSession.getMapper(CarMapper.class);
+        ICarMapper mapper = sqlSession.getMapper(ICarMapper.class);
         Car car = new Car(null, "8635", "吉利帝豪", 32.0, "2020-11-12", "电车");
         mapper.insertUseMybatisReadMysqlGeneratedPrimaryKeyWhenInsert_1(car);
         System.out.println("car.getId() = " + car.getId());
@@ -63,7 +63,7 @@ public class MybatisGetMysqlGeneratedPrimarykeyTest {
     @Test
     public void testUseMybatisReadMysqlGeneratedPrimaryKeyWhenInsert_2() {
         SqlSession sqlSession = SqlSessionUtil.openSession();
-        CarMapper mapper = sqlSession.getMapper(CarMapper.class);
+        ICarMapper mapper = sqlSession.getMapper(ICarMapper.class);
         Car car = new Car(null, "9731", "比亚迪秦", 32.0, "2020-11-12", "电车");
         mapper.insertUseMybatisReadMysqlGeneratedPrimaryKeyWhenInsert_2(car);
         System.out.println("car.getId() = " + car.getId());

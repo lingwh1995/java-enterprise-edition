@@ -2,7 +2,7 @@ package org.bluebridge;
 
 import org.apache.ibatis.session.SqlSession;
 import org.bluebridge.domain.Car;
-import org.bluebridge.mapper.CarMapper;
+import org.bluebridge.mapper.ICarMapper;
 import org.bluebridge.utils.SqlSessionUtil;
 import org.junit.Test;
 
@@ -19,7 +19,7 @@ public class MybatisFuzzyQueryTest {
     @Test
     public void testFuzzyQueryUseMysqlConcat() {
         SqlSession sqlSession = SqlSessionUtil.openSession();
-        CarMapper mapper = sqlSession.getMapper(CarMapper.class);
+        ICarMapper mapper = sqlSession.getMapper(ICarMapper.class);
         List<Car> cars = mapper.selectCarByBrandFuzzyQueryUseMysqlConcat("宝马");
         System.out.println("cars = " + cars);
         sqlSession.close();
@@ -31,7 +31,7 @@ public class MybatisFuzzyQueryTest {
     @Test
     public void testFuzzyQueryUseDoubleQuotationMarkAndHashSymbolConcat() {
         SqlSession sqlSession = SqlSessionUtil.openSession();
-        CarMapper mapper = sqlSession.getMapper(CarMapper.class);
+        ICarMapper mapper = sqlSession.getMapper(ICarMapper.class);
         List<Car> cars = mapper.selectCarByBrandFuzzyQueryUseDoubleQuotationMarkAndHashSymbolConcat("奔驰");
         System.out.println("cars = " + cars);
         sqlSession.close();
@@ -43,7 +43,7 @@ public class MybatisFuzzyQueryTest {
     @Test
     public void testFuzzyQueryUseSingleQuotationMarkAndHashSymbolConcat() {
         SqlSession sqlSession = SqlSessionUtil.openSession();
-        CarMapper mapper = sqlSession.getMapper(CarMapper.class);
+        ICarMapper mapper = sqlSession.getMapper(ICarMapper.class);
         List<Car> cars = mapper.selectCarByBrandFuzzyQueryUseSingleQuotationMarkAndHashSymbolConcat("奔驰");
         System.out.println("cars = " + cars);
         sqlSession.close();
@@ -55,7 +55,7 @@ public class MybatisFuzzyQueryTest {
     @Test
     public void testFuzzyQueryUseMybatisBindTagConcat() {
         SqlSession sqlSession = SqlSessionUtil.openSession();
-        CarMapper mapper = sqlSession.getMapper(CarMapper.class);
+        ICarMapper mapper = sqlSession.getMapper(ICarMapper.class);
         List<Car> cars = mapper.selectCarByBrandFuzzyQueryUseMybatisBindTagConcat("宝马");
         System.out.println("cars = " + cars);
         sqlSession.close();
@@ -67,7 +67,7 @@ public class MybatisFuzzyQueryTest {
     @Test
     public void testFuzzyQueryUseCompleteFuzzyQueryParam() {
         SqlSession sqlSession = SqlSessionUtil.openSession();
-        CarMapper mapper = sqlSession.getMapper(CarMapper.class);
+        ICarMapper mapper = sqlSession.getMapper(ICarMapper.class);
         List<Car> cars = mapper.selectCarByBrandFuzzyQueryUseCompleteFuzzyQueryParam("%奔驰%");
         System.out.println("cars = " + cars);
         sqlSession.close();

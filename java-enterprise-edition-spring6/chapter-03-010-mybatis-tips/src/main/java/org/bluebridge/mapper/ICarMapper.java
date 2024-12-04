@@ -6,7 +6,7 @@ import org.bluebridge.domain.Car;
 import java.util.List;
 import java.util.Map;
 
-public interface CarMapper {
+public interface ICarMapper {
 
     /**
      * 使用 #{} 设置参数

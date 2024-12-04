@@ -6,7 +6,8 @@
 <!-- SQL语句的id必须为方法名 -->
 <mapper namespace="org.bluebridge.mapper.ICarMapper">
 
-    <select id="selectByMultiCondition" resultType="Car">
+    <!-- mybatis动态sql-使用if标签动态拼接多个查询条件 -->
+    <select id="selectByMultiConditionUseIfTag" resultType="Car">
         <!-- where 1 = 1 保证条件都为空时sql语法可以通过 -->
         <!--
         如果条件都为空，并且没有1 = 1，则SQL语句会变为select * from t_car where，
@@ -37,4 +38,180 @@
             and car_type = #{carType}
         </if>
     </select>
+
+    <!-- mybatis动态sql-使用where标签更智能(优雅)的动态拼接多个查询条件 -->
+    <select id="selectByMultiConditionUseWhereTag" resultType="Car">
+        select * from t_car
+        <!--
+              where标签是专门负责where子句动态生成的。如果where标签中的条件都不成立，则SQL语句中不会有where子句
+              使用<where></where>标签后，就不用写 where 1 = 1
+        -->
+        <where>
+            <!-- 可以自动去除条件前面多余的and或or -->
+            <if test="brand != null and brand != ''">
+                and brand like "%"#{brand}"%"
+            </if>
+            <if test="guidePrice != null and guidePrice != ''">
+                and guide_price > #{guidePrice}
+            </if>
+            <if test="carType != null and carType != ''">
+                and car_type = #{carType}
+            </if>
+        </where>
+    </select>
+
+    <!-- mybatis动态sql-使用trim标签更细致的处理动态拼接多个查询条件后多余的 and 或者 or -->
+    <select id="selectByMultiConditionUseTrimTag" resultType="Car">
+        select * from t_car
+        <!--
+            prefix：加前缀
+            suffix：加后缀
+            prefixOverrides：删除前缀
+            suffixOverrides：删除后缀
+        -->
+        <!--
+          prefix="where" 是在trim标签内容的前面添加 where，
+          这个添加是动态的
+          如果有条件，会动态添加where，没有则不添加
+        -->
+        <!--
+            suffixOverrides="and|or"
+          把trim标签中动态判断完后的内容多余的后缀and或or去掉
+        -->
+        <trim prefix="where" suffixOverrides="and|or">
+            <if test="brand != null and brand != ''">
+                brand like "%"#{brand}"%" or
+            </if>
+            <if test="guidePrice != null and guidePrice != ''">
+                guide_price > #{guidePrice} and
+            </if>
+            <if test="carType != null and carType != ''">
+                car_type = #{carType}
+            </if>
+        </trim>
+    </select>
+
+    <!-- mybatis动态sql-使用set标签更智能（优雅）的动态拼接多个需要更新的字段 -->
+    <update id="updateCarUseSetTag">
+        update t_car
+        <set>
+            <if test="carNum != null and carNum != ''">car_num = #{carNum},</if>
+            <if test="brand != null and brand != ''">brand = #{brand},</if>
+            <if test="guidePrice != null and guidePrice != ''">guide_price = #{guidePrice},</if>
+            <if test="produceTime != null and produceTime != ''">produce_time = #{produceTime},</if>
+            <if test="carType != null and carType != ''">car_type = #{carType},</if>
+        </set>
+        where
+        id = #{id}
+    </update>
+
+    <!--
+        mybatis动态sql-使用choose、when、otherwise标签动态从多个查询条件中选出最先符合要求的一个查询条件
+        效果是 只有一个分支会被选择！！！！
+        <choose>
+          <when></when>
+          <when></when>
+          <otherwise></otherwise>
+        </choose>
+        相当于
+        if(){
+        }else if(){
+        }else if(){
+        }else{
+        }
+    -->
+    <select id="selectUseChooseWhenOtherwiseTge" resultType="Car">
+        select * from t_car
+        <where>
+        <!--
+需           求：先根据品牌查询，如果没有提供品牌，再根据指导价格查询，如果没有提供指导价格，就根据汽车类型查询
+          -->
+            <choose>
+                <!--只有一个分支会执行，所以不需要and or关键字-->
+                <when test="brand != null and brand != ''">
+                    brand like "%"#{brand}"%"
+                </when>
+                <when test="guidePrice != null and guidePrice != ''">
+                    guide_price > #{guidePrice}
+                </when>
+                <!--都为null，还是执行这个分支，car_type = null，只是查不到数据-->
+                <otherwise>
+                    car_type = #{carType}
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <!-- mybatis动态sql-使用foreach标签实现批量删除：使用in关键字拼接参数 -->
+    <delete id="deleteBatchByIdsUseForeachTagIn">
+        <!--
+            foreach标签的属性：
+                collection：指定数组或者集合
+                item：代表数组或集合中的元素
+                separator：循环之间的分隔符，自动添加分隔符，会自动在分隔符的两边添加空格
+                open: foreach循环拼接的所有sql语句的最前面以什么开始。
+                close: foreach循环拼接的所有sql语句的最后面以什么结束。
+        -->
+        delete from t_car where id in
+        <!-- 根据id批量删除,使用in关键字拼接多个参数-->
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!-- mybatis动态sql-使用foreach标签实现批量删除：使用or关键字拼接参数 -->
+    <delete id="deleteBatchByIdsUseForeachTagOr">
+        <!--
+            foreach标签的属性：
+                collection：指定数组或者集合
+                item：代表数组或集合中的元素
+                separator：循环之间的分隔符，自动添加分隔符，会自动在分隔符的两边添加空格
+                open: foreach循环拼接的所有sql语句的最前面以什么开始。
+                close: foreach循环拼接的所有sql语句的最后面以什么结束。
+        -->
+        delete from t_car where
+        <!-- 根据id批量删除,使用or关键字拼接多个参数 -->
+        <foreach collection="ids" item="id" separator="or">
+            id=#{id}
+        </foreach>
+    </delete>
+
+    <!-- mybatis动态sql-使用foreach标签实现批量新增 -->
+    <insert id="insertBatchUseForeachTag">
+        insert into t_car values
+        <!-- cars 汽车信息组成的list集合，car一个汽车类的对象，取属性，对象.属性 -->
+        <foreach collection="cars" item="car" separator=",">
+            (null,#{car.carNum},#{car.brand},#{car.guidePrice},#{car.produceTime},#{car.carType})
+        </foreach>
+    </insert>
+
+
+    <!-- 使mybatis动态sql-用sql和include标签抽取可重用sql开始 -->
+    <!--
+        声明sql片段
+        将重复的SQL片段提取出来
+    -->
+    <sql id="carCols">
+        id,
+        car_num carNum,
+        brand,
+        guide_price guidePrice,
+        produce_time produceTime,
+        car_type carType
+    </sql>
+
+    <select id="selectAllCarsUseSqlAndIncludeTag" resultType="Car">
+        <!-- 将声明的sql片段包含进来 -->
+        select
+        <include refid="carCols"/>
+        from t_car
+    </select>
+
+    <select id="selectAllCarsByIdUseSqlAndIncludeTag" resultType="Car">
+        select
+        <include refid="carCols"/>
+        from t_car
+        where id = #{id}
+    </select>
+    <!-- mybatis动态sql-使用sql和include标签抽取可重用sql结束 -->
 </mapper>
