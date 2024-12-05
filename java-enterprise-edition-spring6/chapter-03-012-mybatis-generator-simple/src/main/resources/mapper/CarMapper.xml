@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bluebridge.mapper.CarMapper">
-  <resultMap id="BaseResultMap" type="com.bluebridge.domain.Car">
+<mapper namespace="org.bluebridge.mapper.CarMapper">
+  <resultMap id="BaseResultMap" type="org.bluebridge.domain.Car">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="car_num" jdbcType="VARCHAR" property="carNum" />
     <result column="brand" jdbcType="VARCHAR" property="brand" />
@@ -13,7 +13,7 @@
     delete from t_car
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.bluebridge.domain.Car">
+  <insert id="insert" parameterType="org.bluebridge.domain.Car">
     insert into t_car (id, car_num, brand, 
       guide_price, produce_time, car_type
       )
@@ -21,7 +21,7 @@
       #{guidePrice,jdbcType=DECIMAL}, #{produceTime,jdbcType=CHAR}, #{carType,jdbcType=VARCHAR}
       )
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.bluebridge.domain.Car">
+  <update id="updateByPrimaryKey" parameterType="org.bluebridge.domain.Car">
     update t_car
     set car_num = #{carNum,jdbcType=VARCHAR},
       brand = #{brand,jdbcType=VARCHAR},

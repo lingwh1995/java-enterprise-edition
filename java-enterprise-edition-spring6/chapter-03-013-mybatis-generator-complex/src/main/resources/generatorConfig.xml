@@ -28,9 +28,9 @@
         </jdbcConnection>
 
         <!-- 生成实体包名和位置 -->
-        <javaModelGenerator targetPackage="com.bluebridge.domain" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="org.bluebridge.domain" targetProject="src/main/java">
             <!--是否开启子包-->
-            <!--如果没有开启子包，com.bluebridge.mybatis.domain整个会被作为一个文件夹名-->
+            <!--如果没有开启子包，org.bluebridge.mybatis.domain整个会被作为一个文件夹名-->
             <property name="enableSubPackages" value="true"/>
             <!--是否去除字段名的前后空白-->
             <property name="trimStrings" value="true"/>
@@ -45,7 +45,7 @@
         <!-- 生成Mapper接口的包名和位置 -->
         <javaClientGenerator
                 type="xmlMapper"
-                targetPackage="com.bluebridge.mapper"
+                targetPackage="org.bluebridge.mapper"
                 targetProject="src/main/java">
             <!--是否开启子包-->
             <property name="enableSubPackages" value="true"/>

@@ -103,6 +103,6 @@
 
     <!-- 导入mapper.xml -->
     <mappers>
-        <mapper resource="mapper/CarMapper.xml"/>
+        <mapper class="org.bluebridge.mapper.CarMapper"/>
     </mappers>
 </configuration>

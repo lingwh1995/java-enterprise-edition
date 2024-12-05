@@ -1,8 +1,8 @@
 package com.bluebridge;
 
-import com.bluebridge.domain.Car;
-import com.bluebridge.domain.CarExample;
-import com.bluebridge.mapper.CarMapper;
+import org.bluebridge.domain.Car;
+import org.bluebridge.domain.CarExample;
+import org.bluebridge.mapper.CarMapper;
 import com.bluebridge.utils.SqlSessionUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import java.util.List;
 public class Mybatis3ComplexGeneratorTest {
 
     @Test
-    public void test() {
+    public void testMybatis3ComplexGenerator() {
         SqlSession sqlSession = SqlSessionUtil.openSession();
         CarMapper mapper = sqlSession.getMapper(CarMapper.class);
         // 执行查询

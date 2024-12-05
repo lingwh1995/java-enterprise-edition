@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bluebridge.mapper.CarMapper">
-  <resultMap id="BaseResultMap" type="com.bluebridge.domain.Car">
+<mapper namespace="org.bluebridge.mapper.CarMapper">
+  <resultMap id="BaseResultMap" type="org.bluebridge.domain.Car">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="car_num" jdbcType="VARCHAR" property="carNum" />
     <result column="brand" jdbcType="VARCHAR" property="brand" />
@@ -70,7 +70,7 @@
   <sql id="Base_Column_List">
     id, car_num, brand, guide_price, produce_time, car_type
   </sql>
-  <select id="selectByExample" parameterType="com.bluebridge.domain.CarExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.bluebridge.domain.CarExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -94,13 +94,13 @@
     delete from t_car
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.bluebridge.domain.CarExample">
+  <delete id="deleteByExample" parameterType="org.bluebridge.domain.CarExample">
     delete from t_car
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.bluebridge.domain.Car">
+  <insert id="insert" parameterType="org.bluebridge.domain.Car">
     insert into t_car (id, car_num, brand, 
       guide_price, produce_time, car_type
       )
@@ -108,7 +108,7 @@
       #{guidePrice,jdbcType=DECIMAL}, #{produceTime,jdbcType=CHAR}, #{carType,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.bluebridge.domain.Car">
+  <insert id="insertSelective" parameterType="org.bluebridge.domain.Car">
     insert into t_car
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -151,7 +151,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.bluebridge.domain.CarExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.bluebridge.domain.CarExample" resultType="java.lang.Long">
     select count(*) from t_car
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -195,7 +195,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bluebridge.domain.Car">
+  <update id="updateByPrimaryKeySelective" parameterType="org.bluebridge.domain.Car">
     update t_car
     <set>
       <if test="carNum != null">
@@ -216,7 +216,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.bluebridge.domain.Car">
+  <update id="updateByPrimaryKey" parameterType="org.bluebridge.domain.Car">
     update t_car
     set car_num = #{carNum,jdbcType=VARCHAR},
       brand = #{brand,jdbcType=VARCHAR},
