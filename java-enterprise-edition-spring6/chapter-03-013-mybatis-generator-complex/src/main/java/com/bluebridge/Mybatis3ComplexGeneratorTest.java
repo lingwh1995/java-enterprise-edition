@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * mybatis 逆向工程简单版测试
  */
-public class Mybatis3SimpleGeneratorTest {
+public class Mybatis3ComplexGeneratorTest {
 
     @Test
     public void test() {

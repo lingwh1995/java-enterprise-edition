@@ -64,6 +64,7 @@
         <module>chapter-03-011-mybatis-dynamicsql</module>
         <module>chapter-03-012-mybatis-generator-simple</module>
         <module>chapter-03-013-mybatis-generator-complex</module>
+        <module>chapter-03-014-mybatis-pagehelper</module>
 
     </modules>
 

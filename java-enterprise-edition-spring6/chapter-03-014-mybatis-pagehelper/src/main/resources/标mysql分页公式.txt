@@ -1,0 +1,6 @@
+select
+  *
+from
+  tableName ......
+limit
+  (pageNum - 1) * pageSize, pageSize
