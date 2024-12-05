@@ -16,6 +16,7 @@
         <module>java-enterprise-edition-workflow</module>
         <module>java-enterprise-edition-bigdate</module>
         <module>java-enterprise-edition-authority</module>
+        <module>java-enterprise-edition-sourcecode</module>
     </modules>
 
     <properties>
