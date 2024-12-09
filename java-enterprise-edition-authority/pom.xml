@@ -12,8 +12,8 @@
     <artifactId>java-enterprise-edition-authority</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>chapter-01-001-rbac-helloworld</module>
-        <module>chapter-01-001-security-helloworld</module>
+        <module>chapter-01-01-rbac-helloworld</module>
+        <module>chapter-02-01-security-helloworld</module>
     </modules>
 
     <properties>

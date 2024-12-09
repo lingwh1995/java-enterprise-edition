@@ -12,17 +12,17 @@
     <artifactId>java-enterprise-edition-spring5</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>chapter-01-001-spring-ioc</module>
-        <module>chapter-01-002-spring-aop</module>
-        <module>chapter-01-003-spring-jdbc</module>
-        <module>chapter-01-004-spring-transaction</module>
-        <module>chapter-01-005-spring-noxml</module>
-        <module>chapter-01-007-spring-mvc</module>
-        <module>chapter-01-006-spring-sourcecode</module>
-        <module>chapter-02-001-persistence-mybatis</module>
-        <module>chapter-02-002-persistence-springdata-redis</module>
-        <module>chapter-03-001-integration-ss</module>
-        <module>chapter-03-002-integration-ssm</module>
+        <module>chapter-01-01-spring-ioc</module>
+        <module>chapter-01-02-spring-aop</module>
+        <module>chapter-01-03-spring-jdbc</module>
+        <module>chapter-01-04-spring-transaction</module>
+        <module>chapter-01-05-spring-noxml</module>
+        <module>chapter-01-07-spring-mvc</module>
+        <module>chapter-01-06-spring-sourcecode</module>
+        <module>chapter-02-01-persistence-mybatis</module>
+        <module>chapter-02-02-persistence-springdata-redis</module>
+        <module>chapter-03-01-integration-ss</module>
+        <module>chapter-03-02-integration-ssm</module>
     </modules>
 
     <properties>

@@ -19,6 +19,6 @@
     </properties>
 
     <modules>
-        <module>chapter-01-001-mybatis-source-code</module>
+        <module>chapter-01-01-mybatis-source-code</module>
     </modules>
 </project>

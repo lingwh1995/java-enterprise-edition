@@ -12,32 +12,32 @@
     <artifactId>java-enterprise-edition-springboot2</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>chapter-01-001-springboot-basic-helloworld</module>
-        <module>chapter-01-002-springboot-basic-actuator</module>
-        <module>chapter-01-003-springboot-basic-devtools</module>
-        <module>chapter-01-004-springboot-basic-repository</module>
-        <module>chapter-01-005-springboot-basic-configuration-processor</module>
-        <module>chapter-01-006-springboot-basic-annotation-driven</module>
-        <module>chapter-01-007-springboot-basic-json-xml</module>
-        <module>chapter-01-008-springboot-basic-read-configuration-file</module>
-        <module>chapter-01-009-springboot-basic-read-yml-configuration-file</module>
-        <module>chapter-02-001-springboot-tools-mail</module>
-        <module>chapter-02-002-springboot-tools-schedule</module>
-        <module>chapter-02-003-springboot-tools-async</module>
-        <module>chapter-02-004-springboot-tools-cache</module>
-        <module>chapter-02-005-springboot-tools-rest-template</module>
-        <module>chapter-02-006-springboot-tools-swagger</module>
-        <module>chapter-03-001-springboot-framework-quartz</module>
-        <module>chapter-04-001-springboot-persistence-springdatajpa</module>
-        <module>chapter-04-002-springboot-persistence-mybatis-pagehelper</module>
-        <module>chapter-04-003-springboot-persistence-multiyply-datasource</module>
-        <module>chapter-04-004-springboot-persistence-springdata-redis</module>
-        <module>chapter-05-001-springboot-production-javaweb</module>
-        <module>chapter-05-002-springboot-production-freemarker</module>
-        <module>chapter-05-003-springboot-production-thymeleaf</module>
-        <module>chapter-05-004-springboot-production-multiyply-environment</module>
-        <module>chapter-05-005-springboot-production-package-to-war</module>
-        <module>chapter-06-001-springboot-demo-restfulcrud</module>
+        <module>chapter-01-01-springboot-basic-helloworld</module>
+        <module>chapter-01-02-springboot-basic-actuator</module>
+        <module>chapter-01-03-springboot-basic-devtools</module>
+        <module>chapter-01-04-springboot-basic-repository</module>
+        <module>chapter-01-05-springboot-basic-configuration-processor</module>
+        <module>chapter-01-06-springboot-basic-annotation-driven</module>
+        <module>chapter-01-07-springboot-basic-json-xml</module>
+        <module>chapter-01-08-springboot-basic-read-configuration-file</module>
+        <module>chapter-01-09-springboot-basic-read-yml-configuration-file</module>
+        <module>chapter-02-01-springboot-tools-mail</module>
+        <module>chapter-02-02-springboot-tools-schedule</module>
+        <module>chapter-02-03-springboot-tools-async</module>
+        <module>chapter-02-04-springboot-tools-cache</module>
+        <module>chapter-02-05-springboot-tools-rest-template</module>
+        <module>chapter-02-06-springboot-tools-swagger</module>
+        <module>chapter-03-01-springboot-framework-quartz</module>
+        <module>chapter-04-01-springboot-persistence-springdatajpa</module>
+        <module>chapter-04-02-springboot-persistence-mybatis-pagehelper</module>
+        <module>chapter-04-03-springboot-persistence-multiyply-datasource</module>
+        <module>chapter-04-04-springboot-persistence-springdata-redis</module>
+        <module>chapter-05-01-springboot-production-javaweb</module>
+        <module>chapter-05-02-springboot-production-freemarker</module>
+        <module>chapter-05-03-springboot-production-thymeleaf</module>
+        <module>chapter-05-04-springboot-production-multiyply-environment</module>
+        <module>chapter-05-05-springboot-production-package-to-war</module>
+        <module>chapter-06-01-springboot-demo-restfulcrud</module>
     </modules>
 
     <properties>
