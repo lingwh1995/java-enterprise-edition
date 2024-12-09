@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>7-processvariable</artifactId>
+    <artifactId>chapter-01-04-flowable6.7-processvariable</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
