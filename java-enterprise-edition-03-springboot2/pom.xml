@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.bluebridge</groupId>
+        <artifactId>java-enterprise-edition</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>java-enterprise-edition-03-springboot2</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>chapter-01-01-springboot-basic-helloworld</module>
+        <module>chapter-01-02-springboot-basic-actuator</module>
+        <module>chapter-01-03-springboot-basic-devtools</module>
+        <module>chapter-01-04-springboot-basic-repository</module>
+        <module>chapter-01-05-springboot-basic-configuration-processor</module>
+        <module>chapter-01-06-springboot-basic-annotation-driven</module>
+        <module>chapter-01-07-springboot-basic-json-xml</module>
+        <module>chapter-01-08-springboot-basic-read-configuration-file</module>
+        <module>chapter-01-09-springboot-basic-read-yml-configuration-file</module>
+        <module>chapter-02-01-springboot-tools-mail</module>
+        <module>chapter-02-02-springboot-tools-schedule</module>
+        <module>chapter-02-03-springboot-tools-async</module>
+        <module>chapter-02-04-springboot-tools-cache</module>
+        <module>chapter-02-05-springboot-tools-rest-template</module>
+        <module>chapter-02-06-springboot-tools-swagger</module>
+        <module>chapter-03-01-springboot-framework-quartz</module>
+        <module>chapter-04-01-springboot-persistence-springdatajpa</module>
+        <module>chapter-04-02-springboot-persistence-mybatis-pagehelper</module>
+        <module>chapter-04-03-springboot-persistence-multiyply-datasource</module>
+        <module>chapter-04-04-springboot-persistence-springdata-redis</module>
+        <module>chapter-05-01-springboot-production-javaweb</module>
+        <module>chapter-05-02-springboot-production-freemarker</module>
+        <module>chapter-05-03-springboot-production-thymeleaf</module>
+        <module>chapter-05-04-springboot-production-multiyply-environment</module>
+        <module>chapter-05-05-springboot-production-package-to-war</module>
+        <module>chapter-06-01-springboot-demo-restfulcrud</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.boot.version>2.7.6</spring.boot.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
