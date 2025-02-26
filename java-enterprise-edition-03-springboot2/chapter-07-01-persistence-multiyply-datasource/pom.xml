@@ -9,14 +9,14 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>chapter-05-05-production-package-to-war</artifactId>
-    <packaging>war</packaging>
+    <artifactId>chapter-07-01-persistence-multiyply-datasource</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <failOnMissingWebXml>false</failOnMissingWebXml>
+        <mybatis.version>2.0.0</mybatis.version>
+        <mysql.connector.version>8.0.33</mysql.connector.version>
     </properties>
 
     <dependencies>
@@ -24,27 +24,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis.version}</version>
         </dependency>
-
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.connector.version}</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <finalName>springboot-jar-package-to-war</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>
