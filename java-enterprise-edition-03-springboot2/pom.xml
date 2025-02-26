@@ -12,32 +12,33 @@
     <artifactId>java-enterprise-edition-03-springboot2</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>chapter-01-01-springboot-basic-helloworld</module>
-        <module>chapter-01-02-springboot-basic-actuator</module>
-        <module>chapter-01-03-springboot-basic-devtools</module>
-        <module>chapter-01-04-springboot-basic-repository</module>
-        <module>chapter-01-05-springboot-basic-configuration-processor</module>
-        <module>chapter-01-06-springboot-basic-annotation-driven</module>
-        <module>chapter-01-07-springboot-basic-json-xml</module>
-        <module>chapter-01-08-springboot-basic-read-configuration-file</module>
-        <module>chapter-01-09-springboot-basic-read-yml-configuration-file</module>
-        <module>chapter-02-01-springboot-tools-mail</module>
-        <module>chapter-02-02-springboot-tools-schedule</module>
-        <module>chapter-02-03-springboot-tools-async</module>
-        <module>chapter-02-04-springboot-tools-cache</module>
-        <module>chapter-02-05-springboot-tools-rest-template</module>
-        <module>chapter-02-06-springboot-tools-swagger</module>
-        <module>chapter-03-01-springboot-framework-quartz</module>
-        <module>chapter-04-01-springboot-persistence-springdatajpa</module>
-        <module>chapter-04-02-springboot-persistence-mybatis-pagehelper</module>
-        <module>chapter-04-03-springboot-persistence-multiyply-datasource</module>
-        <module>chapter-04-04-springboot-persistence-springdata-redis</module>
-        <module>chapter-05-01-springboot-production-javaweb</module>
-        <module>chapter-05-02-springboot-production-freemarker</module>
-        <module>chapter-05-03-springboot-production-thymeleaf</module>
-        <module>chapter-05-04-springboot-production-multiyply-environment</module>
-        <module>chapter-05-05-springboot-production-package-to-war</module>
-        <module>chapter-06-01-springboot-demo-restfulcrud</module>
+        <module>chapter-01-01-basic-helloworld</module>
+        <module>chapter-01-02-basic-actuator</module>
+        <module>chapter-01-03-basic-devtools</module>
+        <module>chapter-01-04-basic-repository</module>
+        <module>chapter-01-05-basic-configuration-processor</module>
+        <module>chapter-01-06-basic-annotation-driven</module>
+        <module>chapter-01-07-basic-json-xml</module>
+        <module>chapter-01-08-basic-read-configuration-file</module>
+        <module>chapter-01-09-basic-read-yml-configuration-file</module>
+        <module>chapter-02-01-tools-mail</module>
+        <module>chapter-02-02-tools-schedule</module>
+        <module>chapter-02-03-tools-async</module>
+        <module>chapter-02-04-tools-cache</module>
+        <module>chapter-02-05-tools-rest-template</module>
+        <module>chapter-02-06-tools-swagger</module>
+        <module>chapter-03-01-framework-quartz</module>
+        <module>chapter-04-04-persistence-springdata-jpa</module>
+        <module>chapter-04-02-persistence-mybatis-pagehelper</module>
+        <module>chapter-04-01-persistence-multiyply-datasource</module>
+        <module>chapter-04-05-persistence-springdata-redis</module>
+        <module>chapter-05-01-production-javaweb</module>
+        <module>chapter-05-02-production-freemarker</module>
+        <module>chapter-05-03-production-thymeleaf</module>
+        <module>chapter-05-04-production-multiyply-environment</module>
+        <module>chapter-05-05-production-package-to-war</module>
+        <module>chapter-06-01-demo-restfulcrud</module>
+        <module>chapter-04-03-persistence-mybatis-plus</module>
     </modules>
 
     <properties>
