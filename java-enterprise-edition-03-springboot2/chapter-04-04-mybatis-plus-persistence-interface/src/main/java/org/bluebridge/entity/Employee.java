@@ -4,9 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.Accessors;
 /**
  * <p>
@@ -16,10 +14,8 @@ import lombok.experimental.Accessors;
  * @author lingwh
  * @since 2025-02-27
  */
-@Getter
-@Setter
-@ToString
-@Accessors(chain = true)
+@Builder
+@Data
 @TableName("t_employee")
 public class Employee {
 

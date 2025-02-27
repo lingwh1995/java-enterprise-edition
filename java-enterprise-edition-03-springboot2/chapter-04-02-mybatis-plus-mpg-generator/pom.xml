@@ -33,7 +33,6 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
-            <version>3.5.10</version>
         </dependency>
         <!-- freemarker模板引擎，用于生成代码 -->
         <dependency>
