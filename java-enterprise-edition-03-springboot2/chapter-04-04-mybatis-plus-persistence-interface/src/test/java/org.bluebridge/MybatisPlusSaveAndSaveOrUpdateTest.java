@@ -11,10 +11,13 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * save()
- * saveBatch()
- * saveOrUpdate()
- * saveOrUpdateBatch()
+ * boolean save(T entity);  // 插入一条记录（选择字段，策略插入）
+ * boolean saveBatch(Collection<T> entityList); // 插入（批量）
+ * boolean saveBatch(Collection<T> entityList, int batchSize); // 插入（批量）
+ * boolean saveOrUpdate(T entity);  // TableId 注解属性值存在则更新记录，否插入一条记录
+ * boolean saveOrUpdate(T entity, Wrapper<T> updateWrapper);  // 根据updateWrapper尝试更新，否继续执行saveOrUpdate(T)方法
+ * boolean saveOrUpdateBatch(Collection<T> entityList); // 批量修改插入
+ * boolean saveOrUpdateBatch(Collection<T> entityList, int batchSize);  // 批量修改插入
  */
 @SpringBootTest
 public class MybatisPlusSaveAndSaveOrUpdateTest {
@@ -42,27 +45,33 @@ public class MybatisPlusSaveAndSaveOrUpdateTest {
      */
     @Test
     public void testSaveBatchWithoutSetBatchSize() {
-        Employee zhangsan = Employee.builder().email("1458687169@qq.com")
-                .gender("男")
-                .lastName("张三")
-                .deptNo("01")
-                .build();
-        Employee lisi = Employee.builder().email("1358697169@qq.com")
-                .gender("男")
-                .lastName("李四")
-                .deptNo("01")
-                .build();
-        Employee wangwu = Employee.builder().email("1958687169@qq.com")
-                .gender("男")
-                .lastName("王五")
-                .deptNo("02")
-                .build();
-        Employee zhaoliu = Employee.builder().email("1868687169@qq.com")
-                .gender("男")
-                .lastName("赵六")
-                .deptNo("02")
-                .build();
-        List<Employee> employeeList = Arrays.asList(zhangsan, lisi, wangwu,zhaoliu);
+        List<Employee> employeeList = Arrays.asList(
+                new Employee("张三", "1111111111@qq.com", "男", "01"),
+                new Employee("李四", "2222222222@qq.com", "女", "02"),
+                new Employee("王五", "3333333333@qq.com", "男", "03"),
+                new Employee("王五", "44444444444@qq.com", "男", "03")
+                );
+//        Employee zhangsan = Employee.builder().email()
+//                .gender("男")
+//                .lastName()
+//                .deptNo("01")
+//                .build();
+//        Employee lisi = Employee.builder().email("1358697169@qq.com")
+//                .gender("男")
+//                .lastName("李四")
+//                .deptNo("01")
+//                .build();
+//        Employee wangwu = Employee.builder().email("1958687169@qq.com")
+//                .gender("男")
+//                .lastName("王五")
+//                .deptNo("02")
+//                .build();
+//        Employee zhaoliu = Employee.builder().email("1868687169@qq.com")
+//                .gender("男")
+//                .lastName("赵六")
+//                .deptNo("02")
+//                .build();
+//        List<Employee> employeeList = Arrays.asList(zhangsan, lisi, wangwu,zhaoliu);
         boolean isSave = employeeService.saveBatch(employeeList);
         System.out.println(isSave);
     }
@@ -168,7 +177,7 @@ public class MybatisPlusSaveAndSaveOrUpdateTest {
      * boolean saveOrUpdateBatch(Collection<T> entityList, int batchSize);
      */
     @Test
-    public void testSaveOrUpdateBatchSetBatchSize() {
+    public void testSaveOrUpdateBatchWithSetBatchSize() {
         Employee zhangsan = Employee.builder().email("1458687169@qq.com")
                 .gender("男")
                 .lastName("张三")

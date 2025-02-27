@@ -33,4 +33,11 @@ public class Employee {
 
     @TableField("dept_no")
     private String deptNo;
+
+    public Employee(String lastName, String email, String gender, String deptNo) {
+        this.lastName = lastName;
+        this.email = email;
+        this.gender = gender;
+        this.deptNo = deptNo;
+    }
 }
