@@ -27,18 +27,21 @@
         <module>chapter-02-04-tools-cache</module>
         <module>chapter-02-05-tools-rest-template</module>
         <module>chapter-02-06-tools-swagger</module>
-        <module>chapter-03-01-framework-quartz</module>
+        <module>chapter-02-07-tools-jackson</module>
+        <module>chapter-03-01-quartz</module>
+        <module>chapter-04-01-mybatis-plus-helloworld</module>
         <module>chapter-05-01-framework-springdata-jpa-helloworld</module>
+        <module>chapter-06-01-framework-springdata-redis-helloworld</module>
         <module>chapter-07-02-persistence-mybatis-pagehelper</module>
         <module>chapter-07-01-persistence-multiyply-datasource</module>
-        <module>chapter-06-01-framework-springdata-redis-helloworld</module>
         <module>chapter-08-01-production-javaweb</module>
         <module>chapter-08-02-production-freemarker</module>
         <module>chapter-08-03-production-thymeleaf</module>
         <module>chapter-08-04-production-multiyply-environment</module>
         <module>chapter-08-05-production-package-to-war</module>
         <module>chapter-09-01-demo-restfulcrud</module>
-        <module>chapter-04-01-framework-mybatis-plus-helloworld</module>
+        <module>chapter-04-02-mybatis-plus-mpg-generator</module>
+        <module>chapter-04-03-mybatis-plus-mpg-test</module>
     </modules>
 
     <properties>
@@ -46,6 +49,13 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.boot.version>2.7.6</spring.boot.version>
+        <mybatis-plus.version>3.5.10.1</mybatis-plus.version>
+        <lombok.version>1.18.0</lombok.version>
+        <mysql.connector.version>8.0.33</mysql.connector.version>
+        <junit.version>8.0.33</junit.version>
+        <junit.version>4.12</junit.version>
+        <druid.version>1.1.10</druid.version>
+        <ojdbc6.version>11.2.0.3</ojdbc6.version>
     </properties>
 
     <dependencyManagement>
@@ -56,6 +66,37 @@
                 <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.connector.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.oracle</groupId>
+                <artifactId>ojdbc6</artifactId>
+                <version>${ojdbc6.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-    <bean id="user" class="org.bluebridge.domain.User">
+    <bean id="user" class="org.bluebridge.domain.Employee">
         <property name="name" value="zhangsan"/>
         <property name="age" value="18"/>
     </bean>

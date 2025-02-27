@@ -5,11 +5,11 @@
 
 <mapper namespace="org.bluebridge.mapper.IUserDao">
 
-    <select id="getUserById" resultType="org.bluebridge.domain.User">
+    <select id="getUserById" resultType="org.bluebridge.domain.Employee">
         select * from t_user where id = #{id}
     </select>
 
-    <select id="getAllUsers" resultType="org.bluebridge.domain.User">
+    <select id="getAllUsers" resultType="org.bluebridge.domain.Employee">
         select * from t_user
     </select>
 </mapper>
