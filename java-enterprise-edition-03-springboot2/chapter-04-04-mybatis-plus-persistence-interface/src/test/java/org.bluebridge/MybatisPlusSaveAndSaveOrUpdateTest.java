@@ -46,32 +46,11 @@ public class MybatisPlusSaveAndSaveOrUpdateTest {
     @Test
     public void testSaveBatchWithoutSetBatchSize() {
         List<Employee> employeeList = Arrays.asList(
-                new Employee("张三", "1111111111@qq.com", "男", "01"),
-                new Employee("李四", "2222222222@qq.com", "女", "02"),
-                new Employee("王五", "3333333333@qq.com", "男", "03"),
-                new Employee("王五", "44444444444@qq.com", "男", "03")
+                new Employee(null,"张三", "1111111111@qq.com", "男", "01"),
+                new Employee(null,"李四", "2222222222@qq.com", "女", "02"),
+                new Employee(null,"王五", "3333333333@qq.com", "男", "03"),
+                new Employee(null,"赵六", "44444444444@qq.com", "男", "03")
                 );
-//        Employee zhangsan = Employee.builder().email()
-//                .gender("男")
-//                .lastName()
-//                .deptNo("01")
-//                .build();
-//        Employee lisi = Employee.builder().email("1358697169@qq.com")
-//                .gender("男")
-//                .lastName("李四")
-//                .deptNo("01")
-//                .build();
-//        Employee wangwu = Employee.builder().email("1958687169@qq.com")
-//                .gender("男")
-//                .lastName("王五")
-//                .deptNo("02")
-//                .build();
-//        Employee zhaoliu = Employee.builder().email("1868687169@qq.com")
-//                .gender("男")
-//                .lastName("赵六")
-//                .deptNo("02")
-//                .build();
-//        List<Employee> employeeList = Arrays.asList(zhangsan, lisi, wangwu,zhaoliu);
         boolean isSave = employeeService.saveBatch(employeeList);
         System.out.println(isSave);
     }
@@ -82,29 +61,14 @@ public class MybatisPlusSaveAndSaveOrUpdateTest {
      */
     @Test
     public void testSaveBatchSetBatchSize() {
-        Employee zhangsan = Employee.builder().email("1458687169@qq.com")
-                .gender("男")
-                .lastName("张三")
-                .deptNo("01")
-                .build();
-        Employee lisi = Employee.builder().email("1358697169@qq.com")
-                .gender("男")
-                .lastName("李四")
-                .deptNo("01")
-                .build();
-        Employee wangwu = Employee.builder().email("1958687169@qq.com")
-                .gender("男")
-                .lastName("王五")
-                .deptNo("02")
-                .build();
-        Employee zhaoliu = Employee.builder().email("1868687169@qq.com")
-                .gender("男")
-                .lastName("赵六")
-                .deptNo("02")
-                .build();
-        List<Employee> employeeList = Arrays.asList(zhangsan, lisi, wangwu,zhaoliu);
+        List<Employee> employeeList = Arrays.asList(
+                new Employee(null,"张三", "1111111111@qq.com", "男", "01"),
+                new Employee(null,"李四", "2222222222@qq.com", "女", "02"),
+                new Employee(null,"王五", "3333333333@qq.com", "男", "03"),
+                new Employee(null,"赵六", "44444444444@qq.com", "男", "03")
+        );
         //指定批次大小
-        boolean isSave = employeeService.saveBatch(employeeList, 2);
+        boolean isSave = employeeService.saveBatch(employeeList,2);
         System.out.println(isSave);
     }
 
@@ -147,27 +111,16 @@ public class MybatisPlusSaveAndSaveOrUpdateTest {
      */
     @Test
     public void testSaveOrUpdateBatchWithoutSetBatchSize() {
-        Employee zhangsan = Employee.builder().email("1458687169@qq.com")
-                .gender("男")
-                .lastName("张三")
-                .deptNo("01")
-                .build();
-        Employee lisi = Employee.builder().email("1358697169@qq.com")
-                .gender("男")
-                .lastName("李四")
-                .deptNo("01")
-                .build();
-        Employee wangwu = Employee.builder().email("1958687169@qq.com")
-                .gender("男")
-                .lastName("王五")
-                .deptNo("02")
-                .build();
-        Employee zhaoliu = Employee.builder().email("1868687169@qq.com")
-                .gender("男")
-                .lastName("赵六")
-                .deptNo("02")
-                .build();
-        List<Employee> employeeList = Arrays.asList(zhangsan, lisi, wangwu,zhaoliu);
+        List<Employee> employeeList = Arrays.asList(
+                //新增
+                new Employee(null,"张三", "1111111111@qq.com", "男", "01"),
+                //新增
+                new Employee(null,"李四", "2222222222@qq.com", "女", "02"),
+                //新增
+                new Employee(null,"王五", "3333333333@qq.com", "男", "03"),
+                //更新
+                new Employee(42l,"赵六六", "44444444444@qq.com", "男", "03")
+        );
         boolean isSave = employeeService.saveOrUpdateBatch(employeeList);
         System.out.println(isSave);
     }
@@ -178,27 +131,16 @@ public class MybatisPlusSaveAndSaveOrUpdateTest {
      */
     @Test
     public void testSaveOrUpdateBatchWithSetBatchSize() {
-        Employee zhangsan = Employee.builder().email("1458687169@qq.com")
-                .gender("男")
-                .lastName("张三")
-                .deptNo("01")
-                .build();
-        Employee lisi = Employee.builder().email("1358697169@qq.com")
-                .gender("男")
-                .lastName("李四")
-                .deptNo("01")
-                .build();
-        Employee wangwu = Employee.builder().email("1958687169@qq.com")
-                .gender("男")
-                .lastName("王五")
-                .deptNo("02")
-                .build();
-        Employee zhaoliu = Employee.builder().email("1868687169@qq.com")
-                .gender("男")
-                .lastName("赵六")
-                .deptNo("02")
-                .build();
-        List<Employee> employeeList = Arrays.asList(zhangsan, lisi, wangwu,zhaoliu);
+        List<Employee> employeeList = Arrays.asList(
+                //新增
+                new Employee(null,"张三", "1111111111@qq.com", "男", "01"),
+                //新增
+                new Employee(null,"李四", "2222222222@qq.com", "女", "02"),
+                //新增
+                new Employee(null,"王五", "3333333333@qq.com", "男", "03"),
+                //更新
+                new Employee(null,"赵六", "44444444444@qq.com", "男", "03")
+        );
         //设置批次大小为2
         boolean isSave = employeeService.saveOrUpdateBatch(employeeList,2);
         System.out.println(isSave);

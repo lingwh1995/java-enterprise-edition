@@ -14,6 +14,7 @@ import lombok.experimental.Accessors;
  * @author lingwh
  * @since 2025-02-27
  */
+@AllArgsConstructor
 @Builder
 @Data
 @TableName("t_employee")
@@ -34,10 +35,4 @@ public class Employee {
     @TableField("dept_no")
     private String deptNo;
 
-    public Employee(String lastName, String email, String gender, String deptNo) {
-        this.lastName = lastName;
-        this.email = email;
-        this.gender = gender;
-        this.deptNo = deptNo;
-    }
 }
