@@ -42,6 +42,7 @@
         <module>chapter-09-01-demo-restfulcrud</module>
         <module>chapter-04-02-mybatis-plus-mpg-generator</module>
         <module>chapter-04-03-mybatis-plus-mpg-test</module>
+        <module>chapter-04-04-mybatis-plus-crud</module>
     </modules>
 
     <properties>
@@ -49,7 +50,7 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.boot.version>2.7.6</spring.boot.version>
-        <mybatis-plus.version>3.5.10.1</mybatis-plus.version>
+        <mybatis-plus.version>3.5.10</mybatis-plus.version>
         <lombok.version>1.18.0</lombok.version>
         <mysql.connector.version>8.0.33</mysql.connector.version>
         <junit.version>8.0.33</junit.version>

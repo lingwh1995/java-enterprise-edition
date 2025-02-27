@@ -21,7 +21,7 @@ import java.util.Collections;
 public class MybatisPlusGeneratorTest {
     // 数据库连接字段配置
     private static final String URL = "jdbc:mysql://host.docker.internal:3306/javaee";
-    private static final String USER_NAME = "root";
+    private static final String USERNAME = "root";
     private static final String PASSWORD = "123456";
 
     // 包名和模块名
@@ -43,7 +43,7 @@ public class MybatisPlusGeneratorTest {
          * 1.数据库配置(设置数据源)
          */
         DataSourceConfig.Builder dataSourceConfigBuilder =
-                new DataSourceConfig.Builder(URL, USER_NAME, PASSWORD)
+                new DataSourceConfig.Builder(URL, USERNAME, PASSWORD)
                 .dbQuery(new MySqlQuery())
                 .typeConvert(new MySqlTypeConvert())
                 .keyWordsHandler(new MySqlKeyWordsHandler());
