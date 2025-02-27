@@ -14,8 +14,11 @@ public class MybatisPlusMpgTest {
     @Autowired
     private EmployeeController employeeController;
 
+    /**
+     * 测试使用MybatisPlus的代码生成器生成的代码
+     */
     @Test
-    public void testSelect() {
+    public void testMybatisPlusMpg() {
         List<Employee> employeeList = employeeController.getEmployeeList();
         employeeList.forEach(System.out::println);
     }

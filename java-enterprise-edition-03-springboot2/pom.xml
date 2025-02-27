@@ -42,7 +42,7 @@
         <module>chapter-09-01-demo-restfulcrud</module>
         <module>chapter-04-02-mybatis-plus-mpg-generator</module>
         <module>chapter-04-03-mybatis-plus-mpg-test</module>
-        <module>chapter-04-04-mybatis-plus-crud</module>
+        <module>chapter-04-04-mybatis-plus-persistence-interface</module>
     </modules>
 
     <properties>
