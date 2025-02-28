@@ -19,7 +19,7 @@ import java.util.List;
  * boolean updateBatchById(Collection<T> entityList, int batchSize);    // 根据ID 批量更新
  */
 @SpringBootTest
-public class MybatisPlusUpdateAndUpdateBatchTest {
+public class MybatisPlusUpdateTest {
 
     @Autowired
     private IEmployeeService employeeService;
@@ -69,10 +69,14 @@ public class MybatisPlusUpdateAndUpdateBatchTest {
      */
     @Test
     public void testUpdateByIdBatchWithOutBatchSize() {
-//        List<Employee> employeeList = Arrays.asList(
-//                new Employee(1, null, "new.email1@example.com"),
-//                new Employee(2, null, "new.email2@example.com")
-//        );
+        List<Employee> employeeList = Arrays.asList(
+                new Employee(1l,"张三三", "1111111111@qq.com", "男", "01"),
+                new Employee(2l,"李四四", "2222222222@qq.com", "女", "02"),
+                new Employee(3l,"王五五", "3333333333@qq.com", "男", "03"),
+                new Employee(4l,"赵六六", "44444444444@qq.com", "男", "03")
+        );
+        boolean isUpdateBatchById = employeeService.updateBatchById(employeeList);
+        System.out.println("isUpdateBatchById = " + isUpdateBatchById);
     }
 
     /**
@@ -81,6 +85,13 @@ public class MybatisPlusUpdateAndUpdateBatchTest {
      */
     @Test
     public void testUpdateByIdBatchWithBatchSize() {
-
+        List<Employee> employeeList = Arrays.asList(
+                new Employee(1l,"张三三", "1111111111@qq.com", "男", "01"),
+                new Employee(2l,"李四四", "2222222222@qq.com", "女", "02"),
+                new Employee(3l,"王五五", "3333333333@qq.com", "男", "03"),
+                new Employee(4l,"赵六六", "44444444444@qq.com", "男", "03")
+        );
+        boolean isUpdateBatchById = employeeService.updateBatchById(employeeList, 2);
+        System.out.println("isUpdateBatchById = " + isUpdateBatchById);
     }
 }
