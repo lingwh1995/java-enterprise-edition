@@ -29,6 +29,26 @@ public class MybatisPlusListTest {
     private IEmployeeService employeeService;
 
     /**
+     * 首先执行这个方法初始化数据库数据
+     */
+    @Test
+    public void init(){
+        //删除数据库中t_employee表中所有数据
+        boolean isRemove = employeeService.remove(new QueryWrapper<>());
+        System.out.println("isRemove = " + isRemove);
+
+        List<Employee> employeeList = Arrays.asList(
+                new Employee(1l,"张一", "1111111111@qq.com", "男", "01"),
+                new Employee(2l,"张二", "2222222222@qq.com", "女", "02"),
+                new Employee(3l,"张三", "3333333333@qq.com", "男", "03"),
+                new Employee(4l,"张四", "44444444444@qq.com", "男", "03")
+        );
+        //给数据库中插入测试数据
+        boolean isSaveBatch = employeeService.saveBatch(employeeList);
+        System.out.println("isSaveBatch = " + isSaveBatch);
+    }
+
+    /**
      * 测试查询所有
      * List<T> list();
      */
@@ -56,7 +76,7 @@ public class MybatisPlusListTest {
      */
     @Test
     public void testListByIds() {
-        List<Long> idList = Arrays.asList(1l, 2l, 3l);
+        List<Long> idList = Arrays.asList(1l, 2l, 3l, 4l);
         List<Employee> employeeList = employeeService.listByIds(idList);
         System.out.println("employeeList = " + employeeList);
     }

@@ -25,19 +25,23 @@ public class MybatisPlusGetTest {
     private IEmployeeService employeeService;
 
     /**
-     * 首先执行这个方法为数据库插入初始数据
+     * 首先执行这个方法初始化数据库数据
      */
     @Test
     public void init(){
-        //删除数据库中的无用数据
+        //删除数据库中t_employee表中所有数据
+        boolean isRemove = employeeService.remove(new QueryWrapper<>());
+        System.out.println("isRemove = " + isRemove);
+
         List<Employee> employeeList = Arrays.asList(
-                new Employee(1l,"张三", "1111111111@qq.com", "男", "01"),
-                new Employee(2l,"李四", "2222222222@qq.com", "女", "02"),
-                new Employee(3l,"王五", "3333333333@qq.com", "男", "03"),
-                new Employee(4l,"赵六", "44444444444@qq.com", "男", "03")
+                new Employee(1l,"张一", "1111111111@qq.com", "男", "01"),
+                new Employee(2l,"张二", "2222222222@qq.com", "女", "02"),
+                new Employee(3l,"张三", "3333333333@qq.com", "男", "03"),
+                new Employee(4l,"张四", "44444444444@qq.com", "男", "03")
         );
         //给数据库中插入测试数据
-        employeeService.saveBatch(employeeList);
+        boolean isSaveBatch = employeeService.saveBatch(employeeList);
+        System.out.println("isSaveBatch = " + isSaveBatch);
     }
 
     /**
@@ -57,7 +61,7 @@ public class MybatisPlusGetTest {
     @Test
     public void testGetOneThrowException() {
         QueryWrapper<Employee> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("last_name","张三三");
+        queryWrapper.eq("last_name","张一");
         Employee employee = employeeService.getOne(queryWrapper);
         System.out.println("employee = " + employee);
     }
@@ -69,7 +73,7 @@ public class MybatisPlusGetTest {
     @Test
     public void testGetOneNotThrowException() {
         QueryWrapper<Employee> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("last_name","张三三");
+        queryWrapper.eq("last_name","张一");
         Employee employee = employeeService.getOne(queryWrapper,false);
         System.out.println("employee = " + employee);
     }
@@ -81,7 +85,7 @@ public class MybatisPlusGetTest {
     @Test
     public void testGetMap() {
         QueryWrapper<Employee> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("last_name","张三三");
+        queryWrapper.eq("last_name","张一");
         Map<String, Object> map = employeeService.getMap(queryWrapper);
         System.out.println("map = " + map);
     }
