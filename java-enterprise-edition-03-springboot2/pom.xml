@@ -43,6 +43,7 @@
         <module>chapter-04-02-mybatis-plus-mpg-generator</module>
         <module>chapter-04-03-mybatis-plus-mpg-test</module>
         <module>chapter-04-04-mybatis-plus-service-interface</module>
+        <module>chapter-04-05-mybatis-plus-mapper-interface</module>
     </modules>
 
     <properties>
