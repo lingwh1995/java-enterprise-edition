@@ -73,10 +73,10 @@ public class MybatisPlusSaveOrUpdateTest {
     @Test
     public void testSaveOrUpdateBatchWithoutSetBatchSize() {
         List<Employee> employeeList = Arrays.asList(
-                new Employee(1l,"张三", "1111111111@qq.com", "男", "01"),
-                new Employee(2l,"李四", "2222222222@qq.com", "女", "02"),
-                new Employee(3l,"王五", "3333333333@qq.com", "男", "03"),
-                new Employee(4l,"赵六", "44444444444@qq.com", "男", "03")
+                new Employee(1l,"张一", "1111111111@qq.com", "男", "01"),
+                new Employee(2l,"张二", "2222222222@qq.com", "女", "02"),
+                new Employee(3l,"张三", "3333333333@qq.com", "男", "03"),
+                new Employee(4l,"张四", "44444444444@qq.com", "男", "03")
         );
         boolean isSave = employeeService.saveOrUpdateBatch(employeeList);
         System.out.println(isSave);
@@ -89,10 +89,10 @@ public class MybatisPlusSaveOrUpdateTest {
     @Test
     public void testSaveOrUpdateBatchWithSetBatchSize() {
         List<Employee> employeeList = Arrays.asList(
-                new Employee(1l,"张三三", "1111111111@qq.com", "男", "01"),
-                new Employee(2l,"李四四", "2222222222@qq.com", "女", "02"),
-                new Employee(null,"王五五", "3333333333@qq.com", "男", "03"),
-                new Employee(null,"赵六六", "44444444444@qq.com", "男", "03")
+                new Employee(1l,"张一一", "1111111111@qq.com", "男", "01"),
+                new Employee(2l,"张二二", "2222222222@qq.com", "女", "02"),
+                new Employee(null,"张三三", "3333333333@qq.com", "男", "03"),
+                new Employee(null,"张四四", "44444444444@qq.com", "男", "03")
         );
         //设置批次大小为2
         boolean isSave = employeeService.saveOrUpdateBatch(employeeList,2);
