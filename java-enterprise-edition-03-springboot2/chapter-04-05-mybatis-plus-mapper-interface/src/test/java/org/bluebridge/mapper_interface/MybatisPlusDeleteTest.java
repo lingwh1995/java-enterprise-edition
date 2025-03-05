@@ -46,7 +46,7 @@ public class MybatisPlusDeleteTest {
     @Test
     public void testDelete() {
         QueryWrapper<Employee> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("last_name","张三");
+        queryWrapper.eq("last_name","张一");
         int delete = employeeMapper.delete(queryWrapper);
         System.out.println("delete = " + delete);
     }
@@ -90,7 +90,7 @@ public class MybatisPlusDeleteTest {
     @Test
     public void testDeleteByColumnMap() {
         Map<String, Object> columnMap = new HashMap<>();
-        columnMap.put("last_name","张三");
+        columnMap.put("last_name","张六");
         int i = employeeMapper.deleteByMap(columnMap);
         System.out.println("i = " + i);
     }
