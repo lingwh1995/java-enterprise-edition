@@ -1,0 +1,11 @@
+# DataSource Config
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://host.docker.internal:3306/javaee
+
+mybatis-plus:
+  configuration: # 配置日志实现为 STDOUT
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

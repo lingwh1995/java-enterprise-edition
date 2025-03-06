@@ -1,0 +1,38 @@
+Mapper 层选装件
+
+选装件是 Mybatis-Plus 提供的一些扩展方法，它们位于 com.baomidou.mybatisplus.extension.injector.methods 包下。这些方法需要配合Sql 注入器使用，以扩展 Mapper 接口的功能。
+
+使用这些选装件前，需要确保已经正确配置了 Sql 注入器。更多使用案例和详细信息，可以参考官方案例和源码注释。
+选装件说明
+alwaysUpdateSomeColumnById
+
+int alwaysUpdateSomeColumnById(T entity);
+
+源码：alwaysUpdateSomeColumnById
+功能：这个方法用于在更新操作时，无论实体对象的某些字段是否有变化，都会强制更新这些字段。这在某些业务场景下非常有用，比如更新时间戳字段，确保每次更新操作都会更新该字段。
+使用场景：当你需要在每次更新记录时，都更新某些特定的字段（如更新时间、版本号等），即使这些字段在实体对象中没有变化。
+
+insertBatchSomeColumn
+
+int insertBatchSomeColumn(List<T> entityList);
+
+源码：insertBatchSomeColumn
+功能：这个方法用于批量插入实体对象，但只插入实体对象中指定的某些字段。这在需要批量插入数据，但又不希望插入所有字段时非常有用。
+使用场景：当你需要批量插入数据，并且希望只插入实体对象中的部分字段，以提高插入效率或保护敏感数据。
+
+logicDeleteByIdWithFill
+
+int logicDeleteByIdWithFill(T entity);
+
+源码：logicDeleteByIdWithFill
+功能：这个方法用于逻辑删除记录，并填充实体对象中的某些字段。逻辑删除意味着不是真正从数据库中删除记录，而是通过更新某个字段（如 deleted 字段）来标记记录已被删除。
+使用场景：当你需要实现逻辑删除功能，并且希望在删除操作时自动填充实体对象中的某些字段（如删除时间、删除人等）。
+
+使用提示
+
+    在使用这些选装件之前，确保你的项目中已经正确配置了 Sql 注入器。
+    这些方法通常需要在 Mapper 接口中显式声明，以便 Mybatis-Plus 能够识别并生成相应的 SQL 语句。
+    每个选装件都有其特定的使用场景，根据业务需求选择合适的方法。
+    在实际使用中，可能需要结合实体对象的注解（如 @TableField、@TableLogic 等）来实现更复杂的功能。
+
+通过使用这些选装件，可以进一步扩展 Mybatis-Plus 的功能，满足更多样化的业务需求。
