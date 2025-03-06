@@ -16,6 +16,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 特别注意：
+ *      SimpleQuery相关api需要写mapper,否则会报错
+ */
+
+/**
  * List<A> list(LambdaQueryWrapper<E> wrapper, SFunction<E, A> sFunction, Consumer<E>... peeks);    // 查询表内记录，封装返回为 List<属性>
  * List<A> list(LambdaQueryWrapper<E> wrapper, SFunction<E, A> sFunction, boolean isParallel, Consumer<E>... peeks);    // 查询表内记录，封装返回为 List<属性>，考虑了并行流的情况
  *
