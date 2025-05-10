@@ -1,4 +1,4 @@
-package org.bulebridge.anno.service;
+package org.bluebridge.anno.service;
 
 import org.springframework.stereotype.Service;
 

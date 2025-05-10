@@ -1,4 +1,4 @@
-package org.bulebridge.profile.dao;
+package org.bluebridge.profile.dao;
 
 public interface CustomerDao {
     String save();

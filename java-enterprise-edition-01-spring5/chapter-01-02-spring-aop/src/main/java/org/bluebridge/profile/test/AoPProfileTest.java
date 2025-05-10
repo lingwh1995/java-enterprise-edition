@@ -1,6 +1,6 @@
-package org.bulebridge.profile.test;
+package org.bluebridge.profile.test;
 
-import org.bulebridge.profile.dao.CustomerDao;
+import org.bluebridge.profile.dao.CustomerDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -10,13 +10,13 @@ import javax.annotation.Resource;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext-aop-profile.xml")
-public class AopProfileTest {
+public class AoPProfileTest {
 
     @Resource(name="customerDao")
     private CustomerDao customerDao;
 
     @Test
-    public void run1(){
+    public void fun1(){
         customerDao.save();
     }
 
@@ -25,7 +25,7 @@ public class AopProfileTest {
      * @throws Exception
      */
     @Test
-    public void run2()  throws Exception{
+    public void fun2()  throws Exception{
         customerDao.aroundMethod();
     }
 
@@ -34,7 +34,7 @@ public class AopProfileTest {
      * @throws Exception
      */
     @Test
-    public void run3()  throws Exception{
+    public void fun3()  throws Exception{
         customerDao.testPointCut();
     }
 }

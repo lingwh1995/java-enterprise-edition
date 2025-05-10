@@ -4,25 +4,25 @@
        xsi:schemaLocation="
 				http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
-    <bean id="customerDao" class="org.bulebridge.profile.dao.CustomerDaoImpl"/>
-    <bean id="myAspectXml" class="org.bulebridge.profile.aspect.MyAspectXml"/>
+    <bean id="customerDao" class="org.bluebridge.profile.dao.CustomerDaoImpl"/>
+    <bean id="myAspectXml" class="org.bluebridge.profile.aspect.MyAspectXml"/>
     <aop:config>
         <!-- 引入切面类 -->
         <aop:aspect ref="myAspectXml">
             <!-- 定义通知类型：切面类的方法和切入点的表达式 -->
             <!--前置通知-->
-            <aop:before method="before" pointcut="execution(public * org.bulebridge.profile.dao.CustomerDaoImpl.save(..))"/>
+            <aop:before method="before" pointcut="execution(public * org.bluebridge.profile.dao.CustomerDaoImpl.save(..))"/>
             <!--后置通知-->
-            <aop:after method="after" pointcut="execution(public * org.bulebridge.profile.dao.CustomerDaoImpl.save(..))"/>
+            <aop:after method="after" pointcut="execution(public * org.bluebridge.profile.dao.CustomerDaoImpl.save(..))"/>
             <!--返回通知-->
-            <aop:after-returning method="afterReturning" returning="result" pointcut="execution(public * org.bulebridge.profile.dao.CustomerDaoImpl.save(..))"/>
+            <aop:after-returning method="afterReturning" returning="result" pointcut="execution(public * org.bluebridge.profile.dao.CustomerDaoImpl.save(..))"/>
             <!--异常通知-->
-            <aop:after-throwing throwing="e" method="afterThrowing" pointcut="execution(public * org.bulebridge.profile.dao.CustomerDaoImpl.save(..))"/>
+            <aop:after-throwing throwing="e" method="afterThrowing" pointcut="execution(public * org.bluebridge.profile.dao.CustomerDaoImpl.save(..))"/>
             <!--环绕通知-->
-            <aop:around method="around" pointcut="execution(public * org.bulebridge.profile.dao.CustomerDaoImpl.aroundMethod(..))"/>
+            <aop:around method="around" pointcut="execution(public * org.bluebridge.profile.dao.CustomerDaoImpl.aroundMethod(..))"/>
         </aop:aspect>
         <aop:aspect ref="myAspectXml">
-            <aop:pointcut expression="execution(public * org.bulebridge.profile.dao.CustomerDaoImpl.testPointCut(..))" id="logPointCut"/>
+            <aop:pointcut expression="execution(public * org.bluebridge.profile.dao.CustomerDaoImpl.testPointCut(..))" id="logPointCut"/>
             <aop:around method="around" pointcut-ref="logPointCut"/>
         </aop:aspect>
     </aop:config>

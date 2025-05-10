@@ -1,7 +1,7 @@
-package org.bulebridge.anno.test;
+package org.bluebridge.anno.test;
 
-import org.bulebridge.anno.dao.PersonDao;
-import org.bulebridge.anno.service.IUserService;
+import org.bluebridge.anno.dao.PersonDao;
+import org.bluebridge.anno.service.IUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext-aop-anno.xml")
-public class AopAnnoTest {
+public class AoPAnnoTest {
 
     @Resource(name="personDao")
     private PersonDao personDao;
@@ -23,7 +23,7 @@ public class AopAnnoTest {
      * 为接口生成代理
      */
     @Test
-    public void testGenerateProxyForInterface(){
+    public void fun1(){
         userService.eat();
     }
 
@@ -31,7 +31,7 @@ public class AopAnnoTest {
      * 为类生成代理
      */
     @Test
-    public void testGenerateProxyForClass(){
+    public void fun2(){
         personDao.save();
     }
 
