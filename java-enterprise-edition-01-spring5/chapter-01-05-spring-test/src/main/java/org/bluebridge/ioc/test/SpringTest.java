@@ -1,7 +1,7 @@
-package org.bluebridge.ioc.basic.test;
+package org.bluebridge.ioc.test;
 
 
-import org.bluebridge.ioc.basic.service.UserService;
+import org.bluebridge.ioc.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext-base.xml")
 public class SpringTest {
+
     @Resource(name="userService")
     private UserService userService;
 

@@ -1,0 +1,31 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+                    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--scope属性          &#45;&#45; scope属性代表Bean的作用范围-->
+    <!--* singleton         &#45;&#45; 单例（默认值）-->
+    <!--* prototype         &#45;&#45; 多例，在Spring框架整合Struts2框架的时候，Action类也需要交给Spring做管理，配置把Action类配置成多例！！-->
+    <!--* request           &#45;&#45; 应用在Web项目中,每次HTTP请求都会创建一个新的Bean-->
+    <!--* session           &#45;&#45; 应用在Web项目中,同一个HTTP Session 共享一个Bean-->
+    <!--* globalsession     &#45;&#45; 应用在Web项目中,多服务器间的session-->
+    <!-- Spring的快速入门 -->
+    <bean id="userService" class="org.bluebridge.ioc.service.UserServiceImpl" scope="singleton"/>
+
+    <!--构造方法注入-->
+    <bean id="car_constructor" class="org.bluebridge.ioc.domain.Car">
+        <constructor-arg name="name"  value="大奔"/>
+        <constructor-arg name="money" value="100"/>
+    </bean>
+
+    <!--构造方法注入-->
+    <bean id="car_constructor_index" class="org.bluebridge.ioc.domain.Car">
+        <constructor-arg  index="0" value="宝马"/>
+        <constructor-arg  index="1" value="200"/>
+    </bean>
+
+    <!--Setter注入-->
+    <bean id="dog_setter" class="org.bluebridge.ioc.domain.Dog">
+        <property name="name" value="博美"/>
+        <property name="money" value="150"/>
+    </bean>
+</beans>
