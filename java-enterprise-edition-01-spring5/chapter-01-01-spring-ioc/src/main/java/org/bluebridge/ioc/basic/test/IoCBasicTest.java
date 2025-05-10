@@ -13,7 +13,7 @@ public class IoCBasicTest {
         /**
          * ApplicationContext        -- 在加载applicationContext.xml时候就会创建具体的Bean对象的实例，还提供了一些其他的功能
          */
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext-base.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext-basic.xml");
         // 通过工厂获得类:
         UserService userService = (UserService) applicationContext.getBean("userService");
         userService.sayHello();

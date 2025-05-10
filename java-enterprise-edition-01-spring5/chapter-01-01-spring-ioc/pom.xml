@@ -18,6 +18,7 @@
     </properties>
 
     <dependencies>
+        <!-- spring开始 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -26,28 +27,27 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
-        <!-- @Resource注解用到这个 -->
+        <!-- spring结束 -->
+
+        <!-- @Resource注解开始 -->
         <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
         </dependency>
+        <!-- @Resource注解结束 -->
+
+        <!-- logback开始 -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <!-- logback结束 -->
+
+        <!-- junit开始 -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-
-        <!-- SLF4J 门面 -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>2.0.12</version>
-        </dependency>
-        <!-- Logback 实现 -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.5.3</version>
-        </dependency>
-
+        <!-- junit结束 -->
     </dependencies>
 </project>
