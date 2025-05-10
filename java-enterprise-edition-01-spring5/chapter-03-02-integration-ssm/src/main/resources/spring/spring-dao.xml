@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
 	<!--配置不扫描被@Controller和@ControllerAdvice标记的类-->
-	<context:component-scan base-package="com.dragonsoft.ssm.dao" use-default-filters="true">
+	<context:component-scan base-package="org.bluebridge.ssm.dao" use-default-filters="true">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller"/>
 		<context:exclude-filter type="annotation"
@@ -77,8 +77,8 @@
 		扫描所有的mapper接口的实现，让这些mapper能够自动注入；
 		base-package：指定mapper接口的包名
 	 -->
-	<mybatis-spring:scan base-package="com.dragonsoft.ssm.dao"/>
+	<mybatis-spring:scan base-package="org.bluebridge.ssm.dao"/>
 	<!-- <bean class="org.mybatis.mapper.spring.mybatis.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.dragonsoft.ioc.hellowrold.dao"></property>
+		<property name="basePackage" value="org.bluebridge.ioc.hellowrold.dao"></property>
 	</bean> -->
 </beans>

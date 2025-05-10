@@ -7,7 +7,7 @@
     <!-- 增强Servlet的过滤器 -->
     <filter>
         <filter-name>expandHttpServletFilter</filter-name>
-        <filter-class>com.dragonsoft.filter.ExpandHttpServletFilter</filter-class>
+        <filter-class>org.bluebridge.filter.ExpandHttpServletFilter</filter-class>
         <init-param>
             <param-name>encoding</param-name>
             <param-value>utf-8</param-value>

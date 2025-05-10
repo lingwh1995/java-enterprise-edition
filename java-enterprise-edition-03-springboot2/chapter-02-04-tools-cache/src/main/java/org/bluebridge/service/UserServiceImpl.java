@@ -88,7 +88,7 @@ public class UserServiceImpl implements IUserService {
      *          key="#user.id"
      * 注意:
      *      此处遇到一个bug
-     *          java.lang.ClassCastException: java.lang.Integer cannot be cast to com.dragonsoft.domain.User
+     *          java.lang.ClassCastException: java.lang.Integer cannot be cast to org.bluebridge.domain.User
      *      解决方式1:
      *          Service层写法:返回值为User类型数据
      *              public User updateUser(User user) {}

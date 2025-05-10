@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dragonsoft.bigdata.domain.EmployeeMapper">
-	<select id="addEmp" resultType="com.dragonsoft.bigdata.domain.Employee">
-		INSERT INTO EMP(ENAME,JOB,HIREDATE,SAL,COMM,DEPTNO) VALUES (#{ename},#{job},#{hireDate},#{sal},#{comm},#{deptNo})
-	</select>
-</mapper>

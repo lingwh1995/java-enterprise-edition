@@ -28,7 +28,7 @@
         <appender-ref ref="file" />
     </root>
 
-    <logger name="com.dragonsoft" additivity="false">
+    <logger name="org.bluebridge" additivity="false">
         <appender-ref ref="console"/>
         <appender-ref ref="file" />
     </logger>

@@ -46,7 +46,7 @@
         <!-- 2、package:为某个包下的所有类批量起别名
                 name：指定包名（为当前包以及下面所有的后代包的每一个类都起一个默认别名（类名小写），）
         -->
-<!--        <typeAlias type="com.dragonsoft.interfacemapper.domain.Employee" alias="employeeX"/>-->
+<!--        <typeAlias type="org.bluebridge.interfacemapper.domain.Employee" alias="employeeX"/>-->
     </typeAliases>
     <!--配置多环境:测试/生产-->
 

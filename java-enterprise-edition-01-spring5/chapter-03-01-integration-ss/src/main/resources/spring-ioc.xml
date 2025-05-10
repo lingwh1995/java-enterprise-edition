@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
 	<!--配置不扫描被@Controller和@ControllerAdvice标记的类-->
-	<context:component-scan base-package="com.dragonsoft" use-default-filters="true">
+	<context:component-scan base-package="org.bluebridge" use-default-filters="true">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller"/>
 		<context:exclude-filter type="annotation"
@@ -19,7 +19,6 @@
 		<property name="prefix" value="/views/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
-
 	<!--Spring把porperties文件加入到IOC容器中:方式1-->
 	<!--<context:property-placeholder location="classpath:application.properties" file-encoding="UTF-8"/>-->
 
@@ -36,5 +35,4 @@
 	</bean>
 
 	<!-- 配置数据源, 整合其他框架, 事务等. -->
-
 </beans>

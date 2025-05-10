@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.bluebridge.interfacemapper.dao.IEmployeeDao">
+	<!--
+	接口式编程:
+	namespace:指定接口的全类名
+	id：唯一标识
+	resultType：返回值类型
+	#{id}：从传递过来的参数中取出id值
+
+	public Employee getEmpById(Integer id);
+	<select id="getEmplyeeById" resultType="employeeX" databaseId="oracle">
+		SELECT ID,LAST_NAME LASTNAME,EMAIL,GENDER FROM TBL_EMPLOYEE WHERE ID = #{ID}
+	</select>
+
+	databaseId:mybatis移植性
+	比Oracle版本少查询一个GENDER字段
+	使用了类型别名
+	-->
+	<select id="getEmplyeeById" resultType="employeeX" databaseId="oracle">
+		SELECT ID,LAST_NAME LASTNAME,EMAIL,GENDER FROM TBL_EMPLOYEE WHERE ID = #{ID}
+	</select>
+
+	<select id="getEmplyeeLastNameById" resultType="java.lang.String" databaseId="oracle">
+		SELECT LAST_NAME LASTNAME FROM TBL_EMPLOYEE WHERE ID = #{ID}
+	</select>
+</mapper>

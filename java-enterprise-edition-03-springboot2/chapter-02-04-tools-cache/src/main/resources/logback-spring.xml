@@ -81,7 +81,7 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
 		表示当前logger的appender-ref和rootLogger的appender-ref都有效
     -->
     <!-- mybatis logger -->
-    <logger name="com.dragonsoft.dao" level="DEBUG" />
+    <logger name="org.bluebridge.dao" level="DEBUG" />
     <!-- Spring framework logger -->
     <logger name="org.springframework" level="debug" additivity="true"></logger>
 

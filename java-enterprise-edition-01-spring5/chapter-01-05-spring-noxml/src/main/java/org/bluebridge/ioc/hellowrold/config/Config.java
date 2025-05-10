@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
  * @author ronin
  */
 @Configuration
-//代表扫描的包的路径是:com.dragonsoft,并且扫描的时候根据注解过滤掉被@Controller和@Service的bean,也可以自定义扫描过滤规则
+//代表扫描的包的路径是: org.bluebridge,并且扫描的时候根据注解过滤掉被@Controller和@Service的bean,也可以自定义扫描过滤规则
 //根据注解类型来确定哪些类要被IOC容器管理
-@ComponentScan(value= "com.dragonsoft.ioc.hellowrold",
+@ComponentScan(value= "org.bluebridge.ioc.hellowrold",
         excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION,
                 classes = {Controller.class, Service.class})})
 //根据Class类型来确定哪些类要被IOC容器管理
-//@ComponentScan(value="com.dragonsoft.ioc.hellowrold",
+//@ComponentScan(value="org.bluebridge.ioc.hellowrold",
 //        includeFilters = {@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
 //                classes = {PersonDao.class, Person.class})},useDefaultFilters = false)
 public class Config {

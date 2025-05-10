@@ -36,7 +36,7 @@
 		use-default-filters="true":使用默认的过滤器,扫描@Controller、@ControllerAdvice、@Componment、等所有bean相关注解
 		use-default-filters="false":不使用默认的过滤器,配合<context:include-filter/>实现只扫描被@Controller和@ControllerAdvice标记的类
 	-->
-	<context:component-scan base-package="com.dragonsoft.ssm.controller" use-default-filters="false">
+	<context:component-scan base-package="org.bluebridge.ssm.controller" use-default-filters="false">
 		<context:include-filter type="annotation"
 								expression="org.springframework.stereotype.Controller"/>
 		<context:include-filter type="annotation"

@@ -3,10 +3,10 @@
  PUBLIC "-//mybatis.mapper.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.dragonsoft.ssm.dao.IEmpDao">
+<mapper namespace="org.bluebridge.ssm.dao.IEmpDao">
 
 	<!--根据id获取Emp：Oracle版 -->
-	<select id="getEmployeeById" parameterType="string" resultType="com.dragonsoft.ssm.domain.Emp" databaseId="oracle">
+	<select id="getEmployeeById" parameterType="string" resultType="org.bluebridge.ssm.domain.Emp" databaseId="oracle">
 		select id,lastname,email,gender  from emp where id = #{id}
 	</select>
 

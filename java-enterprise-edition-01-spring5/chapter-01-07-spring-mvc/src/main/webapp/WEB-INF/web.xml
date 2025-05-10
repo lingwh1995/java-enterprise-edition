@@ -12,7 +12,7 @@
 	<!-- 测试WarpperHttpServletRequest -->
 	<filter>
 		<filter-name>warpperHttpServletFilter</filter-name>
-		<filter-class>com.dragonsoft.example.filter.WarpperHttpServletFilter</filter-class>
+		<filter-class>org.bluebridge.example.filter.WarpperHttpServletFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>warpperHttpServletFilter</filter-name>
@@ -22,7 +22,7 @@
 	<!-- 增强Servlet的过滤器 -->
 	<filter>
 		<filter-name>expandHttpServletFilter</filter-name>
-		<filter-class>com.dragonsoft.example.filter.ExpandHttpServletFilter</filter-class>
+		<filter-class>org.bluebridge.example.filter.ExpandHttpServletFilter</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>utf-8</param-value>
@@ -78,7 +78,7 @@
 
 	<context-param>
 		<param-name>org.eclipse.jetty.servlet.jspPackagePrefix</param-name>
-		<param-value>com.dragonsoft</param-value>
+		<param-value>org.bluebridge</param-value>
 	</context-param>
 </web-app>
 

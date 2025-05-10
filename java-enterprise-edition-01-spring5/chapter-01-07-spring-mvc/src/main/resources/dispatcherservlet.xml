@@ -9,12 +9,12 @@
 ">
 	<!-- 配置自动扫描包 -->
 	<context:component-scan
-			base-package="com.dragonsoft.example.controller,
-						  com.dragonsoft.restfulcurd,
-						  com.dragonsoft.exception,
-						  com.dragonsoft.converter,
-						  com.dragonsoft.mvcsuperior,
-						  com.dragonsoft.springmvctest"/>
+			base-package="org.bluebridge.example.controller,
+						  org.bluebridge.restfulcurd,
+						  org.bluebridge.exception,
+						  org.bluebridge.converter,
+						  org.bluebridge.mvcsuperior,
+						  org.bluebridge.springmvctest"/>
 	<!-- 配置视图解析器 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/views/"></property>
@@ -39,7 +39,7 @@
 
 	<!-- 配置自定义的拦截器 -->
 	<mvc:interceptors>
-		<bean class="com.dragonsoft.interceptor.FirstInterceptor"></bean>
+		<bean class="org.bluebridge.interceptor.FirstInterceptor"></bean>
 		<!-- 配置拦截器作用和不作用的路径 -->
 		<mvc:interceptor>
 			<!-- 配置拦截器作用的路径 -->
@@ -47,7 +47,7 @@
 			<mvc:mapping path="/testInterceptor1" />
 			<!-- 配置拦截器不作用的路径 -->
 			<mvc:exclude-mapping path="/testInterceptor2"/>
-			<bean class="com.dragonsoft.interceptor.SecondInterceptor"></bean>
+			<bean class="org.bluebridge.interceptor.SecondInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 
@@ -58,8 +58,8 @@
 		  class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="converters">
 			<set>
-				<bean class="com.dragonsoft.converter.converter.DateConverter"/>
-				<bean class="com.dragonsoft.converter.converter.EmployeeConverter"/>
+				<bean class="org.bluebridge.converter.converter.DateConverter"/>
+				<bean class="org.bluebridge.converter.converter.EmployeeConverter"/>
 			</set>
 		</property>
 	</bean>
