@@ -35,16 +35,19 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+
+        <!-- SLF4J 门面 -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.30</version>
+            <version>2.0.12</version>
         </dependency>
-        <!-- Logback Classic Implementation -->
+        <!-- Logback 实现 -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
+            <version>1.5.3</version>
         </dependency>
+
     </dependencies>
 </project>
