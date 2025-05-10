@@ -1,4 +1,4 @@
-package com.dragonsoft.aop.anno.dao;
+package org.bulebridge.anno.dao;
 
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Repository;

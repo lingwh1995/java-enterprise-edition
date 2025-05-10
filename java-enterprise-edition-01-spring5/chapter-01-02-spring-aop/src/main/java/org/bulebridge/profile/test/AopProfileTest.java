@@ -1,6 +1,6 @@
-package com.dragonsoft.aop.profile.client;
+package org.bulebridge.profile.test;
 
-import com.dragonsoft.aop.profile.dao.CustomerDao;
+import org.bulebridge.profile.dao.CustomerDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -14,6 +14,7 @@ public class AopProfileTest {
 
     @Resource(name="customerDao")
     private CustomerDao customerDao;
+
     @Test
     public void run1(){
         customerDao.save();

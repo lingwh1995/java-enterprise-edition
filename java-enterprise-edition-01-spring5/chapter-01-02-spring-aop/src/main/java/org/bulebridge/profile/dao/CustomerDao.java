@@ -1,4 +1,4 @@
-package com.dragonsoft.aop.profile.dao;
+package org.bulebridge.profile.dao;
 
 public interface CustomerDao {
     String save();

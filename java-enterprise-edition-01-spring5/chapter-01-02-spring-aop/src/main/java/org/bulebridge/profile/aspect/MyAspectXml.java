@@ -1,4 +1,4 @@
-package com.dragonsoft.aop.profile.aspect;
+package org.bulebridge.profile.aspect;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -60,7 +60,7 @@ public class MyAspectXml {
     /**
      * 切入点
      */
-    @Pointcut(value="execution(public String com.dragonsoft.aop.anno.service.UserServiceImpl.eat())")
+    @Pointcut(value="execution(public String org.bulebridge.anno.service.UserServiceImpl.eat())")
     public void log(){
         System.out.println("记录日志...");
     }

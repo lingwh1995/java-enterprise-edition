@@ -1,4 +1,4 @@
-package com.dragonsoft.aop.profile.dao;
+package org.bulebridge.profile.dao;
 
 public class CustomerDaoImpl implements CustomerDao{
     public String save() {

@@ -1,7 +1,7 @@
-package com.dragonsoft.aop.anno.client;
+package org.bulebridge.anno.test;
 
-import com.dragonsoft.aop.anno.dao.PersonDao;
-import com.dragonsoft.aop.anno.service.IUserService;
+import org.bulebridge.anno.dao.PersonDao;
+import org.bulebridge.anno.service.IUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -23,7 +23,7 @@ public class AopAnnoTest {
      * 为接口生成代理
      */
     @Test
-    public void fun1(){
+    public void testGenerateProxyForInterface(){
         userService.eat();
     }
 
@@ -31,7 +31,7 @@ public class AopAnnoTest {
      * 为类生成代理
      */
     @Test
-    public void fun2(){
+    public void testGenerateProxyForClass(){
         personDao.save();
     }
 

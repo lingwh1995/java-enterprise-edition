@@ -1,4 +1,4 @@
-package com.dragonsoft.aop.anno.service;
+package org.bulebridge.anno.service;
 
 public interface IUserService {
     String eat();
