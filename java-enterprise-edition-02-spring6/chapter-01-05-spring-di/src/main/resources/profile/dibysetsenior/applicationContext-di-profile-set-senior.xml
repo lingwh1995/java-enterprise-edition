@@ -17,7 +17,7 @@
     </bean>
 
     <!-- 测试使用set方式为属性注入数组类型的值 -->
-    <bean id="userInjectArrayBySetter" class="org.bluebridge.profile.dibysetsenior.UserInjectArrayBySetter">
+    <bean id="userInjectArrayBySetter" class="org.bluebridge.profile.dibysetsenior.inject.UserInjectArrayBySetter">
         <!-- 注入数组：数组元素数据类型为非引用类型数据 -->
         <property name="hobbies">
             <array>
@@ -38,7 +38,7 @@
     </bean>
 
     <!-- 测试使用set方式为属性注入List类型的值 -->
-    <bean id="userInjectListBySetter" class="org.bluebridge.profile.dibysetsenior.UserInjectListBySetter">
+    <bean id="userInjectListBySetter" class="org.bluebridge.profile.dibysetsenior.inject.UserInjectListBySetter">
         <!-- 注入List集合：List集合元素数据类型为非引用类型数据 -->
         <property name="hobbies">
             <list>
@@ -59,7 +59,7 @@
     </bean>
 
     <!-- 测试使用set方式为属性注入Set类型的值 -->
-    <bean id="userInjectSetBySetter" class="org.bluebridge.profile.dibysetsenior.UserInjectSetBySetter">
+    <bean id="userInjectSetBySetter" class="org.bluebridge.profile.dibysetsenior.inject.UserInjectSetBySetter">
         <!-- 注入Set集合：Set集合元素数据类型为非引用类型数据，Set集合会自动去重 -->
         <property name="hobbies">
             <set>
@@ -81,7 +81,7 @@
     </bean>
 
     <!-- 测试使用set方式为属性注入Map类型的值 -->
-    <bean id="userInjectMapBySetter" class="org.bluebridge.profile.dibysetsenior.UserInjectMapBySetter">
+    <bean id="userInjectMapBySetter" class="org.bluebridge.profile.dibysetsenior.inject.UserInjectMapBySetter">
         <!-- 注入Map集合：Map集合key和value的数据类型为非引用类型数据 -->
         <property name="phones">
             <map>
@@ -105,7 +105,7 @@
     </bean>
 
     <!-- 测试使用set方式为属性注入Properties类型的值 -->
-    <bean id="userInjectPropertiesBySetter" class="org.bluebridge.profile.dibysetsenior.UserInjectPropertiesBySetter">
+    <bean id="userInjectPropertiesBySetter" class="org.bluebridge.profile.dibysetsenior.inject.UserInjectPropertiesBySetter">
         <!-- 注入Properties：Properties属性key和value的数据类型固定为String -->
         <property name="properties">
             <props>
@@ -118,7 +118,7 @@
     </bean>
 
     <!-- 测试使用set方式为属性注入NULL和空字符串的值 -->
-    <bean id="userInjectNULLAndEmptyStringBySetter" class="org.bluebridge.profile.dibysetsenior.UserInjectNULLAndEmptyStringBySetter">
+    <bean id="userInjectNULLAndEmptyStringBySetter" class="org.bluebridge.profile.dibysetsenior.inject.UserInjectNULLAndEmptyStringBySetter">
         <!-- 注入NULL方式一：自动注入NULL，只需要注释掉下面id属性配置代码即可 -->
         <!--<property name="id" value="001"/>-->
         <!-- 注入NULL方式二：手动注入NULL -->
@@ -135,7 +135,7 @@
     </bean>
 
     <!-- 注入特殊符号 -->
-    <bean id="mathInjectSpecialsymbolsBySetter" class="org.bluebridge.profile.dibysetsenior.MathInjectSpecialsymbolsBySetter">
+    <bean id="mathInjectSpecialsymbolsBySetter" class="org.bluebridge.profile.dibysetsenior.inject.MathInjectSpecialsymbolsBySetter">
         <!-- 使用转义符号代替 -->
         <property name="expressionLt" value="2 &lt; 3"/>
         <!-- 使用<![CDATA[]]>处理，注意：只能用value标签赋值，不能使用value属性赋值，<![CDATA[]]>是xml规范，不是Spring语法 -->

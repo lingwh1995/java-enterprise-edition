@@ -1,6 +1,5 @@
 package org.bluebridge.profile.introduceproperties;
 
-import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.io.PrintWriter;
@@ -13,7 +12,6 @@ import java.util.logging.Logger;
  * 使用 context:property-placeholder 引入外部的properties文件
  */
 public class MyDataSource4 implements DataSource {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(MyDataSource4.class);
 
     /**
      * 数据库连接需要的四个参数
@@ -46,10 +44,10 @@ public class MyDataSource4 implements DataSource {
 
     @Override
     public Connection getConnection() throws SQLException {
-        logger.info("driver:"+driver);
-        logger.info("username:"+username);
-        logger.info("password:"+password);
-        logger.info("url:"+url);
+        System.out.println("driver = " + driver);
+        System.out.println("username = " + username);
+        System.out.println("password = " + password);
+        System.out.println("url = " + url);
         return null;
     }
 

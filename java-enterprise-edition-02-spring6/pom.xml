@@ -76,6 +76,7 @@
         <spring.version>6.0.6</spring.version>
         <log4j.version>2.19.0</log4j.version>
         <junit.version>4.12</junit.version>
+        <jakarta.annotation-api.version>2.1.1</jakarta.annotation-api.version>
         <mysql-connector.version>8.0.33</mysql-connector.version>
         <ojdbc6.version>11.2.0.4</ojdbc6.version>
         <jackson.version>2.9.9</jackson.version>
@@ -87,7 +88,6 @@
 
         <dom4j.version>2.1.4</dom4j.version>
         <jaxen.version>2.0.0</jaxen.version>
-        <jakarta.annotation-api.version>2.1.1</jakarta.annotation-api.version>
         <druid.version>1.2.20</druid.version>
         <cglib.version>3.3.0</cglib.version>
         <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
@@ -140,6 +140,14 @@
                 <version>${junit.version}</version>
             </dependency>
             <!-- junit开始 -->
+
+            <!-- javax开始 -->
+            <dependency>
+                <groupId>jakarta.annotation</groupId>
+                <artifactId>jakarta.annotation-api</artifactId>
+                <version>${jakarta.annotation-api.version}</version>
+            </dependency>
+            <!-- javax结束 -->
 
             <!-- 数据库连接开始 -->
             <dependency>
@@ -208,11 +216,7 @@
                 <version>${jaxen.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>jakarta.annotation</groupId>
-                <artifactId>jakarta.annotation-api</artifactId>
-                <version>${jakarta.annotation-api.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>jakarta.servlet</groupId>
                 <artifactId>jakarta.servlet-api</artifactId>

@@ -1,6 +1,5 @@
 package org.bluebridge.profile.namespace.utilnamespace;
 
-import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.io.PrintWriter;
@@ -14,7 +13,6 @@ import java.util.logging.Logger;
  * 使用util命名空间实现spring配置文件的复用
  */
 public class MyDataSource2 implements DataSource {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(MyDataSource2.class);
 
     /**
      * 数据库连接需要的四个参数
@@ -27,7 +25,7 @@ public class MyDataSource2 implements DataSource {
 
     @Override
     public Connection getConnection() throws SQLException {
-        logger.info("linkinfo:"+properties.toString());
+        System.out.println("connection = " + properties.toString());
         return null;
     }
 

@@ -25,12 +25,12 @@
         </dependency>
         <!-- spring结束 -->
 
-        <!-- logback开始 -->
+        <!-- log4j开始 -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
         </dependency>
-        <!-- logback结束 -->
+        <!-- log4j结束 -->
 
         <!-- junit开始 -->
         <dependency>

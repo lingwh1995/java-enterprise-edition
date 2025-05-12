@@ -4,21 +4,21 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- 测试使用set方式为属性注入普通类型的值 -->
-    <bean id="userInjectValueBySetter" class="org.bluebridge.profile.base.UserInjectValueBySetter">
+    <bean id="userInjectValueBySetter" class="org.bluebridge.profile.base.bysetter.UserInjectValueBySetter">
         <property name="type" value="使用setter方式为属性注入非引用数据类型的值"/>
         <property name="name" value="zhangsan"/>
         <property name="age" value="18"/>
     </bean>
 
     <!-- 测试使用构造方式为属性注入非引用数据类型的值，使用name声明具体的属性 -->
-    <bean id="userInjectValueByConstructorParamName" class="org.bluebridge.profile.base.UserInjectValueByConstructor">
+    <bean id="userInjectValueByConstructorParamName" class="org.bluebridge.profile.base.constructor.UserInjectValueByConstructor">
         <constructor-arg name="type" value="使用构造方式注入非引用数据类型的值，使用name配置具体的属性"/>
         <constructor-arg name="name" value="lisi"/>
         <constructor-arg name="age" value="18"/>
     </bean>
 
     <!-- 测试使用构造方式为属性注入非引用数据类型的值，使用index声明具体的属性 -->
-    <bean id="userInjectValueByConstructorParamIndex" class="org.bluebridge.profile.base.UserInjectValueByConstructor">
+    <bean id="userInjectValueByConstructorParamIndex" class="org.bluebridge.profile.base.constructor.UserInjectValueByConstructor">
         <constructor-arg index="0" value="使用构造方式注入非引用数据类型的值，使用index配置具体的属性"/>
         <constructor-arg index="1" value="wangwu"/>
         <constructor-arg index="2" value="18"/>

@@ -1,7 +1,5 @@
 package org.bluebridge.profile.demo.datasource;
 
-import org.slf4j.LoggerFactory;
-
 import javax.sql.DataSource;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -13,7 +11,6 @@ import java.util.logging.Logger;
  * Set方式注入经典应用，getConnection()获取连接对象时需要用到的四个参数可以通过set方式注入来实现外部注入，从而分离参数与代码
  */
 public class MyDataSource1 implements DataSource {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(MyDataSource1.class);
 
     /**
      * 数据库连接需要的四个参数
@@ -46,10 +43,10 @@ public class MyDataSource1 implements DataSource {
 
     @Override
     public Connection getConnection() throws SQLException {
-        logger.info("driver:"+driver);
-        logger.info("username:"+username);
-        logger.info("password:"+password);
-        logger.info("url:"+url);
+        System.out.println("driver = " + driver);
+        System.out.println("username = " + username);
+        System.out.println("password = " + password);
+        System.out.println("url = " + url);
         return null;
     }
 

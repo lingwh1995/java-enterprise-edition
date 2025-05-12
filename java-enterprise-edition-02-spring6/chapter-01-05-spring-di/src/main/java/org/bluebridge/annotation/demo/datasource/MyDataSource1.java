@@ -1,6 +1,7 @@
 package org.bluebridge.annotation.demo.datasource;
 
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -9,11 +10,10 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
-import java.util.logging.Logger;
 
 @Component
 public class MyDataSource1 implements DataSource {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(MyDataSource1.class);
+    private static final Logger logger = LogManager.getLogger(MyDataSource1.class);
 
     /**
      * 数据库连接需要的四个参数
@@ -63,7 +63,7 @@ public class MyDataSource1 implements DataSource {
     }
 
     @Override
-    public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+    public java.util.logging.Logger getParentLogger() throws SQLFeatureNotSupportedException {
         return null;
     }
 
