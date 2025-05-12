@@ -60,13 +60,5 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
         <!-- 数据库连接结束 -->
-
-<!--        &lt;!&ndash; mybatis开始 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.mybatis</groupId>-->
-<!--            <artifactId>mybatis</artifactId>-->
-<!--            <version>${mybatis.version}</version>-->
-<!--        </dependency>-->
-<!--        -->
     </dependencies>
 </project>

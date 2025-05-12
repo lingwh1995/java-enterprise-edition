@@ -1,13 +1,16 @@
-package org.bluebridge.beanscope;
+package org.bluebridge.test;
 
-import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.bluebridge.beanscope.SpringBeanScopeDefault;
+import org.bluebridge.beanscope.SpringBeanScopePrototype;
+import org.bluebridge.beanscope.SpringBeanScopeSingleton;
+import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class SpringTest {
-    private static final Logger logger = LoggerFactory.getLogger(SpringTest.class);
+    private static final Logger logger = LogManager.getLogger(SpringTest.class);
 
     /**
      * 测试Spring容器默认情况下创建的bean是否为单例bean
@@ -24,6 +27,7 @@ public class SpringTest {
         logger.info(String.valueOf(springBeanScopeDefault2.hashCode()));
         logger.info(String.valueOf(springBeanScopeDefault1 == springBeanScopeDefault2));
     }
+
     /**
      * bean的scope为singleton
      *      1.bean是在Spring容器启动的时候创建的
@@ -39,6 +43,7 @@ public class SpringTest {
         logger.info(String.valueOf(springBeanScopeSingleton2.hashCode()));
         logger.info(String.valueOf(springBeanScopeSingleton2 == springBeanScopeSingleton2));
     }
+
     /**
      * bean的scope为prototype
      *      1.bean不是在Spring容器启动的时候创建的
