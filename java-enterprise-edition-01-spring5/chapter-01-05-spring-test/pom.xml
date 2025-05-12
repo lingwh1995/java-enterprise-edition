@@ -29,6 +29,13 @@
         </dependency>
         <!-- spring结束 -->
 
+        <!-- javax开始 -->
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+        </dependency>
+        <!-- javax结束 -->
+
         <!-- logback开始 -->
         <dependency>
             <groupId>ch.qos.logback</groupId>

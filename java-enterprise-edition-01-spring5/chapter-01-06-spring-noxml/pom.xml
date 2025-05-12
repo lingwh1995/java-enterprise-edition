@@ -40,6 +40,13 @@
         </dependency>
         <!-- @Resource注解结束 -->
 
+        <!-- javax开始 -->
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+        </dependency>
+        <!-- javax结束 -->
+
         <!-- logback开始 -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -54,10 +61,11 @@
         </dependency>
         <!-- junit结束 -->
 
+        <!-- 数据库开始 -->
         <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>1</version>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0</artifactId>
         </dependency>
+        <!-- 数据库结束 -->
     </dependencies>
 </project>

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 /**
  * @author ronin
  */
-public class Client {
+public class ImportTest {
 
     @Test
     public void fun1(){

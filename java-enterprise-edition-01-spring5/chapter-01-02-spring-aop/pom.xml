@@ -32,12 +32,12 @@
         </dependency>
         <!-- spring结束 -->
 
-        <!-- @Resource注解开始 -->
+        <!-- javax开始 -->
         <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
         </dependency>
-        <!-- @Resource注解结束 -->
+        <!-- javax结束 -->
 
         <!-- logback开始 -->
         <dependency>

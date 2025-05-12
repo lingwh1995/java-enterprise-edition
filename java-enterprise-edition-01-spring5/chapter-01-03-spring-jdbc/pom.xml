@@ -32,12 +32,12 @@
         </dependency>
         <!-- spring结束 -->
 
-        <!-- @Resource注解开始 -->
+        <!-- javax开始 -->
         <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
         </dependency>
-        <!-- @Resource注解结束 -->
+        <!-- javax结束 -->
 
         <!-- logback开始 -->
         <dependency>
@@ -53,18 +53,15 @@
         </dependency>
         <!-- junit结束 -->
 
-        <!-- c3p0开始 -->
+        <!-- 数据库开始 -->
         <dependency>
             <groupId>c3p0</groupId>
             <artifactId>c3p0</artifactId>
         </dependency>
-        <!-- c3p0结束 -->
-
-        <!-- mysql-connector -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <!-- mysql-connector -->
+        <!-- 数据库结束 -->
     </dependencies>
 </project>
