@@ -19,16 +19,16 @@
 	 -->
     <settings>
         <setting name="logImpl" value="STDOUT_LOGGING"/>
-        <!--配置日志实现SLF4J,引入logback包就可以，注意:下面配置是可以省略的-->
+        <!-- 配置日志实现SLF4J,引入logback包就可以，注意:下面配置是可以省略的 -->
         <!--<setting name="logImpl" value="SLF4J"/>-->
-        <!--开启驼峰命名-->
+        <!-- 开启驼峰命名 -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
-        <!--当数据库环境为Oracle时,将jdbcTye由OTHER设置为NULL-->
+        <!-- 当数据库环境为Oracle时,将jdbcTye由OTHER设置为NULL -->
         <setting name="jdbcTypeForNull" value="NULL"/>
         <!-- 关联查询时查询从表数据是否开启懒加载模式  -->
         <setting name="lazyLoadingEnabled" value="true"/>
         <setting name="aggressiveLazyLoading" value="false"/>
-        <!--开启二级缓存-->
+        <!-- 开启二级缓存 -->
         <setting name="cacheEnabled" value="true"/>
     </settings>
 

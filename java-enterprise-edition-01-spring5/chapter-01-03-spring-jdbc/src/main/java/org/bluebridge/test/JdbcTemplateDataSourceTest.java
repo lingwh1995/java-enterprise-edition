@@ -9,13 +9,14 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
  * 测试使用自己创建的数据源创建JdbcTemplate
  */
 public class JdbcTemplateDataSourceTest {
+
     private JdbcTemplate jdbcTemplate;
 
     @Before
     public void init(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://192.168.1.4:3306/javaee");
+        dataSource.setUrl("jdbc:mysql://host.docker.internal:3306/javaee");
         dataSource.setUsername("root");
         dataSource.setPassword("123456");
         // 创建JdbcTemplate
@@ -28,7 +29,7 @@ public class JdbcTemplateDataSourceTest {
     public void run1(){
         // 完成数据的添加
         try {
-            int update = jdbcTemplate.update("INSERT INTO T_ACCOUNT VALUES (?,?,?)", new Object[]{"001", "测试", 10000});
+            int update = jdbcTemplate.update("insert into t_account values (?,?,?)", new Object[]{"001", "测试", 10000});
             System.out.println("受影响的行数:"+update);
         }catch (Exception e){
             e.printStackTrace();

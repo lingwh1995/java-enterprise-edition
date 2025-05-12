@@ -25,48 +25,57 @@ public class JdbcSpringTest {
     @Resource(name="jdbcTemplate")
     private JdbcTemplate jdbcTemplate;
 
-    /**初始化数据*/
+    /**
+     * 初始化数据
+     */
     @Test
     public void init(){
-        jdbcTemplate.update("INSERT INTO T_ACCOUNT VALUES (?,?,?)", "001","张三",1);
-        jdbcTemplate.update("INSERT INTO T_ACCOUNT VALUES (?,?,?)", "002","李四",2);
-        jdbcTemplate.update("INSERT INTO T_ACCOUNT VALUES (?,?,?)", "003","张三",3);
-        jdbcTemplate.update("INSERT INTO T_ACCOUNT VALUES (?,?,?)", "004","王五",4);
-        jdbcTemplate.update("INSERT INTO T_ACCOUNT VALUES (?,?,?)", "005","赵六",5);
+        jdbcTemplate.update("insert into t_account values (?,?,?)", "001","张三",1);
+        jdbcTemplate.update("insert into t_account values (?,?,?)", "002","李四",2);
+        jdbcTemplate.update("insert into t_account values (?,?,?)", "003","张三",3);
+        jdbcTemplate.update("insert into t_account values (?,?,?)", "004","王五",4);
     }
 
-    /**插入操作*/
+    /**
+     * 插入操作
+     */
     @Test
     public void fun1(){
-        int i = jdbcTemplate.update("INSERT INTO T_ACCOUNT VALUES (?,?,?)", "006", "冠希", 10000);
+        int i = jdbcTemplate.update("insert into t_account values (?,?,?)", "005", "冠希", 10000);
         System.out.println("受影响的条数:" + i);
     }
 
-    /**修改操作*/
+    /**
+     * 修改操作
+     */
     @Test
     public void fun2(){
-        int i = jdbcTemplate.update("UPDATE T_ACCOUNT SET NAME=?,MONEY =? WHERE ID = ?", "思雨",20000,"001");
+        int i = jdbcTemplate.update("update t_account set name=?,money =? where id = ?", "思雨",20000,"001");
         System.out.println("受影响的条数:" + i);
     }
 
-    /**删除操作*/
+    /**
+     * 删除操作
+     */
     @Test
     public void fun3(){
-        int i = jdbcTemplate.update("DELETE FROM T_ACCOUNT WHERE ID = ?", "001");
+        int i = jdbcTemplate.update("delete from t_account where id = ?", "001");
         System.out.println("受影响的条数:" + i);
     }
 
-    /**查询一条记录*/
+    /**
+     * 查询一条记录
+     */
     @Test
     public void fun4(){
         System.out.println("---------------------------------------------------------");
-        Account accountByBeanMapper = jdbcTemplate.queryForObject("SELECT * FROM T_ACCOUNT WHERE ID = ?", new BeanMapper(), "002");
-        System.out.println("BeanMapper方式:"+accountByBeanMapper);
+        Account accountByBeanMapper = jdbcTemplate.queryForObject("select * from t_account where id = ?", new BeanMapper(), "002");
+        System.out.println("BeanMapper方式:" + accountByBeanMapper);
         System.out.println("---------------------------------------------------------");
         RowMapper<Account> accountRowMapper = new BeanPropertyRowMapper<>(Account.class);
-        Account accountByRowMapper = jdbcTemplate.queryForObject("SELECT * FROM T_ACCOUNT WHERE ID = ?", accountRowMapper, "002");
-        //Account accountByRowMapper = jdbcTemplate.queryForObject("SELECT * FROM T_ACCOUNT WHERE ID = ?", accountRowMapper, new Object[]{"002"});
-        System.out.println("RowMapper方式:"+accountByRowMapper);
+        Account accountByRowMapper = jdbcTemplate.queryForObject("select * from t_account where id = ?", accountRowMapper, "002");
+        //Account accountByRowMapper = jdbcTemplate.queryForObject("select * from t_account where id = ?", accountRowMapper, new Object[]{"002"});
+        System.out.println("RowMapper方式:" + accountByRowMapper);
         System.out.println("---------------------------------------------------------");
     }
 
@@ -75,7 +84,7 @@ public class JdbcSpringTest {
      */
     @Test
     public void fun5(){
-        List<Account> list = jdbcTemplate.query("SELECT * FROM T_ACCOUNT", new BeanMapper());
+        List<Account> list = jdbcTemplate.query("select * from t_account", new BeanMapper());
         for (Account account : list) {
             System.out.println(account);
         }
@@ -86,7 +95,7 @@ public class JdbcSpringTest {
      */
     @Test
     public void fun6(){
-        List<Map<String,String>> list = jdbcTemplate.query("SELECT * FROM T_ACCOUNT", new BeanMapperMap());
+        List<Map<String,String>> list = jdbcTemplate.query("select * from t_account", new BeanMapperMap());
         for (Map<String,String> map : list) {
             System.out.println(map);
         }
@@ -98,7 +107,7 @@ public class JdbcSpringTest {
      */
     @Test
     public void fun7(){
-        String sql = "SELECT NAME FROM T_ACCOUNT";
+        String sql = "select name from t_account";
         List<String> names = jdbcTemplate.query(sql, new SingleColumnRowMapper<String>());
         System.out.println(names);
     }
@@ -126,10 +135,10 @@ class BeanMapperMap implements RowMapper<Map<String,String>> {
     @Nullable
     @Override
     public Map<String, String> mapRow(ResultSet rs, int i) throws SQLException {
-        HashMap hashMap = new HashMap<String, String>();
-        hashMap.put("id",rs.getString("id"));
-        hashMap.put("money",rs.getString("money"));
-        hashMap.put("name",rs.getString("name"));
-        return hashMap;
+        Map rowMap = new HashMap<String, String>();
+        rowMap.put("id",rs.getString("id"));
+        rowMap.put("money",rs.getString("money"));
+        rowMap.put("name",rs.getString("name"));
+        return rowMap;
     }
 }

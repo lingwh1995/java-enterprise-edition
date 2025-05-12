@@ -12,7 +12,7 @@
     <Loggers>
         <!-- 配置根日志，设置日志级别和输出目标 -->
         <!--trace < debug < info < warn < error < fatal < off-->
-        <Root level="info">
+        <Root level="debug">
             <AppenderRef ref="Console"/>
         </Root>
     </Loggers>

@@ -18,14 +18,26 @@
     </properties>
 
     <dependencies>
+        <!-- spring开始 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
+        <!-- spring结束 -->
+
+        <!-- logback开始 -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
         </dependency>
+        <!-- logback结束 -->
+
+        <!-- junit开始 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <!-- junit开始 -->
     </dependencies>
 
 </project>

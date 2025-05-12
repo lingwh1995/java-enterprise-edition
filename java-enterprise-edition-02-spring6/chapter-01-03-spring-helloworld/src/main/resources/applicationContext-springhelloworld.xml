@@ -7,5 +7,5 @@
         id      bean的唯一标识
         class   bean所在的全路径名
     -->
-    <bean id="springHelloWorld" class="org.bluebridge.profile.domain.SpringHelloWorld"/>
+    <bean id="springHelloWorld" class="org.bluebridge.domain.SpringHelloWorld"/>
 </beans>

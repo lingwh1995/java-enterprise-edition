@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>chapter-01-04-spring-log4j</artifactId>
+    <artifactId>chapter-01-04-spring-log4j2</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -18,21 +18,25 @@
     </properties>
 
     <dependencies>
+        <!-- spring开始 -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-        </dependency>
+        <!-- spring结束 -->
+
+        <!-- logback开始 -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
         </dependency>
+        <!-- logback结束 -->
+
+        <!-- junit开始 -->
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j2-impl</artifactId>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
         </dependency>
+        <!-- junit开始 -->
     </dependencies>
 </project>

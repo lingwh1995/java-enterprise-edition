@@ -1,14 +1,16 @@
-package bluebridge.spring;
+package org.bluebridge.test;
 
-import org.bluebridge.profile.domain.User;
-import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.bluebridge.domain.User;
+import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class SpringTest {
-    private static final Logger logger = LoggerFactory.getLogger(SpringTest.class);
+
+    private static final  Logger logger = LogManager.getLogger(SpringTest.class);
+
     /**
      * 测试Spring 整合log4j2
      *  直接运行，控制台就已经可以出现debug级别的日志了

@@ -1,6 +1,6 @@
 use javaee;
-CREATE TABLE T_ACCOUNT(
-    ID VARCHAR(32) PRIMARY KEY,
-    NAME VARCHAR(20),
-    MONEY Double(10,2)
+create table t_account(
+    id varchar(32) primary key,
+    name varchar(20),
+    money double(10,2)
 );

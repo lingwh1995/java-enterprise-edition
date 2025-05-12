@@ -20,7 +20,7 @@
         <!--开启二级缓存-->
         <setting name="cacheEnabled" value="true"/>
         <!--指定日志实现-->
-        <setting name="logImpl" value="LOG4J"/>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
 
     <!-- 5、databaseIdProvider：支持多数据库厂商的；

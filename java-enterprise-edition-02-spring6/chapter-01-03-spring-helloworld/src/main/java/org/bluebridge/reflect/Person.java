@@ -1,4 +1,4 @@
-package org.bluebridge.profile.reflect;
+package org.bluebridge.reflect;
 
 public class Person {
     public Person() {

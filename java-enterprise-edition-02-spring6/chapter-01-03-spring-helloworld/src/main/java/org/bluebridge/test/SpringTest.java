@@ -1,10 +1,10 @@
-package org.bluebridge.profile.spring;
+package org.bluebridge.test;
 
-import org.bluebridge.profile.domain.Cat;
-import org.bluebridge.profile.domain.SpringHelloWorld;
-import org.bluebridge.profile.domain.User;
-import org.bluebridge.profile.reflect.Person;
-import org.junit.jupiter.api.Test;
+import org.bluebridge.domain.Cat;
+import org.bluebridge.domain.SpringHelloWorld;
+import org.bluebridge.domain.User;
+import org.bluebridge.reflect.Person;
+import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

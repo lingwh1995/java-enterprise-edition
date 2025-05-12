@@ -1,6 +1,7 @@
-package org.bluebridge.profile.reflect;
+package org.bluebridge.test;
 
-import org.junit.jupiter.api.Test;
+import org.bluebridge.reflect.Person;
+import org.junit.Test;
 
 public class ReflectTest {
 

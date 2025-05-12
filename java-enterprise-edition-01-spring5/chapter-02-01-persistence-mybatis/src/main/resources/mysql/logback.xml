@@ -9,16 +9,20 @@
         </encoder>
     </appender>
 
-    <!--mybatis log configure-->
-    <logger name="com.apache.ibatis" level="TRACE"/>
-    <logger name="java.sql.Connection" level="DEBUG"/>
-    <logger name="java.sql.Statement" level="DEBUG"/>
+    <!-- MyBatis 日志配置 -->
+    <logger name="org.apache.ibatis" level="DEBUG"/>
+    <!-- 打印SQL语句 -->
     <logger name="java.sql.PreparedStatement" level="DEBUG"/>
+    <!-- 打印ResultSet结果集 -->
+    <logger name="java.sql.ResultSet" level="DEBUG"/>
+    <!-- 打印数据库连接信息 -->
+    <logger name="java.sql.Connection" level="DEBUG"/>
+    <!-- 可以为具体的Mapper或类设置日志级别 -->
+    <logger name="org.bulebridge" level="DEBUG"/>
 
     <!-- 日志输出级别,logback日志级别包括五个：TRACE < DEBUG < INFO < WARN < ERROR -->
     <root level="DEBUG">
         <appender-ref ref="STDOUT"/>
-        <appender-ref ref="FILE"/>
     </root>
 
 </configuration>

@@ -32,11 +32,11 @@ public class BatchOperate {
      */
     @Test
     public void init(){
-        jdbcTemplate.update("INSERT INTO T_ACCOUNT VALUES (?,?,?)", "001","张三",10);
-        jdbcTemplate.update("INSERT INTO T_ACCOUNT VALUES (?,?,?)", "002","李四",20);
-        jdbcTemplate.update("INSERT INTO T_ACCOUNT VALUES (?,?,?)", "003","张三",30);
-        jdbcTemplate.update("INSERT INTO T_ACCOUNT VALUES (?,?,?)", "004","王五",40);
-        jdbcTemplate.update("INSERT INTO T_ACCOUNT VALUES (?,?,?)", "005","赵六",50);
+        jdbcTemplate.update("insert into t_account values (?,?,?)", "001","张三",10);
+        jdbcTemplate.update("insert into t_account values (?,?,?)", "002","李四",20);
+        jdbcTemplate.update("insert into t_account values (?,?,?)", "003","张三",30);
+        jdbcTemplate.update("insert into t_account values (?,?,?)", "004","王五",40);
+        jdbcTemplate.update("insert into t_account values (?,?,?)", "005","赵六",50);
     }
 
     /**
@@ -44,8 +44,8 @@ public class BatchOperate {
      */
     @Test
     public void fun1(){
-        String batchInsertSql1 = "INSERT INTO T_ACCOUNT VALUES ('001','测试批量操作',10)";
-        String batchInsertSql2 = "INSERT INTO T_ACCOUNT VALUES ('002','测试批量操作',10)";
+        String batchInsertSql1 = "insert into t_account values ('006','测试批量操作',10)";
+        String batchInsertSql2 = "insert into t_account values ('007','测试批量操作',10)";
         jdbcTemplate.batchUpdate(batchInsertSql1,batchInsertSql2);
     }
 
@@ -54,24 +54,23 @@ public class BatchOperate {
      */
     @Test
     public void fun2(){
-        String batchInsertSql = "INSERT INTO T_ACCOUNT(ID,NAME,MONEY) VALUES (?,?,?)";
-        List<Account> paramList = new ArrayList<Account>(){{
-            add(new Account("003", "zhangsan", 28.9));
-            add(new Account("004", "lisi", 68.0));
-            add(new Account("005", "wangwu", 58.2));
+        String batchInsertSql = "insert into t_account(id,name,money) values (?,?,?)";
+        List<Account> accountList = new ArrayList<Account>(){{
+            add(new Account("008", "赵八", 28.9));
+            add(new Account("009", "钱九", 68.0));
+            add(new Account("010", "孙十", 58.2));
         }};
 
         BatchPreparedStatementSetter bpss = new BatchPreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
-                preparedStatement.setString(1,paramList.get(i).getId());
-                preparedStatement.setString(2,paramList.get(i).getName());
-                preparedStatement.setDouble(3,paramList.get(i).getMoney());
+                preparedStatement.setString(1,accountList.get(i).getId());
+                preparedStatement.setString(2,accountList.get(i).getName());
+                preparedStatement.setDouble(3,accountList.get(i).getMoney());
             }
-
             @Override
             public int getBatchSize() {
-                return paramList.size();
+                return accountList.size();
             }
         };
         jdbcTemplate.batchUpdate(batchInsertSql,bpss);
@@ -82,33 +81,32 @@ public class BatchOperate {
      */
     @Test
     public void fun3(){
-        String batchInsertSql = "INSERT INTO T_ACCOUNT(ID,NAME,MONEY) VALUES (?,?,?)";
+        String batchInsertSql = "insert into t_account(id,name,money) values (?,?,?)";
         List<Account> paramList = new ArrayList<Account>(){{
-            add(new Account("006", "zhangsan", 28.9));
-            add(new Account("007", "lisi", 68.0));
-            add(new Account("008", "wangwu", 58.2));
+            add(new Account("011", "周十一", 28.9));
+            add(new Account("012", "吴十二", 68.0));
+            add(new Account("013", "郑十三", 58.2));
         }};
-
         jdbcTemplate.batchUpdate(batchInsertSql,new AccountBatchPreparedStatementSetter(paramList));
     }
 
     class AccountBatchPreparedStatementSetter implements BatchPreparedStatementSetter{
-        private final List<Account> accounts;
+        private final List<Account> accountList;
 
-        public AccountBatchPreparedStatementSetter(List<Account> accounts) {
-            this.accounts = accounts;
+        public AccountBatchPreparedStatementSetter(List<Account> accountList) {
+            this.accountList = accountList;
         }
 
         @Override
         public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
-                preparedStatement.setString(1,accounts.get(i).getId());
-                preparedStatement.setString(2,accounts.get(i).getName());
-                preparedStatement.setDouble(3,accounts.get(i).getMoney());
+                preparedStatement.setString(1,accountList.get(i).getId());
+                preparedStatement.setString(2,accountList.get(i).getName());
+                preparedStatement.setDouble(3,accountList.get(i).getMoney());
         }
 
         @Override
         public int getBatchSize() {
-            return accounts.size();
+            return accountList.size();
         }
     }
 }

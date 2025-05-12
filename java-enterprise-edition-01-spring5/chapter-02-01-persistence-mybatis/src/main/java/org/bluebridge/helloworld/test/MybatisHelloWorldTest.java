@@ -26,9 +26,9 @@ public class MybatisHelloWorldTest {
      * @throws IOException
      */
     private SqlSession getSqlSession() throws IOException {
-        /**1.加载配置文件*/
+        // 1.加载配置文件
         InputStream inputStream = Resources.getResourceAsStream( ENV + "/mybatis-config.xml");
-        /**2.获取SqlSession对象*/
+        // 2.获取SqlSession对象
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         return sqlSessionFactory.openSession();
     }

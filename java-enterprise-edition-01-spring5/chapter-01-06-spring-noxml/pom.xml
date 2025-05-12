@@ -61,11 +61,11 @@
         </dependency>
         <!-- junit结束 -->
 
-        <!-- 数据库开始 -->
+        <!-- 数据库连接开始 -->
         <dependency>
             <groupId>c3p0</groupId>
             <artifactId>c3p0</artifactId>
         </dependency>
-        <!-- 数据库结束 -->
+        <!-- 数据库连接结束 -->
     </dependencies>
 </project>

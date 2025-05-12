@@ -16,7 +16,7 @@
         <module>chapter-01-01-spring-ocp</module>
         <module>chapter-01-02-spring-structure</module>
         <module>chapter-01-03-spring-helloworld</module>
-        <module>chapter-01-04-spring-log4j</module>
+        <module>chapter-01-04-spring-log4j2</module>
         <module>chapter-01-05-spring-di</module>
         <module>chapter-01-06-spring-bean_scope</module>
         <module>chapter-01-07-spring-design_pattern</module>
@@ -74,39 +74,33 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>6.0.6</spring.version>
-        <junit.version>5.6.3</junit.version>
-        <junit4.version>4.13.2</junit4.version>
-        <log4j.version>2.20.0</log4j.version>
-        <log4j-slf4j.version>2.20.0</log4j-slf4j.version>
-        <log4j-slf4j2.version>2.20.0</log4j-slf4j2.version>
+        <log4j.version>2.19.0</log4j.version>
+        <junit.version>4.12</junit.version>
+        <mysql-connector.version>8.0.33</mysql-connector.version>
+        <ojdbc6.version>11.2.0.4</ojdbc6.version>
+        <jackson.version>2.9.9</jackson.version>
+        <commons-fileupload.version>1.5</commons-fileupload.version>
+        <commons-io.version>2.8.0</commons-io.version>
+        <mybatis.version>3.5.14</mybatis.version>
+
+
+
         <dom4j.version>2.1.4</dom4j.version>
         <jaxen.version>2.0.0</jaxen.version>
         <jakarta.annotation-api.version>2.1.1</jakarta.annotation-api.version>
         <druid.version>1.2.20</druid.version>
-        <mysql-connector.version>8.0.33</mysql-connector.version>
-        <ojdbc6.version>11.2.0.4</ojdbc6.version>
         <cglib.version>3.3.0</cglib.version>
         <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
         <thymeleaf.version>3.1.2.RELEASE</thymeleaf.version>
-        <jackson.version>2.16.0-rc1</jackson.version>
-        <jackson-dataformat-xml.version>2.16.0-rc1</jackson-dataformat-xml.version>
-        <commons-fileupload.version>1.5</commons-fileupload.version>
-        <commons-io.version>2.8.0</commons-io.version>
-        <mybatis.version>3.5.14</mybatis.version>
-        <logback.version>1.4.13</logback.version>
+        <log4j-slf4j2.version>2.20.0</log4j-slf4j2.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <!-- Spring框架开始 -->
+            <!-- spring开始 -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-aspects</artifactId>
                 <version>${spring.version}</version>
             </dependency>
             <dependency>
@@ -116,42 +110,92 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
                 <version>${spring.version}</version>
             </dependency>
-            <!-- Spring框架结束 -->
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter</artifactId>
-                <version>${junit.version}</version>
-            </dependency>
+            <!-- spring结束 -->
 
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit4.version}</version>
-            </dependency>
-            <!-- 日志框架开始 -->
+            <!-- log4j开始 -->
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-core</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
+            <!-- log4j结束 -->
 
-            <!--slf4j2实现-->
+            <!-- junit开始 -->
             <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-slf4j2-impl</artifactId>
-                <version>${log4j-slf4j2.version}</version>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
             </dependency>
+            <!-- junit开始 -->
 
+            <!-- 数据库连接开始 -->
             <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>${logback.version}</version>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector.version}</version>
             </dependency>
-            <!--日志框架结束-->
+            <dependency>
+                <groupId>com.oracle.database.jdbc</groupId>
+                <artifactId>ojdbc6</artifactId>
+                <version>${ojdbc6.version}</version>
+            </dependency>
+            <!-- 数据库连接结束 -->
 
+            <!-- json开始 -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <!-- json结束 -->
+
+            <!-- apache工具类开始 -->
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons-fileupload.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <!-- apache工具类结束 -->
+
+            <!-- mybatis开始 -->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <!-- mybatis结束 -->
+
+<!--            &lt;!&ndash; 日志框架开始 &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.apache.logging.log4j</groupId>-->
+<!--                <artifactId>log4j-slf4j2-impl</artifactId>-->
+<!--                <version>${log4j-slf4j2.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>ch.qos.logback</groupId>-->
+<!--                <artifactId>logback-classic</artifactId>-->
+<!--                <version>${logback.version}</version>-->
+<!--            </dependency>-->
+<!--            &lt;!&ndash;日志框架结束&ndash;&gt;-->
+            <!--
             <dependency>
                 <groupId>org.dom4j</groupId>
                 <artifactId>dom4j</artifactId>
@@ -163,71 +207,36 @@
                 <artifactId>jaxen</artifactId>
                 <version>${jaxen.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>jakarta.annotation</groupId>
                 <artifactId>jakarta.annotation-api</artifactId>
                 <version>${jakarta.annotation-api.version}</version>
             </dependency>
             <dependency>
+                <groupId>jakarta.servlet</groupId>
+                <artifactId>jakarta.servlet-api</artifactId>
+                <version>${jakarta.servlet-api.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
                 <version>${druid.version}</version>
             </dependency>
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql-connector.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.oracle.database.jdbc</groupId>
-                <artifactId>ojdbc6</artifactId>
-                <version>${ojdbc6.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-jdbc</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>cglib</groupId>
                 <artifactId>cglib</artifactId>
                 <version>${cglib.version}</version>
             </dependency>
-            <dependency>
-                <groupId>jakarta.servlet</groupId>
-                <artifactId>jakarta.servlet-api</artifactId>
-                <version>${jakarta.servlet-api.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>org.thymeleaf</groupId>
                 <artifactId>thymeleaf-spring6</artifactId>
                 <version>${thymeleaf.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>${jackson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.dataformat</groupId>
-                <artifactId>jackson-dataformat-xml</artifactId>
-                <version>${jackson-dataformat-xml.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-fileupload</groupId>
-                <artifactId>commons-fileupload</artifactId>
-                <version>${commons-fileupload.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>${commons-io.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis</artifactId>
-                <version>${mybatis.version}</version>
-            </dependency>
+            -->
         </dependencies>
     </dependencyManagement>
 </project>
