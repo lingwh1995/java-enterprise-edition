@@ -10,9 +10,11 @@
 	<bean id="userDao" class="org.bluebridge.ioc.profile.dao.UserDao">
 		<property name="user" ref="user"/>
 	</bean>
+
 	<bean id="userServiceImpl" class="org.bluebridge.ioc.profile.service.UserServiceImpl">
 		<property name="userDao" ref="userDao"/>
 	</bean>
+
 	<bean id="userController" class="org.bluebridge.ioc.profile.controller.UserController">
 		<property name="userServiceImpl" ref="userServiceImpl"/>
 	</bean>

@@ -5,7 +5,10 @@ import org.junit.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-public class DbcpTest {
+/**
+ * 测试使用自己创建的数据源创建JdbcTemplate
+ */
+public class JdbcTemplateDataSourceTest {
     private JdbcTemplate jdbcTemplate;
 
     @Before
@@ -30,6 +33,5 @@ public class DbcpTest {
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 }

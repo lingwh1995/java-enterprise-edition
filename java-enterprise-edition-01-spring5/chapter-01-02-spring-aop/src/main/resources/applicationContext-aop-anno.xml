@@ -8,4 +8,5 @@
     <context:component-scan base-package="org.bluebridge.anno"/>
     <!-- 开启自动代理-->
     <aop:aspectj-autoproxy />
+
 </beans>

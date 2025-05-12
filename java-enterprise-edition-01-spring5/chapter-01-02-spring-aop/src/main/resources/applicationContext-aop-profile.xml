@@ -4,6 +4,7 @@
        xsi:schemaLocation="
 				http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
     <bean id="customerDao" class="org.bluebridge.profile.dao.CustomerDaoImpl"/>
     <bean id="myAspectXml" class="org.bluebridge.profile.aspect.MyAspectXml"/>
     <aop:config>
@@ -26,7 +27,6 @@
             <aop:around method="around" pointcut-ref="logPointCut"/>
         </aop:aspect>
     </aop:config>
-
 
 </beans>
 

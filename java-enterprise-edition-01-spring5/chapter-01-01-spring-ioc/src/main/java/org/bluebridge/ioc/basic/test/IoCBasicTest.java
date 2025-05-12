@@ -8,32 +8,34 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class IoCBasicTest {
+
     @Test
     public void testIoCBasic() {
         /**
-         * ApplicationContext        -- 在加载applicationContext.xml时候就会创建具体的Bean对象的实例，还提供了一些其他的功能
+         * ApplicationContext  -- 在加载applicationContext.xml时候就会创建具体的Bean对象的实例，还提供了一些其他的功能
          */
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext-basic.xml");
-        // 通过工厂获得类:
+        // 通过工厂获得类
         UserService userService = (UserService) applicationContext.getBean("userService");
         userService.sayHello();
 
         /**
          * 构造方法注入
          */
-        Car carConstructor = (Car) applicationContext.getBean("car_constructor");
-        System.out.println(carConstructor);
+        Car carConstructorInject = (Car) applicationContext.getBean("carConstructorInject");
+        System.out.println(carConstructorInject);
 
         /**
          * 构造方法注入
          */
-        Car carConstructorIndex = (Car) applicationContext.getBean("car_constructor_index");
-        System.out.println(carConstructorIndex);
+        Car carConstructorIndexInject = (Car) applicationContext.getBean("carConstructorIndexInject");
+        System.out.println(carConstructorIndexInject);
 
         /**
          * Setter注入
          */
-        Dog dogSetter = (Dog) applicationContext.getBean("dog_setter");
-        System.out.println(dogSetter);
+        Dog dogSetterInject = (Dog) applicationContext.getBean("dogSetterInject");
+        System.out.println(dogSetterInject);
     }
+
 }

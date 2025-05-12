@@ -16,8 +16,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  *    
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:applicationContext-base.xml")
+@ContextConfiguration("classpath:applicationContext-ioc-anno.xml")
 public class IoCAnnoTest {
+
 	@Test
 	public void testIoCAnno(){
 		ClassPathXmlApplicationContext applicationContext = new
@@ -25,4 +26,5 @@ public class IoCAnnoTest {
 		CatController catController = applicationContext.getBean("catController", CatController.class);
 		catController.eat();
 	}
+
 }

@@ -16,8 +16,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  *    
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:applicationContext-base.xml")
+@ContextConfiguration("classpath:applicationContext-ioc-profile.xml")
 public class IoCProfileTest {
+
 	@Test
 	public void testIoCProfile(){
 		ClassPathXmlApplicationContext applicationContext = new
@@ -25,4 +26,5 @@ public class IoCProfileTest {
 		UserController controller = applicationContext.getBean("userController", UserController.class);
 		controller.say();
 	}
+
 }
