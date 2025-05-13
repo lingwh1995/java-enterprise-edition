@@ -1,4 +1,4 @@
-package org.bluebridge;
+package org.bluebridge.controller;
 
 import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Controller;

@@ -24,7 +24,6 @@
 	<mvc:view-controller path="/testMVCView-controller" view-name="success" />
 
 	<!--重定向-->
-
 	<!--<mvc:view-controller path="/" view-name="redirect:success"></mvc:view-controller>-->
 	<!-- springmvc处理静态资源 -->
 	<mvc:default-servlet-handler/>

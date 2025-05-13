@@ -1,4 +1,4 @@
-package org.bluebridge;
+package org.bluebridge.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;

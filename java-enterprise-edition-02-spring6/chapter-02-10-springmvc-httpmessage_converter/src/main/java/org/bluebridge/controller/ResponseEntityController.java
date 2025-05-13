@@ -1,4 +1,4 @@
-package org.bluebridge;
+package org.bluebridge.controller;
 
 import org.bluebridge.domain.User;
 import org.springframework.http.HttpStatus;

@@ -40,21 +40,21 @@
 <!--        </plugins>-->
 <!--    </build>-->
     <!--阿里云镜像地址:pom.xml版-->
-<!--    <repositories>-->
-<!--        <repository>-->
-<!--            <id>nexus-aliyun</id>-->
-<!--            <name>Nexus aliyun</name>-->
-<!--            <url>http://maven.aliyun.com/nexus/content/groups/public</url>-->
-<!--            <releases>-->
-<!--                <enabled>true</enabled>-->
-<!--            </releases>-->
-<!--            <snapshots>-->
-<!--                <enabled>true</enabled>-->
-<!--                <updatePolicy>always</updatePolicy>-->
-<!--                <checksumPolicy>fail</checksumPolicy>-->
-<!--            </snapshots>-->
-<!--        </repository>-->
-<!--    </repositories>-->
+    <repositories>
+        <repository>
+            <id>nexus-aliyun</id>
+            <name>Nexus aliyun</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <!-- 阿里云镜像地址Setting.xml版 -->
     <!--

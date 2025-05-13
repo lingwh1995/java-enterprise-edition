@@ -1,4 +1,4 @@
-package org.bluebridge;
+package org.bluebridge.controller;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
