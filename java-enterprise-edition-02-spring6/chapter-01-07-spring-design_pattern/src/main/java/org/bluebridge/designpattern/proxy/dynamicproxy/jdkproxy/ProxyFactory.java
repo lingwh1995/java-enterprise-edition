@@ -1,7 +1,8 @@
 package org.bluebridge.designpattern.proxy.dynamicproxy.jdkproxy;
 
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -9,7 +10,7 @@ import java.lang.reflect.Proxy;
 
 public class ProxyFactory {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProxyFactory.class);
+    private static final Logger logger = LogManager.getLogger(ProxyFactory.class);
 
     private Object target;
 

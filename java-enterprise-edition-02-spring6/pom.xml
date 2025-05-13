@@ -83,13 +83,13 @@
         <commons-fileupload.version>1.5</commons-fileupload.version>
         <commons-io.version>2.8.0</commons-io.version>
         <mybatis.version>3.5.14</mybatis.version>
-
+        <cglib.version>3.3.0</cglib.version>
 
 
         <dom4j.version>2.1.4</dom4j.version>
         <jaxen.version>2.0.0</jaxen.version>
         <druid.version>1.2.20</druid.version>
-        <cglib.version>3.3.0</cglib.version>
+
         <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
         <thymeleaf.version>3.1.2.RELEASE</thymeleaf.version>
         <log4j-slf4j2.version>2.20.0</log4j-slf4j2.version>
@@ -183,6 +183,14 @@
             </dependency>
             <!-- apache工具类结束 -->
 
+            <!-- cglib开始 -->
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${cglib.version}</version>
+            </dependency>
+            <!-- cglib结束 -->
+
             <!-- mybatis开始 -->
             <dependency>
                 <groupId>org.mybatis</groupId>
@@ -229,11 +237,6 @@
                 <version>${druid.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>cglib</groupId>
-                <artifactId>cglib</artifactId>
-                <version>${cglib.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>org.thymeleaf</groupId>

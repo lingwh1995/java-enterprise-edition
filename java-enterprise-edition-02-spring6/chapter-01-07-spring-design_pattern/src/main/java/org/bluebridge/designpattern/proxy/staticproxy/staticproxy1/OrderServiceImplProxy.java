@@ -1,11 +1,12 @@
 package org.bluebridge.designpattern.proxy.staticproxy.staticproxy1;
 
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class OrderServiceImplProxy implements IOrderService{
 
-    private static final Logger logger = LoggerFactory.getLogger(OrderServiceImplProxy.class);
+    private static final Logger logger = LogManager.getLogger(OrderServiceImplProxy.class);
 
     private IOrderService target;
 

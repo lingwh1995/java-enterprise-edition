@@ -1,14 +1,14 @@
 package org.bluebridge.designpattern.factory.factorymethod;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * 坦克类
  */
 public class Tank extends Weapon{
 
-    private static final Logger logger = LoggerFactory.getLogger(Tank.class);
+    private static final Logger logger = LogManager.getLogger(Tank.class);
 
     @Override
     public void attack() {

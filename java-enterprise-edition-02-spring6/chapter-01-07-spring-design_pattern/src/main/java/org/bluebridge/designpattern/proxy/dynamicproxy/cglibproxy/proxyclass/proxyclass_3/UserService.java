@@ -1,4 +1,4 @@
-package org.bluebridge.designpattern.proxy.dynamicproxy.cglibproxy.proxyclass;
+package org.bluebridge.designpattern.proxy.dynamicproxy.cglibproxy.proxyclass.proxyclass_3;
 
 
 public class UserService {

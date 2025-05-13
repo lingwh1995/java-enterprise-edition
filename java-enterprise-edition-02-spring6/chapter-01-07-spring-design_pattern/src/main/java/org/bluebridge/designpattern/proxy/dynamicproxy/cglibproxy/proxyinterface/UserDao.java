@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class UserDao {
 	//所有人员
-	static Map<String,User> users = new HashMap<>();
+	static Map<String, User> users = new HashMap<>();
 	
 	static {
 		users.put("001",new User("001", "张三", 18, "西安财经学院"));

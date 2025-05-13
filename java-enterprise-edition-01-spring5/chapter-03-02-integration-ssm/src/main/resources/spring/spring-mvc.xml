@@ -26,8 +26,8 @@
 	-->
 
 	<!--
-		SpringMVC 的 IOC 容器中的 bean 可以来引用 Spring IOC 容器中的 bean.
-		返回来呢 ? 反之则不行. Spring IOC 容器中的 bean 却不能来引用 SpringMVC IOC 容器中的 bean!
+		SpringMVC的IOC容器中的bean可以来引用Spring IOC容器中的bean.
+		反过来呢?反之则不行. Spring IOC容器中的bean却不能来引用SpringMVC IOC容器中的bean!
 	-->
 
 	<!-- 配置自动扫描包 -->

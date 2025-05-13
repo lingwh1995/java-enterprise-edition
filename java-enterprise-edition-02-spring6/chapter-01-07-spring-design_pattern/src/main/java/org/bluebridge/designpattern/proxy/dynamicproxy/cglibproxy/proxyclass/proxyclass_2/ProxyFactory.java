@@ -1,4 +1,4 @@
-package org.bluebridge.designpattern.proxy.dynamicproxy.cglibproxy.proxyinterface;
+package org.bluebridge.designpattern.proxy.dynamicproxy.cglibproxy.proxyclass.proxyclass_2;
 
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
@@ -8,9 +8,13 @@ import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.Method;
 
-public class ProxyFactory {
+public class ProxyFactory{
+
     private static final Logger logger = LogManager.getLogger(ProxyFactory.class);
 
+    /**
+     * 维护一个目标对象
+     */
     private Object target;
 
     public ProxyFactory(Object target) {
@@ -19,22 +23,26 @@ public class ProxyFactory {
 
     //返回代理对象
     public Object getProxyInstance(){
-        // 使用 CGLIB 代理 UserServiceImpl
+        // 1.创建一个工具类
         Enhancer enhancer = new Enhancer();
+        // 2.设置父类
         enhancer.setSuperclass(target.getClass());
-        enhancer.setCallback(new MethodInterceptor() {
-            @Override
-            public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
-                Object invokeResult;
-                beforeJdkInvoke();
-                invokeResult = proxy.invokeSuper(obj, args);
-                afterJdkInvoke();
-                return invokeResult;
+        // 3.设置回调函数
+        enhancer.setCallback(
+            new MethodInterceptor() {
+                @Override
+                public Object intercept(Object obj, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
+                    Object invoke= null;
+                    beforeJdkInvoke();
+                    invoke = method.invoke(target,args);
+                    afterJdkInvoke();
+                    return invoke;
+                }
             }
-        });
+        );
+        //4创建子类对象，即代理对象
         return enhancer.create();
     }
-
 
     /**
      * cglib动态代理调用目标方法之前执行的方法

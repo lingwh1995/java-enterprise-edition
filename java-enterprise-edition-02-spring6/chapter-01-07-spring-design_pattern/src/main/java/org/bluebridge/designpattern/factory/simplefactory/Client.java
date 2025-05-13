@@ -13,4 +13,5 @@ public class Client {
         Weapon dagger = WeaponFactory.getWeapon("Dagger");
         dagger.attack();
     }
+
 }

@@ -1,13 +1,12 @@
 package org.bluebridge.designpattern.proxy.dynamicproxy.jdkproxy;
 
 
-import org.junit.jupiter.api.Test;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Client {
 
-    private static final Logger logger = LoggerFactory.getLogger(Client.class);
+    private static final Logger logger = LogManager.getLogger(Client.class);
 
     public static void main(String[] args) {
         //1.创建目标对象

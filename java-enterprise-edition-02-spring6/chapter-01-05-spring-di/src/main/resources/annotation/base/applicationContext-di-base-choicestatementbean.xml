@@ -24,7 +24,6 @@
     -->
 
     <context:component-scan base-package="org.bluebridge.annotation.base.choicestatementbean" use-default-filters="true">
-        <!-- 如果放开下面注解则会报错 -->
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 </beans>

@@ -1,4 +1,4 @@
-package org.bluebridge.designpattern.proxy.dynamicproxy.cglibproxy.proxyclass;
+package org.bluebridge.designpattern.proxy.dynamicproxy.cglibproxy.proxyclass.proxyclass_3;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -20,6 +20,7 @@ public class UserDao {
 	}
 	
 	public void deleteById(String id) {
+		System.out.println("根据id = " + id + "删除用户......");
 		users.remove(id);
 	}
 	
