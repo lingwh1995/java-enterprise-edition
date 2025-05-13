@@ -1,14 +1,14 @@
 package org.bluebridge.beaninstantiation.factorymethod;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * 枪
  */
 public class Gun extends Weapon {
 
-    private static final Logger logger = LoggerFactory.getLogger(Gun.class);
+    private static final Logger logger = LogManager.getLogger(Gun.class);
 
     @Override
     public void attack() {
