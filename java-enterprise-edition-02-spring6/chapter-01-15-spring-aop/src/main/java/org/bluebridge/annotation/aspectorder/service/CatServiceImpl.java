@@ -1,13 +1,13 @@
 package org.bluebridge.annotation.aspectorder.service;
 
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 @Service("catService")
 public class CatServiceImpl implements ICatService{
 
-    private static final Logger logger = LoggerFactory.getLogger(CatServiceImpl.class);
+    private static final Logger logger = LogManager.getLogger(CatServiceImpl.class);
 
     @Override
     public void deleteCatById(String id) {

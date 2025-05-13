@@ -1,7 +1,7 @@
 package org.bluebridge.beanlifecycle.sevenstep;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Spring中Bean的生命周期七步：
@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  */
 public class SpringBeanLifeCycleSevenStep {
 
-    private static final Logger logger = LoggerFactory.getLogger(SpringBeanLifeCycleSevenStep.class);
+    private static final Logger logger = LogManager.getLogger(SpringBeanLifeCycleSevenStep.class);
 
     private String description;
 

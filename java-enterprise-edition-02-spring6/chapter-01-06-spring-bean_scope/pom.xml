@@ -37,6 +37,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-        <!-- junit开始 -->
+        <!-- junit结束 -->
     </dependencies>
 </project>

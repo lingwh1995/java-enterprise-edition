@@ -1,12 +1,12 @@
 package org.summerframework.core;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class ClassPathXmlApplicationContext implements BeanFactory{
 
-    private Logger logger = LoggerFactory.getLogger(ClassPathXmlApplicationContext.class);
+    private Logger logger = LogManager.getLogger(ClassPathXmlApplicationContext.class);
 
     //用于存放xml配置文件中解析出来的bean信息
     private Map<String,Object> singletonObject = new HashMap<>();

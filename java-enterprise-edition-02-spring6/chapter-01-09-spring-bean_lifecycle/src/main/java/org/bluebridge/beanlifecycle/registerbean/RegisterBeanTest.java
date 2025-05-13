@@ -1,7 +1,7 @@
 package org.bluebridge.beanlifecycle.registerbean;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 
 /**
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
  */
 public class RegisterBeanTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(RegisterBeanTest.class);
+    private static final Logger logger = LogManager.getLogger(RegisterBeanTest.class);
 
     public static void main(String[] args) {
         User user = new User();

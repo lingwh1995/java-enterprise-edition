@@ -1,13 +1,13 @@
 package org.bluebridge.profile.genericpointcut.aspect;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class AspectConfigByXmlUseAopAspectTag {
 
-    private static final Logger logger = LoggerFactory.getLogger(AspectConfigByXmlUseAopAspectTag.class);
+    private static final Logger logger = LogManager.getLogger(AspectConfigByXmlUseAopAspectTag.class);
 
     /**
      * 前置通知

@@ -1,14 +1,13 @@
 package org.bluebridge.profile.base.service;
 
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bluebridge.profile.base.dao.UserDao;
 import org.bluebridge.profile.base.domain.User;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 
 public class UserServiceImpl implements IUserService{
 
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
 
     private UserDao userDao;
 

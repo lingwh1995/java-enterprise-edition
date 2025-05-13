@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-    <bean id="user" class="org.bluebridge.domain.Employee">
+    <bean id="user" class="org.bluebridge.domain.User">
         <property name="name" value="zhangsan"/>
         <property name="age" value="18"/>
     </bean>
@@ -9,7 +9,7 @@
     <bean id="userService" class="org.bluebridge.service.UserService">
         <property name="userDao" ref="userDao"/>
     </bean>
-    <bean id="userController" class="org.bluebridge.UserController">
+    <bean id="userController" class="org.bluebridge.controller.UserController">
         <property name="userService" ref="userService"/>
     </bean>
 </beans>

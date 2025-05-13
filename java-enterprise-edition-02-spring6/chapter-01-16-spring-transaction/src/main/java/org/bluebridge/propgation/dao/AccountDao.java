@@ -1,7 +1,7 @@
 package org.bluebridge.propgation.dao;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class AccountDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(AccountDao.class);
+    private static final Logger logger = LogManager.getLogger(AccountDao.class);
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

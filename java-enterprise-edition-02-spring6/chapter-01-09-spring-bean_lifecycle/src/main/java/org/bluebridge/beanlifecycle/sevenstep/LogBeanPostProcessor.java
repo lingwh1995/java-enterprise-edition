@@ -1,7 +1,7 @@
 package org.bluebridge.beanlifecycle.sevenstep;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
  */
 public class LogBeanPostProcessor implements BeanPostProcessor {
 
-    private static final Logger logger = LoggerFactory.getLogger(LogBeanPostProcessor.class);
+    private static final Logger logger = LogManager.getLogger(LogBeanPostProcessor.class);
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {

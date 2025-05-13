@@ -1,15 +1,15 @@
 package org.bluebridge.annotation.base.dao;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bluebridge.annotation.base.domain.User;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 import org.springframework.stereotype.Repository;
 
 
 @Repository
 public class UserDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserDao.class);
+    private static final Logger logger = LogManager.getLogger(UserDao.class);
 
     public void addUser(User User) {
         logger.info("正在执行新增用户操作...");

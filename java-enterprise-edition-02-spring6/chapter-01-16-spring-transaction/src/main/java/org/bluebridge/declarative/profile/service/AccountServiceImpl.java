@@ -1,8 +1,8 @@
 package org.bluebridge.declarative.profile.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bluebridge.declarative.profile.dao.AccountDao;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service("accountService")
 public class AccountServiceImpl implements IAccountService {
 
-    private static final Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
+    private static final Logger logger = LogManager.getLogger(AccountServiceImpl.class);
 
     @Autowired
     private AccountDao accountDao;

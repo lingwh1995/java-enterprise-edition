@@ -1,10 +1,10 @@
 package org.bluebridge.annotation.aspectorder.aspect;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Order(2)
 public class AspectConfigByAnnotationOrder1 {
 
-    private static final Logger logger = LoggerFactory.getLogger(AspectConfigByAnnotationOrder1.class);
+    private static final Logger logger = LogManager.getLogger(AspectConfigByAnnotationOrder1.class);
 
     @Before("execution(public * org.bluebridge.annotation.aspectorder.service.CatServiceImpl.deleteCatById(..))")
     public void beforeAdvice(JoinPoint joinPoint) {

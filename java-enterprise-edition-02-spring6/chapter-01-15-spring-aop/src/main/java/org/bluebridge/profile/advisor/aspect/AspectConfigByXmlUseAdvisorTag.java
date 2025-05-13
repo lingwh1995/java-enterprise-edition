@@ -2,8 +2,8 @@ package org.bluebridge.profile.advisor.aspect;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.aop.ThrowsAdvice;
@@ -17,7 +17,7 @@ import java.lang.reflect.Method;
 public class AspectConfigByXmlUseAdvisorTag implements
         MethodBeforeAdvice, AfterReturningAdvice, MethodInterceptor, ThrowsAdvice {
 
-    private static final Logger logger = LoggerFactory.getLogger(AspectConfigByXmlUseAdvisorTag.class);
+    private static final Logger logger = LogManager.getLogger(AspectConfigByXmlUseAdvisorTag.class);
 
     /**
      * 前置通知

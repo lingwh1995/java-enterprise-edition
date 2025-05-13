@@ -17,7 +17,7 @@
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
         <property name="username" value="root"/>
         <property name="password" value="123456"/>
-        <property name="url" value="jdbc:mysql://192.168.0.4:3306/javaee"/>
+        <property name="url" value="jdbc:mysql://host.docker.internal:3306/javaee"/>
     </bean>
 
     <!--

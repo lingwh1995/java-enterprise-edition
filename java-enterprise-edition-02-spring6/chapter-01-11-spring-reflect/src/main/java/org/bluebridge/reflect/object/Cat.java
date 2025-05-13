@@ -1,11 +1,11 @@
 package org.bluebridge.reflect.object;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Cat {
 
-    private static final Logger logger = LoggerFactory.getLogger(Cat.class);
+    private static final Logger logger = LogManager.getLogger(Cat.class);
 
     private String id;
     private String name;

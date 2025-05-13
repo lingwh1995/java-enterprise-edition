@@ -1,9 +1,9 @@
 package org.bluebridge.profile.base.aspect;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 
 /**
  * 切面类  使用xml配置
@@ -11,7 +11,7 @@ import org.slf4j.Logger;
  */
 public class AspectConfigByXmlUseAopAspectTag {
 
-    private static final Logger logger = LoggerFactory.getLogger(AspectConfigByXmlUseAopAspectTag.class);
+    private static final Logger logger = LogManager.getLogger(AspectConfigByXmlUseAopAspectTag.class);
 
     /**
      * 前置通知

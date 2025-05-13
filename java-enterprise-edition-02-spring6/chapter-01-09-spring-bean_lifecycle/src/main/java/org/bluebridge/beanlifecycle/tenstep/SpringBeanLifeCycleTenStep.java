@@ -1,7 +1,7 @@
 package org.bluebridge.beanlifecycle.tenstep;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
 
@@ -17,7 +17,7 @@ import org.springframework.beans.factory.*;
  */
 public class SpringBeanLifeCycleTenStep implements BeanNameAware, BeanClassLoaderAware, BeanFactoryAware, InitializingBean, DisposableBean {
 
-    private static final Logger logger = LoggerFactory.getLogger(SpringBeanLifeCycleTenStep.class);
+    private static final Logger logger = LogManager.getLogger(SpringBeanLifeCycleTenStep.class);
 
     private String description;
 
