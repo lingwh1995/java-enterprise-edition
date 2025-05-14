@@ -23,6 +23,8 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jyaml.version>1.3</jyaml.version>
+        <snakeyaml.version>1.30</snakeyaml.version>
     </properties>
 
 <!--    <build>-->

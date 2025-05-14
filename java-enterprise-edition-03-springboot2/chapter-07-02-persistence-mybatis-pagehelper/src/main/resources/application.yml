@@ -12,7 +12,7 @@ spring:
     ansi:
       enabled: always
   logging:
-    config: classpath:logback-spring.xml
+    config: classpath:logback.xml
   datasource:
     #数据源基本配置
     driver-class-name: com.mysql.jdbc.Driver

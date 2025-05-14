@@ -39,12 +39,10 @@ public class Interceptor implements HandlerInterceptor {
      *      可以对请求域中的属性或视图做出修改
      *      执行时机:   org.springframework.web.servlet.DispatcherServlet.doDispatch()中
      *      具体位置:   mv = ha.handle()方法执行之后  mappedHandler.applyPostHandle(processedRequest, response, mv); 这一行代码中执行
-     * @param request current HTTP request
-     * @param response current HTTP response
-     * @param handler the handler (or {@link HandlerMethod}) that started asynchronous
-     * execution, for type and/or instance examination
-     * @param modelAndView the {@code ModelAndView} that the handler returned
-     * (can also be {@code null})
+     * @param request
+     * @param response
+     * @param handler
+     * @param modelAndView
      * @throws Exception
      */
     @Override
@@ -57,12 +55,10 @@ public class Interceptor implements HandlerInterceptor {
      * 在视图渲染完成之后执行，通常用来释放资源
      *      法执时机:   org.springframework.web.servlet.DispatcherServlet.processDispatchResult()中
      *      具体位置:   mappedHandler.triggerAfterCompletion(request, response, null);执行时调用
-     * @param request current HTTP request
-     * @param response current HTTP response
-     * @param handler the handler (or {@link HandlerMethod}) that started asynchronous
-     * execution, for type and/or instance examination
-     * @param ex any exception thrown on handler execution, if any; this does not
-     * include exceptions that have been handled through an exception resolver
+     * @param request
+     * @param response
+     * @param handler
+     * @param ex
      * @throws Exception
      */
     @Override

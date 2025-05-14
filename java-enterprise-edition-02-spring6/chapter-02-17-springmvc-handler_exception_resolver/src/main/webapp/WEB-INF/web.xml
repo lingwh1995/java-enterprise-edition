@@ -11,7 +11,8 @@
 		<!-- 配置SpringMVC使用的配置文件的位置和名称-->
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:annotation/springMVC-annotation.xml</param-value>
+<!--			<param-value>classpath:annotation/springMVC-annotation.xml</param-value>-->
+			<param-value>classpath:profile/springMVC-profile.xml</param-value>
 		</init-param>
 		<!-- 将SpringMVC前端控制器DispatcherServlet的初始化时机从第一次访问时提前到服务器启动时-->
 		<load-on-startup>1</load-on-startup>

@@ -12,8 +12,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class MyRedisReactiveHealthIndicator implements HealthIndicator {
+
     @Override
     public Health health() {
         return Health.down().withDetail("msg","Redis启动异常").build();
     }
+
 }

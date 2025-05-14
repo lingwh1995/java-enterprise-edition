@@ -18,4 +18,4 @@ spring:
       enabled: always
 
 #会打印自动配置信息
-debug: true
+debug: false

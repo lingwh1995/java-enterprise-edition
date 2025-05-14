@@ -8,7 +8,7 @@ spring:
   profiles:
     active: test
   logging:
-    config: classpath:logback-spring.xml
+    config: classpath:logback.xml
 #   数据源其他配置
 #   使用type来配置要选用的数据源,这里切换为druid
     type: com.alibaba.druid.pool.DruidDataSource

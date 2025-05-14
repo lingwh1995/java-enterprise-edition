@@ -14,9 +14,6 @@ public class IndexController {
 
     private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 
-    //访问    http://localhost:8080/      查看效果
-
-
     @RequestMapping("/")
     public String index() {
         logger.info("跳转到首页...");

@@ -12,3 +12,5 @@ spring:
     suffix: .ftl
 server:
   port: 8080
+
+debug: false

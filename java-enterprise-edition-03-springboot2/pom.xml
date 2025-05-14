@@ -18,7 +18,6 @@
         <module>chapter-01-04-basic-repository</module>
         <module>chapter-01-05-basic-configuration-processor</module>
         <module>chapter-01-06-basic-annotation-driven</module>
-        <module>chapter-01-07-basic-json-xml</module>
         <module>chapter-01-08-basic-read-configuration-file</module>
         <module>chapter-01-09-basic-read-yml-configuration-file</module>
         <module>chapter-02-01-tools-mail</module>
@@ -49,6 +48,7 @@
         <module>chapter-08-04-production-multiyply-environment</module>
         <module>chapter-08-05-production-package-to-war</module>
         <module>chapter-09-01-demo-restfulcrud</module>
+        <module>chapter-01-07-basic-json-xml</module>
     </modules>
 
     <properties>
@@ -60,10 +60,13 @@
         <mybatis-plus-generator.version>3.5.10</mybatis-plus-generator.version>
         <lombok.version>1.18.0</lombok.version>
         <mysql.connector.version>8.0.33</mysql.connector.version>
-        <junit.version>8.0.33</junit.version>
-        <junit.version>4.12</junit.version>
+        <ojdbc6.version>11.2.0.4</ojdbc6.version>
         <druid.version>1.1.10</druid.version>
-        <ojdbc6.version>11.2.0.3</ojdbc6.version>
+        <jackson-dataformat-xml.version>2.15.0</jackson-dataformat-xml.version>
+        <junit.version>4.12</junit.version>
+        <httpclient.version>4.5.6</httpclient.version>
+        <swagger.version>2.9.2</swagger.version>
+        <swagger-bootstrap-ui.version>1.9.1</swagger-bootstrap-ui.version>
     </properties>
 
     <dependencyManagement>
@@ -81,6 +84,11 @@
                 <version>${mybatis-plus.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus-generator.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
@@ -91,10 +99,9 @@
                 <version>${mysql.connector.version}</version>
             </dependency>
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
-                <scope>test</scope>
+                <groupId>com.oracle.database.jdbc</groupId>
+                <artifactId>ojdbc6</artifactId>
+                <version>${ojdbc6.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -102,14 +109,45 @@
                 <version>${druid.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.oracle</groupId>
-                <artifactId>ojdbc6</artifactId>
-                <version>${ojdbc6.version}</version>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-xml</artifactId>
+                <version>${jackson-dataformat-xml.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-generator</artifactId>
-                <version>${mybatis-plus-generator.version}</version>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jyaml</groupId>
+                <artifactId>jyaml</artifactId>
+                <version>${jyaml.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>${snakeyaml.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>swagger-bootstrap-ui</artifactId>
+                <version>${swagger-bootstrap-ui.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

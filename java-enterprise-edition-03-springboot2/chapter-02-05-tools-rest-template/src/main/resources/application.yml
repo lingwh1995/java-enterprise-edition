@@ -16,6 +16,8 @@ spring:
   output:
     ansi:
       enabled: always
-debug: true
+
+debug: false
+
 server:
   context-path: /rest

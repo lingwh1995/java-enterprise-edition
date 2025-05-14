@@ -6,3 +6,5 @@ spring:
     suffix: .html
     prefix: classpath:/templates/
     mode: HTML
+
+debug: false
