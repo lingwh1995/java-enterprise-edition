@@ -56,8 +56,9 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.boot.version>2.7.6</spring.boot.version>
+        <mybatis-spring-boot-starter.version>3.5.3</mybatis-spring-boot-starter.version>
         <mybatis-plus.version>3.5.3</mybatis-plus.version>
-        <mybatis-plus-generator.version>3.5.10</mybatis-plus-generator.version>
+        <mybatis-plus-generator.version>2.2.0</mybatis-plus-generator.version>
         <lombok.version>1.18.0</lombok.version>
         <mysql.connector.version>8.0.33</mysql.connector.version>
         <ojdbc6.version>11.2.0.4</ojdbc6.version>
@@ -77,6 +78,11 @@
                 <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-spring-boot-starter.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
