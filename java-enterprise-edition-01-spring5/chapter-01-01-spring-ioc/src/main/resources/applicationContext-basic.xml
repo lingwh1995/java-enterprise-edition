@@ -13,14 +13,14 @@
     <!-- Spring的快速入门 -->
     <bean id="userService" class="org.bluebridge.ioc.basic.service.UserServiceImpl" scope="singleton"/>
 
-    <!--构造方法注入-->
-    <bean id="carConstructorInject" class="org.bluebridge.ioc.basic.domain.Car">
+    <!--构造方法名称注入-->
+    <bean id="carConstructorArgNameInject" class="org.bluebridge.ioc.basic.domain.Car">
         <constructor-arg name="name"  value="大奔"/>
-        <constructor-arg name="money" value="100"/>
+        <constructor-arg name="price" value="100"/>
     </bean>
 
-    <!--构造方法注入-->
-    <bean id="carConstructorIndexInject" class="org.bluebridge.ioc.basic.domain.Car">
+    <!--构造方法索引注入-->
+    <bean id="carConstructorArgIndexInject" class="org.bluebridge.ioc.basic.domain.Car">
         <constructor-arg  index="0" value="宝马"/>
         <constructor-arg  index="1" value="200"/>
     </bean>
@@ -28,6 +28,6 @@
     <!--Setter注入-->
     <bean id="dogSetterInject" class="org.bluebridge.ioc.basic.domain.Dog">
         <property name="name" value="博美"/>
-        <property name="money" value="150"/>
+        <property name="price" value="150"/>
     </bean>
 </beans>

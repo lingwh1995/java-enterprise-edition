@@ -5,20 +5,23 @@ package org.bluebridge.ioc.basic.domain;
  */
 public class Car {
     private String name;
-    private double money;
+    private double price;
 
     /**
      * 构造方法注入时用到
      * @param name
-     * @param money
+     * @param price
      */
-    public Car(String name, double money) {
+    public Car(String name, double price) {
         this.name = name;
-        this.money = money;
+        this.price = price;
     }
 
     @Override
     public String toString() {
-        return "Car [name=" + name + ", money=" + money + "]";
+        return "Car{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

@@ -2,7 +2,7 @@ package org.bluebridge.ioc.basic.domain;
 
 public class Dog {
     private String name;
-    private double money;
+    private double price;
 
     /**
      * Setter注入时用到
@@ -14,14 +14,17 @@ public class Dog {
 
     /**
      * Setter注入时用到
-     * @param money
+     * @param price
      */
-    public void setMoney(double money) {
-        this.money = money;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     @Override
     public String toString() {
-        return "Car [name=" + name + ", money=" + money + "]";
+        return "Dog{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

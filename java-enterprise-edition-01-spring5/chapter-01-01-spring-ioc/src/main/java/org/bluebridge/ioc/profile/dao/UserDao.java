@@ -18,7 +18,7 @@ public class UserDao {
 	}
 
 	public void say(){
-		System.out.println("Hello!My Name Is "+user.getName());
+		System.out.println("Hello! My Name Is " + user.getName() + "!");
 	}
 }
 

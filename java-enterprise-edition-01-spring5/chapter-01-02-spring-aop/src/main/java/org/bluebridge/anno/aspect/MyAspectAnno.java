@@ -5,8 +5,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
-
-
 @Aspect
 @Component
 public class MyAspectAnno {
@@ -19,7 +17,8 @@ public class MyAspectAnno {
      */
     @Before(value="execution(public String org.bluebridge.anno.dao.PersonDao.save())")
     public void before(){
-        System.out.println("----------前置通知(before)----------");
+        System.out.println("----------前置通知(before)开始----------");
+        System.out.println("----------前置通知(before)结束----------");
     }
 
 
@@ -31,15 +30,21 @@ public class MyAspectAnno {
      */
     @Before(value="execution(public String org.bluebridge.anno.service.UserServiceImpl.eat())")
     public void before1(){
-        System.out.println("----------前置通知(before)----------");
+        System.out.println("----------前置通知(before)开始----------");
+        System.out.println("----------前置通知(before)结束----------");
     }
 
     /**
      * 后置通知
      */
     @After(value="execution(public String org.bluebridge.anno.service.UserServiceImpl.eat())")
-    public void after(){
-        System.out.println("----------后置通知(after)----------");
+    public void after(JoinPoint joinPoint){
+        System.out.println("----------后置通知(after)开始----------");
+        // 获取方法信息
+        String methodName = joinPoint.getSignature().getName();
+        System.out.println("methodName = " + methodName);
+        System.out.println("----------后置通知(after)结束----------");
+        System.out.println("----------后置通知(after)...----------");
     }
 
     /**
@@ -47,9 +52,12 @@ public class MyAspectAnno {
      */
     @AfterReturning(value="execution(public String org.bluebridge.anno.service.UserServiceImpl.eat())",returning = "result")
     public void afterReturning(JoinPoint joinPoint, Object result){
-        System.out.println("----------返回通知(afterReturning)...----------");
+        System.out.println("----------返回通知(afterReturning)开始----------");
+        // 获取方法信息
         String methodName = joinPoint.getSignature().getName();
-        System.out.println("The method " + methodName + " return with " + result);
+        System.out.println("methodName = " + methodName);
+        System.out.println("result = " + result);
+        System.out.println("----------返回通知(afterReturning)结束----------");
     }
 
     /**
@@ -60,6 +68,9 @@ public class MyAspectAnno {
         System.out.println("----------前环绕通知(around)----------");
         Object o = null;
         try {
+            // 获取方法信息
+            String methodName = proceedingJoinPoint.getSignature().getName();
+            System.out.println("methodName = " + methodName);
             o = proceedingJoinPoint.proceed();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
@@ -73,11 +84,13 @@ public class MyAspectAnno {
      */
     @AfterThrowing(value="execution(public String org.bluebridge.anno.service.UserServiceImpl.eat())",throwing="e")
     public void afterThrowing(JoinPoint joinPoint,Exception e){
-        System.out.println("----------异常通知(afterThrowing)----------");
+        System.out.println("----------异常通知(afterThrowing)开始----------");
+        // 获取方法信息
         String methodName = joinPoint.getSignature().getName();
-        System.out.println("(异常通知)The method " + methodName + " occurs exception: " +e);
+        System.out.println("methodName = " + methodName);
+        System.out.println("e = " + e);
+        System.out.println("----------异常通知(afterThrowing)结束----------");
     }
-
 
     /**
      * 切入点
@@ -92,7 +105,7 @@ public class MyAspectAnno {
      */
     @Before(value="org.bluebridge.anno.aspect.MyAspectAnno.log()")
     public void beforeUsePointCut(){
-        System.out.println("----------使用接入点的前置通知(beforeUsePointCut111111)----------");
+        System.out.println("----------使用切入点的前置通知(beforeUsePointCut)----------");
     }
 
 }

@@ -11,29 +11,22 @@ public class IoCBasicTest {
 
     @Test
     public void testIoCBasic() {
-        /**
-         * ApplicationContext  -- 在加载applicationContext.xml时候就会创建具体的Bean对象的实例，还提供了一些其他的功能
-         */
+        // 在加载applicationContext.xml时候就会创建具体的Bean对象的实例，还提供了一些其他的功能
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext-basic.xml");
         // 通过工厂获得类
-        UserService userService = (UserService) applicationContext.getBean("userService");
+//        UserService userService = (UserService) applicationContext.getBean("userService");
+        UserService userService = applicationContext.getBean("userService", UserService.class);
         userService.sayHello();
 
-        /**
-         * 构造方法注入
-         */
-        Car carConstructorInject = (Car) applicationContext.getBean("carConstructorInject");
+        // 构造方法名称注入
+        Car carConstructorInject = (Car) applicationContext.getBean("carConstructorArgNameInject");
         System.out.println(carConstructorInject);
 
-        /**
-         * 构造方法注入
-         */
-        Car carConstructorIndexInject = (Car) applicationContext.getBean("carConstructorIndexInject");
+        // 构造方法索引注入
+        Car carConstructorIndexInject = (Car) applicationContext.getBean("carConstructorArgIndexInject");
         System.out.println(carConstructorIndexInject);
 
-        /**
-         * Setter注入
-         */
+        // Setter注入
         Dog dogSetterInject = (Dog) applicationContext.getBean("dogSetterInject");
         System.out.println(dogSetterInject);
     }

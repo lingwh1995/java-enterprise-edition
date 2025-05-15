@@ -9,18 +9,19 @@ public class MyAspectXml {
      * 定义前置通知
      */
     public void before(){
-        System.out.println("----------前置通知(before)----------");
+        System.out.println("----------前置通知(before)开始----------");
+        System.out.println("----------前置通知(before)结束----------");
     }
 
     /**
      * 定义后置通知
      */
     public void after(JoinPoint joinPoint){
-        /**
-         * 获取方法信息
-         */
-//        String Name = joinPoint.getSignature().getName();
-//        System.out.println("The afterlogging  "+Name+" end");
+        System.out.println("----------后置通知(after)开始----------");
+        // 获取方法信息
+        String methodName = joinPoint.getSignature().getName();
+        System.out.println("methodName = " + methodName);
+        System.out.println("----------后置通知(after)结束----------");
         System.out.println("----------后置通知(after)...----------");
     }
 
@@ -28,19 +29,26 @@ public class MyAspectXml {
      * 返回通知
      */
     public void afterReturning(JoinPoint joinPoint, Object result){
-        System.out.println("----------返回通知(afterReturning)...----------");
+        System.out.println("----------返回通知(afterReturning)开始----------");
+        // 获取方法信息
         String methodName = joinPoint.getSignature().getName();
-        System.out.println("(返回通知)The method " + methodName + " return with " + result);
+        System.out.println("methodName = " + methodName);
+        System.out.println("result = " + result);
+        System.out.println("----------返回通知(afterReturning)结束----------");
     }
 
     /**
      * 异常通知
      */
     public void afterThrowing(JoinPoint joinPoint,Exception e) {
-        System.out.println("----------异常通知(afterThrowing)...----------");
+        System.out.println("----------异常通知(afterThrowing)开始----------");
+        // 获取方法信息
         String methodName = joinPoint.getSignature().getName();
-        System.out.println("(异常通知)The method " + methodName + " occurs exception: " +e);
+        System.out.println("methodName = " + methodName);
+        System.out.println("e = " + e);
+        System.out.println("----------异常通知(afterThrowing)结束----------");
     }
+
     /**
      * 环绕通知
      */
@@ -48,21 +56,15 @@ public class MyAspectXml {
         System.out.println("----------前环绕(前around)...----------");
         Object o = null;
         try {
+            // 获取方法信息
+            String methodName = proceedingJoinPoint.getSignature().getName();
+            System.out.println("methodName = " + methodName);
             o = proceedingJoinPoint.proceed();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
         System.out.println("----------后环绕(后around)...----------");
         return o;
-    }
-
-
-    /**
-     * 切入点
-     */
-    @Pointcut(value="execution(public String org.bluebridge.anno.service.UserServiceImpl.eat())")
-    public void log(){
-        System.out.println("记录日志...");
     }
 
 }
