@@ -85,7 +85,7 @@
         <mysql-connector.version>8.0.33</mysql-connector.version>
         <ojdbc6.version>11.2.0.4</ojdbc6.version>
         <druid.version>1.2.20</druid.version>
-        <jackson.version>2.15.0</jackson.version>
+        <jackson.version>2.16.0</jackson.version>
         <jackson-dataformat-xml.version>2.13.3</jackson-dataformat-xml.version>
         <commons-fileupload.version>1.5</commons-fileupload.version>
         <commons-io.version>2.8.0</commons-io.version>

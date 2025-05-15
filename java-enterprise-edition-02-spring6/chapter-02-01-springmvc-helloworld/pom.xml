@@ -57,12 +57,5 @@
             <artifactId>thymeleaf-spring6</artifactId>
         </dependency>
         <!-- javax结束 -->
-
-        <!-- json开始 -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-        <!-- json结束 -->
     </dependencies>
 </project>

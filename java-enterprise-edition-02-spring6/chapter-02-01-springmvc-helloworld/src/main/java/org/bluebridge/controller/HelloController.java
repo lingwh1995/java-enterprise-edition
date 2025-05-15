@@ -20,12 +20,9 @@ public class HelloController {
         return "index";
     }
 
-    @ResponseBody
     @RequestMapping("/hello")
-    public Map<String,String> toTarget() {
+    public String toTarget() {
         logger.info("跳转到hello页面...");
-        Map<String, String> map = new HashMap<>();
-        map.put("message","hello world");
-        return map;
+        return "hello";
     }
 }
