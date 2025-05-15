@@ -9,7 +9,7 @@
         type   写全类名和别名都可以（前提是写了别名）
         id      这个规则的唯一标识
     -->
-    <resultMap type="org.bluebridge.domain.Emp" id="getEmployeeByIdResultMap">
+    <resultMap type="org.bluebridge.domain.Employee" id="getEmployeeByIdResultMap">
         <!--指定主键列，使得框架优化规则 -->
         <id column="id" property="id"/>
         <!-- 指定普通列 -->
@@ -24,15 +24,13 @@
     </select>
 
 
-
-
     <!-- ResultMap案例二  使用ResultMap完成多表关联查询 -->
     <!--
         resultMap:对某个bean自定义映射规则
         type   写全类名和别名都可以（前提是写了别名）
         id      这个规则的唯一标识
     -->
-    <resultMap type="org.bluebridge.domain.Emp" id="getEmployeeAndDepartmentByIdResultMap">
+    <resultMap type="org.bluebridge.domain.Employee" id="getEmployeeAndDepartmentByIdResultMap">
         <!--规定主键列-->
         <id column="id" property="id"/>
         <result column="last_name" property="lastName"/>
