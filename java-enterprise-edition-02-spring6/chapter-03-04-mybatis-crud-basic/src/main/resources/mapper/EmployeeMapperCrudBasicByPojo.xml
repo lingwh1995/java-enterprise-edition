@@ -31,7 +31,7 @@
     </delete>
 
     <!--selectOne sql：查询一个Employee信息-->
-    <select id="selectOneEmployee" resultType="org.bluebridge.domain.Emp">
+    <select id="selectOneEmployee" resultType="org.bluebridge.domain.Employee">
         select
             *
         from
@@ -41,7 +41,7 @@
     </select>
 
     <!--selectList sql：查询多个Employee信息，特别注意：这里的查询多个Employee的resultType的类型和查询一个Employee的resultType的类型是一致的-->
-    <select id="selectEmployees" resultType="org.bluebridge.domain.Emp">
+    <select id="selectEmployees" resultType="org.bluebridge.domain.Employee">
         select
             *
         from
