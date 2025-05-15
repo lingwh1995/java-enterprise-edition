@@ -96,9 +96,7 @@ public class MyAspectAnno {
      * 切入点
      */
     @Pointcut(value="execution(public String org.bluebridge.anno.service.UserServiceImpl.eat())")
-    public void log(){
-        System.out.println("记录日志...使用切入点.....");
-    }
+    public void log(){}
 
     /**
      * 使用切入点的前置通知
