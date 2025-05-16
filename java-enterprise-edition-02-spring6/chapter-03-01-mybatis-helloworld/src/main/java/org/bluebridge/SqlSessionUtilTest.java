@@ -5,6 +5,7 @@ import org.bluebridge.utils.SqlSessionUtil;
 import org.junit.Test;
 
 public class SqlSessionUtilTest {
+
     @Test
     public void testMybatisHelloWorld() {
         SqlSession sqlSession = null;
@@ -24,4 +25,5 @@ public class SqlSessionUtilTest {
             }
         }
     }
+
 }

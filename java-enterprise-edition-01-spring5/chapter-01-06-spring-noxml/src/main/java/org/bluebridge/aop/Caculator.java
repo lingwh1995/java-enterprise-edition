@@ -6,7 +6,8 @@ package org.bluebridge.aop;
 public class Caculator {
 
     public int div(int i,int j){
-        int k = 1/0;
+        //int k = 1/0;
         return i/j;
     }
+
 }

@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.io.InputStream;
 
 public class MybatisHelloworldTest {
+
     private static final String ENV = "mysql";
 
     @Test
