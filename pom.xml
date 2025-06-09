@@ -15,8 +15,9 @@
         <module>java-enterprise-edition-03-springboot2</module>
         <module>java-enterprise-edition-04-source-code</module>
         <module>java-enterprise-edition-05-authority</module>
-        <module>java-enterprise-edition-06-workflow</module>
-        <module>java-enterprise-edition-07-bigdate</module>
+        <module>java-enterprise-edition-06-netty</module>
+        <module>java-enterprise-edition-07-workflow</module>
+        <module>java-enterprise-edition-08-bigdate</module>
     </modules>
 
     <properties>
