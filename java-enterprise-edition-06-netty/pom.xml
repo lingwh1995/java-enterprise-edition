@@ -25,40 +25,66 @@
         <guava.version>19.0</guava.version>
         <logback-classic.version>1.2.3</logback-classic.version>
         <protobuf-java.version>3.11.3</protobuf-java.version>
+        <junit4.version>4.12</junit4.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- netty开始 -->
             <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>
                 <version>${netty.version}</version>
             </dependency>
+            <!-- netty结束 -->
+
+            <!-- lombok开始 -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
             </dependency>
+            <!-- lombk结束 -->
+
+            <!-- gson开始 -->
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
                 <version>${gson.version}</version>
             </dependency>
+            <!-- gson结束 -->
+
+            <!-- guava开始 -->
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
+            <!-- guava结束 -->
+
+            <!-- logback开始 -->
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
                 <version>${logback-classic.version}</version>
             </dependency>
+            <!-- logback结束 -->
+
+            <!-- protobuf-java开始 -->
             <dependency>
                 <groupId>com.google.protobuf</groupId>
                 <artifactId>protobuf-java</artifactId>
                 <version>${protobuf-java.version}</version>
             </dependency>
+            <!-- protobuf-java结束 -->
+
+            <!-- junit开始 -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit4.version}</version>
+            </dependency>
+            <!-- junit结束 -->
         </dependencies>
     </dependencyManagement>
 </project>
