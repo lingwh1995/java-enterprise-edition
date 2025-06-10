@@ -32,11 +32,12 @@ public class FileChannelTest {
                 // 5.从buffer中读取数据
                 while (buffer.hasRemaining()) { // 检查缓冲区中是否还有剩余的数据
                     byte b = buffer.get(); // 每次读取一个字节
+                    System.out.println("position = " + buffer.position());
                     log.debug("读取到的数据：{}", (char)b);
                 }
                 // 6.一次循环后切换为写模式 [ 复位position limit指针（动不了实际数据） ]
-                buffer.clear();
-                //buffer.compact(); //从上次未读完的地方向前移动，并沿着未读完数据的最后一位往后写
+                //buffer.clear();
+                buffer.compact(); //从上次未读完的地方向前移动，并沿着未读完数据的最后一位往后写
             }
         }
     }
