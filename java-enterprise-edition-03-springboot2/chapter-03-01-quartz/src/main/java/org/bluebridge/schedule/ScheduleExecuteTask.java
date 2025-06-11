@@ -17,9 +17,16 @@ public class ScheduleExecuteTask {
      * cron表达式示例
      * @Scheduled(cron = "0 00 07 * * *")
      */
-    //每5秒执行一次
+    //每5秒执行一次：写法一
     @Scheduled(cron = "*/5 * * * * ?")
     public void configureTasks() {
         System.err.println("执行静态定时任务时间: " + LocalDateTime.now());
     }
+
+    /*
+    //每5秒执行一次：写法二
+    @Scheduled(fixedDelay = 1000 * 5)
+    public void configureTasks() {
+        System.err.println("执行静态定时任务时间: " + LocalDateTime.now());
+    }*/
 }
