@@ -4,6 +4,9 @@ import org.junit.Test;
 
 import java.nio.ByteBuffer;
 
+/**
+ * ByteBuffer分配空间的两种方式
+ */
 public class ByteBufferAllocateTest {
 
     @Test

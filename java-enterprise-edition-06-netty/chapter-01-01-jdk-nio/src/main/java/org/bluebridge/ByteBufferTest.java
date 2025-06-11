@@ -4,6 +4,9 @@ import org.junit.Test;
 
 import java.nio.ByteBuffer;
 
+/**
+ * ByteBuffer读写数据
+ */
 public class ByteBufferTest {
 
     @Test
@@ -42,4 +45,5 @@ public class ByteBufferTest {
         buffer.put(new byte[]{(byte)0x66, (byte)0x67, (byte)0x68});
         ByteBufferUtil.debugAll(buffer, 7);
     }
+
 }
