@@ -1,4 +1,4 @@
-package org.bluebridge;
+package org.bluebridge.chapter_01;
 
 import org.junit.Test;
 
@@ -7,7 +7,7 @@ import java.nio.ByteBuffer;
 /**
  * ByteBuffer分配空间的两种方式
  */
-public class ByteBufferAllocateTest {
+public class _04_ByteBufferAllocateTest {
 
     @Test
     public void testByteBufferAllocate() {

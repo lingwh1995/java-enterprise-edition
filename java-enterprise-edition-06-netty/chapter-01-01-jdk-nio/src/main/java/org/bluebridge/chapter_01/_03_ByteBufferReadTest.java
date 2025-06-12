@@ -1,5 +1,6 @@
-package org.bluebridge;
+package org.bluebridge.chapter_01;
 
+import org.bluebridge.ByteBufferUtil;
 import org.junit.Test;
 
 import java.nio.ByteBuffer;
@@ -9,7 +10,7 @@ import java.nio.ByteBuffer;
  *   rewind()  把position移动到0索引位置
  *   mark() & reset()   mark 做一个标记，记录position位置，reset是将position重置到mark位置
  */
-public class ByteBufferReadTest {
+public class _03_ByteBufferReadTest {
 
     @Test
     public void testByteBufferRead() {

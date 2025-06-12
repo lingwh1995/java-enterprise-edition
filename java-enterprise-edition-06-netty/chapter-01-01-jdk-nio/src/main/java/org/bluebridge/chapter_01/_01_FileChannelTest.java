@@ -1,4 +1,4 @@
-package org.bluebridge;
+package org.bluebridge.chapter_01;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -11,7 +11,7 @@ import java.nio.channels.FileChannel;
  * NIO使用FileChannel读取文件中的数据
  */
 @Slf4j
-public class FileChannelTest {
+public class _01_FileChannelTest {
 
     @Test
     public void testFileChannel() throws Exception {

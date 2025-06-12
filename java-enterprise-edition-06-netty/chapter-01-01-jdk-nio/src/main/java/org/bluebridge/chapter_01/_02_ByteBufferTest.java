@@ -1,5 +1,6 @@
-package org.bluebridge;
+package org.bluebridge.chapter_01;
 
+import org.bluebridge.ByteBufferUtil;
 import org.junit.Test;
 
 import java.nio.ByteBuffer;
@@ -7,7 +8,7 @@ import java.nio.ByteBuffer;
 /**
  * ByteBuffer读写数据
  */
-public class ByteBufferTest {
+public class _02_ByteBufferTest {
 
     @Test
     public void testByteBuffer() {

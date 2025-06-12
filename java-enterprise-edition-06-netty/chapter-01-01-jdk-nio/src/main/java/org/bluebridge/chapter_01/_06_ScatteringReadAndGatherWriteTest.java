@@ -1,0 +1,59 @@
+package org.bluebridge.chapter_01;
+
+import org.bluebridge.ByteBufferUtil;
+import org.junit.Test;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
+
+/**
+ * 分散读和集中写
+ */
+public class _06_ScatteringReadAndGatherWriteTest {
+
+    /**
+     * 集中读
+     */
+    @Test
+    public void testScatteringRead() {
+        try(FileChannel channel = new RandomAccessFile("read.txt", "r").getChannel()){
+            ByteBuffer buffer1 = ByteBuffer.allocate(3);
+            ByteBuffer buffer2 = ByteBuffer.allocate(3);
+            ByteBuffer buffer3 = ByteBuffer.allocate(5);
+            channel.read(new ByteBuffer[]{buffer1, buffer2, buffer3});
+            buffer1.flip();
+            buffer2.flip();
+            buffer3.flip();
+            ByteBufferUtil.debugAll(buffer1);
+            ByteBufferUtil.debugAll(buffer2);
+            ByteBufferUtil.debugAll(buffer3);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 分散写
+     */
+    @Test
+    public void testGatherWriteTest() {
+        ByteBuffer buffer1 = StandardCharsets.UTF_8.encode("hello");
+        ByteBuffer buffer2 = StandardCharsets.UTF_8.encode("world");
+        ByteBuffer buffer3 = StandardCharsets.UTF_8.encode("你好");
+
+        try(FileChannel channel = new RandomAccessFile("write.txt", "rw").getChannel()) {
+            channel.write(new ByteBuffer[]{buffer1, buffer2, buffer3});
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+}

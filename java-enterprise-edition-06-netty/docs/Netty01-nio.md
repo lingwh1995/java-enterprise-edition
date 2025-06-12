@@ -29,7 +29,7 @@ buffer 则用来缓冲读写数据，常见的 buffer 有
   * MappedByteBuffer
   * DirectByteBuffer
   * HeapByteBuffer
-* ShortBuffer
+* ShortBufferStickyPacket
 * IntBuffer
 * LongBuffer
 * FloatBuffer
