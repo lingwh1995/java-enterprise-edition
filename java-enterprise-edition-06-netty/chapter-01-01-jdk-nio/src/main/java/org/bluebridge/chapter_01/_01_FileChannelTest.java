@@ -16,7 +16,7 @@ public class _01_FileChannelTest {
     @Test
     public void testFileChannel() throws Exception {
         // 1.从输入流中获取channel
-        try(FileChannel channel = new FileInputStream("nio.txt").getChannel()) {
+        try(FileChannel channel = new FileInputStream("files/nio.txt").getChannel()) {
             // 2.创建一个大小为10字节的缓冲区
             ByteBuffer buffer = ByteBuffer.allocate(10);
             // 3.从channel中读取数据到，并写入到缓冲区

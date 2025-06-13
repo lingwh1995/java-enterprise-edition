@@ -20,7 +20,7 @@ public class _06_ScatteringReadAndGatherWriteTest {
      */
     @Test
     public void testScatteringRead() {
-        try(FileChannel channel = new RandomAccessFile("read.txt", "r").getChannel()){
+        try(FileChannel channel = new RandomAccessFile("files/read.txt", "r").getChannel()){
             ByteBuffer buffer1 = ByteBuffer.allocate(3);
             ByteBuffer buffer2 = ByteBuffer.allocate(3);
             ByteBuffer buffer3 = ByteBuffer.allocate(5);
@@ -47,7 +47,7 @@ public class _06_ScatteringReadAndGatherWriteTest {
         ByteBuffer buffer2 = StandardCharsets.UTF_8.encode("world");
         ByteBuffer buffer3 = StandardCharsets.UTF_8.encode("你好");
 
-        try(FileChannel channel = new RandomAccessFile("write.txt", "rw").getChannel()) {
+        try(FileChannel channel = new RandomAccessFile("files/write.txt", "rw").getChannel()) {
             channel.write(new ByteBuffer[]{buffer1, buffer2, buffer3});
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

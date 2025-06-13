@@ -21,4 +21,5 @@ public class _04_ByteBufferAllocateTest {
          */
         System.out.println(ByteBuffer.allocateDirect(10).getClass());
     }
+
 }
