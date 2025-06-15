@@ -6,9 +6,9 @@ import org.junit.Test;
 import java.nio.ByteBuffer;
 
 /**
- * 黏包和半包
+ * 处理黏包和半包
  */
-public class _07_StickyPacketAndHalfPacketTest {
+public class _08_StickyPacketAndHalfPacketTest {
     
     /**
      * 网络上有多条数据发送给服务端，数据之间使用 \n 进行分隔

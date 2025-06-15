@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * 分散读和集中写
  */
-public class _06_ScatteringReadAndGatherWriteTest {
+public class _07_ScatteringReadAndGatherWriteTest {
 
     /**
      * 集中读

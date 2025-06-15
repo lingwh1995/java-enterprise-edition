@@ -7,7 +7,7 @@ import java.nio.ByteBuffer;
 /**
  * ByteBuffer分配空间的两种方式
  */
-public class _04_ByteBufferAllocateTest {
+public class _05_ByteBufferAllocateTest {
 
     @Test
     public void testByteBufferAllocate() {

@@ -37,7 +37,7 @@ public class _02_ByteBufferTest {
 
         /**
          * 调用compact()方法后 =>
-         *  1.将缓冲区切换为读模式
+         *  1.将缓冲区切换为写模式
          *  2.position‌：移动到上次读取的末尾位置
          *  3.limit‌：设置为缓冲区的容量（capacity）
          */
@@ -45,6 +45,8 @@ public class _02_ByteBufferTest {
         ByteBufferUtil.debugAll(buffer, 6);
         buffer.put(new byte[]{(byte)0x66, (byte)0x67, (byte)0x68});
         ByteBufferUtil.debugAll(buffer, 7);
+        buffer.compact();
+        ByteBufferUtil.debugAll(buffer, 8);
     }
 
 }

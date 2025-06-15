@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * ByteBuffer和字符串互相转换
  */
-public class _05_ByteBufferAndStringTransferTest {
+public class _06_ByteBufferAndStringTransferTest {
 
     /**
      * 字符串转换为ByteBuffer
