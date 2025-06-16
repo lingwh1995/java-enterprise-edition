@@ -19,7 +19,7 @@ public class _09_FileChannelTransferToTest {
             // 获取文件大小
             long size = from.size();
             log.debug("文件大小：{}", size);
-            // 效率高，会使用系统底层零拷贝进行优化
+            // 效率高，会使用系统底层零拷贝进行优化，一次最多可以传输2G文件
             long currentTransferDataLength = from.transferTo(0, from.size(), to);
             System.out.println("本次传输的数据长度 = " + currentTransferDataLength + "byte");
         } catch (FileNotFoundException e) {
