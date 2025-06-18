@@ -1,4 +1,4 @@
-package org.bluebridge.chapter_01;
+package org.bluebridge.chapter_01_bytebuffer;
 
 import org.bluebridge.ByteBufferUtil;
 import org.junit.Test;
@@ -8,14 +8,17 @@ import java.nio.ByteBuffer;
 /**
  * ByteBuffer读写数据
  */
-public class _02_ByteBufferTest {
+public class _01_ByteBufferTest {
 
     @Test
     public void testByteBuffer() {
+        // 创建ByteBuffer
         ByteBuffer buffer = ByteBuffer.allocate(10);
         ByteBufferUtil.debugAll(buffer, 1);
+        // 给ByteBuffer中放入一个数据
         buffer.put((byte)0x61);// 'a'
         ByteBufferUtil.debugAll(buffer, 2);
+        // 给ByteBuffer中放入多个数据
         buffer.put(new byte[]{(byte)0x62, (byte)0x63, (byte)0x64, (byte)0x65});
         ByteBufferUtil.debugAll(buffer, 3);
 

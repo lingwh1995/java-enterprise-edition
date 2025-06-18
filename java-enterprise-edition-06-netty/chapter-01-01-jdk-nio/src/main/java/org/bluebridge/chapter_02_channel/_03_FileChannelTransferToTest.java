@@ -1,4 +1,4 @@
-package org.bluebridge.chapter_01;
+package org.bluebridge.chapter_02_channel;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -10,7 +10,7 @@ import java.nio.channels.FileChannel;
  * FileChannel的 transferTo() 方法测试
  */
 @Slf4j
-public class _09_FileChannelTransferToTest {
+public class _03_FileChannelTransferToTest {
 
     /**
      * 传输小于2G的数据
@@ -61,4 +61,5 @@ public class _09_FileChannelTransferToTest {
         long end = System.nanoTime();
         System.out.println("transferTo 用时：" + (end - start) / 1000_000_000.0 + "秒");
     }
+
 }

@@ -1,4 +1,4 @@
-package org.bluebridge.chapter_01;
+package org.bluebridge.chapter_01_bytebuffer;
 
 import org.bluebridge.ByteBufferUtil;
 import org.junit.Test;
@@ -8,8 +8,8 @@ import java.nio.ByteBuffer;
 /**
  * 处理黏包和半包
  */
-public class _08_StickyPacketAndHalfPacketTest {
-    
+public class _07_StickyPacketAndHalfPacketTest {
+
     /**
      * 网络上有多条数据发送给服务端，数据之间使用 \n 进行分隔
      * 但由于某种原因这些数据在接收时，被进行了重新组合，例如原始数据有3条为

@@ -1,4 +1,4 @@
-package org.bluebridge.chapter_01;
+package org.bluebridge.chapter_02_channel;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;

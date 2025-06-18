@@ -1,4 +1,4 @@
-package org.bluebridge.chapter_01;
+package org.bluebridge.chapter_01_bytebuffer;
 
 import org.bluebridge.ByteBufferUtil;
 import org.junit.Test;

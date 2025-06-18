@@ -1,4 +1,4 @@
-package org.bluebridge.chapter_01;
+package org.bluebridge.chapter_02_channel;
 
 import org.bluebridge.ByteBufferUtil;
 import org.junit.Test;
@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * 分散读和集中写
  */
-public class _07_ScatteringReadAndGatherWriteTest {
+public class _02_ScatteringReadAndGatherWriteTest {
 
     /**
      * 集中读

@@ -1,4 +1,4 @@
-package org.bluebridge.chapter_01;
+package org.bluebridge.chapter_03_jdk;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * JDK7 新增了 Files 类
  */
 @Slf4j
-public class _11_JDK7FilesTest {
+public class _02_JDK7FilesTest {
 
     /**
      * 测试JDK7 新增的 Files 类基础用法
@@ -161,21 +161,24 @@ public class _11_JDK7FilesTest {
     }
 
     /**
-     * // TODO 这个方法写的有问题，有时间了改正这个方法
      * 测试JDK7 新增的 Files 类拷贝多级目录
      */
     @Test
     public void testJDK7FilesCopyDirs() throws IOException {
         long start = System.currentTimeMillis();
-        Path sourceDir = Paths.get("files/d1");
-        Path targetDir = Paths.get("files/d11");
-        Files.walk(sourceDir).forEach(path -> {
+        String source = "D:\\upload";
+        String target = "D:\\uploadcpy";
+
+        Files.walk(Paths.get(source)).forEach(path -> {
             try {
-                //String targetName = path.toString().replace(sourceDir, targetDir);
-                if (Files.isDirectory(path)) { // 是目录
-                    Files.copy(sourceDir, targetDir, StandardCopyOption.REPLACE_EXISTING);
-                }else if (Files.isRegularFile(path)) { // 是普通文件
-                    Files.copy(sourceDir, targetDir, StandardCopyOption.REPLACE_EXISTING);
+                String targetName = path.toString().replace(source, target);
+                // 是目录
+                if (Files.isDirectory(path)) {
+                    Files.createDirectory(Paths.get(targetName));
+                }
+                // 是普通文件
+                else if (Files.isRegularFile(path)) {
+                    Files.copy(path, Paths.get(targetName));
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -184,4 +187,5 @@ public class _11_JDK7FilesTest {
         long end = System.currentTimeMillis();
         System.out.println(end - start);
     }
+
 }

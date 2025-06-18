@@ -1,4 +1,4 @@
-package org.bluebridge.chapter_01;
+package org.bluebridge.chapter_03_jdk;
 
 import org.junit.Test;
 
@@ -10,7 +10,7 @@ import java.nio.file.Paths;
  *  Path 用来表示文件路径
  *  Paths 是工具类，用来获取 Path 实例
  */
-public class _10_JDK7PathAndPathsTest {
+public class _01_JDK7PathAndPathsTest {
 
     /**
      * 测试JDK7 新增的 Path 和 Paths 类
@@ -41,4 +41,5 @@ public class _10_JDK7PathAndPathsTest {
         System.out.println(path);
         System.out.println(path.normalize());
     }
+
 }

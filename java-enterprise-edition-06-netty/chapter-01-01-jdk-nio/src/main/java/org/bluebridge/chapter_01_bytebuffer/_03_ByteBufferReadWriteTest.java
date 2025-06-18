@@ -1,4 +1,4 @@
-package org.bluebridge.chapter_01;
+package org.bluebridge.chapter_01_bytebuffer;
 
 import org.bluebridge.ByteBufferUtil;
 import org.junit.Test;
@@ -6,9 +6,9 @@ import org.junit.Test;
 import java.nio.ByteBuffer;
 
 /**
- * ByteBuffer读写测试
+ * 两个ByteBuffer读写测试
  */
-public class _04_ByteBufferReadWriteTest {
+public class _03_ByteBufferReadWriteTest {
 
     @Test
     public void testByteBufferReadWrite() {
@@ -26,4 +26,5 @@ public class _04_ByteBufferReadWriteTest {
         target.put(source);
         ByteBufferUtil.debugAll(target);
     }
+
 }
