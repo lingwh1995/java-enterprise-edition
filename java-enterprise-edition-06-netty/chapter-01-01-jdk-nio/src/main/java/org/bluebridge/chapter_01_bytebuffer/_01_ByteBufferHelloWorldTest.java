@@ -5,13 +5,13 @@ import org.junit.Test;
 
 import java.nio.ByteBuffer;
 
-/**
- * ByteBuffer读写数据
- */
-public class _01_ByteBufferTest {
+public class _01_ByteBufferHelloWorldTest {
 
+    /**
+     * ByteBuffer基础使用
+     */
     @Test
-    public void testByteBuffer() {
+    public void testByteBufferHelloWorld() {
         // 创建ByteBuffer
         ByteBuffer buffer = ByteBuffer.allocate(10);
         ByteBufferUtil.debugAll(buffer, 1);

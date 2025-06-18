@@ -20,7 +20,7 @@ public class _05_ByteBufferAllocateTest {
         /**
          * 直接内存:物理内存，性能高，申请慢，读写效率高（少一次拷贝），不会受GC的影响，适用于数据量大，IO生命周期长或者IO次数频繁
          */
-        System.out.println(ByteBuffer.allocateDirect(10*44654564).getClass());
+        System.out.println(ByteBuffer.allocateDirect(10).getClass());
     }
 
 }

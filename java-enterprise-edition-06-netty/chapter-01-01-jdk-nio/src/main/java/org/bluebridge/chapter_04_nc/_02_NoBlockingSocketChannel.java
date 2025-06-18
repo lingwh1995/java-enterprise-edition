@@ -10,11 +10,12 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class _02_NoBlockingSocketChannel {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         // 1.创建服务器
         ServerSocketChannel ssc = ServerSocketChannel.open();
         ssc.configureBlocking(false); // 非阻塞模式
@@ -27,7 +28,7 @@ public class _02_NoBlockingSocketChannel {
         // 4.循环监听
         while (true) {
             // 5.等待与客户端建立连接
-            log.debug("waiting connecting......");
+            //log.debug("waiting connecting......");
             // 6.accept建立与客户端连接，SocketChannel用来与客户端之间通信
             SocketChannel sc = ssc.accept(); // 非阻塞，线程还会继续运行，如果没有连接建立，但sc是null
             if(sc != null) {
@@ -37,7 +38,7 @@ public class _02_NoBlockingSocketChannel {
             }
             for (SocketChannel channel : channels) {
                 // 5. 接收客户端发送的数据
-                log.debug("before read......{}", channel);
+                //log.debug("before read......{}", channel);
                 int len = channel.read(buffer);; // 非阻塞，线程仍然会继续运行，如果没有读到数据，read 返回 0
                 if(len > 0) {
                     log.debug("本次读取到的数据长度：{}", len);
@@ -47,6 +48,8 @@ public class _02_NoBlockingSocketChannel {
                     log.debug("after read......{}", channel);
                 }
             }
+            // 睡眠100毫秒，防止CPU占满
+            TimeUnit.MILLISECONDS.sleep(100);
         }
     }
 

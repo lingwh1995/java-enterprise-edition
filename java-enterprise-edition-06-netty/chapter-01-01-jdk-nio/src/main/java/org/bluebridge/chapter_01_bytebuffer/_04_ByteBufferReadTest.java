@@ -10,6 +10,10 @@ import java.nio.ByteBuffer;
  */
 public class _04_ByteBufferReadTest {
 
+    /**
+     * 每次读取一个字节
+     * 每次读取多个字节
+     */
     @Test
     public void testByteBufferReadWrite() {
         ByteBuffer buffer = ByteBuffer.allocate(10);

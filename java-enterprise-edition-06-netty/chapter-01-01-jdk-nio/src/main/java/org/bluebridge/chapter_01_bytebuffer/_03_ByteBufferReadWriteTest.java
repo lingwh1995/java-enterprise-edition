@@ -20,7 +20,7 @@ public class _03_ByteBufferReadWriteTest {
         source.flip();
 
         // source的limit属性决定了target能从source中读取的数据长度
-        //source.limit(2);
+        source.limit(2);
         // 创建target ByteBuffer
         ByteBuffer target = ByteBuffer.allocate(5);
         target.put(source);
