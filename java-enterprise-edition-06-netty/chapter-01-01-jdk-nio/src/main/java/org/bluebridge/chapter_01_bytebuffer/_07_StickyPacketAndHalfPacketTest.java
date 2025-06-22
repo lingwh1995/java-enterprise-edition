@@ -1,5 +1,6 @@
 package org.bluebridge.chapter_01_bytebuffer;
 
+import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.ByteBufferUtil;
 import org.junit.Test;
 
@@ -8,6 +9,7 @@ import java.nio.ByteBuffer;
 /**
  * 处理黏包和半包
  */
+@Slf4j
 public class _07_StickyPacketAndHalfPacketTest {
 
     /**
@@ -28,6 +30,8 @@ public class _07_StickyPacketAndHalfPacketTest {
     @Test
     public void testStickyPacketAndHalfPacket() {
         ByteBuffer source = ByteBuffer.allocate(32);
+        source.put("\n".getBytes());
+        ByteBufferUtil.debugAll(source);
         //                     11            24
         source.put("Hello,world\nI'm zhangsan\nHo".getBytes());
         splitPacket(source);
@@ -44,6 +48,7 @@ public class _07_StickyPacketAndHalfPacketTest {
         source.flip();
         int oldLimit = source.limit();
         for (int i = 0; i < oldLimit; i++) {
+            log.debug("source.get(i) = {}", source.get(i));
             if (source.get(i) == '\n') {
                 System.out.println(i);
                 ByteBuffer target = ByteBuffer.allocate(i + 1 - source.position());
