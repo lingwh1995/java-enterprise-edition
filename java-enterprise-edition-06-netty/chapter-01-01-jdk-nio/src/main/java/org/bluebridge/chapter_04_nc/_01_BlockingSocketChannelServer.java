@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-public class _01_BlockingSocketChannel {
+public class _01_BlockingSocketChannelServer {
 
     public static void main(String[] args) throws IOException {
         // 1.创建服务器

@@ -10,29 +10,31 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.nio.charset.Charset;
 import java.util.Iterator;
 
 /**
- * 使用selector实现Server
+ * 使用selector实现Server并处理粘包半包问题
  */
-public class SelectorServer {
+public class _02_SelectorServer {
 
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(SelectorServer.class);
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(_02_SelectorServer.class);
 
     public static void main(String[] args) throws IOException {
-        // 1.创建selector，管理多个channel
-        Selector selector = Selector.open();
-        // 2.创建服务器对象
+        // 1.创建服务器对象
         ServerSocketChannel ssc = ServerSocketChannel.open();
-        // 3.设置非阻塞
+        // 2.设置非阻塞
         ssc.configureBlocking(false);
+        // 3.创建selector，管理多个channel
+        Selector selector = Selector.open();
         // 4. 建立selector和channel的联系(注册)
+        /*
         // SelectionKey就是将来事件发生后，通过它可以知道事件和哪个channel的事件
         SelectionKey sscKey = ssc.register(selector, 0, null);
         // 5.key只关注accept事件
         sscKey.interestOps(SelectionKey.OP_ACCEPT);
         log.debug("register key: {}", sscKey);
+        */
+        //ssc.register(selector, SelectionKey.OP_ACCEPT);
         // 6.绑定端口号
         ssc.bind(new InetSocketAddress(8080));
         while (true) {
@@ -52,22 +54,34 @@ public class SelectorServer {
                     ServerSocketChannel channel = (ServerSocketChannel) key.channel(); // 拿到触发事件的channel
                     SocketChannel sc = channel.accept();
                     sc.configureBlocking(false);
-                    SelectionKey scKey = sc.register(selector, 0, null);
+                    // 创建buffer
+                    ByteBuffer buffer = ByteBuffer.allocate(16);
+                    // 将bytebuffer设置作为附件与SelectionKey关联
+                    SelectionKey scKey = sc.register(selector, 0, buffer);
                     scKey.interestOps(SelectionKey.OP_READ);
                     log.debug("sc: {}", sc);
 //                    log.debug("scKey: {}", scKey);
                 } else if (key.isReadable()) { // 如果是读事件
                     try {
                         SocketChannel channel = (SocketChannel) key.channel();
-                        ByteBuffer buffer = ByteBuffer.allocate(16);
+                        // 获取SelectionKey关联的附件
+                        ByteBuffer buffer = (ByteBuffer) key.attachment();
+                        log.debug("buffer.capacity(): {}", buffer.capacity());
                         int read = channel.read(buffer);
                         if (read == -1) {
                             // 客户端调用了socket.close()方法断开了
                             key.cancel();
                         } else {
-                            buffer.flip();
-                            ByteBufferUtil.debugAll(buffer);
-                            System.out.println(Charset.defaultCharset().decode(buffer));
+                            splitPacket(buffer);
+                            if(buffer.position() == buffer.limit()) { // 需要扩容
+                                // 切回为读模式
+                                buffer.flip();
+                                ByteBuffer newBuffer = ByteBuffer.allocate(buffer.capacity() * 2);
+                                // 将旧的bytebuffer放入到新的bytebuffer中
+                                newBuffer.put(buffer);
+                                // 替换附件
+                                key.attach(newBuffer);
+                            }
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -81,4 +95,25 @@ public class SelectorServer {
         }
     }
 
+
+    /**
+     * 拆包
+     * @param source
+     */
+    private static void splitPacket(ByteBuffer source) {
+        source.flip();
+        int oldLimit = source.limit();
+        for (int i = 0; i < oldLimit; i++) {
+            if (source.get(i) == '\n') {
+                System.out.println(i);
+                ByteBuffer target = ByteBuffer.allocate(i + 1 - source.position());
+                // 0 ~ limit
+                source.limit(i + 1);
+                target.put(source); // 从source 读，向 target 写
+                ByteBufferUtil.debugAll(target);
+                source.limit(oldLimit);
+            }
+        }
+        source.compact();
+    }
 }

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-public class _02_NoBlockingSocketChannel {
+public class _02_NoBlockingSocketChannelServer {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         // 1.创建服务器
