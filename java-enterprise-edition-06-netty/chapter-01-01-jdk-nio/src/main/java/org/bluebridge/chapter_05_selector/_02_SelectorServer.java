@@ -2,7 +2,6 @@ package org.bluebridge.chapter_05_selector;
 
 import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.ByteBufferUtil;
-import org.slf4j.Logger;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
