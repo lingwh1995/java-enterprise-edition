@@ -1,5 +1,6 @@
 package org.bluebridge.chapter_05_selector;
 
+import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.ByteBufferUtil;
 import org.slf4j.Logger;
 
@@ -16,11 +17,13 @@ import java.util.Iterator;
 /**
  * 使用selector实现Server
  */
+@Slf4j
 public class _01_SelectorServer {
 
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(_01_SelectorServer.class);
+    private static final int PORT = 8080;
 
     public static void main(String[] args) throws IOException {
+        log.debug("非阻塞Selector服务器启动，端口：{}......", PORT);
         // 1.创建服务器对象
         ServerSocketChannel ssc = ServerSocketChannel.open();
         // 2.设置非阻塞

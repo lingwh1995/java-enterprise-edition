@@ -14,7 +14,10 @@ import java.util.List;
 @Slf4j
 public class _01_BlockingSocketChannelServer {
 
+    private static final int PORT = 8080;
+
     public static void main(String[] args) throws IOException {
+        log.debug("非阻塞服务器启动，端口：{}......", PORT);
         // 1.创建服务器
         ServerSocketChannel ssc = ServerSocketChannel.open();
         // 2.绑定监听端口

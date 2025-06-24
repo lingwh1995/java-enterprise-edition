@@ -15,12 +15,15 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class _02_NoBlockingSocketChannelServer {
 
+    private static final int PORT = 8080;
+
     public static void main(String[] args) throws IOException, InterruptedException {
+        log.debug("非阻塞服务器启动，端口：{}......", PORT);
         // 1.创建服务器
         ServerSocketChannel ssc = ServerSocketChannel.open();
         ssc.configureBlocking(false); // 非阻塞模式
         // 2.绑定监听端口
-        ssc.bind(new InetSocketAddress(8080));
+        ssc.bind(new InetSocketAddress(PORT));
         // 3.创建连接集合
         List<SocketChannel> channels = new ArrayList<>();
         // 4.创建ByteBuffer
