@@ -19,15 +19,16 @@ import java.util.Iterator;
 @Slf4j
 public class _02_WriteServer {
 
+    private static final int PORT = 8080;
+
     public static void main(String[] args) throws IOException {
         ServerSocketChannel ssc = ServerSocketChannel.open();
         ssc.configureBlocking(false);
 
         Selector selector = Selector.open();
-        SelectionKey scKey = ssc.register(selector, 0, null);
-        scKey.interestOps(SelectionKey.OP_READ);
+        ssc.register(selector, SelectionKey.OP_ACCEPT);
 
-        ssc.bind(new InetSocketAddress(8080));
+        ssc.bind(new InetSocketAddress(PORT));
 
         while (true) {
             // 阻塞直到绑定事件发生
@@ -39,7 +40,7 @@ public class _02_WriteServer {
                 if(key.isAcceptable()) {
                     SocketChannel sc = ssc.accept();
                     sc.configureBlocking( false);
-
+                    SelectionKey scKey = sc.register(selector, SelectionKey.OP_READ);
                     // 向客户端发送大量数据
                     StringBuilder sb = new StringBuilder();
                     for (int i = 0; i < 30000000; i++) {
@@ -49,8 +50,8 @@ public class _02_WriteServer {
                     // 2.判断是否有剩余
                     if (buffer.hasRemaining()) {
                         // 3.关注可写事件
-                        //scKey.interestOps(scKey.interestOps() + SelectionKey.OP_WRITE);
-                        scKey.interestOps(scKey.interestOps() | SelectionKey.OP_WRITE);
+                        scKey.interestOps(scKey.interestOps() + SelectionKey.OP_WRITE);
+                        //scKey.interestOps(scKey.interestOps() | SelectionKey.OP_WRITE);
 
                         // 4.把未写完的数据以附件形式挂在 scKey
                         scKey.attach( buffer);

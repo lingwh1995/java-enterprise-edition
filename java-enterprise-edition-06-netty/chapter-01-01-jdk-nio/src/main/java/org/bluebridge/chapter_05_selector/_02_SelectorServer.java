@@ -36,21 +36,20 @@ public class _02_SelectorServer {
         sscKey.interestOps(SelectionKey.OP_ACCEPT);
         log.debug("register key: {}", sscKey);
         */
-        //ssc.register(selector, SelectionKey.OP_ACCEPT);
+        ssc.register(selector, SelectionKey.OP_ACCEPT);
         // 6.绑定端口号
-        ssc.bind(new InetSocketAddress(8080));
+        ssc.bind(new InetSocketAddress(PORT));
         while (true) {
             // 7.select方法，没有事件发生，线程阻塞，有事件，线程才会恢复
             // select在事件未处理时，它不会阻塞，事件发生后要么处理，要么取消，不能置之不理
-            int readyChannels = selector.select();
-            if(readyChannels == 0) {
-                continue;
-            };
+            selector.select();
             // 8.处理事件，selectedKeys内部包含了所有发生的事件
             Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
             while (iterator.hasNext()) {
                 SelectionKey key = iterator.next();
                 log.debug("key: {}", key);
+                // 处理完key时，要从 selectKeys 集合中删除，否则下次处理就会有问题
+                iterator.remove();
                 // 9.区分事件类型
                 if (key.isAcceptable()) { // 如果是accept事件
                     ServerSocketChannel channel = (ServerSocketChannel) key.channel(); // 拿到触发事件的channel
@@ -91,8 +90,6 @@ public class _02_SelectorServer {
                         key.cancel();
                     }
                 }
-                // 处理完key时，要从 selectKeys 集合中删除，否则下次处理就会有问题
-                iterator.remove();
             }
         }
     }

@@ -10,9 +10,11 @@ import java.nio.channels.SocketChannel;
 @Slf4j
 public class WriteClient {
 
+    private static final int PORT = 8080;
+
     public static void main(String[] args) throws IOException {
         SocketChannel sc = SocketChannel.open();
-        sc.connect(new InetSocketAddress("localhost", 8080));
+        sc.connect(new InetSocketAddress("localhost", PORT));
         int count = 0;
         while (true) {
             ByteBuffer buffer = ByteBuffer.allocate(1024 * 1024);

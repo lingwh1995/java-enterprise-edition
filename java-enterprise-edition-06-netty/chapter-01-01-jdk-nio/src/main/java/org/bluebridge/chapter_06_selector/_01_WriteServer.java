@@ -19,6 +19,8 @@ import java.util.Iterator;
 @Slf4j
 public class _01_WriteServer {
 
+    private static final int PORT = 8080;
+
     public static void main(String[] args) throws IOException {
         ServerSocketChannel ssc = ServerSocketChannel.open();
         ssc.configureBlocking(false);
@@ -26,7 +28,7 @@ public class _01_WriteServer {
         Selector selector = Selector.open();
         ssc.register(selector, SelectionKey.OP_ACCEPT);
 
-        ssc.bind(new InetSocketAddress(8080));
+        ssc.bind(new InetSocketAddress(PORT));
 
         while (true) {
             // 阻塞直到绑定事件发生

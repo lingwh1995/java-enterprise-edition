@@ -11,13 +11,16 @@ import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 阻塞方式实现网络通信
+ */
 @Slf4j
 public class _01_BlockingSocketChannelServer {
 
     private static final int PORT = 8080;
 
     public static void main(String[] args) throws IOException {
-        log.debug("非阻塞服务器启动，端口：{}......", PORT);
+        log.debug("阻塞服务器启动，端口：{}......", PORT);
         // 1.创建服务器
         ServerSocketChannel ssc = ServerSocketChannel.open();
         // 2.绑定监听端口

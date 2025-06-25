@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 非阻塞方式实现网络通信
+ */
 @Slf4j
 public class _02_NoBlockingSocketChannelServer {
 

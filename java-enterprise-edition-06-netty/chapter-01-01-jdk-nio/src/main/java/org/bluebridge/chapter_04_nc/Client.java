@@ -10,12 +10,12 @@ import java.util.Scanner;
 
 @Slf4j
 public class Client {
-
+    private static final int PORT = 8080;
     public static void main(String[] args) throws IOException {
         // 1.创建客户端
         SocketChannel sc = SocketChannel.open();
         // 2.连接服务端
-        sc.connect(new InetSocketAddress("localhost", 8080));
+        sc.connect(new InetSocketAddress("localhost", PORT));
         Scanner scanner = new Scanner(System.in);
         // 3.发送消息
         while (true) {
