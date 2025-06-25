@@ -18,57 +18,53 @@ import java.util.Iterator;
  */
 @Slf4j
 public class _02_WriteServer {
-
-    private static final int PORT = 8080;
-
     public static void main(String[] args) throws IOException {
         ServerSocketChannel ssc = ServerSocketChannel.open();
         ssc.configureBlocking(false);
+        ssc.bind(new InetSocketAddress(8080));
 
         Selector selector = Selector.open();
         ssc.register(selector, SelectionKey.OP_ACCEPT);
-
-        ssc.bind(new InetSocketAddress(PORT));
-
-        while (true) {
-            // 阻塞直到绑定事件发生
+        int totalCount = 0;
+        while(true) {
             selector.select();
-            Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
-            while (iterator.hasNext()) {
-                SelectionKey key = iterator.next();
-                iterator.remove();
-                if(key.isAcceptable()) {
+            Iterator<SelectionKey> iter = selector.selectedKeys().iterator();
+            while (iter.hasNext()) {
+                SelectionKey key = iter.next();
+                iter.remove();
+                if (key.isAcceptable()) {
                     SocketChannel sc = ssc.accept();
-                    sc.configureBlocking( false);
-                    SelectionKey scKey = sc.register(selector, SelectionKey.OP_READ);
-                    // 向客户端发送大量数据
+                    sc.configureBlocking(false);
+                    SelectionKey sckey = sc.register(selector, SelectionKey.OP_READ);
+                    // 1. 向客户端发送内容
                     StringBuilder sb = new StringBuilder();
-                    for (int i = 0; i < 30000000; i++) {
+                    for (int i = 0; i < 3000000; i++) {
                         sb.append("a");
                     }
                     ByteBuffer buffer = Charset.defaultCharset().encode(sb.toString());
-                    // 2.判断是否有剩余
+                    // 3. write 表示实际写了多少字节
+                    int write = sc.write(buffer);
+                    totalCount += write;
+                    // 4. 如果有剩余未读字节，才需要关注写事件
                     if (buffer.hasRemaining()) {
-                        // 3.关注可写事件
-                        scKey.interestOps(scKey.interestOps() + SelectionKey.OP_WRITE);
-                        //scKey.interestOps(scKey.interestOps() | SelectionKey.OP_WRITE);
-
-                        // 4.把未写完的数据以附件形式挂在 scKey
-                        scKey.attach( buffer);
+                        // read 1  write 4
+                        // 在原有关注事件的基础上，多关注 写事件
+                        sckey.interestOps(sckey.interestOps() + SelectionKey.OP_WRITE);
+                        // 把 buffer 作为附件加入 sckey
+                        sckey.attach(buffer);
                     }
-                }else if(key.isWritable()) {
+                } else if (key.isWritable()) {
                     ByteBuffer buffer = (ByteBuffer) key.attachment();
                     SocketChannel sc = (SocketChannel) key.channel();
-                    // 5.返回值代表实际写入的字节数
                     int write = sc.write(buffer);
-                    log.debug("write: {}", write);
-                    // 6.清理操作
-                    if(!buffer.hasRemaining()) {
-                        key.attach(null);
+                    totalCount += write;
+                    if (!buffer.hasRemaining()) { // 写完了
                         key.interestOps(key.interestOps() - SelectionKey.OP_WRITE);
+                        key.attach(null);
                     }
                 }
             }
+            log.debug("实际写入字节: {}", totalCount);
         }
     }
 }
