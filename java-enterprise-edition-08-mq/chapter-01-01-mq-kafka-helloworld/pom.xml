@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.bluebridge</groupId>
-        <artifactId>java-enterprise-edition-08-bigdate</artifactId>
+        <artifactId>java-enterprise-edition-08-mq</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 

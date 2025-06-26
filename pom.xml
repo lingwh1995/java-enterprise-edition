@@ -17,7 +17,7 @@
         <module>java-enterprise-edition-05-authentication</module>
         <module>java-enterprise-edition-06-netty</module>
         <module>java-enterprise-edition-07-workflow</module>
-        <module>java-enterprise-edition-08-bigdate</module>
+        <module>java-enterprise-edition-08-mq</module>
     </modules>
 
     <properties>
