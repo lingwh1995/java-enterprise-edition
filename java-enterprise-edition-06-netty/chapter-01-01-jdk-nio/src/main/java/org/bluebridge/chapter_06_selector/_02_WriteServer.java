@@ -18,10 +18,13 @@ import java.util.Iterator;
  */
 @Slf4j
 public class _02_WriteServer {
+
+    private static final int PORT = 8080;
+
     public static void main(String[] args) throws IOException {
         ServerSocketChannel ssc = ServerSocketChannel.open();
         ssc.configureBlocking(false);
-        ssc.bind(new InetSocketAddress(8080));
+        ssc.bind(new InetSocketAddress(PORT));
 
         Selector selector = Selector.open();
         ssc.register(selector, SelectionKey.OP_ACCEPT);
@@ -67,4 +70,5 @@ public class _02_WriteServer {
             log.debug("实际写入字节: {}", totalCount);
         }
     }
+
 }

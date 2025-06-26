@@ -1,4 +1,4 @@
-package org.bluebridge.chapter_03_jdk;
+package org.bluebridge.chapter_03_jdk7;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
