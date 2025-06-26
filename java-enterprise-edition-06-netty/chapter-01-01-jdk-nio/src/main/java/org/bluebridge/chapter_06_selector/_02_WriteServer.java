@@ -30,6 +30,7 @@ public class _02_WriteServer {
         ssc.register(selector, SelectionKey.OP_ACCEPT);
         int totalCount = 0;
         while(true) {
+            log.debug("......");
             selector.select();
             Iterator<SelectionKey> iter = selector.selectedKeys().iterator();
             while (iter.hasNext()) {

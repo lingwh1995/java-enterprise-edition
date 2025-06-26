@@ -31,6 +31,7 @@ public class _01_WriteServer {
         ssc.bind(new InetSocketAddress(PORT));
 
         while (true) {
+            log.debug("......");
             // 阻塞直到绑定事件发生
             selector.select();
             Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();

@@ -1,4 +1,4 @@
-package org.bluebridge.chapter_05_selector;
+package org.bluebridge.chapter_07_selector;
 
 import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.ByteBufferUtil;
@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
-import java.nio.charset.Charset;
 import java.util.Scanner;
 
 @Slf4j
