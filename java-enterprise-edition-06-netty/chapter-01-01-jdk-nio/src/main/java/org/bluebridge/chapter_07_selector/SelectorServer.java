@@ -19,7 +19,7 @@ import java.util.Set;
  *     2.isOpen(): 是否是open状态，如果调用了close()方法则会返回false
  *     3.provider(): 获取当前Selector的Provider
  *     4.keys(): 获取当前channel注册在Selector上所有的key
- *     5.selectedKeys(): 获取当前channel就绪的事件列表
+ *     5.selectedKeys(): 获取当前channel就绪的事件列表（特别注意：是就绪事件，是事件，就是说一个selectedKeys代表一个事件）
  *     6.selectNow(): 获取当前是否有事件就绪，该方法立即返回结果，不会阻塞；如果返回值>0，则代表存在一个或多个
  *     7.select(long timeout): selectNow的阻塞超时方法，超时时间内，有事件就绪时才会返回；否则超过时间也会返回
  *     8.select(): selectNow的阻塞方法，直到有事件就绪时才会返回

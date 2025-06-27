@@ -29,6 +29,7 @@ public class _02_SelectorServer {
         // 3.创建selector，管理多个channel
         Selector selector = Selector.open();
         // 4. 建立selector和channel的联系(注册)
+        // 把Channel注册到Selector上写法一
         /*
         // SelectionKey就是将来事件发生后，通过它可以知道事件和哪个channel的事件
         SelectionKey sscKey = ssc.register(selector, 0, null);
@@ -36,7 +37,9 @@ public class _02_SelectorServer {
         sscKey.interestOps(SelectionKey.OP_ACCEPT);
         log.debug("register key: {}", sscKey);
         */
+        // 把Channel注册到Selector上写法二
         ssc.register(selector, SelectionKey.OP_ACCEPT);
+
         // 6.绑定端口号
         ssc.bind(new InetSocketAddress(PORT));
         while (true) {
