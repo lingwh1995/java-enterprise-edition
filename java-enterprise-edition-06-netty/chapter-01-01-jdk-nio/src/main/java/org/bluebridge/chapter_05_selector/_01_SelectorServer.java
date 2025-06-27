@@ -71,7 +71,7 @@ public class _01_SelectorServer {
                         } else {
                             buffer.flip();
                             ByteBufferUtil.debugAll(buffer);
-                            System.out.println(Charset.defaultCharset().decode(buffer));
+                            log.debug("读取到的来自客户端的数据： {}", Charset.defaultCharset().decode(buffer));
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
