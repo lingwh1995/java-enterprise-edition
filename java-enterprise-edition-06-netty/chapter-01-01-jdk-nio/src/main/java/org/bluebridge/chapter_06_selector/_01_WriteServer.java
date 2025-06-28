@@ -39,7 +39,8 @@ public class _01_WriteServer {
                 SelectionKey key = iterator.next();
                 iterator.remove();
                 if(key.isAcceptable()) {
-                    SocketChannel sc = ssc.accept();
+                    ServerSocketChannel channel = (ServerSocketChannel) key.channel(); // 拿到触发事件的channel
+                    SocketChannel sc = channel.accept();
                     sc.configureBlocking( false);
 
                     // 向客户端发送大量数据
