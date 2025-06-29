@@ -6,14 +6,27 @@ import org.bluebridge.ByteBufferUtil;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
-import java.nio.channels.*;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
 import java.util.Iterator;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 
 /**
+ * V6.0 客户端与服务端可以建立连接，可以正常通信（V4.0多个worker版）
  * 使用 多线程 + selector 实现Server
+ *
+ * tag:1 处代码解决了问题
+ *
+ * 核心思路：保证 sc.register(selector, SelectionKey.OP_READ, null); 执行之前，selector处于非阻塞状态
+ *
+ * worker数量建议设置为cpu核心数
+ *      使用 Runtime.getRuntime().availableProcessors() 获取cpu核心数，docker下获取的物理机核心数，而非docker容器核心数，所以手工指定最好
  */
 @Slf4j
-public class MultiThreadServer {
+public class _06_MultiThreadServer {
 
     private static final int PORT = 8080;
 
@@ -26,8 +39,12 @@ public class MultiThreadServer {
         bossKey.interestOps(SelectionKey.OP_ACCEPT);
         ssc.bind(new InetSocketAddress(PORT));
         // 创建固定数量的worker
-        Worker worker = new Worker("worker-0");
-        worker.register();
+        //Worker[] workers = new Worker[Runtime.getRuntime().availableProcessors()];  // 获取cpu核心数
+        Worker[] workers = new Worker[3];
+        IntStream.range(0, 3).forEach(i -> {
+            workers[i] = new Worker("worker-" + i);
+        });
+        AtomicInteger index = new AtomicInteger();
         while (true) {
             boss.select();
             Iterator<SelectionKey> iterator = boss.selectedKeys().iterator();
@@ -40,7 +57,7 @@ public class MultiThreadServer {
                     log.debug("connected......{}", sc.getRemoteAddress());
                     // 2.关联worker中的selector
                     log.debug("before register......{}", sc.getRemoteAddress());
-                    sc.register(worker.selector, SelectionKey.OP_READ, null);
+                    workers[index.getAndIncrement() % workers.length].init(sc);  // boss线程调用，初始化selector，启动worker
                     log.debug("after register......{}", sc.getRemoteAddress());
                 }
             }
@@ -55,20 +72,25 @@ public class MultiThreadServer {
             this.name = name;
         }
         private volatile boolean start = false;
-        public void register() throws IOException {
+
+        public void init(SocketChannel sc) throws IOException {
             if(!start) {
                 selector = Selector.open();
                 thread = new Thread(this, name);
                 thread.start();
                 start = true;
             }
+            selector.wakeup();    //boss线程中执行  // tag:1
+            sc.register(selector, SelectionKey.OP_READ, null);  //boss线程中执行 // tag:1
+            log.debug("init() => thread name......{}", Thread.currentThread().getName());
         }
 
         @Override
         public void run() {
             while (true) {
                 try {
-                    selector.select();
+                    selector.select();   // 在worker-0线程中执行
+                    log.debug("run() => thread name......{}", Thread.currentThread().getName());
                     Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
                     while (iterator.hasNext()) {
                         SelectionKey key = iterator.next();
@@ -88,4 +110,5 @@ public class MultiThreadServer {
             }
         }
     }
+
 }

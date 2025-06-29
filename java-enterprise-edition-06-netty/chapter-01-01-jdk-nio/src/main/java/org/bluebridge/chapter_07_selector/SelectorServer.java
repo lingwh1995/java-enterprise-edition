@@ -23,7 +23,7 @@ import java.util.Set;
  *     6.selectNow(): 获取当前是否有事件就绪，该方法立即返回结果，不会阻塞；如果返回值>0，则代表存在一个或多个
  *     7.select(long timeout): selectNow的阻塞超时方法，超时时间内，有事件就绪时才会返回；否则超过时间也会返回
  *     8.select(): selectNow的阻塞方法，直到有事件就绪时才会返回
- *     9.wakeup(): 调用该方法会时，阻塞在select()处的线程会立马返回；(ps：下面一句划重点)即使当前不存在线程阻塞在select()处，那么下一个执行select()方法的线程也会立即返回结果，相当于执行了一次selectNow()方法
+ *     9.wakeup(): 唤醒阻塞的线程，不管在是select()方法之前调用wakeup()方法，还是在select()方法之后调用wakeup()，都会唤醒阻塞的线程，有点类似与LockSupport.park()和LockSupport.unpark()的感觉
  *     10.close(): 用完Selector后调用其close()方法会关闭该Selector，且使注册到该Selector上的所有SelectionKey实例无效，channel本身并不会关闭。
  *
  *  Selector和SelectionKey关系
@@ -37,10 +37,10 @@ import java.util.Set;
  *          interest set
  *
  *  SelectionKey的事件类型包括：
- *      OP_READ：可读事件，值为：1<<0
- *      OP_WRITE：可写事件，值为：1<<2
- *      OP_CONNECT：客户端连接服务端的事件(tcp连接)，一般为创建SocketChannel客户端channel，值为：1<<3
- *      OP_ACCEPT：服务端接收客户端连接的事件，一般为创建ServerSocketChannel服务端channel，值为：1<<4
+ *      OP_READ：可读事件，值为：1<<0                                                            =>  1
+ *      OP_WRITE：可写事件，值为：1<<2                                                           =>  4
+ *      OP_CONNECT：客户端连接服务端的事件(tcp连接)，一般为创建SocketChannel客户端channel，值为：1<<3  =>  8
+ *      OP_ACCEPT：服务端接收客户端连接的事件，一般为创建ServerSocketChannel服务端channel，值为：1<<4  =>  16
  */
 @Slf4j
 public class SelectorServer {
@@ -108,6 +108,11 @@ public class SelectorServer {
         /*--------------测试selector api--------------*/
 
         ssc.bind(new InetSocketAddress(PORT));
+
+        /*--------------测试selector api--------------*/
+        // 测试wakeup(): 唤醒selector
+        //selector.wakeup();
+        /*--------------测试selector api--------------*/
 
         while (true) {
             /*--------------测试selector api--------------*/

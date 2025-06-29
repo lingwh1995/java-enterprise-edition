@@ -32,10 +32,10 @@ public class SelectorServer {
         while (true) {
             selector.select();
             // 获取所有就绪事件
-            Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
-            while (iterator.hasNext()) {
-                SelectionKey event = iterator.next();
-                iterator.remove();
+            Iterator<SelectionKey> eventIterator = selector.selectedKeys().iterator();
+            while (eventIterator.hasNext()) {
+                SelectionKey event = eventIterator.next();
+                eventIterator.remove();
                 if(event.isAcceptable()) {
                     // 获取每一个就绪事件
                     ServerSocketChannel acceptEventSSCChannel = (ServerSocketChannel) event.channel();

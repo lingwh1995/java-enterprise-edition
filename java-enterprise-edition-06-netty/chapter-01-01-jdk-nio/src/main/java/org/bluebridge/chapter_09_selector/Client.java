@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 @Slf4j
 public class Client {
+
     private static final int PORT = 8080;
 
     public static void main(String[] args) throws IOException {
