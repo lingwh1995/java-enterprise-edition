@@ -23,7 +23,7 @@ import java.util.stream.IntStream;
  * 核心思路：保证 sc.register(selector, SelectionKey.OP_READ, null); 执行之前，selector处于非阻塞状态
  *
  * worker数量建议设置为cpu核心数
- *      使用 Runtime.getRuntime().availableProcessors() 获取cpu核心数，docker下获取的物理机核心数，而非docker容器核心数，所以手工指定最好
+ *      使用 Runtime.getRuntime().availableProcessors() 获取cpu核心数，docker下获取的是物理机核心数，而非docker容器核心数，所以手工指定最好
  */
 @Slf4j
 public class _06_MultiThreadServer {

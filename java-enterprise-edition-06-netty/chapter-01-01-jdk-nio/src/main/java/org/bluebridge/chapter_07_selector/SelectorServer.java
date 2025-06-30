@@ -15,26 +15,41 @@ import java.util.Set;
 
 /**
  * Selector方法详解（总共包含以下10个方法）
- *     1.open(): 创建一个Selector对象
- *     2.isOpen(): 是否是open状态，如果调用了close()方法则会返回false
- *     3.provider(): 获取当前Selector的Provider
- *     4.keys(): 获取当前channel注册在Selector上所有的key
- *     5.selectedKeys(): 获取当前channel就绪的事件列表（特别注意：是就绪事件，是事件，就是说一个selectedKeys代表一个事件）
- *     6.selectNow(): 获取当前是否有事件就绪，该方法立即返回结果，不会阻塞；如果返回值>0，则代表存在一个或多个
- *     7.select(long timeout): selectNow的阻塞超时方法，超时时间内，有事件就绪时才会返回；否则超过时间也会返回
- *     8.select(): selectNow的阻塞方法，直到有事件就绪时才会返回
- *     9.wakeup(): 唤醒阻塞的线程，不管在是select()方法之前调用wakeup()方法，还是在select()方法之后调用wakeup()，都会唤醒阻塞的线程，有点类似与LockSupport.park()和LockSupport.unpark()的感觉
- *     10.close(): 用完Selector后调用其close()方法会关闭该Selector，且使注册到该Selector上的所有SelectionKey实例无效，channel本身并不会关闭。
+ *     1.Selector open(): 创建一个Selector对象
+ *     2.boolean isOpen(): 是否是open状态，如果调用了close()方法则会返回false
+ *     3.SelectorProvider provider(): 获取当前Selector的Provider
+ *     4.Set<SelectionKey> keys(): 获取当前channel注册在Selector上所有的key
+ *     5.Set<SelectionKey> selectedKeys(): 获取当前channel就绪的事件列表（特别注意：是就绪事件，是事件，就是说一个selectedKeys代表一个事件）
+ *     6.int selectNow(): 获取当前是否有事件就绪，该方法立即返回结果，不会阻塞；如果返回值>0，则代表存在一个或多个
+ *     7.int select(long timeout): selectNow的阻塞超时方法，超时时间内，有事件就绪时才会返回；否则超过时间也会返回
+ *     8.int select(): selectNow的阻塞方法，直到有事件就绪时才会返回
+ *     9.Selector wakeup(): 唤醒阻塞的线程，不管在是select()方法之前调用wakeup()方法，还是在select()方法之后调用wakeup()，都会唤醒阻塞的线程，有点类似与LockSupport.park()和LockSupport.unpark()的感觉
+ *     10.void close(): 用完Selector后调用其close()方法会关闭该Selector，且使注册到该Selector上的所有SelectionKey实例无效，channel本身并不会关闭。
  *
- *  Selector和SelectionKey关系
- *      Selector和SelectionKey，两者是紧密关联，配合使用的，如上文所示，往Selector中注册Channel会返回一个SelectionKey对象
- *      这个SelectionKey对象包含了如下内容：
+ *  SelectionKey
+ *      SelectionKey是Java NIO中的一个重要类，用于表示一个通道在Selector上的注册关系。一个SelectionKey对象包含了如下内容：
  *          interest set：当前Channel感兴趣的事件集，即在调用register方法设置的interes set
  *          ready set
  *          channel
  *          selector
  *          attached object：可选的附加对象
  *          interest set
+ *      SelectionKey方法详解
+ *          1.int interestOps():   返回当前选择键的兴趣集，即通道感兴趣的操作
+ *          2.SelectionKey interestOps(SelectionKey.OP_READ | SelectionKey.OP_WRITE):   设置通道的兴趣集，指定对哪些操作感兴趣
+ *          3.int readyOps():  返回通道已经准备好的操作集
+ *          4.SelectableChannel channel():  返回当前选择键关联的通道
+ *          5.Selector selector():  返回生成此选择键的选择器
+ *          6.boolean isValid():    检查选择键是否仍然有效
+ *          7.void cancel():   取消选择键，使其无效
+ *          8.Object attach(Object ob)/Object attachment():    可以将一个对象附加到选择键上，便于在处理事件时访问相关数据
+ *      SelectionKey注意事项
+ *          有效性：在处理完一个 SelectionKey 后，通常需要调用 keyIterator.remove() 来从集合中移除它，以避免重复处理
+ *          附加对象：可以通过 attach() 和 attachment() 方法将上下文信息附加到选择键上，方便在事件处理时使用
+ *          取消键：当通道不再需要时，可以调用 cancel() 方法取消选择键
+ *
+ *  Selector和SelectionKey关系
+ *      Selector和SelectionKey，两者是紧密关联，配合使用的，如上文所示，往Selector中注册Channel会返回一个SelectionKey对象
  *
  *  SelectionKey的事件类型包括：
  *      OP_READ：可读事件，值为：1<<0                                                            =>  1
