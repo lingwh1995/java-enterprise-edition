@@ -21,10 +21,13 @@ public class StopWatchTest {
         task1();
         // 停止计时
         stopWatch.stop();
-        System.out.println("StopWatch名称：" + stopWatch.getLastTaskName() + "，执行时间：" + stopWatch.getLastTaskTimeMillis());
+        log.info("任务名称：{}，执行时间：{}，花费总时间：{}，任务总数：{}", stopWatch.getLastTaskName(), stopWatch.getLastTaskTimeMillis(), stopWatch.getTotalTimeMillis(), stopWatch.getTaskCount());
     }
+
     /**
-     * 测试StopWatch HelloWorld 案例
+     * 测试StopWatch
+     *  1.多个任务执行时间统计
+     *  2.优雅的打印执行结果
      */
     @Test
     public void testStopWatch() throws InterruptedException {
@@ -41,7 +44,7 @@ public class StopWatchTest {
         task2();
         // task-2停止计时
         stopWatch.stop();
-        System.out.println(stopWatch.prettyPrint());
+        log.info(stopWatch.prettyPrint());
     }
 
     /**
