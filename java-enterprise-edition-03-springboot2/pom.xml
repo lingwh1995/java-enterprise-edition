@@ -28,6 +28,7 @@
         <module>chapter-02-05-tools-rest-template</module>
         <module>chapter-02-06-tools-swagger</module>
         <module>chapter-02-07-tools-jackson</module>
+        <module>chapter-02-08-tools-springutils</module>
         <module>chapter-03-01-quartz</module>
         <module>chapter-04-01-mybatis-plus-helloworld</module>
         <module>chapter-04-02-mybatis-plus-mpg-generator</module>
