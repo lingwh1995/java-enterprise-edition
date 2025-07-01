@@ -1,4 +1,4 @@
-package org.bluebridge;
+package org.bluebridge.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -6,8 +6,11 @@ import org.springframework.util.StopWatch;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 秒表工具类测试
+ */
 @Slf4j
-public class StopWatchTest {
+public class StopWatchUtilsTest {
 
     /**
      * 测试StopWatch HelloWorld 案例
