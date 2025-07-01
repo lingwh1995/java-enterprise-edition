@@ -5,13 +5,12 @@ import org.junit.Test;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * 字符串工具类
+ * 字符串工具类测试
  */
 @Slf4j
 public class StringUtilsTest {
