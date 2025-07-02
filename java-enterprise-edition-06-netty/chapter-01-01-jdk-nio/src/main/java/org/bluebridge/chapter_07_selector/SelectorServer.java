@@ -38,11 +38,16 @@ import java.util.Set;
  *          1.int interestOps():   返回当前选择键的兴趣集，即通道感兴趣的操作
  *          2.SelectionKey interestOps(SelectionKey.OP_READ | SelectionKey.OP_WRITE):   设置通道的兴趣集，指定对哪些操作感兴趣
  *          3.int readyOps():  返回通道已经准备好的操作集
- *          4.SelectableChannel channel():  返回当前选择键关联的通道
- *          5.Selector selector():  返回生成此选择键的选择器
- *          6.boolean isValid():    检查选择键是否仍然有效
+ *          4.SelectableChannel channel():  返回当前事件关联的通道，可转换的选项包括:`ServerSocketChannel`和`SocketChannel`
+ *          5.Selector selector():  返回当前事件所关联的Selector对象
+ *          6.boolean isValid():    检查当前事件是否仍然有效
  *          7.void cancel():   取消选择键，使其无效
  *          8.Object attach(Object ob)/Object attachment():    可以将一个对象附加到选择键上，便于在处理事件时访问相关数据
+ *              或者在注册时也可以直接添加   SelectionKey key = channel.register(selector, SelectionKey.OP_READ, theObject);
+ *          9.boolean isAcceptable():   服务端连接事件是否就绪
+ *          10.boolean isConnectable():   客户端连接事件是否就绪
+ *          11.boolean isReadable():   读事件是否就绪
+ *          12.boolean isWritable():   写事件是否就绪
  *      SelectionKey注意事项
  *          有效性：在处理完一个 SelectionKey 后，通常需要调用 keyIterator.remove() 来从集合中移除它，以避免重复处理
  *          附加对象：可以通过 attach() 和 attachment() 方法将上下文信息附加到选择键上，方便在事件处理时使用
