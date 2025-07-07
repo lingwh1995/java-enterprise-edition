@@ -18,6 +18,7 @@ public class Client {
         SocketChannel sc = SocketChannel.open();
         // 2.连接服务端
         sc.connect(new InetSocketAddress("localhost", PORT));
+        log.debug("客户端启动......");
         Scanner scanner = new Scanner(System.in);
         // 3.发送消息
         while (true) {

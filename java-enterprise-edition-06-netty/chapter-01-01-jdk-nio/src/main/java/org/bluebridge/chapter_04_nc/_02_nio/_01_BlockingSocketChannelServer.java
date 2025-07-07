@@ -1,4 +1,4 @@
-package org.bluebridge.chapter_04_nc;
+package org.bluebridge.chapter_04_nc._02_nio;
 
 import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.ByteBufferUtil;
@@ -12,7 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 阻塞方式实现网络通信
+ * @author lingwh
+ * @desc   阻塞方式实现网络通信-基于NIO的Channel理解阻塞通信模型
+ * @date   2025/7/7 18:01
+ */
+
+/**
+ * NIO模型网络通信Server端
+ * V1.0 服务端接收多个客户端单条消息发送和接收需求
+ *
+ * 测试方法:
+ *  1.cmd -> telnet 127.0.0.1 8080/telnet localhost 8080 ->直接输入内容/按下Ctrl+]后输入 send +内容 ->查看idea控制台接收到的信息
+ *  2.启动多个客户端
  */
 @Slf4j
 public class _01_BlockingSocketChannelServer {
@@ -20,7 +31,7 @@ public class _01_BlockingSocketChannelServer {
     private static final int PORT = 8080;
 
     public static void main(String[] args) throws IOException {
-        log.debug("阻塞服务器启动，端口：{}......", PORT);
+        log.info("阻塞服务器启动，端口：{}......", PORT);
         // 1.创建服务器
         ServerSocketChannel ssc = ServerSocketChannel.open();
         // 2.绑定监听端口
@@ -32,20 +43,20 @@ public class _01_BlockingSocketChannelServer {
         // 4.循环监听
         while (true) {
             // 5.等待与客户端建立连接
-            log.debug("waiting connecting......");
+            log.info("waiting connecting......");
             // 6.accept建立与客户端连接，SocketChannel用来与客户端之间通信
             SocketChannel sc = ssc.accept(); // 阻塞方法，线程停止运行
-            log.debug("connected......{}", sc);
+            log.info("connected......{}", sc);
             channels.add(sc);
             for (SocketChannel channel : channels) {
                 // 5. 接收客户端发送的数据
-                log.debug("before read......{}", channel);
+                log.info("before read......{}", channel);
                 int len = channel.read(buffer);; // 阻塞方法，线程停止运行
-                log.debug("本次读取到的数据长度：{}", len);
+                log.info("本次读取到的数据长度：{}", len);
                 buffer.flip();
                 ByteBufferUtil.debugRead(buffer);
                 buffer.clear();
-                log.debug("after read......{}", channel);
+                log.info("after read......{}", channel);
             }
         }
     }
