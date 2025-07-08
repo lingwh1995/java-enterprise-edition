@@ -5,7 +5,9 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc
+ * @date   2019/4/5 12:38
  */
 @Aspect
 public class LogAspect {

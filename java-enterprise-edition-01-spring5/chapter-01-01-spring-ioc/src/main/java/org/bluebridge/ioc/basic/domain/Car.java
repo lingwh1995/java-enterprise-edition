@@ -1,7 +1,9 @@
 package org.bluebridge.ioc.basic.domain;
 
 /**
- * 构造方法注入
+ * @author lingwh
+ * @desc   演示构造方法注入
+ * @date   2019/3/17 9:38
  */
 public class Car {
     private String name;

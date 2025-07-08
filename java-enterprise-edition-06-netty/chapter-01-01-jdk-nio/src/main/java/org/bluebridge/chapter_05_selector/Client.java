@@ -10,6 +10,11 @@ import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 import java.util.Scanner;
 
+/**
+ * @author lingwh
+ * @desc   测试使用selector实现Server的客户端
+ * @date   2025/7/8 9:06
+ */
 @Slf4j
 public class Client {
     private static final int PORT = 8080;

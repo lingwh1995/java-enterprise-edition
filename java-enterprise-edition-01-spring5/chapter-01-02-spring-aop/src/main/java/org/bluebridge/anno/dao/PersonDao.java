@@ -3,6 +3,11 @@ package org.bluebridge.anno.dao;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Repository;
 
+/**
+ * @author lingwh
+ * @desc
+ * @date   2019/3/21 14:30
+ */
 @Repository("personDao")
 @EnableAspectJAutoProxy(exposeProxy = true)
 public class PersonDao {

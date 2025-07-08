@@ -6,6 +6,12 @@ import org.junit.Test;
 import java.nio.ByteBuffer;
 
 /**
+ * @author lingwh
+ * @desc   ByteBuffer的常用方法
+ * @date   2025/6/20 11:42
+ */
+
+/**
  * ByteBuffer的常用方法：
  *   position()  设置postion的值
  *   limit()     设置limit的值

@@ -8,6 +8,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 
+/**
+ * @author lingwh
+ * @desc   测试基于配置文件的AOP
+ * @date   2019/3/21 9:55
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext-aop-profile.xml")
 public class AoPProfileTest {

@@ -15,8 +15,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
 /**
+ * @author lingwh
+ * @desc   使用 多线程 + selector 实现Server
+ * @date   2025/6/29 15:43
+ */
+
+/**
  * V6.0 客户端与服务端可以建立连接，可以正常通信（V4.0多个worker版）
- * 使用 多线程 + selector 实现Server
  *
  * tag:1 处代码解决了问题
  *

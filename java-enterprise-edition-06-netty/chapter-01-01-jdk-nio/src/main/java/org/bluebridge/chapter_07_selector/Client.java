@@ -9,6 +9,11 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.Scanner;
 
+/**
+ * @author lingwh
+ * @desc   测试Selector对象、SelectionKey对象详解的客户端
+ * @date   2025/6/28 16:35
+ */
 @Slf4j
 public class Client {
     private static final int PORT = 8080;

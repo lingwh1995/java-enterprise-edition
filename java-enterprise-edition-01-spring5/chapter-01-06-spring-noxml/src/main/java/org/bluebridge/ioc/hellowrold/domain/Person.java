@@ -3,7 +3,9 @@ package org.bluebridge.ioc.hellowrold.domain;
 import org.springframework.stereotype.Controller;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc
+ * @date   2019/4/2 9:10
  */
 @Controller
 public class Person {

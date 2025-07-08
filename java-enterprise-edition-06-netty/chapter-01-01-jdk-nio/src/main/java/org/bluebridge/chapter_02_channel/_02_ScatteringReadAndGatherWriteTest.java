@@ -11,7 +11,9 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 
 /**
- * 分散读和集中写
+ * @author lingwh
+ * @desc   NIO中FileChannel的分散读和集中写
+ * @date   2025/6/24 16:08
  */
 public class _02_ScatteringReadAndGatherWriteTest {
 

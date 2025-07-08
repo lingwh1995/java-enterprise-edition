@@ -7,6 +7,11 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+/**
+ * @author lingwh
+ * @desc
+ * @date   2019/3/17 9:45
+ */
 public class IoCBasicTest {
 
     @Test

@@ -7,7 +7,12 @@ import java.io.*;
 import java.nio.channels.FileChannel;
 
 /**
- * FileChannel的 transferTo() 方法测试
+ *
+ */
+/**
+ * @author lingwh
+ * @desc   NIO中FileChannel的transferTo()方法测试
+ * @date   2025/6/24 17:08
  */
 @Slf4j
 public class _03_FileChannelTransferToTest {

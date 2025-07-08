@@ -6,7 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc
+ * @date   2019/4/2 9:16
  */
 @Configuration
 //代表扫描的包的路径是: org.bluebridge,并且扫描的时候根据注解过滤掉被@Controller和@Service的bean,也可以自定义扫描过滤规则

@@ -13,8 +13,13 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
 /**
+ * @author lingwh
+ * @desc   使用 多线程 + selector 实现Server
+ * @date   2025/6/29 9:45
+ */
+
+/**
  * V2.0 客户端无法与服务端可以建立连接，多个客户端时从第二个客户端开始无法与服务端通信
- * 使用 多线程 + selector 实现Server
  *
  * 多个客户端时从第二个客户端开始无法与服务端通信成功原因分析
  *      // 在boss线程中执行 => 第一个客户端连接时: main() => sc.register(worker.selector, SelectionKey.OP_READ, null); => OP_READ事件注册成功

@@ -5,6 +5,11 @@ import org.junit.Test;
 
 import java.nio.ByteBuffer;
 
+/**
+ * @author lingwh
+ * @desc   ByteBuffer基础使用
+ * @date   2025/6/20 9:38
+ */
 public class _01_ByteBufferHelloWorldTest {
 
     /**

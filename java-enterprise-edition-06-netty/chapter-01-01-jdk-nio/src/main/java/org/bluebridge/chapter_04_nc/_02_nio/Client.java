@@ -8,6 +8,11 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.Scanner;
 
+/**
+ * @author lingwh
+ * @desc   测试阻塞方式实现网络通信-基于NIO的Channel理解阻塞通信模型的客户端
+ * @date   2025/6/26 18:01
+ */
 @Slf4j
 public class Client {
 

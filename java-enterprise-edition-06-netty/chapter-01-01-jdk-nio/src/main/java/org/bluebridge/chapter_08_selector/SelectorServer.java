@@ -11,7 +11,9 @@ import java.nio.charset.Charset;
 import java.util.Iterator;
 
 /**
- * 从事件驱动角度理解 selector 网络通信
+ * @author lingwh
+ * @desc   从事件驱动角度理解 selector 网络通信
+ * @date   2025/6/28 17:35
  */
 @Slf4j
 public class SelectorServer {

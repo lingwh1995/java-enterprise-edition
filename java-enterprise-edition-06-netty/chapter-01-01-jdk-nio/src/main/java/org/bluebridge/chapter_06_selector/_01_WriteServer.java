@@ -14,7 +14,9 @@ import java.nio.charset.Charset;
 import java.util.Iterator;
 
 /**
- * 没有解决写大量数据阻塞问题
+ * @author lingwh
+ * @desc   写服务器-没有解决写大量数据阻塞问题
+ * @date   2025/6/28 9:06
  */
 @Slf4j
 public class _01_WriteServer {

@@ -8,13 +8,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-
-/**  
- * @ClassName: Client  
- * @Description: TODO(IOC Client)  
- * @author ronin  
- * @date 2019年3月20日  
- *    
+/**
+ * @author lingwh
+ * @desc
+ * @date   2019/3/19 14:55
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext-ioc-profile.xml")

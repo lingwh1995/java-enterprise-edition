@@ -9,7 +9,9 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * JDK7 新增了 Files 类
+ * @author lingwh
+ * @desc   JDK7新增的Files 类
+ * @date   2025/6/25 16:05
  */
 @Slf4j
 public class _02_JDK7FilesTest {

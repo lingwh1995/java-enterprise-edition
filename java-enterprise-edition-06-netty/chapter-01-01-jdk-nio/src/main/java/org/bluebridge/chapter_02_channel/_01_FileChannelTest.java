@@ -8,7 +8,9 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 /**
- * NIO使用FileChannel读取文件中的数据
+ * @author lingwh
+ * @desc   NIO使用FileChannel读取文件中的数据
+ * @date   2025/6/24 15:08
  */
 @Slf4j
 public class _01_FileChannelTest {

@@ -3,11 +3,9 @@ package org.bluebridge.ioc.profile.dao;
 import org.bluebridge.ioc.profile.domain.User;
 
 /**
- * @ClassName: Dog  
- * @Description: TODO(这里用一句话描述这个类的作用)  
- * @author ronin  
- * @date 2019年3月19日  
- *    
+ * @author lingwh
+ * @desc
+ * @date   2019/3/19 14:22
  */
 public class UserDao {
 

@@ -9,6 +9,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 
+/**
+ * @author lingwh
+ * @desc
+ * @date   2019/3/21 14:40
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext-aop-anno.xml")
 public class AoPAnnoTest {

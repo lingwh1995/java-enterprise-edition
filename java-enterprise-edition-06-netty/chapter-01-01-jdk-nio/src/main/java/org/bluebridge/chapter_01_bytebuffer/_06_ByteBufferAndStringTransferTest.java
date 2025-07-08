@@ -7,7 +7,9 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
 /**
- * ByteBuffer和字符串互相转换
+ * @author lingwh
+ * @desc   ByteBuffer和字符串互相转换
+ * @date   2025/6/22 14:23
  */
 public class _06_ByteBufferAndStringTransferTest {
 

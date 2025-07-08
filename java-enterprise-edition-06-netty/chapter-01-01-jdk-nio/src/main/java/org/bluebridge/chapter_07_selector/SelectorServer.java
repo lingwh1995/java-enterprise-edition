@@ -14,6 +14,12 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
+ * @author lingwh
+ * @desc   Selector对象、SelectionKey对象详解
+ * @date   2025/6/28 16:32
+ */
+
+/**
  * Selector方法详解（总共包含以下10个方法）
  *     1.Selector open(): 创建一个Selector对象
  *     2.boolean isOpen(): 是否是open状态，如果调用了close()方法则会返回false

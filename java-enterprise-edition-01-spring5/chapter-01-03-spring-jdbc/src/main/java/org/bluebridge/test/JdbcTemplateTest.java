@@ -18,9 +18,14 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author lingwh
+ * @desc   测试SpringJdbcTemplate的操作
+ * @date   2019/3/25 15:12
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
-public class JdbcSpringTest {
+public class JdbcTemplateTest {
 
     @Resource(name="jdbcTemplate")
     private JdbcTemplate jdbcTemplate;
@@ -115,7 +120,9 @@ public class JdbcSpringTest {
 }
 
 /**
- * 把单条查询结果封装到实体中
+ * @author lingwh
+ * @desc   把单条查询结果封装到实体中
+ * @date   2019/3/25 15:20
  */
 class BeanMapper implements RowMapper<Account> {
     @Override
@@ -129,7 +136,9 @@ class BeanMapper implements RowMapper<Account> {
 }
 
 /**
- * 把单条查询结果封装到Map中
+ * @author lingwh
+ * @desc   把单条查询结果封装到Map中
+ * @date   2019/3/25 15:25
  */
 class BeanMapperMap implements RowMapper<Map<String,String>> {
     @Nullable

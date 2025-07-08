@@ -13,8 +13,13 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
 /**
+ * @author lingwh
+ * @desc   使用 多线程 + selector 实现Server
+ * @date   2025/6/29 14:28
+ */
+
+/**
  * V5.0 客户端与服务端可以建立连接，可以正常通信
- * 使用 多线程 + selector 实现Server
  *
  * tag:1 处代码解决了问题
  *

@@ -13,6 +13,12 @@ import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 
 /**
+ * @author lingwh
+ * @desc   零配置搭建Spring开发环境测试
+ * @date   2019/4/2 10:26
+ */
+
+/**
  * Profile:
  *      Spring为我们提供的可以根据当前环境,动态的期货和切换一系列组件的功能
  * 开发环境:测试环境、生产环境

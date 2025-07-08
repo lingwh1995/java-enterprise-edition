@@ -5,13 +5,11 @@ import javax.annotation.Resource;
 import org.bluebridge.ioc.anno.dao.CatDao;
 import org.springframework.stereotype.Component;
 
-/**  
- * @ClassName: CatServiceImpl  
- * @Description: TODO(这里用一句话描述这个类的作用)  
- * @author ronin  
- * @date 2019年3月20日  
+/**
+ * @author lingwh
+ * @desc
+ * @date   2019/3/20 9:34
  */
-
 @Component(value="catService")
 public class CatServiceImpl implements ICatService{
 

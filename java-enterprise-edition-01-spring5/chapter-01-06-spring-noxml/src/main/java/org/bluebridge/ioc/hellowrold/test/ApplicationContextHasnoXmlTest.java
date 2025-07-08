@@ -6,10 +6,10 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-
 /**
- * 零配置搭建Spring开发环境测试
- * @author ronin
+ * @author lingwh
+ * @desc   零配置搭建Spring开发环境测试
+ * @date   2019/4/2 9:20
  */
 public class ApplicationContextHasnoXmlTest {
 

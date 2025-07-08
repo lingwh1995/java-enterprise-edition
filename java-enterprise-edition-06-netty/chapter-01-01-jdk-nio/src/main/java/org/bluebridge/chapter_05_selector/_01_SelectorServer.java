@@ -14,7 +14,9 @@ import java.nio.charset.Charset;
 import java.util.Iterator;
 
 /**
- * 使用selector实现Server
+ * @author lingwh
+ * @desc   使用selector实现Server
+ * @date   2025/6/27 9:06
  */
 @Slf4j
 public class _01_SelectorServer {

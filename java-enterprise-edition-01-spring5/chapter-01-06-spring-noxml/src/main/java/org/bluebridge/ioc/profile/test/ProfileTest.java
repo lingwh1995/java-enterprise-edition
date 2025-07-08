@@ -5,6 +5,12 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
+ * @author lingwh
+ * @desc   零配置搭建Spring开发环境测试
+ * @date   2019/4/2 10:30
+ */
+
+/**
  * 如何切换配置环境:
  *      1.在运行时给动态的给JVM配置参数-Dspring.profiles.active=test
  *      2.在代码层面进行控制

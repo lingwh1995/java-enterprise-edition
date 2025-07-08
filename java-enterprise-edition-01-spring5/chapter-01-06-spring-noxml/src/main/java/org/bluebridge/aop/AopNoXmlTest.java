@@ -5,7 +5,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc
+ * @date   2019/4/5 12:40
  */
 public class AopNoXmlTest {
 

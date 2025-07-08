@@ -1,5 +1,10 @@
 package org.bluebridge.profile.dao;
 
+/**
+ * @author lingwh
+ * @desc
+ * @date   2019/3/21 9:42
+ */
 public class CustomerDaoImpl implements CustomerDao{
     public String save() {
         /**

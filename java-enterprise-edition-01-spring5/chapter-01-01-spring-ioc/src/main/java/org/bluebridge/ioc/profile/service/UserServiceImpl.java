@@ -3,11 +3,9 @@ package org.bluebridge.ioc.profile.service;
 import org.bluebridge.ioc.profile.dao.UserDao;
 
 /**
- * @ClassName: UserServiceImpl  
- * @Description: TODO(这里用一句话描述这个类的作用)  
- * @author ronin  
- * @date 2019年3月19日  
- *    
+ * @author lingwh
+ * @desc
+ * @date   2019/3/19 14:32
  */
 public class UserServiceImpl implements IUserService{
 

@@ -15,14 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author ronin
- * @version V1.0
- * @desc    SpringJdbcTemplate的批量操作
- * @since 2019/7/24 16:03
+ * @author lingwh
+ * @desc   测试SpringJdbcTemplate的批量操作
+ * @date   2019/3/25 16:03
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
-public class BatchOperate {
+public class JdbcTemplateBatchOperateTest {
 
     @Resource
     private JdbcTemplate jdbcTemplate;

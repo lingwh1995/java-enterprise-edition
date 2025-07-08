@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 /**
  * @author lingwh
- * @desc   阻塞方式实现网络通信-基于BIO的流理解阻塞通信模型
+ * @desc   测试阻塞方式实现网络通信-基于BIO的流理解阻塞通信模型的客户端
  * @date   2025/7/7 18:01
  */
 

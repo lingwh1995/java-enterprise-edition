@@ -6,7 +6,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 /**
- * 测试使用自己创建的数据源创建JdbcTemplate
+ * @author lingwh
+ * @desc   测试使用自己创建的数据源创建JdbcTemplate
+ * @date   2019/3/25 14:32
  */
 public class JdbcTemplateDataSourceTest {
 

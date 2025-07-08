@@ -4,6 +4,11 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Pointcut;
 
+/**
+ * @author lingwh
+ * @desc
+ * @date   2019/3/21 9:50
+ */
 public class MyAspectXml {
     /**
      * 定义前置通知

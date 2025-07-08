@@ -13,7 +13,9 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
 /**
- * 使用selector实现Server并处理粘包半包问题
+ * @author lingwh
+ * @desc   使用selector实现Server并处理粘包半包问题
+ * @date   2025/6/27 9:06
  */
 @Slf4j
 public class _02_SelectorServer {

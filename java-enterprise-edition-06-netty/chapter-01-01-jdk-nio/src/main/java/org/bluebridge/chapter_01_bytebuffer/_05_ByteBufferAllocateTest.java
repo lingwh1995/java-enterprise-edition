@@ -5,7 +5,9 @@ import org.junit.Test;
 import java.nio.ByteBuffer;
 
 /**
- * ByteBuffer分配空间的两种方式
+ * @author lingwh
+ * @desc   ByteBuffer分配空间的两种方式
+ * @date   2025/6/22 11:19
  */
 public class _05_ByteBufferAllocateTest {
 

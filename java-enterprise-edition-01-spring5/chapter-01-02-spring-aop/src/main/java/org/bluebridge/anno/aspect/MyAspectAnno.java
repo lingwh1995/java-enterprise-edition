@@ -5,6 +5,11 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author lingwh
+ * @desc
+ * @date   2019/3/21 14:38
+ */
 @Aspect
 @Component
 public class MyAspectAnno {

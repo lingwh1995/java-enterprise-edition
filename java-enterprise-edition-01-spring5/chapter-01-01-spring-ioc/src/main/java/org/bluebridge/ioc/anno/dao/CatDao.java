@@ -5,12 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 
-/**  
- * @ClassName: CatDao  
- * @Description: TODO(这里用一句话描述这个类的作用)  
- * @author ronin  
- * @date 2019年3月20日  
- *    
+/**
+ * @author lingwh
+ * @desc
+ * @date   2019/3/20 9:30
  */
 @Repository(value="catDao")
 public class CatDao {

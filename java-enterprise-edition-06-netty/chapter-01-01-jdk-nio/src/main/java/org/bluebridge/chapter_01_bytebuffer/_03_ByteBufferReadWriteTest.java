@@ -6,7 +6,9 @@ import org.junit.Test;
 import java.nio.ByteBuffer;
 
 /**
- * 两个ByteBuffer读写测试
+ * @author lingwh
+ * @desc   两个ByteBuffer读写测试
+ * @date   2025/6/20 16:37
  */
 public class _03_ByteBufferReadWriteTest {
 

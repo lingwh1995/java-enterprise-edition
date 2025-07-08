@@ -10,8 +10,13 @@ import java.nio.channels.*;
 import java.util.Iterator;
 
 /**
+ * @author lingwh
+ * @desc   使用 多线程 + selector 实现Server
+ * @date   2025/6/29 9:24
+ */
+
+/**
  * V1.0 客户端无法与服务端可以建立连接，无法正常通信
- * 使用 多线程 + selector 实现Server
  *
  * 客户端无法与服务端通信成功原因分析
  *      // 在worker-0线程中执行 => main() => worker.register(); => thread.start(); => selector.select(); => selector阻塞  //会导致selector阻塞(处于阻塞状态时其他通道上的事件无法被注册到这个selector上)
