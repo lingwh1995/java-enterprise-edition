@@ -3,7 +3,9 @@ package org.bluebridge.ioc.autowiredlocation.dbutils;
 import org.springframework.stereotype.Component;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc
+ * @date   2019/4/11 10:42
  */
 @Component
 public class Dbutils {

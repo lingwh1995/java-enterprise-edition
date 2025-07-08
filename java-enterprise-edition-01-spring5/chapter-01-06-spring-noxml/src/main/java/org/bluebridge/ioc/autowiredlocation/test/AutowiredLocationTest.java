@@ -7,7 +7,9 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc   Autowired注解书写位置测试
+ * @date   2019/4/11 10:45
  */
 public class AutowiredLocationTest {
 

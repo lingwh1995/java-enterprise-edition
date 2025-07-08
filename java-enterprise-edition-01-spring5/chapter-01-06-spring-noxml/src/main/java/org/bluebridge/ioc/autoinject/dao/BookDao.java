@@ -6,7 +6,9 @@ import org.springframework.stereotype.Repository;
 import javax.inject.Inject;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc
+ * @date   2019/4/12 12:13
  */
 @Repository
 public class BookDao {

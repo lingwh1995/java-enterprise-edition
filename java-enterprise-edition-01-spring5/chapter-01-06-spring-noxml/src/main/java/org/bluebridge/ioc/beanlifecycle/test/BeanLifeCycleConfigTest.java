@@ -6,7 +6,9 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc
+ * @date   2019/4/10 11:32
  */
 public class BeanLifeCycleConfigTest {
 

@@ -7,7 +7,9 @@ import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.stereotype.Component;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc   零配置搭建Spring开发环境测试
+ * @date   2019/4/4 10:44
  */
 @Component
 public class MyBeanFactoryPostProcess implements BeanFactoryPostProcessor {

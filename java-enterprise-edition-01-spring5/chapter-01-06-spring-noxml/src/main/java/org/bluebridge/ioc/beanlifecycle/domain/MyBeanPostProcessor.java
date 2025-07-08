@@ -6,8 +6,9 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 /**
- * 后置处理器:初始化前后进行处理工作
- * @author ronin
+ * @author lingwh
+ * @desc   后置处理器:初始化前后进行处理工作
+ * @date   2019/4/10 11:25
  */
 @Component
 public class MyBeanPostProcessor implements BeanPostProcessor{

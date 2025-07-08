@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc
+ * @date   2019/4/11 10:32
  */
 @Repository
 public class UserDao {

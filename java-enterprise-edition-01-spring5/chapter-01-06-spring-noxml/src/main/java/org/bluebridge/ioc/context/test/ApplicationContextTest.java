@@ -5,7 +5,12 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class ContextTest {
+/**
+ * @author lingwh
+ * @desc
+ * @date   2019/4/7 8:21
+ */
+public class ApplicationContextTest {
 
     @Test
     public void testApplicationContext(){

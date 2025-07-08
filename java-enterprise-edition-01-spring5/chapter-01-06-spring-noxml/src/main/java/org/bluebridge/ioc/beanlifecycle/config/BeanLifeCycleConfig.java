@@ -8,7 +8,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc
+ * @date   2019/4/10 11:29
  */
 @Configuration
 @ComponentScan("org.bluebridge.ioc.beanlifecycle.domain")

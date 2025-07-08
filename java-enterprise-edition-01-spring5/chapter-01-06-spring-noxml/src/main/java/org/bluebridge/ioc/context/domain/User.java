@@ -1,5 +1,10 @@
 package org.bluebridge.ioc.context.domain;
 
+/**
+ * @author lingwh
+ * @desc
+ * @date   2019/4/7 8:16
+ */
 public class User {
     public String name;
     private int age;

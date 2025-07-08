@@ -3,7 +3,9 @@ package org.bluebridge.ioc.autoinject.dbutils;
 import org.springframework.stereotype.Component;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc
+ * @date   2019/4/12 12:21
  */
 @Component(value="dbutils")
 public class DBUtils {

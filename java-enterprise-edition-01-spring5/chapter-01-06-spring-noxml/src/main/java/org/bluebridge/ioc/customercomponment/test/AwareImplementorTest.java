@@ -5,7 +5,9 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc
+ * @date   2019/4/6 13:47
  */
 public class AwareImplementorTest {
 
@@ -13,4 +15,5 @@ public class AwareImplementorTest {
     public void testAwareImplementor() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
     }
+
 }

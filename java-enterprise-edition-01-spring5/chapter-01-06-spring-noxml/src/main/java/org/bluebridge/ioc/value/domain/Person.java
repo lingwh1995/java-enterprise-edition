@@ -3,7 +3,9 @@ package org.bluebridge.ioc.value.domain;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc   零配置搭建Spring开发环境测试
+ * @date   2019/4/3 14:28
  */
 public class Person {
     /**

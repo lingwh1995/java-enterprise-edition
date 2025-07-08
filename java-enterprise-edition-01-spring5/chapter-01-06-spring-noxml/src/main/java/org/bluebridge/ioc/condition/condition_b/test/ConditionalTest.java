@@ -5,9 +5,9 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * @Conditional：
- *  可以写在方法上或者类上
- * @author ronin
+ * @author lingwh
+ * @desc   @Conditional可以写在方法上或者类上
+ * @date   2019/4/8 14:28
  */
 public class ConditionalTest {
 

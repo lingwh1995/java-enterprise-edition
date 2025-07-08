@@ -4,7 +4,9 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc
+ * @date   2019/4/10 11:22
  */
 public class Dog {
 

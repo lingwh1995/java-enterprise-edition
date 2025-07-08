@@ -7,7 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc
+ * @date   2019/4/11 10:40
  */
 @ComponentScan({"org.bluebridge.ioc.autowiredlocation.controller",
         "org.bluebridge.ioc.autowiredlocation.service",

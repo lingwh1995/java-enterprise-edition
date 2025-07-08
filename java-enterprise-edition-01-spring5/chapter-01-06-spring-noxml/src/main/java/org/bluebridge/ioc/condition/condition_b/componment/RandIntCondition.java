@@ -5,7 +5,9 @@ import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc
+ * @date   2019/4/8 14:23
  */
 public class RandIntCondition implements Condition {
     @Override

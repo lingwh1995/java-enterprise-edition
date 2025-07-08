@@ -1,7 +1,9 @@
 package org.bluebridge.ioc.beanlifecycle.domain;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc
+ * @date   2019/4/10 11:17
  */
 public class Car {
 

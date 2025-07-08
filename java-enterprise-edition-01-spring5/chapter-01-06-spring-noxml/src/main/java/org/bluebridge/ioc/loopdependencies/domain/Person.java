@@ -3,7 +3,9 @@ package org.bluebridge.ioc.loopdependencies.domain;
 import org.springframework.stereotype.Controller;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc   零配置搭建Spring开发环境测试
+ * @date   2019/4/4 10:34
  */
 @Controller
 public class Person {

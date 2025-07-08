@@ -10,7 +10,9 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc
+ * @date   2019/4/8 11:25
  */
 public class WindowsConditional implements Condition {
 

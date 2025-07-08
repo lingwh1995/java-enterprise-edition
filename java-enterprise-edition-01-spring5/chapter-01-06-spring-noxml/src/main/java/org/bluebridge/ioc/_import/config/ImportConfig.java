@@ -6,7 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc
+ * @date   2019/4/13 14:25
  */
 @Configuration
 //导入一个类

@@ -6,8 +6,9 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * 零配置搭建Spring开发环境测试
- * @author ronin
+ * @author lingwh
+ * @desc   Spring循环依赖
+ * @date   2019/4/4 10:46
  */
 public class SpringLoopDependenciesTest {
 

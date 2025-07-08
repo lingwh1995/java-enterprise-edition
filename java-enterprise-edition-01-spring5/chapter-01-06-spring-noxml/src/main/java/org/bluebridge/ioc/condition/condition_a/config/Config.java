@@ -6,7 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc
+ * @date   2019/4/8 11:23
  */
 //@Conditional({WindowsConditional.class})
 //意味着只有当满足Conditional的子类的方法中的条件,这个类中所有注册bean的方法才会生效

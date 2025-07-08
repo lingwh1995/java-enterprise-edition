@@ -3,7 +3,9 @@ package org.bluebridge.ioc.condition.condition_a.domain;
 import org.springframework.stereotype.Controller;
 
 /**
- * @author ronin
+ * @author lingwh
+ * @desc
+ * @date   2019/4/8 11:21
  */
 @Controller
 public class Person {
