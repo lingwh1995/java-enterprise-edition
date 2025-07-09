@@ -125,7 +125,7 @@ public class RestTemplateTest {
         HttpHeaders headers = new HttpHeaders();
         //header可以不设置值
         //headers.set("phone", "1234567");
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+        MultiValueMap<String, String> params = new LinkedMultiValueMap();
         params.add("name", "zhaoliu");
         params.add("age", "55");
         HttpEntity httpEntity = new HttpEntity(params, headers);
@@ -149,7 +149,7 @@ public class RestTemplateTest {
         HttpHeaders headers = new HttpHeaders();
         //header可以不设置值
         //headers.set("phone", "1234567");
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+        MultiValueMap<String, String> params = new LinkedMultiValueMap();
         params.add("name", "zhaoliu");
         params.add("age", "55");
         HttpEntity httpEntity = new HttpEntity(params, headers);
@@ -182,7 +182,7 @@ public class RestTemplateTest {
         HttpHeaders headers = new HttpHeaders();
         //header可以不设置值
         //headers.set("phone", "1234567");
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+        MultiValueMap<String, String> params = new LinkedMultiValueMap();
         params.add("name", "zhaoliu");
         params.add("age", "55");
         HttpEntity httpEntity = new HttpEntity(params, headers);
