@@ -7,7 +7,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
- * SpringMVC重定向传
+ * @author lingwh
+ * @desc
+ * @date   2019/6/20 15:09
+ */
+
+/**
+ * SpringMVC重定向时参数传递
  *  1.把参数拼接到URL中
  *  2.把参数放在Session中,重定向到一个页面或者Controlelr
  *  RedirectAttributes的使用:

@@ -16,6 +16,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * @author lingwh
+ * @desc   @ModelAttribuate注解详解
+ * @date   2019/6/20 10:20
+ */
+
+/**
  * ModelAttribuate注解:
  *      1.何时运行:被@ModelAttribuate标注的方法，SpringMVC执行每一个方法的时候都会被调用一次
  *      2.复杂情况如何处理:从数据库中查询出来的同一个数据被放入到到多个不同域中，Map<String,Object>/Model/ModelMap,以哪个模型中

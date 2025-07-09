@@ -6,6 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
+ * @author lingwh
+ * @desc   ant风格通配符
+ * @date   2019/6/20 13:25
+ */
+
+/**
  * 使用ant风格通配符实现通用的逻辑视图跳转控制器
  *      此类是：Springmvc Ant 风格匹配url
  *          ? 匹配一个任意的字符

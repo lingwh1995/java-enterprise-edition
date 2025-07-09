@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Map;
 
 /**
- * @author ronin
- * @version V1.0
- * @description
- * @class DealJsonController
- * @date 2019/6/19 20:09
+ * @author lingwh
+ * @desc
+ * @date   2019/6/19 20:09
  */
 @Controller
 public class DealJsonController {

@@ -10,11 +10,10 @@ import org.springframework.web.servlet.View;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
-
 /**
- * SpringMVC使用ModelAndView作为模型:
- *      addObject(String attributeName,Object object):默认把值放在request域对象中
- *
+ * @author lingwh
+ * @desc   SpringMVC使用ModelAndView作为模型:addObject(String attributeName,Object object):默认把值放在request域对象中
+ * @date   2019/6/20 9:15
  */
 @Controller
 @SessionAttributes(value="time1")

@@ -3,6 +3,11 @@ package org.bluebridge.example.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * @author lingwh
+ * @desc
+ * @date   2019/6/20 9:08
+ */
 @Controller
 public class InterceptorController {
 
@@ -17,4 +22,5 @@ public class InterceptorController {
         System.out.println("testInterceptor2......");
         return "success";
     }
+
 }

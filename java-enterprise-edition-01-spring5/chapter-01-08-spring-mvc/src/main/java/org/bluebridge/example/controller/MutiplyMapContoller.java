@@ -10,11 +10,17 @@ import java.util.Date;
 import java.util.Map;
 
 /**
+ * @author lingwh
+ * @desc   SpringMVC中的模型
+ * @date   2019/6/20 14:22
+ */
+
+/**
  * SpringMVC中的模型:
- *      1.Model
- *      2.Map
- *      3.ModelMap
- *      4.ModelAndView
+ *     1.Model
+ *     2.Map
+ *     3.ModelMap
+ *     4.ModelAndView
  */
 @Controller
 public class MutiplyMapContoller {
@@ -72,4 +78,5 @@ public class MutiplyMapContoller {
         //视图页面的a将显示为"update" 而不是"new"
         return mv;
     }
+
 }

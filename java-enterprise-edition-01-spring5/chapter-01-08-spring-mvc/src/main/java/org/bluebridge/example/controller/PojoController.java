@@ -7,6 +7,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
+ * @author lingwh
+ * @desc
+ * @date   2019/6/20 14:07
+ */
+
+/**
  * SpringMVC接受POJO类型的参数
  *      支持级联操作,注意事项:
  *          1.User中有一个属性是Address类型的，如果这个Address没有无参构造方法，则在级联操作时会发生异常
