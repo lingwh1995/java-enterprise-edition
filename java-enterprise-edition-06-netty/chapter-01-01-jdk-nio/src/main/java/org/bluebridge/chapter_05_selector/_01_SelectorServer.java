@@ -18,13 +18,13 @@ import java.util.Iterator;
  * @desc   使用selector实现Server
  * @date   2025/6/27 9:06
  */
-@Slf4j
+@Slf4j(topic = "·")
 public class _01_SelectorServer {
 
     private static final int PORT = 8080;
 
     public static void main(String[] args) throws IOException {
-        log.debug("非阻塞Selector服务器启动，端口：{}......", PORT);
+        log.info("非阻塞Selector服务器启动，端口：{}......", PORT);
         // 1.创建服务器对象
         ServerSocketChannel ssc = ServerSocketChannel.open();
         // 2.设置非阻塞
@@ -38,7 +38,7 @@ public class _01_SelectorServer {
         SelectionKey sscKey = ssc.register(selector, 0, null);
         // 5.key只关注accept事件
         sscKey.interestOps(SelectionKey.OP_ACCEPT);
-        log.debug("register key: {}", sscKey);
+        log.info("register key: {}", sscKey);
         */
 
         // 把Channel注册到Selector上写法二
@@ -54,7 +54,7 @@ public class _01_SelectorServer {
             Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
             while (iterator.hasNext()) {
                 SelectionKey key = iterator.next();
-                log.debug("key: {}", key);
+                log.info("key: {}", key);
                 // 处理完key时，要从 selectKeys 集合中删除，否则下次处理就会有问题
                 iterator.remove();
                 // 9.区分事件类型
@@ -64,8 +64,8 @@ public class _01_SelectorServer {
                     sc.configureBlocking(false);
                     SelectionKey scKey = sc.register(selector, 0, null);
                     scKey.interestOps(SelectionKey.OP_READ);
-                    log.debug("sc: {}", sc);
-//                    log.debug("scKey: {}", scKey);
+                    log.info("sc: {}", sc);
+//                    log.info("scKey: {}", scKey);
                 } else if (key.isReadable()) { // 如果是读事件
                     try {
                         SocketChannel channel = (SocketChannel) key.channel();
@@ -77,7 +77,7 @@ public class _01_SelectorServer {
                         } else {
                             buffer.flip();
                             ByteBufferUtil.debugAll(buffer);
-                            log.debug("读取到的来自客户端的数据： {}", Charset.defaultCharset().decode(buffer));
+                            log.info("读取到的来自客户端的数据： {}", Charset.defaultCharset().decode(buffer));
                         }
                     } catch (IOException e) {
                         e.printStackTrace();

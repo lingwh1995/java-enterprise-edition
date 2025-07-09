@@ -1,5 +1,6 @@
 package org.bluebridge.chapter_01_bytebuffer;
 
+import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.ByteBufferUtil;
 import org.junit.Test;
 
@@ -10,6 +11,7 @@ import java.nio.ByteBuffer;
  * @desc   ByteBuffer基础使用
  * @date   2025/6/20 9:38
  */
+@Slf4j(topic = "·")
 public class _01_ByteBufferHelloWorldTest {
 
     /**
@@ -40,7 +42,7 @@ public class _01_ByteBufferHelloWorldTest {
          * 调用get()方法后 =>
          *  1.position = position + 1;      // position位置会后移一位
          */
-        System.out.println(buffer.get()); // 读取到的数据会转换为10进制数
+        log.info("buffer.get() = {}", buffer.get()); // 读取到的数据会转换为10进制数
         ByteBufferUtil.debugAll(buffer, 5);
 
         /**

@@ -25,7 +25,7 @@ import java.util.Iterator;
  *
  * 核心思路：保证 sc.register(selector, SelectionKey.OP_READ, null); 执行之前，selector处于非阻塞状态
  */
-@Slf4j
+@Slf4j(topic = "·")
 public class _05_MultiThreadServer {
 
     private static final int PORT = 8080;
@@ -49,12 +49,12 @@ public class _05_MultiThreadServer {
                 if(key.isAcceptable()) {
                     SocketChannel sc = ssc.accept();
                     sc.configureBlocking(false);
-                    log.debug("connected......{}", sc.getRemoteAddress());
+                    log.info("connected......{}", sc.getRemoteAddress());
                     // 2.关联worker中的selector
-                    log.debug("before register......{}", sc.getRemoteAddress());
+                    log.info("before register......{}", sc.getRemoteAddress());
                     worker.init();
                     sc.register(worker.selector, SelectionKey.OP_READ, null);  // 在boss线程中执行
-                    log.debug("after register......{}", sc.getRemoteAddress());
+                    log.info("after register......{}", sc.getRemoteAddress());
                 }
             }
         }
@@ -77,7 +77,7 @@ public class _05_MultiThreadServer {
                 start = true;
             }
             selector.wakeup(); // tag:1
-            log.debug("init() => thread name......{}", Thread.currentThread().getName());
+            log.info("init() => thread name......{}", Thread.currentThread().getName());
         }
 
         @Override
@@ -85,7 +85,7 @@ public class _05_MultiThreadServer {
             while (true) {
                 try {
                     selector.select();   // 在worker-0线程中执行
-                    log.debug("run() => thread name......{}", Thread.currentThread().getName());
+                    log.info("run() => thread name......{}", Thread.currentThread().getName());
                     Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
                     while (iterator.hasNext()) {
                         SelectionKey key = iterator.next();
@@ -93,7 +93,7 @@ public class _05_MultiThreadServer {
                         if (key.isReadable()) {
                             ByteBuffer buffer = ByteBuffer.allocate(16);
                             SocketChannel sc = (SocketChannel) key.channel();
-                            log.debug("readed......{}", sc.getRemoteAddress());
+                            log.info("readed......{}", sc.getRemoteAddress());
                             sc.read(buffer);
                             buffer.flip();
                             ByteBufferUtil.debugAll(buffer);

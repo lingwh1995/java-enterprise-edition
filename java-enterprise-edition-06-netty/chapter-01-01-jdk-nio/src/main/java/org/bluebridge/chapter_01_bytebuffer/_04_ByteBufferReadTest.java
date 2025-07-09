@@ -1,5 +1,6 @@
 package org.bluebridge.chapter_01_bytebuffer;
 
+import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.ByteBufferUtil;
 import org.junit.Test;
 
@@ -10,6 +11,7 @@ import java.nio.ByteBuffer;
  * @desc   ByteBuffer读数据测试
  * @date   2025/6/21 10:19
  */
+@Slf4j(topic = "·")
 public class _04_ByteBufferReadTest {
 
     /**
@@ -25,12 +27,12 @@ public class _04_ByteBufferReadTest {
         buffer.flip();
 
         // 读取一个字节
-        System.out.println((char)buffer.get());
+        log.info("(char)buffer.get(): {}", (char)buffer.get());
         // 使用字节数组一次读取多个字节
         byte[] b = new byte[3];
         buffer.get(b);
         String s = new String(b);
-        System.out.println(s);
+        log.info("s: {}", s);
     }
 
 }

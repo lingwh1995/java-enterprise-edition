@@ -1,5 +1,6 @@
 package org.bluebridge.chapter_02_channel;
 
+import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.ByteBufferUtil;
 import org.junit.Test;
 
@@ -15,6 +16,7 @@ import java.nio.charset.StandardCharsets;
  * @desc   NIO中FileChannel的分散读和集中写
  * @date   2025/6/24 16:08
  */
+@Slf4j(topic = "·")
 public class _02_ScatteringReadAndGatherWriteTest {
 
     /**

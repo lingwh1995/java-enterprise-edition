@@ -11,7 +11,7 @@ import java.nio.ByteBuffer;
  * @desc   处理黏包和半包
  * @date   2025/6/23 16:35
  */
-@Slf4j
+@Slf4j(topic = "·")
 public class _07_StickyPacketAndHalfPacketTest {
 
     /**
@@ -50,9 +50,9 @@ public class _07_StickyPacketAndHalfPacketTest {
         source.flip();
         int oldLimit = source.limit();
         for (int i = 0; i < oldLimit; i++) {
-            log.debug("source.get(i) = {}", source.get(i));
+            log.info("source.get(i) = {}", source.get(i));
             if (source.get(i) == '\n') {
-                System.out.println(i);
+                log.info("i: {}", i);
                 ByteBuffer target = ByteBuffer.allocate(i + 1 - source.position());
                 // 0 ~ limit
                 source.limit(i + 1);

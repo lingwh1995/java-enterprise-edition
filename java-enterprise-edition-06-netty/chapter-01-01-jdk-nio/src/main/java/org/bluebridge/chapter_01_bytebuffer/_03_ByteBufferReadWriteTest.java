@@ -1,5 +1,6 @@
 package org.bluebridge.chapter_01_bytebuffer;
 
+import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.ByteBufferUtil;
 import org.junit.Test;
 
@@ -10,6 +11,7 @@ import java.nio.ByteBuffer;
  * @desc   两个ByteBuffer读写测试
  * @date   2025/6/20 16:37
  */
+@Slf4j(topic = "·")
 public class _03_ByteBufferReadWriteTest {
 
     @Test

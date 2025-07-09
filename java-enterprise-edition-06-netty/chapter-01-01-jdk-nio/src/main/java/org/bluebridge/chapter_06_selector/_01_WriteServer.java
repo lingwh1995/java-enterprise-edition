@@ -18,7 +18,7 @@ import java.util.Iterator;
  * @desc   写服务器-没有解决写大量数据阻塞问题
  * @date   2025/6/28 9:06
  */
-@Slf4j
+@Slf4j(topic = "·")
 public class _01_WriteServer {
 
     private static final int PORT = 8080;
@@ -33,7 +33,7 @@ public class _01_WriteServer {
         ssc.bind(new InetSocketAddress(PORT));
 
         while (true) {
-            log.debug("......");
+            log.info("......");
             // 阻塞直到绑定事件发生
             selector.select();
             Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
@@ -54,10 +54,11 @@ public class _01_WriteServer {
                     while (buffer.hasRemaining()) {
                         // 2.返回值代表实际写入的字节数
                         int write = sc.write(buffer);
-                        log.debug("write: {}", write);
+                        log.info("write: {}", write);
                     }
                 }
             }
         }
     }
+
 }

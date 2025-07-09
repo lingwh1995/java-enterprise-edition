@@ -12,7 +12,7 @@ import java.nio.channels.SocketChannel;
  * @desc   写客户端
  * @date   2025/6/26 9:06
  */
-@Slf4j
+@Slf4j(topic = "·")
 public class WriteClient {
 
     private static final int PORT = 8080;
@@ -24,7 +24,7 @@ public class WriteClient {
         while (true) {
             ByteBuffer buffer = ByteBuffer.allocate(1024 * 1024);
             count += sc.read(buffer);
-            log.debug("count: {}", count);
+            log.info("count: {}", count);
             buffer.clear();
         }
     }

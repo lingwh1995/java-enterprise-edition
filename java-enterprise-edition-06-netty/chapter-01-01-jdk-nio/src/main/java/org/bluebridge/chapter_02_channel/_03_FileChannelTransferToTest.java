@@ -14,7 +14,7 @@ import java.nio.channels.FileChannel;
  * @desc   NIO中FileChannel的transferTo()方法测试
  * @date   2025/6/24 17:08
  */
-@Slf4j
+@Slf4j(topic = "·")
 public class _03_FileChannelTransferToTest {
 
     /**
@@ -27,10 +27,10 @@ public class _03_FileChannelTransferToTest {
         ) {
             // 获取文件大小
             long size = from.size();
-            log.debug("文件大小：{}", size);
+            log.info("文件大小：{}", size);
             // 效率高，会使用系统底层零拷贝进行优化，一次最多可以传输2G文件
             long currentTransferDataLength = from.transferTo(0, from.size(), to);
-            System.out.println("本次传输的数据长度 = " + currentTransferDataLength + " byte");
+            log.info("本次传输的数据长度 = {} 字节", currentTransferDataLength);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -54,8 +54,8 @@ public class _03_FileChannelTransferToTest {
             long copySize = 0;
             while(copySize < size){
                 copySize += from.transferTo(copySize, size, to);
-                log.debug("已经拷贝传输的数据大小：{}", copySize);
-                System.out.println("to.position() = " + to.position());
+                log.info("已经拷贝传输的数据大小：{}", copySize);
+                log.info("to.position(): {}", to.position());
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -64,7 +64,7 @@ public class _03_FileChannelTransferToTest {
         }
         // 返回当前JVM运行的纳秒级时间戳
         long end = System.nanoTime();
-        System.out.println("transferTo 用时：" + (end - start) / 1000_000_000.0 + "秒");
+        log.info("transferTo 用时: {} 秒", (end - start) / 1000_000_000.0);
     }
 
 }

@@ -15,7 +15,7 @@ import java.util.Iterator;
  * @desc   从事件驱动角度理解 selector 网络通信
  * @date   2025/6/28 17:35
  */
-@Slf4j
+@Slf4j(topic = "·")
 public class SelectorServer {
 
     private static final int PORT = 8080;
@@ -58,7 +58,7 @@ public class SelectorServer {
                         }else {
                             buffer.flip();
                             ByteBufferUtil.debugAll(buffer);
-                            log.debug("读取到的来自客户端的数据： {}", Charset.defaultCharset().decode(buffer));
+                            log.info("读取到的来自客户端的数据： {}", Charset.defaultCharset().decode(buffer));
                         }
                     }catch (IOException e) {
                         e.printStackTrace();

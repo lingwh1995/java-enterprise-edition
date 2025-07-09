@@ -31,7 +31,7 @@ import java.util.Iterator;
  *      selector对象上，这里的事件能注册成功，客户端就能正确发送数据给服务器，事件注册失败，客户端无法发送数据给服务器，因为事件没有注册到selector对象上
  *
  */
-@Slf4j
+@Slf4j(topic = "·")
 public class _02_MultiThreadServer {
 
     private static final int PORT = 8080;
@@ -55,13 +55,13 @@ public class _02_MultiThreadServer {
                 if(key.isAcceptable()) {
                     SocketChannel sc = ssc.accept();
                     sc.configureBlocking(false);
-                    log.debug("connected......{}", sc.getRemoteAddress());
+                    log.info("connected......{}", sc.getRemoteAddress());
                     // 2.关联worker中的selector
-                    log.debug("before register......{}", sc.getRemoteAddress());
+                    log.info("before register......{}", sc.getRemoteAddress());
                     worker.init();
                     sc.register(worker.selector, SelectionKey.OP_READ, null);  //tag:1 // 在boss线程中执行
-                    log.debug("after register......{}", sc.getRemoteAddress());
-                    log.debug("thread name......{}", Thread.currentThread().getName());
+                    log.info("after register......{}", sc.getRemoteAddress());
+                    log.info("thread name......{}", Thread.currentThread().getName());
                 }
             }
         }
@@ -90,7 +90,7 @@ public class _02_MultiThreadServer {
             while (true) {
                 try {
                     selector.select();   // 在worker-0线程中执行
-                    log.debug("run() => thread name......{}", Thread.currentThread().getName());
+                    log.info("run() => thread name......{}", Thread.currentThread().getName());
                     Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
                     while (iterator.hasNext()) {
                         SelectionKey key = iterator.next();
@@ -98,7 +98,7 @@ public class _02_MultiThreadServer {
                         if (key.isReadable()) {
                             ByteBuffer buffer = ByteBuffer.allocate(16);
                             SocketChannel sc = (SocketChannel) key.channel();
-                            log.debug("readed......{}", sc.getRemoteAddress());
+                            log.info("readed......{}", sc.getRemoteAddress());
                             sc.read(buffer);
                             buffer.flip();
                             ByteBufferUtil.debugAll(buffer);

@@ -30,7 +30,7 @@ import java.util.stream.IntStream;
  * worker数量建议设置为cpu核心数
  *      使用 Runtime.getRuntime().availableProcessors() 获取cpu核心数，docker下获取的是物理机核心数，而非docker容器核心数，所以手工指定最好
  */
-@Slf4j
+@Slf4j(topic = "·")
 public class _06_MultiThreadServer {
 
     private static final int PORT = 8080;
@@ -59,11 +59,11 @@ public class _06_MultiThreadServer {
                 if(key.isAcceptable()) {
                     SocketChannel sc = ssc.accept();
                     sc.configureBlocking(false);
-                    log.debug("connected......{}", sc.getRemoteAddress());
+                    log.info("connected......{}", sc.getRemoteAddress());
                     // 2.关联worker中的selector
-                    log.debug("before register......{}", sc.getRemoteAddress());
+                    log.info("before register......{}", sc.getRemoteAddress());
                     workers[index.getAndIncrement() % workers.length].init(sc);  // boss线程调用，初始化selector，启动worker
-                    log.debug("after register......{}", sc.getRemoteAddress());
+                    log.info("after register......{}", sc.getRemoteAddress());
                 }
             }
         }
@@ -87,7 +87,7 @@ public class _06_MultiThreadServer {
             }
             selector.wakeup();    //boss线程中执行  // tag:1
             sc.register(selector, SelectionKey.OP_READ, null);  //boss线程中执行 // tag:1
-            log.debug("init() => thread name......{}", Thread.currentThread().getName());
+            log.info("init() => thread name......{}", Thread.currentThread().getName());
         }
 
         @Override
@@ -95,7 +95,7 @@ public class _06_MultiThreadServer {
             while (true) {
                 try {
                     selector.select();   // 在worker-0线程中执行
-                    log.debug("run() => thread name......{}", Thread.currentThread().getName());
+                    log.info("run() => thread name......{}", Thread.currentThread().getName());
                     Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
                     while (iterator.hasNext()) {
                         SelectionKey key = iterator.next();
@@ -103,7 +103,7 @@ public class _06_MultiThreadServer {
                         if (key.isReadable()) {
                             ByteBuffer buffer = ByteBuffer.allocate(16);
                             SocketChannel sc = (SocketChannel) key.channel();
-                            log.debug("readed......{}", sc.getRemoteAddress());
+                            log.info("readed......{}", sc.getRemoteAddress());
                             sc.read(buffer);
                             buffer.flip();
                             ByteBufferUtil.debugAll(buffer);

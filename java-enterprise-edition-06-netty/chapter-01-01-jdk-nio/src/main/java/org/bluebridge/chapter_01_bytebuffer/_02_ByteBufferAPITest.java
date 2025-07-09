@@ -1,5 +1,6 @@
 package org.bluebridge.chapter_01_bytebuffer;
 
+import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.ByteBufferUtil;
 import org.junit.Test;
 
@@ -23,6 +24,7 @@ import java.nio.ByteBuffer;
  *   clear()     切换为写模式
  *   put()       写入数据
  */
+@Slf4j(topic = "·")
 public class _02_ByteBufferAPITest {
 
     /**
@@ -40,17 +42,17 @@ public class _02_ByteBufferAPITest {
         ByteBufferUtil.debugAll(buffer, 2);
 
         // 读取第 position=0 时的字符
-        System.out.println((char)buffer.get());
+        log.info("position值为0 = {}", (char)buffer.get());
         ByteBufferUtil.debugAll(buffer, 3);
 
         // 读取第 position=1 时的字符
-        System.out.println((char)buffer.get());
+        log.info("position值为1 = {}", (char)buffer.get());
         ByteBufferUtil.debugAll(buffer, 4);
 
         // 设置position的值
         buffer.position(0);
         ByteBufferUtil.debugAll(buffer, 5);
-        System.out.println((char)buffer.get());
+        log.info("position值重设 = {}", (char)buffer.get());
         ByteBufferUtil.debugAll(buffer, 6);
 
         // 设置limit的值
@@ -76,22 +78,24 @@ public class _02_ByteBufferAPITest {
 
         buffer.rewind(); // 把position移动到0索引位置
         ByteBufferUtil.debugAll(buffer, 2);
-        System.out.println((char)buffer.get());
+        log.info("(char)buffer.get() = {}", (char)buffer.get());
 
         buffer = ByteBuffer.allocate(10);
         buffer.put(new byte[]{'a', 'b', 'c', 'd', 'e'});
+        buffer.flip();
+        ByteBufferUtil.debugAll(buffer, 3);
         // mark & reset
         // mark 做一个标记，记录position位置，reset是将position重置到mark位置
-        System.out.println((char)buffer.get());
-        System.out.println((char)buffer.get());
+        log.info("(char)buffer.get() = {}", (char)buffer.get());
+        log.info("(char)buffer.get() = {}", (char)buffer.get());
         buffer.mark(); // 加标记，索引2位置
-        System.out.println((char)buffer.get());
-        System.out.println((char)buffer.get());
-        ByteBufferUtil.debugAll(buffer, 3);
-        buffer.reset(); // 将position重置到索引2位置
-        System.out.println((char)buffer.get());
-        System.out.println((char)buffer.get());
+        log.info("(char)buffer.get() = {}", (char)buffer.get());
+        log.info("(char)buffer.get() = {}", (char)buffer.get());
         ByteBufferUtil.debugAll(buffer, 4);
+        buffer.reset(); // 将position重置到索引2位置
+        log.info("(char)buffer.get() = {}", (char)buffer.get());
+        log.info("(char)buffer.get() = {}", (char)buffer.get());
+        ByteBufferUtil.debugAll(buffer, 5);
     }
 
     /**
@@ -113,4 +117,5 @@ public class _02_ByteBufferAPITest {
         buffer.put(new byte[]{'f'});
         ByteBufferUtil.debugAll(buffer, 4);
     }
+
 }

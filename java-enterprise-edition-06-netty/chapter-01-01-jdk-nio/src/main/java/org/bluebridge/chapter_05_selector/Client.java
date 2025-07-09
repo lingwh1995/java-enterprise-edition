@@ -15,7 +15,7 @@ import java.util.Scanner;
  * @desc   测试使用selector实现Server的客户端
  * @date   2025/7/8 9:06
  */
-@Slf4j
+@Slf4j(topic = "·")
 public class Client {
     private static final int PORT = 8080;
 
@@ -24,11 +24,11 @@ public class Client {
         SocketChannel sc = SocketChannel.open();
         // 2.连接服务端
         sc.connect(new InetSocketAddress("localhost", PORT));
-        log.debug("客户端启动......");
+        log.info("客户端启动......");
         Scanner scanner = new Scanner(System.in);
         // 3.发送消息
         while (true) {
-            log.debug("请输入消息......");
+            log.info("请输入消息......");
             String input = scanner.nextLine();
 //            ByteBuffer buffer = Charset.defaultCharset().encode(input.concat("\n"));
 //            sc.write(buffer);

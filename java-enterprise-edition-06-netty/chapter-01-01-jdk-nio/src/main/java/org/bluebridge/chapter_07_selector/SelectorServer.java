@@ -68,7 +68,7 @@ import java.util.Set;
  *      OP_CONNECT：客户端连接服务端的事件(tcp连接)，一般为创建SocketChannel客户端channel，值为：1<<3  =>  8
  *      OP_ACCEPT：服务端接收客户端连接的事件，一般为创建ServerSocketChannel服务端channel，值为：1<<4  =>  16
  */
-@Slf4j
+@Slf4j(topic = "·")
 public class SelectorServer {
 
     private static final int PORT = 8080;
@@ -84,10 +84,10 @@ public class SelectorServer {
         /*--------------测试selector api--------------*/
         // 测试isOpen(): 判断是否selector对象是否创建
         boolean isOpen = selector.isOpen();
-        log.debug("isOpen: {}", isOpen);
+        log.info("isOpen: {}", isOpen);
         // 测试provider(): 获取当前Selector的Provider
         SelectorProvider provider = selector.provider();
-        log.debug("provider: {}", provider);
+        log.info("provider: {}", provider);
         /*--------------测试selector api--------------*/
 
         /*
@@ -95,42 +95,42 @@ public class SelectorServer {
          *  注意：一个Channel仅仅可以被注册到一个Selector一次，如果将Channel注册到Selector多次，那么其实就是相当于更新SelectionKey的interest set.
          */
         SelectionKey selectionKey = ssc.register(selector, SelectionKey.OP_ACCEPT);
-        log.debug("selectionKey: {}", selectionKey);
+        log.info("selectionKey: {}", selectionKey);
 
         /*--------------测试selectionKey api--------------*/
         // interestOps()：返回当前感兴趣的事件列表
         int interestOps = selectionKey.interestOps();
-        log.debug("selectionKey.interestOps: {}", interestOps);
+        log.info("selectionKey.interestOps: {}", interestOps);
         // 也可通过interestSet判断其中包含的事件
         boolean isInterestedInAccept  = interestOps == SelectionKey.OP_ACCEPT;
         boolean isInterestedInConnect = interestOps == SelectionKey.OP_CONNECT;
         boolean isInterestedInRead    = interestOps == SelectionKey.OP_READ;
         boolean isInterestedInWrite   = interestOps == SelectionKey.OP_WRITE;
-        log.debug("isInterestedInAccept: {}, isInterestedInConnect: {}, isInterestedInRead: {}, isInterestedInWrite: {}",
+        log.info("isInterestedInAccept: {}, isInterestedInConnect: {}, isInterestedInRead: {}, isInterestedInWrite: {}",
                 isInterestedInAccept, isInterestedInConnect, isInterestedInRead, isInterestedInWrite);
         // 也可通过四个方法来分别判断不同事件是否就绪
         isInterestedInAccept  = selectionKey.isAcceptable();  //服务端连接事件是否就绪
         isInterestedInConnect = selectionKey.isConnectable(); //客户端连接事件是否就绪
         isInterestedInRead    = selectionKey.isReadable();    //读事件是否就绪
         isInterestedInWrite   = selectionKey.isWritable();    //写事件是否就绪
-        log.debug("isInterestedInAccept: {}, isInterestedInConnect: {}, isInterestedInRead: {}, isInterestedInWrite: {}",
+        log.info("isInterestedInAccept: {}, isInterestedInConnect: {}, isInterestedInRead: {}, isInterestedInWrite: {}",
                 isInterestedInAccept, isInterestedInConnect, isInterestedInRead, isInterestedInWrite);
 
         // 返回当前事件关联的通道，可转换的选项包括:`ServerSocketChannel`和`SocketChannel`
         Channel selectionKeyBindChannel = selectionKey.channel();
-        log.debug("before connect with client => selectionKeyBindChannel: {}", selectionKeyBindChannel);
+        log.info("before connect with client => selectionKeyBindChannel: {}", selectionKeyBindChannel);
         //返回当前事件所关联的Selector对象
         Selector selectionKeyBindSelector = selectionKey.selector();
-        log.debug("before connect with client => selectionKeyBindSelector: {}", selectionKeyBindSelector);
+        log.info("before connect with client => selectionKeyBindSelector: {}", selectionKeyBindSelector);
         /*--------------测试selectionKey api--------------*/
 
         /*--------------测试selector api--------------*/
         // 测试keys(): 获取当前channel注册在Selector上所有的key
         Set<SelectionKey> keys = selector.keys();
-        log.debug("before op_accept => keys: {}", keys);
+        log.info("before op_accept => keys: {}", keys);
         // 测试selectedKeys(): 获取当前channel就绪的事件列表
         Set<SelectionKey> selectionKeys = selector.selectedKeys();
-        log.debug("before op_accept => selectionKeys: {}", selectionKeys);
+        log.info("before op_accept => selectionKeys: {}", selectionKeys);
         /*--------------测试selector api--------------*/
 
         ssc.bind(new InetSocketAddress(PORT));
@@ -145,36 +145,36 @@ public class SelectorServer {
             // 测试selectNow(): 获取当前是否有事件就绪，该方法立即返回结果，不会阻塞；如果返回值>0，则代表存在一个或多个
             /*
             int selectNowSelected = selector.selectNow();
-            log.debug("selectNowSelected: {}", selectNowSelected);
+            log.info("selectNowSelected: {}", selectNowSelected);
              */
             /*--------------测试selector api--------------*/
 
             // 测试select(): selectNow的阻塞方法，直到有事件就绪时才会返回
             int selectSelected = selector.select();
-            log.debug("selectSelected: {}", selectSelected);
+            log.info("selectSelected: {}", selectSelected);
 
             /*--------------测试selector api--------------*/
             // 测试keys(): 获取当前channel注册在Selector上所有的key
             keys = selector.keys();
-            log.debug("after op_accept => keys: {}", keys);
+            log.info("after op_accept => keys: {}", keys);
             // 测试selectedKeys(): 获取当前channel就绪的事件列表
             selectionKeys = selector.selectedKeys();
-            log.debug("after op_accept => selectionKeys: {}", selectionKeys);
+            log.info("after op_accept => selectionKeys: {}", selectionKeys);
             /*--------------测试selector api--------------*/
 
             Iterator<SelectionKey> iterator = selectionKeys.iterator();
             while (iterator.hasNext()) {
                 // 获取当前就绪的SelectionKey
                 SelectionKey beReadySelectionKey = iterator.next();
-                log.debug("beReadySelectionKey: {}", beReadySelectionKey);
+                log.info("beReadySelectionKey: {}", beReadySelectionKey);
 
                 /*--------------测试selectionKey api--------------*/
                 // 返回当前事件关联的通道，可转换的选项包括:`ServerSocketChannel`和`SocketChannel`
                 selectionKeyBindChannel = selectionKey.channel();
-                log.debug("after connect with client => selectionKeyBindChannel: {}", selectionKeyBindChannel);
+                log.info("after connect with client => selectionKeyBindChannel: {}", selectionKeyBindChannel);
                 //返回当前事件所关联的Selector对象
                 selectionKeyBindSelector = selectionKey.selector();
-                log.debug("after connect with client => selectionKeyBindSelector: {}", selectionKeyBindSelector);
+                log.info("after connect with client => selectionKeyBindSelector: {}", selectionKeyBindSelector);
                 /*--------------测试selectionKey api--------------*/
 
                 iterator.remove();
@@ -200,7 +200,7 @@ public class SelectorServer {
                         }else {
                             buffer.flip();
                             ByteBufferUtil.debugAll(buffer);
-                            log.debug("读取到的来自客户端的数据： {}", Charset.defaultCharset().decode(buffer));
+                            log.info("读取到的来自客户端的数据： {}", Charset.defaultCharset().decode(buffer));
                         }
                     }catch (IOException e) {
                         e.printStackTrace();

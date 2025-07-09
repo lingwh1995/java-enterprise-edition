@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @desc   JDK7新增的Files 类
  * @date   2025/6/25 16:05
  */
-@Slf4j
+@Slf4j(topic = "·")
 public class _02_JDK7FilesTest {
 
     /**
@@ -23,8 +23,8 @@ public class _02_JDK7FilesTest {
     public void testJDK7FilesBasic() throws IOException {
         // 检查文件是否存在
         Path path = Paths.get("files/files.txt");
-        System.out.println(path.toAbsolutePath());
-        System.out.println(Files.exists(path));
+        log.info("绝对路径: {}", path.toAbsolutePath());
+        log.info("文件是否存在: {}", Files.exists(path));
 
         /**
          * 创建一级目录
@@ -32,7 +32,7 @@ public class _02_JDK7FilesTest {
          *  不能一次创建多级目录，否则会抛异常 NoSuchFileException
          */
 //        path = Paths.get("files/d1");
-//        System.out.println(path.toAbsolutePath());
+//        log.info("绝对路径: {}", path.toAbsolutePath());
 //        Files.createDirectory(path);
 
         /**
@@ -102,7 +102,7 @@ public class _02_JDK7FilesTest {
             @Override
             public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs)
                     throws IOException {
-                System.out.println(dir);
+                log.info("dir: {}", dir);
                 dirCount.incrementAndGet();
                 return super.preVisitDirectory(dir, attrs);
             }
@@ -110,13 +110,13 @@ public class _02_JDK7FilesTest {
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
                     throws IOException {
-                System.out.println(file);
+                log.info("file: {}", file);
                 fileCount.incrementAndGet();
                 return super.visitFile(file, attrs);
             }
         });
-        System.out.println(dirCount);
-        System.out.println(fileCount);
+        log.info("dirCount: {}", dirCount);
+        log.info("fileCount: {}", fileCount);
     }
 
     /**
@@ -136,7 +136,7 @@ public class _02_JDK7FilesTest {
                 return super.visitFile(file, attrs);
             }
         });
-        System.out.println(fileCount);
+        log.info("fileCount: {}", fileCount);
     }
 
     /**
@@ -187,7 +187,7 @@ public class _02_JDK7FilesTest {
             }
         });
         long end = System.currentTimeMillis();
-        System.out.println(end - start);
+        log.info("end - start: {}", end - start);
     }
 
 }
