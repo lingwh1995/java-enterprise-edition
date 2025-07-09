@@ -8,7 +8,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * @author lingwh
+ * @desc
+ * @date   2019/7/20 14:13
+ */
 @Repository
 public class DepartmentDao {
 

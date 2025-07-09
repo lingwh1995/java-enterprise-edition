@@ -6,10 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author ronin
- * @version V1.0
- * @desc
- * @since 2019/7/26 15:44
+ * @author lingwh
+ * @desc   SpringMVC高级特性
+ * @date   2019/7/26 15:44
  */
 @Controller
 public class WarpperHttpServletController {

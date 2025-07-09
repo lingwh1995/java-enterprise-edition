@@ -9,10 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author ronin
- * @version V1.0
- * @desc SpringMVC 高级特性
- * @since 2019/7/8 13:32
+ * @author lingwh
+ * @desc   SpringMVC高级特性
+ * @date   2019/7/8 13:32
  */
 @Controller
 public class SpringMVCSuperior {

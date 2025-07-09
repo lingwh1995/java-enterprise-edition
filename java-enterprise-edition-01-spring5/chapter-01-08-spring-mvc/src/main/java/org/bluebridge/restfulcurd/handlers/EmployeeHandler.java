@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 /**
- * 注意:请求URI相同,请求方式不同,如请求URI都是 /emp,一个请求方法是GET,一个请求方法是POST,也可以被识别为不同的方法
+ * @author lingwh
+ * @desc   请求URI相同,请求方式不同,如请求URI都是 /emp,一个请求方法是GET,一个请求方法是POST,也可以被识别为不同的方法
+ * @date   2019/7/20 14:19
  */
 @Controller
 public class EmployeeHandler {

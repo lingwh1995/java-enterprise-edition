@@ -6,13 +6,10 @@ import org.springframework.lang.Nullable;
 
 import java.util.Arrays;
 
-
 /**
- * @author ronin
- * @version V1.0
- * @description 把字符串类型的Employee转换为实体类型的Employee
- * @class EmployeeConverter
- * @date 2019/6/17 14:58
+ * @author lingwh
+ * @desc   把字符串类型的Employee转换为实体类型的Employee
+ * @date   2019/6/17 14:58
  */
 public class EmployeeConverter implements Converter<String, Employee>{
 

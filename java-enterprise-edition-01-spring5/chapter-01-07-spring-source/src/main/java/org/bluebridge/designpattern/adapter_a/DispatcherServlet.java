@@ -2,6 +2,11 @@ package org.bluebridge.designpattern.adapter_a;
 import	java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author lingwh
+ * @desc
+ * @date   2019/4/15 8:52
+ */
 public class DispatcherServlet {
     private List<HandlerAdapter> handlerAdapters = new ArrayList < HandlerAdapter>();
 

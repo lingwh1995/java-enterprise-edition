@@ -8,11 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Date;
 
 /**
- * @author ronin
- * @version V1.0
- * @description 测试日期转换器
- * @class ConverterHandler
- * @date 2019/6/17 14:32
+ * @author lingwh
+ * @desc   测试日期转换器
+ * @date   2019/6/17 14:32
  */
 @Controller
 public class ConverterHandler {

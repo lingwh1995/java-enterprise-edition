@@ -1,6 +1,10 @@
 package org.bluebridge.converter.entity;
 
-
+/**
+ * @author lingwh
+ * @desc   Employee实体类
+ * @date   2019/6/17 14:02
+ */
 public class Employee {
 
 	private String id;

@@ -6,6 +6,11 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * @author lingwh
+ * @desc   SpringMVC高级特性
+ * @date   2019/7/25 9:15
+ */
 public class FirstInterceptor implements HandlerInterceptor {
     /**
      * 该方法在目标方法之前被调用.

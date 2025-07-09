@@ -1,5 +1,10 @@
 package org.bluebridge.designpattern.adapter_a;
 
+/**
+ * @author lingwh
+ * @desc
+ * @date   2019/4/15 8:45
+ */
 public class SimpleHandlerAdapter implements HandlerAdapter{
 
     @Override
@@ -11,4 +16,5 @@ public class SimpleHandlerAdapter implements HandlerAdapter{
     public void handle(Object handler) {
         ((SimpleController)handler).doSimplerHandler();
     }
+
 }

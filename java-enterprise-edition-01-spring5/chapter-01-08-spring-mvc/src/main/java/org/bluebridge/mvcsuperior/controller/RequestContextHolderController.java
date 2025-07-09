@@ -9,10 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author ronin
- * @version V1.0
- * @desc
- * @since 2019/7/23 11:05
+ * @author lingwh
+ * @desc   SpringMVC高级特性
+ * @date   2019/7/23 11:05
  */
 @Controller
 public class RequestContextHolderController {

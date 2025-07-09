@@ -8,10 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author ronin
- * @version V1.0
+ * @author lingwh
  * @desc
- * @since 2019/7/23 11:06
+ * @date   2019/7/23 11:06
  */
 @Service
 public class RequestContextHolderServiceImpl implements IRequestContextHolderService{

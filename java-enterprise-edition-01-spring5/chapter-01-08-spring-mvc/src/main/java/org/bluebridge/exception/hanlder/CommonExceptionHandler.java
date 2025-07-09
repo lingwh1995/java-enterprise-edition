@@ -4,6 +4,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * @author lingwh
+ * @desc   SpringMVC高级特性
+ * @date   2019/7/25 9:23
+ */
 @ControllerAdvice
 public class CommonExceptionHandler {
     /**

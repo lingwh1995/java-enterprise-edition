@@ -1,5 +1,10 @@
 package org.bluebridge.restfulcurd.eitity;
 
+/**
+ * @author lingwh
+ * @desc
+ * @date   2019/7/20 14:10
+ */
 public class Department {
 
 	private Integer id;

@@ -1,6 +1,12 @@
 package org.bluebridge.domain;
 
+/**
+ * @author lingwh
+ * @desc   User实体类
+ * @date   2019/6/18 14:32
+ */
 public class User {
+
     private String username;
     private String password;
     private String email;
@@ -68,4 +74,5 @@ public class User {
                 ", address=" + address +
                 '}';
     }
+
 }
