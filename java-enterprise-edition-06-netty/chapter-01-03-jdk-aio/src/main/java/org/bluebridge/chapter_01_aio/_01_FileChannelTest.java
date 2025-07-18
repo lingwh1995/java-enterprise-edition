@@ -41,6 +41,7 @@ public class _01_FileChannelTest {
             e.printStackTrace();
         }
         log.debug("do other things......");
+        // 默认文件 AIO 使用的线程都是守护线程，所以最后要执行 System.in.read() 以避免守护线程意外结束
         System.in.read();
     }
 

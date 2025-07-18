@@ -24,7 +24,7 @@ import java.net.Socket;
  *  2.启动多个客户端
  */
 @Slf4j(topic = "·")
-public class _02_BlockingInputStreamServer {
+public class _02_BlockingInputOutputServer {
 
     private static final int PORT = 8080;
 
