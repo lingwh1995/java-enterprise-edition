@@ -15,8 +15,10 @@ public class MqttMessageProvider {
 
     public void sendMessage(String payload, String topic) {
         mqttOutboundChannel.send(MessageBuilder.withPayload(payload)
-                .setHeader(MqttHeaders.TOPIC, topic) // 动态主题
-                .setHeader(MqttHeaders.QOS, 1) // QoS级别
+                // 动态主题
+                .setHeader(MqttHeaders.TOPIC, topic)
+                // QoS级别
+                .setHeader(MqttHeaders.QOS, 1)
                 .build());
     }
 

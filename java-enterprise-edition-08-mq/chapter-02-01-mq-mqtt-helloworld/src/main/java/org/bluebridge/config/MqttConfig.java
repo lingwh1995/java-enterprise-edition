@@ -39,11 +39,17 @@ public class MqttConfig {
     @Bean
     public MqttConnectOptions mqttConnectOptions() {
         MqttConnectOptions options = new MqttConnectOptions();
+        // 设置MQTT版本为自动协商
+        //options.setMqttVersion(MqttConnectOptions.MQTT_VERSION_DEFAULT);
+        // 设置MQTT版本为3.1.1
+        options.setMqttVersion(MqttConnectOptions.MQTT_VERSION_3_1_1);
         options.setServerURIs(new String[]{brokerUrl});
         options.setUserName(username);
         options.setPassword(password.toCharArray());
-        options.setCleanSession(true); // 清除会话
-        options.setAutomaticReconnect(true); // 自动重连
+        // 清除会话
+        options.setCleanSession(true);
+        // 自动重连
+        options.setAutomaticReconnect(true);
         return options;
     }
 
@@ -73,9 +79,11 @@ public class MqttConfig {
                 new MqttPahoMessageDrivenChannelAdapter(
                         clientId + "-inbound",
                         mqttClientFactory(),
-                        defaultTopic); // 默认订阅主题
+                        // 默认订阅主题
+                        defaultTopic);
         adapter.setCompletionTimeout(5000);
-        adapter.setQos(1); // 服务质量等级
+        // 服务质量等级
+        adapter.setQos(1);
         adapter.setOutputChannel(mqttInputChannel());
         return adapter;
     }
@@ -90,8 +98,10 @@ public class MqttConfig {
         MqttPahoMessageHandler handler = new MqttPahoMessageHandler(
                 clientId + "-outbound",
                 mqttClientFactory());
-        handler.setAsync(true); // 异步发送
-        handler.setDefaultTopic(defaultTopic); // 默认发布主题
+        // 异步发送
+        handler.setAsync(true);
+        // 默认发布主题
+        handler.setDefaultTopic(defaultTopic);
         return handler;
     }
 
@@ -99,4 +109,5 @@ public class MqttConfig {
     public MessageChannel mqttOutboundChannel() {
         return new DirectChannel();
     }
+
 }

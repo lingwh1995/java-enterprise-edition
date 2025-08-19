@@ -1,11 +1,5 @@
 spring:
-  mqtt:
-    broker-url: tcp://localhost:1883  # 公共MQTT服务器
-    client-id: spring-boot-client-${random.uuid}  # 动态客户端ID避免冲突
-    username: admin  # 若需要认证
-    password: bbt@2025
-    default-topic: test/hello-topic  # 默认发布主题
-    topics:
-      - test/hello-topic  # 订阅的主题
+  profiles:
+    active: pro
 server:
   port: 8080
