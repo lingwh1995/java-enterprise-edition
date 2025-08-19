@@ -29,9 +29,6 @@ public class ConfigurationFileController {
     @Value("${user.password}")
     private String password;
 
-    @Value("${user.hobbies}")
-    private List<String> hobbies;
-
     @Value("${library.location}")
     private String location;
 
@@ -86,7 +83,6 @@ public class ConfigurationFileController {
         System.out.println("version = " + version);
         System.out.println("username = " + username);
         System.out.println("password = " + password);
-        System.out.println("hobbies = " + hobbies);
         System.out.println("location = " + location);
         System.out.println("book0 = " + book0name + "-" + book0description);
         System.out.println("book1 = " + book1name + "-" + book1description);

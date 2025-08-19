@@ -3,10 +3,6 @@ version: V1.0
 user:
   username: 张三
   password: zhangsan
-  hobbies:
-    - basketball # 篮球
-    - football   # 足球
-    - baseball   # 棒球
 library:
   location: 陕西省图书馆
   books:
@@ -21,11 +17,7 @@ debug: true
 
 spring:
   datasource:
-    #   数据源基本配置
     driver-class-name: oracle.jdbc.OracleDriver
-
-    #   数据源其他配置
-    #   使用type来配置要选用的数据源,这里切换为druid
     type: com.alibaba.druid.pool.DruidDataSource
     initialSize: 5
     minIdle: 5
@@ -38,7 +30,6 @@ spring:
     testOnBorrow: false
     testOnReturn: false
     poolPreparedStatements: true
-    #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
     filters: stat,wall,slf4j
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
