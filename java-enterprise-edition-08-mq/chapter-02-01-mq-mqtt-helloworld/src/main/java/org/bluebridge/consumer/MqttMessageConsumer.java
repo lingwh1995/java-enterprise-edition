@@ -1,13 +1,14 @@
 package org.bluebridge.consumer;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.integration.annotation.MessageEndpoint;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.mqtt.support.MqttHeaders;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component
+@MessageEndpoint
 public class MqttMessageConsumer {
 
     // 处理接收到的消息
