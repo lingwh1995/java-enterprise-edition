@@ -4,6 +4,6 @@ spring:
     client-id: abcde  # 动态客户端ID避免冲突
     username: D5vQHGkim1  # 若需要认证
     password: version=2018-10-31&res=products%2FD5vQHGkim1%2Fdevices%2Fabcde&et=1764222935&method=sha1&sign=IYDogTGvWuqphhr3%2BmKYBuIfUrE%3D
-    default-topic: $sys/D5vQHGkim1/abcde/thing/property/desired/get  # 默认发布主题
+    default-topic: $sys/D5vQHGkim1/abcde/thing/property/desired/get  # 默认订阅主题
     topics:
       - $sys/D5vQHGkim1/abcde/thing/property/desired/get/reply  # 订阅的主题

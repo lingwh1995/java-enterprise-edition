@@ -3,7 +3,10 @@ version: V1.0
 user:
   username: 张三
   password: zhangsan
-
+  hobbies:
+    - basketball # 篮球
+    - football   # 足球
+    - baseball   # 棒球
 library:
   location: 陕西省图书馆
   books:
@@ -14,7 +17,7 @@ library:
     - name: 鲁滨孙漂流记
       description: 鲁滨孙历险记
 
-debug: false
+debug: true
 
 spring:
   datasource:

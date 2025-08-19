@@ -15,4 +15,5 @@ public class LibraryConfigConfigurationPropertiesRecommendUsage {
     public DataSource dataSource(){
         return new DruidDataSource();
     }
+
 }
