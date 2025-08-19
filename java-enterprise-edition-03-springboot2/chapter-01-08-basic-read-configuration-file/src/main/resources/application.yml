@@ -42,3 +42,7 @@ spring:
     filters: stat,wall,slf4j
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+logging:
+  config:
+    classpath:logback.xml

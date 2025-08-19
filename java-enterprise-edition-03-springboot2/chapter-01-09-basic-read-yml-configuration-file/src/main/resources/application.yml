@@ -19,3 +19,7 @@ person:
   dog:
     name: xiaogou
     age: 5
+
+logging:
+  config:
+    classpath:logback.xml

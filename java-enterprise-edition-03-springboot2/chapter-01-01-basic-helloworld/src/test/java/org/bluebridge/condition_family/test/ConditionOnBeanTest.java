@@ -23,4 +23,5 @@ public class ConditionOnBeanTest {
     public void fun(){
         System.out.println(person);
     }
+
 }
