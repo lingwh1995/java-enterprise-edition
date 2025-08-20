@@ -28,20 +28,6 @@
         <snakeyaml.version>1.30</snakeyaml.version>
     </properties>
 
-<!--    <build>-->
-<!--        <plugins>-->
-<!--            &lt;!&ndash; 设置jdk版本&ndash;&gt;-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-compiler-plugin</artifactId>-->
-<!--                <version>3.1</version>-->
-<!--                <configuration>-->
-<!--                    <source>1.8</source>-->
-<!--                    <target>1.8</target>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--        </plugins>-->
-<!--    </build>-->
     <!--阿里云镜像地址:pom.xml版-->
     <repositories>
         <repository>

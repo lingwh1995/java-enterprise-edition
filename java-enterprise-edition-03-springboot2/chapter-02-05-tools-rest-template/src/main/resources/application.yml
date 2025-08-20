@@ -1,3 +1,7 @@
+server:
+  context-path: /rest
+  port: 8100
+
 http:
   # 最大连接数
   maxTotal: 200
@@ -19,5 +23,3 @@ spring:
 
 debug: false
 
-server:
-  context-path: /rest

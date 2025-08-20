@@ -6,8 +6,8 @@ spring:
     password: version=2018-10-31&res=products%2FD5vQHGkim1%2Fdevices%2Fabcde&et=1764222935&method=sha1&sign=IYDogTGvWuqphhr3%2BmKYBuIfUrE%3D
     default-topic: test/hello-topic  # 默认订阅的主题
     topics: # 所有订阅的主题
-      - test/aaa
-      - test/bbb
-      - test/ccc
-      - test/ddd
-      - test/eee
+      - test/aaa-topic
+      - test/bbb-topic
+      - test/ccc-topic
+      - test/ddd-topic
+      - test/eee-topic

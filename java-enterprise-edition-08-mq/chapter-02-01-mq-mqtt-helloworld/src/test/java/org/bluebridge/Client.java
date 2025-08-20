@@ -29,4 +29,5 @@ public class Client {
     public void sendMessage() {
         mqttMessageProvider.sendMessage("hello mqtt! I am springboot!", "test/hello-topic");
     }
+
 }

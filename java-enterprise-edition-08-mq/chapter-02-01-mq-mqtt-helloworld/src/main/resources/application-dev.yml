@@ -6,8 +6,8 @@ spring:
     password: bbt@2025
     default-topic: test/hello-topic  # 默认订阅的主题
     topics: # 所有订阅的主题
-      - test/aaa
-      - test/bbb
-      - test/ccc
-      - test/ddd
-      - test/eee
+      - test/aaa-topic
+      - test/bbb-topic
+      - test/ccc-topic
+      - test/ddd-topic
+      - test/eee-topic
