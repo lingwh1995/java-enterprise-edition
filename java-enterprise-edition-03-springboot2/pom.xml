@@ -29,27 +29,27 @@
         <module>chapter-02-06-tools-swagger</module>
         <module>chapter-02-07-tools-jackson</module>
         <module>chapter-02-08-tools-springutils</module>
-        <module>chapter-03-01-quartz</module>
-        <module>chapter-04-01-mybatis-plus-helloworld</module>
-        <module>chapter-04-02-mybatis-plus-mpg-generator</module>
-        <module>chapter-04-03-mybatis-plus-mpg-test</module>
-        <module>chapter-04-04-mybatis-plus-service-interface</module>
-        <module>chapter-04-05-mybatis-plus-mapper-interface</module>
-        <module>chapter-04-06-mybatis-plus-mapper-optional-components</module>
-        <module>chapter-04-07-mybatis-plus-chaining</module>
-        <module>chapter-04-08-mybatis-plus-active-record</module>
-        <module>chapter-04-09-mybatis-plus-simple-query</module>
-        <module>chapter-04-10-mybatis-plus-db-kit</module>
-        <module>chapter-05-01-framework-springdata-jpa-helloworld</module>
-        <module>chapter-06-01-framework-springdata-redis-helloworld</module>
-        <module>chapter-07-02-persistence-mybatis-pagehelper</module>
-        <module>chapter-07-01-persistence-multiyply-datasource</module>
-        <module>chapter-08-01-production-javaweb</module>
-        <module>chapter-08-02-production-freemarker</module>
-        <module>chapter-08-03-production-thymeleaf</module>
-        <module>chapter-08-04-production-multiyply-environment</module>
-        <module>chapter-08-05-production-package-to-war</module>
-        <module>chapter-09-01-demo-restfulcrud</module>
+        <module>chapter-02-09-tools-multiyply-datasource</module>
+        <module>chapter-03-01-framework-mybatis-plus-helloworld</module>
+        <module>chapter-03-02-framework-mybatis-plus-mpg-generator</module>
+        <module>chapter-03-03-framework-mybatis-plus-mpg-test</module>
+        <module>chapter-03-04-framework-mybatis-plus-service-interface</module>
+        <module>chapter-03-05-framework-mybatis-plus-mapper-interface</module>
+        <module>chapter-03-06-framework-mybatis-plus-mapper-optional-components</module>
+        <module>chapter-03-07-framework-mybatis-plus-chaining</module>
+        <module>chapter-03-08-framework-mybatis-plus-active-record</module>
+        <module>chapter-03-09-framework-mybatis-plus-simple-query</module>
+        <module>chapter-03-10-framework-mybatis-plus-db-kit</module>
+        <module>chapter-03-11-framework-mybatis-pagehelper</module>
+        <module>chapter-03-12-framework-springdata-jpa-helloworld</module>
+        <module>chapter-03-13-framework-springdata-redis-helloworld</module>
+        <module>chapter-03-14-framework-quartz</module>
+        <module>chapter-04-01-production-javaweb</module>
+        <module>chapter-04-02-production-freemarker</module>
+        <module>chapter-04-03-production-thymeleaf</module>
+        <module>chapter-04-04-production-multiyply-environment</module>
+        <module>chapter-04-05-production-package-to-war</module>
+        <module>chapter-05-01-demo-restfulcrud</module>
     </modules>
 
     <properties>
