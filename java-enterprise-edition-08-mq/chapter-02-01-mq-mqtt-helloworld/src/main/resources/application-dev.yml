@@ -2,8 +2,11 @@ spring:
   mqtt:
     broker-url: tcp://localhost:1883  # 公共MQTT服务器
     client-id: spring-boot-client-${random.uuid}  # 动态客户端ID避免冲突
-    username: admin  # 若需要认证
-    password: bbt@2025
+    username: admin  # 用户名
+    password: bbt@2025 # 密码
+    timeout: 3000 # 超时时间
+    keepalive: 1000 # 保持连接
+    qos: 1
     default-topic: test/hello-topic  # 默认订阅的主题
     topics: # 所有订阅的主题
       - test/aaa-topic

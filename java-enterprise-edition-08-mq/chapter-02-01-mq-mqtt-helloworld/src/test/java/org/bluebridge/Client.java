@@ -1,7 +1,7 @@
 package org.bluebridge;
 
-import org.bluebridge.consumer.MqttMessageConsumer;
-import org.bluebridge.provider.MqttMessageProvider;
+import org.bluebridge.handler.MqttMessageReceiverHandler;
+import org.bluebridge.handler.MqttMessageSenderHandler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,13 +17,13 @@ public class Client {
      * mqtt消息提供者
      */
     @Resource
-    private MqttMessageProvider mqttMessageProvider;
+    private MqttMessageSenderHandler mqttMessageProvider;
 
     /**
      * mqtt消息消费者
      */
     @Resource
-    private MqttMessageConsumer mqttMessageConsumer;
+    private MqttMessageReceiverHandler mqttMessageConsumer;
 
     @Test
     public void sendMessage() {

@@ -1,20 +1,23 @@
-package org.bluebridge.provider;
+package org.bluebridge.handler;
 
 import org.springframework.integration.mqtt.support.MqttHeaders;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.MessageChannel;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
-@Service
-public class MqttMessageProvider {
+/**
+ * 发送入站消息的处理器
+ */
+@Component
+public class MqttMessageSenderHandler {
 
     @Resource
     private MessageChannel mqttOutboundChannel;
 
     /**
-     * 发送MQTT消息到指定主题
+     * 发送mqtt消息到指定主题
      * @param payload 消息内容
      * @param topic 主题
      */
@@ -28,7 +31,7 @@ public class MqttMessageProvider {
     }
     
     /**
-     * 发送MQTT消息到默认主题
+     * 发送mqtt消息到默认主题
      * @param payload 消息内容
      */
     public void sendMessage(String payload) {
@@ -39,7 +42,7 @@ public class MqttMessageProvider {
     }
     
     /**
-     * 发送MQTT消息到指定主题并设置QoS级别
+     * 发送mqtt消息到指定主题并设置QoS级别
      * @param payload 消息内容
      * @param topic 主题
      * @param qos QoS级别 (0, 1, 2)

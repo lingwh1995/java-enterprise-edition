@@ -2,8 +2,11 @@ spring:
   mqtt:
     broker-url: tcp://144.7.97.78:1883  # 公共MQTT服务器
     client-id: abcde  # 动态客户端ID避免冲突
-    username: D5vQHGkim1  # 若需要认证
-    password: version=2018-10-31&res=products%2FD5vQHGkim1%2Fdevices%2Fabcde&et=1764222935&method=sha1&sign=IYDogTGvWuqphhr3%2BmKYBuIfUrE%3D
+    username: D5vQHGkim1  # 用户名
+    password: version=2018-10-31&res=products%2FD5vQHGkim1%2Fdevices%2Fabcde&et=1764222935&method=sha1&sign=IYDogTGvWuqphhr3%2BmKYBuIfUrE%3D # 密码
+    timeout: 3000 # 超时时间
+    keepalive: 1000 # 保持连接
+    qos: 1
     default-topic: test/hello-topic  # 默认订阅的主题
     topics: # 所有订阅的主题
       - test/aaa-topic
