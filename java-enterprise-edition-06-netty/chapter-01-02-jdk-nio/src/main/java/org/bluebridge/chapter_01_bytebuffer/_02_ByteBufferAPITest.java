@@ -35,7 +35,7 @@ public class _02_ByteBufferAPITest {
     public void testByteBufferPositionAndLimit() {
         ByteBuffer buffer = ByteBuffer.allocate(10);
         // 向ByteBuffer中写入数据
-        buffer.put(new byte[]{'a', 'b', 'c', 'd', 'e'});
+        buffer.put(new byte[]{ 'a', 'b', 'c', 'd', 'e' });
         ByteBufferUtil.debugAll(buffer, 1);
         // 切换为读模式
         buffer.flip();
@@ -88,11 +88,13 @@ public class _02_ByteBufferAPITest {
         // mark 做一个标记，记录position位置，reset是将position重置到mark位置
         log.info("(char)buffer.get() = {}", (char)buffer.get());
         log.info("(char)buffer.get() = {}", (char)buffer.get());
-        buffer.mark(); // 加标记，索引2位置
+        // 加标记，索引2位置
+        buffer.mark();
         log.info("(char)buffer.get() = {}", (char)buffer.get());
         log.info("(char)buffer.get() = {}", (char)buffer.get());
         ByteBufferUtil.debugAll(buffer, 4);
-        buffer.reset(); // 将position重置到索引2位置
+        // 将position重置到索引2位置
+        buffer.reset();
         log.info("(char)buffer.get() = {}", (char)buffer.get());
         log.info("(char)buffer.get() = {}", (char)buffer.get());
         ByteBufferUtil.debugAll(buffer, 5);

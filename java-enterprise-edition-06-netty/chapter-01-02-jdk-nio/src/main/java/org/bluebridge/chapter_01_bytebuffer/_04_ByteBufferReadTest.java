@@ -21,7 +21,7 @@ public class _04_ByteBufferReadTest {
     @Test
     public void testByteBufferReadWrite() {
         ByteBuffer buffer = ByteBuffer.allocate(10);
-        buffer.put(new byte[]{'a', 'b', 'c', 'd', 'e'});
+        buffer.put(new byte[]{ 'a', 'b', 'c', 'd', 'e' });
         ByteBufferUtil.debugAll(buffer);
         // 将source切换为读模式
         buffer.flip();

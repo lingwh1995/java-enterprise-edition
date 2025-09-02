@@ -1,4 +1,4 @@
-package org.bluebridge.chapter_04_nc._01_bio;
+package org.bluebridge.chapter_04_socket._01_bio;
 
 
 import lombok.extern.slf4j.Slf4j;
