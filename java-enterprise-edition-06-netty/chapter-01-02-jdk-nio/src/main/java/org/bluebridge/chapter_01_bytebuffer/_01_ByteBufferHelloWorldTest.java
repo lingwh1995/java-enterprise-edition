@@ -40,9 +40,11 @@ public class _01_ByteBufferHelloWorldTest {
         ByteBufferUtil.debugAll(buffer, 4);
         /**
          * 调用get()方法后 =>
-         *  1.position = position + 1;      // position位置会后移一位
+         *  // position位置会后移一位
+         *  1.position = position + 1;
          */
-        log.info("buffer.get() = {}", buffer.get()); // 读取到的数据会转换为10进制数
+        // 读取到的数据会转换为10进制数
+        log.info("buffer.get() = {}", buffer.get());
         ByteBufferUtil.debugAll(buffer, 5);
 
         /**
