@@ -81,7 +81,7 @@ public class _02_ByteBufferAPITest {
         log.info("(char)buffer.get() = {}", (char)buffer.get());
 
         buffer = ByteBuffer.allocate(10);
-        buffer.put(new byte[]{'a', 'b', 'c', 'd', 'e'});
+        buffer.put(new byte[]{ 'a', 'b', 'c', 'd', 'e' });
         buffer.flip();
         ByteBufferUtil.debugAll(buffer, 3);
         // mark & reset
@@ -110,7 +110,7 @@ public class _02_ByteBufferAPITest {
         ByteBuffer buffer = ByteBuffer.allocate(10);
         ByteBufferUtil.debugAll(buffer, 1);
         // 给ByteBuffer中放入数据
-        buffer.put(new byte[]{'a', 'b', 'c', 'd', 'e'});
+        buffer.put(new byte[]{ 'a', 'b', 'c', 'd', 'e' });
         ByteBufferUtil.debugAll(buffer, 2);
         // 切换为写模式，特别注意：切换为写模式，只是把position的位置设置0，里面的数据并没有发生变化
         buffer.clear();
