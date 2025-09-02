@@ -44,10 +44,8 @@ public class MqttConfig {
         options.setConnectionTimeout(mqttProperties.getTimeout());
         // 设置心跳时间
         options.setKeepAliveInterval(mqttProperties.getKeepalive());
-        // 接受离线消息  告诉代理客户端是否要建立持久会话   false为建立持久会话
+        // 接受离线消息  需要接收离线消息，使用false，不需要离线消息，使用 true
         options.setCleanSession(false);
-        // 清除会话
-        options.setCleanSession(true);
         // 自动重连
         options.setAutomaticReconnect(true);
         return options;

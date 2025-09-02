@@ -22,8 +22,8 @@ public class _01_ByteBufferHelloWorldTest {
         // 创建ByteBuffer
         ByteBuffer buffer = ByteBuffer.allocate(10);
         ByteBufferUtil.debugAll(buffer, 1);
-        // 给ByteBuffer中放入一个数据
-        buffer.put((byte)0x61);// 'a'
+        // 给ByteBuffer中放入一个字符 'a'
+        buffer.put((byte)0x61);
         ByteBufferUtil.debugAll(buffer, 2);
         // 给ByteBuffer中放入多个数据
         buffer.put(new byte[]{(byte)0x62, (byte)0x63, (byte)0x64, (byte)0x65});
