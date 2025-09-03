@@ -5,6 +5,8 @@ import org.bluebridge.ByteBufferUtil;
 import org.junit.Test;
 
 import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author lingwh
@@ -68,15 +70,19 @@ public class _02_ByteBufferAPITest {
     public void testByteBufferRewindMarkAndReset() {
         ByteBuffer buffer = ByteBuffer.allocate(10);
         // 向ByteBuffer中写入数据
-        buffer.put(new byte[]{'a', 'b', 'c', 'd', 'e'});
+        buffer.put(new byte[]{ 'a', 'b', 'c', 'd', 'e' });
         // 切换为读模式
         buffer.flip();
 
         // 从头开始读
-        buffer.get(new byte[4]);
+        byte[] dest = new byte[4];
+        buffer.get(dest);
+        String destStr = new String(dest, StandardCharsets.UTF_8);
+        log.info("destStr: {}", destStr);
         ByteBufferUtil.debugAll(buffer, 1);
 
-        buffer.rewind(); // 把position移动到0索引位置
+        // 把position移动到0索引位置
+        buffer.rewind();
         ByteBufferUtil.debugAll(buffer, 2);
         log.info("(char)buffer.get() = {}", (char)buffer.get());
 
@@ -116,7 +122,7 @@ public class _02_ByteBufferAPITest {
         buffer.clear();
         ByteBufferUtil.debugAll(buffer, 3);
         // 写入数据，调用下面的方法只会覆盖第一个位置的值，不会覆盖后面的数据
-        buffer.put(new byte[]{'f'});
+        buffer.put(new byte[]{ 'f' });
         ByteBufferUtil.debugAll(buffer, 4);
     }
 
