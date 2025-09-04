@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * @author lingwh
- * @desc   阻塞方式实现网络通信-基于NIO的Channel理解阻塞通信模型
+ * @desc   阻塞方式实现网络通信-基于NIO的Channel理解阻塞通信模型（阻塞方式可以与单个客户端完成每一次通信，无法正常的与多个客户端完成每一次通信）
  * @date   2025/6/26 18:01
  */
 

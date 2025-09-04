@@ -50,13 +50,15 @@ public class _07_StickyPacketAndHalfPacketTest {
         source.flip();
         int oldLimit = source.limit();
         for (int i = 0; i < oldLimit; i++) {
-            log.info("source.get(i) = {}", source.get(i));
+            //log.info("source.get(i) = {}", source.get(i));
             if (source.get(i) == '\n') {
                 log.info("i: {}", i);
                 ByteBuffer target = ByteBuffer.allocate(i + 1 - source.position());
-                // 0 ~ limit
+                // 0 ~ limit （i是\n的位置）
                 source.limit(i + 1);
-                target.put(source); // 从source 读，向 target 写
+                ByteBufferUtil.debugAll(source);
+                // 从source 读，向 target 写
+                target.put(source);
                 ByteBufferUtil.debugAll(target);
                 source.limit(oldLimit);
             }
