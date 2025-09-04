@@ -56,7 +56,8 @@ public class _07_StickyPacketAndHalfPacketTest {
                 ByteBuffer target = ByteBuffer.allocate(i + 1 - source.position());
                 // 0 ~ limit
                 source.limit(i + 1);
-                target.put(source); // 从source 读，向 target 写
+                // 从source 读，向 target 写
+                target.put(source);
                 ByteBufferUtil.debugAll(target);
                 source.limit(oldLimit);
             }
