@@ -15,8 +15,26 @@ import java.util.Iterator;
 
 /**
  * @author lingwh
- * @desc   使用selector实现Server
+ * @desc   使用Selector实现Server
  * @date   2025/6/27 9:06
+ */
+
+/**
+ * Selector（IO多路复用模型）网络通信Server端
+ *  实现了IO多路复用，没有处理粘包半包问题
+ *
+ * 测试方法
+ *  1.cmd -> telnet 127.0.0.1 8080/telnet localhost 8080 -> 直接输入内容（只能发送单个字符）/按下Ctrl+]后输入 send + 内容（可以发送字符串） -> 查看idea控制台接收到的信息
+ *  2.启动多个客户端
+ *
+ * 测试结论
+ *  1.单线程可以配合Selector完成对多个Channel可读写事件的监控，这称之为多路复用
+ *  2.多路复用仅针对网络 IO、普通文件IO没法利用多路复用
+ *  3.如果不用 Selector 的非阻塞模式，线程大部分时间都在做无用功，而Selector能够保证
+ *      有可连接事件时才去连接
+ *      有可读事件才去读取
+ *      有可写事件才去写入
+ *  4.限于网络传输能力，Channel未必时时可写，一旦Channel可写，会触发Selector的可写事件
  */
 @Slf4j(topic = "·")
 public class _01_SelectorServer {

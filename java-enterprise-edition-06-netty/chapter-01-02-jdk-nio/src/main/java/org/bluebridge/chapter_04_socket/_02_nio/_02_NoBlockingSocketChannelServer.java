@@ -20,11 +20,18 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * NIO模型网络通信Server端
- * V2.0 服务端接收多个客户端多条消息发送和接收需求
+ *  V2.0 服务端接收多个客户端多条消息发送和接收需求
  *
- * 测试方法:
- *  1.cmd -> telnet 127.0.0.1 8080/telnet localhost 8080 ->直接输入内容/按下Ctrl+]后输入 send +内容 ->查看idea控制台接收到的信息
+ * 测试方法
+ *  1.cmd -> telnet 127.0.0.1 8080/telnet localhost 8080 -> 直接输入内容（只能发送单个字符）/按下Ctrl+]后输入 send + 内容（可以发送字符串） -> 查看idea控制台接收到的信息
  *  2.启动多个客户端
+ *
+ * 测试结论
+ *  1.非阻塞模式下，相关方法都会不会让线程暂停
+ *  2.在ServerSocketChannel.accept 在没有连接建立时，会返回null，继续运行
+ *  3.SocketChannel.read 在没有数据可读时，会返回 0，但线程不必阻塞，可以去执行其它 SocketChannel的read或是去执行ServerSocketChannel.accept
+ *  4.写数据时，线程只是等待数据写入Channel即可，无需等Channel通过网络把数据发送出去
+ *  5.非阻塞模式下，即使没有连接建立，和可读数据，线程仍然在不断运行，白白浪费了cpu
  */
 @Slf4j
 public class _02_NoBlockingSocketChannelServer {
@@ -50,7 +57,7 @@ public class _02_NoBlockingSocketChannelServer {
             SocketChannel sc = ssc.accept(); // 非阻塞，线程还会继续运行，如果没有连接建立，但sc是null
             if(sc != null) {
                 log.info("connected......{}", sc);
-                sc.configureBlocking(false);
+                sc.configureBlocking(false); // 非阻塞模式
                 channels.add(sc);
             }
             for (SocketChannel channel : channels) {
