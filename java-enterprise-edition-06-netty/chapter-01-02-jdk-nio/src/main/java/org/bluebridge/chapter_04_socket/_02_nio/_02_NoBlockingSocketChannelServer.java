@@ -9,6 +9,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -60,16 +61,24 @@ public class _02_NoBlockingSocketChannelServer {
                 sc.configureBlocking(false); // 非阻塞模式
                 channels.add(sc);
             }
-            for (SocketChannel channel : channels) {
-                // 5. 接收客户端发送的数据
-                //log.info("before read......{}", channel);
-                int len = channel.read(buffer);; // 非阻塞，线程仍然会继续运行，如果没有读到数据，read 返回 0
-                if(len > 0) {
-                    log.info("本次读取到的数据长度：{}", len);
-                    buffer.flip();
-                    ByteBufferUtil.debugRead(buffer);
-                    buffer.clear();
-                    log.info("after read......{}", channel);
+            Iterator<SocketChannel> iterator = channels.iterator();
+            while(iterator.hasNext()) {
+                try {
+                    SocketChannel channel = iterator.next();
+                    // 5. 接收客户端发送的数据
+                    //log.info("before read......{}", channel);
+                    int len = channel.read(buffer); // 非阻塞，线程仍然会继续运行，如果没有读到数据，read 返回 0
+                    if(len > 0) {
+                        log.info("本次读取到的数据长度：{}", len);
+                        buffer.flip();
+                        ByteBufferUtil.debugRead(buffer);
+                        buffer.clear();
+                        log.info("after read......{}", channel);
+                    }
+                }catch (IOException e) {
+                    log.info("客户端非正常断开（暴力断开）");
+                    iterator.remove();
+                    e.printStackTrace();
                 }
             }
             // 睡眠100毫秒，防止CPU占满
