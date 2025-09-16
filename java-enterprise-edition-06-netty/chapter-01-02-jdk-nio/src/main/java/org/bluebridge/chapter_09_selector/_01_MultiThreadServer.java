@@ -11,7 +11,7 @@ import java.util.Iterator;
 
 /**
  * @author lingwh
- * @desc   使用 多线程 + selector 实现Server
+ * @desc   使用 多线程 + selector 实现Server（单个worker版）
  * @date   2025/6/29 9:24
  */
 

@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * @author lingwh
- * @desc   使用 多线程 + selector 实现Server
+ * @desc   使用 多线程 + selector 实现Server（单个worker版）
  * @date   2025/6/29 10:50
  */
 
@@ -73,7 +73,7 @@ public class _04_MultiThreadServer {
                 thread.start();
                 start = true;
             }
-            selector.wakeup();    //boss线程中执行  // tag:1
+            selector.wakeup();    //boss线程中执行   // tag:1
             sc.register(selector, SelectionKey.OP_READ, null);  //boss线程中执行 // tag:1
             log.info("init() => thread name......{}", Thread.currentThread().getName());
         }

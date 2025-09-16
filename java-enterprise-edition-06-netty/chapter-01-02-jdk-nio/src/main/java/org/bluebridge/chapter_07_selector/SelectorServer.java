@@ -136,7 +136,7 @@ public class SelectorServer {
         ssc.bind(new InetSocketAddress(PORT));
 
         /*--------------测试selector api--------------*/
-        // 测试wakeup(): 唤醒selector
+        // 测试wakeup(): 唤醒selector，使selector不再处于阻塞状态
         //selector.wakeup();
         /*--------------测试selector api--------------*/
 

@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 
 /**
- * V3.0 客户端与服务端可以建立连接，可以正常通信
+ * V3.0 客户端与服务端可以建立连接，可以正常通信（单个worker版）
  *
  * tag:1 和 tag:2 处代码解决了问题
  *
@@ -77,7 +77,7 @@ public class _03_MultiThreadServer {
             // 向队列中添加任务
             tasks.add(() -> {                                               // tag:1
                 try {                                                       // tag:1
-                    sc.register(selector, SelectionKey.OP_READ, null);   // tag:1   // 在boss线程中执行)
+                    sc.register(selector, SelectionKey.OP_READ, null);  // tag:1   // 在boss线程中执行)
                 } catch (ClosedChannelException e) {                        // tag:1
                     throw new RuntimeException(e);                          // tag:1
                 }                                                           // tag:1

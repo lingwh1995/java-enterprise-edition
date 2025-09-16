@@ -21,7 +21,7 @@ import java.util.stream.IntStream;
  */
 
 /**
- * V6.0 客户端与服务端可以建立连接，可以正常通信（V4.0多个worker版）
+ * V6.0 客户端与服务端可以建立连接，可以正常通信（多个worker版）
  *
  * tag:1 处代码解决了问题
  *
