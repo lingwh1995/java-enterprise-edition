@@ -38,7 +38,7 @@ public class RestTemplateTest {
      * 注意:参数是直接写在方法里面的
      */
     @Test
-    public void fun1(){
+    public void testGetForEntity_1(){
         ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://localhost:8080/get?name={name}", String.class, "ls");
         System.out.println(responseEntity);
     }
@@ -55,7 +55,7 @@ public class RestTemplateTest {
      *      2.map的key必须和请求url中?的值保持一致,这里是字符串name
      */
     @Test
-    public void fun2(){
+    public void testGetForEntity_2(){
         Map<String, String> map = new HashMap<String,String>();
         map.put("name", "ls");
         //泛型为User
@@ -68,7 +68,7 @@ public class RestTemplateTest {
 
     /**
      * getForObject()
-     *      测试get方式远程调用,url的形式可以为下面的形式:
+     *      测试get方式远程调用，url的形式可以为下面的形式:
      *          http://localhost:8080/get?name={?}
      *          http://localhost:8080/get?name={1}
      *          http://localhost:8080/get?name={xxx}
@@ -79,7 +79,7 @@ public class RestTemplateTest {
      *          2.使用map传递参数
      */
     @Test
-    public void fun3(){
+    public void testGetForObject_1(){
         Map<String, String> map = new HashMap<String,String>();
         map.put("name", "ls");
         User user = restTemplate.getForObject("http://localhost:8080/get?name={name}", User.class, map);
@@ -90,7 +90,7 @@ public class RestTemplateTest {
      * 使用RestTemplate进行远程调用:查询单个并且不传递参数
      */
     @Test
-    public void fun4(){
+    public void testGetForObject_2(){
         User user = restTemplate.getForObject("http://localhost:8080/get/1",User.class);
         System.out.println(user);
     }
@@ -108,7 +108,7 @@ public class RestTemplateTest {
      *          2.不使用map传递参数,适用可变参数传递参数
      */
     @Test
-    public void fun5(){
+    public void testGetForObject_3(){
         User user = restTemplate.getForObject("http://localhost:8080/get?name={name}", User.class, "ls");
         System.out.println(user);
     }
@@ -120,7 +120,7 @@ public class RestTemplateTest {
      *          2.使用map传递参数,适用可变参数传递参数
      */
     @Test
-    public void fun6(){
+    public void testPostForEntity(){
         String url = "http://localhost:8080/rest/post";
         HttpHeaders headers = new HttpHeaders();
         //header可以不设置值
@@ -144,7 +144,7 @@ public class RestTemplateTest {
      *          2.使用map传递参数,适用可变参数传递参数
      */
     @Test
-    public void fun7(){
+    public void testPostForObject_1(){
         String url = "http://localhost:8080/post";
         HttpHeaders headers = new HttpHeaders();
         //header可以不设置值
@@ -158,7 +158,7 @@ public class RestTemplateTest {
     }
 
     @Test
-    public void fun71(){
+    public void testPostForObjectAndPostForEntity(){
         String url = "http://localhost:8080/rest/postjson";
         HttpHeaders requestHeaders = new HttpHeaders();
         //requestHeaders.setContentType(MediaType.APPLICATION_JSON);
@@ -177,7 +177,7 @@ public class RestTemplateTest {
      * put()
      */
     @Test
-    public void fun8(){
+    public void testPut(){
         String url = "http://localhost:8080/put";
         HttpHeaders headers = new HttpHeaders();
         //header可以不设置值
@@ -193,7 +193,7 @@ public class RestTemplateTest {
      * delete()
      */
     @Test
-    public void fun9(){
+    public void testDelete(){
         String url = "http://localhost:8080/delete/1";
         restTemplate.delete(url);
     }
@@ -207,8 +207,9 @@ public class RestTemplateTest {
      *      http://localhost:8080/get/{placeholder}
      */
     @Test
-    public void fun10(){
+    public void testGetForObject_Placeholder(){
         User user = restTemplate.getForObject("http://localhost:8080/get/{id}",User.class,1);
         System.out.println(user);
     }
+
 }
