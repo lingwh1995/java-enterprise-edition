@@ -1,5 +1,7 @@
 package org.bluebridge.chapter_02_nc;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -13,6 +15,7 @@ import java.nio.charset.Charset;
  * @desc   基于AIO的服务器端
  * @date   2025/7/18 11:48
  */
+@Slf4j(topic = "·")
 public class _01_AsynchronousServerSocketChannelServer {
 
     private static final int PORT = 8080;
@@ -26,7 +29,7 @@ public class _01_AsynchronousServerSocketChannelServer {
 
     private static void closeChannel(AsynchronousSocketChannel sc) {
         try {
-            System.out.printf("[%s] %s close\n", Thread.currentThread().getName(), sc.getRemoteAddress());
+            log.info("[{}] {} close", Thread.currentThread().getName(), sc.getRemoteAddress());
             sc.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,9 +49,9 @@ public class _01_AsynchronousServerSocketChannelServer {
                     closeChannel(sc);
                     return;
                 }
-                System.out.printf("[%s] %s read\n", Thread.currentThread().getName(), sc.getRemoteAddress());
+                log.info("[{}] {} read", Thread.currentThread().getName(), sc.getRemoteAddress());
                 attachment.flip();
-                System.out.println(Charset.defaultCharset().decode(attachment));
+                log.info("{}", Charset.defaultCharset().decode(attachment));
                 attachment.clear();
                 // 处理完第一个 read 时，需要再次调用 read 方法来处理下一个 read 事件
                 sc.read(attachment, attachment, this);
@@ -96,7 +99,7 @@ public class _01_AsynchronousServerSocketChannelServer {
         @Override
         public void completed(AsynchronousSocketChannel sc, Object attachment) {
             try {
-                System.out.printf("[%s] %s connected\n", Thread.currentThread().getName(), sc.getRemoteAddress());
+                log.info("[{}] {} connected", Thread.currentThread().getName(), sc.getRemoteAddress())
             } catch (IOException e) {
                 e.printStackTrace();
             }
