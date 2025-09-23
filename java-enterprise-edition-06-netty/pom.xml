@@ -16,6 +16,7 @@
         <module>chapter-01-02-jdk-nio</module>
         <module>chapter-01-03-jdk-aio</module>
         <module>chapter-02-01-netty-helloworld</module>
+        <module>chapter-02-03-netty-future</module>
     </modules>
 
     <properties>

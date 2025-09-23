@@ -1,4 +1,4 @@
-package org.bluebridge;
+package org.bluebridge._01_eventloop;
 
 import io.netty.channel.nio.NioEventLoopGroup;
 import lombok.extern.slf4j.Slf4j;
@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author lingwh
- * @desc 事件循环和事件循环组测试
+ * @desc 事件循环测试
  * @date 2025/9/23 11:06
  */
 @Slf4j(topic = "·")

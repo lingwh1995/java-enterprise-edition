@@ -99,7 +99,7 @@ public class _01_AsynchronousServerSocketChannelServer {
         @Override
         public void completed(AsynchronousSocketChannel sc, Object attachment) {
             try {
-                log.info("[{}] {} connected", Thread.currentThread().getName(), sc.getRemoteAddress())
+                log.info("[{}] {} connected", Thread.currentThread().getName(), sc.getRemoteAddress());
             } catch (IOException e) {
                 e.printStackTrace();
             }
