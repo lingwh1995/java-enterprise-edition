@@ -1,4 +1,4 @@
-package org.bluebridge._02_eventloop;
+package org.bluebridge;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
@@ -9,17 +9,16 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import lombok.extern.slf4j.Slf4j;
-import org.bluebridge.utils.ByteBufUtil;
 
 import java.nio.charset.Charset;
 
 /**
  * @author lingwh
- * @desc 事件循环Server端
+ * @desc 用于测试时充当临时 服务端
  * @date 2025/9/23 11:58
  */
 @Slf4j(topic = "·")
-public class EventLoopServer {
+public class NettyServer {
 
     public static void main(String[] args) {
         new ServerBootstrap()

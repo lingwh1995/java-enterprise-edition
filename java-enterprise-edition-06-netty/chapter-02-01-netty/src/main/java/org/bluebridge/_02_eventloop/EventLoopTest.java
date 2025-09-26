@@ -33,7 +33,7 @@ public class EventLoopTest {
         // 3.执行普通任务
         group.next().submit(() -> log.info("这是个普通任务......"));
 
-        // 4.执行定时循环任务
+        // 4.执行定时任务
         group.next().scheduleAtFixedRate(() -> {
             try {
                 TimeUnit.MILLISECONDS.sleep(3000);

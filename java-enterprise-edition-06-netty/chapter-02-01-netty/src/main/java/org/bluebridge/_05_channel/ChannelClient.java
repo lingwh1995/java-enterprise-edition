@@ -1,4 +1,4 @@
-package org.bluebridge._04_channel;
+package org.bluebridge._05_channel;
 
 /**
  * @author lingwh
@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
  *      带有Future、Promise的类型都是和异步方法配套使用，用来处理结果
  */
 @Slf4j(topic = "·")
-public class ChannelEventLoopClient {
+public class ChannelClient {
 
     public static void main(String[] args) throws InterruptedException {
         ChannelFuture channelFuture = new Bootstrap()

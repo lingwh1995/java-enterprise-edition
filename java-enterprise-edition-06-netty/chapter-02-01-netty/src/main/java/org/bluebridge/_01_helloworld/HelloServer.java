@@ -33,8 +33,8 @@ import lombok.extern.slf4j.Slf4j;
 public class HelloServer {
 
     public static void main(String[] args) {
-        useSimpleChannelInboundHandlerAsHandler();
-        //useChannelInboundHandlerAdapterAsHandler();
+        //useSimpleChannelInboundHandlerAsHandler();
+        useChannelInboundHandlerAdapterAsHandler();
     }
 
     /**

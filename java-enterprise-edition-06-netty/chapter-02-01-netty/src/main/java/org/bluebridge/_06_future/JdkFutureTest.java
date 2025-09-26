@@ -1,4 +1,4 @@
-package org.bluebridge._05_future;
+package org.bluebridge._06_future;
 
 import lombok.extern.slf4j.Slf4j;
 

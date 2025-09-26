@@ -5,7 +5,6 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
-import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -15,46 +14,36 @@ import java.nio.charset.Charset;
 
 /**
  * @author lingwh
- * @desc
- * @date 2025/9/23 13:47
+ * @desc 事件循环组服务端
+ * @date 2025/9/26 10:14
+ */
+
+/**
+ * 3个客户端连接服务端，可以看到两个NioEventLoopGroup在交替处理三个连接
  */
 @Slf4j(topic = "·")
 public class EventLoopGroupServer {
 
-    public static void main(String[] args) {
-        // 细分: 独立出来一个EventLoopGroup来处理耗时较长的任务
-        EventLoopGroup eventExecutors = new NioEventLoopGroup();
-
-        /**
-         * 注意到两次输出的thread名不一样(nioEventLoopGroup-4-1， nioEventLoopGroup-2-1 )， 说明提交给不同的Group执行， 其中nioEventLoopGroup-4-1的4指的是第4个Group， 1为当前Group的线程号
-         */
+    public static void main(String[] args) throws InterruptedException {
         new ServerBootstrap()
-            .group(new NioEventLoopGroup(),new NioEventLoopGroup(2))// (parentGroup, childGroup)--->(负责Accept事件, 负责I/O事件)
+            .group(new NioEventLoopGroup(1), new NioEventLoopGroup(2)) // 服务器端两个nio worker工人
             .channel(NioServerSocketChannel.class)
             .childHandler(new ChannelInitializer<NioSocketChannel>() {
                 @Override
-                protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-                    nioSocketChannel.pipeline()
-                    .addLast("handler1",new ChannelInboundHandlerAdapter() {
+                protected void initChannel(NioSocketChannel ch) {
+                    ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
                         @Override
-                        public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-                            ByteBuf buffer = (ByteBuf) msg;
-                            String s = buffer.toString(Charset.defaultCharset());
-                            log.debug("第一个handler中接收到的字符串： {}", s);
-                            // 让消息传递给下一个handler
-                            ctx.fireChannelRead(msg);
-                        }
-                    }).addLast(eventExecutors, "handler2", new ChannelInboundHandlerAdapter() { // 传入指定的eventGroup
-                        @Override
-                        public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-                            ByteBuf buffer = (ByteBuf) msg;
-                            String s = buffer.toString(Charset.defaultCharset());
-                            log.debug("第二个handler中接收到的字符串： {}", s);
+                        public void channelRead(ChannelHandlerContext ctx, Object msg) {
+                            ByteBuf buf = (ByteBuf) msg;
+                            String s = buf.toString(Charset.defaultCharset());
+                            // 在这里打印线程名称，可以看到第一个NioEventLoopGroup和第二个NioEventLoopGroup在轮询处理来自客户端的连接
+                            log.debug("NioEventLoopGroup 名称：{}，接收到的字符串： {}", Thread.currentThread().getName(), s);
                         }
                     });
                 }
             })
-            .bind(8080);
+            .bind(8080)
+            .sync();
     }
 
 }
