@@ -33,7 +33,7 @@ public class EventLoopTest {
         // 3.执行普通任务
         group.next().submit(() -> log.info("这是个普通任务......"));
 
-        // 4.执行定时任务
+        // 4.执行定时任务，可以用于实现keepalive这样的心跳功能
         group.next().scheduleAtFixedRate(() -> {
             try {
                 TimeUnit.MILLISECONDS.sleep(3000);
