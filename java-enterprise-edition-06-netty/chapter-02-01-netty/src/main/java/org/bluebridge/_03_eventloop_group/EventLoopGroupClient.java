@@ -37,6 +37,7 @@ public class EventLoopGroupClient {
             .connect("localhost", 8080)
             .sync()
             .channel();
+        log.info("channel:" + channel);
         channel.writeAndFlush("zhangsan");
         TimeUnit.MILLISECONDS.sleep(2000);
         channel.writeAndFlush("zhangsan");
@@ -54,6 +55,7 @@ public class EventLoopGroupClient {
                 .connect("localhost", 8080)
                 .sync()
                 .channel();
+        log.info("channel:" + channel);
         channel.writeAndFlush("lisi");
         TimeUnit.MILLISECONDS.sleep(2000);
         channel.writeAndFlush("lisi");
@@ -71,6 +73,7 @@ public class EventLoopGroupClient {
                 .connect("localhost", 8080)
                 .sync()
                 .channel();
+        log.info("channel:" + channel);
         channel.writeAndFlush("wangwu");
         TimeUnit.MILLISECONDS.sleep(2000);
         channel.writeAndFlush("wangwu");
