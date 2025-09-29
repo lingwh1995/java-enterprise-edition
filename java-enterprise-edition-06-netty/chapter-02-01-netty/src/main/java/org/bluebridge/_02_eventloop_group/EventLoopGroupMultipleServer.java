@@ -1,4 +1,4 @@
-package org.bluebridge._03_eventloop_group;
+package org.bluebridge._02_eventloop_group;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
@@ -14,15 +14,22 @@ import java.nio.charset.Charset;
 
 /**
  * @author lingwh
- * @desc 事件循环组服务端
+ * @desc 多事件循环组 服务端
  * @date 2025/9/26 10:14
  */
 
 /**
- * 3个客户端连接服务端，可以看到两个NioEventLoopGroup在交替处理三个连接
+ * 双参数版本 => public ServerBootstrap group(EventLoopGroup parentGroup, EventLoopGroup childGroup)
+ * 1.允许分别指定父级和子级EventLoopGroup提供更灵活的线程模型配置
+ *   parentGroup: 负责接收新连接(accept操作)，childGroup: 负责处理已建立连接的I/O操作
+ * 2.适用于需要精细控制线程资源分配的高性能应用，可以为accept操作和I/O操作分配不同的线程池
+ */
+
+/**
+ * 3个客户端连接服务端，可以看到两个NioEventLoopGroup在轮询处理来自3个客户端的连接
  */
 @Slf4j(topic = "·")
-public class EventLoopGroupServer {
+public class EventLoopGroupMultipleServer {
 
     public static void main(String[] args) throws InterruptedException {
         new ServerBootstrap()
@@ -36,7 +43,7 @@ public class EventLoopGroupServer {
                         public void channelRead(ChannelHandlerContext ctx, Object msg) {
                             ByteBuf buf = (ByteBuf) msg;
                             String s = buf.toString(Charset.defaultCharset());
-                            // 在这里打印线程名称，可以看到第一个NioEventLoopGroup和第二个NioEventLoopGroup在轮询处理来自客户端的连接
+                            // 在这里打印线程名称，可以看到两个NioEventLoopGroup在轮询处理来自3个客户端的连接
                             log.debug("NioEventLoopGroup 名称：{}，接收到的字符串： {}", Thread.currentThread().getName(), s);
                         }
                     });

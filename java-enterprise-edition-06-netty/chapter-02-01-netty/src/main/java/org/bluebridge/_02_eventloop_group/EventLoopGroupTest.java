@@ -1,4 +1,4 @@
-package org.bluebridge._02_eventloop;
+package org.bluebridge._02_eventloop_group;
 
 import io.netty.channel.nio.NioEventLoopGroup;
 import lombok.extern.slf4j.Slf4j;
@@ -10,8 +10,12 @@ import java.util.concurrent.TimeUnit;
  * @desc 事件循环测试
  * @date 2025/9/23 11:06
  */
+
+/**
+ * NioEventLoop 除了可以处理 io 事件，也可以处理普通任务
+ */
 @Slf4j(topic = "·")
-public class EventLoopTest {
+public class EventLoopGroupTest {
 
     public static void main(String[] args) throws InterruptedException {
         // 1.创建事件循环组
@@ -35,13 +39,8 @@ public class EventLoopTest {
 
         // 4.执行定时任务，可以用于实现keepalive这样的心跳功能
         group.next().scheduleAtFixedRate(() -> {
-            try {
-                TimeUnit.MILLISECONDS.sleep(3000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
             log.info("这是个定时任务......");
-        },3,10, TimeUnit.SECONDS);
+        },3,2000, TimeUnit.MILLISECONDS);
 
         log.debug("main");
 

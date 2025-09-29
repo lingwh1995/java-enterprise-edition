@@ -1,4 +1,4 @@
-package org.bluebridge._08_pipeline;
+package org.bluebridge._07_pipeline;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author lingwh
- * @desc
+ * @desc 测试Netty pipeline 服务端
  * @date 2025/9/24 15:30
  */
 @Slf4j(topic = "·")

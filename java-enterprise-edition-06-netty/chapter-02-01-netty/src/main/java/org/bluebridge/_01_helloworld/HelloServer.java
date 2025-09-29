@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author lingwh
- * @desc 服务端
+ * @desc netty helloworld 服务端
  * @date 2025/8/20 17:24
  */
 

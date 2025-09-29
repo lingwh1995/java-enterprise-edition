@@ -1,4 +1,4 @@
-package org.bluebridge._04_eventloop_group_enhance;
+package org.bluebridge._03_eventloop_group_enhance;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;

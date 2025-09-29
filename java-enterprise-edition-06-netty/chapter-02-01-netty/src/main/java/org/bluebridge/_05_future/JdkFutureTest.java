@@ -1,4 +1,4 @@
-package org.bluebridge._06_future;
+package org.bluebridge._05_future;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -8,6 +8,10 @@ import java.util.concurrent.*;
  * @author lingwh
  * @desc Jdk自带的Future测试
  * @date 2025/9/23 18:13
+ */
+
+/**
+ * jdk Future 只能同步等待任务结束（或成功、或失败）才能得到结果
  */
 @Slf4j(topic = "·")
 public class JdkFutureTest {
@@ -20,8 +24,9 @@ public class JdkFutureTest {
         Future<Integer> future = executorService.submit(new Callable<Integer>() {
             @Override
             public Integer call() throws Exception {
-                Thread.sleep(5000);
-                return 50;
+                log.debug("正在运行......");
+                TimeUnit.MILLISECONDS.sleep(1000 * 5);
+                return 100;
             }
         });
 

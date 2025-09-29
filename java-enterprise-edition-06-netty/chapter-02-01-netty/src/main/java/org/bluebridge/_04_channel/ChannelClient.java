@@ -1,4 +1,4 @@
-package org.bluebridge._05_channel;
+package org.bluebridge._04_channel;
 
 /**
  * @author lingwh

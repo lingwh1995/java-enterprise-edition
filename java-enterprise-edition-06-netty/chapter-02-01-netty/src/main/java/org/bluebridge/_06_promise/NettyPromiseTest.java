@@ -1,13 +1,20 @@
-package org.bluebridge._07_promise;
+package org.bluebridge._06_promise;
 
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.util.concurrent.DefaultPromise;
 import lombok.extern.slf4j.Slf4j;
 
+import java.sql.Time;
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author lingwh
  * @desc
  * @date 2025/9/24 15:24
+ */
+
+/**
+ * netty Promise 不仅有 netty Future 的功能，而且脱离了任务独立存在，只作为两个线程间传递结果的容器
  */
 @Slf4j(topic = "·")
 public class NettyPromiseTest {
@@ -18,12 +25,12 @@ public class NettyPromiseTest {
 
         new Thread(() -> {
             try {
-                Thread.sleep(1000);
+                TimeUnit.MILLISECONDS.sleep(1000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
             // 向Promise容器填充对象
-            promise.setSuccess(80);
+            promise.setSuccess(100);
         }).start();
 
         log.info("获取结果： {}", promise.getNow());

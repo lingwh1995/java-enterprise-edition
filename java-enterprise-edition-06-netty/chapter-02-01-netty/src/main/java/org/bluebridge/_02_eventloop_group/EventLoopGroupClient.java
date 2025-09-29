@@ -1,4 +1,4 @@
-package org.bluebridge._03_eventloop_group;
+package org.bluebridge._02_eventloop_group;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -12,9 +12,10 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author lingwh
- * @desc 事件循环Client端
+ * @desc 事件循环组 客户端
  * @date 2025/9/23 11:58
  */
+
 /**
  * 测试方法：
  *    客户端，启动三次，分别修改发送字符串为 zhangsan（第一次），lisi（第二次），wangwu（第三次），可

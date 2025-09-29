@@ -1,4 +1,4 @@
-package org.bluebridge._02_eventloop;
+package org.bluebridge._02_eventloop_group;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
@@ -9,14 +9,19 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import lombok.extern.slf4j.Slf4j;
-import org.bluebridge.utils.ByteBufUtil;
 
 import java.nio.charset.Charset;
 
 /**
  * @author lingwh
- * @desc 事件循环组 服务端
+ * @desc 单事件循环组 服务端
  * @date 2025/9/23 11:58
+ */
+
+/**
+ * 单参数版本 => public ServerBootstrap group(EventLoopGroup group)
+ * 1.用于父级和子级EventLoopGroup使用同一个实例的场景，内部会将同一个group同时作为parentGroup和childGroup使用
+ * 2.适用于单线程模型的场景，如简单的服务器应用，不需要复杂的线程模型配置
  */
 
 /**
@@ -34,7 +39,7 @@ import java.nio.charset.Charset;
  *   Netty的NioEventLoopGroup的默认线程数量大小为 CPU 核心数 × 2，这是基于I/O多路复用和并发处理的优化设定。
  */
 @Slf4j(topic = "·")
-public class EventLoopServer {
+public class EventLoopGroupSingleServer {
 
     public static void main(String[] args) {
         new ServerBootstrap()
