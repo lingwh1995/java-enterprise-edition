@@ -18,6 +18,7 @@
         <module>java-enterprise-edition-06-netty</module>
         <module>java-enterprise-edition-07-workflow</module>
         <module>java-enterprise-edition-08-mq</module>
+        <module>java-enterprise-edition-09-ml</module>
     </modules>
 
     <properties>
