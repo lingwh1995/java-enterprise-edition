@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  *    客户端，启动三次，分别修改发送字符串为 zhangsan（第一次），lisi（第二次），wangwu（第三次），可
  *    以看到两个工人轮流处理 channel，但工人与 channel 之间进行了绑定
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class EventLoopGroupClient {
 
     public static void main(String[] args) throws InterruptedException {

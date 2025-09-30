@@ -11,7 +11,7 @@ import java.nio.file.Paths;
  * @desc   JDK7新增的Path和Paths类（Path用来表示文件路径、Paths是工具类，用来获取Path实例）
  * @date   2025/6/25 16:05
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _01_JDK7PathAndPathsTest {
 
     /**

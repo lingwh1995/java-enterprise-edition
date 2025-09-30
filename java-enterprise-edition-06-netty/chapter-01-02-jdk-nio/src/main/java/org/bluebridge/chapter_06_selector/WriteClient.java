@@ -12,7 +12,7 @@ import java.nio.channels.SocketChannel;
  * @desc   写客户端
  * @date   2025/6/26 9:06
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class WriteClient {
 
     private static final int PORT = 8080;

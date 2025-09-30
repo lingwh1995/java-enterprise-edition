@@ -13,7 +13,7 @@ import java.util.concurrent.*;
 /**
  * jdk Future 只能同步等待任务结束（或成功、或失败）才能得到结果
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class JdkFutureTest {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {

@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
  * @desc   ByteBuffer分配空间的两种方式
  * @date   2025/6/22 11:19
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _05_ByteBufferAllocateTest {
 
     @Test

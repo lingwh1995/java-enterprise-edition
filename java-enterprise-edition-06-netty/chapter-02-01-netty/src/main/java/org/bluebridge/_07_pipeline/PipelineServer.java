@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
  * @desc 测试Netty pipeline 服务端
  * @date 2025/9/24 15:30
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class PipelineServer {
 
     public static void main(String[] args) {

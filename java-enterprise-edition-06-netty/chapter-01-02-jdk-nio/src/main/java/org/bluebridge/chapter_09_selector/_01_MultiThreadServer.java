@@ -23,7 +23,7 @@ import java.util.Iterator;
  *      // 在boss线程中执行 => main() => sc.register(worker.selector, SelectionKey.OP_READ, null); => OP_READ事件注册失败
  *      上面selector和下面worker.selector 是同一个对象，上面的方法会导致selector阻塞(处于阻塞状态时其他通道上的事件无法被注册到这个selector上)，所以下面的方法无法把Channel注册到同一个selector中
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _01_MultiThreadServer {
 
     private static final int PORT = 8080;

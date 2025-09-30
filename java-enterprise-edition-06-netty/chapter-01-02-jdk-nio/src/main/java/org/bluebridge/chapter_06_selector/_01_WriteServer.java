@@ -18,7 +18,7 @@ import java.util.Iterator;
  * @desc   写服务器-没有解决写大量数据阻塞问题
  * @date   2025/6/28 9:06
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _01_WriteServer {
 
     private static final int PORT = 8080;

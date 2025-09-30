@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
  * @desc 用于测试时充当临时 客户端
  * @date 2025/9/23 11:58
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class NettyClient {
 
     public static void main(String[] args) throws InterruptedException {

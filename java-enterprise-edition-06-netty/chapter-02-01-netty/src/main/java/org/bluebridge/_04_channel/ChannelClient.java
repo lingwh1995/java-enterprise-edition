@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
  *  注意事项
  *      带有Future、Promise的类型都是和异步方法配套使用，用来处理结果
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class ChannelClient {
 
     public static void main(String[] args) throws InterruptedException {

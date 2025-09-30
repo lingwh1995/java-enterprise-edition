@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
  * @desc 使用EmbeddedChannel进行测试，不再需要启动Client和Server
  * @date 2025/9/24 15:46
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class EmbeddedChannelTest {
 
     public static void main(String[] args) {

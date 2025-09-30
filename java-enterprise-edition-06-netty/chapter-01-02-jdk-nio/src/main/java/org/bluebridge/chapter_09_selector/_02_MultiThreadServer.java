@@ -31,7 +31,7 @@ import java.util.Iterator;
  *      selector对象上，这里的事件能注册成功，客户端就能正确发送数据给服务器，事件注册失败，客户端无法发送数据给服务器，因为事件没有注册到selector对象上
  *
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _02_MultiThreadServer {
 
     private static final int PORT = 8080;

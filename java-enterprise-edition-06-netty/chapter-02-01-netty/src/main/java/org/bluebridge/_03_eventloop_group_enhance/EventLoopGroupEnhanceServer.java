@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * @desc 使用独立的EventLoopGroup处理耗时较长的任务 服务端
  * @date 2025/9/23 13:47
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class EventLoopGroupEnhanceServer {
 
     public static void main(String[] args) {
@@ -34,11 +34,11 @@ public class EventLoopGroupEnhanceServer {
             .channel(NioServerSocketChannel.class)
             .childHandler(new ChannelInitializer<NioSocketChannel>() {
                 @Override
-                protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
+                protected void initChannel(NioSocketChannel nioSocketChannel) {
                     nioSocketChannel.pipeline()
                     .addLast("handler1",new ChannelInboundHandlerAdapter() {
                         @Override
-                        public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+                        public void channelRead(ChannelHandlerContext ctx, Object msg) {
                             ByteBuf buf = (ByteBuf) msg;
                             String s = buf.toString(Charset.defaultCharset());
                             log.debug("NioEventLoopGroup 名称：{}，第一个handler开始处理耗时任务： {}", Thread.currentThread().getName(), s);
@@ -47,7 +47,7 @@ public class EventLoopGroupEnhanceServer {
                         }
                     }).addLast(eventExecutors, "handler2", new ChannelInboundHandlerAdapter() { // 传入指定的eventGroup
                         @Override
-                        public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+                        public void channelRead(ChannelHandlerContext ctx, Object msg) {
                             ByteBuf buf = (ByteBuf) msg;
                             String s = buf.toString(Charset.defaultCharset());
                             // 使用异步方式处理耗时任务，避免阻塞I/O线程
@@ -68,7 +68,7 @@ public class EventLoopGroupEnhanceServer {
                         }
                     }).addLast(eventExecutors, "handler3", new ChannelInboundHandlerAdapter() { // 传入指定的eventGroup
                         @Override
-                        public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+                        public void channelRead(ChannelHandlerContext ctx, Object msg) {
                             ByteBuf buf = (ByteBuf) msg;
                             String s = buf.toString(Charset.defaultCharset());
                             log.debug("NioEventLoopGroup 名称：{}，第三个handler开始处理耗时任务： {}", Thread.currentThread().getName(), s);

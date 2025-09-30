@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
  * @desc 使用独立的EventLoopGroup处理耗时较长的任务 客户端
  * @date 2025/9/23 11:58
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class EventLoopGroupEnhanceClient {
 
     public static void main(String[] args) throws InterruptedException {

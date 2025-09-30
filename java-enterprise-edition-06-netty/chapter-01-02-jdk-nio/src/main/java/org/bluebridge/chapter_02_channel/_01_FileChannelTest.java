@@ -12,7 +12,7 @@ import java.nio.channels.FileChannel;
  * @desc   NIO使用FileChannel读取文件中的数据
  * @date   2025/6/24 15:08
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _01_FileChannelTest {
 
     @Test

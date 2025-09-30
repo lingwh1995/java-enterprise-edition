@@ -11,7 +11,7 @@ import java.nio.ByteBuffer;
  * @desc   ByteBuffer基础使用
  * @date   2025/6/20 9:38
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _01_ByteBufferHelloWorldTest {
 
     /**

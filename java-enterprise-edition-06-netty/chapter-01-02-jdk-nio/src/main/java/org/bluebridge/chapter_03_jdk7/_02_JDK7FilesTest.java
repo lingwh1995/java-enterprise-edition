@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @desc   JDK7新增的Files 类
  * @date   2025/6/25 16:05
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _02_JDK7FilesTest {
 
     /**

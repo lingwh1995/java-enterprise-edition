@@ -14,7 +14,7 @@ import java.util.Scanner;
  * @desc   测试使用 多线程 + selector 实现Server的客户端
  * @date   2025/6/29 9:24
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class Client {
 
     private static final int PORT = 8080;

@@ -15,7 +15,7 @@ import java.util.Iterator;
  * @desc   从事件驱动角度理解 selector 网络通信
  * @date   2025/6/28 17:35
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class SelectorServer {
 
     private static final int PORT = 8080;

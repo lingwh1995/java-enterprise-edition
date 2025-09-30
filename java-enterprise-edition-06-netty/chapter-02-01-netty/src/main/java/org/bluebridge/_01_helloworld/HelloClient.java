@@ -14,7 +14,7 @@ import java.net.InetSocketAddress;
  * @desc netty helloworld 客户端
  * @date 2025/8/20 17:24
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class HelloClient {
 
     public static void main(String[] args) throws InterruptedException {

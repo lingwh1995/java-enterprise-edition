@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
  *        eventLoop 既可以执行 io 操作，也可以进行任务处理，每个 eventLoop 有自己的任务队列，队列里可以堆放多个 channel 的待处理任务，任务分为普通任务、定时任务
  *        eventLoop 按照 pipeline 顺序，依次按照 handler 的规划（代码）处理数据，可以为每个 handler 指定不同的 eventLoop
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class HelloServer {
 
     public static void main(String[] args) {
@@ -51,13 +51,13 @@ public class HelloServer {
             // ChannelInitializer 处理器，仅执行一次，它的作用是待客户端SocketChannel建立连接后，执行initChannel以便添加更多的处理器
             .childHandler(new ChannelInitializer<NioSocketChannel>() {
                 @Override
-                protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
+                protected void initChannel(NioSocketChannel nioSocketChannel) {
                     // 5.SocketChannel的处理器，使用StringDecoder解码，ByteBuf=>String
                     nioSocketChannel.pipeline().addLast(new StringDecoder());
                     // 6.SocketChannel的业务处理，使用上一个处理器的处理结果
                     nioSocketChannel.pipeline().addLast(new SimpleChannelInboundHandler<String>() {
                         @Override
-                        protected void channelRead0(ChannelHandlerContext channelHandlerContext, String msg) throws Exception {
+                        protected void channelRead0(ChannelHandlerContext channelHandlerContext, String msg) {
                             log.info("msg: {}", msg);
                         }
                     });
@@ -81,13 +81,13 @@ public class HelloServer {
                 // 5.代表和客户端进行数据读写的通道，负责添加别的handler，在initChannel()方法中进行添加
                 new ChannelInitializer<NioSocketChannel>() {
                     @Override
-                    protected void initChannel(NioSocketChannel ch) throws Exception {
+                    protected void initChannel(NioSocketChannel ch) {
                         // 6.添加具体handler
                         ch.pipeline().addLast(new StringDecoder()); //将ByteBuf转换为字符串
                         ch.pipeline().addLast(new ChannelInboundHandlerAdapter(){ //自定义的handler
                             // 读事件
                             @Override
-                            public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+                            public void channelRead(ChannelHandlerContext ctx, Object msg) {
                                 log.info("msg: {}", msg);
                             }
                         });

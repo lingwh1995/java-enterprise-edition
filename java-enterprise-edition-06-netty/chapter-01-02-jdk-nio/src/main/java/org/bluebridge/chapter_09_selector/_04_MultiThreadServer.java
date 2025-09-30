@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  *
  * 核心思路：保证 sc.register(selector, SelectionKey.OP_READ, null); 执行之前，selector处于非阻塞状态
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _04_MultiThreadServer {
 
     private static final int PORT = 8080;

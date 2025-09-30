@@ -34,7 +34,7 @@ import java.util.concurrent.TimeUnit;
  *  3.32位机器下每个线程320kb，64位机器下每个线程1024kb，如果创建的线程过多，极有可能出现OOM现象，可以使用线程池进行优化，但是
  *    仍要注意，即使使用了线程池进行优化，也不适用于处理连接线程过多且都是长连接的的情况，一定程度上具备处理多个短连接的能力
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _03_BlockingInputOutputServer {
 
     private static final int PORT = 8080;
@@ -100,7 +100,7 @@ class ServerThreadPool {
 /**
  * 封装了Socket的任务对象
  */
-@Slf4j(topic = "·")
+@Slf4j
 class ServerRunnableTask implements Runnable {
     private Socket socket;
 

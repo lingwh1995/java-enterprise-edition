@@ -17,7 +17,7 @@ import java.nio.charset.Charset;
  * @desc 用于测试时充当临时 服务端
  * @date 2025/9/23 11:58
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class NettyServer {
 
     public static void main(String[] args) {

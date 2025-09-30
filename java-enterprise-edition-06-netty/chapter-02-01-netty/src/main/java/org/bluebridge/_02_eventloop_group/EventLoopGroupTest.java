@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * NioEventLoop 除了可以处理 io 事件，也可以处理普通任务
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class EventLoopGroupTest {
 
     public static void main(String[] args) throws InterruptedException {

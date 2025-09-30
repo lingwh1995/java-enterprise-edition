@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
  * @desc   ByteBuffer和字符串互相转换
  * @date   2025/6/22 14:23
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _06_ByteBufferAndStringTransferTest {
 
     /**

@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
  * 1. 调用 sync 方法，阻塞等待异步操作完成
  * 2. 调用 addListener 方法，添加一个监听器，异步操作完成时会调用监听器
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class ChannelFutureClient {
 
     public static void main(String[] args) throws InterruptedException {

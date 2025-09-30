@@ -23,7 +23,7 @@ import java.net.Socket;
  *  1.cmd -> telnet 127.0.0.1 8080/telnet localhost 8080 -> 直接输入内容（只能发送单个字符）/按下Ctrl+]后输入 send + 内容（可以发送字符串） -> 查看idea控制台接收到的信息
  *  2.启动多个客户端
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _02_BlockingInputOutputServer {
 
     private static final int PORT = 8080;
@@ -51,7 +51,7 @@ public class _02_BlockingInputOutputServer {
 /**
  * 用于处理多个客户端连接同一个服务端的多线程类
  */
-@Slf4j(topic = "·")
+@Slf4j
 class ServerThread implements Runnable{
     private Socket socket;
 

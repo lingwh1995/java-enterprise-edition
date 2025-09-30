@@ -11,7 +11,7 @@ import java.nio.ByteBuffer;
  * @desc   两个ByteBuffer读写测试
  * @date   2025/6/20 16:37
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _03_ByteBufferReadWriteTest {
 
     @Test

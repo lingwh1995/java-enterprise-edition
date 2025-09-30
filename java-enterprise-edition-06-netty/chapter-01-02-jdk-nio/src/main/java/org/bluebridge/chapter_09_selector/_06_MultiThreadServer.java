@@ -30,7 +30,7 @@ import java.util.stream.IntStream;
  * worker数量建议设置为cpu核心数
  *      使用 Runtime.getRuntime().availableProcessors() 获取cpu核心数，docker下获取的是物理机核心数，而非docker容器核心数，所以手工指定最好
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _06_MultiThreadServer {
 
     private static final int PORT = 8080;

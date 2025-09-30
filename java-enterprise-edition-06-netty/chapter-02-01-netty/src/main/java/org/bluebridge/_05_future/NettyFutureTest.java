@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * netty Future 可以同步等待任务结束得到结果，也可以异步方式得到结果，但都是要等任务结束
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class NettyFutureTest {
 
     public static void main(String[] args) throws InterruptedException {

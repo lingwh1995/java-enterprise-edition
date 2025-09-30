@@ -20,7 +20,7 @@ import java.util.Scanner;
  * @desc 获取关闭后的Channel，用来执行善后工作
  * @date 2025/9/23 18:10
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class ChannelFutureCloseFutureClient {
     /*
     public static void main(String[] args) throws InterruptedException {

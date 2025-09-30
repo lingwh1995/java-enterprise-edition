@@ -36,7 +36,7 @@ import java.util.Iterator;
  *      有可写事件才去写入
  *  4.限于网络传输能力，Channel未必时时可写，一旦Channel可写，会触发Selector的可写事件
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _01_SelectorServer {
 
     private static final int PORT = 8080;

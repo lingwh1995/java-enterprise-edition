@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * netty Promise 不仅有 netty Future 的功能，而且脱离了任务独立存在，只作为两个线程间传递结果的容器
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class NettyPromiseTest {
 
     public static void main(String[] args) throws InterruptedException {

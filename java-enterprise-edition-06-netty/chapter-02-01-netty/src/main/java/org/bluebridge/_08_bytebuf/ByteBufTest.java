@@ -10,7 +10,7 @@ import org.junit.Test;
  * @desc Netty中的ByteBuf
  * @date 2025/9/24 15:50
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class ByteBufTest {
 
     @Test

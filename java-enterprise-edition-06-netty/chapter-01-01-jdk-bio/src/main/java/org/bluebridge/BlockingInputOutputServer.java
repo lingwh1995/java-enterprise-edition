@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.*;
 import java.net.*;
 
-@Slf4j(topic = "·")
+@Slf4j
 public class BlockingInputOutputServer {
 
     private static final int PORT = 8080;

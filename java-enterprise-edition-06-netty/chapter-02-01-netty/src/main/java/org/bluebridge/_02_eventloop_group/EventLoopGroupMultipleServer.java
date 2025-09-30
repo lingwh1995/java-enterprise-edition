@@ -23,17 +23,15 @@ import java.nio.charset.Charset;
  * 1.允许分别指定父级和子级EventLoopGroup提供更灵活的线程模型配置
  *   parentGroup: 负责接收新连接(accept操作)，childGroup: 负责处理已建立连接的I/O操作
  * 2.适用于需要精细控制线程资源分配的高性能应用，可以为accept操作和I/O操作分配不同的线程池
+ * 3.parentGroup相当于boss线程，childGroup处理worker线程
  */
 
-/**
- * 3个客户端连接服务端，可以看到两个NioEventLoopGroup在轮询处理来自3个客户端的连接
- */
-@Slf4j(topic = "·")
+@Slf4j
 public class EventLoopGroupMultipleServer {
 
     public static void main(String[] args) throws InterruptedException {
         new ServerBootstrap()
-            .group(new NioEventLoopGroup(1), new NioEventLoopGroup(2)) // 服务器端两个nio worker工人
+            .group(new NioEventLoopGroup(1), new NioEventLoopGroup(2)) // 服务器端一个boss线程，两个worker线程
             .channel(NioServerSocketChannel.class)
             .childHandler(new ChannelInitializer<NioSocketChannel>() {
                 @Override

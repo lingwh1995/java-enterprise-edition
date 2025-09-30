@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
  * @desc   NIO中FileChannel的分散读和集中写
  * @date   2025/6/24 16:08
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _02_ScatteringReadAndGatherWriteTest {
 
     /**

@@ -15,7 +15,7 @@ import java.nio.charset.Charset;
  * @desc   基于AIO的服务器端
  * @date   2025/7/18 11:48
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _01_AsynchronousServerSocketChannelServer {
 
     private static final int PORT = 8080;

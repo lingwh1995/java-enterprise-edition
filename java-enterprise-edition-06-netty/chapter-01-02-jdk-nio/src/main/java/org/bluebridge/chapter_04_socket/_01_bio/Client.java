@@ -18,7 +18,7 @@ import java.util.Scanner;
  * BIO模型网络通信Client端
  * 目标: 服务端接收单个客户端单条消息发送和接收需求
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class Client {
 
     private static final int PORT = 8080;

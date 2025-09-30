@@ -26,7 +26,7 @@ import java.nio.charset.StandardCharsets;
  *   clear()     切换为写模式
  *   put()       写入数据
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _02_ByteBufferAPITest {
 
     /**

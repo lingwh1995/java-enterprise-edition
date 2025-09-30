@@ -11,7 +11,7 @@ import java.nio.ByteBuffer;
  * @desc   处理黏包和半包
  * @date   2025/6/23 16:35
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _07_StickyPacketAndHalfPacketTest {
 
     /**

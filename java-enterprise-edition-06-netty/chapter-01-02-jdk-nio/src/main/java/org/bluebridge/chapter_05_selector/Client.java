@@ -15,7 +15,7 @@ import java.util.Scanner;
  * @desc   测试使用selector实现Server的客户端
  * @date   2025/7/8 9:06
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class Client {
     private static final int PORT = 8080;
 

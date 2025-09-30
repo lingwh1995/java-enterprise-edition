@@ -14,7 +14,7 @@ import java.nio.channels.FileChannel;
  * @desc   NIO中FileChannel的transferTo()方法测试
  * @date   2025/6/24 17:08
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _03_FileChannelTransferToTest {
 
     /**

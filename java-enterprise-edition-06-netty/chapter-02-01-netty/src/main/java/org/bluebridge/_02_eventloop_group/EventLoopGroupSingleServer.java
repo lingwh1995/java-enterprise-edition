@@ -38,26 +38,25 @@ import java.nio.charset.Charset;
  * 总结：
  *   Netty的NioEventLoopGroup的默认线程数量大小为 CPU 核心数 × 2，这是基于I/O多路复用和并发处理的优化设定。
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class EventLoopGroupSingleServer {
 
     public static void main(String[] args) {
         new ServerBootstrap()
-            .group(new NioEventLoopGroup())
+            .group(new NioEventLoopGroup()) // 无参构造函数会自动设置线程数为 CPU 核心数的两倍。
             .channel(NioServerSocketChannel.class)
             .childHandler(new ChannelInitializer<NioSocketChannel>() {
                 @Override
-                protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
+                protected void initChannel(NioSocketChannel nioSocketChannel) {
                     nioSocketChannel.pipeline().addLast(new ChannelInboundHandlerAdapter() {
                         @Override
-                        public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+                        public void channelRead(ChannelHandlerContext ctx, Object msg) {
                             ByteBuf buf = (ByteBuf) msg;
                             String s = buf.toString(Charset.defaultCharset());
                             // 每个客户端都对应着线程池中的一个线程，可能会出现一个线程处理了多个客户端的连接，这取决于线程池大小和客户端数量
                             log.debug("线程名称:{}, 收到消息:{}", Thread.currentThread().getName(), s);
                             //ByteBufUtil.debugRead(buf);
                         }
-
                     });
                 }
             })

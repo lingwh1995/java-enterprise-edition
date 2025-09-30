@@ -68,7 +68,7 @@ import java.util.Set;
  *      OP_CONNECT：客户端连接服务端的事件(tcp连接)，一般为创建SocketChannel客户端channel，值为：1<<3  =>  8
  *      OP_ACCEPT：服务端接收客户端连接的事件，一般为创建ServerSocketChannel服务端channel，值为：1<<4  =>  16
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class SelectorServer {
 
     private static final int PORT = 8080;

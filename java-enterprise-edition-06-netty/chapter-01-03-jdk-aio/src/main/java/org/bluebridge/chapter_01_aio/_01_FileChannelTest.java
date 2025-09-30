@@ -16,7 +16,7 @@ import java.nio.file.StandardOpenOption;
  * @desc
  * @date 2025/7/16 18:34
  */
-@Slf4j(topic = "·")
+@Slf4j
 public class _01_FileChannelTest {
 
     public static void main(String[] args) throws IOException {
