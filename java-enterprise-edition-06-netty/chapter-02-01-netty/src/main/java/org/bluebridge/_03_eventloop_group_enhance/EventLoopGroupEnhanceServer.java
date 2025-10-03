@@ -2,10 +2,7 @@ package org.bluebridge._03_eventloop_group_enhance;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -24,7 +21,7 @@ public class EventLoopGroupEnhanceServer {
 
     public static void main(String[] args) {
         // 细分: 独立出来一个EventLoopGroup来处理耗时较长的任务
-        EventLoopGroup eventExecutors = new NioEventLoopGroup();
+        EventLoopGroup eventExecutors = new DefaultEventLoopGroup();
 
         /**
          * 注意到两次输出的thread名不一样(nioEventLoopGroup-4-1， nioEventLoopGroup-2-1 )， 说明提交给不同的Group执行， 其中nioEventLoopGroup-4-1的4指的是第4个Group， 1为当前Group的线程号
@@ -66,7 +63,7 @@ public class EventLoopGroupEnhanceServer {
                             // 让消息传递给下一个handler
                             ctx.fireChannelRead(msg);
                         }
-                    }).addLast(eventExecutors, "handler3", new ChannelInboundHandlerAdapter() { // 传入指定的eventGroup
+                    }).addLast("handler3", new ChannelInboundHandlerAdapter() { // 传入指定的eventGroup
                         @Override
                         public void channelRead(ChannelHandlerContext ctx, Object msg) {
                             ByteBuf buf = (ByteBuf) msg;

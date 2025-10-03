@@ -12,12 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author lingwh
- * @desc 测试ChannelFuture 客户单
+ * @desc 使用ChannelFuture正确处理连接建立
  * @date 2025/9/26 14:53
  */
 
 /**
- * 让异步方法同步的两种方式：
+ * 让异步方法同步（获取建立好的连接）的两种方式：
  * 1. 调用 sync 方法，阻塞等待异步操作完成
  * 2. 调用 addListener 方法，添加一个监听器，异步操作完成时会调用监听器
  */
@@ -30,7 +30,7 @@ public class ChannelFutureClient {
     }
 
     /**
-     * 调用sync()让ChannelFuture异步变同步
+     * 调用sync()让ChannelFuture异步变同步：等待执行结果的是主线程（注意观察打印日志使用的线程的名称）
      * @throws InterruptedException
      */
     private static void makeChannelFutureSyncUseSync() throws InterruptedException {
@@ -44,20 +44,22 @@ public class ChannelFutureClient {
                     }
                 })
                 .connect("127.0.0.1", 8080);
-        log.info("连接成功");
+        log.info("连接成功......");
 
         /**
          * 执行到 1 时，连接未建立，打印 [id: 0x2e1884dd]
          * 执行到 2 时，sync 方法是同步等待连接建立完成
          * 执行到 3 时，连接肯定建立了，打印 [id: 0x2e1884dd, L:/127.0.0.1:57191 - R:/127.0.0.1:8080]
          */
-        log.info("{}", channelFuture.channel()); // 1
+        log.info("当前线程：{}， channel：{}",
+                Thread.currentThread().getName(), channelFuture.channel()); // 1
         channelFuture.sync(); // 2
-        log.info("{}", channelFuture.channel()); // 3
+        log.info("当前线程：{}， channel：{}",
+                Thread.currentThread().getName(), channelFuture.channel()); // 3
     }
 
     /**
-     * 调用 addListener() 让ChannelFuture异步变同步
+     * 调用 addListener() 让ChannelFuture异步变同步：等待执行结果的也是 NioEventLoopGroup 线程（注意观察打印日志使用的线程的名称）
      * @throws InterruptedException
      */
     private static void makeChannelFutureSyncUseAddListener() {
@@ -78,7 +80,8 @@ public class ChannelFutureClient {
          */
         log.info("{}", channelFuture.channel()); // 1
         channelFuture.addListener((ChannelFutureListener) future -> {
-            log.info("{}", channelFuture.channel()); // 2
+            log.info("当前线程：{}， channel：{}",
+                    Thread.currentThread().getName(), channelFuture.channel()); // 2
         });
     }
 

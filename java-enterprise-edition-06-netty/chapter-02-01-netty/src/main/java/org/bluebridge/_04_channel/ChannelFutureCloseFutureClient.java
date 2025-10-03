@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 /**
  * @author lingwh
- * @desc 获取关闭后的Channel，用来执行善后工作
+ * @desc 用来正确处理Channel的关闭工作
  * @date 2025/9/23 18:10
  */
 @Slf4j
@@ -35,7 +35,7 @@ public class ChannelFutureCloseFutureClient {
                     }
                 })
                 // 连接到服务器
-                // connect是一个异步非阻塞方法(即发起调用的main线程不阻塞, 把任务交给connect线程)
+                // connect是一个异步非阻塞方法（即发起调用的main线程不阻塞，把任务交给connect线程）
                 .connect("localhost", 8080);
 
         // 获取关闭后的channel
@@ -43,7 +43,7 @@ public class ChannelFutureCloseFutureClient {
         ChannelFuture closeFuture = channel.closeFuture();
         closeFuture.sync();// 阻塞
         // 执行关闭后的操作
-        group.shutdownGracefully();// 先拒绝接受新的任务， 把现有的任务能运行玩的运行完，然后再停止
+        group.shutdownGracefully(); // 先拒绝接受新的任务，把现有的任务能运行玩的运行完，然后再停止
     }*/
 
     public static void main(String[] args) throws InterruptedException {
@@ -64,6 +64,7 @@ public class ChannelFutureCloseFutureClient {
         new Thread(()->{
             Scanner scanner = new Scanner(System.in);
             while (true) {
+                log.info("请输入要发送给服务端的信息：");
                 String line = scanner.nextLine();
                 if ("q".equals(line)) {
                     channel.close(); // close 异步操作 1s 之后
@@ -76,14 +77,20 @@ public class ChannelFutureCloseFutureClient {
 
         // 获取 CloseFuture 对象， 1) 同步处理关闭， 2) 异步处理关闭
         ChannelFuture closeFuture = channel.closeFuture();
-        /*log.debug("waiting close...");
+
+        // 同步处理关闭
+        /*
+        log.debug("waiting close......");
         closeFuture.sync();
-        log.debug("处理关闭之后的操作");*/
+        log.debug("处理关闭之后的操作");
+        */
+
+        // 异步处理关闭
         closeFuture.addListener(new ChannelFutureListener() {
             @Override
             public void operationComplete(ChannelFuture future) throws Exception {
-                log.debug("处理关闭之后的操作");
-                group.shutdownGracefully();
+                log.debug("处理关闭之后的操作......");
+                group.shutdownGracefully(); // 先拒绝接受新的任务，把现有的任务能运行玩的运行完，然后再停止
             }
         });
     }
