@@ -24,16 +24,18 @@ public class NettyPromiseTest {
         DefaultPromise<Object> promise = new DefaultPromise<>(new NioEventLoopGroup().next());// 主动创建Promise对象
 
         new Thread(() -> {
+            log.info("开始计算......");
             try {
-                TimeUnit.MILLISECONDS.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                //int i = 1 / 0;
+                // 向Promise容器填充对象
+                promise.setSuccess(100);
+            }catch (Exception e) {
+                e.printStackTrace();
+                promise.setFailure(e);
             }
-            // 向Promise容器填充对象
-            promise.setSuccess(100);
         }).start();
 
-        log.info("获取结果： {}", promise.getNow());
+        log.info("等待结果......");
         Thread.sleep(2000);
         log.info("获取结果： {}", promise.getNow());
     }

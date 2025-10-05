@@ -29,10 +29,7 @@ public class NettyClient {
             .connect("localhost", 8080)
             .sync()
             .channel();
-//          .writeAndFlush("我是nio");
         channel.writeAndFlush("我是nio");
-        // 使用debug模式向服务器发送数据
-//        System.out.println(channel);
     }
 
 }
