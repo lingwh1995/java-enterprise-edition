@@ -23,6 +23,7 @@ public class EmbeddedChannelTest {
                 super.channelRead(ctx,msg);
             }
         };
+
         ChannelInboundHandlerAdapter h2 = new ChannelInboundHandlerAdapter() {
             @Override
             public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -30,6 +31,7 @@ public class EmbeddedChannelTest {
                 super.channelRead(ctx,msg);
             }
         };
+
         ChannelInboundHandlerAdapter h3 = new ChannelInboundHandlerAdapter() {
             @Override
             public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -37,14 +39,15 @@ public class EmbeddedChannelTest {
                 super.channelRead(ctx,msg);
             }
         };
-        ChannelInboundHandlerAdapter h4 = new ChannelInboundHandlerAdapter() {
-            @Override
-            public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-                log.info("h4");
-                super.channelRead(ctx,msg);
 
+        ChannelOutboundHandlerAdapter h4 = new ChannelOutboundHandlerAdapter() {
+            @Override
+            public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
+                log.info("h4");
+                super.write(ctx, msg, promise);
             }
         };
+
         ChannelOutboundHandlerAdapter h5 = new ChannelOutboundHandlerAdapter() {
             @Override
             public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
@@ -52,6 +55,7 @@ public class EmbeddedChannelTest {
                 super.write(ctx, msg, promise);
             }
         };
+
         ChannelOutboundHandlerAdapter h6 = new ChannelOutboundHandlerAdapter() {
             @Override
             public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
@@ -61,7 +65,7 @@ public class EmbeddedChannelTest {
         };
 
         EmbeddedChannel embeddedChannel = new EmbeddedChannel(h1, h2, h3, h4, h5, h6);
-        embeddedChannel.writeInbound("hello1");// 测试入站
+        //embeddedChannel.writeInbound("测试入站......");// 测试入站
         embeddedChannel.writeOutbound("hello2");// 测试出站
     }
     

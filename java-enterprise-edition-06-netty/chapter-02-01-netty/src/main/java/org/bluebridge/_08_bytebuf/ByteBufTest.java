@@ -3,7 +3,15 @@ package org.bluebridge._08_bytebuf;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import lombok.extern.slf4j.Slf4j;
+import org.bluebridge.utils.ByteBufUtil;
 import org.junit.Test;
+
+import java.lang.reflect.Array;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+
+import static io.netty.buffer.ByteBufUtil.appendPrettyHexDump;
+import static sun.security.pkcs11.wrapper.Constants.NEWLINE;
 
 /**
  * @author lingwh
@@ -16,9 +24,9 @@ public class ByteBufTest {
     @Test
     public void testByteBufHelloWorld() {
         // ByteBuf可以动态扩容(初始为256)
-        ByteBuf buffer = ByteBufAllocator.DEFAULT.buffer();
+        ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer();
 
-        log.info("buffer： {}", buffer);
+        log.info("初始的  byteBuf： {}", byteBuf);
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 300; i++) {
@@ -26,9 +34,10 @@ public class ByteBufTest {
         }
 
         // 写入字节数组
-        buffer.writeBytes(sb.toString().getBytes());
+        byteBuf.writeBytes(sb.toString().getBytes());
         // 扩容至512
-        log.info("buffer： {}", buffer);
+        log.info("扩容后的byteBuf： {}", byteBuf);
+        ByteBufUtil.debugAll(byteBuf);
     }
 
     /**
@@ -55,12 +64,66 @@ public class ByteBufTest {
      */
     @Test
     public void testByteBufAllocator() {
-        // 直接内存
+        // 直接内存: 分配效率低，读写效率高
         ByteBuf buffer = ByteBufAllocator.DEFAULT.buffer(16);
-        // 堆内存
+        // 堆内存: 分配效率高，读写效率低
         buffer = ByteBufAllocator.DEFAULT.heapBuffer(16);
         // 创建池化基于直接内存的 ByteBuf
         buffer = ByteBufAllocator.DEFAULT.directBuffer(16);
+    }
+
+    /**
+     * 测试ByteBuf写入
+     */
+    @Test
+    public void testByteBufWrite() {
+        ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer();
+        // 写入boolean类型数据
+        byteBuf.writeBoolean(true);
+        // 写入byte类型数据
+        byte b = 10;
+        byteBuf.writeByte(b);
+        // 写入short类型数据
+        short s = 0x1234;
+        byteBuf.writeShort(s);
+        // 写入int类型的数据(大端形式)
+        int i = 0x12345678;
+        byteBuf.writeInt(i);
+        // 写入int类型的数据(小端形式)
+        byteBuf.writeIntLE(i);
+        // 写入long类型的数据(大端形式)
+        long l = 0x12345678;
+        byteBuf.writeLong(l);
+        // 写入long类型的数据(小端形式)
+        byteBuf.writeLongLE(l);
+        // 写入char类型的数据
+        char c = 10;
+        byteBuf.writeChar(c);
+        // 写入float类型的数据
+        float f = 1.5f;
+        byteBuf.writeFloat(f);
+        // 写入double类型的数据
+        double d = 2.5;
+        byteBuf.writeDouble(d);
+        // 写入byte数组
+        byteBuf.writeBytes(new byte[]{ 1, 2, 3, 4});
+        ByteBufUtil.debugAll(byteBuf);
+    }
+
+    /**
+     * 测试ByteBuf写入
+     */
+    @Test
+    public void testByteBufRead() {
+        ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer();
+        byteBuf.writeBytes(new byte[]{ 1, 2, 3, 4, 5, 6, 7, 8 });
+        log.info("{}", byteBuf.readByte());
+        log.info("{}", byteBuf.readByte());
+        log.info("{}", byteBuf.readByte());
+        log.info("{}", byteBuf.readByte());
+        byte[] dst = new byte[4];
+        byteBuf.readBytes(dst);
+        log.info("{}", Arrays.toString(dst));
     }
 
 }

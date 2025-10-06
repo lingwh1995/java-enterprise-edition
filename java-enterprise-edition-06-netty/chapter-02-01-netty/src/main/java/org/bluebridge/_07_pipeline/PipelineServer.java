@@ -66,9 +66,14 @@ public class PipelineServer {
                             Student student = (Student) msg;
                             log.info("student: {}", student);
 //                                super.channelRead(ctx, msg);// 后面没有了, 所以这个方法没用
+
                             // 写一些数据，触发出站处理器
                             // 使用pipeline则从最后开始找出站处理器h6->h5->h4
-                            pipeline.writeAndFlush(ctx.alloc().buffer().writeBytes("Server".getBytes()));
+                            //pipeline.writeAndFlush(ctx.alloc().buffer().writeBytes("Server".getBytes()));
+
+                            // 使用nioSocketChannel则从最后开始找出站处理器h6->h5->h4
+                            nioSocketChannel.writeAndFlush(ctx.alloc().buffer().writeBytes("Server".getBytes()));
+
                             // 使用cxt从当前处理器往前找出站处理器，即从h3往前找，那么就找不到h4,h5,h6
                             //ctx.writeAndFlush(ctx.alloc().buffer().writeBytes("Server".getBytes()));
                         }
