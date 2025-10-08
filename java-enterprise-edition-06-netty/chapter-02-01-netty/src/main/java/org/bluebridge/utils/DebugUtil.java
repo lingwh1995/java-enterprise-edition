@@ -12,7 +12,7 @@ public class DebugUtil {
     /**
      * 一个简单的debug()
      */
-    private static void debug(ByteBuf buffer) {
+    public static void debug(ByteBuf buffer) {
         int length = buffer.readableBytes();
         int rows = length / 16 + (length % 15 == 0 ? 0 : 1) + 4;
         StringBuilder buf = new StringBuilder(rows * 80 * 2)

@@ -6,12 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.utils.ByteBufUtil;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-import static io.netty.buffer.ByteBufUtil.appendPrettyHexDump;
-import static sun.security.pkcs11.wrapper.Constants.NEWLINE;
 
 /**
  * @author lingwh
@@ -61,6 +57,12 @@ public class ByteBufTest {
      *        读指针前的部分被称为废弃部分，是已经读过的内容
      *        读指针与写指针之间的空间称为可读部分
      *        写指针与当前容量之间的空间称为可写部分
+     *   6.ByteBuf 优势
+     *      池化 - 可以重用池中 ByteBuf 实例，更节约内存，减少内存溢出的可能
+     *      读写指针分离，不需要像 ByteBuffer 一样切换读写模式
+     *      可以自动扩容
+     *      支持链式调用，使用更流畅
+     *      很多地方体现零拷贝，例如 slice、duplicate、CompositeByteBuf
      */
     @Test
     public void testByteBufAllocator() {

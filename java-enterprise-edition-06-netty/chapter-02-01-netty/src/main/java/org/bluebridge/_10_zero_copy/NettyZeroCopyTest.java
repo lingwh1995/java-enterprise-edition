@@ -2,6 +2,7 @@ package org.bluebridge._10_zero_copy;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
+import io.netty.buffer.CompositeByteBuf;
 import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.utils.ByteBufUtil;
 import org.junit.Test;
@@ -30,7 +31,7 @@ public class NettyZeroCopyTest {
         ByteBuf byteBufSlice2 = byteBuf.slice(5, 5);
         byteBufSlice2.setByte(0, 'F');
 
-        ByteBufUtil.debugRead(byteBuf);
+        ByteBufUtil.debugAll(byteBuf);
         ByteBufUtil.debugRead(byteBufSlice1);
         ByteBufUtil.debugRead(byteBufSlice2);
     }
@@ -48,27 +49,42 @@ public class NettyZeroCopyTest {
         // 复制原始 ByteBuf
         ByteBuf byteBufDuplicate = byteBuf.duplicate();
         byteBufDuplicate.setByte(0, 'A');
-        ByteBufUtil.debugRead(byteBuf);
-        ByteBufUtil.debugRead(byteBufDuplicate);
+        ByteBufUtil.debugAll(byteBuf);
+        ByteBufUtil.debugAll(byteBufDuplicate);
         // 从截取的 ByteBuf 中读取一个字节，会改变截取 ByteBuf 的 readerIndex，不会改变原始 ByteBuf 的 readerIndex，因为调用duplicate()方法复制的 ByteBuf 读写指针是独立的
         char c = (char)byteBufDuplicate.readByte();
         log.info("c = {}", c);
-        ByteBufUtil.debugRead(byteBuf);
-        ByteBufUtil.debugRead(byteBufDuplicate);
+        ByteBufUtil.debugAll(byteBuf);
+        ByteBufUtil.debugAll(byteBufDuplicate);
     }
 
+    /**
+     * 零拷贝方式合并多个ByteBuf
+     */
     @Test
-    public void testByteBufCopy() {
+    public void testByteBufComposite() {
         ByteBuf byteBuf1 = ByteBufAllocator.DEFAULT.buffer(10);
         byteBuf1.writeBytes(new byte[] { 'a', 'b', 'c', 'd', 'e' });
-        ByteBufUtil.debugRead(byteBuf1);
+        ByteBufUtil.debugAll(byteBuf1);
         ByteBuf byteBuf2 = ByteBufAllocator.DEFAULT.buffer(10);
         byteBuf2.writeBytes(new byte[] { 'f', 'g', 'h', 'i', 'j' });
-        ByteBufUtil.debugRead(byteBuf2);
+        ByteBufUtil.debugAll(byteBuf2);
 
+        /*
         ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer(20);
+        // 合并两个ByteBuf，writeBytes()会发生真正的数据复制，而不是零拷贝，下面方法就发生了两次数据复制
         byteBuf.writeBytes(byteBuf1).writeBytes(byteBuf2);
-        ByteBufUtil.debugRead(byteBuf);
+        ByteBufUtil.debugAll(byteBuf);
+        */
+
+        CompositeByteBuf byteBufs = ByteBufAllocator.DEFAULT.compositeBuffer();
+        /*
+        byteBufs.addComponent(byteBuf1);
+        byteBufs.addComponent(byteBuf2);
+        */
+        // 第一个参数：是否自动增长写指针
+        byteBufs.addComponents(true, byteBuf1, byteBuf2);
+        ByteBufUtil.debugAll(byteBufs);
     }
 
 }
