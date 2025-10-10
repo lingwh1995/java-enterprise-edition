@@ -1,4 +1,4 @@
-package org.bluebridge._05_future;
+package org.bluebridge._06_future;
 
 import io.netty.channel.EventLoop;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -41,7 +41,7 @@ public class NettyFutureTest {
         // 异步方式接收结果
         future.addListener(new GenericFutureListener<Future<? super Integer>>() {
             @Override
-            public void operationComplete(Future<? super Integer> future) throws Exception {
+            public void operationComplete(Future<? super Integer> future) {
                 log.info("结果是： {}", future.getNow());
             }
         });

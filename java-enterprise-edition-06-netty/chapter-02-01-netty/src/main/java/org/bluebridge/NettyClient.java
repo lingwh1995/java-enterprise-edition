@@ -3,6 +3,7 @@ package org.bluebridge;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringEncoder;
@@ -22,8 +23,9 @@ public class NettyClient {
             .channel(NioSocketChannel.class)
             .handler(new ChannelInitializer<NioSocketChannel>() {
                 @Override
-                protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-                    nioSocketChannel.pipeline().addLast(new StringEncoder());// 内部使用CharBuffer.wrap(msg)
+                protected void initChannel(NioSocketChannel ch) {
+                    ChannelPipeline pipeline = ch.pipeline();
+                    pipeline.addLast(new StringEncoder());// 内部使用CharBuffer.wrap(msg)
                 }
             })
             .connect("localhost", 8080)

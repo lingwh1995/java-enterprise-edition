@@ -65,29 +65,6 @@ public class ByteBufUtil {
         }
     }
 
-//    /**
-//     * 打印 ByteBuf 所有内容（从 0 到 capacity）
-//     */
-//    public static void debugAll(ByteBuf buf) {
-//        // 复制缓冲区，避免修改原始索引
-//        ByteBuf duplicate = buf.duplicate();
-//        int originalReaderIndex = duplicate.readerIndex();
-//        int originalWriterIndex = duplicate.writerIndex();
-//
-//        // 临时设置为可读所有内容（0 到 capacity）
-//        duplicate.readerIndex(0);
-//        duplicate.writerIndex(buf.capacity());
-//
-//        StringBuilder dump = new StringBuilder(256);
-//        appendPrettyHexDump(dump, duplicate, originalReaderIndex, duplicate.readableBytes());
-//        System.out.println("+--------+-------------------- all ------------------------+----------------+");
-//        System.out.printf("readerIndex: [%d], writerIndex: [%d], capacity: [%d]\n", buf.readerIndex(), buf.writerIndex(), buf.capacity());
-//        System.out.println(dump);
-//
-//        // 恢复复制缓冲区的原始索引（不影响原始缓冲区）
-//        duplicate.readerIndex(originalReaderIndex);
-//        duplicate.writerIndex(originalWriterIndex);
-//    }
 
     /**
      * 打印 ByteBuf 所有内容（从 0 到 capacity）

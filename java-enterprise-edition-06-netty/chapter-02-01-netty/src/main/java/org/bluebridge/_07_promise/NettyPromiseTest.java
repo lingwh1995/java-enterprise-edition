@@ -1,4 +1,4 @@
-package org.bluebridge._06_promise;
+package org.bluebridge._07_promise;
 
 import io.netty.channel.DefaultEventLoop;
 import io.netty.channel.nio.NioEventLoopGroup;

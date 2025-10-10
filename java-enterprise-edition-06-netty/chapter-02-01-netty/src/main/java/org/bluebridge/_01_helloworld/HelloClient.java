@@ -2,6 +2,7 @@ package org.bluebridge._01_helloworld;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringEncoder;
@@ -27,9 +28,10 @@ public class HelloClient {
             // 4.添加处理器，仅执行一次，它的作用是待客户端SocketChannel建立连接后，执行initChannel以便添加更多的处理器
             .handler(new ChannelInitializer<NioSocketChannel>() {
                 @Override // 在连接建立后被调用
-                protected void initChannel(NioSocketChannel ch) throws Exception {
+                protected void initChannel(NioSocketChannel ch) {
                     // 消息会经过通道 handler 处理，这里是将 String => ByteBuf 编码发出
-                    ch.pipeline().addLast(new StringEncoder());
+                    ChannelPipeline pipeline = ch.pipeline();
+                    pipeline.addLast(new StringEncoder());
                 }
             })
             // 5. 连接到服务器

@@ -1,4 +1,4 @@
-package org.bluebridge._09_head_tail_realase;
+package org.bluebridge._10_head_tail_realase;
 
 
 import io.netty.buffer.ByteBuf;

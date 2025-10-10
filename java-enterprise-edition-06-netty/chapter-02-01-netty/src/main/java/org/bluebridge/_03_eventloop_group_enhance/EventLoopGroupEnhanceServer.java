@@ -27,24 +27,25 @@ public class EventLoopGroupEnhanceServer {
          * 注意到两次输出的thread名不一样(nioEventLoopGroup-4-1， nioEventLoopGroup-2-1 )， 说明提交给不同的Group执行， 其中nioEventLoopGroup-4-1的4指的是第4个Group， 1为当前Group的线程号
          */
         new ServerBootstrap()
-            .group(new NioEventLoopGroup(1),new NioEventLoopGroup(2))// (parentGroup, childGroup)--->(负责Accept事件, 负责I/O事件)
-            .channel(NioServerSocketChannel.class)
-            .childHandler(new ChannelInitializer<NioSocketChannel>() {
-                @Override
-                protected void initChannel(NioSocketChannel nioSocketChannel) {
-                    nioSocketChannel.pipeline()
-                    .addLast("handler1",new ChannelInboundHandlerAdapter() {
-                        @Override
-                        public void channelRead(ChannelHandlerContext ctx, Object msg) {
-                            ByteBuf buf = (ByteBuf) msg;
-                            String s = buf.toString(Charset.defaultCharset());
-                            log.debug("NioEventLoopGroup 名称：{}，第一个handler开始处理耗时任务： {}", Thread.currentThread().getName(), s);
-                            // 让消息传递给下一个handler
-                            ctx.fireChannelRead(msg);
-                        }
-                    }).addLast(eventExecutors, "handler2", new ChannelInboundHandlerAdapter() { // 传入指定的eventGroup
-                        @Override
-                        public void channelRead(ChannelHandlerContext ctx, Object msg) {
+                .group(new NioEventLoopGroup(1), new NioEventLoopGroup(2))// (parentGroup, childGroup)--->(负责Accept事件, 负责I/O事件)
+                .channel(NioServerSocketChannel.class)
+                .childHandler(new ChannelInitializer<NioSocketChannel>() {
+                    @Override
+                    protected void initChannel(NioSocketChannel ch) {
+                        ChannelPipeline pipeline = ch.pipeline();
+                        pipeline.addLast("handler1", new ChannelInboundHandlerAdapter() {
+                            @Override
+                            public void channelRead(ChannelHandlerContext ctx, Object msg) {
+                                ByteBuf buf = (ByteBuf) msg;
+                                String s = buf.toString(Charset.defaultCharset());
+                                log.debug("NioEventLoopGroup 名称：{}，第一个handler开始处理耗时任务： {}", Thread.currentThread().getName(), s);
+                                // 让消息传递给下一个handler
+                                ctx.fireChannelRead(msg);
+                            }
+                        });
+                        pipeline.addLast(eventExecutors, "handler2", new ChannelInboundHandlerAdapter() { // 传入指定的eventGroup
+                            @Override
+                            public void channelRead(ChannelHandlerContext ctx, Object msg) {
                             ByteBuf buf = (ByteBuf) msg;
                             String s = buf.toString(Charset.defaultCharset());
                             // 使用异步方式处理耗时任务，避免阻塞I/O线程
@@ -62,19 +63,20 @@ public class EventLoopGroupEnhanceServer {
                             });
                             // 让消息传递给下一个handler
                             ctx.fireChannelRead(msg);
-                        }
-                    }).addLast("handler3", new ChannelInboundHandlerAdapter() { // 传入指定的eventGroup
-                        @Override
-                        public void channelRead(ChannelHandlerContext ctx, Object msg) {
+                            }
+                        });
+                        pipeline.addLast("handler3", new ChannelInboundHandlerAdapter() { // 传入指定的eventGroup
+                            @Override
+                            public void channelRead(ChannelHandlerContext ctx, Object msg) {
                             ByteBuf buf = (ByteBuf) msg;
                             String s = buf.toString(Charset.defaultCharset());
                             log.debug("NioEventLoopGroup 名称：{}，第三个handler开始处理耗时任务： {}", Thread.currentThread().getName(), s);
                             buf.release(); // 释放ByteBuf，避免内存泄漏（可选但推荐）
-                        }
-                    });
-                }
-            })
-            .bind(8080);
+                            }
+                        });
+                    }
+                })
+                .bind(8080);
     }
 
 }

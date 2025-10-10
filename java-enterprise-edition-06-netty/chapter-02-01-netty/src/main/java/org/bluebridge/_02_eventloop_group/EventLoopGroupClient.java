@@ -3,6 +3,7 @@ package org.bluebridge._02_eventloop_group;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringEncoder;
@@ -31,8 +32,9 @@ public class EventLoopGroupClient {
             .channel(NioSocketChannel.class)
             .handler(new ChannelInitializer<NioSocketChannel>() {
                 @Override
-                protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-                    nioSocketChannel.pipeline().addLast(new StringEncoder());// 内部使用CharBuffer.wrap(msg)
+                protected void initChannel(NioSocketChannel ch) {
+                    ChannelPipeline pipeline = ch.pipeline();
+                    pipeline.addLast(new StringEncoder());// 内部使用CharBuffer.wrap(msg)
                 }
             })
             .connect("localhost", 8080)
@@ -45,17 +47,18 @@ public class EventLoopGroupClient {
 
         // 模拟第二个客户端连接服务器
         channel = new Bootstrap()
-                .group(new NioEventLoopGroup())
-                .channel(NioSocketChannel.class)
-                .handler(new ChannelInitializer<NioSocketChannel>() {
-                    @Override
-                    protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-                        nioSocketChannel.pipeline().addLast(new StringEncoder());// 内部使用CharBuffer.wrap(msg)
-                    }
-                })
-                .connect("localhost", 8080)
-                .sync()
-                .channel();
+            .group(new NioEventLoopGroup())
+            .channel(NioSocketChannel.class)
+            .handler(new ChannelInitializer<NioSocketChannel>() {
+                @Override
+                protected void initChannel(NioSocketChannel ch) {
+                    ChannelPipeline pipeline = ch.pipeline();
+                    pipeline.addLast(new StringEncoder());// 内部使用CharBuffer.wrap(msg)
+                }
+            })
+            .connect("localhost", 8080)
+            .sync()
+            .channel();
         log.info("channel:" + channel);
         channel.writeAndFlush("lisi");
         TimeUnit.MILLISECONDS.sleep(2000);
@@ -63,17 +66,18 @@ public class EventLoopGroupClient {
 
         // 模拟第三个客户端连接服务器
         channel = new Bootstrap()
-                .group(new NioEventLoopGroup())
-                .channel(NioSocketChannel.class)
-                .handler(new ChannelInitializer<NioSocketChannel>() {
-                    @Override
-                    protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-                        nioSocketChannel.pipeline().addLast(new StringEncoder());// 内部使用CharBuffer.wrap(msg)
-                    }
-                })
-                .connect("localhost", 8080)
-                .sync()
-                .channel();
+            .group(new NioEventLoopGroup())
+            .channel(NioSocketChannel.class)
+            .handler(new ChannelInitializer<NioSocketChannel>() {
+                @Override
+                protected void initChannel(NioSocketChannel ch) {
+                    ChannelPipeline pipeline = ch.pipeline();
+                    pipeline.addLast(new StringEncoder());// 内部使用CharBuffer.wrap(msg)
+                }
+            })
+            .connect("localhost", 8080)
+            .sync()
+            .channel();
         log.info("channel:" + channel);
         channel.writeAndFlush("wangwu");
         TimeUnit.MILLISECONDS.sleep(2000);

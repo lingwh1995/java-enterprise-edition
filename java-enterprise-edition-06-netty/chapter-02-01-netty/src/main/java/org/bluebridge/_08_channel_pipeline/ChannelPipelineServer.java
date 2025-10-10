@@ -1,4 +1,4 @@
-package org.bluebridge._07_pipeline;
+package org.bluebridge._08_channel_pipeline;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
@@ -23,7 +23,7 @@ import java.nio.charset.Charset;
  * ctx.writeAndFlush(): 从当前Handler开始找出站处理器
  */
 @Slf4j
-public class PipelineServer {
+public class ChannelPipelineServer {
 
     public static void main(String[] args) {
         new ServerBootstrap()
@@ -31,9 +31,9 @@ public class PipelineServer {
             .channel(NioServerSocketChannel.class)
             .childHandler(new ChannelInitializer<NioSocketChannel>() {
                 @Override
-                protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
+                protected void initChannel(NioSocketChannel ch) {
                     // 1. 通过channel拿到pipeline
-                    ChannelPipeline pipeline = nioSocketChannel.pipeline();
+                    ChannelPipeline pipeline = ch.pipeline();
 
                     // 2. 添加Handler: head -> h1 -> h2 -> h3 -> tail
                     pipeline.addLast("h1", new ChannelInboundHandlerAdapter() {
@@ -61,18 +61,18 @@ public class PipelineServer {
 
                     pipeline.addLast("h3", new ChannelInboundHandlerAdapter() {
                         @Override
-                        public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+                        public void channelRead(ChannelHandlerContext ctx, Object msg) {
                             log.info("h3......");
                             Student student = (Student) msg;
                             log.info("student: {}", student);
-//                                super.channelRead(ctx, msg);// 后面没有了, 所以这个方法没用
+                            // super.channelRead(ctx, msg);// 后面没有了,所以这个方法没用
 
                             // 写一些数据，触发出站处理器
                             // 使用pipeline则从最后开始找出站处理器h6->h5->h4
                             //pipeline.writeAndFlush(ctx.alloc().buffer().writeBytes("Server".getBytes()));
 
-                            // 使用nioSocketChannel则从最后开始找出站处理器h6->h5->h4
-                            nioSocketChannel.writeAndFlush(ctx.alloc().buffer().writeBytes("Server".getBytes()));
+                            // 使用ch则从最后开始找出站处理器h6->h5->h4
+                            ch.writeAndFlush(ctx.alloc().buffer().writeBytes("Server".getBytes()));
 
                             // 使用cxt从当前处理器往前找出站处理器，即从h3往前找，那么就找不到h4,h5,h6
                             //ctx.writeAndFlush(ctx.alloc().buffer().writeBytes("Server".getBytes()));
@@ -84,8 +84,8 @@ public class PipelineServer {
                     pipeline.addLast("h4", new ChannelOutboundHandlerAdapter() {
                         @Override
                         public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
-                            log.info("h4......");
-                            super.write(ctx, msg, promise);
+                        log.info("h4......");
+                        super.write(ctx, msg, promise);
                         }
                     });
 
@@ -100,8 +100,8 @@ public class PipelineServer {
                     pipeline.addLast("h6", new ChannelOutboundHandlerAdapter() {
                         @Override
                         public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
-                            log.info("h6......");
-                            super.write(ctx, msg, promise);
+                        log.info("h6......");
+                        super.write(ctx, msg, promise);
                         }
                     });
                 }

@@ -11,7 +11,7 @@ import java.io.*;
 import java.net.*;
 
 @Slf4j
-public class BlockingInputOutputServer {
+public class BlockingIOServer {
 
     private static final int PORT = 8080;
 

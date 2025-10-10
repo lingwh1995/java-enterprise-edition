@@ -1,10 +1,7 @@
 package org.bluebridge._04_channel;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelInitializer;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringEncoder;
@@ -12,14 +9,14 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author lingwh
- * @desc 使用ChannelFuture正确处理连接建立
+ * @desc 使用ChannelFuture正确处理连接建立 客户端
  * @date 2025/9/26 14:53
  */
 
 /**
  * 让异步方法同步（获取建立好的连接）的两种方式：
- * 1. 调用 sync 方法，阻塞等待异步操作完成
- * 2. 调用 addListener 方法，添加一个监听器，异步操作完成时会调用监听器
+ *   1. 调用 sync 方法，阻塞等待异步操作完成
+ *   2. 调用 addListener 方法，添加一个监听器，异步操作完成时会调用监听器
  */
 @Slf4j
 public class ChannelFutureClient {
@@ -40,7 +37,8 @@ public class ChannelFutureClient {
                 .handler(new ChannelInitializer<Channel>() {
                     @Override
                     protected void initChannel(Channel ch) {
-                        ch.pipeline().addLast(new StringEncoder());
+                        ChannelPipeline pipeline = ch.pipeline();
+                        pipeline.addLast(new StringEncoder());
                     }
                 })
                 .connect("127.0.0.1", 8080);
@@ -69,7 +67,8 @@ public class ChannelFutureClient {
                 .handler(new ChannelInitializer<Channel>() {
                     @Override
                     protected void initChannel(Channel ch) {
-                        ch.pipeline().addLast(new StringEncoder());
+                    ChannelPipeline pipeline = ch.pipeline();
+                    pipeline.addLast(new StringEncoder());
                     }
                 })
                 .connect("127.0.0.1", 8080);

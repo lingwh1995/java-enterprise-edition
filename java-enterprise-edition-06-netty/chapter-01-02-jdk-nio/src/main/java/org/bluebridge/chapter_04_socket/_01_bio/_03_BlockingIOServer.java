@@ -35,7 +35,7 @@ import java.util.concurrent.TimeUnit;
  *    仍要注意，即使使用了线程池进行优化，也不适用于处理连接线程过多且都是长连接的的情况，一定程度上具备处理多个短连接的能力
  */
 @Slf4j
-public class _03_BlockingInputOutputServer {
+public class _03_BlockingIOServer {
 
     private static final int PORT = 8080;
 
@@ -102,6 +102,7 @@ class ServerThreadPool {
  */
 @Slf4j
 class ServerRunnableTask implements Runnable {
+
     private Socket socket;
 
     public ServerRunnableTask(Socket socket) {

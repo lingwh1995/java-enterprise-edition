@@ -90,4 +90,5 @@
             <!-- junit结束 -->
         </dependencies>
     </dependencyManagement>
+
 </project>

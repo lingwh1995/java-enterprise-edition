@@ -1,10 +1,7 @@
 package org.bluebridge._04_channel;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelInitializer;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringEncoder;
@@ -17,7 +14,7 @@ import java.util.Scanner;
 
 /**
  * @author lingwh
- * @desc 用来正确处理Channel的关闭工作
+ * @desc 用来正确处理Channel的关闭工作 客户端
  * @date 2025/9/23 18:10
  */
 @Slf4j
@@ -30,8 +27,9 @@ public class ChannelFutureCloseFutureClient {
                 .channel(NioSocketChannel.class)
                 .handler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
-                    protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-                        nioSocketChannel.pipeline().addLast(new StringEncoder());// 内部使用CharBuffer.wrap(msg)
+                    protected void initChannel(NioSocketChannel ch) throws Exception {
+                        ChannelPipeline是由多个ChannelHander组成的.txt pipeline = ch.pipeline();
+                        pipeline.addLast(new StringEncoder());// 内部使用CharBuffer.wrap(msg)
                     }
                 })
                 // 连接到服务器
@@ -53,14 +51,17 @@ public class ChannelFutureCloseFutureClient {
                 .channel(NioSocketChannel.class)
                 .handler(new ChannelInitializer<NioSocketChannel>() {
                     @Override // 在连接建立后被调用
-                    protected void initChannel(NioSocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
-                        ch.pipeline().addLast(new StringEncoder());
+                    protected void initChannel(NioSocketChannel ch) {
+                        ChannelPipeline pipeline = ch.pipeline();
+                        pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
+                        pipeline.addLast(new StringEncoder());
                     }
                 })
                 .connect(new InetSocketAddress("localhost", 8080));
+
         Channel channel = channelFuture.sync().channel();
         log.debug("{}", channel);
+
         new Thread(()->{
             Scanner scanner = new Scanner(System.in);
             while (true) {
