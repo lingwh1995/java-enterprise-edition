@@ -53,7 +53,7 @@ public class MessageEchoClient {
         new Thread(() -> {
             Scanner scanner = new Scanner(System.in);
             while (true) {
-                log.debug("请输入要发送给客户端的消息:");
+                log.info("请输入要发送给客户端的消息:");
                 String line = scanner.nextLine();
                 if ("q".equals(line)) {
                     channel.close();

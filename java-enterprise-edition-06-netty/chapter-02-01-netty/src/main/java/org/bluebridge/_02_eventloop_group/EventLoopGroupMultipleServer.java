@@ -44,7 +44,7 @@ public class EventLoopGroupMultipleServer {
                             ByteBuf buf = (ByteBuf) msg;
                             String s = buf.toString(Charset.defaultCharset());
                             // 在这里打印线程名称，可以看到两个NioEventLoopGroup在轮询处理来自3个客户端的连接
-                            log.debug("NioEventLoopGroup 名称：{}，接收到的字符串： {}", Thread.currentThread().getName(), s);
+                            log.info("NioEventLoopGroup 名称：{}，接收到的字符串： {}", Thread.currentThread().getName(), s);
                         }
                     });
                 }

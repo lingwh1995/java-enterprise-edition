@@ -31,7 +31,7 @@ public class NettyServer {
                         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
                             ByteBuf buf = (ByteBuf) msg;
                             String s = buf.toString(Charset.defaultCharset());
-                            log.debug(s);
+                            log.info(s);
                             //ByteBufUtil.debugRead(buf);
                         }
                     });

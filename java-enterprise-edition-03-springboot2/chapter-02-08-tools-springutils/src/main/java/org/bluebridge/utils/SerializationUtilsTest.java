@@ -21,7 +21,7 @@ public class SerializationUtilsTest {
         map.put("c", "3");
         byte[] serialize = SerializationUtils.serialize(map);
         Object deserialize = SerializationUtils.deserialize(serialize);
-        log.debug("{}", deserialize);
+        log.info("{}", deserialize);
     }
 
 }

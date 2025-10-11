@@ -50,7 +50,7 @@ public class _03_FileChannelTransferToTest {
         ) {
             // 获取文件大小
             long size = from.size();
-            log.debug("文件大小：{}", size);
+            log.info("文件大小：{}", size);
             long copySize = 0;
             while(copySize < size){
                 copySize += from.transferTo(copySize, size, to);

@@ -20,10 +20,10 @@ public class Base64UtilsTest {
         String str = "abc";
         // 编码
         String encode = new String(Base64Utils.encode(str.getBytes()));
-        log.debug("编码：" + encode);
+        log.info("编码：" + encode);
 
         // 解码
         String decode = new String(Base64Utils.decode(encode.getBytes()), "utf8");
-        log.debug("解码：" + decode);
+        log.info("解码：" + decode);
     }
 }

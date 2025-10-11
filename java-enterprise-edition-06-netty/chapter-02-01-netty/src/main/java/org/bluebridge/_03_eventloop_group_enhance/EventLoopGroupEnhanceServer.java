@@ -38,7 +38,7 @@ public class EventLoopGroupEnhanceServer {
                             public void channelRead(ChannelHandlerContext ctx, Object msg) {
                                 ByteBuf buf = (ByteBuf) msg;
                                 String s = buf.toString(Charset.defaultCharset());
-                                log.debug("NioEventLoopGroup 名称：{}，第一个handler开始处理耗时任务： {}", Thread.currentThread().getName(), s);
+                                log.info("NioEventLoopGroup 名称：{}，第一个handler开始处理耗时任务： {}", Thread.currentThread().getName(), s);
                                 // 让消息传递给下一个handler
                                 ctx.fireChannelRead(msg);
                             }
@@ -50,7 +50,7 @@ public class EventLoopGroupEnhanceServer {
                             String s = buf.toString(Charset.defaultCharset());
                             // 使用异步方式处理耗时任务，避免阻塞I/O线程
                             eventExecutors.submit(() -> {
-                                log.debug("NioEventLoopGroup 名称：{}，第二个handler开始处理耗时任务，内容：{}", Thread.currentThread().getName(), s);
+                                log.info("NioEventLoopGroup 名称：{}，第二个handler开始处理耗时任务，内容：{}", Thread.currentThread().getName(), s);
 
                                 // 模拟耗时任务（例如数据库查询、复杂计算等）
                                 try {
@@ -59,7 +59,7 @@ public class EventLoopGroupEnhanceServer {
                                     throw new RuntimeException(e);
                                 }
 
-                                log.debug("NioEventLoopGroup 名称：{}，第二个handler耗时任务处理完成", Thread.currentThread().getName());
+                                log.info("NioEventLoopGroup 名称：{}，第二个handler耗时任务处理完成", Thread.currentThread().getName());
                             });
                             // 让消息传递给下一个handler
                             ctx.fireChannelRead(msg);
@@ -70,7 +70,7 @@ public class EventLoopGroupEnhanceServer {
                             public void channelRead(ChannelHandlerContext ctx, Object msg) {
                             ByteBuf buf = (ByteBuf) msg;
                             String s = buf.toString(Charset.defaultCharset());
-                            log.debug("NioEventLoopGroup 名称：{}，第三个handler开始处理耗时任务： {}", Thread.currentThread().getName(), s);
+                            log.info("NioEventLoopGroup 名称：{}，第三个handler开始处理耗时任务： {}", Thread.currentThread().getName(), s);
                             buf.release(); // 释放ByteBuf，避免内存泄漏（可选但推荐）
                             }
                         });

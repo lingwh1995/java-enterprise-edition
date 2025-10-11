@@ -56,7 +56,7 @@ public class EventLoopGroupSingleServer {
                             ByteBuf byteBuf = (ByteBuf) msg;
                             String s = byteBuf.toString(Charset.defaultCharset());
                             // 每个客户端都对应着线程池中的一个线程，可能会出现一个线程处理了多个客户端的连接，这取决于线程池大小和客户端数量
-                            log.debug("线程名称:{}, 收到消息:{}", Thread.currentThread().getName(), s);
+                            log.info("线程名称:{}, 收到消息:{}", Thread.currentThread().getName(), s);
                             //ByteBufUtil.debugRead(buf);
                         }
                     });

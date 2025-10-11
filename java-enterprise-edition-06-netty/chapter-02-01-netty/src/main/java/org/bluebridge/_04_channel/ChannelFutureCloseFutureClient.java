@@ -60,7 +60,7 @@ public class ChannelFutureCloseFutureClient {
                 .connect(new InetSocketAddress("localhost", 8080));
 
         Channel channel = channelFuture.sync().channel();
-        log.debug("{}", channel);
+        log.info("{}", channel);
 
         new Thread(()->{
             Scanner scanner = new Scanner(System.in);
@@ -69,7 +69,7 @@ public class ChannelFutureCloseFutureClient {
                 String line = scanner.nextLine();
                 if ("q".equals(line)) {
                     channel.close(); // close 异步操作 1s 之后
-//                    log.debug("处理关闭之后的操作"); // 不能在这里善后
+//                    log.info("处理关闭之后的操作"); // 不能在这里善后
                     break;
                 }
                 channel.writeAndFlush(line);
@@ -81,16 +81,16 @@ public class ChannelFutureCloseFutureClient {
 
         // 同步处理关闭
         /*
-        log.debug("waiting close......");
+        log.info("waiting close......");
         closeFuture.sync();
-        log.debug("处理关闭之后的操作");
+        log.info("处理关闭之后的操作");
         */
 
         // 异步处理关闭
         closeFuture.addListener(new ChannelFutureListener() {
             @Override
             public void operationComplete(ChannelFuture future) throws Exception {
-                log.debug("处理关闭之后的操作......");
+                log.info("处理关闭之后的操作......");
                 group.shutdownGracefully(); // 先拒绝接受新的任务，把现有的任务能运行玩的运行完，然后再停止
             }
         });

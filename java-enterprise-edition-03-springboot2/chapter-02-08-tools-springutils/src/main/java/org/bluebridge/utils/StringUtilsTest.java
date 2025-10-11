@@ -22,11 +22,11 @@ public class StringUtilsTest {
     public void testIsEmpty() {
         String str = null;
         boolean result = StringUtils.isEmpty(str);
-        log.debug("result : {}", result);
+        log.info("result : {}", result);
 
         str = "";
         result = StringUtils.isEmpty(str);
-        log.debug("result : {}", result);
+        log.info("result : {}", result);
     }
 
     /**
@@ -36,11 +36,11 @@ public class StringUtilsTest {
     public void testHasLength() {
         String str = null;
         boolean result = StringUtils.hasLength(str);
-        log.debug("result : {}", result);
+        log.info("result : {}", result);
 
         str = "";
         result = StringUtils.hasLength(str);
-        log.debug("result : {}", result);
+        log.info("result : {}", result);
     }
 
     /**
@@ -51,7 +51,7 @@ public class StringUtilsTest {
         // 去掉所有的空格（替换掉所有的空格）
         String s = " a b c d e ";
         s = StringUtils.trimAllWhitespace(s);
-        log.debug("s : {}", s);
+        log.info("s : {}", s);
     }
 
     /**
@@ -63,13 +63,13 @@ public class StringUtilsTest {
         String s = "abcde";
         String prefix = "ab";
         String suffix = "de";
-        log.debug("使用jdk原生api startsWith : {}", s.startsWith(prefix));
-        log.debug("使用jdk原生api endWith : {}", s.endsWith(suffix));
+        log.info("使用jdk原生api startsWith : {}", s.startsWith(prefix));
+        log.info("使用jdk原生api endWith : {}", s.endsWith(suffix));
 
         // 使用spring提供的工具类，有忽略大小写功能
         s = "AbcdE";
-        log.debug("使用spring提供的api startsWithIgnoreCase : {}", StringUtils.startsWithIgnoreCase(s, prefix));
-        log.debug("使用spring提供的api endsWithIgnoreCase : {}", StringUtils.endsWithIgnoreCase(s, suffix));
+        log.info("使用spring提供的api startsWithIgnoreCase : {}", StringUtils.startsWithIgnoreCase(s, prefix));
+        log.info("使用spring提供的api endsWithIgnoreCase : {}", StringUtils.endsWithIgnoreCase(s, suffix));
     }
 
     /**
@@ -83,30 +83,30 @@ public class StringUtilsTest {
         list.add("b");
         list.add("c");
         // 使用jdk原生api实现将集合元素拼接成字符串
-        log.debug("使用jdk原生api 集合拼接后的字符串 : {}", String.join(",", list));
-        log.debug("使用jdk原生api 集合拼接后的字符串 : {}", String.join("-", list));
+        log.info("使用jdk原生api 集合拼接后的字符串 : {}", String.join(",", list));
+        log.info("使用jdk原生api 集合拼接后的字符串 : {}", String.join("-", list));
         // 使用spring提供的api实现将集合元素拼接成字符串
-        log.debug("使用spring提供的api 集合拼接后的字符串 : {}", StringUtils.collectionToCommaDelimitedString(list));
-        log.debug("使用spring提供的api 集合拼接后的字符串 : {}", StringUtils.collectionToDelimitedString(list,"-"));
+        log.info("使用spring提供的api 集合拼接后的字符串 : {}", StringUtils.collectionToCommaDelimitedString(list));
+        log.info("使用spring提供的api 集合拼接后的字符串 : {}", StringUtils.collectionToDelimitedString(list,"-"));
 
         String[] arr = {"A","B","C"};
         // 使用jdk原生api实现将数组元素拼接成字符串
-        log.debug("使用jdk原生api 数组拼接后的字符串 : {}", String.join(",", arr));
-        log.debug("使用jdk原生api 数组拼接后的字符串 : {}", String.join("-", arr));
+        log.info("使用jdk原生api 数组拼接后的字符串 : {}", String.join(",", arr));
+        log.info("使用jdk原生api 数组拼接后的字符串 : {}", String.join("-", arr));
         // 使用spring提供的api实现将数组元素拼接成字符串
-        log.debug("使用spring提供的api 数组拼接后的字符串 : {}", StringUtils.arrayToCommaDelimitedString(arr));
-        log.debug("使用spring提供的api 数组拼接后的字符串 : {}", StringUtils.arrayToDelimitedString(arr,"-"));
+        log.info("使用spring提供的api 数组拼接后的字符串 : {}", StringUtils.arrayToCommaDelimitedString(arr));
+        log.info("使用spring提供的api 数组拼接后的字符串 : {}", StringUtils.arrayToDelimitedString(arr,"-"));
 
         // 使用jdk8的stream api实现（填入三个参数）
         String result = list.stream().collect(Collectors.joining(", ", "[", "]"));
-        log.debug("result: {}", result);
+        log.info("result: {}", result);
         result = Stream.of(arr).collect(Collectors.joining("- ", "[", "]"));
-        log.debug("result: {}", result);
+        log.info("result: {}", result);
 
         // 使用jdk8的stream api实现（填入一个参数）
         result = list.stream().collect(Collectors.joining(" * "));
-        log.debug("result: {}", result);
+        log.info("result: {}", result);
         result = Stream.of(arr).collect(Collectors.joining(" | "));
-        log.debug("result: {}", result);
+        log.info("result: {}", result);
     }
 }

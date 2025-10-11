@@ -62,6 +62,7 @@
         <mybatis-plus-boot.version>3.5.0</mybatis-plus-boot.version>
         <mybatis-plus-generator.version>3.5.0</mybatis-plus-generator.version>
         <lombok.version>1.18.0</lombok.version>
+        <logback-classic.version>1.2.3</logback-classic.version>
         <mysql.connector.version>8.0.33</mysql.connector.version>
         <ojdbc6.version>11.2.0.4</ojdbc6.version>
         <druid.version>1.1.10</druid.version>
@@ -101,6 +102,13 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
             </dependency>
+            <!-- logback开始 -->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback-classic.version}</version>
+            </dependency>
+            <!-- logback结束 -->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>

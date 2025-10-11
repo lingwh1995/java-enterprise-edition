@@ -16,7 +16,7 @@ public class HtmlUtilsTest {
     public void testHtmlEscape() {
         String html = "<div id=\"testDiv\">test1;test2</div>";
         String escapeHtml = HtmlUtils.htmlEscape(html);
-        log.debug("escapeHtml:{}", escapeHtml);
+        log.info("escapeHtml:{}", escapeHtml);
     }
 
 }

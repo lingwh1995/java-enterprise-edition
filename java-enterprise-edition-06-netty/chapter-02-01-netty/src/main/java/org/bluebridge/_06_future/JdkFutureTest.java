@@ -24,7 +24,7 @@ public class JdkFutureTest {
         Future<Integer> future = executorService.submit(new Callable<Integer>() {
             @Override
             public Integer call() throws Exception {
-                log.debug("正在运行......");
+                log.info("正在运行......");
                 TimeUnit.MILLISECONDS.sleep(1000 * 5);
                 return 100;
             }

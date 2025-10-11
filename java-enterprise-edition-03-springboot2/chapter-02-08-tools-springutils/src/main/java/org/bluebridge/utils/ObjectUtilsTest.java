@@ -26,22 +26,22 @@ public class ObjectUtilsTest {
         e.put(a, a);
         Optional<String> f = Optional.of(a);
         if (!ObjectUtils.isEmpty(a)) {
-            log.debug("a不为空");
+            log.info("a不为空");
         }
         if (!ObjectUtils.isEmpty(b)) {
-            log.debug("b不为空");
+            log.info("b不为空");
         }
         if (!ObjectUtils.isEmpty(c)) {
-            log.debug("c不为空");
+            log.info("c不为空");
         }
         if (!ObjectUtils.isEmpty(d)) {
-            log.debug("d不为空");
+            log.info("d不为空");
         }
         if (!ObjectUtils.isEmpty(e)) {
-            log.debug("e不为空");
+            log.info("e不为空");
         }
         if (!ObjectUtils.isEmpty(f)) {
-            log.debug("f不为空");
+            log.info("f不为空");
         }
     }
 

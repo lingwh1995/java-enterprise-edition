@@ -42,7 +42,7 @@ public class EventLoopGroupTest {
             log.info("这是个定时任务......");
         },3,2000, TimeUnit.MILLISECONDS); // 延迟3秒，每2秒执行一次
 
-        log.debug("main");
+        log.info("main");
 
         // 5.让主线程等待30秒，确保定时任务有时间执行
         TimeUnit.SECONDS.sleep(30);

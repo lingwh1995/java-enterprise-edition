@@ -24,24 +24,24 @@ public class _01_FileChannelTest {
             AsynchronousFileChannel channel = AsynchronousFileChannel
                     .open(Paths.get("java-enterprise-edition-06-netty/chapter-01-03-jdk-aio/files/aio.txt"), StandardOpenOption.READ);
             ByteBuffer buffer = ByteBuffer.allocate(2);
-            log.debug("begin......");
+            log.info("begin......");
             channel.read(buffer, 0, null, new CompletionHandler<Integer, ByteBuffer>() {
                 @Override
                 public void completed(Integer result, ByteBuffer attachment) {
-                    log.debug("read completed......{}", result);
+                    log.info("read completed......{}", result);
                     buffer.flip();
                     ByteBufferUtil.debugAll(buffer);
                 }
 
                 @Override
                 public void failed(Throwable exc, ByteBuffer attachment) {
-                    log.debug("read failed......");
+                    log.info("read failed......");
                 }
             });
         } catch (IOException e) {
             e.printStackTrace();
         }
-        log.debug("do other things......");
+        log.info("do other things......");
         // 默认文件 AIO 使用的线程都是守护线程，所以最后要执行 System.in.read() 以避免守护线程意外结束
         System.in.read();
     }
