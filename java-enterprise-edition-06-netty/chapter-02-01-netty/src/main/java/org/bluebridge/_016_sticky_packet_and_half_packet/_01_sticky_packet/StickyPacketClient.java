@@ -36,7 +36,7 @@ public class StickyPacketClient {
                                 for (int i = 0; i < 10; i++) {
                                     log.info("第{}次向服务端发送数据......", i + 1);
                                     ByteBuf byteBuf = ctx.alloc().buffer();
-                                    byteBuf.writeBytes(new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15});
+                                    byteBuf.writeBytes(new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f'});
                                     ctx.writeAndFlush(byteBuf);
                                 }
                             }

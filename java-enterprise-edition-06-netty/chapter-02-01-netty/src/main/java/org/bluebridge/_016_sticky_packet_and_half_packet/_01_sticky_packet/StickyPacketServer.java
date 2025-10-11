@@ -53,7 +53,7 @@ public class StickyPacketServer {
             ChannelFuture channelFuture = serverBootstrap.bind(8080);
             log.info("{} binding......", channelFuture.channel());
             channelFuture.sync();
-            log.info("{} bound......", channelFuture.channel());
+            log.info("{} binding successful......", channelFuture.channel());
             channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             log.error("server error......", e);

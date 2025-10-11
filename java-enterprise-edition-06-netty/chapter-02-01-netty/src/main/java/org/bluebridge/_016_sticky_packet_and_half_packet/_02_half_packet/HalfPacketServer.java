@@ -30,31 +30,31 @@ public class HalfPacketServer {
             ServerBootstrap serverBootstrap = new ServerBootstrap()
                 .channel(NioServerSocketChannel.class)
                 .group(boss, worker)
-                .option(ChannelOption.SO_RCVBUF, 10) // 设置接收缓冲区大小为10字节
+                .option(ChannelOption.SO_RCVBUF, 16) // 设置接收缓冲区大小为10字节
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) {
-                    ChannelPipeline pipeline = ch.pipeline();
-                    pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
-                    pipeline.addLast(new ChannelInboundHandlerAdapter() {
-                        @Override
-                        public void channelActive(ChannelHandlerContext ctx) throws Exception {
-                            log.info("connected {}", ctx.channel());
-                            super.channelActive(ctx);
-                        }
+                        ChannelPipeline pipeline = ch.pipeline();
+                        pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
+                        pipeline.addLast(new ChannelInboundHandlerAdapter() {
+                            @Override
+                            public void channelActive(ChannelHandlerContext ctx) throws Exception {
+                                log.info("connected {}", ctx.channel());
+                                super.channelActive(ctx);
+                            }
 
-                        @Override
-                        public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-                            log.info("disconnect {}", ctx.channel());
-                            super.channelInactive(ctx);
-                        }
-                    });
+                            @Override
+                            public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+                                log.info("disconnect {}", ctx.channel());
+                                super.channelInactive(ctx);
+                            }
+                        });
                     }
                 });
             ChannelFuture channelFuture = serverBootstrap.bind(8080);
             log.info("{} binding......", channelFuture.channel());
             channelFuture.sync();
-            log.info("{} bound......", channelFuture.channel());
+            log.info("{} binding successful......", channelFuture.channel());
             channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             log.error("server error......", e);
