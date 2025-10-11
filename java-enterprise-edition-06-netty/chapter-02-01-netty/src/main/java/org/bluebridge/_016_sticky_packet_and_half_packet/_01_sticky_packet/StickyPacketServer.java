@@ -1,10 +1,7 @@
-package org.bluebridge._015_sticky_packet;
+package org.bluebridge._016_sticky_packet_and_half_packet._01_sticky_packet;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.ChannelInitializer;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -16,6 +13,12 @@ import lombok.extern.slf4j.Slf4j;
  * @author lingwh
  * @desc Netty黏包测试 服务端
  * @date 2025/10/11 10:43
+ */
+
+/**
+ * 黏包现象分析
+ *   客户端总共发送10次消息，每次消息是16字节
+ *   服务器端一次就接收了160个字节，而非分10次接收，这样就发生了黏包现象
  */
 @Slf4j
 public class StickyPacketServer {
@@ -29,9 +32,10 @@ public class StickyPacketServer {
                 .group(boss, worker)
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
-                    protected void initChannel(SocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
-                        ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
+                    protected void initChannel(SocketChannel ch) {
+                        ChannelPipeline pipeline = ch.pipeline();
+                        pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
+                        pipeline.addLast(new ChannelInboundHandlerAdapter() {
                             @Override
                             public void channelActive(ChannelHandlerContext ctx) throws Exception {
                                 log.info("connected {}", ctx.channel());

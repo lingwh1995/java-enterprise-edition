@@ -1,4 +1,4 @@
-package org.bluebridge._015_sticky_packet;
+package org.bluebridge._016_sticky_packet_and_half_packet._02_half_packet;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
@@ -11,14 +11,13 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import lombok.extern.slf4j.Slf4j;
 
-
 /**
  * @author lingwh
- * @desc Netty黏包测试 客户端
+ * @desc Netty半包测试 客户端
  * @date 2025/10/11 10:43
  */
 @Slf4j
-public class StickyPacketClient {
+public class HalfPacketClient {
 
     public static void main(String[] args) {
         NioEventLoopGroup worker = new NioEventLoopGroup();
@@ -29,18 +28,18 @@ public class StickyPacketClient {
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
-                        log.info("connected......");
-                        ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
-                            @Override
-                            public void channelActive(ChannelHandlerContext ctx) throws Exception {
-                                log.info("sending......");
-                                for (int i = 0; i < 10; i++) {
-                                    ByteBuf buffer = ctx.alloc().buffer();
-                                    buffer.writeBytes(new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15});
-                                    ctx.writeAndFlush(buffer);
-                                }
-                            }
-                        });
+                    log.info("connected......");
+                    ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
+                        @Override
+                        public void channelActive(ChannelHandlerContext ctx) throws Exception {
+                        log.info("sending......");
+                        ByteBuf byteBuf = ctx.alloc().buffer();
+                        for (int i = 0; i < 10; i++) {
+                            byteBuf.writeBytes(new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15});
+                        }
+                        ctx.writeAndFlush(byteBuf);
+                        }
+                    });
                     }
                 });
             ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 8080).sync();

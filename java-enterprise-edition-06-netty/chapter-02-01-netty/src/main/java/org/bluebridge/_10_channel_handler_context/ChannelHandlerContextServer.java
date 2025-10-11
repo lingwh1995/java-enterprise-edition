@@ -1,22 +1,27 @@
-package org.bluebridge;
+package org.bluebridge._10_channel_handler_context;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
-import io.netty.channel.*;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.Charset;
 
 /**
  * @author lingwh
- * @desc 用于测试时充当临时 服务端
- * @date 2025/9/23 11:58
+ * @desc 使用ChannelHandlerContext接口的子类来创建Bytebuf 服务端
+ * @date 2025/10/11 15:39
  */
 @Slf4j
-public class NettyServer {
+public class ChannelHandlerContextServer {
 
     public static void main(String[] args) {
         new ServerBootstrap()
@@ -26,13 +31,13 @@ public class NettyServer {
                 @Override
                 protected void initChannel(NioSocketChannel ch) throws Exception {
                     ChannelPipeline pipeline = ch.pipeline();
+                    pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
                     pipeline.addLast(new ChannelInboundHandlerAdapter() {
                         @Override
                         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-                            ByteBuf buf = (ByteBuf) msg;
-                            String s = buf.toString(Charset.defaultCharset());
+                            ByteBuf byteBuf = (ByteBuf) msg;
+                            String s = byteBuf.toString(Charset.defaultCharset());
                             log.info("来自客户端的消息: {}", s);
-                            //ByteBufUtil.debugRead(buf);
                         }
                     });
                 }
