@@ -40,8 +40,8 @@ public class ShortConnectionServer {
             ServerBootstrap serverBootstrap = new ServerBootstrap()
                 .channel(NioServerSocketChannel.class)
                 .group(boss, worker)
-                 // 设置 netty 的接收缓冲区大小
-                .childOption(ChannelOption.RCVBUF_ALLOCATOR, new AdaptiveRecvByteBufAllocator(16, 16, 16))
+                 // 设置 netty 的接收缓冲区大小， 如果要查看短连接不能解决半包问题，放开下面一行的注释
+                 //.childOption(ChannelOption.RCVBUF_ALLOCATOR, new AdaptiveRecvByteBufAllocator(16, 16, 16))
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) {
