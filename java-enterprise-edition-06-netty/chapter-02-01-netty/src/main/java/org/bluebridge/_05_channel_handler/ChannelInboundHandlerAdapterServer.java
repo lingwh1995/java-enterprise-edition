@@ -19,8 +19,8 @@ import java.nio.charset.Charset;
  */
 
 /**
- * ChannelPipeline是由多个ChannelHander组成的.txt、ChannelHandler、和ChannelInboundHandlerAdapter之间的关系
- *      ChannelPipeline是由多个ChannelHander组成的.txt 包含一组 ChannelHandler，形成一条处理链。
+ * ChannelPipeline是由多个ChannelHander组成的、ChannelHandler、和ChannelInboundHandlerAdapter之间的关系
+ *      ChannelPipeline是由多个ChannelHander组成的 包含一组 ChannelHandler，形成一条处理链。
  *      ChannelInboundHandlerAdapter 是 ChannelHandler 的一种具体实现（专注于入站事件）。
  */
 @Slf4j
@@ -139,7 +139,7 @@ public class ChannelInboundHandlerAdapterServer {
 
                         /**
                          * 方法作用
-                         *    处理用户自定义事件的回调方法，当 ChannelPipeline是由多个ChannelHander组成的.txt 中触发用户事件时被调用
+                         *    处理用户自定义事件的回调方法，当 ChannelPipeline是由多个ChannelHander组成的 中触发用户事件时被调用
                          * 典型应用场景
                          *    处理空闲检测事件（如 IdleStateEvent）
                          *    处理自定义业务事件
@@ -188,7 +188,7 @@ public class ChannelInboundHandlerAdapterServer {
 
                         /**
                          * 方法作用
-                         *    处理 ChannelPipeline是由多个ChannelHander组成的.txt 中发生的异常事件，当 ChannelHandler 处理过程中抛出异常时被调用
+                         *    处理 ChannelPipeline是由多个ChannelHander组成的 中发生的异常事件，当 ChannelHandler 处理过程中抛出异常时被调用
                          * 典型应用场景
                          *    异常处理: 捕获和处理网络通信过程中的各种异常
                          *    错误日志记录: 记录异常信息用于调试和监控

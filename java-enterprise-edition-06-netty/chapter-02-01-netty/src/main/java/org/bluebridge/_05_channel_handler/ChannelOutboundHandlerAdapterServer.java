@@ -18,8 +18,8 @@ import java.nio.charset.Charset;
  */
 
 /**
- * ChannelPipeline是由多个ChannelHander组成的.txt、ChannelHandler、和ChannelInboundHandlerAdapter之间的关系
- *      ChannelPipeline是由多个ChannelHander组成的.txt 包含一组 ChannelHandler，形成一条处理链。
+ * ChannelPipeline是由多个ChannelHander组成的、ChannelHandler、和ChannelInboundHandlerAdapter之间的关系
+ *      ChannelPipeline是由多个ChannelHander组成的 包含一组 ChannelHandler，形成一条处理链。
  *      ChannelInboundHandlerAdapter 是 ChannelHandler 的一种具体实现（专注于入站事件）。
  */
 @Slf4j
@@ -180,7 +180,7 @@ public class ChannelOutboundHandlerAdapterServer {
                          *    处理出站数据写入操作，是 ChannelOutboundHandler 接口的核心方法，当调用 ChannelHandlerContext#write 或 Channel#write 时触发
                          * 执行流程
                          *    1.在当前示例中，当 ChannelInboundHandlerAdapter#channelRead 方法中调用 ch.writeAndFlush 时触发
-                         *    2.由于 ChannelPipeline是由多个ChannelHander组成的.txt 的出站处理顺序是从后往前，会找到并执行 ChannelOutboundHandlerAdapter 的 write 方法
+                         *    2.由于 ChannelPipeline是由多个ChannelHander组成的 的出站处理顺序是从后往前，会找到并执行 ChannelOutboundHandlerAdapter 的 write 方法
                          *    3.当前实现直接调用 super.write 将操作继续传播
                          * 典型应用场景
                          *    数据预处理（编码、加密、格式转换）

@@ -1,4 +1,4 @@
-package org.bluebridge._016_sticky_packet_and_half_packet._01_sticky_packet;
+package org.bluebridge._017_resolve_sticky_packet_and_half_packet._01_short_connection;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
  *       TCP 是流式协议，消息无边界，所以接收方无法知道消息的边界，只能根据滑动窗口大小来判断是否接收完整
  */
 @Slf4j
-public class StickyPacketServer {
+public class ShortConnectionServer {
 
     public static void main(String[] args) {
         NioEventLoopGroup boss = new NioEventLoopGroup();
@@ -40,6 +40,8 @@ public class StickyPacketServer {
             ServerBootstrap serverBootstrap = new ServerBootstrap()
                 .channel(NioServerSocketChannel.class)
                 .group(boss, worker)
+                 // 设置 netty 的接收缓冲区大小
+                .childOption(ChannelOption.RCVBUF_ALLOCATOR, new AdaptiveRecvByteBufAllocator(16, 16, 16))
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) {

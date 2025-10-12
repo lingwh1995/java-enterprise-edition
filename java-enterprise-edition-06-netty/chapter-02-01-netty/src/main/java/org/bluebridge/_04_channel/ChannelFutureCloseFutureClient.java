@@ -28,7 +28,7 @@ public class ChannelFutureCloseFutureClient {
                 .handler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
-                        ChannelPipeline是由多个ChannelHander组成的.txt pipeline = ch.pipeline();
+                        ChannelPipeline是由多个ChannelHander组成的 pipeline = ch.pipeline();
                         pipeline.addLast(new StringEncoder());// 内部使用CharBuffer.wrap(msg)
                     }
                 })
