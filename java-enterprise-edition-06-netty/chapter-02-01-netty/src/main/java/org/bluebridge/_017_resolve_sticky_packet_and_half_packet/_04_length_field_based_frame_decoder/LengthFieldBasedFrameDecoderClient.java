@@ -33,16 +33,24 @@ public class LengthFieldBasedFrameDecoderClient {
                     log.info("connected......");
                     ChannelPipeline pipeline = ch.pipeline();
                     pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
-                    // 预设长度解码器
-                    pipeline.addLast(new LengthFieldBasedFrameDecoder(1024, 0, 4, 0, 0));
                     ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
                         @Override
                         public void channelActive(ChannelHandlerContext ctx) throws Exception {
-                        log.info("sending......");
-                        ByteBuf byteBuf = ctx.alloc().buffer();
-                        send(byteBuf, "Hello, world");
-                        send(byteBuf, "Hi!");
-                        ctx.writeAndFlush(byteBuf);
+                            log.info("sending......");
+                            Random r = new Random();
+                            char c = 'a';
+                            ByteBuf buffer = ctx.alloc().buffer();
+                            for (int i = 0; i < 10; i++) {
+                                byte length = (byte) (r.nextInt(16) + 1);
+                                // 先写入长度
+                                buffer.writeByte(length);
+                                // 再写入内容
+                                for (int j = 1; j <= length; j++) {
+                                    buffer.writeByte((byte) c);
+                                }
+                                c++;
+                            }
+                            ctx.writeAndFlush(buffer);
                         }
                     });
                 }
@@ -55,13 +63,6 @@ public class LengthFieldBasedFrameDecoderClient {
         } finally {
             worker.shutdownGracefully();
         }
-    }
-
-    private static void send(ByteBuf byteBuf, String content) {
-        byte[] bytes = content.getBytes(); // 实际内容
-        int length = bytes.length; // 实际内容长度
-        byteBuf.writeInt(length);
-        byteBuf.writeBytes(bytes);
     }
 
 }

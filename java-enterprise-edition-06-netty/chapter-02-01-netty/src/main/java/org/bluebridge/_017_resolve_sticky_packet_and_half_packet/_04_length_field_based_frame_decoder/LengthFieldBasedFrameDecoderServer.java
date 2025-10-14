@@ -32,9 +32,11 @@ public class LengthFieldBasedFrameDecoderServer {
                     @Override
                     protected void initChannel(SocketChannel ch) {
                         ChannelPipeline pipeline = ch.pipeline();
-                        pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
                         // 预设长度解码器
-                        pipeline.addLast(new LengthFieldBasedFrameDecoder(1024, 0, 4, 0, 0));
+                        // 最大长度，长度偏移，长度占用字节，长度调整，剥离字节数
+                        pipeline.addLast(new LengthFieldBasedFrameDecoder(1024, 0, 1, 0, 1));
+                        // 特别注意：这里的LoggingHandler不能放在第一个位，否则打印出来的数据是原始数据，不是解码器处理后的数据，很有可能有黏包半包情况
+                        pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
                         pipeline.addLast(new ChannelInboundHandlerAdapter() {
                             @Override
                             public void channelActive(ChannelHandlerContext ctx) throws Exception {
