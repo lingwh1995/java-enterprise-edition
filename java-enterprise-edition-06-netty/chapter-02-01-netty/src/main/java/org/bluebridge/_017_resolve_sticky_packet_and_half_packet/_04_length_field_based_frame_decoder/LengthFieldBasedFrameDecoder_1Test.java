@@ -12,11 +12,11 @@ import org.bluebridge.utils.DebugUtil;
 
 /**
  * @author lingwh
- * @desc 预设长度解码器
+ * @desc 预设长度解码器 消息中没有版本号
  * @date 2025/10/14 14:05
  */
 @Slf4j
-public class LengthFieldBasedFrameDecoderTest {
+public class LengthFieldBasedFrameDecoder_1Test {
 
     public static void main(String[] args) {
         /**
@@ -44,8 +44,10 @@ public class LengthFieldBasedFrameDecoderTest {
     }
 
     private static void send(ByteBuf buffer, String content) {
-        byte[] bytes = content.getBytes(); // 实际内容
-        int length = bytes.length; // 实际内容长度
+        // 实际内容
+        byte[] bytes = content.getBytes();
+        // 实际内容长度
+        int length = bytes.length;
         buffer.writeInt(length);
         buffer.writeBytes(bytes);
     }
