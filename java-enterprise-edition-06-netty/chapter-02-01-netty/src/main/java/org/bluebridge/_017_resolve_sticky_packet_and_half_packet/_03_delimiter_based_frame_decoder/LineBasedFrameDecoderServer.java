@@ -1,29 +1,22 @@
-package org.bluebridge._017_resolve_sticky_packet_and_half_packet._01_short_connection;
+package org.bluebridge._017_resolve_sticky_packet_and_half_packet._03_delimiter_based_frame_decoder;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author lingwh
- * @desc 短连接解决黏包问题 服务端
- * @date 2025/10/11 10:43
- */
-
-/**
- * 使用短连接解决黏包问题
- * 以解决粘包为例
- *    改客户端代码，每次发16字节后，断开连接，
- * 但是无法解决半包问题
- *    修改服务端代码，让netty的缓冲区最大为16字节
+ * @desc 固定分隔符解码器解决黏包半包问题 服务端
+ * @date 2025/10/14 11:47
  */
 @Slf4j
-public class ShortConnectionServer {
+public class LineBasedFrameDecoderServer {
 
     public static void main(String[] args) {
         NioEventLoopGroup boss = new NioEventLoopGroup();
@@ -32,12 +25,12 @@ public class ShortConnectionServer {
             ServerBootstrap serverBootstrap = new ServerBootstrap()
                 .channel(NioServerSocketChannel.class)
                 .group(boss, worker)
-                 // 设置 netty 的接收缓冲区大小， 如果要查看短连接不能解决半包问题，放开下面一行的注释
-                 //.childOption(ChannelOption.RCVBUF_ALLOCATOR, new AdaptiveRecvByteBufAllocator(16, 16, 16))
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) {
                         ChannelPipeline pipeline = ch.pipeline();
+                        // 默认以 \n 或 \r\n 作为分隔符，如果超出指定长度仍未出现分隔符，则抛出异常
+                        pipeline.addLast(new LineBasedFrameDecoder(1024));
                         pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
                         pipeline.addLast(new ChannelInboundHandlerAdapter() {
                             @Override

@@ -132,14 +132,14 @@ public class ChannelDemo1 {
             do {
                 // 向 buffer 写入
                 int len = channel.read(buffer);
-                log.debug("读到字节数：{}", len);
+                log.info("读到字节数：{}", len);
                 if (len == -1) {
                     break;
                 }
                 // 切换 buffer 读模式
                 buffer.flip();
                 while(buffer.hasRemaining()) {
-                    log.debug("{}", (char)buffer.get());
+                    log.info("{}", (char)buffer.get());
                 }
                 // 切换 buffer 写模式
                 buffer.clear();
@@ -1066,18 +1066,18 @@ ssc.bind(new InetSocketAddress(8080));
 List<SocketChannel> channels = new ArrayList<>();
 while (true) {
     // 4. accept 建立与客户端连接， SocketChannel 用来与客户端之间通信
-    log.debug("connecting...");
+    log.info("connecting...");
     SocketChannel sc = ssc.accept(); // 阻塞方法，线程停止运行
-    log.debug("connected... {}", sc);
+    log.info("connected... {}", sc);
     channels.add(sc);
     for (SocketChannel channel : channels) {
         // 5. 接收客户端发送的数据
-        log.debug("before read... {}", channel);
+        log.info("before read... {}", channel);
         channel.read(buffer); // 阻塞方法，线程停止运行
         buffer.flip();
         debugRead(buffer);
         buffer.clear();
-        log.debug("after read...{}", channel);
+        log.info("after read...{}", channel);
     }
 }
 ```
@@ -1120,7 +1120,7 @@ while (true) {
     // 4. accept 建立与客户端连接， SocketChannel 用来与客户端之间通信
     SocketChannel sc = ssc.accept(); // 非阻塞，线程还会继续运行，如果没有连接建立，但sc是null
     if (sc != null) {
-        log.debug("connected... {}", sc);
+        log.info("connected... {}", sc);
         sc.configureBlocking(false); // 非阻塞模式
         channels.add(sc);
     }
@@ -1131,7 +1131,7 @@ while (true) {
             buffer.flip();
             debugRead(buffer);
             buffer.clear();
-            log.debug("after read...{}", channel);
+            log.info("after read...{}", channel);
         }
     }
 }
@@ -1279,7 +1279,7 @@ public class ChannelDemo6 {
             while (true) {
                 int count = selector.select();
 //                int count = selector.selectNow();
-                log.debug("select count: {}", count);
+                log.info("select count: {}", count);
 //                if(count <= 0) {
 //                    continue;
 //                }
@@ -1296,7 +1296,7 @@ public class ChannelDemo6 {
                         ServerSocketChannel c = (ServerSocketChannel) key.channel();
                         // 必须处理
                         SocketChannel sc = c.accept();
-                        log.debug("{}", sc);
+                        log.info("{}", sc);
                     }
                     // 处理完毕，必须将事件移除
                     iter.remove();
@@ -1333,7 +1333,7 @@ public class ChannelDemo6 {
             while (true) {
                 int count = selector.select();
 //                int count = selector.selectNow();
-                log.debug("select count: {}", count);
+                log.info("select count: {}", count);
 //                if(count <= 0) {
 //                    continue;
 //                }
@@ -1352,7 +1352,7 @@ public class ChannelDemo6 {
                         SocketChannel sc = c.accept();
                         sc.configureBlocking(false);
                         sc.register(selector, SelectionKey.OP_READ);
-                        log.debug("连接已建立: {}", sc);
+                        log.info("连接已建立: {}", sc);
                     } else if (key.isReadable()) {
                         SocketChannel sc = (SocketChannel) key.channel();
                         ByteBuffer buffer = ByteBuffer.allocate(128);
@@ -1527,7 +1527,7 @@ public static void main(String[] args) throws IOException {
     SelectionKey sscKey = ssc.register(selector, 0, null);
     // key 只关注 accept 事件
     sscKey.interestOps(SelectionKey.OP_ACCEPT);
-    log.debug("sscKey:{}", sscKey);
+    log.info("sscKey:{}", sscKey);
     ssc.bind(new InetSocketAddress(8080));
     while (true) {
         // 3. select 方法, 没有事件发生，线程阻塞，有事件，线程才会恢复运行
@@ -1539,7 +1539,7 @@ public static void main(String[] args) throws IOException {
             SelectionKey key = iter.next();
             // 处理key 时，要从 selectedKeys 集合中删除，否则下次处理就会有问题
             iter.remove();
-            log.debug("key: {}", key);
+            log.info("key: {}", key);
             // 5. 区分事件类型
             if (key.isAcceptable()) { // 如果是 accept
                 ServerSocketChannel channel = (ServerSocketChannel) key.channel();
@@ -1549,8 +1549,8 @@ public static void main(String[] args) throws IOException {
                 // 将一个 byteBuffer 作为附件关联到 selectionKey 上
                 SelectionKey scKey = sc.register(selector, 0, buffer);
                 scKey.interestOps(SelectionKey.OP_READ);
-                log.debug("{}", sc);
-                log.debug("scKey:{}", scKey);
+                log.info("{}", sc);
+                log.info("scKey:{}", scKey);
             } else if (key.isReadable()) { // 如果是 read
                 try {
                     SocketChannel channel = (SocketChannel) key.channel(); // 拿到触发事件的channel
@@ -1766,7 +1766,7 @@ public class ChannelDemo7 {
                 ssckey.interestOps(SelectionKey.OP_ACCEPT);
                 workers = initEventLoops();
                 new Thread(this, "boss").start();
-                log.debug("boss start...");
+                log.info("boss start...");
                 start = true;
             }
         }
@@ -1793,7 +1793,7 @@ public class ChannelDemo7 {
                             ServerSocketChannel c = (ServerSocketChannel) key.channel();
                             SocketChannel sc = c.accept();
                             sc.configureBlocking(false);
-                            log.debug("{} connected", sc.getRemoteAddress());
+                            log.info("{} connected", sc.getRemoteAddress());
                             workers[index.getAndIncrement() % workers.length].register(sc);
                         }
                     }
@@ -1857,7 +1857,7 @@ public class ChannelDemo7 {
                                     sc.close();
                                 } else {
                                     buffer.flip();
-                                    log.debug("{} message:", sc.getRemoteAddress());
+                                    log.info("{} message:", sc.getRemoteAddress());
                                     debugAll(buffer);
                                 }
                             } catch (IOException e) {
@@ -2121,25 +2121,25 @@ public class AioDemo1 {
                 AsynchronousFileChannel.open(
                 	Paths.get("1.txt"), StandardOpenOption.READ);
             ByteBuffer buffer = ByteBuffer.allocate(2);
-            log.debug("begin...");
+            log.info("begin...");
             s.read(buffer, 0, null, new CompletionHandler<Integer, ByteBuffer>() {
                 @Override
                 public void completed(Integer result, ByteBuffer attachment) {
-                    log.debug("read completed...{}", result);
+                    log.info("read completed...{}", result);
                     buffer.flip();
                     debug(buffer);
                 }
 
                 @Override
                 public void failed(Throwable exc, ByteBuffer attachment) {
-                    log.debug("read failed...");
+                    log.info("read failed...");
                 }
             });
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        log.debug("do other things...");
+        log.info("do other things...");
         System.in.read();
     }
 }

@@ -1,29 +1,30 @@
-package org.bluebridge._017_resolve_sticky_packet_and_half_packet._01_short_connection;
+package org.bluebridge._017_resolve_sticky_packet_and_half_packet._02_fixed_length_frame_decoder;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.FixedLengthFrameDecoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author lingwh
- * @desc 短连接解决黏包问题 服务端
+ * @desc 固定长度解码器解决黏包半包问题 服务端
  * @date 2025/10/11 10:43
  */
 
 /**
- * 使用短连接解决黏包问题
- * 以解决粘包为例
- *    改客户端代码，每次发16字节后，断开连接，
- * 但是无法解决半包问题
- *    修改服务端代码，让netty的缓冲区最大为16字节
+ * 使用固定长度解码器解决黏包半包问题
+ *
+ * 缺点是，数据包的大小不好把握
+ *     长度定的太大，浪费
+ *     长度定的太小，对某些数据包又显得不够
  */
 @Slf4j
-public class ShortConnectionServer {
+public class FixedLengthFrameDecoderServer {
 
     public static void main(String[] args) {
         NioEventLoopGroup boss = new NioEventLoopGroup();
@@ -32,12 +33,12 @@ public class ShortConnectionServer {
             ServerBootstrap serverBootstrap = new ServerBootstrap()
                 .channel(NioServerSocketChannel.class)
                 .group(boss, worker)
-                 // 设置 netty 的接收缓冲区大小， 如果要查看短连接不能解决半包问题，放开下面一行的注释
-                 //.childOption(ChannelOption.RCVBUF_ALLOCATOR, new AdaptiveRecvByteBufAllocator(16, 16, 16))
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) {
                         ChannelPipeline pipeline = ch.pipeline();
+                        // 每10个字节拆分一次
+                        pipeline.addLast(new FixedLengthFrameDecoder(10));
                         pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
                         pipeline.addLast(new ChannelInboundHandlerAdapter() {
                             @Override

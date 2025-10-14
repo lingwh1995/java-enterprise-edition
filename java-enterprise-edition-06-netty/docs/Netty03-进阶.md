@@ -23,29 +23,29 @@ public class HelloWorldServer {
                     ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
                         @Override
                         public void channelActive(ChannelHandlerContext ctx) throws Exception {
-                            log.debug("connected {}", ctx.channel());
+                            log.info("connected {}", ctx.channel());
                             super.channelActive(ctx);
                         }
 
                         @Override
                         public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-                            log.debug("disconnect {}", ctx.channel());
+                            log.info("disconnect {}", ctx.channel());
                             super.channelInactive(ctx);
                         }
                     });
                 }
             });
             ChannelFuture channelFuture = serverBootstrap.bind(8080);
-            log.debug("{} binding...", channelFuture.channel());
+            log.info("{} binding...", channelFuture.channel());
             channelFuture.sync();
-            log.debug("{} bound...", channelFuture.channel());
+            log.info("{} bound...", channelFuture.channel());
             channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             log.error("server error", e);
         } finally {
             boss.shutdownGracefully();
             worker.shutdownGracefully();
-            log.debug("stoped");
+            log.info("stoped");
         }
     }
 
@@ -69,11 +69,11 @@ public class HelloWorldClient {
             bootstrap.handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
-                    log.debug("connetted...");
+                    log.info("connetted...");
                     ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
                         @Override
                         public void channelActive(ChannelHandlerContext ctx) throws Exception {
-                            log.debug("sending...");
+                            log.info("sending...");
                             Random r = new Random();
                             char c = 'a';
                             for (int i = 0; i < 10; i++) {
@@ -292,12 +292,12 @@ public class HelloWorldClient {
             bootstrap.handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
-                    log.debug("conneted...");
+                    log.info("conneted...");
                     ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
                     ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
                         @Override
                         public void channelActive(ChannelHandlerContext ctx) throws Exception {
-                            log.debug("sending...");
+                            log.info("sending...");
                             ByteBuf buffer = ctx.alloc().buffer();
                             buffer.writeBytes(new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15});
                             ctx.writeAndFlush(buffer);
@@ -348,12 +348,12 @@ public class HelloWorldClient {
             bootstrap.handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
-                    log.debug("connetted...");
+                    log.info("connetted...");
                     ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
                     ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
                         @Override
                         public void channelActive(ChannelHandlerContext ctx) throws Exception {
-                            log.debug("sending...");
+                            log.info("sending...");
                             // 发送内容随机的数据包
                             Random r = new Random();
                             char c = 'a';
@@ -505,12 +505,12 @@ public class HelloWorldClient {
             bootstrap.handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
-                    log.debug("connetted...");
+                    log.info("connetted...");
                     ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
                     ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
                         @Override
                         public void channelActive(ChannelHandlerContext ctx) throws Exception {
-                            log.debug("sending...");
+                            log.info("sending...");
                             Random r = new Random();
                             char c = 'a';
                             ByteBuf buffer = ctx.alloc().buffer();
@@ -655,12 +655,12 @@ public class HelloWorldClient {
             bootstrap.handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
-                    log.debug("connetted...");
+                    log.info("connetted...");
                     ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
                     ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
                         @Override
                         public void channelActive(ChannelHandlerContext ctx) throws Exception {
-                            log.debug("sending...");
+                            log.info("sending...");
                             Random r = new Random();
                             char c = 'a';
                             ByteBuf buffer = ctx.alloc().buffer();
@@ -940,7 +940,7 @@ try {
                 @Override
                 protected void channelRead0(ChannelHandlerContext ctx, HttpRequest msg) throws Exception {
                     // 获取请求
-                    log.debug(msg.uri());
+                    log.info(msg.uri());
 
                     // 返回响应
                     DefaultFullHttpResponse response =
@@ -958,7 +958,7 @@ try {
             /*ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
                 @Override
                 public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-                    log.debug("{}", msg.getClass());
+                    log.info("{}", msg.getClass());
 
                     if (msg instanceof HttpRequest) { // 请求行，请求头
 
@@ -1039,9 +1039,9 @@ public class MessageCodec extends ByteToMessageCodec<Message> {
         in.readBytes(bytes, 0, length);
         ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(bytes));
         Message message = (Message) ois.readObject();
-        log.debug("{}, {}, {}, {}, {}, {}", magicNum, version, serializerType, messageType, sequenceId, length);
-        log.debug("{}", message);
-        out.add(message);
+        log.info("{}, {}, {}, {}, {}, {}", magicNum, version, serializerType, messageType, sequenceId, length);
+        log.info("{}", message);
+        out.info(message);
     }
 }
 ```
@@ -1130,9 +1130,9 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
         in.readBytes(bytes, 0, length);
         ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(bytes));
         Message message = (Message) ois.readObject();
-        log.debug("{}, {}, {}, {}, {}, {}", magicNum, version, serializerType, messageType, sequenceId, length);
-        log.debug("{}", message);
-        out.add(message);
+        log.info("{}, {}, {}, {}, {}, {}", magicNum, version, serializerType, messageType, sequenceId, length);
+        log.info("{}", message);
+        out.info(message);
     }
 }
 ```
@@ -1336,7 +1336,7 @@ public class ChatClient {
                         // 接收响应消息
                         @Override
                         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-                            log.debug("msg: {}", msg);
+                            log.info("msg: {}", msg);
                             if ((msg instanceof LoginResponseMessage)) {
                                 LoginResponseMessage response = (LoginResponseMessage) msg;
                                 if (response.isSuccess()) {
@@ -1585,14 +1585,14 @@ public class QuitHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         SessionFactory.getSession().unbind(ctx.channel());
-        log.debug("{} 已经断开", ctx.channel());
+        log.info("{} 已经断开", ctx.channel());
     }
 
 	// 当出现异常时触发
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         SessionFactory.getSession().unbind(ctx.channel());
-        log.debug("{} 已经异常断开 异常是{}", ctx.channel(), cause.getMessage());
+        log.info("{} 已经异常断开 异常是{}", ctx.channel(), cause.getMessage());
     }
 }
 ```
@@ -1632,7 +1632,7 @@ ch.pipeline().addLast(new ChannelDuplexHandler() {
         IdleStateEvent event = (IdleStateEvent) evt;
         // 触发了读空闲事件
         if (event.state() == IdleState.READER_IDLE) {
-            log.debug("已经 5s 没有读到数据了");
+            log.info("已经 5s 没有读到数据了");
             ctx.channel().close();
         }
     }
@@ -1657,7 +1657,7 @@ ch.pipeline().addLast(new ChannelDuplexHandler() {
         IdleStateEvent event = (IdleStateEvent) evt;
         // 触发了写空闲事件
         if (event.state() == IdleState.WRITER_IDLE) {
-            //                                log.debug("3s 没有写数据了，发送一个心跳包");
+            //                                log.info("3s 没有写数据了，发送一个心跳包");
             ctx.writeAndFlush(new PingMessage());
         }
     }

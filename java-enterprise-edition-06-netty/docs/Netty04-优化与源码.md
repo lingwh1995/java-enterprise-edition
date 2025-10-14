@@ -184,8 +184,8 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
         // 确定具体消息类型
         Class<? extends Message> messageClass = Message.getMessageClass(messageType);
         Message message = algorithm.deserialize(messageClass, bytes);
-//        log.debug("{}, {}, {}, {}, {}, {}", magicNum, version, serializerType, messageType, sequenceId, length);
-//        log.debug("{}", message);
+//        log.info("{}, {}, {}, {}, {}, {}", magicNum, version, serializerType, messageType, sequenceId, length);
+//        log.info("{}", message);
         out.add(message);
     }
 }
@@ -277,7 +277,7 @@ public class TestConnectionTimeout {
             future.sync().channel().closeFuture().sync(); // 断点1
         } catch (Exception e) {
             e.printStackTrace();
-            log.debug("timeout");
+            log.info("timeout");
         } finally {
             group.shutdownGracefully();
         }
@@ -770,7 +770,7 @@ public class RpcClient {
 public class RpcResponseMessageHandler extends SimpleChannelInboundHandler<RpcResponseMessage> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, RpcResponseMessage msg) throws Exception {
-        log.debug("{}", msg);
+        log.info("{}", msg);
     }
 }
 ```
@@ -897,7 +897,7 @@ public class RpcResponseMessageHandler extends SimpleChannelInboundHandler<RpcRe
     @Override
 
     protected void channelRead0(ChannelHandlerContext ctx, RpcResponseMessage msg) throws Exception {
-        log.debug("{}", msg);
+        log.info("{}", msg);
         // 拿到空的 promise
         Promise<Object> promise = PROMISES.remove(msg.getSequenceId());
         if (promise != null) {

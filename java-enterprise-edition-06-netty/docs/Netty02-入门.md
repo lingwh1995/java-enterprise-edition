@@ -264,7 +264,7 @@ new ServerBootstrap()
                     if (byteBuf != null) {
                         byte[] buf = new byte[16];
                         ByteBuf len = byteBuf.readBytes(buf, 0, byteBuf.readableBytes());
-                        log.debug(new String(buf));
+                        log.info(new String(buf));
                     }
                 }
             });
@@ -330,7 +330,7 @@ new ServerBootstrap()
                     if (byteBuf != null) {
                         byte[] buf = new byte[16];
                         ByteBuf len = byteBuf.readBytes(buf, 0, byteBuf.readableBytes());
-                        log.debug(new String(buf));
+                        log.info(new String(buf));
                     }
                 }
             });
@@ -445,10 +445,10 @@ NioEventLoop 除了可以处理 io 事件，同样可以向它提交普通任务
 ```java
 NioEventLoopGroup nioWorkers = new NioEventLoopGroup(2);
 
-log.debug("server start...");
+log.info("server start...");
 Thread.sleep(2000);
 nioWorkers.execute(()->{
-    log.debug("normal task...");
+    log.info("normal task...");
 });
 ```
 
@@ -468,10 +468,10 @@ nioWorkers.execute(()->{
 ```java
 NioEventLoopGroup nioWorkers = new NioEventLoopGroup(2);
 
-log.debug("server start...");
+log.info("server start...");
 Thread.sleep(2000);
 nioWorkers.scheduleAtFixedRate(() -> {
-    log.debug("running...");
+    log.info("running...");
 }, 0, 1, TimeUnit.SECONDS);
 ```
 
@@ -611,14 +611,14 @@ public class CloseFutureClient {
                 })
                 .connect(new InetSocketAddress("localhost", 8080));
         Channel channel = channelFuture.sync().channel();
-        log.debug("{}", channel);
+        log.info("{}", channel);
         new Thread(()->{
             Scanner scanner = new Scanner(System.in);
             while (true) {
                 String line = scanner.nextLine();
                 if ("q".equals(line)) {
                     channel.close(); // close 异步操作 1s 之后
-//                    log.debug("处理关闭之后的操作"); // 不能在这里善后
+//                    log.info("处理关闭之后的操作"); // 不能在这里善后
                     break;
                 }
                 channel.writeAndFlush(line);
@@ -627,13 +627,13 @@ public class CloseFutureClient {
 
         // 获取 CloseFuture 对象， 1) 同步处理关闭， 2) 异步处理关闭
         ChannelFuture closeFuture = channel.closeFuture();
-        /*log.debug("waiting close...");
+        /*log.info("waiting close...");
         closeFuture.sync();
-        log.debug("处理关闭之后的操作");*/
+        log.info("处理关闭之后的操作");*/
         closeFuture.addListener(new ChannelFutureListener() {
             @Override
             public void operationComplete(ChannelFuture future) throws Exception {
-                log.debug("处理关闭之后的操作");
+                log.info("处理关闭之后的操作");
                 group.shutdownGracefully();
             }
         });
@@ -740,13 +740,13 @@ eventExecutors.execute(()->{
     } catch (InterruptedException e) {
         e.printStackTrace();
     }
-    log.debug("set success, {}",10);
+    log.info("set success, {}",10);
     promise.setSuccess(10);
 });
 
-log.debug("start...");
-log.debug("{}",promise.getNow()); // 还没有结果
-log.debug("{}",promise.get());
+log.info("start...");
+log.info("{}",promise.getNow()); // 还没有结果
+log.info("{}",promise.get());
 ```
 
 输出
@@ -771,7 +771,7 @@ DefaultPromise<Integer> promise = new DefaultPromise<>(eventExecutors);
 // 设置回调，异步接收结果
 promise.addListener(future -> {
     // 这里的 future 就是上面的 promise
-    log.debug("{}",future.getNow());
+    log.info("{}",future.getNow());
 });
 
 // 等待 1000 后设置成功结果
@@ -781,11 +781,11 @@ eventExecutors.execute(()->{
     } catch (InterruptedException e) {
         e.printStackTrace();
     }
-    log.debug("set success, {}",10);
+    log.info("set success, {}",10);
     promise.setSuccess(10);
 });
 
-log.debug("start...");
+log.info("start...");
 ```
 
 输出
@@ -813,12 +813,12 @@ DefaultEventLoop eventExecutors = new DefaultEventLoop();
                 e.printStackTrace();
             }
             RuntimeException e = new RuntimeException("error...");
-            log.debug("set failure, {}", e.toString());
+            log.info("set failure, {}", e.toString());
             promise.setFailure(e);
         });
 
-        log.debug("start...");
-        log.debug("{}", promise.getNow());
+        log.info("start...");
+        log.info("{}", promise.getNow());
         promise.get(); // sync() 也会出现异常，只是 get 会再用 ExecutionException 包一层异常
 ```
 
@@ -857,14 +857,14 @@ eventExecutors.execute(() -> {
         e.printStackTrace();
     }
     RuntimeException e = new RuntimeException("error...");
-    log.debug("set failure, {}", e.toString());
+    log.info("set failure, {}", e.toString());
     promise.setFailure(e);
 });
 
-log.debug("start...");
-log.debug("{}", promise.getNow());
+log.info("start...");
+log.info("{}", promise.getNow());
 promise.await(); // 与 sync 和 get 区别在于，不会抛异常
-log.debug("result {}", (promise.isSuccess() ? promise.getNow() : promise.cause()).toString());
+log.info("result {}", (promise.isSuccess() ? promise.getNow() : promise.cause()).toString());
 ```
 
 输出
@@ -887,7 +887,7 @@ DefaultEventLoop eventExecutors = new DefaultEventLoop();
 DefaultPromise<Integer> promise = new DefaultPromise<>(eventExecutors);
 
 promise.addListener(future -> {
-    log.debug("result {}", (promise.isSuccess() ? promise.getNow() : promise.cause()).toString());
+    log.info("result {}", (promise.isSuccess() ? promise.getNow() : promise.cause()).toString());
 });
 
 eventExecutors.execute(() -> {
@@ -897,11 +897,11 @@ eventExecutors.execute(() -> {
         e.printStackTrace();
     }
     RuntimeException e = new RuntimeException("error...");
-    log.debug("set failure, {}", e.toString());
+    log.info("set failure, {}", e.toString());
     promise.setFailure(e);
 });
 
-log.debug("start...");
+log.info("start...");
 ```
 
 输出
