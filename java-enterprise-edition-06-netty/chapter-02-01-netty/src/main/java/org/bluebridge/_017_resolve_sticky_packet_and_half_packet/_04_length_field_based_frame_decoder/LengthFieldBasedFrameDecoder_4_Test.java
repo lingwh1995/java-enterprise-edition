@@ -12,11 +12,11 @@ import org.bluebridge.utils.DebugUtil;
 
 /**
  * @author lingwh
- * @desc 预设长度解码器 消息中有版本号
+ * @desc 预设长度解码器 消息中有版本号和偏移量，并且从解码后的帧中剥离前4字节偏移量
  * @date 2025/10/14 14:05
  */
 @Slf4j
-public class LengthFieldBasedFrameDecoder_2Test {
+public class LengthFieldBasedFrameDecoder_4_Test {
 
     public static void main(String[] args) {
         /**
@@ -31,7 +31,7 @@ public class LengthFieldBasedFrameDecoder_2Test {
          * public LengthFieldBasedFrameDecoder(int maxFrameLength, int lengthFieldOffset, int lengthFieldLength, int lengthAdjustment, int initialBytesToStrip)
          */
         EmbeddedChannel channel = new EmbeddedChannel(
-                new LengthFieldBasedFrameDecoder(1024, 0, 4, 1, 0),
+                new LengthFieldBasedFrameDecoder(1024, 4, 4, 1, 4),
                 new LoggingHandler(LogLevel.DEBUG)
         );
 
@@ -44,12 +44,16 @@ public class LengthFieldBasedFrameDecoder_2Test {
     }
 
     private static void send(ByteBuf buffer, String content) {
+        // 偏移量
+        byte[] offset = { 0x01, 0x02, 0x03, 0x04};
         // 实际内容
         byte[] bytes = content.getBytes();
         // 实际内容长度
         int length = bytes.length;
-        // 写入版本号
+        // 版本号
         byte version = 1;
+        // 写入偏移量
+        buffer.writeBytes(offset);
         buffer.writeInt(length);
         buffer.writeByte(version);
         buffer.writeBytes(bytes);

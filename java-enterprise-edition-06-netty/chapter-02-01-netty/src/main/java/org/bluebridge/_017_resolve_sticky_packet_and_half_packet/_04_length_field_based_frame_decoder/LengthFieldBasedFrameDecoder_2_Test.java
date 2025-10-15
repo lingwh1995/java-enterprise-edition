@@ -12,11 +12,11 @@ import org.bluebridge.utils.DebugUtil;
 
 /**
  * @author lingwh
- * @desc 预设长度解码器 消息中没有版本号
+ * @desc 预设长度解码器 消息中有版本号
  * @date 2025/10/14 14:05
  */
 @Slf4j
-public class LengthFieldBasedFrameDecoder_1Test {
+public class LengthFieldBasedFrameDecoder_2_Test {
 
     public static void main(String[] args) {
         /**
@@ -31,7 +31,7 @@ public class LengthFieldBasedFrameDecoder_1Test {
          * public LengthFieldBasedFrameDecoder(int maxFrameLength, int lengthFieldOffset, int lengthFieldLength, int lengthAdjustment, int initialBytesToStrip)
          */
         EmbeddedChannel channel = new EmbeddedChannel(
-                new LengthFieldBasedFrameDecoder(1024, 0, 4, 0, 0),
+                new LengthFieldBasedFrameDecoder(1024, 0, 4, 1, 0),
                 new LoggingHandler(LogLevel.DEBUG)
         );
 
@@ -48,7 +48,10 @@ public class LengthFieldBasedFrameDecoder_1Test {
         byte[] bytes = content.getBytes();
         // 实际内容长度
         int length = bytes.length;
+        // 写入版本号
+        byte version = 1;
         buffer.writeInt(length);
+        buffer.writeByte(version);
         buffer.writeBytes(bytes);
     }
 
