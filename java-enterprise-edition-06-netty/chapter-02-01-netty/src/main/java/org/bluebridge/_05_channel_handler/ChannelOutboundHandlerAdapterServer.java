@@ -13,17 +13,20 @@ import java.nio.charset.Charset;
 
 /**
  * @author lingwh
- * @desc ChannelHandler的具体实现，以入站处理器ChannelOutboundHandlerAdapter为例 服务端
+ * @desc ChannelHandler的具体实现ChannelOutboundHandlerAdapter 服务端
  * @date 2025/10/10 14:39
  */
 
 /**
  * ChannelPipeline是由多个ChannelHander组成的、ChannelHandler、和ChannelInboundHandlerAdapter之间的关系
- *      ChannelPipeline是由多个ChannelHander组成的 包含一组 ChannelHandler，形成一条处理链。
- *      ChannelInboundHandlerAdapter 是 ChannelHandler 的一种具体实现（专注于入站事件）。
+ *     ChannelPipeline是由多个ChannelHander组成的 包含一组 ChannelHandler，形成一条处理链。
+ *     ChannelInboundHandlerAdapter 是 ChannelHandler 的一种具体实现（专注于入站事件）。
  */
 @Slf4j
 public class ChannelOutboundHandlerAdapterServer {
+
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 8080;
 
     public static void main(String[] args) {
         new ServerBootstrap()
@@ -60,7 +63,7 @@ public class ChannelOutboundHandlerAdapterServer {
                     pipeline.addLast(new ChannelOutboundHandlerAdapter() {
                         /**
                          * 方法作用
-                         *    处理 Channel 绑定到本地地址的出站操作，这是一个 ChannelOutboundHandler 的方法，用于处理绑定请求
+                         *    处理 Channel 绑定到本地地址的出站操作，这是一个 ChannelOutboundHandler接口的方法，用于处理绑定请求
                          * 典型应用场景
                          *    地址绑定前的验证: 在绑定操作前验证地址的有效性
                          *    日志记录: 记录绑定操作的信息
@@ -224,7 +227,7 @@ public class ChannelOutboundHandlerAdapterServer {
                     });
                 }
             })
-            .bind(8080);
+            .bind(HOST, PORT);
     }
 
 }

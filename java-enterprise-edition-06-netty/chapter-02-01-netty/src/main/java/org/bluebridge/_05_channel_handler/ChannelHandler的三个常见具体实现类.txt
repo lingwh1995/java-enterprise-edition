@@ -1,0 +1,4 @@
+1.ChannelInboundHandlerAdapter
+2.ChannelOutboundHandlerAdapter
+3.SimpleChannelInboundHandler
+    是ChannelInboundHandlerAdapter的子类，可以重写父类的所有方法，用于处理入站消息，优点是增加了泛型支持，不用手动去写类型转换代码了

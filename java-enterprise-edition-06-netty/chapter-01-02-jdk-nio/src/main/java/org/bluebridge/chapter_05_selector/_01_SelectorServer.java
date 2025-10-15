@@ -39,6 +39,7 @@ import java.util.Iterator;
 @Slf4j
 public class _01_SelectorServer {
 
+    private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;
 
     public static void main(String[] args) throws IOException {
@@ -63,7 +64,7 @@ public class _01_SelectorServer {
         ssc.register(selector, SelectionKey.OP_ACCEPT);
 
         // 6.绑定端口号
-        ssc.bind(new InetSocketAddress(PORT));
+        ssc.bind(new InetSocketAddress(HOST, PORT));
         while (true) {
             // 7.select方法，没有事件发生，线程阻塞，有事件，线程才会恢复
             // select在事件未处理时，它不会阻塞，事件发生后要么处理，要么取消，不能置之不理

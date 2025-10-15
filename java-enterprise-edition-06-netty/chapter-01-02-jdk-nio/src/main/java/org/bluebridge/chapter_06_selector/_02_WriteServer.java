@@ -21,12 +21,13 @@ import java.util.Iterator;
 @Slf4j
 public class _02_WriteServer {
 
+    private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;
 
     public static void main(String[] args) throws IOException {
         ServerSocketChannel ssc = ServerSocketChannel.open();
         ssc.configureBlocking(false);
-        ssc.bind(new InetSocketAddress(PORT));
+        ssc.bind(new InetSocketAddress(HOST, PORT));
 
         Selector selector = Selector.open();
         ssc.register(selector, SelectionKey.OP_ACCEPT);

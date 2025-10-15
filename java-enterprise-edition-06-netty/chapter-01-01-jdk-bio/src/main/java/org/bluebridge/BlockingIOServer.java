@@ -13,17 +13,19 @@ import java.net.*;
 @Slf4j
 public class BlockingIOServer {
 
+    private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;
 
     public static void main(String[] args) {
         try {
             // 创建ServerSocket，监听8080端口
-            ServerSocket serverSocket = new ServerSocket(PORT);
+            ServerSocket ss = new ServerSocket();
+            ss.bind(new InetSocketAddress(HOST, PORT));
             log.info("服务器启动，端口：{}......", PORT);
 
             while (true) {
                 // 接受客户端连接（阻塞）
-                Socket socket = serverSocket.accept();
+                Socket socket = ss.accept();
                 log.info("客户端连接: {}", socket.getInetAddress());
 
                 // 为每个客户端创建一个线程处理

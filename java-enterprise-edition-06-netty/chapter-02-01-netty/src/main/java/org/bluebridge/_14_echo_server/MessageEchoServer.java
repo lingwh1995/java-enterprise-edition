@@ -24,6 +24,9 @@ import java.nio.charset.Charset;
 @Slf4j
 public class MessageEchoServer {
 
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 8080;
+
     public static void main(String[] args) {
         new ServerBootstrap()
             .group(new NioEventLoopGroup())
@@ -50,7 +53,7 @@ public class MessageEchoServer {
               });
                 }
             })
-            .bind(8080);
+            .bind(HOST, PORT);
     }
 
 }

@@ -21,6 +21,9 @@ import java.util.Scanner;
 @Slf4j
 public class MessageEchoClient {
 
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 8080;
+
     public static void main(String[] args) throws InterruptedException {
         NioEventLoopGroup group = new NioEventLoopGroup();
         Channel channel = new Bootstrap()
@@ -42,7 +45,7 @@ public class MessageEchoClient {
                 });
                 }
             })
-            .connect("127.0.0.1", 8080)
+            .connect(HOST, PORT)
             .sync()
             .channel();
 

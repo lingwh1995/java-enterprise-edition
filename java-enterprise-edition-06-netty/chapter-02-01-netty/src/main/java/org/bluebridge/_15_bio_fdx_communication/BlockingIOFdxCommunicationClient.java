@@ -14,10 +14,11 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class BlockingIOFdxCommunicationClient {
 
+    private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;
 
     public static void main(String[] args) throws IOException {
-        Socket s = new Socket("localhost", PORT);
+        Socket s = new Socket(HOST, PORT);
 
         new Thread(() -> {
             try {

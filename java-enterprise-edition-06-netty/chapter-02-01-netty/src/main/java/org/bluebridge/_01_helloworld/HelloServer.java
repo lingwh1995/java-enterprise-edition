@@ -34,6 +34,9 @@ public class HelloServer {
         useChannelInboundHandlerAdapterAsHandler();
     }
 
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 8080;
+
     /**
      * 使用 SimpleChannelInboundHandler 作为入站处理器
      */
@@ -61,7 +64,7 @@ public class HelloServer {
                     });
                 }
                 // 7.ServerSocketChannel绑定8080端口
-            }).bind(8080);
+            }).bind(HOST, PORT);
     }
 
     /**
@@ -92,7 +95,7 @@ public class HelloServer {
                         });
                     }
                 }
-            ).bind(8080);
+            ).bind(HOST, PORT);
     }
 
 }

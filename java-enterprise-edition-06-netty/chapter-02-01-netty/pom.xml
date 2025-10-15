@@ -45,6 +45,13 @@
             <artifactId>junit</artifactId>
         </dependency>
         <!-- junit结束 -->
+
+        <!-- hutool开始 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+        <!-- hutool开始 -->
     </dependencies>
 
 </project>

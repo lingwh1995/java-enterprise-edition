@@ -19,7 +19,7 @@ public class EmbeddedChannelTest {
         ChannelInboundHandlerAdapter h1 = new ChannelInboundHandlerAdapter() {
             @Override
             public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-                log.info("h1");
+                log.info("h1 -> {}", msg);
                 super.channelRead(ctx,msg);
             }
         };
@@ -27,7 +27,7 @@ public class EmbeddedChannelTest {
         ChannelInboundHandlerAdapter h2 = new ChannelInboundHandlerAdapter() {
             @Override
             public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-                log.info("h2");
+                log.info("h2 -> {}", msg);
                 super.channelRead(ctx,msg);
             }
         };
@@ -35,7 +35,7 @@ public class EmbeddedChannelTest {
         ChannelInboundHandlerAdapter h3 = new ChannelInboundHandlerAdapter() {
             @Override
             public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-                log.info("h3");
+                log.info("h3 -> {}", msg);
                 super.channelRead(ctx,msg);
             }
         };
@@ -43,7 +43,7 @@ public class EmbeddedChannelTest {
         ChannelOutboundHandlerAdapter h4 = new ChannelOutboundHandlerAdapter() {
             @Override
             public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
-                log.info("h4");
+                log.info("h4 -> {}", msg);
                 super.write(ctx, msg, promise);
             }
         };
@@ -51,7 +51,7 @@ public class EmbeddedChannelTest {
         ChannelOutboundHandlerAdapter h5 = new ChannelOutboundHandlerAdapter() {
             @Override
             public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
-                log.info("h5");
+                log.info("h5 -> {}", msg);
                 super.write(ctx, msg, promise);
             }
         };
@@ -59,14 +59,16 @@ public class EmbeddedChannelTest {
         ChannelOutboundHandlerAdapter h6 = new ChannelOutboundHandlerAdapter() {
             @Override
             public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
-                log.info("h6");
+                log.info("h6 -> {}", msg);
                 super.write(ctx, msg, promise);
             }
         };
 
         EmbeddedChannel embeddedChannel = new EmbeddedChannel(h1, h2, h3, h4, h5, h6);
-        //embeddedChannel.writeInbound("测试入站......");// 测试入站
-        embeddedChannel.writeOutbound("hello2");// 测试出站
+        // 测试入站
+        embeddedChannel.writeInbound("测试入站......");
+        // 测试出站
+        //embeddedChannel.writeOutbound("测试出站......");
     }
     
 }

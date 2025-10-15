@@ -33,6 +33,7 @@ import java.util.stream.IntStream;
 @Slf4j
 public class _06_MultiThreadServer {
 
+    private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;
 
     public static void main(String[] args) throws IOException {
@@ -42,7 +43,7 @@ public class _06_MultiThreadServer {
         Selector boss = Selector.open();
         SelectionKey bossKey = ssc.register(boss, 0, null);
         bossKey.interestOps(SelectionKey.OP_ACCEPT);
-        ssc.bind(new InetSocketAddress(PORT));
+        ssc.bind(new InetSocketAddress(HOST, PORT));
         // 创建固定数量的worker
         //Worker[] workers = new Worker[Runtime.getRuntime().availableProcessors()];  // 获取cpu核心数
         Worker[] workers = new Worker[3];

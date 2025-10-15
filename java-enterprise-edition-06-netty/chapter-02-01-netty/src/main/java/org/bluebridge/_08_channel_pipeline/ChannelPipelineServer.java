@@ -6,8 +6,6 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.Charset;
@@ -24,6 +22,9 @@ import java.nio.charset.Charset;
  */
 @Slf4j
 public class ChannelPipelineServer {
+
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 8080;
 
     public static void main(String[] args) {
         new ServerBootstrap()
@@ -106,13 +107,8 @@ public class ChannelPipelineServer {
                     });
                 }
             })
-            .bind(8080);
+            .bind(HOST, PORT);
     }
 
 }
 
-@AllArgsConstructor
-@Data
-class Student {
-    private String name;
-}

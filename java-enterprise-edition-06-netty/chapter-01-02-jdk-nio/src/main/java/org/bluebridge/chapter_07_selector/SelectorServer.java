@@ -71,6 +71,7 @@ import java.util.Set;
 @Slf4j
 public class SelectorServer {
 
+    private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;
 
     public static void main(String[] args) throws IOException {
@@ -132,8 +133,8 @@ public class SelectorServer {
         Set<SelectionKey> selectionKeys = selector.selectedKeys();
         log.info("before op_accept => selectionKeys: {}", selectionKeys);
         /*--------------测试selector api--------------*/
-
-        ssc.bind(new InetSocketAddress(PORT));
+        // 6.绑定端口号
+        ssc.bind(new InetSocketAddress(HOST, PORT));
 
         /*--------------测试selector api--------------*/
         // 测试wakeup(): 唤醒selector，使selector不再处于阻塞状态

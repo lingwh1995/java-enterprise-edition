@@ -18,11 +18,12 @@ import java.nio.charset.Charset;
 @Slf4j
 public class _01_AsynchronousServerSocketChannelServer {
 
+    private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;
 
     public static void main(String[] args) throws IOException {
         AsynchronousServerSocketChannel ssc = AsynchronousServerSocketChannel.open();
-        ssc.bind(new InetSocketAddress(PORT));
+        ssc.bind(new InetSocketAddress(HOST, PORT));
         ssc.accept(null, new AcceptHandler(ssc));
         System.in.read();
     }

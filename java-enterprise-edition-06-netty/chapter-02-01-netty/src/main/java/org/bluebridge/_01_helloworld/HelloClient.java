@@ -18,6 +18,9 @@ import java.net.InetSocketAddress;
 @Slf4j
 public class HelloClient {
 
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 8080;
+
     public static void main(String[] args) throws InterruptedException {
         // 1.启动类
         new Bootstrap()
@@ -35,7 +38,7 @@ public class HelloClient {
                 }
             })
             // 5. 连接到服务器
-            .connect(new InetSocketAddress("127.0.0.1", 8080))
+            .connect(new InetSocketAddress(HOST, PORT))
             // netty 中很多方法都是异步的，如connect，这时需要使用 sync 方法等待 connect 建立连接完毕
             .sync()
             // 获取 channel 对象，它即为通道抽象，可以进行数据读写操作

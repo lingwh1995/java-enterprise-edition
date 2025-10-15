@@ -9,6 +9,7 @@ package org.bluebridge._15_bio_fdx_communication;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.TimeUnit;
@@ -26,10 +27,13 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class BlockingIOFdxCommunicationServer {
 
+    private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;
 
     public static void main(String[] args) throws IOException {
-        ServerSocket ss = new ServerSocket(PORT);
+        ServerSocket ss = new ServerSocket();
+        ss.bind(new InetSocketAddress(HOST, PORT));
+
         Socket s = ss.accept();
         new Thread(() -> {
             try {

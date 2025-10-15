@@ -32,9 +32,13 @@ import java.nio.charset.Charset;
 @Slf4j
 public class EventLoopGroupMultipleServer {
 
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 8080;
+
     public static void main(String[] args) throws InterruptedException {
         new ServerBootstrap()
-            .group(new NioEventLoopGroup(1), new NioEventLoopGroup(2)) // 服务器端一个boss线程，两个worker线程
+            // 服务器端一个boss线程，两个worker线程
+            .group(new NioEventLoopGroup(1), new NioEventLoopGroup(2))
             .channel(NioServerSocketChannel.class)
             .childHandler(new ChannelInitializer<NioSocketChannel>() {
                 @Override
@@ -52,7 +56,7 @@ public class EventLoopGroupMultipleServer {
                     });
                 }
             })
-            .bind(8080)
+            .bind(HOST, PORT)
             .sync();
     }
 

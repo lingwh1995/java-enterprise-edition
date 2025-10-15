@@ -21,6 +21,7 @@ import java.util.Iterator;
 @Slf4j
 public class _01_WriteServer {
 
+    private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;
 
     public static void main(String[] args) throws IOException {
@@ -29,8 +30,8 @@ public class _01_WriteServer {
 
         Selector selector = Selector.open();
         ssc.register(selector, SelectionKey.OP_ACCEPT);
-
-        ssc.bind(new InetSocketAddress(PORT));
+        // 6.绑定端口号
+        ssc.bind(new InetSocketAddress(HOST, PORT));
 
         while (true) {
             log.info("......");

@@ -21,6 +21,9 @@ import java.util.Random;
 @Slf4j
 public class LengthFieldBasedFrameDecoderClient {
 
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 8080;
+
     public static void main(String[] args) {
         NioEventLoopGroup worker = new NioEventLoopGroup();
         try {
@@ -55,7 +58,7 @@ public class LengthFieldBasedFrameDecoderClient {
                     });
                 }
             });
-            ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 8080).sync();
+            ChannelFuture channelFuture = bootstrap.connect(HOST, PORT).sync();
             channelFuture.channel().closeFuture().sync();
 
         } catch (InterruptedException e) {

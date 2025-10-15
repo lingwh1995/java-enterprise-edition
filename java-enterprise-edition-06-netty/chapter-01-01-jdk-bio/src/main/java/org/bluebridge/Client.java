@@ -13,12 +13,13 @@ import java.net.*;
 @Slf4j
 public class Client {
 
+    private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;
 
     public static void main(String[] args) {
         try {
             // 连接服务器
-            Socket socket = new Socket("localhost", PORT);
+            Socket socket = new Socket(HOST, PORT);
             log.info("连接到服务器，端口：{}......", PORT);
 
             // 获取输入输出流

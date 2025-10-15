@@ -17,6 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class EventLoopGroupEnhanceClient {
 
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 8080;
+
     public static void main(String[] args) throws InterruptedException {
         Channel channel = new Bootstrap()
             .group(new NioEventLoopGroup())
@@ -28,7 +31,7 @@ public class EventLoopGroupEnhanceClient {
                     pipeline.addLast(new StringEncoder());// 内部使用CharBuffer.wrap(msg)
                 }
             })
-            .connect("localhost", 8080)
+            .connect(HOST, PORT)
             .sync()
             .channel();
         channel.writeAndFlush("zhangsan");

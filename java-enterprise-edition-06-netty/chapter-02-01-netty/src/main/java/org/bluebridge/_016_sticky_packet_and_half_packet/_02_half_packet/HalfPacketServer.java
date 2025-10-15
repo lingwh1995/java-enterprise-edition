@@ -33,6 +33,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HalfPacketServer {
 
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 8080;
+
     public static void main(String[] args) {
         NioEventLoopGroup boss = new NioEventLoopGroup();
         NioEventLoopGroup worker = new NioEventLoopGroup(4);
@@ -70,7 +73,7 @@ public class HalfPacketServer {
                         });
                     }
                 });
-            ChannelFuture channelFuture = serverBootstrap.bind(8080);
+            ChannelFuture channelFuture = serverBootstrap.bind(HOST, PORT);
             log.info("{} binding......", channelFuture.channel());
             channelFuture.sync();
             log.info("{} binding successful......", channelFuture.channel());

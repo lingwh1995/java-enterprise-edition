@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -26,14 +27,16 @@ import java.net.Socket;
 @Slf4j
 public class _01_BlockingIOServer {
 
+    private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;
 
     public static void main(String[] args) {
         BufferedReader bufferedReader = null;
         try {
-            log.info("阻塞服务器启动，端口：{}......", PORT);
             // 1.创建ServerSocket
-            ServerSocket serverSocket = new ServerSocket(PORT);
+            ServerSocket serverSocket = new ServerSocket();
+            serverSocket.bind(new InetSocketAddress(HOST, PORT));
+            log.info("阻塞服务器启动，端口：{}......", PORT);
             // 2.获取Socket
             Socket socket = serverSocket.accept();
             // 3.获取输入流

@@ -26,6 +26,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 @Slf4j
 public class _04_MultiThreadServer {
 
+    private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;
 
     public static void main(String[] args) throws IOException {
@@ -35,7 +36,7 @@ public class _04_MultiThreadServer {
         Selector boss = Selector.open();
         SelectionKey bossKey = ssc.register(boss, 0, null);
         bossKey.interestOps(SelectionKey.OP_ACCEPT);
-        ssc.bind(new InetSocketAddress(PORT));
+        ssc.bind(new InetSocketAddress(HOST, PORT));
         // 创建固定数量的worker
         Worker worker = new Worker("worker-0");
         while (true) {

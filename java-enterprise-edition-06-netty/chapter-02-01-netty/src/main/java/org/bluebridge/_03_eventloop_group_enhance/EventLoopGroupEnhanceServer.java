@@ -19,6 +19,9 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class EventLoopGroupEnhanceServer {
 
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 8080;
+
     public static void main(String[] args) {
         // 细分: 独立出来一个EventLoopGroup来处理耗时较长的任务
         EventLoopGroup eventExecutors = new DefaultEventLoopGroup();
@@ -76,7 +79,7 @@ public class EventLoopGroupEnhanceServer {
                         });
                     }
                 })
-                .bind(8080);
+                .bind(HOST, PORT);
     }
 
 }

@@ -1,5 +1,6 @@
-package org.bluebridge;
+package org.bluebridge._05_channel_handler;
 
+import cn.hutool.json.JSONUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
@@ -11,11 +12,11 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author lingwh
- * @desc 用于测试时充当临时 客户端
+ * @desc ChannelHandler的具体实现SimpleChannelInboundHandler 客户端
  * @date 2025/9/23 11:58
  */
 @Slf4j
-public class NettyClient {
+public class SimpleChannelInboundHandlerStringClient {
 
     private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;
@@ -35,7 +36,10 @@ public class NettyClient {
             .connect(HOST, PORT)
             .sync()
             .channel();
-        channel.writeAndFlush("我是nio");
+
+        Student student = new Student("张三");
+        // 将student对象转为字符串并发送
+        channel.writeAndFlush(JSONUtil.toJsonStr(student));
     }
 
 }

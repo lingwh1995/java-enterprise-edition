@@ -1,16 +1,11 @@
 package org.bluebridge._10_channel_handler_context;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.string.StringEncoder;
 import lombok.extern.slf4j.Slf4j;
-
-import java.nio.charset.Charset;
 
 /**
  * @author lingwh
@@ -24,8 +19,11 @@ import java.nio.charset.Charset;
 @Slf4j
 public class ChannelHandlerContextClient {
 
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 8080;
+
     public static void main(String[] args) throws InterruptedException {
-        Channel channel = new Bootstrap()
+        new Bootstrap()
             .group(new NioEventLoopGroup())
             .channel(NioSocketChannel.class)
             .handler(new ChannelInitializer<NioSocketChannel>() {
@@ -43,7 +41,7 @@ public class ChannelHandlerContextClient {
                     });
                 }
             })
-            .connect("localhost", 8080)
+            .connect(HOST, PORT)
             .sync()
             .channel();
     }

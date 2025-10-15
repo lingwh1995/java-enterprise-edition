@@ -42,9 +42,13 @@ import java.nio.charset.Charset;
 @Slf4j
 public class EventLoopGroupSingleServer {
 
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 8080;
+
     public static void main(String[] args) {
         new ServerBootstrap()
-            .group(new NioEventLoopGroup()) // 无参构造函数会自动设置线程数为 CPU 核心数的两倍。
+            // 无参构造函数会自动设置线程数为 CPU 核心数的两倍。
+            .group(new NioEventLoopGroup())
             .channel(NioServerSocketChannel.class)
             .childHandler(new ChannelInitializer<NioSocketChannel>() {
                 @Override
@@ -62,7 +66,7 @@ public class EventLoopGroupSingleServer {
                     });
                 }
             })
-            .bind(8080);
+            .bind(HOST, PORT);
     }
 
 }

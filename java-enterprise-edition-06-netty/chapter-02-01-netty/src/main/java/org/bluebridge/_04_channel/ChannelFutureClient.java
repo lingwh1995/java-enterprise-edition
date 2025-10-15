@@ -21,9 +21,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ChannelFutureClient {
 
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 8080;
+
     public static void main(String[] args) throws InterruptedException {
-        //makeChannelFutureSyncUseSync();
-        makeChannelFutureSyncUseAddListener();
+        makeChannelFutureSyncUseSync();
+        //makeChannelFutureSyncUseAddListener();
     }
 
     /**
@@ -71,7 +74,7 @@ public class ChannelFutureClient {
                     pipeline.addLast(new StringEncoder());
                     }
                 })
-                .connect("127.0.0.1", 8080);
+                .connect(HOST, PORT);
 
         /**
          * 执行到 1 时，连接未建立，打印 [id: 0x749124ba]

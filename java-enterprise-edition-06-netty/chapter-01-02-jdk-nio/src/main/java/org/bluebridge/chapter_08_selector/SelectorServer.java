@@ -18,6 +18,7 @@ import java.util.Iterator;
 @Slf4j
 public class SelectorServer {
 
+    private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;
 
     public static void main(String[] args) throws IOException {
@@ -26,7 +27,7 @@ public class SelectorServer {
         // 2.设置服务器对象
         ssc.configureBlocking(false);
         // 3.绑定端口号
-        ssc.bind(new InetSocketAddress(PORT));
+        ssc.bind(new InetSocketAddress(HOST, PORT));
         // 4.创建Selector对象
         Selector selector = Selector.open();
         // 5.把Channel注册到selector上

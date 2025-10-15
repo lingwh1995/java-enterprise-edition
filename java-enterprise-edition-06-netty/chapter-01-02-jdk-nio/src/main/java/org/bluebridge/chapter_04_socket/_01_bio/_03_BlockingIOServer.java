@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -37,12 +38,14 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class _03_BlockingIOServer {
 
+    private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;
 
     public static void main(String[] args) {
         try {
             // 1.获取ServerSocket
-            ServerSocket serverSocket = new ServerSocket(PORT);
+            ServerSocket serverSocket = new ServerSocket();
+            serverSocket.bind(new InetSocketAddress(HOST, PORT));
             // 2.初始化一个线程池
             ServerThreadPool serverThreadPool = new ServerThreadPool(6, 10);
             log.info("阻塞服务器启动，端口：{}......", PORT);
