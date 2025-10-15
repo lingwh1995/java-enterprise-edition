@@ -1,10 +1,7 @@
 package org.bluebridge.demo;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -25,8 +22,9 @@ public class Server {
         bootstrap.childOption(ChannelOption.SO_REUSEADDR, true);
         bootstrap.childHandler(new ChannelInitializer<SocketChannel>(){
             @Override
-            public void initChannel(SocketChannel ch)throws Exception{
-                ch.pipeline().addLast(new EchoServerHandler());
+            public void initChannel(SocketChannel ch) {
+                ChannelPipeline pipeline = ch.pipeline();
+                pipeline.addLast(new EchoServerHandler());
             }
         });
 

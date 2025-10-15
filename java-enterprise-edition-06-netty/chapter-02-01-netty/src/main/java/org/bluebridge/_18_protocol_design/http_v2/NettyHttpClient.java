@@ -1,21 +1,28 @@
 package org.bluebridge._18_protocol_design.http_v2;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.http.*;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
+import lombok.extern.slf4j.Slf4j;
 
 import java.net.InetSocketAddress;
 import java.net.URI;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author lingwh
  * @desc 基于Netty的HTTP客户端
  * @date 2025/10/15 14:51
  */
+@Slf4j
 public class NettyHttpClient {
 
     private static final String HOST = "127.0.0.1";
@@ -38,10 +45,19 @@ public class NettyHttpClient {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
                         ChannelPipeline pipeline = ch.pipeline();
-                        // 发送数据进行编码
+
+                        // 分别设置响应解码器和请求编码器
+                        /*
+                        // 设置请求解码器
+                        pipeline.addLast(new HttpResponseDecoder());
+                        // 设置响应编码器
                         pipeline.addLast(new HttpRequestEncoder());
-                        // 发送端接受响应解码
-                        pipeline.addLast(new HttpRequestDecoder());
+                        */
+                        // 一次设置响应解码器和请求编码器，这里使用HttpClientCodec，它包含了HttpResponseDecoder和HttpRequestEncoder
+                        pipeline.addLast(new HttpClientCodec());
+
+                        // 类似于 HttpServerCodec 的写法
+                        pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
                         // 聚合成一个完整报文
                         pipeline.addLast("aggregator", new HttpObjectAggregator(10 * 1024 * 1024));
                         // 允许压缩解压等操作
@@ -51,7 +67,8 @@ public class NettyHttpClient {
                             public void channelActive(ChannelHandlerContext ctx) throws Exception {
                                 String url = "/test";
                                 URI uri = new URI(url);
-                                String msg = "hello, netty http server, i am netty http client!";
+                                //String msg = "hello netty http server, i am netty http client!";
+                                String msg = "hello!";
                                 DefaultFullHttpRequest request =
                                         new DefaultFullHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.GET, uri.toASCIIString(),
                                                 Unpooled.wrappedBuffer(msg.getBytes("UTF-8")));
@@ -61,6 +78,13 @@ public class NettyHttpClient {
                                 request.headers().set(HttpHeaderNames.CONTENT_LENGTH, request.content().readableBytes());
                                 // 发送http请求
                                 ctx.writeAndFlush(request);
+                            }
+
+                            @Override
+                            public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+                                FullHttpResponse httpResponse = (FullHttpResponse) msg;
+                                String response = httpResponse.content().toString(StandardCharsets.UTF_8);
+                                log.info("来自服务器端的数据： {}", response);
                             }
                         });
                     }

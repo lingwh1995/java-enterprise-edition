@@ -42,7 +42,7 @@ public class DelimiterBasedFrameDecoderServer {
                         // 使用自定义符号作为作为分隔符，如果超出指定长度仍未出现分隔符，则抛出异常
                         ByteBuf buf= ByteBufAllocator.DEFAULT.buffer();
                         buf.writeByte('$');
-                        ch.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, buf));
+                        pipeline.addLast(new DelimiterBasedFrameDecoder(1024, buf));
                         pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
                         pipeline.addLast(new ChannelInboundHandlerAdapter() {
                             @Override

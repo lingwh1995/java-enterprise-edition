@@ -1,10 +1,7 @@
 package org.bluebridge._18_protocol_design.http_v1;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -42,11 +39,22 @@ public class NettyHttpServer {
             serverBootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel ch) {
-                    ch.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
-                    ch.pipeline().addLast(new HttpServerCodec());
+                    ChannelPipeline pipeline = ch.pipeline();
+
+                    // 分别设置请求解码器和响应编码器
+                    /*
+                    // 设置请求解码器
+                    pipeline.addLast(new HttpRequestDecoder());
+                    // 设置响应编码器
+                    pipeline.addLast(new HttpResponseEncoder());
+                    */
+                    // 一次设置请求解码器和响应编码器，这里使用HttpServerCodec，它包含了HttpRequestDecoder和HttpResponseEncoder
+                    pipeline.addLast(new HttpServerCodec());
+
+                    pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
                     // 如果需要读取POST请求的请求体数据，需要在pipeline中添加 HttpObjectAggregator，如果仅需读取GET请求，可以注释掉下面一行
-                    ch.pipeline().addLast(new HttpObjectAggregator(64 * 1024));
-                    ch.pipeline().addLast(new SimpleChannelInboundHandler<HttpRequest>() {
+                    pipeline.addLast(new HttpObjectAggregator(64 * 1024));
+                    pipeline.addLast(new SimpleChannelInboundHandler<HttpRequest>() {
                         @Override
                         protected void channelRead0(ChannelHandlerContext ctx, HttpRequest httpRequest) {
                             // netty模拟HttpServer处理来自客户端的GET请求
@@ -54,11 +62,12 @@ public class NettyHttpServer {
                                 // 获取请求
                                 log.info(httpRequest.uri());
                                 // 返回响应
-                                DefaultFullHttpResponse response = new DefaultFullHttpResponse(httpRequest.protocolVersion(), HttpResponseStatus.OK);
+                                DefaultFullHttpResponse response = new DefaultFullHttpResponse(httpRequest.protocolVersion(),
+                                        HttpResponseStatus.OK);
                                 byte[] bytes = "<h1>Hello, world!</h1>".getBytes();
                                 response.headers().setInt(CONTENT_LENGTH, bytes.length);
                                 response.content().writeBytes(bytes);
-                                // 写回响应
+                                // 写回响应，接下来会经过出栈处理器处理
                                 ctx.writeAndFlush(response);
                             }
 
@@ -82,7 +91,7 @@ public class NettyHttpServer {
                         }
                     });
                     /*
-                    ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
+                    pipeline.addLast(new ChannelInboundHandlerAdapter() {
                         @Override
                         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
                             log.info("{}", msg.getClass());

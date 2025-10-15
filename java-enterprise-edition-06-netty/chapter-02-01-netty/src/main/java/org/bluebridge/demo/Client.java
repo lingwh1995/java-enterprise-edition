@@ -28,8 +28,9 @@ public class Client {
         bootstrap.handler(new ChannelInitializer<SocketChannel>() {
             @Override
             protected void initChannel(SocketChannel ch) {
-                ch.pipeline().addLast(new IdleStateHandler(0, 0, 120)).
-                        addLast(new EchoClientHandler());
+                ChannelPipeline pipeline = ch.pipeline();
+                pipeline.addLast(new IdleStateHandler(0, 0, 120));
+                pipeline.addLast(new EchoClientHandler());
             }
         });
 

@@ -7,6 +7,8 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.http.*;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,10 +39,18 @@ public class NettyHttpServer {
                     @Override
                     protected void initChannel(SocketChannel ch) {
                         ChannelPipeline pipeline = ch.pipeline();
-                        // 设置编码器
-                        pipeline.addLast("encoder", new HttpResponseEncoder());
-                        // 设置解码器
-                        pipeline.addLast("decoder", new HttpRequestDecoder());
+
+                        // 分别设置请求解码器和响应编码器
+                        /*
+                        // 设置请求解码器
+                        pipeline.addLast(new HttpRequestDecoder());
+                        // 设置响应编码器
+                        pipeline.addLast(new HttpResponseEncoder());
+                        */
+                        // 一次设置请求解码器和响应编码器，这里使用HttpServerCodec，它包含了HttpRequestDecoder和HttpResponseEncoder
+                        pipeline.addLast(new HttpServerCodec());
+
+                        pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
                         // 聚合操作，将请求体和请求头等聚合
                         pipeline.addLast("aggregator", new HttpObjectAggregator(10 * 1024 * 1024));
                         // 允许压缩解压等操作
@@ -58,8 +68,8 @@ public class NettyHttpServer {
                                 }else{
                                     errorCount.incrementAndGet();
                                 }
-                                log.info("请求成功数为：" + successCount);
-                                log.info("请求失败数为：" + errorCount);
+                                log.info("请求成功数为：{}", successCount);
+                                log.info("请求失败数为：{}", errorCount);
                                 //传递给下一个handler
                                 ctx.fireChannelRead(msg);
                             }

@@ -7,6 +7,8 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.http.*;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import io.netty.util.AttributeKey;
 import lombok.extern.slf4j.Slf4j;
 
@@ -55,18 +57,32 @@ public class NettyHttpClient {
     public NettyHttpClient() {
         bootstrap.group(group)
             .channel(NioSocketChannel.class)
-            .option(ChannelOption.TCP_NODELAY, true)          // 关闭 Nagle
-            .option(ChannelOption.SO_KEEPALIVE, true)         // TCP KeepAlive
+            // 关闭 Nagle
+            .option(ChannelOption.TCP_NODELAY, true)
+            // TCP KeepAlive
+            .option(ChannelOption.SO_KEEPALIVE, true)
             .handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel ch) {
-                    ChannelPipeline p = ch.pipeline();
+                    ChannelPipeline pipeline = ch.pipeline();
                     // 1. HTTP 编解码
-                    p.addLast(new HttpClientCodec());
-                    // 2. 聚合分片 -> FullHttpResponse
-                    p.addLast(new HttpObjectAggregator(64 * 1024));
-                    // 3. 业务处理器
-                    p.addLast(new HttpResponseHandler());
+
+                    // 分别设置响应解码器和请求编码器
+                    /*
+                    // 设置请求解码器
+                    pipeline.addLast(new HttpResponseDecoder());
+                    // 设置响应编码器
+                    pipeline.addLast(new HttpRequestEncoder());
+                    */
+                    // 一次设置响应解码器和请求编码器，这里使用HttpClientCodec，它包含了HttpResponseDecoder和HttpRequestEncoder
+                    pipeline.addLast(new HttpClientCodec());
+
+                    // 2.日志处理器
+                    pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
+                    // 3. 聚合分片 -> FullHttpResponse
+                    pipeline.addLast(new HttpObjectAggregator(64 * 1024));
+                    // 4. 业务处理器
+                    pipeline.addLast(new HttpResponseHandler());
                 }
             });
     }

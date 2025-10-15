@@ -70,8 +70,8 @@ public class ChannelFutureClient {
                 .handler(new ChannelInitializer<Channel>() {
                     @Override
                     protected void initChannel(Channel ch) {
-                    ChannelPipeline pipeline = ch.pipeline();
-                    pipeline.addLast(new StringEncoder());
+                        ChannelPipeline pipeline = ch.pipeline();
+                        pipeline.addLast(new StringEncoder());
                     }
                 })
                 .connect(HOST, PORT);

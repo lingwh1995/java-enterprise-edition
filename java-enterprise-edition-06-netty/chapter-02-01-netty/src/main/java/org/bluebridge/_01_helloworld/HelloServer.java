@@ -6,6 +6,8 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -53,9 +55,11 @@ public class HelloServer {
                 @Override
                 protected void initChannel(NioSocketChannel ch) {
                     ChannelPipeline pipeline = ch.pipeline();
-                    // 5.SocketChannel的处理器，使用StringDecoder解码，ByteBuf=>String
+                    // 5.日志处理器
+                    pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
+                    // 6.使用StringDecoder解码处理器，ByteBuf=>String
                     pipeline.addLast(new StringDecoder());
-                    // 6.SocketChannel的业务处理，使用上一个处理器的处理结果
+                    // 7.SocketChannel的业务处理，使用上一个处理器的处理结果
                     pipeline.addLast(new SimpleChannelInboundHandler<String>() {
                         @Override
                         protected void channelRead0(ChannelHandlerContext channelHandlerContext, String msg) {
@@ -83,10 +87,13 @@ public class HelloServer {
                 new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) {
-                        // 6.添加具体handler
                         ChannelPipeline pipeline = ch.pipeline();
-                        pipeline.addLast(new StringDecoder());//将ByteBuf转换为字符串
-                        pipeline.addLast(new ChannelInboundHandlerAdapter(){ //自定义的handler
+                        // 6.添加日志处理器
+                        pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
+                        // 7.使用StringDecoder解码处理器，ByteBuf=>String
+                        pipeline.addLast(new StringDecoder());
+                        // 8.SocketChannel的业务处理，使用上一个处理器的处理结果
+                        pipeline.addLast(new ChannelInboundHandlerAdapter() {
                             // 读事件
                             @Override
                             public void channelRead(ChannelHandlerContext ctx, Object msg) {

@@ -42,7 +42,8 @@ public class ChannelClient {
                     @Override
                     protected void initChannel(NioSocketChannel ch) {
                         ChannelPipeline pipeline = ch.pipeline();
-                        pipeline.addLast(new StringEncoder());// 内部使用CharBuffer.wrap(msg)
+                        // 内部使用CharBuffer.wrap(msg)
+                        pipeline.addLast(new StringEncoder());
                     }
                 })
                 // 连接到服务器

@@ -6,6 +6,8 @@ import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.InetSocketAddress;
@@ -32,9 +34,10 @@ public class HelloClient {
             .handler(new ChannelInitializer<NioSocketChannel>() {
                 @Override // 在连接建立后被调用
                 protected void initChannel(NioSocketChannel ch) {
-                // 消息会经过通道 handler 处理，这里是将 String => ByteBuf 编码发出
-                ChannelPipeline pipeline = ch.pipeline();
-                pipeline.addLast(new StringEncoder());
+                    // 消息会经过通道 handler 处理，这里是将 String => ByteBuf 编码发出
+                    ChannelPipeline pipeline = ch.pipeline();
+                    pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
+                    pipeline.addLast(new StringEncoder());
                 }
             })
             // 5. 连接到服务器

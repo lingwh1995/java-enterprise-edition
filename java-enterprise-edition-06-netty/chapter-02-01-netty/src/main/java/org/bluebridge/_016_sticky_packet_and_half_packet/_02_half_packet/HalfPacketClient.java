@@ -33,7 +33,7 @@ public class HalfPacketClient {
                         log.info("connected......");
                         ChannelPipeline pipeline = ch.pipeline();
                         pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
-                        ch.pipeline().addLast(new ChannelInboundHandlerAdapter() {
+                        pipeline.addLast(new ChannelInboundHandlerAdapter() {
                             @Override
                             public void channelActive(ChannelHandlerContext ctx) throws Exception {
                                 log.info("sending......");
