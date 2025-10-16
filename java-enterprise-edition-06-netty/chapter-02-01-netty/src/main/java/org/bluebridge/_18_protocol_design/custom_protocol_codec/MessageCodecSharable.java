@@ -67,8 +67,8 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
         in.readBytes(bytes, 0, length);
         ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(bytes));
         Message message = (Message) ois.readObject();
-        log.debug("{}, {}, {}, {}, {}, {}", magicNum, version, serializerType, messageType, sequenceId, length);
-        log.debug("{}", message);
+        log.info("{}, {}, {}, {}, {}, {}", magicNum, version, serializerType, messageType, sequenceId, length);
+        log.info("{}", message);
         out.add(message);
     }
 

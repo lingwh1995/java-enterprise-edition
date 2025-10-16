@@ -1,4 +1,4 @@
-package org.bluebridge._19_group_chat.message;
+package org.bluebridge._20_rpc.message;
 
 import lombok.Getter;
 import lombok.ToString;

@@ -1,17 +1,20 @@
-package org.bluebridge._19_group_chat.client;
+package org.bluebridge._20_rpc.client;
 
-import org.bluebridge._19_group_chat.message.RpcRequestMessage;
-import org.bluebridge._19_group_chat.protocol.MessageCodecSharable;
-import org.bluebridge._19_group_chat.protocol.ProcotolFrameDecoder;
-import org.bluebridge._19_group_chat.client.handler.RpcResponseMessageHandler;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.*;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
+import org.bluebridge._20_rpc.client.handler.RpcResponseMessageHandler;
+import org.bluebridge._20_rpc.message.RpcRequestMessage;
+import org.bluebridge._20_rpc.protocol.MessageCodecSharable;
+import org.bluebridge._20_rpc.protocol.ProcotolFrameDecoder;
 
 @Slf4j
 public class RpcClient {
@@ -42,7 +45,7 @@ public class RpcClient {
 
             ChannelFuture future = channel.writeAndFlush(new RpcRequestMessage(
                     1,
-                    "org.bluebridge._19_group_chat.server.service.HelloService",
+                     "org.bluebridge._20_rpc.server.service.HelloService",
                     "sayHello",
                     String.class,
                     new Class[]{String.class},

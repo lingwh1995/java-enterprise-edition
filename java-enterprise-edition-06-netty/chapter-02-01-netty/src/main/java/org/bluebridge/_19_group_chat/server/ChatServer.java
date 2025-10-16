@@ -33,6 +33,8 @@ public class ChatServer {
         GroupMembersRequestMessageHandler GROUP_MEMBERS_HANDLER = new GroupMembersRequestMessageHandler();
         GroupQuitRequestMessageHandler GROUP_QUIT_HANDLER = new GroupQuitRequestMessageHandler();
         GroupChatRequestMessageHandler GROUP_CHAT_HANDLER = new GroupChatRequestMessageHandler();
+        // 添加心跳包处理器
+        PingMessageHandler PING_HANDLER = new PingMessageHandler();
         QuitHandler QUIT_HANDLER = new QuitHandler();
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
@@ -40,23 +42,23 @@ public class ChatServer {
             serverBootstrap.group(boss, worker);
             serverBootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
-                protected void initChannel(SocketChannel ch) throws Exception {
+                protected void initChannel(SocketChannel ch) {
                     ChannelPipeline pipeline = ch.pipeline();
                     pipeline.addLast(new ProcotolFrameDecoder());
                     pipeline.addLast(LOGGING_HANDLER);
                     pipeline.addLast(MESSAGE_CODEC);
                     // 用来判断是不是 读空闲时间过长，或 写空闲时间过长
-                    // 5s 内如果没有收到 channel 的数据，会触发一个 IdleState#READER_IDLE 事件
-                    pipeline.addLast(new IdleStateHandler(5, 0, 0));
+                    // 30s 内如果没有收到 channel 的数据，会触发一个 IdleState#READER_IDLE 事件
+                    pipeline.addLast(new IdleStateHandler(30, 0, 0));
                     // ChannelDuplexHandler 可以同时作为入站和出站处理器
                     pipeline.addLast(new ChannelDuplexHandler() {
                         // 用来触发特殊事件
                         @Override
-                        public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception{
+                        public void userEventTriggered(ChannelHandlerContext ctx, Object evt) {
                             IdleStateEvent event = (IdleStateEvent) evt;
                             // 触发了读空闲事件
                             if (event.state() == IdleState.READER_IDLE) {
-                                log.debug("已经 5s 没有读到数据了");
+                                log.info("已经 30s 没有读到数据了......");
                                 ctx.channel().close();
                             }
                         }
@@ -68,13 +70,15 @@ public class ChatServer {
                     pipeline.addLast(GROUP_MEMBERS_HANDLER);
                     pipeline.addLast(GROUP_QUIT_HANDLER);
                     pipeline.addLast(GROUP_CHAT_HANDLER);
+                    // 添加心跳包处理器
+                    pipeline.addLast(PING_HANDLER);
                     pipeline.addLast(QUIT_HANDLER);
                 }
             });
             Channel channel = serverBootstrap.bind(HOST, PORT).sync().channel();
             channel.closeFuture().sync();
         } catch (InterruptedException e) {
-            log.error("server error", e);
+            log.error("server error......", e);
         } finally {
             boss.shutdownGracefully();
             worker.shutdownGracefully();

@@ -1,13 +1,13 @@
-package org.bluebridge._19_group_chat.server.handler;
+package org.bluebridge._20_rpc.server.handler;
 
-import org.bluebridge._19_group_chat.message.RpcRequestMessage;
-import org.bluebridge._19_group_chat.message.RpcResponseMessage;
-import org.bluebridge._19_group_chat.server.service.HelloService;
-import org.bluebridge._19_group_chat.server.service.ServicesFactory;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
+import org.bluebridge._20_rpc.message.RpcRequestMessage;
+import org.bluebridge._20_rpc.message.RpcResponseMessage;
+import org.bluebridge._20_rpc.server.service.HelloService;
+import org.bluebridge._20_rpc.server.service.ServicesFactory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -37,7 +37,7 @@ public class RpcRequestMessageHandler extends SimpleChannelInboundHandler<RpcReq
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         RpcRequestMessage message = new RpcRequestMessage(
                 1,
-                "cn.itcast.server.service.HelloService",
+                "org.bluebridge._20_rpc.server.service.HelloService",
                 "sayHello",
                 String.class,
                 new Class[]{String.class},

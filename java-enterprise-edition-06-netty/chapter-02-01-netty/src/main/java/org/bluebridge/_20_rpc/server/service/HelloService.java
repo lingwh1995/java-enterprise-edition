@@ -1,4 +1,4 @@
-package org.bluebridge._19_group_chat.server.service;
+package org.bluebridge._20_rpc.server.service;
 
 public interface HelloService {
 

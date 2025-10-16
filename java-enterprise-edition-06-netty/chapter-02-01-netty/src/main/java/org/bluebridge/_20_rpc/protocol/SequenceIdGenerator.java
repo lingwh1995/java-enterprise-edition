@@ -1,4 +1,4 @@
-package org.bluebridge._19_group_chat.protocol;
+package org.bluebridge._20_rpc.protocol;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

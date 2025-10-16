@@ -1,15 +1,9 @@
-package org.bluebridge._19_group_chat.client;
+package org.bluebridge._20_rpc.client;
 
-import io.netty.channel.ChannelPipeline;
-import org.bluebridge._19_group_chat.client.handler.RpcResponseMessageHandler;
-import org.bluebridge._19_group_chat.message.RpcRequestMessage;
-import org.bluebridge._19_group_chat.protocol.MessageCodecSharable;
-import org.bluebridge._19_group_chat.protocol.ProcotolFrameDecoder;
-import org.bluebridge._19_group_chat.protocol.SequenceIdGenerator;
-import org.bluebridge._19_group_chat.server.service.HelloService;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -17,12 +11,20 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.util.concurrent.DefaultPromise;
 import lombok.extern.slf4j.Slf4j;
+import org.bluebridge._20_rpc.client.handler.RpcResponseMessageHandler;
+import org.bluebridge._20_rpc.message.RpcRequestMessage;
+import org.bluebridge._20_rpc.protocol.MessageCodecSharable;
+import org.bluebridge._20_rpc.protocol.ProcotolFrameDecoder;
+import org.bluebridge._20_rpc.protocol.SequenceIdGenerator;
+import org.bluebridge._20_rpc.server.service.HelloService;
 
 import java.lang.reflect.Proxy;
 
 @Slf4j
 public class RpcClientManager {
 
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 8080;
 
     public static void main(String[] args) {
         HelloService service = getProxyService(HelloService.class);
@@ -35,7 +37,7 @@ public class RpcClientManager {
     public static <T> T getProxyService(Class<T> serviceClass) {
         ClassLoader loader = serviceClass.getClassLoader();
         Class<?>[] interfaces = new Class[]{serviceClass};
-        //                                                            sayHello  "张三"
+        // sayHello  "张三"
         Object o = Proxy.newProxyInstance(loader, interfaces, (proxy, method, args) -> {
             // 1. 将方法调用转换为 消息对象
             int sequenceId = SequenceIdGenerator.nextId();
@@ -108,7 +110,7 @@ public class RpcClientManager {
             }
         });
         try {
-            channel = bootstrap.connect("localhost", 8080).sync().channel();
+            channel = bootstrap.connect(HOST, PORT).sync().channel();
             channel.closeFuture().addListener(future -> {
                 group.shutdownGracefully();
             });

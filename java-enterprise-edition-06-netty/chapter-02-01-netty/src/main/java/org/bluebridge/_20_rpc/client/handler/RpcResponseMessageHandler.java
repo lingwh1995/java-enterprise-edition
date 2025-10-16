@@ -1,11 +1,11 @@
-package org.bluebridge._19_group_chat.client.handler;
+package org.bluebridge._20_rpc.client.handler;
 
-import org.bluebridge._19_group_chat.message.RpcResponseMessage;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.concurrent.Promise;
 import lombok.extern.slf4j.Slf4j;
+import org.bluebridge._20_rpc.message.RpcResponseMessage;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,7 +19,7 @@ public class RpcResponseMessageHandler extends SimpleChannelInboundHandler<RpcRe
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, RpcResponseMessage msg) throws Exception {
-        log.debug("{}", msg);
+        log.info("{}", msg);
         // 拿到空的 promise
         Promise<Object> promise = PROMISES.remove(msg.getSequenceId());
         if (promise != null) {

@@ -1,11 +1,11 @@
-package org.bluebridge._19_group_chat.protocol;
+package org.bluebridge._20_rpc.protocol;
 
-import org.bluebridge._19_group_chat.message.Message;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageCodec;
 import lombok.extern.slf4j.Slf4j;
+import org.bluebridge._20_rpc.message.Message;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

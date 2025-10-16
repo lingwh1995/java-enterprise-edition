@@ -37,7 +37,7 @@ public class EventLoopGroupTest {
         // 3.执行普通任务
         group.next().submit(() -> log.info("这是个普通任务......"));
 
-        // 4.执行定时任务，可以用于实现keepalive这样的心跳功能
+        // 4.执行定时任务，可以用于实现keepalive这样的心跳包功能
         group.next().scheduleAtFixedRate(() -> {
             log.info("这是个定时任务......");
         },3,2000, TimeUnit.MILLISECONDS); // 延迟3秒，每2秒执行一次
