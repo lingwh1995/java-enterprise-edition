@@ -36,9 +36,13 @@ public class EventLoopGroupMultipleServer {
     private static final int PORT = 8080;
 
     public static void main(String[] args) throws InterruptedException {
+        // 主线程池boss：用于接受客户端的请求链接，不做任何处理
+        NioEventLoopGroup boss = new NioEventLoopGroup(1);
+        // 从线程池worker：主线程池会把任务交给它，让其做任务
+        NioEventLoopGroup worker = new NioEventLoopGroup(2);
         new ServerBootstrap()
-            // 服务器端一个boss线程，两个worker线程
-            .group(new NioEventLoopGroup(1), new NioEventLoopGroup(2))
+            // 设置主从线程组
+            .group(boss, worker)
             .channel(NioServerSocketChannel.class)
             .childHandler(new ChannelInitializer<NioSocketChannel>() {
                 @Override

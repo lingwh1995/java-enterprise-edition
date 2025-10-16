@@ -7,6 +7,8 @@ import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -28,6 +30,7 @@ public class NettyClient {
                 @Override
                 protected void initChannel(NioSocketChannel ch) {
                     ChannelPipeline pipeline = ch.pipeline();
+                    pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
                     // 内部使用CharBuffer.wrap(msg)
                     pipeline.addLast(new StringEncoder());
                 }
