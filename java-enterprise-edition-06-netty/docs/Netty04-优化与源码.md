@@ -666,7 +666,7 @@ public class ServicesFactory {
 
 ```
 serializer.algorithm=Json
-cn.itcast.server.service.HelloService=cn.itcast.server.service.HelloServiceImpl
+service.server.org.bluebridge._19_group_chat.HelloService=service.server.org.bluebridge._19_group_chat.HelloServiceImpl
 ```
 
 
@@ -738,7 +738,7 @@ public class RpcClient {
 
             ChannelFuture future = channel.writeAndFlush(new RpcRequestMessage(
                     1,
-                    "cn.itcast.server.service.HelloService",
+                    "service.server.org.bluebridge._19_group_chat.HelloService",
                     "sayHello",
                     String.class,
                     new Class[]{String.class},
