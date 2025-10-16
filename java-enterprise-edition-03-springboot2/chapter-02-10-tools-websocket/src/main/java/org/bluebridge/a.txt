@@ -1,0 +1,60 @@
+@Configuration
+@EnableWebSocket
+public class WebSocketConfig implements WebSocketConfigurer {
+
+    @Override
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry.addHandler(new MyWebSocketHandler(), "/websocket")
+                .setAllowedOrigins("*");
+    }
+}
+
+
+
+@Component
+public class MyWebSocketHandler extends TextWebSocketHandler {
+
+    private static final Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
+
+    @Override
+    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+        sessions.put(session.getId(), session);
+        System.out.println("连接建立: " + session.getId());
+    }
+
+    @Override
+    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+        String payload = message.getPayload();
+        System.out.println("收到消息: " + payload);
+        // 回显消息
+        session.sendMessage(new TextMessage("服务器收到: " + payload));
+    }
+
+    @Override
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        sessions.remove(session.getId());
+        System.out.println("连接关闭: " + session.getId());
+    }
+}
+
+
+
+const socket = new WebSocket('ws://localhost:8080/websocket/user123');
+
+socket.onopen = function(event) {
+    console.log('连接已建立');
+};
+
+socket.onmessage = function(event) {
+    console.log('收到消息:', event.data);
+};
+
+socket.onclose = function(event) {
+    console.log('连接已关闭');
+};
+
+// 发送消息
+function sendMessage() {
+    const message = document.getElementById('message').value;
+    socket.send(message);
+}

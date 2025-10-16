@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>websocket</title>
+    <!-- 引入vue -->
+    <script type="text/javascript" src="./vue.js"></script>
+    <!-- 引入element-ui -->
+    <link rel="stylesheet" href="./index.css">
+    <script src="./index.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <div class="app-container home">
+        <el-row :gutter="20">
+            <el-col :sm="24" :lg="24">
+                <h1>WebSocket测试</h1>
+            </el-col>
+        </el-row>
+        <el-row :gutter="20">
+            <el-col :sm="24" :lg="24">
+                <div>
+                    <el-input type="text" v-model="url" style="width: 15%" size="small"></el-input>
+                    <br/>
+                    <br/>
+                    <el-button @click="connect" type="primary" size="small">连接</el-button>
+                    <el-button @click="disconnect" type="danger" size="small">断开</el-button>
+                    <el-button @click="resetForm" type="success" size="small">重置</el-button>
+                    <br />
+                    <br />
+                    <el-input type="textarea" v-model="message" :rows="9"></el-input>
+                    <br />
+                    <br />
+                    <el-button type="success" @click="send">发送消息</el-button>
+                    <br />
+                    <br />
+                    返回内容
+                    <el-input type="textarea" v-model="text_content" :rows="9"></el-input>
+                    <br />
+                    <br />
+                </div>
+            </el-col>
+        </el-row>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //创建vue实例
+    //特别注意: 一个vue实例只能对应一个容器
+    const vm = new Vue({
+        //el:用于指定当前vue容器用于操作哪个容器，值通常为css选择器字符串
+        //或者写成 el:document.getElementById("#app")
+        el: '#app',
+        //data中用于存储数据，存储的数据用于el所操作的容器使用
+        data() {
+            return {
+                url: "ws://127.0.0.1:8080/websocket",
+                message: "",
+                text_content: "",
+                ws: null,
+            };
+        },
+        methods: {
+            connect() {
+                if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+                    this.text_content += "WebSocket 已经处于连接状态！\n"
+                    return
+                }
+                const wsUri = this.url
+                try {
+                    this.ws = new WebSocket(wsUri)
+                    const self = this
+
+                    this.ws.onopen = function (event) {
+                        self.text_content += "WebSocket 连接已建立。\n"
+                    }
+
+                    this.ws.onerror = function (error) {
+                        self.text_content += "WebSocket 发生错误：" + error + "\n"
+                    }
+
+                    this.ws.onmessage = function (event) {
+                        self.text_content += "收到消息：" + event.data + "\n"
+                    }
+
+                    this.ws.onclose = function (event) {
+                        self.text_content += "WebSocket 连接已关闭。\n"
+                        self.ws = null;
+                    }
+                } catch (e) {
+                    this.text_content += "无法创建 WebSocket 连接：" + e.message + "\n"
+                }
+            },
+            disconnect() {
+                if (this.ws) {
+                    this.ws.close();
+                    this.ws = null;
+                }
+            },
+            send() {
+                if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
+                    alert("尚未连接到服务器，请先点击“连接”按钮");
+                    return;
+                }
+
+                if (this.message.trim() === "") {
+                    alert("请输入要发送的消息内容");
+                    return;
+                }
+
+                this.ws.send(this.message);
+                this.text_content += "发送消息：" + this.message + "\n";
+                this.message = ""; // 清空输入框
+            },
+            resetForm() {
+                this.message = "";
+                this.text_content = "";
+            },
+        },
+    })
+</script>
+</body>
+
+</html>
