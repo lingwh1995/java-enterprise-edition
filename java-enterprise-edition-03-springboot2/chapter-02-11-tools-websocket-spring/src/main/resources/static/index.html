@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>websocket</title>
+    <!-- 引入vue -->
+    <script type="text/javascript" src="./assets/vue.js"></script>
+    <!-- 引入element-ui -->
+    <link rel="stylesheet" href="./assets/element-ui@2.6.2/theme-chalk/index.css">
+    <script src="./assets/element-ui@2.6.2/index.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <div class="app-container home">
+        <el-row :gutter="20">
+            <el-col :sm="24" :lg="24">
+                <h1>WebSocket测试</h1>
+            </el-col>
+        </el-row>
+        <el-row :gutter="20">
+            <el-col :sm="12" :lg="12">
+                WS服务地址 <el-input type="text" v-model="url" placeholder="请输入WS服务地址" style="width: 40%" size="small"></el-input>
+            </el-col>
+            <el-col :sm="12" :lg="12">
+                目标用户ID <el-input type="text" v-model="targetUserId" placeholder="请输入2字节目标用户ID，如 0002" style="width: 40%" size="small"></el-input>
+            </el-col>
+        </el-row>
+        <el-row :gutter="20">
+            <el-col :sm="24" :lg="24">
+                消息类型 <el-radio-group v-model="messageType" size="small">
+                <el-radio label="01">普通消息</el-radio>
+                <el-radio label="02">定向消息</el-radio>
+                <el-radio label="03">广播消息</el-radio>
+            </el-radio-group>
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col :sm="24" :lg="24">
+                <el-button @click="connect" type="primary" size="small">连接</el-button>
+                <el-button @click="disconnect" type="danger" size="small">断开</el-button>
+                <el-button @click="resetForm" type="success" size="small">重置</el-button>
+                <br />
+                <br />
+                <el-input type="textarea" v-model="message" :rows="9"></el-input>
+                <br />
+                <br />
+                <el-button type="success" @click="send" size="small">发送消息</el-button>
+                <br />
+                <br />
+                返回内容
+                <el-input type="textarea" v-model="text_content" :rows="9"></el-input>
+                <br />
+                <br />
+            </el-col>
+        </el-row>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //创建vue实例
+    const vm = new Vue({
+        el: '#app',
+        //data中用于存储数据，存储的数据用于el所操作的容器使用
+        data() {
+            return {
+                url: "ws://127.0.0.1:8080/websocket/0001",
+                targetUserId: "",
+                message: "",
+                text_content: "",
+                ws: null,
+                // 默认选择普通消息
+                messageType: "01"
+            };
+        },
+        methods: {
+            connect() {
+                if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+                    this.text_content += "WebSocket 已经处于连接状态！\n"
+                    return
+                }
+                const wsUri = this.url
+                try {
+                    // 支持websocket的浏览器
+                    this.ws = new WebSocket(wsUri)
+                    const self = this
+
+                    this.ws.onopen = function (event) {
+                        self.text_content += "WebSocket 连接已建立。\n"
+                    }
+
+                    this.ws.onerror = function (error) {
+                        self.text_content += "WebSocket 发生错误：" + error + "\n"
+                    }
+
+                    this.ws.onmessage = function (event) {
+                        self.text_content += "收到消息：" + event.data + "\n"
+                    }
+
+                    this.ws.onclose = function (event) {
+                        self.text_content += "WebSocket 连接已关闭。\n"
+                        self.ws = null;
+                    }
+                } catch (e) {
+                    this.text_content += "无法创建 WebSocket 连接：" + e.message + "\n"
+                }
+            },
+            disconnect() {
+                if (this.ws) {
+                    this.ws.close();
+                    this.ws = null;
+                }
+            },
+            send() {
+                if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
+                    alert('尚未连接到服务器，请先点击"连接"按钮')
+                    return;
+                }
+
+                if (this.message.trim() === "") {
+                    alert("请输入要发送的消息内容");
+                    return;
+                }
+
+                switch (this.messageType) {
+                    // 普通消息： 消息类型为00
+                    case "01":
+                        this.message = '01' + this.message
+                        this.text_content += "发送消息：" + this.message + "\n"
+                        break;
+                    // 定向消息： 消息类型为02
+                    case "02":
+                        this.message = '02' + this.targetUserId + this.message
+                        this.text_content += `发送定向消息给用户${this.targetUserId}：${this.message}\n`
+                        break;
+                    // 广播消息： 消息类型为03
+                    case "03":
+                        this.message = '03' + this.message
+                        this.text_content += "发送消息：" + this.message + "\n"
+                        break;
+                    default:
+                        break;
+                }
+                // 发送消息
+                this.ws.send(this.message)
+                // 清空输入框
+                this.message = "";
+            },
+            resetForm() {
+                this.message = "";
+                this.text_content = "";
+            },
+        },
+    })
+</script>
+</body>
+
+</html>

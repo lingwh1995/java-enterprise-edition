@@ -1,0 +1,1 @@
+不支持sockjs库，建议使用spring提供的websocket

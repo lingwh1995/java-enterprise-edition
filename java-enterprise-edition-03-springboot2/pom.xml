@@ -30,7 +30,9 @@
         <module>chapter-02-07-tools-jackson</module>
         <module>chapter-02-08-tools-springutils</module>
         <module>chapter-02-09-tools-stream-response</module>
-        <module>chapter-02-10-tools-websocket</module>
+        <module>chapter-02-10-tools-websocket-javax</module>
+        <module>chapter-02-11-tools-websocket-spring</module>
+        <module>chapter-02-12-tools-websocket-stomp</module>
         <module>chapter-04-05-tools-multiyply-datasource</module>
         <module>chapter-03-01-framework-mybatis-plus-helloworld</module>
         <module>chapter-03-02-framework-mybatis-plus-mpg-generator</module>
