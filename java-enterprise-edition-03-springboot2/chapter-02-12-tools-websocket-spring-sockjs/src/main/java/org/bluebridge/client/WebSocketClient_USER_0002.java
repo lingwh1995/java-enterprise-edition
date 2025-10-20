@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class WebSocketClient_USER_0002 {
 
     private static final String USER_ID = "0002";
-    private static final String WS_URL = "http://127.0.0.1:8080/websocket-spring-sockjs";
+    private static final String WS_URL = "http://localhost:8080/websocket-spring-sockjs";
     private static final String FULL_WS_URL = WS_URL + USER_ID;
 
     /**
