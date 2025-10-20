@@ -76,7 +76,7 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
                 for (Map.Entry<String, WebSocketSession> entry : ONLINE_SESSION_ID_SESSION_POOL.entrySet()) {
                     WebSocketSession targetSession = entry.getValue();
                     if (targetSession.isOpen()) {
-                        session.sendMessage(new TextMessage("[广播消息 " + userId + " => ]: " + message));
+                        targetSession.sendMessage(new TextMessage("[广播消息 " + userId + " => ]: " + payload));
                     }
                 }
                 break;

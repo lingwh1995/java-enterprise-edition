@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 /**
  * @author lingwh
- * @desc 客户端端点3
+ * @desc WebSocket客户端端点3
  * @date 2025/10/17 16:42
  */
 @Slf4j

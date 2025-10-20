@@ -11,6 +11,12 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * @author lingwh
+ * @desc WebSocket服务端端点
+ * @date 2025/10/16 18:30
+ */
+
+/**
  * WebSocket简介
  *    WebSocket 是一种在单个TCP连接上进行全双工通信的协议。WebSocket使得客户端和服务器之间的数据交换变得更加简单，允许服务端主动向客户端
  *    推送数据。在WebSocket API中，浏览器和服务器只需要完成一次握手，两者之间就直接可以创建持久性的连接，并进行双向数据传输。
@@ -35,12 +41,9 @@ import java.util.concurrent.ConcurrentHashMap;
  *    AsyncRemote: 用于异步发送消息
  */
 
-/**
- * 服务端端点
- */
 @Slf4j
 @Component
-@ServerEndpoint("/websocket/{userId}")
+@ServerEndpoint("/websocket-javax/{userId}")
 public class WebSocketServer {
 
     // USER_ID和SESSION的映射

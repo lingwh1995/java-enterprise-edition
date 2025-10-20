@@ -17,6 +17,7 @@ import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 import java.net.URI;
 import java.security.Principal;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 @Slf4j
 @Configuration
@@ -51,21 +52,6 @@ public class StompWebSocketConfig implements WebSocketMessageBrokerConfigurer {
     }
 
     /**
-     * sockjs版
-     * @param registry
-     */
-    /*
-    @Override
-    public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/websocket/0001")
-            // 添加自定义握手拦截器
-            .addInterceptors(paramsInterceptor())
-            .setAllowedOriginPatterns("http://*:*")
-            .withSockJS();
-    }
-    */
-
-    /**
      * 自定义握手拦截器，这里用来处理请求头信息
      * @return
      */
@@ -93,7 +79,11 @@ public class StompWebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 log.info("完整URL：{}，协议：{}，主机名：{}，端口号：{}，路径：{}，查询参数：{}",
                         url, scheme, host, port, path, query);
                 String[] urlSplit = url.split("/");
-                String userId = urlSplit[urlSplit.length - 1];
+                int userIdIndex = IntStream.range(0, urlSplit.length)
+                        .filter(i -> urlSplit[i].equals("websocket-stomp"))
+                        .findFirst()
+                        .getAsInt();
+                String userId = urlSplit[userIdIndex + 1];
                 attributes.put("userId", userId);
                 return true;
             }

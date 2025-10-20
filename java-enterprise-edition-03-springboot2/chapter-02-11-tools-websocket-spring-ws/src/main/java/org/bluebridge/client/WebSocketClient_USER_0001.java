@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 /**
  * @author lingwh
- * @desc 客户端端点1
+ * @desc WebSocket客户端端点1
  * @date 2025/10/17 16:42
  */
 @Slf4j
@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class WebSocketClient_USER_0001 {
 
     private static final String USER_ID = "0001";
-    private static final String WS_URL = "ws://localhost:8080/websocket/";
+    private static final String WS_URL = "ws://localhost:8080/websocket-spring-ws/";
     private static final String FULL_WS_URL = WS_URL + USER_ID;
 
     /**

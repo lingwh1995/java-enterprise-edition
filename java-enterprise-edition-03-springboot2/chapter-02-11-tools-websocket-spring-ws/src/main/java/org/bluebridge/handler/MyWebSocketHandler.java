@@ -10,6 +10,12 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * @author lingwh
+ * @desc WebSocket处理器
+ * @date 2025/10/20 14:26
+ */
+
 @Slf4j
 @Component
 public class MyWebSocketHandler extends TextWebSocketHandler {
@@ -76,7 +82,7 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
                 for (Map.Entry<String, WebSocketSession> entry : ONLINE_SESSION_ID_SESSION_POOL.entrySet()) {
                     WebSocketSession targetSession = entry.getValue();
                     if (targetSession.isOpen()) {
-                        session.sendMessage(new TextMessage("[广播消息 " + userId + " => ]: " + message));
+                        targetSession.sendMessage(new TextMessage("[广播消息 " + userId + " => ]: " + payload));
                     }
                 }
                 break;

@@ -1,3 +1,4 @@
-1.基于spring+sockjs提供的websocket
+1.基于spring提供的websocket + sockjs
 2.前端页面访问地址
-    http://localhost:8080/
+    sockjs版（需要先将application.yml中enable-sockjs 配置为 true）
+        http://localhost:8080

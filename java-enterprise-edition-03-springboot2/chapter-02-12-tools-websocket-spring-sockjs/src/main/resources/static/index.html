@@ -10,8 +10,8 @@
     <!-- 引入element-ui -->
     <link rel="stylesheet" href="./assets/element-ui@2.6.2/theme-chalk/index.css">
     <script src="./assets/element-ui@2.6.2/index.js"></script>
-    <!-- 引入stomp.js -->
-    <script type="text/javascript" src="./assets/stomp.min.js"></script>
+    <!-- 引入sockjs.min.js，让不支持WebSocket的浏览器也能使用websocket协议通信 -->
+    <script type="text/javascript" src="./assets/sockjs.min.js"></script>
 </head>
 
 <body>
@@ -65,10 +65,9 @@
     //创建vue实例
     const vm = new Vue({
         el: '#app',
-        //data中用于存储数据，存储的数据用于el所操作的容器使用
         data() {
             return {
-                url: "http://127.0.0.1:8080/websocket/0001",
+                url: "http://127.0.0.1:8080/websocket-spring-sockjs/0001",
                 targetUserId: "",
                 message: "",
                 text_content: "",
@@ -78,58 +77,33 @@
             };
         },
         methods: {
-            connect(options) {
+            connect() {
                 if (this.ws && this.ws.readyState === WebSocket.OPEN) {
                     this.text_content += "WebSocket 已经处于连接状态！\n"
                     return
                 }
                 const wsUri = this.url
                 try {
-                    // 支持websocket的浏览器
-                    const socket = new WebSocket(wsUri)
                     // 不支持websocket的浏览器
-                    const socket = new SockJS(wsUri)
-                    this.ws = Stomp.over(socket);
-                    // stompClient
+                    this.ws = new SockJS(wsUri)
                     const self = this
 
-                    const headers = {};
+                    this.ws.onopen = function (event) {
+                        self.text_content += "WebSocket 连接已建立。\n"
+                    }
 
-                    this.ws.connect(headers, frame => {
-                        console.log('Connected: ' + frame);
-                        // 订阅普通消息
-                        self.ws.subscribe('/topic/original', (message) => {
-                            console.log('订阅到的普通消息: ' + message.body);
-                        })
-                        // 订阅定向消息
-                        self.ws.subscribe('/topic/private', (message) => {
-                            console.log('订阅到的定向消息: ' + message.body);
-                        })
-                        // 订阅广播消息
-                        self.ws.subscribe('/topic/broadcast', (message) => {
-                            console.log('订阅到的广播消息: ' + message.body);
-                        },error => {
-                            console.error('连接失败: ' + error);
-                            self.text_content += "连接失败：" + error + "\n";
-                        })
-                    })
+                    this.ws.onerror = function (error) {
+                        self.text_content += "WebSocket 发生错误：" + error + "\n"
+                    }
 
-                    // this.ws.onopen = function (event) {
-                    //     self.text_content += "WebSocket 连接已建立。\n"
-                    // }
-                    //
-                    // this.ws.onerror = function (error) {
-                    //     self.text_content += "WebSocket 发生错误：" + error + "\n"
-                    // }
-                    //
-                    // this.ws.onmessage = function (event) {
-                    //     self.text_content += "收到消息：" + event.data + "\n"
-                    // }
-                    //
-                    // this.ws.onclose = function (event) {
-                    //     self.text_content += "WebSocket 连接已关闭。\n"
-                    //     self.ws = null;
-                    // }
+                    this.ws.onmessage = function (event) {
+                        self.text_content += "收到消息：" + event.data + "\n"
+                    }
+
+                    this.ws.onclose = function (event) {
+                        self.text_content += "WebSocket 连接已关闭。\n"
+                        self.ws = null;
+                    }
                 } catch (e) {
                     this.text_content += "无法创建 WebSocket 连接：" + e.message + "\n"
                 }
@@ -141,8 +115,7 @@
                 }
             },
             send() {
-                // 检查是否已经连接
-                if (!this.ws) {
+                if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
                     alert('尚未连接到服务器，请先点击"连接"按钮')
                     return;
                 }
@@ -157,23 +130,21 @@
                     case "01":
                         this.message = '01' + this.message
                         this.text_content += "发送消息：" + this.message + "\n"
-                        // 发送普通消息
-                        this.ws.send("/websocket-stomp/chat/ordinary", {}, this.message)
-                        break
+                        break;
                     // 定向消息： 消息类型为02
                     case "02":
+                        if(this.targetUserId.trim() === ""){
+                            alert("请输入目标用户ID");
+                            return;
+                        }
                         this.message = '02' + this.targetUserId + this.message
                         this.text_content += `发送定向消息给用户${this.targetUserId}：${this.message}\n`
-                        // 发送定向消息
-                        this.ws.send("/websocket-stomp/chat/private", {}, this.message)
-                        break
+                        break;
                     // 广播消息： 消息类型为03
                     case "03":
                         this.message = '03' + this.message
                         this.text_content += "发送消息：" + this.message + "\n"
-                        // 发送广播消息
-                        this.ws.send("/websocket-stomp/chat/broadcast", {}, this.message)
-                        break
+                        break;
                     default:
                         break;
                 }

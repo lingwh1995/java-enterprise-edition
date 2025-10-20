@@ -63,10 +63,9 @@
     //创建vue实例
     const vm = new Vue({
         el: '#app',
-        //data中用于存储数据，存储的数据用于el所操作的容器使用
         data() {
             return {
-                url: "ws://127.0.0.1:8080/websocket/0001",
+                url: "ws://127.0.0.1:8080/websocket-spring-ws/0001",
                 targetUserId: "",
                 message: "",
                 text_content: "",
@@ -132,6 +131,10 @@
                         break;
                     // 定向消息： 消息类型为02
                     case "02":
+                        if(this.targetUserId.trim() === ""){
+                            alert("请输入目标用户ID");
+                            return;
+                        }
                         this.message = '02' + this.targetUserId + this.message
                         this.text_content += `发送定向消息给用户${this.targetUserId}：${this.message}\n`
                         break;
