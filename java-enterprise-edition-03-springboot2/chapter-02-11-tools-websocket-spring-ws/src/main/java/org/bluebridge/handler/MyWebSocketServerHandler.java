@@ -10,9 +10,15 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * @author lingwh
+ * @desc WebSocket处理器
+ * @date 2025/10/20 14:26
+ */
+
 @Slf4j
 @Component
-public class MyWebSocketHandler extends TextWebSocketHandler {
+public class MyWebSocketServerHandler extends TextWebSocketHandler {
 
     // 添加SESSION_ID和USER_ID的映射
     private static final Map<String, String> ONLINE_SESSION_ID_USER_ID_POOL = new ConcurrentHashMap<>();
@@ -44,7 +50,7 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
                 log.info("用户 {} 发送普通消息: {}", userId, payload);
                 // 发送普通消息
                 if(session.isOpen()) {
-                    session.sendMessage(new TextMessage("[普通消息]: " + payload));
+                    session.sendMessage(new TextMessage("[普通消息]: " + payload + "来自服务器"));
                 }
                 break;
             case "02":
@@ -89,6 +95,17 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
         ONLINE_SESSION_ID_SESSION_POOL.remove(session.getId());
         log.info("用户 {} 连接关闭: {}", userId, session.getId());
         log.info("当前在线用户数: {}", getOnlineCount());
+    }
+
+    /**
+     * 发生错误时触发
+     * @param session
+     * @param exception
+     * @throws Exception
+     */
+    @Override
+    public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
+        log.info("用户 {} 错误: {}", ONLINE_SESSION_ID_USER_ID_POOL.get(session.getId()), exception.getMessage());
     }
 
     /**

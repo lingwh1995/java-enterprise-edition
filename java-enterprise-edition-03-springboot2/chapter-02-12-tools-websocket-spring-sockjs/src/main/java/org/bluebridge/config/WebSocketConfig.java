@@ -1,7 +1,7 @@
 package org.bluebridge.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.bluebridge.handler.MyWebSocketHandler;
+import org.bluebridge.handler.MyWebSocketServerHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.server.ServerHttpRequest;
@@ -35,7 +35,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         // 注册WebSocket处理器，允许跨域访问
-        WebSocketHandlerRegistration registration = registry.addHandler(new MyWebSocketHandler(),
+        WebSocketHandlerRegistration registration = registry.addHandler(new MyWebSocketServerHandler(),
                         webSocketProperties.getEndpointPathPrefix() + "/{userId}")
                 .addInterceptors(handshakeInterceptor())
                 .setAllowedOriginPatterns(webSocketProperties.getAllowedOrigins().toArray(new String[0]));

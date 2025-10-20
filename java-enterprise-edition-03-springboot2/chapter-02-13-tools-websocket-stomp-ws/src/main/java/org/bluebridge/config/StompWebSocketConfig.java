@@ -8,9 +8,12 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.WebSocketHandler;
+import org.springframework.web.socket.client.WebSocketClient;
+import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
+import org.springframework.web.socket.messaging.WebSocketStompClient;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
@@ -118,6 +121,22 @@ public class StompWebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 return principal;
             }
         };
+    }
+
+
+    @Configuration
+    public class WebSocketConfig {
+
+        @Bean
+        public WebSocketClient webSocketClient() {
+            return new StandardWebSocketClient();
+        }
+
+        @Bean
+        public WebSocketStompClient webSocketStompClient(WebSocketClient webSocketClient) {
+            return new WebSocketStompClient(webSocketClient);
+        }
+
     }
 
 }
