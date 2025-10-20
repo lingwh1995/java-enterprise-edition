@@ -8,21 +8,21 @@ import java.util.Scanner;
 
 /**
  * @author lingwh
- * @desc 客户端端点2
+ * @desc 客户端端点1
  * @date 2025/10/17 16:42
  */
 @Slf4j
 @ClientEndpoint
-public class WebSocketClient_USER_0002 {
+public class WebSocketClient_USER_0001 {
 
-    private static final String USER_ID = "0002";
+    private static final String USER_ID = "0001";
     private static final String WS_URL = "ws://localhost:8080/websocket/";
     private static final String FULL_WS_URL = WS_URL + USER_ID;
 
     /**
      * 测试数据
      *    普通消息  01Hello
-     *    定向消息  020003Hello => 发给 0003 用户
+     *    定向消息  020002Hello => 发给 0002 用户
      *    广播消息  03Hello
      * @param args
      * @throws Exception
@@ -30,7 +30,7 @@ public class WebSocketClient_USER_0002 {
     public static void main(String[] args) throws Exception {
         // 连接服务器（注意：实际运行需部署服务器到 8080 端口）
         WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-        Session session = container.connectToServer(WebSocketClient_USER_0002.class,
+        Session session = container.connectToServer(WebSocketClient_USER_0001.class,
                 new URI(FULL_WS_URL));
 
         // 从控制台输入消息并发送
@@ -47,6 +47,7 @@ public class WebSocketClient_USER_0002 {
         }
         scanner.close();
     }
+
 
     /**
      * 连接建立时触发

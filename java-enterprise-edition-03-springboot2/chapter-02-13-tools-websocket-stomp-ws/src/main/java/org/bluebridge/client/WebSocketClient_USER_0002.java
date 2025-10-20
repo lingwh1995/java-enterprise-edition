@@ -22,7 +22,7 @@ public class WebSocketClient_USER_0002 {
     /**
      * 测试数据
      *    普通消息  01Hello
-     *    定向消息  020003Hello => 发给 0003 用户
+     *    定向消息  020002Hello => 发给 0003 用户
      *    广播消息  03Hello
      * @param args
      * @throws Exception

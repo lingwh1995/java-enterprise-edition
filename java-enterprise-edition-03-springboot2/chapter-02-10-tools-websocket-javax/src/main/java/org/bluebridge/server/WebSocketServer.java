@@ -70,7 +70,7 @@ public class WebSocketServer {
                 log.info("用户 {} 发送定向消息 => {}，消息内容: {}", userId, targetUserId, message);
                 String messageContent = message.substring(6);
                 // 发送消息给目标用户
-                messageContent = "[定向消息 => " + targetUserId + "]: " + messageContent;
+                messageContent = "[定向消息 " + userId + " => " + targetUserId + "]: " + messageContent;
                 Session targetSession = ONLINE_USER_ID_SESSION_POOL.get(targetUserId);
                 if (targetSession != null && targetSession.isOpen()) {
                     targetSession.getBasicRemote().sendText(messageContent);
@@ -83,7 +83,7 @@ public class WebSocketServer {
                 for (Map.Entry<String, Session> entry : ONLINE_USER_ID_SESSION_POOL.entrySet()) {
                     targetSession = entry.getValue();
                     if (targetSession.isOpen()) {
-                        targetSession.getBasicRemote().sendText("[广播消息]: " + message);
+                        targetSession.getBasicRemote().sendText("[广播消息 " + userId + " => ]: " + message);
                     }
                 }
                 break;

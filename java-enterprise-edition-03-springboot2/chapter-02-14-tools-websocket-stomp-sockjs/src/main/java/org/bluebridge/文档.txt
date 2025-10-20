@@ -1,0 +1,25 @@
+WebSocket—STOMP详解(官方原版)
+https://blog.csdn.net/leesinbad/article/details/133993369?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-4-133993369-blog-89328336.235^v43^pc_blog_bottom_relevance_base9&spm=1001.2101.3001.4242.3&utm_relevant_index=7
+
+SpringBoot+WebSocket实现IM及时通讯的代码示例
+https://www.jb51.net/program/303214psv.htm
+
+WebSocket多人在线聊天室（SpringBoot+WebSocket）
+https://cloud.tencent.com/developer/article/1488423
+
+PostMan发送Websocket请求
+https://zhuanlan.zhihu.com/p/706033356
+https://zhuanlan.zhihu.com/p/706033089
+
+Spring Boot WebSocket方案终极指南：Netty与官方Starter对比与实践
+https://juejin.cn/post/7521721402527301641
+
+三分钟构建高性能 WebSocket 服务 | 超优雅的 SpringBoot 整合 Netty 方案
+https://cloud.tencent.com/developer/article/1370821
+
+Java Web心跳机制实现与实战代码解析
+https://blog.51cto.com/u_16213634/14250900
+
+websocket鉴权
+https://blog.csdn.net/m0_60259116/article/details/137680824
+https://blog.ning.moe/posts/springboot-websocket-springSecurity/
