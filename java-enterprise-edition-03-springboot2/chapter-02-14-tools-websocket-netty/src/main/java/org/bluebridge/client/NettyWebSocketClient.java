@@ -59,6 +59,13 @@ public class NettyWebSocketClient {
 
             Channel channel = bootstrap.connect(HOST, PORT).sync().channel();
 
+
+//            // 等待WebSocket握手完成
+//            channel.pipeline()
+//                    .get(WebSocketClientProtocolHandler.class)
+//                    .handshakeFuture()
+//                    .sync();
+
             // 发送消息
             channel.writeAndFlush(new TextWebSocketFrame("Hello Netty WebSocket!"));
 

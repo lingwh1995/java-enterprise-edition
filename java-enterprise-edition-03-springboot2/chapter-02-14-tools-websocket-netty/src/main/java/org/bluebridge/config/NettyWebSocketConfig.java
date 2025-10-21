@@ -50,7 +50,7 @@ public class NettyWebSocketConfig {
                     // 添加聚合器
                     pipeline.addLast(new HttpObjectAggregator(65536));
                     // 添加WebSocket支持
-                    pipeline.addLast(new WebSocketServerProtocolHandler("ws://localhost:8088/websocket"));
+                    pipeline.addLast(new WebSocketServerProtocolHandler("/websocket"));
                     // 添加自定义处理器
                     pipeline.addLast(nettyWebSocketServerHandler());
                 }
