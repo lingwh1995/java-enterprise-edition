@@ -39,3 +39,38 @@ https://blog.ning.moe/posts/springboot-websocket-springSecurity/
 //        }
 //
 //    }
+
+/**
+  * 抽时间研究一下  .setHeartbeatTime(10000);               // 心跳间隔
+  */
+@Configuration
+@EnableWebSocketMessageBroker
+public class WebSocketStompConfig implements WebSocketMessageBrokerConfigurer {
+    @Override
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
+        // 注册STOMP端点，客户端将使用这个端点连接到STOMP服务器
+        // 前端 const socket = new SockJS('/publicServer');
+        registry.addEndpoint("/publicServer")    //广播
+                .withSockJS()                           // 启用SockJS降级支持
+                .setHeartbeatTime(10000);               // 心跳间隔
+
+
+        registry.addEndpoint("/privateServer")  //点对点
+                .withSockJS()
+                .setHeartbeatTime(10000);
+    }
+
+    @Override
+    public void configureMessageBroker(MessageBrokerRegistry config) {
+        // 后端推送给前端路径前缀
+        // 后端@SendTo("/topic/public")
+        // 前端需要订阅stompClient.subscribe('/topic/public', onMessageReceived);
+        config.enableSimpleBroker("/topic", "/user");
+
+        // 前端发送消息给后端路径前缀
+        // 前端 stompClient.send("/app/addUser",{},JSON.stringify({sender: sid, type: 'JOIN'}));
+        // 后端默认会带上app前缀 @MessageMapping("/publicSendMessage")
+        config.setApplicationDestinationPrefixes("/app");
+    }
+
+}

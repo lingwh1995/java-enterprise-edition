@@ -4,21 +4,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.server.ServerHttpRequest;
-import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.StompWebSocketEndpointRegistration;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
-import org.springframework.web.socket.server.HandshakeInterceptor;
 import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
 import javax.annotation.Resource;
 import java.net.URI;
 import java.security.Principal;
 import java.util.Map;
-import java.util.stream.IntStream;
 
 /**
  * @author lingwh
@@ -45,15 +42,23 @@ public class StompWebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         /**
-         * 1.用户可以订阅来自以"/topic", "/user"为前缀的消息，广播式应配置一个/topic消息代理，点对点应配置一个/user消息代理
-         * 2.必须和controller中的@SendTo配置的地址前缀一样或者全匹配
-         * 3.客户端只可以订阅这两个前缀的主题
+         * 配置后端推送给前端路径前缀
+         *    1.用户可以订阅来自以"/topic", "/user"为前缀的消息，广播式应配置一个/topic消息代理，点对点应配置一个/user消息代理
+         *    2.必须和controller中的@SendTo配置的地址前缀一样或者全匹配
+         *    3.客户端只可以订阅这两个前缀的主题
          */
         config.enableSimpleBroker("/topic", "/user");
-        // 客户端发送过来的消息，需要以"/websocket-stomp"为前缀，再经过Broker转发给响应的Controller
+
+        /**
+         * 配置前端发送消息给后端路径前缀
+         *   客户端发送过来的消息，需要以"/websocket-stomp-ws"为前缀，再经过Broker转发给响应的Controller
+         */
         config.setApplicationDestinationPrefixes(webSocketProperties.getEndpointPathPrefix());
 
-        // 配置用户目的地前缀，点对点使用的订阅前缀（客户端订阅路径上会体现出来），不设置的话，默认也是/user/
+        /**
+         * 配置用户目的地前缀
+         *    点对点使用的订阅前缀（客户端订阅路径上会体现出来），不设置的话，默认也是/user/
+         */
         config.setUserDestinationPrefix("/user");
     }
 
