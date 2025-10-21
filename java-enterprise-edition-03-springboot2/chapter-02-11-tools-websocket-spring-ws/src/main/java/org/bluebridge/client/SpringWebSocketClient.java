@@ -13,6 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * @author lingwh
+ * @desc WebSocket客户端
+ * @date 2025/10/18 14:23
+ */
 @Slf4j
 public class SpringWebSocketClient {
 

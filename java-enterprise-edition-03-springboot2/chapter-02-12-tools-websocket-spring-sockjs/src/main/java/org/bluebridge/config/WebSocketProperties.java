@@ -10,9 +10,8 @@ import java.util.List;
 /**
  * @author lingwh
  * @desc WebSocket配置属性
- * @date 2025/10/20 14:26
+ * @date 2025/10/18 18:25
  */
-
 @Configuration
 @ConfigurationProperties(prefix = "spring.websocket")
 @Data

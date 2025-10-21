@@ -10,9 +10,8 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 /**
  * @author lingwh
  * @desc WebSocket处理器
- * @date 2025/10/20 14:26
+ * @date 2025/10/18 18:50
  */
-
 @Slf4j
 @Component
 public class MyWebSocketClientHandler extends TextWebSocketHandler {

@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import java.security.Principal;
 
 @Controller
-public class StompChatController {
+public class StompController {
 
     @Resource
     private SimpMessagingTemplate messagingTemplate;

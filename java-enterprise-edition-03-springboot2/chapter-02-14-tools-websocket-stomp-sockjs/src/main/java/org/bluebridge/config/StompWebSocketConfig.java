@@ -18,6 +18,12 @@ import java.net.URI;
 import java.security.Principal;
 import java.util.Map;
 
+/**
+ * 基于Stomp的WebSocket的开发两个重要注解
+ *    @MessageMapping("/chat/broadcast") // @MessageMapping 和 @RequestMapping 功能类似，处理来自客户端的消息。
+ *    @SendTo("/topic/broadcast") // 如果服务器接受到了消息，就会对订阅了 @SendTo 括号中的地址的客户端发送消息。
+ */
+
 @Slf4j
 @Configuration
 // 注解开启使用STOMP协议来传输基于代理(message broker)的消息,这时控制器支持使用@MessageMapping,就像使用@RequestMapping一样
@@ -26,7 +32,7 @@ public class StompWebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        // 用户可以订阅来自以"/topic", "/user"为前缀的消息，点对点应配置一个/user消息代理，广播式应配置一个/topic消息代理
+        // 用户可以订阅来自以"/topic", "/user"为前缀的消息，点对点应配置一个/user消息代理，广播式应配置一个/topic消息代理，必须和controller中的@SendTo配置的地址前缀一样或者全匹配
         config.enableSimpleBroker("/topic", "/user");
         // 客户端发送过来的消息，需要以"/websocket-stomp"为前缀，再经过Broker转发给响应的Controller
         config.setApplicationDestinationPrefixes("/websocket-stomp");

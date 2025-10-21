@@ -20,9 +20,8 @@ import java.util.Map;
 /**
  * @author lingwh
  * @desc WebSocket配置类
- * @date 2025/10/16 18:32
+ * @date 2025/10/18 18:32
  */
-
 @Slf4j
 @Configuration
 // 表示启用 WebSocket 消息代理

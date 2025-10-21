@@ -4,6 +4,11 @@ package org.bluebridge.client;
 import java.net.URI;
 import java.util.Scanner;
 
+/**
+ * @author lingwh
+ * @desc WebSocket客户端测试类2
+ * @date 2025/10/18 19:03
+ */
 public class SpringWebSocketClient_USER_0003_Test {
 
     private static final String USER_ID = "0003";
