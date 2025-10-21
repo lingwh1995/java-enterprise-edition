@@ -7,6 +7,8 @@ import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketClientProtocolHandler;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Scanner;
+
 /**
  * @author lingwh
  * @desc
@@ -29,8 +31,17 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<TextWebS
                     (WebSocketClientProtocolHandler.ClientHandshakeStateEvent) evt;
             if (handshakeEvent == WebSocketClientProtocolHandler.ClientHandshakeStateEvent.HANDSHAKE_COMPLETE) {
                 log.info("WebSocket握手完成，可以发送消息");
-                // 握手完成后发送消息
-                ctx.channel().writeAndFlush(new TextWebSocketFrame("Hello Netty WebSocket!"));
+                // 改为从终端中接收信息
+                Scanner scanner = new Scanner(System.in);
+                while (scanner.hasNextLine()) {
+                    System.out.print("请输入消息（输入 exit 退出）：\n");
+                    String message = scanner.nextLine();
+                    if ("exit".equals(message)) {
+                        break;
+                    }
+                    // 握手完成后发送消息
+                    ctx.channel().writeAndFlush(new TextWebSocketFrame(message));
+                }
             }
         }
         super.userEventTriggered(ctx, evt);

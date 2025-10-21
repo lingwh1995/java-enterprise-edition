@@ -10,7 +10,6 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.http.EmptyHttpHeaders;
 import io.netty.handler.codec.http.HttpClientCodec;
 import io.netty.handler.codec.http.HttpObjectAggregator;
-import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketClientHandshakerFactory;
 import io.netty.handler.codec.http.websocketx.WebSocketClientProtocolHandler;
 import io.netty.handler.codec.http.websocketx.WebSocketVersion;
@@ -58,16 +57,6 @@ public class NettyWebSocketClient {
                 });
 
             Channel channel = bootstrap.connect(HOST, PORT).sync().channel();
-
-
-//            // 等待WebSocket握手完成
-//            channel.pipeline()
-//                    .get(WebSocketClientProtocolHandler.class)
-//                    .handshakeFuture()
-//                    .sync();
-
-            // 发送消息
-            channel.writeAndFlush(new TextWebSocketFrame("Hello Netty WebSocket!"));
 
             // 等待连接关闭
             channel.closeFuture().sync();
