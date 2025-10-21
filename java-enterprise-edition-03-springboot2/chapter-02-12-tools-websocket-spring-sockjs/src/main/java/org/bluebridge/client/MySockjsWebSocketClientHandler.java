@@ -14,7 +14,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
  */
 @Slf4j
 @Component
-public class MyWebSocketClientHandler extends TextWebSocketHandler {
+public class MySockjsWebSocketClientHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {

@@ -10,6 +10,8 @@
     <!-- 引入element-ui -->
     <link rel="stylesheet" href="./assets/element-ui@2.6.2/theme-chalk/index.css">
     <script src="./assets/element-ui@2.6.2/index.js"></script>
+    <!-- 引入sockjs.js -->
+    <script type="text/javascript" src="./assets/sockjs.min.js"></script>
     <!-- 引入stomp.js -->
     <script type="text/javascript" src="./assets/stomp.min.js"></script>
 </head>
@@ -68,7 +70,7 @@
         //data中用于存储数据，存储的数据用于el所操作的容器使用
         data() {
             return {
-                url: "ws://localhost:8080/websocket/0001",
+                url: "http://localhost:8080/websocket-stomp-sockjs/0001",
                 targetUserId: "",
                 message: "",
                 text_content: "",
@@ -86,7 +88,7 @@
                 const wsUri = this.url
                 try {
                     // 支持websocket的浏览器
-                    const socket = new WebSocket(wsUri)
+                    const socket = new SockJS(wsUri)
                     this.ws = Stomp.over(socket);
                     const self = this
 
@@ -153,21 +155,21 @@
                         this.message = '01' + this.message
                         this.text_content += "发送普通消息：" + this.message + "\n"
                         // 发送普通消息
-                        this.ws.send("/websocket-stomp/chat/ordinary", {}, this.message)
+                        this.ws.send("/websocket-stomp-sockjs/chat/ordinary", {}, this.message)
                         break
                     // 定向消息： 消息类型为02
                     case "02":
                         this.message = '02' + this.targetUserId + this.message
                         this.text_content += `发送定向消息给用户${this.targetUserId}：${this.message}\n`
                         // 发送定向消息
-                        this.ws.send("/websocket-stomp/chat/private", {}, this.message)
+                        this.ws.send("/websocket-stomp-sockjs/chat/private", {}, this.message)
                         break
                     // 广播消息： 消息类型为03
                     case "03":
                         this.message = '03' + this.message
                         this.text_content += "发送广播消息：" + this.message + "\n"
                         // 发送广播消息
-                        this.ws.send("/websocket-stomp/chat/broadcast", {}, this.message)
+                        this.ws.send("/websocket-stomp-sockjs/chat/broadcast", {}, this.message)
                         break
                     default:
                         break;
@@ -179,7 +181,7 @@
                 this.message = "";
                 this.text_content = "";
             },
-        },
+        }
     })
 </script>
 </body>

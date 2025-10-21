@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 @Slf4j
 @AllArgsConstructor
-public class MyStompSessionHandler extends StompSessionHandlerAdapter {
+public class MyStompSockjsSessionHandler extends StompSessionHandlerAdapter {
 
     // 接收外部传递来的用户id
     private String userId;

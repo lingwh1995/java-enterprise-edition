@@ -1,4 +1,14 @@
 server:
   port: 8080
 
-debug: false
+# spring本身并不提供websocket相关配置，下面这些配置都是我们自定义的
+spring:
+  websocket:
+    # websocket端点路径前缀
+    endpoint-path-prefix: /websocket-stomp-sockjs
+    # 允许的跨域来源
+    allowed-origins:
+    #  - "*"
+      - "http://*:*"
+    # 是否启用sockjs
+    enable-sockjs: true

@@ -6,19 +6,19 @@ import java.util.Scanner;
 
 /**
  * @author lingwh
- * @desc WebSocket客户端测试类2
- * @date 2025/10/18 19:01
+ * @desc WebSocket客户端测试类1
+ * @date 2025/10/18 18:57
  */
-public class SpringWebSocketClient_USER_0002_Test {
+public class SpringSockjsWebSocketClient_USER_0001_Test {
 
-    private static final String USER_ID = "0002";
+    private static final String USER_ID = "0001";
     private static final String WS_URL = "http://localhost:8080/websocket-spring-sockjs/";
     private static final String FULL_WS_URL = WS_URL + USER_ID;
 
     /**
      * 测试数据
      *    普通消息  01Hello
-     *    定向消息  020003Hello => 发给 0003 用户
+     *    定向消息  020002Hello => 发给 0002 用户
      *    广播消息  03Hello
      * @param args
      * @throws Exception
@@ -28,7 +28,7 @@ public class SpringWebSocketClient_USER_0002_Test {
         URI webSocketUri = new URI(FULL_WS_URL);
 
         // 创建客户端并连接
-        SpringWebSocketClient springWebSocketClient = new SpringWebSocketClient(webSocketUri);
+        SpringSockjsWebSocketClient springWebSocketClient = new SpringSockjsWebSocketClient(webSocketUri);
 
         // 从控制台输入消息并发送
         Scanner scanner = new Scanner(System.in);

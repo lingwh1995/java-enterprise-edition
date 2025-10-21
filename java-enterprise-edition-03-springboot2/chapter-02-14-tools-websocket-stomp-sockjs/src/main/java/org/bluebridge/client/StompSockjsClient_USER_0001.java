@@ -1,44 +1,49 @@
 package org.bluebridge.client;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
+import org.springframework.messaging.converter.StringMessageConverter;
+import org.springframework.messaging.simp.stomp.*;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
+import org.springframework.web.socket.messaging.WebSocketStompClient;
 import org.springframework.web.socket.sockjs.client.RestTemplateXhrTransport;
 import org.springframework.web.socket.sockjs.client.SockJsClient;
 import org.springframework.web.socket.sockjs.client.Transport;
 import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
  * @author lingwh
- * @desc WebSocket客户端
- * @date 2025/10/18 18:54
+ * @desc Stomp版WebSocket客户端1
+ * @date 2025/10/21 11:10
  */
 @Slf4j
-public class SpringWebSocketClient {
+public class StompSockjsClient_USER_0001 {
 
-    private final WebSocketSession session;
+    private static final String USER_ID = "0001";
+    private static final String WS_URL = "http://localhost:8080";
+    private static final String ENDPOINT_PATH_PREFIX = "/websocket-stomp-sockjs";
+    private static final String BACKSLASH = "/";
+    private static final String FULL_WS_URL = WS_URL + ENDPOINT_PATH_PREFIX + BACKSLASH + USER_ID;
 
     /**
-     * 初始化客户端并连接服务端
-     * @param webSocketUri
-     * @throws ExecutionException
-     * @throws InterruptedException
+     * 测试数据
+     *    普通消息  01Hello
+     *    定向消息  020002Hello => 发给 0002 用户
+     *    广播消息  03Hello
+     * @param args
+     * @throws Exception
      */
-    public SpringWebSocketClient(URI webSocketUri) throws ExecutionException, InterruptedException {
+    public static void main(String[] args) {
         /**
          * 原生WebSocket客户端
          */
         /*
-        // 创建WebSocket客户端（基于标准JSR-356）
-        StandardWebSocketClient client = new StandardWebSocketClient();
-        // 连接服务端，指定消息处理器
-        this.session = client.doHandshake(new MyWebSocketClientHandler(), webSocketUri.toString()).get();
+        // 创建WebSocket客户端
+        StandardWebSocketClient webSocketClient = new StandardWebSocketClient();
+        // 创建WebSocket STOMP客户端
+        WebSocketStompClient webSocketStompClient = new WebSocketStompClient(webSocketClient);
         */
 
         /**
@@ -61,28 +66,19 @@ public class SpringWebSocketClient {
         }
         // 添加RestTemplateXHR传输（备选方式）
         transports.add(new RestTemplateXhrTransport());
-
         SockJsClient sockJsClient = new SockJsClient(transports);
-        this.session = sockJsClient.doHandshake(new MyWebSocketClientHandler(), webSocketUri.toString()).get();
-    }
+        // 创建 STOMP 客户端
+        WebSocketStompClient webSocketStompClient = new WebSocketStompClient(sockJsClient);
 
-    /**
-     * 发送文本消息
-     * @param message
-     * @throws Exception
-     */
-    public void sendMessage(String message) throws Exception {
-        if (session.isOpen()) {
-            session.sendMessage(new TextMessage(message));
-        }
-    }
+        // 添加消息转换器
+        webSocketStompClient.setMessageConverter(new StringMessageConverter());
 
-    /**
-     * 关闭连接
-     * @throws Exception
-     */
-    public void close() throws Exception {
-        session.close();
+        // 创建STOMP会话处理器
+        StompSessionHandler sessionHandler = new MyStompSockjsSessionHandler(USER_ID, ENDPOINT_PATH_PREFIX);
+        // 连接到STOMP端点
+        webSocketStompClient.connect(FULL_WS_URL, sessionHandler);
     }
 
 }
+
+

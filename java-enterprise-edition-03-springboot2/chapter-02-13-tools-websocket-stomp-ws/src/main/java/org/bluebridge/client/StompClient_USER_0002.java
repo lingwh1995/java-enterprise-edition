@@ -1,25 +1,18 @@
 package org.bluebridge.client;
 
 import org.springframework.messaging.converter.StringMessageConverter;
-import org.springframework.messaging.simp.stomp.*;
+import org.springframework.messaging.simp.stomp.StompSessionHandler;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.socket.messaging.WebSocketStompClient;
-import org.springframework.web.socket.sockjs.client.RestTemplateXhrTransport;
-import org.springframework.web.socket.sockjs.client.SockJsClient;
-import org.springframework.web.socket.sockjs.client.Transport;
-import org.springframework.web.socket.sockjs.client.WebSocketTransport;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author lingwh
- * @desc Stomp版WebSocket客户端1
- * @date 2025/10/21 11:10
+ * @desc Stomp版WebSocket客户端2
+ * @date 2025/10/21 11:13
  */
-public class StompClient_USER_0001 {
+public class StompClient_USER_0002 {
 
-    private static final String USER_ID = "0001";
+    private static final String USER_ID = "0002";
     private static final String WS_URL = "ws://localhost:8080";
     private static final String ENDPOINT_PATH_PREFIX = "/websocket-stomp-ws";
     private static final String BACKSLASH = "/";

@@ -23,3 +23,19 @@ https://blog.51cto.com/u_16213634/14250900
 websocket鉴权
 https://blog.csdn.net/m0_60259116/article/details/137680824
 https://blog.ning.moe/posts/springboot-websocket-springSecurity/
+
+
+//    @Configuration
+//    public class WebSocketConfig {
+//
+//        @Bean
+//        public WebSocketClient webSocketClient() {
+//            return new StandardWebSocketClient();
+//        }
+//
+//        @Bean
+//        public WebSocketStompClient webSocketStompClient(WebSocketClient webSocketClient) {
+//            return new WebSocketStompClient(webSocketClient);
+//        }
+//
+//    }

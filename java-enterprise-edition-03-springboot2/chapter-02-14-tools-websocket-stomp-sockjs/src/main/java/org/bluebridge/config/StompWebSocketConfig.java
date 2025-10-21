@@ -5,23 +5,32 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
-import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.socket.config.annotation.StompWebSocketEndpointRegistration;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
+import javax.annotation.Resource;
 import java.net.URI;
 import java.security.Principal;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 /**
- * 基于Stomp的WebSocket的开发两个重要注解
- *    @MessageMapping("/chat/broadcast") // @MessageMapping 和 @RequestMapping 功能类似，处理来自客户端的消息。
- *    @SendTo("/topic/broadcast") // 如果服务器接受到了消息，就会对订阅了 @SendTo 括号中的地址的客户端发送消息。
+ * @author lingwh
+ * @desc WebSocket配置类
+ * @date 2025/10/19 10:07
+ */
+
+/**
+ * STOMP WebSocket客户端特点
+ * 协议支持：STOMP是一个简单的文本消息协议，为WebSocket增加了语义层
+ * 消息路由：支持基于目的地（destination）的消息路由机制
+ * 订阅机制：客户端可以订阅特定的消息主题或队列
  */
 
 @Slf4j
@@ -30,12 +39,19 @@ import java.util.Map;
 @EnableWebSocketMessageBroker
 public class StompWebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
+    @Resource
+    private WebSocketProperties webSocketProperties;
+
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        // 用户可以订阅来自以"/topic", "/user"为前缀的消息，点对点应配置一个/user消息代理，广播式应配置一个/topic消息代理，必须和controller中的@SendTo配置的地址前缀一样或者全匹配
+        /**
+         * 1.用户可以订阅来自以"/topic", "/user"为前缀的消息，广播式应配置一个/topic消息代理，点对点应配置一个/user消息代理
+         * 2.必须和controller中的@SendTo配置的地址前缀一样或者全匹配
+         * 3.客户端只可以订阅这两个前缀的主题
+         */
         config.enableSimpleBroker("/topic", "/user");
         // 客户端发送过来的消息，需要以"/websocket-stomp"为前缀，再经过Broker转发给响应的Controller
-        config.setApplicationDestinationPrefixes("/websocket-stomp");
+        config.setApplicationDestinationPrefixes(webSocketProperties.getEndpointPathPrefix());
 
         // 配置用户目的地前缀，点对点使用的订阅前缀（客户端订阅路径上会体现出来），不设置的话，默认也是/user/
         config.setUserDestinationPrefix("/user");
@@ -47,69 +63,15 @@ public class StompWebSocketConfig implements WebSocketMessageBrokerConfigurer {
      */
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        //路径"/websocket/{userId}"被注册为STOMP端点，对外暴露，客户端通过该路径接入WebSocket服务
-        registry.addEndpoint("/websocket/{userId}")
-            // 添加默认握手拦截器
-            .setHandshakeHandler(defaultHandshakeHandler())
-            // 添加自定义握手拦截器
-            .addInterceptors(paramsInterceptor())
-            .setAllowedOriginPatterns("*");
-    }
-
-    /**
-     * sockjs版
-     * @param registry
-     */
-    /*
-    @Override
-    public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/websocket/0001")
-            // 添加自定义握手拦截器
-            .addInterceptors(paramsInterceptor())
-            .setAllowedOriginPatterns("http://*:*")
-            .withSockJS();
-    }
-    */
-
-    /**
-     * 自定义握手拦截器，这里用来处理请求头信息
-     * @return
-     */
-    @Bean
-    public HandshakeInterceptor paramsInterceptor() {
-        return new HandshakeInterceptor() {
-            @Override
-            public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response,
-                                           WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
-                // 获取完整的请求 URL（包含协议、域名、端口、路径、参数等）
-                URI requestUri = request.getURI();
-                // 获取请求url
-                String url = requestUri.toString();
-                // 可以进一步解析 URL 的各个部分：
-                // 协议（ws 或 wss）
-                String scheme = requestUri.getScheme();
-                // 域名/主机名（如 localhost）
-                String host = requestUri.getHost();
-                // 端口号（如 8080）
-                int port = requestUri.getPort();
-                // 路径（如 /ws）
-                String path = requestUri.getPath();
-                // 查询参数（如 userId=123）
-                String query = requestUri.getQuery();
-                log.info("完整URL：{}，协议：{}，主机名：{}，端口号：{}，路径：{}，查询参数：{}",
-                        url, scheme, host, port, path, query);
-                String[] urlSplit = url.split("/");
-                String userId = urlSplit[urlSplit.length - 1];
-                attributes.put("userId", userId);
-                return true;
-            }
-
-            @Override
-            public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response,
-                                       WebSocketHandler wsHandler, Exception exception) {
-                // 握手后操作（可选）
-            }
-        };
+        // 路径"/websocket/{userId}"被注册为STOMP端点，对外暴露，客户端通过该路径接入WebSocket服务
+        StompWebSocketEndpointRegistration registration = registry.addEndpoint(webSocketProperties.getEndpointPathPrefix() + "/{userId}")
+                // 添加默认握手拦截器
+                .setHandshakeHandler(defaultHandshakeHandler())
+                .setAllowedOriginPatterns(webSocketProperties.getAllowedOrigins().toArray(new String[0]));
+        if (webSocketProperties.isEnableSockjs()) {
+            // 添加SockJS支持
+            registration.withSockJS();
+        }
     }
 
     @Bean
@@ -123,8 +85,8 @@ public class StompWebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 // 获取请求url
                 String url = requestUri.toString();
                 // 获取 userId
-                String[] urlSplit = url.split("/");
-                String userId = urlSplit[urlSplit.length - 1];
+                int userIdStartIndex = url.indexOf(webSocketProperties.getEndpointPathPrefix()) + webSocketProperties.getEndpointPathPrefix().length() + 1;
+                String userId = url.substring(userIdStartIndex, userIdStartIndex + 4);
 
                 Principal principal = request.getPrincipal();
                 if (principal == null && userId != null) {

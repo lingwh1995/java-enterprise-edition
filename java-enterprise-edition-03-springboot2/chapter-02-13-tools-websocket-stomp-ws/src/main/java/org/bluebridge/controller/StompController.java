@@ -5,6 +5,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.server.WebSession;
 
 import javax.annotation.Resource;
 import java.security.Principal;
@@ -37,9 +38,12 @@ public class StompController {
         // 获取用户ID
         String userId = principal.getName();
         log.info("用户 {} 发送普通消息: {}", userId, message);
+        // 获取消息内容
+        String messageContent = message.substring(2);
         // 向给服务端发送消息的用户发送消息
-        messagingTemplate.convertAndSendToUser(userId, "/topic/ordinary", message);
+        messagingTemplate.convertAndSendToUser(userId, "/topic/ordinary", messageContent);
     }
+
     /**
      * 处理定向消息
      * @param message
@@ -71,7 +75,9 @@ public class StompController {
         // 获取用户ID
         String userId = principal.getName();
         log.info("用户 {} 发送广播消息: {}", userId, message);
-        return message.substring(2);
+        // 获取消息内容
+        String messageContent = message.substring(2);
+        return messageContent;
     }
 
 }
