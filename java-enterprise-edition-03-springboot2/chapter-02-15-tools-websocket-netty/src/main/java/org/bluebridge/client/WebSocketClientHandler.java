@@ -30,7 +30,7 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<TextWebS
             WebSocketClientProtocolHandler.ClientHandshakeStateEvent handshakeEvent =
                     (WebSocketClientProtocolHandler.ClientHandshakeStateEvent) evt;
             if (handshakeEvent == WebSocketClientProtocolHandler.ClientHandshakeStateEvent.HANDSHAKE_COMPLETE) {
-                log.info("WebSocket握手完成，可以发送消息");
+                log.info("WebSocket握手完成，可以发送消息，请输入消息（输入 exit 退出）");
                 // 改为从终端中接收信息
                 Scanner scanner = new Scanner(System.in);
                 while (scanner.hasNextLine()) {

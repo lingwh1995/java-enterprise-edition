@@ -34,6 +34,8 @@
         <module>chapter-02-11-tools-websocket-spring-ws</module>
         <module>chapter-02-12-tools-websocket-spring-sockjs</module>
         <module>chapter-02-13-tools-websocket-stomp-ws</module>
+        <module>chapter-02-14-tools-websocket-stomp-sockjs</module>
+        <module>chapter-02-15-tools-websocket-netty</module>
         <module>chapter-04-05-tools-multiyply-datasource</module>
         <module>chapter-03-01-framework-mybatis-plus-helloworld</module>
         <module>chapter-03-02-framework-mybatis-plus-mpg-generator</module>
@@ -55,8 +57,6 @@
         <module>chapter-04-04-production-multiyply-environment</module>
         <module>chapter-04-06-production-package-to-war</module>
         <module>chapter-05-01-demo-restfulcrud</module>
-        <module>chapter-02-14-tools-websocket-stomp-sockjs</module>
-        <module>chapter-02-14-tools-websocket-netty</module>
     </modules>
 
     <properties>
