@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 /**
  * @author lingwh
@@ -31,12 +32,14 @@ public class NettyWebSocketConfig {
     @Value("${netty.websocket.port}")
     private int port;
 
+    private NioEventLoopGroup bossGroup;
+    private NioEventLoopGroup workerGroup;
+
     @PostConstruct
     public void startNettyServer() {
         ServerBootstrap bootstrap = new ServerBootstrap();
-        NioEventLoopGroup bossGroup = new NioEventLoopGroup();
-        NioEventLoopGroup workerGroup = new NioEventLoopGroup();
-
+        bossGroup = new NioEventLoopGroup();
+        workerGroup = new NioEventLoopGroup();
         bootstrap.group(bossGroup, workerGroup)
             .channel(NioServerSocketChannel.class)
             .childHandler(new ChannelInitializer<SocketChannel>() {
@@ -67,6 +70,12 @@ public class NettyWebSocketConfig {
     @Bean
     public NettyWebSocketServerHandler nettyWebSocketServerHandler() {
         return new NettyWebSocketServerHandler();
+    }
+
+    @PreDestroy
+    public void stop() {
+        bossGroup.shutdownGracefully();
+        workerGroup.shutdownGracefully();
     }
 
 }
