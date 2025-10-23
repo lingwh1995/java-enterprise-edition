@@ -1,4 +1,21 @@
-1.Netty is an asynchronous event-driven network application framework,
+1.官方网站 https://netty.io/
+2.Netty is an asynchronous event-driven network application framework,
   for rapid development of maintainable high performance protocol servers & clients.
   Netty 是一个异步的、基于事件驱动的网络应用框架，用于快速开发可维护、高性能的网络服务器和客户端
-2.官方网站 https://netty.io/
+3.Netty的特点
+      高并发：Netty 是一款基于 NIO(Nonblocking IO，非阻塞IO)开发的网络通信框架，对比于 BIO(Blocking I/O，阻塞IO)，他的并发性能得到了很大提高。
+      传输快：Netty 的传输依赖于零拷贝特性，尽量减少不必要的内存拷贝，实现了更高效率的传输。
+      封装好：Netty 封装了 NIO 操作的很多细节，提供了易于使用调用接口。
+4.Netty的优势：
+      使用简单：封装了 NIO 的很多细节，使用更简单。
+      功能强大：预置了多种编解码功能，支持多种主流协议。
+      定制能力强：可以通过 ChannelHandler 对通信框架进行灵活地扩展。
+      性能高：通过与其他业界主流的 NIO 框架对比，Netty 的综合性能最优。
+      稳定：Netty 修复了已经发现的所有 NIO 的 bug，让开发人员可以专注于业务本身。
+      社区活跃：Netty 是活跃的开源项目，版本迭代周期短，bug 修复速度快。
+5.Netty高性能表现在哪些方面
+      IO 线程模型：同步非阻塞，用最少的资源做更多的事。
+      内存零拷贝：尽量减少不必要的内存拷贝，实现了更高效率的传输。
+      内存池设计：申请的内存可以重用，主要指直接内存。内部实现是用一颗二叉查找树管理内存分配情况。
+      串形化处理读写：避免使用锁带来的性能开销。
+      高性能序列化协议：支持 protobuf 等高性能序列化协议。
