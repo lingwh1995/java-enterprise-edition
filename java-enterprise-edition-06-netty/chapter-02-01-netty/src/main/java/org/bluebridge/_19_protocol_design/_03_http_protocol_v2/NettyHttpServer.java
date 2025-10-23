@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author lingwh
- * @desc 基于Netty的HTTP服务器
+ * @desc 基于 Netty 的 HTTP 服务器
  * @date 2025/10/15 14:42
  */
 @Slf4j
@@ -26,14 +26,14 @@ public class NettyHttpServer {
     private static final int PORT = 8080;
 
     public static void main(String[] args) {
-        // 创建自定义事件组，一个线程循环的处理事件，类似与nio的selector
+        // 创建自定义事件组，一个线程循环的处理事件，类似与 nio 的 selector
         EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
         try{
             //创建服务端主启动类
             ServerBootstrap bootstrap = new ServerBootstrap();
             bootstrap.group(eventLoopGroup)
                 .channel(NioServerSocketChannel.class)
-                 // 绑定IP和端口
+                 // 绑定 IP 和端口
                 .localAddress(HOST, PORT)
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override

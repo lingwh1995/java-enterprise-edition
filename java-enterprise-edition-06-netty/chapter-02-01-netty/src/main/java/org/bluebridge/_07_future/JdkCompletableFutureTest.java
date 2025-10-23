@@ -12,7 +12,7 @@ import java.util.concurrent.ExecutionException;
  * @date 2025/10/15 13:46
  */
 /**
- * CompletableFuture 是 Java 8 引入的异步编程工具类，实现了 Future 和 CompletionStage 接口，提供了更强大的异步编程能力。
+ * CompletableFuture 是 Java8 引入的异步编程工具类，实现了 Future 和 CompletionStage 接口，提供了更强大的异步编程能力。
  * 核心特性
  *    1.异步执行
  *      - 支持异步执行任务而不阻塞主线程
@@ -58,13 +58,13 @@ import java.util.concurrent.ExecutionException;
 public class JdkCompletableFutureTest {
 
     /**
-     * 测试CompletableFuture
+     * 测试 CompletableFuture
      * @throws ExecutionException
      * @throws InterruptedException
      */
     @Test
     public void testCompletableFutureBasic() throws ExecutionException, InterruptedException {
-        // 创建CompletableFuture
+        // 创建 CompletableFuture
         CompletableFuture<String> future = new CompletableFuture<>();
         // 异步完成任务
         CompletableFuture.runAsync(() -> {
@@ -77,7 +77,7 @@ public class JdkCompletableFutureTest {
     }
 
     /**
-     * 测试CompletableFuture链式调用
+     * 测试 CompletableFuture 链式调用
      * @throws ExecutionException
      * @throws InterruptedException
      */
@@ -92,7 +92,7 @@ public class JdkCompletableFutureTest {
     }
 
     /**
-     * 测试CompletableFuture异常处理
+     * 测试 CompletableFuture 异常处理
      */
     @Test
     public void testCompletableFutureExceptionDeal() {
@@ -112,7 +112,7 @@ public class JdkCompletableFutureTest {
      }
 
     /**
-     * 测试CompletableFuture supplyAsync()和runAsync()
+     * 测试 CompletableFuture supplyAsync() 和 runAsync()
      *    runAsync(): 无返回值，执行任务完成后，不返回任何结果
      *    supplyAsync(): 有返回值，执行任务完成后，返回一个结果
      * @throws ExecutionException

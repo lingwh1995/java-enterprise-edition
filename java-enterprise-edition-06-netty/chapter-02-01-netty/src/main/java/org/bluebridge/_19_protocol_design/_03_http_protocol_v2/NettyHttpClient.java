@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * @author lingwh
- * @desc 基于Netty的HTTP客户端
+ * @desc 基于 Netty 的 HTTP 客户端
  * @date 2025/10/15 14:51
  */
 @Slf4j
@@ -27,10 +27,10 @@ public class NettyHttpClient {
     private static final int PORT = 8080;
 
     public static void main(String[] args) {
-        // 创建自定义事件组，一个线程循环的处理事件，类似与nio的selector
+        // 创建自定义事件组，一个线程循环的处理事件，类似与 nio 的 selector
         EventLoopGroup eventLoopGroup = new NioEventLoopGroup();
         try{
-            //客户端只需要用bootStrap
+            //客户端只需要用 bootStrap
             Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(eventLoopGroup)
                 .channel(NioSocketChannel.class)
@@ -38,7 +38,7 @@ public class NettyHttpClient {
                 .option(ChannelOption.SO_KEEPALIVE,true)
                 // 和服务器不一样，这里只需要连接服务器地址即可
                 .remoteAddress(new InetSocketAddress(HOST, PORT))
-                // 和服务端不同，服务端使用的childHandler客户端只需要具体的handler即可
+                // 和服务端不同，服务端使用的childHandler客户端只需要具体的 handler 即可
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
@@ -51,7 +51,7 @@ public class NettyHttpClient {
                         // 设置响应编码器
                         pipeline.addLast(new HttpRequestEncoder());
                         */
-                        // 一次设置响应解码器和请求编码器，这里使用HttpClientCodec，它包含了HttpResponseDecoder和HttpRequestEncoder
+                        // 一次设置响应解码器和请求编码器，这里使用 HttpClientCodec ，它包含了 HttpResponseDecoder 和 HttpRequestEncoder
                         pipeline.addLast(new HttpClientCodec());
 
                         // 类似于 HttpServerCodec 的写法
@@ -70,11 +70,11 @@ public class NettyHttpClient {
                                 DefaultFullHttpRequest request =
                                         new DefaultFullHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.GET, uri.toASCIIString(),
                                                 Unpooled.wrappedBuffer(msg.getBytes("UTF-8")));
-                                // 构建http请求
+                                // 构建 http 请求
                                 request.headers().set(HttpHeaderNames.HOST, HOST);
                                 request.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.KEEP_ALIVE);
                                 request.headers().set(HttpHeaderNames.CONTENT_LENGTH, request.content().readableBytes());
-                                // 发送http请求
+                                // 发送 http 请求
                                 ctx.writeAndFlush(request);
                             }
 
@@ -87,9 +87,9 @@ public class NettyHttpClient {
                         });
                     }
                 });
-            //完成绑定,内部如果异步实现bind，因此需要阻塞拿到返回结果
+            //完成绑定,内部如果异步实现 bind ，因此需要阻塞拿到返回结果
             ChannelFuture future = bootstrap.connect().sync();
-            //关闭future时也需要阻塞，内部也采用的是异步操作
+            //关闭 future 时也需要阻塞，内部也采用的是异步操作
             future.channel().closeFuture().sync();
         }catch (Exception e){
             e.printStackTrace();

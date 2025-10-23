@@ -17,7 +17,7 @@ import java.util.concurrent.CompletableFuture;
 
 /**
  * @author lingwh
- * @desc 基于Netty的HTTP客户端
+ * @desc 基于 Netty 的 HTTP 客户端
  * @date 2025/10/15 10:38
  */
 @Slf4j
@@ -29,7 +29,7 @@ public class NettyHttpClient {
     public static void main(String[] args) {
         NettyHttpClient client = new NettyHttpClient();
 
-        // 发送get请求并获取响应内容
+        // 发送 get 请求并获取响应内容
         CompletableFuture<String> future = client.get(HOST, PORT, "/");
         future.thenAccept(response -> log.info("GET 请求响应内容: {}", response))
             .exceptionally(throwable -> {
@@ -38,7 +38,7 @@ public class NettyHttpClient {
             })
             .join();
 
-        // 发送post请求并获取响应内容
+        // 发送 post 请求并获取响应内容
         String json = "{\"msg\":\"hello netty\"}";
         future = client.post(HOST, PORT, "/", json);
         future.thenAccept(response -> log.info("POST 请求响应内容: {}", response))
@@ -74,7 +74,7 @@ public class NettyHttpClient {
                     // 设置响应编码器
                     pipeline.addLast(new HttpRequestEncoder());
                     */
-                    // 一次设置响应解码器和请求编码器，这里使用HttpClientCodec，它包含了HttpResponseDecoder和HttpRequestEncoder
+                    // 一次设置响应解码器和请求编码器，这里使用 HttpClientCodec ，它包含了 HttpResponseDecoder 和 HttpRequestEncoder
                     pipeline.addLast(new HttpClientCodec());
 
                     // 2.日志处理器

@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author lingwh
- * @desc 使用独立的EventLoopGroup处理耗时较长的任务 客户端
+ * @desc 使用独立的 EventLoopGroup 处理耗时较长的任务客户端
  * @date 2025/9/23 11:58
  */
 @Slf4j
@@ -28,7 +28,7 @@ public class EventLoopGroupEnhanceClient {
                 @Override
                 protected void initChannel(NioSocketChannel ch) {
                     ChannelPipeline pipeline = ch.pipeline();
-                    // 内部使用CharBuffer.wrap(msg)
+                    // 内部使用 CharBuffer.wrap(msg)
                     pipeline.addLast(new StringEncoder());
                 }
             })

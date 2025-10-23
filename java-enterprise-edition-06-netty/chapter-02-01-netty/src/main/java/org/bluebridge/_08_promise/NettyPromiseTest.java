@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author lingwh
- * @desc
+ * @desc Netty 提供的 Promise 测试
  * @date 2025/9/24 15:24
  */
 
@@ -32,7 +32,7 @@ public class NettyPromiseTest {
      * @throws ExecutionException
      */
     private static void syncGetResult() throws InterruptedException, ExecutionException {
-        // 主动创建Promise对象，Promise 相当于一个结果容器
+        // 主动创建 Promise 对象， Promise 相当于一个结果容器
         DefaultPromise<Integer> promise = new DefaultPromise<>(new NioEventLoopGroup().next());
         new Thread(() -> {
             try {
@@ -58,7 +58,7 @@ public class NettyPromiseTest {
      * @throws ExecutionException
      */
     private static void asyncGetResult() {
-        // 主动创建Promise对象，Promise 相当于一个结果容器
+        // 主动创建 Promise 对象， Promise 相当于一个结果容器
         DefaultPromise<Integer> promise = new DefaultPromise<>(new NioEventLoopGroup().next());
         // 设置回调，异步接收结果
         promise.addListener(future -> {

@@ -9,13 +9,13 @@ import org.junit.Test;
 
 
 /**
- * netty中的零拷贝
+ * netty 中的零拷贝
  */
 @Slf4j
 public class NettyZeroCopyTest {
 
     /**
-     * 将一个大的ByteBuf分片成小的ByteBuf
+     * 将一个大的 ByteBuf 分片成小的 ByteBuf
      *
      * 【零拷贝】的体现之一，对原始 ByteBuf 进行切片成多个 ByteBuf，切片后的 ByteBuf 并没有发生内存复制，还
      *  是使用原始 ByteBuf 的内存，切片后的 ByteBuf 维护独立的 read，write 指针
@@ -37,7 +37,7 @@ public class NettyZeroCopyTest {
     }
 
     /**
-     * 截取原ByteBuf的全部内容
+     * 截取原 ByteBuf 的全部内容
      *
      * 【零拷贝】的体现之一，就好比截取了原始 ByteBuf 所有内容，并且没有 max capacity 的限制，也是与原
      *  始 ByteBuf 使用同一块底层内存，只是读写指针是独立的
@@ -59,7 +59,7 @@ public class NettyZeroCopyTest {
     }
 
     /**
-     * 零拷贝方式合并多个ByteBuf
+     * 零拷贝方式合并多个 ByteBuf
      */
     @Test
     public void testByteBufComposite() {
@@ -72,7 +72,7 @@ public class NettyZeroCopyTest {
 
         /*
         ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer(20);
-        // 合并两个ByteBuf，writeBytes()会发生真正的数据复制，而不是零拷贝，下面方法就发生了两次数据复制
+        // 合并两个 ByteBuf ， writeBytes() 会发生真正的数据复制，而不是零拷贝，下面方法就发生了两次数据复制
         byteBuf.writeBytes(byteBuf1).writeBytes(byteBuf2);
         ByteBufUtil.debugAll(byteBuf);
         */

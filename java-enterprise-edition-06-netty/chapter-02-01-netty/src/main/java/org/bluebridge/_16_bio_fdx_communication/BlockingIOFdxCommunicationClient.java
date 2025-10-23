@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author lingwh
- * @desc 基于Java的BIO+多线程实现全双工通信 客户端
+ * @desc 基于 Java 的 BIO + 多线程实现全双工通信 客户端
  * @date 2025/10/10 11:01
  */
 @Slf4j

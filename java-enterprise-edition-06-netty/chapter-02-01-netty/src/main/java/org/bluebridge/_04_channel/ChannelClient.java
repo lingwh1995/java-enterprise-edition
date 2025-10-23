@@ -36,28 +36,28 @@ public class ChannelClient {
 
     public static void main(String[] args) throws InterruptedException {
         ChannelFuture channelFuture = new Bootstrap()
-                .group(new NioEventLoopGroup())
-                .channel(NioSocketChannel.class)
-                .handler(new ChannelInitializer<NioSocketChannel>() {
-                    @Override
-                    protected void initChannel(NioSocketChannel ch) {
-                        ChannelPipeline pipeline = ch.pipeline();
-                        // 内部使用CharBuffer.wrap(msg)
-                        pipeline.addLast(new StringEncoder());
-                    }
-                })
-                // 连接到服务器
-                // connect是一个异步非阻塞方法(即发起调用的main线程不阻塞，把建立连接的任务交给NioEventLoopGroup线程执行，这个过程大概需要一秒的时间),主线程并不知道连接是否建立好了
-                .connect(HOST, PORT);
+            .group(new NioEventLoopGroup())
+            .channel(NioSocketChannel.class)
+            .handler(new ChannelInitializer<NioSocketChannel>() {
+                @Override
+                protected void initChannel(NioSocketChannel ch) {
+                    ChannelPipeline pipeline = ch.pipeline();
+                    // 内部使用 CharBuffer.wrap(msg)
+                    pipeline.addLast(new StringEncoder());
+                }
+            })
+            // 连接到服务器
+            // connect 是一个异步非阻塞方法(即发起调用的main线程不阻塞，把建立连接的任务交给NioEventLoopGroup线程执行，这个过程大概需要一秒的时间),主线程并不知道连接是否建立好了
+            .connect(HOST, PORT);
         log.info("{}", channelFuture);
-        // 2.1 使用sync 同步处理结果
+        // 2.1 使用 sync 同步处理结果
         channelFuture
-                // 下面都是ChannelFuture的方法
-                .sync()// 这是一个阻塞方法，同来同步连接建立结果，一旦建立连接后才往下执行
-                .channel()// 获取当前Channel
-                .writeAndFlush("Channel测试......");// 使用这个channel发送消息
+            // 下面都是 ChannelFuture 的方法
+            .sync()// 这是一个阻塞方法，同来同步连接建立结果，一旦建立连接后才往下执行
+            .channel()// 获取当前 Channel
+            .writeAndFlush("Channel测试......");// 使用这个 channel 发送消息
 
-        // 2.2 使用addListener(回调对象)方法异步处理结果
+        // 2.2 使用 addListener(回调对象) 方法异步处理结果
         /*
         channelFuture.addListener(new ChannelFutureListener() {
             // 建立连接好后，会调用这个方法

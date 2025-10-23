@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author lingwh
- * @desc Netty自带的Future测试，提供了更强大的功能，可以实时取到运行状态
+ * @desc Netty 自带的 Future 测试，提供了更强大的功能，可以实时取到运行状态
  * @date 2025/9/23 18:13
  */
 
@@ -21,9 +21,9 @@ import java.util.concurrent.TimeUnit;
 public class NettyFutureTest {
 
     public static void main(String[] args) throws InterruptedException {
-        NioEventLoopGroup group = new NioEventLoopGroup();// 会有多个 NioEventLoop (executor)
-
-        // 拿到一个EventLoop
+        // 会有多个 NioEventLoop (executor)
+        NioEventLoopGroup group = new NioEventLoopGroup();
+        // 拿到一个 EventLoop
         EventLoop eventLoop = group.next();
 
         Future<Integer> future = eventLoop.submit(() -> {

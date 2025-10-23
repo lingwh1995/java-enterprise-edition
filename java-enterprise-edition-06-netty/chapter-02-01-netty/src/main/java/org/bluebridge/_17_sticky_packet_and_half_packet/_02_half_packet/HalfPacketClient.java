@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author lingwh
- * @desc Netty半包测试 客户端
+ * @desc Netty 半包测试 客户端
  * @date 2025/10/11 10:43
  */
 @Slf4j

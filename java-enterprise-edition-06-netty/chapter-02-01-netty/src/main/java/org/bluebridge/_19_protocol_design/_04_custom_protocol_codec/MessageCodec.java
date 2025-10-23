@@ -2,7 +2,7 @@ package org.bluebridge._19_protocol_design._04_custom_protocol_codec;
 
 /**
  * @author lingwh
- * @desc
+ * @desc 消息编解码器
  * @date 2025/10/15 17:19
  */
 

@@ -15,7 +15,7 @@ import io.netty.handler.stream.ChunkedWriteHandler;
 
 /**
  * @author lingwh
- * @desc
+ * @desc 基于 Netty 的 WebSocket 服务器
  * @date 2025/10/16 14:07
  */
 public class NettyWebSocketServer {
@@ -37,16 +37,16 @@ public class NettyWebSocketServer {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
                         ChannelPipeline pipeline = ch.pipeline() ;
-                        // websocket基于http协议，所需要的http编解码器
+                        // websocket 基于 http 协议，所需要的 http 编解码器
                         pipeline.addLast(new HttpServerCodec());
-                        // 在http上有一些数据流产生，有大有小，我们对其进行处理，既然如此，我们需要使用netty对下数据流写提供支持，这个类叫ChunkedWriteHandler
+                        // 在 http 上有一些数据流产生，有大有小，我们对其进行处理，既然如此，我们需要使用 netty 对下数据流写提供支持，这个类叫 ChunkedWriteHandler
                         pipeline.addLast(new ChunkedWriteHandler());
-                        // 对httpMessage进行聚合处理，聚合成request或response
+                        // 对 httpMessage 进行聚合处理，聚合成 request 或 response
                         pipeline.addLast(new HttpObjectAggregator(64 * 1024));
                         /**
-                         * 本handler会帮你处理一些繁重复杂的事情
-                         * 会帮你处理握手动作: handshaking (close、ping、pong) ping+pong = 心跳
-                         * 对于websocket来讲，都是以frams进行传输的，不同的数据类型对应的fnams也不同
+                         * 本 handler 会帮你处理一些繁重复杂的事情
+                         * 会帮你处理握手动作: handshaking (close、ping、pong) ping + pong = 心跳
+                         * 对于 websocket 来讲，都是以 frams 进行传输的，不同的数据类型对应的 frams 也不同
                          */
                         pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
 

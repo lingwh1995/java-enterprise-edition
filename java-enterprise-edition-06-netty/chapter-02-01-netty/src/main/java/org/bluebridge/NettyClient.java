@@ -31,7 +31,7 @@ public class NettyClient {
                 protected void initChannel(NioSocketChannel ch) {
                     ChannelPipeline pipeline = ch.pipeline();
                     pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
-                    // 内部使用CharBuffer.wrap(msg)
+                    // 内部使用 CharBuffer.wrap(msg)
                     pipeline.addLast(new StringEncoder());
                 }
             })

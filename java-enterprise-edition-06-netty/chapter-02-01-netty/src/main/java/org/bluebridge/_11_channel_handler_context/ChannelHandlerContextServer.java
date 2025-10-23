@@ -17,7 +17,7 @@ import java.nio.charset.Charset;
 
 /**
  * @author lingwh
- * @desc 使用ChannelHandlerContext接口的子类来创建Bytebuf 服务端
+ * @desc 使用 ChannelHandlerContext 接口的子类来创建 Bytebuf 服务端
  * @date 2025/10/11 15:39
  */
 @Slf4j

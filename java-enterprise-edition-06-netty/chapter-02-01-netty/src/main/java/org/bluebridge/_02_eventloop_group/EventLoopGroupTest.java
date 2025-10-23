@@ -19,8 +19,8 @@ public class EventLoopGroupTest {
 
     public static void main(String[] args) throws InterruptedException {
         // 1.创建事件循环组
-        // 可以负责 io 事件，普通任务，定时任务(内部使用ScheduledThreadPool实现)
-        // 默认使用MAX(1，电脑核心数 * 2)线程数
+        // 可以负责 io 事件，普通任务，定时任务(内部使用 ScheduledThreadPool 实现)
+        // 默认使用 MAX(1，电脑核心数 * 2) 线程数
         NioEventLoopGroup group = new NioEventLoopGroup(4);
         // 普通任务， 定时任务
 //        DefaultEventLoopGroup defaultEventLoopGroup = new DefaultEventLoopGroup();
@@ -37,7 +37,7 @@ public class EventLoopGroupTest {
         // 3.执行普通任务
         group.next().submit(() -> log.info("这是个普通任务......"));
 
-        // 4.执行定时任务，可以用于实现keepalive这样的心跳包功能
+        // 4.执行定时任务，可以用于实现 keepalive 这样的心跳包功能
         group.next().scheduleAtFixedRate(() -> {
             log.info("这是个定时任务......");
         },3,2000, TimeUnit.MILLISECONDS); // 延迟3秒，每2秒执行一次

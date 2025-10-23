@@ -18,7 +18,7 @@ import java.nio.charset.Charset;
 
 /**
  * @author lingwh
- * @desc ChannelHandler生命周期
+ * @desc ChannelHandler 生命周期
  * @date 2025/10/16 11:57
  */
 @Slf4j

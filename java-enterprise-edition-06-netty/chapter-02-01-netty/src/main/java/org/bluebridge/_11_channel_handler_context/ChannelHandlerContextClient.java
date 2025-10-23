@@ -9,12 +9,12 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author lingwh
- * @desc 使用ChannelHandlerContext接口的子类来创建Bytebuf 客户端
+ * @desc 使用 ChannelHandlerContext 接口的子类来创建 Bytebuf 客户端
  * @date 2025/10/11 15:39
  */
 
 /**
- * 在Netty编程中通常使用ChannelHandlerContext接口的子类来创建Bytebuf，而不是使用ByteBufAllocator或Unpooled方式创建ByteBuf
+ * 在 Netty 编程中通常使用 ChannelHandlerContext 接口的子类来创建 Bytebuf ，而不是使用 ByteBufAllocator 或 Unpooled 方式创建 ByteBuf
  */
 @Slf4j
 public class ChannelHandlerContextClient {
@@ -33,7 +33,7 @@ public class ChannelHandlerContextClient {
                     pipeline.addLast(new ChannelInboundHandlerAdapter() {
                         @Override
                         public void channelActive(ChannelHandlerContext ctx) {
-                            // 使用ChannelHandlerContext接口的子类来创建Bytebuf
+                            // 使用 ChannelHandlerContext 接口的子类来创建 Bytebuf
                             ByteBuf byteBuf = ctx.alloc().buffer();
                             byteBuf.writeBytes(new byte[] { 'a', 'b', 'c', 'd', 'e'});
                             ctx.writeAndFlush(byteBuf);

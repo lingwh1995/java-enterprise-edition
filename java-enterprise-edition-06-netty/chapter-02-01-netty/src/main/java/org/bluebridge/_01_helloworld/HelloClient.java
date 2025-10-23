@@ -42,7 +42,7 @@ public class HelloClient {
             })
             // 5. 连接到服务器
             .connect(new InetSocketAddress(HOST, PORT))
-            // netty 中很多方法都是异步的，如connect，这时需要使用 sync 方法等待 connect 建立连接完毕
+            // netty 中很多方法都是异步的，如 connect() ，这时需要使用 sync 方法等待 connect 建立连接完毕
             .sync()
             // 获取 channel 对象，它即为通道抽象，可以进行数据读写操作
             .channel()

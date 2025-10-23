@@ -7,7 +7,7 @@ import org.bluebridge.utils.ByteBufUtil;
 
 /**
  * HeadContext 和 TailContext 释放资源
- *      应当理解到： netty中的创建的Bytebuf使用完成后最终要被释放，而不是什么处理都不做
+ *      应当理解到： netty 中的创建的 Bytebuf 使用完成后最终要被释放，而不是什么处理都不做
  */
 public class HeadTailReleaseTest {
 
@@ -40,9 +40,9 @@ public class HeadTailReleaseTest {
     public static void main(String[] args) {
         ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer();
         byteBuf.writeBytes(new byte[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' });
-        // byteBuf引用计数加1
+        // byteBuf 引用计数加1
         byteBuf.retain();
-        // byteBuf引用计数减1，当byteBuf的引用计数为0时，会释放资源，虽然byteBuf对象还存在，再次调用debugAll()方法会抛出异常
+        // byteBuf 引用计数减1，当byteBuf的引用计数为0时，会释放资源，虽然 byteBuf 对象还存在，再次调用 debugAll() 方法会抛出异常
         byteBuf.release();
         ByteBufUtil.debugAll(byteBuf);
     }

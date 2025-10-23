@@ -6,7 +6,7 @@ import java.util.concurrent.*;
 
 /**
  * @author lingwh
- * @desc Jdk自带的Future测试
+ * @desc Jdk 自带的 Future 测试
  * @date 2025/9/23 18:13
  */
 
@@ -20,7 +20,7 @@ public class JdkFutureTest {
         // 1. 创建线程池
         ExecutorService executorService = Executors.newFixedThreadPool(2);
 
-        // 2. 提交任务, callable有返回结果, runnable没有返回结果
+        // 2. 提交任务，callable 有返回结果，runnable 没有返回结果
         Future<Integer> future = executorService.submit(new Callable<Integer>() {
             @Override
             public Integer call() throws Exception {

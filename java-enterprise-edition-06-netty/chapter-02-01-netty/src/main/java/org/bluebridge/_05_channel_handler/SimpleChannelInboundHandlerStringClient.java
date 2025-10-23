@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author lingwh
- * @desc ChannelHandler的具体实现SimpleChannelInboundHandler 客户端
+ * @desc ChannelHandler 的具体实现 SimpleChannelInboundHandler 客户端
  * @date 2025/9/23 11:58
  */
 @Slf4j

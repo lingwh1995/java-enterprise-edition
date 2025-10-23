@@ -13,13 +13,13 @@ import java.nio.charset.Charset;
 
 /**
  * @author lingwh
- * @desc ChannelHandler的具体实现ChannelOutboundHandlerAdapter 服务端
+ * @desc ChannelHandler 的具体实现 ChannelOutboundHandlerAdapter 服务端
  * @date 2025/10/10 14:39
  */
 
 /**
- * ChannelPipeline是由多个ChannelHander组成的、ChannelHandler、和ChannelInboundHandlerAdapter之间的关系
- *     ChannelPipeline是由多个ChannelHander组成的 包含一组 ChannelHandler，形成一条处理链。
+ * ChannelPipeline 是由多个 ChannelHander 组成的、ChannelHandler、和 ChannelInboundHandlerAdapter 之间的关系
+ *     ChannelPipeline 是由多个 ChannelHander 组成的 包含一组 ChannelHandler，形成一条处理链。
  *     ChannelInboundHandlerAdapter 是 ChannelHandler 的一种具体实现（专注于入站事件）。
  */
 @Slf4j
@@ -63,7 +63,7 @@ public class ChannelOutboundHandlerAdapterServer {
                     pipeline.addLast(new ChannelOutboundHandlerAdapter() {
                         /**
                          * 方法作用
-                         *    处理 Channel 绑定到本地地址的出站操作，这是一个 ChannelOutboundHandler接口的方法，用于处理绑定请求
+                         *    处理 Channel 绑定到本地地址的出站操作，这是一个 ChannelOutboundHandler 接口的方法，用于处理绑定请求
                          * 典型应用场景
                          *    地址绑定前的验证: 在绑定操作前验证地址的有效性
                          *    日志记录: 记录绑定操作的信息
@@ -183,7 +183,7 @@ public class ChannelOutboundHandlerAdapterServer {
                          *    处理出站数据写入操作，是 ChannelOutboundHandler 接口的核心方法，当调用 ChannelHandlerContext#write 或 Channel#write 时触发
                          * 执行流程
                          *    1.在当前示例中，当 ChannelInboundHandlerAdapter#channelRead 方法中调用 ch.writeAndFlush 时触发
-                         *    2.由于 ChannelPipeline是由多个ChannelHander组成的 的出站处理顺序是从后往前，会找到并执行 ChannelOutboundHandlerAdapter 的 write 方法
+                         *    2.由于 ChannelPipeline 是由多个 ChannelHander 组成的 的出站处理顺序是从后往前，会找到并执行 ChannelOutboundHandlerAdapter 的 write 方法
                          *    3.当前实现直接调用 super.write 将操作继续传播
                          * 典型应用场景
                          *    数据预处理（编码、加密、格式转换）

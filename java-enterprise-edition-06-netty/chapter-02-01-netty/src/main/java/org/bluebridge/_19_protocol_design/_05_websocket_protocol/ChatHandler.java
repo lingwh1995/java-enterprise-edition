@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 /**
  * @author lingwh
- * @desc
+ * @desc 处理文本消息的handler
  * @date 2025/10/16 14:08
  */
 @Slf4j

@@ -17,7 +17,7 @@ import static io.netty.handler.codec.http.HttpHeaderNames.CONTENT_TYPE;
 
 /**
  * @author lingwh
- * @desc 基于Netty的HTTP服务器
+ * @desc 基于 Netty 的 HTTP 服务器
  * @date 2025/10/15 10:13
  */
 
@@ -49,16 +49,16 @@ public class NettyHttpServer {
                     // 设置响应编码器
                     pipeline.addLast(new HttpResponseEncoder());
                     */
-                    // 一次设置请求解码器和响应编码器，这里使用HttpServerCodec，它包含了HttpRequestDecoder和HttpResponseEncoder
+                    // 一次设置请求解码器和响应编码器，这里使用 HttpServerCodec ，它包含了 HttpRequestDecoder 和 HttpResponseEncoder
                     pipeline.addLast(new HttpServerCodec());
 
                     pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
-                    // 如果需要读取POST请求的请求体数据，需要在pipeline中添加 HttpObjectAggregator，如果仅需读取GET请求，可以注释掉下面一行
+                    // 如果需要读取POST请求的请求体数据，需要在 pipeline 中添加 HttpObjectAggregator，如果仅需读取 GET 请求，可以注释掉下面一行
                     pipeline.addLast(new HttpObjectAggregator(64 * 1024));
                     pipeline.addLast(new SimpleChannelInboundHandler<HttpRequest>() {
                         @Override
                         protected void channelRead0(ChannelHandlerContext ctx, HttpRequest httpRequest) {
-                            // netty模拟HttpServer处理来自客户端的GET请求
+                            // netty 模拟 HttpServer 处理来自客户端的 GET 请求
                             if("GET".equals(httpRequest.method().name())){
                                 // 获取请求
                                 log.info(httpRequest.uri());
@@ -67,22 +67,22 @@ public class NettyHttpServer {
                                         HttpResponseStatus.OK);
                                 byte[] bytes = "<h1>Hello, world!</h1>".getBytes();
 
-                                //为响应增加mime类型和长度
+                                //为响应增加 mime 类型和长度
                                 response.headers().set(CONTENT_TYPE,"text/html");
                                 response.headers().setInt(CONTENT_LENGTH, bytes.length);
                                 response.content().writeBytes(bytes);
-                                // 把响应渲染到html客户端页面上，接下来会经过出栈处理器处理
+                                // 把响应渲染到 html 客户端页面上，接下来会经过出栈处理器处理
                                 ctx.writeAndFlush(response);
                             }
 
-                            // netty模拟HttpServer处理来自客户端的POST请求（实现直接返回POST请求体数据）
+                            // netty 模拟 HttpServer 处理来自客户端的 POST 请求（实现直接返回 POST 请求体数据）
                             if("POST".equals(httpRequest.method().name())){
-                                // 处理POST请求
+                                // 处理 POST 请求
                                 log.info("POST request: {}", httpRequest.uri());
-                                // 如果需要读取请求体，需要添加HttpObjectAggregator处理器
+                                // 如果需要读取请求体，需要添加 HttpObjectAggregator 处理器
                                 // 这里简单返回成功响应
                                 DefaultFullHttpResponse response = new DefaultFullHttpResponse(httpRequest.protocolVersion(), HttpResponseStatus.OK);
-                                // 获取post请求发送的数据
+                                // 获取 post 请求发送的数据
                                 FullHttpRequest fullHttpRequest = (FullHttpRequest) httpRequest;
                                 String requestBody = fullHttpRequest.content().toString(StandardCharsets.UTF_8);
                                 log.info("请求体内容： {}", requestBody);

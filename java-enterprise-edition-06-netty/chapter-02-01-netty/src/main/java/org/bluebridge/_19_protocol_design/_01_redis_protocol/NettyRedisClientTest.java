@@ -13,7 +13,7 @@ import java.nio.charset.Charset;
 
 /**
  * @author lingwh
- * @desc Netty版RedisClient测试类
+ * @desc Netty 版 RedisClient 测试类
  * @date 2025/10/15 9:33
  */
 

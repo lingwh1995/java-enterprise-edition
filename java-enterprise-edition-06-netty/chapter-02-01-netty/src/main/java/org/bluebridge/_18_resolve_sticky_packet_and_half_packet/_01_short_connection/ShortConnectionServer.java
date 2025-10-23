@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
  * 以解决粘包为例
  *    改客户端代码，每次发16字节后，断开连接，
  * 但是无法解决半包问题
- *    修改服务端代码，让netty的缓冲区最大为16字节
+ *    修改服务端代码，让 netty 的缓冲区最大为16字节
  */
 @Slf4j
 public class ShortConnectionServer {

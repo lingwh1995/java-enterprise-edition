@@ -16,7 +16,7 @@ import java.util.Arrays;
  */
 
 /**
- *  1.创建ByteBuf
+ *  1.创建 ByteBuf
  *     直接内存创建和销毁的代价昂贵，但读写性能高（少一次内存复制），适合配合池化功能一起用
  *     直接内存对 GC 压力小，因为这部分内存不受 JVM 垃圾回收的管理，但也要注意及时主动释放
  *  2.池化与非池化
@@ -26,12 +26,12 @@ import java.util.Arrays;
  *     高并发时，池化功能更节约内存，减少内存溢出的可能
  *  3.池化功能是否开启，可以通过下面的系统环境变量来设置
  *      -Dio.netty.allocator.type={unpooled|pooled}
- *  4.ByteBuf主要有以下几个组成部分
+ *  4.ByteBuf 主要有以下几个组成部分
  *     最大容量与当前容量
- *         在构造ByteBuf时，可传入两个参数，分别代表初始容量和最大容量，若未传入第二个参数（最大容量），最大容量默认为Integer.MAX_VALUE
- *         当ByteBuf容量无法容纳所有数据时，会进行扩容操作，若超出最大容量，会抛出java.lang.IndexOutOfBoundsException异常
- *  5.ByteBuf的读写
- *     读写操作不同于ByteBuffer只用position进行控制，ByteBuf分别由读指针和写指针两个指针控制
+ *         在构造 ByteBuf 时，可传入两个参数，分别代表初始容量和最大容量，若未传入第二个参数（最大容量），最大容量默认为 Integer.MAX_VALUE
+ *         当 ByteBuf 容量无法容纳所有数据时，会进行扩容操作，若超出最大容量，会抛出 java.lang.IndexOutOfBoundsException异常
+ *  5.ByteBuf 的读写
+ *     读写操作不同于 ByteBuffer 只用 position 进行控制， ByteBuf 分别由读指针和写指针两个指针控制
  *     进行读写操作时，无需进行模式的切换
  *        读指针前的部分被称为废弃部分，是已经读过的内容
  *        读指针与写指针之间的空间称为可读部分
@@ -48,7 +48,7 @@ public class ByteBufTest {
 
     @Test
     public void testByteBufHelloWorld() {
-        // ByteBuf可以动态扩容(初始为256)
+        // ByteBuf 可以动态扩容(初始为256)
         ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer();
 
         log.info("初始的  byteBuf： {}", byteBuf);
@@ -81,34 +81,34 @@ public class ByteBufTest {
     @Test
     public void testByteBufWrite() {
         ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer();
-        // 写入boolean类型数据
+        // 写入 boolean 类型数据
         byteBuf.writeBoolean(true);
-        // 写入byte类型数据
+        // 写入 byte 类型数据
         byte b = 10;
         byteBuf.writeByte(b);
-        // 写入short类型数据
+        // 写入 short 类型数据
         short s = 0x1234;
         byteBuf.writeShort(s);
-        // 写入int类型的数据(大端形式)
+        // 写入 int 类型的数据(大端形式)
         int i = 0x12345678;
         byteBuf.writeInt(i);
-        // 写入int类型的数据(小端形式)
+        // 写入 int 类型的数据(小端形式)
         byteBuf.writeIntLE(i);
-        // 写入long类型的数据(大端形式)
+        // 写入 long 类型的数据(大端形式)
         long l = 0x12345678;
         byteBuf.writeLong(l);
-        // 写入long类型的数据(小端形式)
+        // 写入 long 类型的数据(小端形式)
         byteBuf.writeLongLE(l);
-        // 写入char类型的数据
+        // 写入 char 类型的数据
         char c = 10;
         byteBuf.writeChar(c);
-        // 写入float类型的数据
+        // 写入 float 类型的数据
         float f = 1.5f;
         byteBuf.writeFloat(f);
-        // 写入double类型的数据
+        // 写入 double 类型的数据
         double d = 2.5;
         byteBuf.writeDouble(d);
-        // 写入byte数组
+        // 写入 byte 数组
         byteBuf.writeBytes(new byte[]{ 1, 2, 3, 4});
         ByteBufUtil.debugAll(byteBuf);
     }

@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author lingwh
- * @desc 使用EmbeddedChannel进行测试，不再需要启动Client和Server
+ * @desc 使用 EmbeddedChannel 进行测试，不再需要启动 Client 和 Server
  * @date 2025/9/24 15:46
  */
 @Slf4j

@@ -13,14 +13,22 @@ import io.netty.handler.logging.LoggingHandler;
  * @date 2025/10/15 17:33
  */
 
-public class CustomProtocolMessageCodecTest {
+public class CustomProtocolMessageCodecAndSharableTest {
 
     public static void main(String[] args) throws Exception {
+        /**
+         * 如果判断处理器是否支持多线程共享
+         *  1. 通过处理器原码 @Sharable 注解判断，支持多线程共享的处理器上面都有 @Sharable 注解
+         *  2. 自定义的处理器如果要支持多线程共享，需要在处理器类上添加 @Sharable 或 @ChannelHandler.Sharable 注解
+         *  3. @Sharable 是 @ChannelHandler.Sharable的简化形式，需要通过适当的 import 语句来使用
+         */
+        // 日志处理器
+        LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
         EmbeddedChannel channel = new EmbeddedChannel(
             // 帧解码器
             new LengthFieldBasedFrameDecoder(1024, 12, 4, 0, 0),
             // 日志处理器
-            new LoggingHandler(LogLevel.DEBUG),
+            LOGGING_HANDLER,
             // 自定义协议编解码器
             new MessageCodec());
 

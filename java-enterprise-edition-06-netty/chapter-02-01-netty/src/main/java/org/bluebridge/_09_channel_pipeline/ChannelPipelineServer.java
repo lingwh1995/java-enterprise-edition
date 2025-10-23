@@ -17,8 +17,8 @@ import java.nio.charset.Charset;
  */
 
 /**
- * pipeline.writeAndFlush(): 从最后一个Handler开始找出站处理器
- * ctx.writeAndFlush(): 从当前Handler开始找出站处理器
+ * pipeline.writeAndFlush(): 从最后一个 Handler 开始找出站处理器
+ * ctx.writeAndFlush(): 从当前 Handler 开始找出站处理器
  */
 @Slf4j
 public class ChannelPipelineServer {
@@ -33,10 +33,10 @@ public class ChannelPipelineServer {
             .childHandler(new ChannelInitializer<NioSocketChannel>() {
                 @Override
                 protected void initChannel(NioSocketChannel ch) {
-                    // 1. 通过channel拿到pipeline
+                    // 1. 通过 channel 拿到 pipeline
                     ChannelPipeline pipeline = ch.pipeline();
 
-                    // 2. 添加Handler: head -> h1 -> h2 -> h3 -> tail
+                    // 2. 添加 Handler : head -> h1 -> h2 -> h3 -> tail
                     pipeline.addLast("h1", new ChannelInboundHandlerAdapter() {
                         @Override
                         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
