@@ -8,29 +8,29 @@ import java.nio.ByteBuffer;
 
 /**
  * @author lingwh
- * @desc   ByteBuffer基础使用
- * @date   2025/6/20 9:38
+ * @desc ByteBuffer 基础使用
+ * @date 2025/6/20 9:38
  */
 @Slf4j
 public class _01_ByteBufferHelloWorldTest {
 
     /**
-     * ByteBuffer基础使用
+     * ByteBuffer 基础使用
      */
     @Test
     public void testByteBufferHelloWorld() {
-        // 创建ByteBuffer
+        // 创建 ByteBuffer
         ByteBuffer buffer = ByteBuffer.allocate(10);
         ByteBufferUtil.debugAll(buffer, 1);
-        // 给ByteBuffer中放入一个字符 'a'
+        // 给 ByteBuffer 中放入一个字符 'a'
         buffer.put((byte)0x61);
         ByteBufferUtil.debugAll(buffer, 2);
-        // 给ByteBuffer中放入多个数据
+        // 给 ByteBuffer 中放入多个数据
         buffer.put(new byte[]{(byte)0x62, (byte)0x63, (byte)0x64, (byte)0x65});
         ByteBufferUtil.debugAll(buffer, 3);
 
         /**
-         * 调用flip()方法后 =>
+         * 调用 flip() 方法后 =>
          *  1.将缓冲区切换为读模式
          *  2.limit = position;  // 设置可读取数据的终点
          *  3.position = 0;      // 复位读取起始位置
@@ -39,8 +39,8 @@ public class _01_ByteBufferHelloWorldTest {
         buffer.flip();
         ByteBufferUtil.debugAll(buffer, 4);
         /**
-         * 调用get()方法后 =>
-         *  // position位置会后移一位
+         * 调用 get() 方法后 =>
+         *  // position 位置会后移一位
          *  1.position = position + 1;
          */
         // 读取到的数据会转换为10进制数
@@ -49,7 +49,7 @@ public class _01_ByteBufferHelloWorldTest {
         ByteBufferUtil.debugAll(buffer, 5);
 
         /**
-         * 调用compact()方法后 =>
+         * 调用 compact() 方法后 =>
          *  1.将缓冲区切换为写模式
          *  2.position‌：移动到上次读取的末尾位置，已经读取过的部分直接压缩掉
          *  3.limit‌：设置为缓冲区的容量（capacity）

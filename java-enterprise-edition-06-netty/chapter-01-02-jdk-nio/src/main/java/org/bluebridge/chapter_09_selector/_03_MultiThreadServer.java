@@ -12,8 +12,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * @author lingwh
- * @desc   使用 多线程 + selector 实现Server
- * @date   2025/6/29 10:12
+ * @desc 使用 多线程 + selector 实现 Server
+ * @date 2025/6/29 10:12
  */
 
 /**
@@ -37,7 +37,7 @@ public class _03_MultiThreadServer {
         SelectionKey bossKey = ssc.register(boss, 0, null);
         bossKey.interestOps(SelectionKey.OP_ACCEPT);
         ssc.bind(new InetSocketAddress(HOST, PORT));
-        // 创建固定数量的worker
+        // 创建固定数量的 worker
         Worker worker = new Worker("worker-0");
         while (true) {
             boss.select();
@@ -49,7 +49,7 @@ public class _03_MultiThreadServer {
                     SocketChannel sc = ssc.accept();
                     sc.configureBlocking(false);
                     log.info("connected......{}", sc.getRemoteAddress());
-                    // 2.关联worker中的selector
+                    // 2.关联 worker 中的selector
                     log.info("before register......{}", sc.getRemoteAddress());
                     worker.init(sc);
                     log.info("after register......{}", sc.getRemoteAddress());

@@ -9,8 +9,8 @@ import java.nio.channels.SocketChannel;
 
 /**
  * @author lingwh
- * @desc   写客户端
- * @date   2025/6/26 9:06
+ * @desc 写客户端
+ * @date 2025/6/26 9:06
  */
 @Slf4j
 public class WriteClient {

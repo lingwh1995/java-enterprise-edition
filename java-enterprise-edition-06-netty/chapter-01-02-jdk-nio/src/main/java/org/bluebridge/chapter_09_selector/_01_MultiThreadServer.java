@@ -11,17 +11,17 @@ import java.util.Iterator;
 
 /**
  * @author lingwh
- * @desc   使用 多线程 + selector 实现Server（单个worker版）
- * @date   2025/6/29 9:24
+ * @desc 使用 多线程 + selector 实现Server（单个worker版）
+ * @date 2025/6/29 9:24
  */
 
 /**
  * V1.0 客户端无法与服务端可以建立连接，无法正常通信
  *
  * 客户端无法与服务端通信成功原因分析
- *      // 在worker-0线程中执行 => main() => worker.register(); => thread.start(); => selector.select(); => selector阻塞  //会导致selector阻塞(处于阻塞状态时其他通道上的事件无法被注册到这个selector上)
- *      // 在boss线程中执行 => main() => sc.register(worker.selector, SelectionKey.OP_READ, null); => OP_READ事件注册失败
- *      上面selector和下面worker.selector 是同一个对象，上面的方法会导致selector阻塞(处于阻塞状态时其他通道上的事件无法被注册到这个selector上)，所以下面的方法无法把Channel注册到同一个selector中
+ *      // 在 worker-0 线程中执行 => main() => worker.register(); => thread.start(); => selector.select(); => selector 阻塞  //会导致 selector 阻塞(处于阻塞状态时其他通道上的事件无法被注册到这个 selector 上)
+ *      // 在 boss 线程中执行 => main() => sc.register(worker.selector, SelectionKey.OP_READ, null); => OP_READ事件注册失败
+ *      上面 selector 和下面 worker.selector 是同一个对象，上面的方法会导致 selector 阻塞(处于阻塞状态时其他通道上的事件无法被注册到这个 selector 上)，所以下面的方法无法把Channel注册到同一个 selector 中
  */
 @Slf4j
 public class _01_MultiThreadServer {
@@ -37,7 +37,7 @@ public class _01_MultiThreadServer {
         SelectionKey bossKey = ssc.register(boss, 0, null);
         bossKey.interestOps(SelectionKey.OP_ACCEPT);
         ssc.bind(new InetSocketAddress(HOST, PORT));
-        // 创建固定数量的worker
+        // 创建固定数量的 worker
         Worker worker = new Worker("worker-0");
         worker.init();
         while (true) {
@@ -83,7 +83,7 @@ public class _01_MultiThreadServer {
             while (true) {
                 try {
                     log.info("thread name......{}", Thread.currentThread().getName());
-                    selector.select(); // 在worker-0线程中执行
+                    selector.select(); // 在worker-0 线程中执行
                     Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
                     while (iterator.hasNext()) {
                         SelectionKey key = iterator.next();

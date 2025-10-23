@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 /**
  * @author lingwh
- * @desc   测试Selector对象、SelectionKey对象详解的客户端
- * @date   2025/6/28 16:35
+ * @desc 测试 Selector 对象、 SelectionKey 对象详解的客户端
+ * @date 2025/6/28 16:35
  */
 @Slf4j
 public class Client {

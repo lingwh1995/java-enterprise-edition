@@ -39,7 +39,7 @@ public class RpcClientManager {
         Class<?>[] interfaces = new Class[]{serviceClass};
         // sayHello  "张三"
         Object o = Proxy.newProxyInstance(loader, interfaces, (proxy, method, args) -> {
-            // 1. 将方法调用转换为 消息对象
+            // 1.将方法调用转换为 消息对象
             int sequenceId = SequenceIdGenerator.nextId();
             RpcRequestMessage msg = new RpcRequestMessage(
                     sequenceId,
@@ -49,10 +49,10 @@ public class RpcClientManager {
                     method.getParameterTypes(),
                     args
             );
-            // 2. 将消息对象发送出去
+            // 2.将消息对象发送出去
             getChannel().writeAndFlush(msg);
 
-            // 3. 准备一个空 Promise 对象，来接收结果             指定 promise 对象异步接收结果线程
+            // 3.准备一个空 Promise 对象，来接收结果             指定 promise 对象异步接收结果线程
             DefaultPromise<Object> promise = new DefaultPromise<>(getChannel().eventLoop());
             RpcResponseMessageHandler.PROMISES.put(sequenceId, promise);
 

@@ -10,8 +10,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author lingwh
- * @desc   JDK7新增的Files 类
- * @date   2025/6/25 16:05
+ * @desc JDK7 新增的 Files 类
+ * @date 2025/6/25 16:05
  */
 @Slf4j
 public class _02_JDK7FilesTest {

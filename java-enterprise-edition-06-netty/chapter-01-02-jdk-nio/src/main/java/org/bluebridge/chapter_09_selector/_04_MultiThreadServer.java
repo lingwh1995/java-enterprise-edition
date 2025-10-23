@@ -12,8 +12,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * @author lingwh
- * @desc   使用 多线程 + selector 实现Server（单个worker版）
- * @date   2025/6/29 10:50
+ * @desc 使用 多线程 + selector 实现 Server（单个 worker 版）
+ * @date 2025/6/29 10:50
  */
 
 /**
@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  *
  * tag:1 处代码解决了问题
  *
- * 核心思路：保证 sc.register(selector, SelectionKey.OP_READ, null); 执行之前，selector处于非阻塞状态
+ * 核心思路：保证 sc.register(selector, SelectionKey.OP_READ, null); 执行之前，selector 处于非阻塞状态
  */
 @Slf4j
 public class _04_MultiThreadServer {
@@ -37,7 +37,7 @@ public class _04_MultiThreadServer {
         SelectionKey bossKey = ssc.register(boss, 0, null);
         bossKey.interestOps(SelectionKey.OP_ACCEPT);
         ssc.bind(new InetSocketAddress(HOST, PORT));
-        // 创建固定数量的worker
+        // 创建固定数量的 worker
         Worker worker = new Worker("worker-0");
         while (true) {
             boss.select();
@@ -74,7 +74,7 @@ public class _04_MultiThreadServer {
                 thread.start();
                 start = true;
             }
-            selector.wakeup();    //boss线程中执行   // tag:1
+            selector.wakeup();    // boss 线程中执行   // tag:1
             sc.register(selector, SelectionKey.OP_READ, null);  //boss线程中执行 // tag:1
             log.info("init() => thread name......{}", Thread.currentThread().getName());
         }
@@ -83,7 +83,7 @@ public class _04_MultiThreadServer {
         public void run() {
             while (true) {
                 try {
-                    selector.select();   // 在worker-0线程中执行
+                    selector.select();   // 在 worker-0 线程中执行
                     log.info("run() => thread name......{}", Thread.currentThread().getName());
                     Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
                     while (iterator.hasNext()) {

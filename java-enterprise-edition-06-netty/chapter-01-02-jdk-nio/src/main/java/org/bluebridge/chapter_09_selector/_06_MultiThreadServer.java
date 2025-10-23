@@ -16,19 +16,19 @@ import java.util.stream.IntStream;
 
 /**
  * @author lingwh
- * @desc   使用 多线程 + selector 实现Server
- * @date   2025/6/29 15:43
+ * @desc 使用 多线程 + selector 实现 Server
+ * @date 2025/6/29 15:43
  */
 
 /**
- * V6.0 客户端与服务端可以建立连接，可以正常通信（多个worker版）
+ * V6.0 客户端与服务端可以建立连接，可以正常通信（多个 worker 版）
  *
  * tag:1 处代码解决了问题
  *
- * 核心思路：保证 sc.register(selector, SelectionKey.OP_READ, null); 执行之前，selector处于非阻塞状态
+ * 核心思路：保证 sc.register(selector, SelectionKey.OP_READ, null); 执行之前， selector 处于非阻塞状态
  *
- * worker数量建议设置为cpu核心数
- *      使用 Runtime.getRuntime().availableProcessors() 获取cpu核心数，docker下获取的是物理机核心数，而非docker容器核心数，所以手工指定最好
+ * worker 数量建议设置为cpu核心数
+ *      使用 Runtime.getRuntime().availableProcessors() 获取cpu核心数，docker 下获取的是物理机核心数，而非 docker 容器核心数，所以手工指定最好
  */
 @Slf4j
 public class _06_MultiThreadServer {
@@ -44,7 +44,7 @@ public class _06_MultiThreadServer {
         SelectionKey bossKey = ssc.register(boss, 0, null);
         bossKey.interestOps(SelectionKey.OP_ACCEPT);
         ssc.bind(new InetSocketAddress(HOST, PORT));
-        // 创建固定数量的worker
+        // 创建固定数量的 worker
         //Worker[] workers = new Worker[Runtime.getRuntime().availableProcessors()];  // 获取cpu核心数
         Worker[] workers = new Worker[3];
         IntStream.range(0, 3).forEach(i -> {
@@ -86,7 +86,7 @@ public class _06_MultiThreadServer {
                 thread.start();
                 start = true;
             }
-            selector.wakeup();    //boss线程中执行  // tag:1
+            selector.wakeup();    // boss 线程中执行  // tag:1
             sc.register(selector, SelectionKey.OP_READ, null);  //boss线程中执行 // tag:1
             log.info("init() => thread name......{}", Thread.currentThread().getName());
         }
@@ -95,7 +95,7 @@ public class _06_MultiThreadServer {
         public void run() {
             while (true) {
                 try {
-                    selector.select();   // 在worker-0线程中执行
+                    selector.select();   // 在 worker-0 线程中执行
                     log.info("run() => thread name......{}", Thread.currentThread().getName());
                     Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
                     while (iterator.hasNext()) {

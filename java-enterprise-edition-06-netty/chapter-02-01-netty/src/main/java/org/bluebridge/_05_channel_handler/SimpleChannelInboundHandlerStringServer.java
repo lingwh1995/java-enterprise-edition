@@ -18,9 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * SimpleChannelInboundHandler
- *    1. SimpleChannelInboundHandler 是 ChannelInboundHandlerAdapter 的子类，可以重写父类的所有方法
- *    2. SimpleChannelInboundHandler 可以使用泛型来指定接收的消息类型，这样的好处是不用手动强制类型转换
- *    3. 当SimpleChannelInboundHandler 接收到消息时，会自动调用 channelRead0() 方法，将消息作为参数传递给该方法
+ *    1.SimpleChannelInboundHandler 是 ChannelInboundHandlerAdapter 的子类，可以重写父类的所有方法
+ *    2.SimpleChannelInboundHandler 可以使用泛型来指定接收的消息类型，这样的好处是不用手动强制类型转换
+ *    3.当SimpleChannelInboundHandler 接收到消息时，会自动调用 channelRead0() 方法，将消息作为参数传递给该方法
  *
  * 本程序演示了使用 String 来作为 SimpleChannelInboundHandler，一般来使用 String 类型，然后再对字符串进行处理
  */

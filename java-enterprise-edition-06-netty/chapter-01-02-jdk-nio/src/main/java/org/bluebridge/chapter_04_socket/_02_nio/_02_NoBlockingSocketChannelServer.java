@@ -15,8 +15,8 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author lingwh
- * @desc   阻塞方式实现网络通信-基于NIO的Channel理解阻塞通信模型
- * @date   2025/6/26 18:01
+ * @desc 阻塞方式实现网络通信-基于NIO的Channel理解阻塞通信模型
+ * @date 2025/6/26 18:01
  */
 
 /**
@@ -30,8 +30,8 @@ import java.util.concurrent.TimeUnit;
  * 测试结论
  *  1.非阻塞模式下，相关方法都会不会让线程暂停
  *  2.在ServerSocketChannel.accept 在没有连接建立时，会返回null，继续运行
- *  3.SocketChannel.read 在没有数据可读时，会返回 0，但线程不必阻塞，可以去执行其它 SocketChannel的read或是去执行ServerSocketChannel.accept
- *  4.写数据时，线程只是等待数据写入Channel即可，无需等Channel通过网络把数据发送出去
+ *  3.SocketChannel.read() 在没有数据可读时，会返回 0，但线程不必阻塞，可以去执行其它 SocketChannel 的 read 或是去执行 ServerSocketChannel.accept()
+ *  4.写数据时，线程只是等待数据写入 Channel 即可，无需等 Channel 通过网络把数据发送出去
  *  5.非阻塞模式下，即使没有连接建立，和可读数据，线程仍然在不断运行，白白浪费了cpu
  */
 @Slf4j
@@ -48,7 +48,7 @@ public class _02_NoBlockingSocketChannelServer {
         ssc.bind(new InetSocketAddress(PORT));
         // 3.创建连接集合
         List<SocketChannel> channels = new ArrayList<>();
-        // 4.创建ByteBuffer
+        // 4.创建 ByteBuffer
         ByteBuffer buffer = ByteBuffer.allocate(16);
         // 4.循环监听
         while (true) {

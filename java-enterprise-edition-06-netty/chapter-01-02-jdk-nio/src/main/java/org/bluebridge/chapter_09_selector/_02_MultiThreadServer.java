@@ -14,21 +14,21 @@ import java.util.Iterator;
 
 /**
  * @author lingwh
- * @desc   使用 多线程 + selector 实现Server（单个worker版）
- * @date   2025/6/29 9:45
+ * @desc 使用 多线程 + selector 实现 Server（单个 worker 版）
+ * @date 2025/6/29 9:45
  */
 
 /**
  * V2.0 客户端无法与服务端可以建立连接，多个客户端时从第二个客户端开始无法与服务端通信
  *
  * 多个客户端时从第二个客户端开始无法与服务端通信成功原因分析
- *      // 在boss线程中执行 => 第一个客户端连接时: main() => sc.register(worker.selector, SelectionKey.OP_READ, null); => OP_READ事件注册成功
- *      // 在worker-0线程中执行 => main() => worker.register(); => thread.start();  => selector.select(); => selector阻塞   //会导致selector阻塞(处于阻塞状态时其他通道上的事件无法被注册到这个selector上)
- *      // 在boss线程中执行 => 第二个客户端连接时: main() => sc.register(worker.selector, SelectionKey.OP_READ, null); => OP_READ事件注册失败
+ *      // 在 boss 线程中执行 => 第一个客户端连接时: main() => sc.register(worker.selector, SelectionKey.OP_READ, null); => OP_READ 事件注册成功
+ *      // 在 worker-0 线程中执行 => main() => worker.register(); => thread.start();  => selector.select(); => selector阻塞   //会导致 selector 阻塞(处于阻塞状态时其他通道上的事件无法被注册到这个 selector 上)
+ *      // 在 boss 线程中执行 => 第二个客户端连接时: main() => sc.register(worker.selector, SelectionKey.OP_READ, null); => OP_READ 事件注册失败
  *
- *      第一个客户端连接后会导致selector阻塞(处于阻塞状态时其他通道上的事件无法被注册到这个selector上)，所以从第二个客户端之后的客户端只能触发服务器上的OP_ACCEPT
- *      事件，无法触发OP_READ事件，所以现象是从第二个客户端之后的客户端只能与服务器连接，服务器无法接收到客户端发送的数据，核心在于理解 tag:1 处OP_READ有没有注册到
- *      selector对象上，这里的事件能注册成功，客户端就能正确发送数据给服务器，事件注册失败，客户端无法发送数据给服务器，因为事件没有注册到selector对象上
+ *      第一个客户端连接后会导致 selector 阻塞(处于阻塞状态时其他通道上的事件无法被注册到这个 selector 上)，所以从第二个客户端之后的客户端只能触发服务器上的 OP_ACCEPT 事件
+ *      事件，无法触发 OP_READ 事件，所以现象是从第二个客户端之后的客户端只能与服务器连接，服务器无法接收到客户端发送的数据，核心在于理解 tag:1 处 OP_READ 有没有注册到
+ *      selector 对象上，这里的事件能注册成功，客户端就能正确发送数据给服务器，事件注册失败，客户端无法发送数据给服务器，因为事件没有注册到 selector 对象上
  *
  */
 @Slf4j
@@ -57,7 +57,7 @@ public class _02_MultiThreadServer {
                     SocketChannel sc = ssc.accept();
                     sc.configureBlocking(false);
                     log.info("connected......{}", sc.getRemoteAddress());
-                    // 2.关联worker中的selector
+                    // 2.关联 worker 中的 selector
                     log.info("before register......{}", sc.getRemoteAddress());
                     worker.init();
                     sc.register(worker.selector, SelectionKey.OP_READ, null);  //tag:1 // 在boss线程中执行
@@ -90,7 +90,7 @@ public class _02_MultiThreadServer {
         public void run() {
             while (true) {
                 try {
-                    selector.select();   // 在worker-0线程中执行
+                    selector.select();   // 在 worker-0 线程中执行
                     log.info("run() => thread name......{}", Thread.currentThread().getName());
                     Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
                     while (iterator.hasNext()) {

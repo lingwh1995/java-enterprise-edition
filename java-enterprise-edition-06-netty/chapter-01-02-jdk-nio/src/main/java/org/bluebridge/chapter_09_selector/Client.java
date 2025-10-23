@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 /**
  * @author lingwh
- * @desc   测试使用 多线程 + selector 实现Server的客户端
- * @date   2025/6/29 9:24
+ * @desc 测试使用 多线程 + selector 实现 Server 的客户端
+ * @date 2025/6/29 9:24
  */
 @Slf4j
 public class Client {

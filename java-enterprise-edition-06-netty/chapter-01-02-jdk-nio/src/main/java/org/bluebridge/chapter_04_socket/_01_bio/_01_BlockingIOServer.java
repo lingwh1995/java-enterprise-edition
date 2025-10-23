@@ -12,12 +12,12 @@ import java.net.Socket;
 
 /**
  * @author lingwh
- * @desc   阻塞方式实现网络通信-基于BIO的流理解阻塞通信模型
- * @date   2025/7/7 18:01
+ * @desc 阻塞方式实现网络通信-基于 BIO 的流理解阻塞通信模型
+ * @date 2025/7/7 18:01
  */
 
 /**
- * BIO模型网络通信Server端
+ * BIO 模型网络通信 Server 端
  *  V1.0 服务端接收单个客户端多条消息发送和接收需求
  *
  * 测试方法

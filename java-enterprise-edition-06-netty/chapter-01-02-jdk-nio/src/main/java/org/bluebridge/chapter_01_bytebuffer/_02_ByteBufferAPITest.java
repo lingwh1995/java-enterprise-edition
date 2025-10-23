@@ -10,18 +10,18 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * @author lingwh
- * @desc   ByteBuffer的常用方法
- * @date   2025/6/20 11:42
+ * @desc ByteBuffer 的常用方法
+ * @date 2025/6/20 11:42
  */
 
 /**
  * ByteBuffer的常用方法：
- *   position()  设置postion的值
- *   limit()     设置limit的值
+ *   position()  设置 postion 的值
+ *   limit()     设置 limit 的值
  *
- *   rewind()    把position移动到0索引位置
- *   mark()      mark 做一个标记，记录position位置
- *   reset()     reset是将position重置到mark位置
+ *   rewind()    把 position 移动到0索引位置
+ *   mark()      mark 做一个标记，记录 position 位置
+ *   reset()     reset 是将 position 重置到 mark 位置
  *
  *   clear()     切换为写模式
  *   put()       写入数据
@@ -30,46 +30,46 @@ import java.nio.charset.StandardCharsets;
 public class _02_ByteBufferAPITest {
 
     /**
-     * position() 设置postion的值
-     * limit() 设置limit的值
+     * position() 设置 postion 的值
+     * limit() 设置 limit 的值
      */
     @Test
     public void testByteBufferPositionAndLimit() {
         ByteBuffer buffer = ByteBuffer.allocate(10);
-        // 向ByteBuffer中写入数据
+        // 向 ByteBuffer 中写入数据
         buffer.put(new byte[]{ 'a', 'b', 'c', 'd', 'e' });
         ByteBufferUtil.debugAll(buffer, 1);
         // 切换为读模式
         buffer.flip();
         ByteBufferUtil.debugAll(buffer, 2);
 
-        // 读取第 position=0 时的字符
+        // 读取第 position = 0 时的字符
         log.info("position值为0 = {}", (char)buffer.get());
         ByteBufferUtil.debugAll(buffer, 3);
 
-        // 读取第 position=1 时的字符
+        // 读取第 position = 1 时的字符
         log.info("position值为1 = {}", (char)buffer.get());
         ByteBufferUtil.debugAll(buffer, 4);
 
-        // 设置position的值
+        // 设置 position 的值
         buffer.position(0);
         ByteBufferUtil.debugAll(buffer, 5);
         log.info("position值重设 = {}", (char)buffer.get());
         ByteBufferUtil.debugAll(buffer, 6);
 
-        // 设置limit的值
+        // 设置 limit 的值
         buffer.limit(3);
         ByteBufferUtil.debugAll(buffer, 7);
     }
 
     /**
-     * rewind()  把position移动到0索引位置
-     * mark() & reset()   mark 做一个标记，记录position位置，reset是将position重置到mark位置
+     * rewind()  把 position 移动到0索引位置
+     * mark() & reset()   mark 做一个标记，记录 position 位置，reset 是将 position 重置到 mark 位置
      */
     @Test
     public void testByteBufferRewindMarkAndReset() {
         ByteBuffer buffer = ByteBuffer.allocate(10);
-        // 向ByteBuffer中写入数据
+        // 向 ByteBuffer 中写入数据
         buffer.put(new byte[]{ 'a', 'b', 'c', 'd', 'e' });
         // 切换为读模式
         buffer.flip();
@@ -81,7 +81,7 @@ public class _02_ByteBufferAPITest {
         log.info("destStr: {}", destStr);
         ByteBufferUtil.debugAll(buffer, 1);
 
-        // 把position移动到0索引位置
+        // 把 position 移动到0索引位置
         buffer.rewind();
         ByteBufferUtil.debugAll(buffer, 2);
         log.info("(char)buffer.get() = {}", (char)buffer.get());
@@ -91,7 +91,7 @@ public class _02_ByteBufferAPITest {
         buffer.flip();
         ByteBufferUtil.debugAll(buffer, 3);
         // mark & reset
-        // mark 做一个标记，记录position位置，reset是将position重置到mark位置
+        // mark 做一个标记，记录 position 位置，reset 是将 position 重置到 mark 位置
         log.info("(char)buffer.get() = {}", (char)buffer.get());
         log.info("(char)buffer.get() = {}", (char)buffer.get());
         // 加标记，索引2位置

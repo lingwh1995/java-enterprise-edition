@@ -11,8 +11,8 @@ import java.nio.channels.FileChannel;
  */
 /**
  * @author lingwh
- * @desc   NIO中FileChannel的transferTo()方法测试
- * @date   2025/6/24 17:08
+ * @desc NIO中 FileChannel 的 transferTo() 方法测试
+ * @date 2025/6/24 17:08
  */
 @Slf4j
 public class _03_FileChannelTransferToTest {
@@ -43,7 +43,7 @@ public class _03_FileChannelTransferToTest {
      */
     @Test
     public void FileChannelTransferToLessThan2GTest1() {
-        // 返回当前JVM运行的纳秒级时间戳
+        // 返回当前 JVM 运行的纳秒级时间戳
         long start = System.nanoTime();
         try (FileChannel from = new FileInputStream("E:\\nio\\from.iso").getChannel();
              FileChannel to = new FileOutputStream("E:\\nio\\to.iso").getChannel()
@@ -62,7 +62,7 @@ public class _03_FileChannelTransferToTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        // 返回当前JVM运行的纳秒级时间戳
+        // 返回当前 JVM 运行的纳秒级时间戳
         long end = System.nanoTime();
         log.info("transferTo 用时: {} 秒", (end - start) / 1000_000_000.0);
     }

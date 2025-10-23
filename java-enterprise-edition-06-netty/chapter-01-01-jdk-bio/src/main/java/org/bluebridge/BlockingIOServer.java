@@ -7,7 +7,7 @@ import java.net.*;
 
 /**
  * @author lingwh
- * @desc BIO服务端
+ * @desc BIO 服务端
  * @date 2025/9/23 11:19
  */
 @Slf4j
@@ -18,7 +18,7 @@ public class BlockingIOServer {
 
     public static void main(String[] args) {
         try {
-            // 创建ServerSocket，监听8080端口
+            // 创建 ServerSocket ，监听8080端口
             ServerSocket ss = new ServerSocket();
             ss.bind(new InetSocketAddress(HOST, PORT));
             log.info("服务器启动，端口：{}......", PORT);

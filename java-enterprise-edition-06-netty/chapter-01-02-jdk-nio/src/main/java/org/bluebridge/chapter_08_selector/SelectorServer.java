@@ -12,8 +12,8 @@ import java.util.Iterator;
 
 /**
  * @author lingwh
- * @desc   从事件驱动角度理解 selector 网络通信
- * @date   2025/6/28 17:35
+ * @desc 从事件驱动角度理解 selector 网络通信
+ * @date 2025/6/28 17:35
  */
 @Slf4j
 public class SelectorServer {
@@ -28,9 +28,9 @@ public class SelectorServer {
         ssc.configureBlocking(false);
         // 3.绑定端口号
         ssc.bind(new InetSocketAddress(HOST, PORT));
-        // 4.创建Selector对象
+        // 4.创建 Selector 对象
         Selector selector = Selector.open();
-        // 5.把Channel注册到selector上
+        // 5.把 Channel 注册到 selector 上
         ssc.register(selector, SelectionKey.OP_ACCEPT);
         while (true) {
             selector.select();
@@ -45,7 +45,7 @@ public class SelectorServer {
                     SocketChannel sc = acceptEventSSCChannel.accept();
                     // 设置为非阻塞
                     sc.configureBlocking(false);
-                    // 把scChannel注册到Selector中，关注读事件
+                    // 把 scChannel 注册到 selector 中，关注读事件
                     sc.register(selector, SelectionKey.OP_READ);
                 }else if(event.isReadable()) {
                     try {
@@ -54,7 +54,7 @@ public class SelectorServer {
                         ByteBuffer buffer = ByteBuffer.allocate(16);
                         int readLength = readEventSCChannel.read(buffer);
                         if(readLength == -1) {
-                            // 客户端调用了socket.close()方法断开了
+                            // 客户端调用了 socket.close() 方法断开了
                             event.cancel();
                         }else {
                             buffer.flip();

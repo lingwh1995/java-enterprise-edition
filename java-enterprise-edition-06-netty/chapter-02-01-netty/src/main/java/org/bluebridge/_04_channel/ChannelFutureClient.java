@@ -15,8 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * 让异步方法同步（获取建立好的连接）的两种方式：
- *   1. 调用 sync 方法，阻塞等待异步操作完成
- *   2. 调用 addListener 方法，添加一个监听器，异步操作完成时会调用监听器
+ *   1.调用 sync 方法，阻塞等待异步操作完成
+ *   2.调用 addListener 方法，添加一个监听器，异步操作完成时会调用监听器
  */
 @Slf4j
 public class ChannelFutureClient {

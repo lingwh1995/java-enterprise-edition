@@ -12,12 +12,12 @@ import java.net.Socket;
 
 /**
  * @author lingwh
- * @desc   阻塞方式实现网络通信-基于BIO的流理解阻塞通信模型
- * @date   2025/7/7 18:01
+ * @desc 阻塞方式实现网络通信-基于 BIO 的流理解阻塞通信模型
+ * @date 2025/7/7 18:01
  */
 
 /**
- * BIO模型网络通信Server端
+ * BIO模型网络通信 Server 端
  *  V2.0 服务端接收多个客户端多条消息发送和接收需求(一个客户端对应一个线程)
  *
  * 测试方法
@@ -32,13 +32,13 @@ public class _02_BlockingIOServer {
 
     public static void main(String[] args) {
         try {
-            // 1.获取ServerSocket
+            // 1.获取 ServerSocket
             ServerSocket serverSocket = new ServerSocket();
             serverSocket.bind(new InetSocketAddress(HOST, PORT));
             log.info("阻塞服务器启动，端口：{}......", PORT);
             while(true) {
                 log.info("服务端同步阻塞，等待客户端连接中......");
-                // 2.获取Socket
+                // 2.获取 Socket
                 Socket socket = serverSocket.accept();
                 log.info("客户端成功连接到服务端......");
                 // 3.启动多个客户端连接同一个服务端多线程类
@@ -66,7 +66,7 @@ class ServerThread implements Runnable{
     public void run() {
         BufferedReader bufferedReader = null;
         try {
-            //3.从Socket中获取输入流
+            //3.从 Socket中获取输入流
             InputStream socketInputStream = socket.getInputStream();
             //4.获取包装流
             bufferedReader = new BufferedReader(new InputStreamReader(socketInputStream));

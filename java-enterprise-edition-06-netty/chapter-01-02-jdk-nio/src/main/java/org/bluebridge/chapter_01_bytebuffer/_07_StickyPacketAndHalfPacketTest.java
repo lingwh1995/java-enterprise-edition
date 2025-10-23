@@ -8,8 +8,8 @@ import java.nio.ByteBuffer;
 
 /**
  * @author lingwh
- * @desc   处理黏包和半包
- * @date   2025/6/23 16:35
+ * @desc 处理黏包和半包
+ * @date 2025/6/23 16:35
  */
 @Slf4j
 public class _07_StickyPacketAndHalfPacketTest {
@@ -56,7 +56,7 @@ public class _07_StickyPacketAndHalfPacketTest {
                 ByteBuffer target = ByteBuffer.allocate(i + 1 - source.position());
                 // 0 ~ limit
                 source.limit(i + 1);
-                // 从source 读，向 target 写
+                // 从 source 读，向 target 写
                 target.put(source);
                 ByteBufferUtil.debugAll(target);
                 source.limit(oldLimit);

@@ -65,7 +65,7 @@ public class NettyHttpClient {
                 @Override
                 protected void initChannel(SocketChannel ch) {
                     ChannelPipeline pipeline = ch.pipeline();
-                    // 1. HTTP 编解码
+                    // 1.HTTP 编解码
 
                     // 分别设置响应解码器和请求编码器
                     /*
@@ -79,9 +79,9 @@ public class NettyHttpClient {
 
                     // 2.日志处理器
                     pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
-                    // 3. 聚合分片 -> FullHttpResponse
+                    // 3.聚合分片 -> FullHttpResponse
                     pipeline.addLast(new HttpObjectAggregator(64 * 1024));
-                    // 4. 业务处理器
+                    // 4.业务处理器
                     pipeline.addLast(new HttpResponseHandler());
                 }
             });

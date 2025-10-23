@@ -14,8 +14,8 @@ import java.util.Iterator;
 
 /**
  * @author lingwh
- * @desc   使用 多线程 + selector 实现Server（单个worker版）
- * @date   2025/6/29 14:28
+ * @desc 使用 多线程 + selector 实现 Server（单个 worker 版）
+ * @date 2025/6/29 14:28
  */
 
 /**
@@ -39,7 +39,7 @@ public class _05_MultiThreadServer {
         SelectionKey bossKey = ssc.register(boss, 0, null);
         bossKey.interestOps(SelectionKey.OP_ACCEPT);
         ssc.bind(new InetSocketAddress(HOST, PORT));
-        // 创建固定数量的worker
+        // 创建固定数量的 worker
         Worker worker = new Worker("worker-0");
         while (true) {
             boss.select();
@@ -51,10 +51,10 @@ public class _05_MultiThreadServer {
                     SocketChannel sc = ssc.accept();
                     sc.configureBlocking(false);
                     log.info("connected......{}", sc.getRemoteAddress());
-                    // 2.关联worker中的selector
+                    // 2.关联 worker 中的selector
                     log.info("before register......{}", sc.getRemoteAddress());
                     worker.init();
-                    sc.register(worker.selector, SelectionKey.OP_READ, null);  // 在boss线程中执行
+                    sc.register(worker.selector, SelectionKey.OP_READ, null);  // 在 boss 线程中执行
                     log.info("after register......{}", sc.getRemoteAddress());
                 }
             }
@@ -85,7 +85,7 @@ public class _05_MultiThreadServer {
         public void run() {
             while (true) {
                 try {
-                    selector.select();   // 在worker-0线程中执行
+                    selector.select();   // 在 worker-0 线程中执行
                     log.info("run() => thread name......{}", Thread.currentThread().getName());
                     Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
                     while (iterator.hasNext()) {

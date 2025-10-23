@@ -8,8 +8,8 @@ import java.nio.ByteBuffer;
 
 /**
  * @author lingwh
- * @desc   ByteBuffer读数据测试
- * @date   2025/6/21 10:19
+ * @desc ByteBuffer 读数据测试
+ * @date 2025/6/21 10:19
  */
 @Slf4j
 public class _04_ByteBufferReadTest {
@@ -23,7 +23,7 @@ public class _04_ByteBufferReadTest {
         ByteBuffer buffer = ByteBuffer.allocate(10);
         buffer.put(new byte[]{ 'a', 'b', 'c', 'd', 'e' });
         ByteBufferUtil.debugAll(buffer);
-        // 将source切换为读模式
+        // 将 source 切换为读模式
         buffer.flip();
 
         // 读取一个字节

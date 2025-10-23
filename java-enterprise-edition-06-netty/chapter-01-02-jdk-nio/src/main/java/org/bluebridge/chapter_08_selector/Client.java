@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 /**
  * @author lingwh
- * @desc   测试从事件驱动角度理解 selector 网络通信的客户端
- * @date   2025/6/28 17:38
+ * @desc 测试从事件驱动角度理解 selector 网络通信的客户端
+ * @date 2025/6/28 17:38
  */
 @Slf4j
 public class Client {

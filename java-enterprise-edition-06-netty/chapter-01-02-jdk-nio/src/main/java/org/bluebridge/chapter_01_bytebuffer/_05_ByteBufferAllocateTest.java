@@ -7,8 +7,8 @@ import java.nio.ByteBuffer;
 
 /**
  * @author lingwh
- * @desc   ByteBuffer分配空间的两种方式
- * @date   2025/6/22 11:19
+ * @desc ByteBuffer 分配空间的两种方式
+ * @date 2025/6/22 11:19
  */
 @Slf4j
 public class _05_ByteBufferAllocateTest {

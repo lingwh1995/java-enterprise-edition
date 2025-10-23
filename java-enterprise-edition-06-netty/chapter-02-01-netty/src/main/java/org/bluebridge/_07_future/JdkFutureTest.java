@@ -17,10 +17,10 @@ import java.util.concurrent.*;
 public class JdkFutureTest {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        // 1. 创建线程池
+        // 1.创建线程池
         ExecutorService executorService = Executors.newFixedThreadPool(2);
 
-        // 2. 提交任务，callable 有返回结果，runnable 没有返回结果
+        // 2.提交任务，callable 有返回结果，runnable 没有返回结果
         Future<Integer> future = executorService.submit(new Callable<Integer>() {
             @Override
             public Integer call() throws Exception {

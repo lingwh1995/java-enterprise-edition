@@ -15,8 +15,8 @@ import java.util.Iterator;
 
 /**
  * @author lingwh
- * @desc   写服务器-解决了写大量数据阻塞问题
- * @date   2025/6/28 9:06
+ * @desc 写服务器-解决了写大量数据阻塞问题
+ * @date 2025/6/28 9:06
  */
 @Slf4j
 public class _02_WriteServer {
@@ -44,16 +44,16 @@ public class _02_WriteServer {
                     SocketChannel sc = channel.accept();
                     sc.configureBlocking(false);
                     SelectionKey sckey = sc.register(selector, SelectionKey.OP_READ);
-                    // 1. 向客户端发送内容
+                    // 1.向客户端发送内容
                     StringBuilder sb = new StringBuilder();
                     for (int i = 0; i < 3000000; i++) {
                         sb.append("a");
                     }
                     ByteBuffer buffer = Charset.defaultCharset().encode(sb.toString());
-                    // 3. write 表示实际写了多少字节
+                    // 3.write 表示实际写了多少字节
                     int write = sc.write(buffer);
                     totalCount += write;
-                    // 4. 如果有剩余未读字节，才需要关注写事件
+                    // 4.如果有剩余未读字节，才需要关注写事件
                     if (buffer.hasRemaining()) {
                         // read 1  write 4
                         // 在原有关注事件的基础上，多关注 写事件
