@@ -1,4 +1,4 @@
-package org.bluebridge.config;
+package org.bluebridge.server;
 
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;

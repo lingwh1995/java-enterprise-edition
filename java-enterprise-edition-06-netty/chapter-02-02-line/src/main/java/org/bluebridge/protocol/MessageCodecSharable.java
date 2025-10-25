@@ -1,21 +1,27 @@
-package org.bluebridge._20_group_chat.protocol;
+package org.bluebridge.protocol;
 
-import org.bluebridge._20_group_chat.config.Config;
-import org.bluebridge._20_group_chat.message.Message;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageCodec;
 import lombok.extern.slf4j.Slf4j;
+import org.bluebridge.config.Config;
+import org.bluebridge.domain.Message;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 必须和 LengthFieldBasedFrameDecoder 一起使用，确保接到的 ByteBuf 消息是完整的
+ * @author lingwh
+ * @desc 消息编解码器，必须和 LengthFieldBasedFrameDecoder 一起使用，确保接到的 ByteBuf 消息是完整的
+ * @date 2025/10/25 12:47
  */
 @Slf4j
 @ChannelHandler.Sharable
 public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message> {
+
+    @Resource
+    private Config config;
 
     @Override
     public void encode(ChannelHandlerContext ctx, Message msg, List<Object> outList) throws Exception {
@@ -25,7 +31,7 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
         // 2.1 字节的版本,
         out.writeByte(1);
         // 3.1 字节的序列化方式 jdk 0 , json 1
-        out.writeByte(Config.getSerializerAlgorithm().ordinal());
+        out.writeByte(config.getSerializerAlgorithm().ordinal());
         // 4.1 字节的指令类型
         out.writeByte(msg.getMessageType());
         // 5.4 个字节
@@ -33,7 +39,7 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
         // 无意义，对齐填充
         out.writeByte(0xff);
         // 6.获取内容的字节数组
-        byte[] bytes = Config.getSerializerAlgorithm().serialize(msg);
+        byte[] bytes = config.getSerializerAlgorithm().serialize(msg);
         // 7.长度
         out.writeInt(bytes.length);
         // 8.写入内容

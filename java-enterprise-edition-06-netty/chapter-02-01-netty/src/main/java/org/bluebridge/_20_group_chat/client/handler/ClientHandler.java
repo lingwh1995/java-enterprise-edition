@@ -62,7 +62,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
             System.out.println(message);
             // 发送消息
             ctx.writeAndFlush(message);
-            System.out.println("等待后续操作...");
+            System.out.println("等待后续操作......");
             try {
                 WAIT_FOR_LOGIN.await();
             } catch (InterruptedException e) {

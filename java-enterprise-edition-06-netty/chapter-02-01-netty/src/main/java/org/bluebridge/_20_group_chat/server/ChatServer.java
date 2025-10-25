@@ -24,8 +24,9 @@ public class ChatServer {
     public static void main(String[] args) {
         NioEventLoopGroup boss = new NioEventLoopGroup();
         NioEventLoopGroup worker = new NioEventLoopGroup();
+
         LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
-        MessageCodecSharable MESSAGE_CODEC = new MessageCodecSharable();
+        MessageCodecSharable MESSAGE_CODEC_SHARABLE = new MessageCodecSharable();
         LoginRequestMessageHandler LOGIN_HANDLER = new LoginRequestMessageHandler();
         ChatRequestMessageHandler CHAT_HANDLER = new ChatRequestMessageHandler();
         GroupCreateRequestMessageHandler GROUP_CREATE_HANDLER = new GroupCreateRequestMessageHandler();
@@ -36,6 +37,7 @@ public class ChatServer {
         // 添加心跳包处理器
         PingMessageHandler PING_HANDLER = new PingMessageHandler();
         QuitHandler QUIT_HANDLER = new QuitHandler();
+
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.channel(NioServerSocketChannel.class);
@@ -46,7 +48,7 @@ public class ChatServer {
                     ChannelPipeline pipeline = ch.pipeline();
                     pipeline.addLast(new ProcotolFrameDecoder());
                     pipeline.addLast(LOGGING_HANDLER);
-                    pipeline.addLast(MESSAGE_CODEC);
+                    pipeline.addLast(MESSAGE_CODEC_SHARABLE);
                     // 用来判断是不是 读空闲时间过长，或 写空闲时间过长
                     // 30s 内如果没有收到 channel 的数据，会触发一个 IdleState#READER_IDLE 事件
                     pipeline.addLast(new IdleStateHandler(30, 0, 0));
@@ -54,7 +56,7 @@ public class ChatServer {
                     pipeline.addLast(new ChannelDuplexHandler() {
                         // 用来触发特殊事件
                         @Override
-                        public void userEventTriggered(ChannelHandlerContext ctx, Object evt) {
+                        public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
                             IdleStateEvent event = (IdleStateEvent) evt;
                             // 触发了读空闲事件
                             if (event.state() == IdleState.READER_IDLE) {

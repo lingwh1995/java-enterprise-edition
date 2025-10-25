@@ -57,6 +57,7 @@
         <module>chapter-04-04-production-multiyply-environment</module>
         <module>chapter-04-06-production-package-to-war</module>
         <module>chapter-05-01-demo-restfulcrud</module>
+        <module>chapter-01-10-basic-bean-lifecycle</module>
     </modules>
 
     <properties>

@@ -16,6 +16,7 @@
         <module>chapter-01-02-jdk-nio</module>
         <module>chapter-01-03-jdk-aio</module>
         <module>chapter-02-01-netty</module>
+        <module>chapter-02-02-line</module>
     </modules>
 
     <properties>
@@ -29,10 +30,18 @@
         <logback-classic.version>1.2.3</logback-classic.version>
         <protobuf-java.version>3.11.3</protobuf-java.version>
         <junit4.version>4.12</junit4.version>
+        <spring.boot.version>2.7.6</spring.boot.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <!-- netty开始 -->
             <dependency>
                 <groupId>io.netty</groupId>

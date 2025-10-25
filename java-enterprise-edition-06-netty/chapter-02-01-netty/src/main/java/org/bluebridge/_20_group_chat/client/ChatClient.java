@@ -26,7 +26,7 @@ public class ChatClient {
     public static void main(String[] args) {
         NioEventLoopGroup group = new NioEventLoopGroup();
         LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
-        MessageCodecSharable MESSAGE_CODEC = new MessageCodecSharable();
+        MessageCodecSharable MESSAGE_CODEC_SHARABLE = new MessageCodecSharable();
         ClientHandler CLIENT_HANDLER = new ClientHandler();
 
         try {
@@ -39,7 +39,7 @@ public class ChatClient {
                     ChannelPipeline pipeline = ch.pipeline();
                     pipeline.addLast(new ProcotolFrameDecoder());
                     pipeline.addLast(LOGGING_HANDLER);
-                    pipeline.addLast(MESSAGE_CODEC);
+                    pipeline.addLast(MESSAGE_CODEC_SHARABLE);
                     // 用来判断是不是 读空闲时间过长，或 写空闲时间过长
                     // 10s 内如果没有向服务器写数据，会触发一个 IdleState#WRITER_IDLE 事件
                     pipeline.addLast(new IdleStateHandler(0, 10, 0));
@@ -52,7 +52,7 @@ public class ChatClient {
                             // 触发了写空闲事件
                             if (event.state() == IdleState.WRITER_IDLE) {
                                  log.info("10s 没有写数据了，发送一个心跳包");
-                                 ctx.writeAndFlush(new PingMessage());
+                                 ctx.writeAndFlush(new PingMessage(14));
                             }
                         }
                     });

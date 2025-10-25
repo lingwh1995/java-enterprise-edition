@@ -31,6 +31,12 @@ public class NettyWebSocketClient {
 
     public static void main(String[] args) throws InterruptedException {
         NioEventLoopGroup group = new NioEventLoopGroup();
+
+        // 日志处理器
+        LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
+        // WebSocket处理器
+        WebSocketClientHandler WEBSOCKET_CLIENT_HANDLER = new WebSocketClientHandler();
+
         try {
             Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(group)
@@ -41,7 +47,7 @@ public class NettyWebSocketClient {
                         ChannelPipeline pipeline = ch.pipeline();
                         pipeline.addLast(new HttpClientCodec());
                         // 添加日志处理器
-                        pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
+                        pipeline.addLast(LOGGING_HANDLER);
                         pipeline.addLast(new HttpObjectAggregator(8192));
                         pipeline.addLast(new WebSocketClientProtocolHandler(
                             WebSocketClientHandshakerFactory.newHandshaker(
@@ -52,7 +58,7 @@ public class NettyWebSocketClient {
                                 EmptyHttpHeaders.INSTANCE
                             )
                         ));
-                        pipeline.addLast(new WebSocketClientHandler());
+                        pipeline.addLast(WEBSOCKET_CLIENT_HANDLER);
                     }
                 });
 

@@ -1,4 +1,4 @@
-package org.bluebridge.config;
+package org.bluebridge.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -14,8 +14,7 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -26,8 +25,11 @@ import javax.annotation.PreDestroy;
  * @date 2025/10/21 16:28
  */
 @Slf4j
-@Configuration
-public class NettyWebSocketConfig {
+@Component
+public class NettyWebSocketServer {
+
+    @Value("${netty.websocket.host}")
+    private String host;
 
     @Value("${netty.websocket.port}")
     private int port;
@@ -40,6 +42,9 @@ public class NettyWebSocketConfig {
         ServerBootstrap bootstrap = new ServerBootstrap();
         bossGroup = new NioEventLoopGroup();
         workerGroup = new NioEventLoopGroup();
+
+        NettyWebSocketServerHandler NETTY_WEBSOCKET_SERVER_HANDLER = new NettyWebSocketServerHandler();
+
         bootstrap.group(bossGroup, workerGroup)
             .channel(NioServerSocketChannel.class)
             .childHandler(new ChannelInitializer<SocketChannel>() {
@@ -55,21 +60,16 @@ public class NettyWebSocketConfig {
                     // 添加WebSocket支持
                     pipeline.addLast(new WebSocketServerProtocolHandler("/websocket"));
                     // 添加自定义处理器
-                    pipeline.addLast(nettyWebSocketServerHandler());
+                    pipeline.addLast(NETTY_WEBSOCKET_SERVER_HANDLER);
                 }
             });
 
         try {
-            ChannelFuture future = bootstrap.bind(port).sync();
+            ChannelFuture future = bootstrap.bind(host, port).sync();
             log.info("Netty WebSocket服务器启动成功，端口: {}", port);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    @Bean
-    public NettyWebSocketServerHandler nettyWebSocketServerHandler() {
-        return new NettyWebSocketServerHandler();
     }
 
     @PreDestroy

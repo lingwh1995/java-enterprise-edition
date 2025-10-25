@@ -1,3 +1,4 @@
 netty:
   websocket:
+    host: localhost
     port: 8088
