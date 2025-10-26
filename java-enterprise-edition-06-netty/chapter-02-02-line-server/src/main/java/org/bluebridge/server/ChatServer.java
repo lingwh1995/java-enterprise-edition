@@ -25,6 +25,12 @@ import javax.annotation.Resource;
  * @desc 聊天服务器
  * @date 2025/10/25 12:17
  */
+
+/**
+ * 测试方法
+ *  1.cmd -> telnet 127.0.0.1 8080/telnet localhost 8080 -> 直接输入内容（只能发送单个字符）/按下Ctrl+]后输入 send + 内容（可以发送字符串） -> 查看idea控制台接收到的信息
+ *  2.启动多个客户端
+ */
 @Slf4j
 @Component
 public class ChatServer {
@@ -38,13 +44,14 @@ public class ChatServer {
     @Resource
     private IUserService userService;
 
+    @Resource
+    private LoggingHandler loggingHandler;
+
+    @Resource
+    private MessageCodecSharable messageCodecSharable;
+
     NioEventLoopGroup bossGroup = new NioEventLoopGroup();
     NioEventLoopGroup workerGroup = new NioEventLoopGroup();
-
-    // 日志处理器
-    LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
-    // 消息处理器
-    MessageCodecSharable MESSAGE_CODEC_SHARABLE = new MessageCodecSharable();
 
     @PostConstruct
     public void startNettyServer() {
@@ -56,8 +63,8 @@ public class ChatServer {
                 protected void initChannel(NioSocketChannel ch) throws Exception {
                     ChannelPipeline pipeline = ch.pipeline();
                     pipeline.addLast(new ProcotolFrameDecoder());
-                    pipeline.addLast(LOGGING_HANDLER);
-                    pipeline.addLast(MESSAGE_CODEC_SHARABLE);
+                    pipeline.addLast(loggingHandler);
+                    pipeline.addLast(messageCodecSharable);
                     pipeline.addLast(new SimpleChannelInboundHandler<LoginRequestMessage>() {
                         @Override
                         protected void channelRead0(ChannelHandlerContext ctx, LoginRequestMessage msg) throws Exception {
@@ -66,11 +73,17 @@ public class ChatServer {
                             boolean isLogin = userService.login(username, password);
                             LoginResponseMessage message = null;
                             if(isLogin) {
-                                message = new LoginResponseMessage(false, "登录成功");
+                                message = new LoginResponseMessage(true, "登录成功");
                             } else {
                                 message = new LoginResponseMessage(false, "用户名或密码错误");
                             }
                             ctx.channel().writeAndFlush(message);
+                        }
+
+                        @Override
+                        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+                            log.info("server......");
+                            super.exceptionCaught(ctx, cause);
                         }
                     });
                 }

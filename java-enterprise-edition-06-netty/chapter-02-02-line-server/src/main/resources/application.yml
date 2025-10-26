@@ -5,4 +5,4 @@ netty:
     host: localhost
     port: 8080
   serializer:
-    algorithm: 1
+    algorithm: Json

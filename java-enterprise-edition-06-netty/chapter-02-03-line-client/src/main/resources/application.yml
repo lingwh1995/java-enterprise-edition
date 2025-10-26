@@ -1,0 +1,8 @@
+server:
+  port: 8089
+netty:
+  tcp:
+    host: localhost
+    port: 8080
+  serializer:
+    algorithm: Json

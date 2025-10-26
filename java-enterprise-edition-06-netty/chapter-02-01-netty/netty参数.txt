@@ -1,0 +1,65 @@
+import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.channel.socket.nio.NioServerSocketChannel;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.PreDestroy;
+
+@Configuration
+public class NettyServerConfig {
+
+    // 从配置文件读取端口（默认 8089）
+    @Value("${netty.server.port:8089}")
+    private int port;
+
+    // Boss 线程组（处理连接请求）
+    private final NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
+    // Worker 线程组（处理读写操作）
+    private final NioEventLoopGroup workerGroup = new NioEventLoopGroup();
+
+    /**
+     * 启动 Netty 服务器
+     */
+    @Bean
+    public ChannelFuture startNettyServer() throws InterruptedException {
+        // 初始化服务器启动器
+        ServerBootstrap bootstrap = new ServerBootstrap();
+        bootstrap.group(bossGroup, workerGroup)
+                .channel(NioServerSocketChannel.class) // 使用 NIO 通道
+                .option(ChannelOption.SO_BACKLOG, 128) // 连接队列大小
+                .childOption(ChannelOption.SO_KEEPALIVE, true) // 保持长连接
+                .childHandler(new ChannelInitializer<SocketChannel>() {
+                    @Override
+                    protected void initChannel(SocketChannel ch) {
+                        // 配置通道处理器（自定义业务逻辑）
+                        ch.pipeline()
+                                // 添加字符串编解码器（简化字符串消息处理）
+                                .addLast(new io.netty.handler.codec.string.StringDecoder())
+                                .addLast(new io.netty.handler.codec.string.StringEncoder())
+                                // 自定义业务处理器（核心逻辑）
+                                .addLast(new NettyServerHandler());
+                    }
+                });
+
+        // 绑定端口并启动服务器（同步阻塞等待启动完成）
+        ChannelFuture future = bootstrap.bind(port).sync();
+        System.out.println("Netty 服务器启动成功，端口：" + port);
+        return future;
+    }
+
+    /**
+     * 关闭服务器（Spring 销毁时调用）
+     */
+    @PreDestroy
+    public void stopNettyServer() {
+        bossGroup.shutdownGracefully();
+        workerGroup.shutdownGracefully();
+        System.out.println("Netty 服务器已关闭");
+    }
+}
