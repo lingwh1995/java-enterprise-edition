@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 
 /**
  * @author lingwh
@@ -34,6 +35,12 @@ public class NettyWebSocketServer {
     @Value("${netty.websocket.port}")
     private int port;
 
+    @Value("${netty.websocket.ws-url}")
+    private String wsUrl;
+
+    @Resource
+    private NettyWebSocketServerHandler nettyWebSocketServerHandler;
+
     private NioEventLoopGroup bossGroup;
     private NioEventLoopGroup workerGroup;
 
@@ -42,8 +49,6 @@ public class NettyWebSocketServer {
         ServerBootstrap bootstrap = new ServerBootstrap();
         bossGroup = new NioEventLoopGroup();
         workerGroup = new NioEventLoopGroup();
-
-        NettyWebSocketServerHandler NETTY_WEBSOCKET_SERVER_HANDLER = new NettyWebSocketServerHandler();
 
         bootstrap.group(bossGroup, workerGroup)
             .channel(NioServerSocketChannel.class)
@@ -58,9 +63,9 @@ public class NettyWebSocketServer {
                     // 添加聚合器
                     pipeline.addLast(new HttpObjectAggregator(65536));
                     // 添加WebSocket支持
-                    pipeline.addLast(new WebSocketServerProtocolHandler("/websocket"));
+                    pipeline.addLast(new WebSocketServerProtocolHandler(wsUrl));
                     // 添加自定义处理器
-                    pipeline.addLast(NETTY_WEBSOCKET_SERVER_HANDLER);
+                    pipeline.addLast(nettyWebSocketServerHandler);
                 }
             });
 

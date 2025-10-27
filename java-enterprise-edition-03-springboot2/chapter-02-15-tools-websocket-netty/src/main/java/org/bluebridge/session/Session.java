@@ -1,4 +1,4 @@
-package org.bluebridge._20_group_chat.server.session;
+package org.bluebridge.session;
 
 
 import io.netty.channel.Channel;

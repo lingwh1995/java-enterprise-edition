@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 /**
  * @author lingwh
- * @desc
+ * @desc 客户端处理器
  * @date 2025/10/21 16:31
  */
 @Slf4j
@@ -30,18 +30,20 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<TextWebS
             WebSocketClientProtocolHandler.ClientHandshakeStateEvent handshakeEvent =
                     (WebSocketClientProtocolHandler.ClientHandshakeStateEvent) evt;
             if (handshakeEvent == WebSocketClientProtocolHandler.ClientHandshakeStateEvent.HANDSHAKE_COMPLETE) {
-                log.info("WebSocket握手完成，可以发送消息，请输入消息（输入 exit 退出）");
-                // 改为从终端中接收信息
-                Scanner scanner = new Scanner(System.in);
-                while (scanner.hasNextLine()) {
-                    System.out.print("请输入消息（输入 exit 退出）：\n");
-                    String message = scanner.nextLine();
-                    if ("exit".equals(message)) {
-                        break;
+                new Thread(() -> {
+                    log.info("WebSocket握手完成，可以发送消息，请输入消息（输入 exit 退出）");
+                    // 改为从终端中接收信息
+                    Scanner scanner = new Scanner(System.in);
+                    while (scanner.hasNextLine()) {
+                        System.out.print("请输入消息（输入 exit 退出）：\n");
+                        String message = scanner.nextLine();
+                        if ("exit".equals(message)) {
+                            break;
+                        }
+                        // 握手完成后发送消息
+                        ctx.channel().writeAndFlush(new TextWebSocketFrame(message));
                     }
-                    // 握手完成后发送消息
-                    ctx.channel().writeAndFlush(new TextWebSocketFrame(message));
-                }
+                }).start();
             }
         }
         super.userEventTriggered(ctx, evt);

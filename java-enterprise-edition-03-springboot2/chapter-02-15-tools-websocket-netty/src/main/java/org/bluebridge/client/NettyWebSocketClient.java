@@ -26,8 +26,9 @@ import java.net.URI;
 public class NettyWebSocketClient {
 
     private static final String HOST = "localhost";
-    private static final int PORT = 8088;
-    private static final String URL = "/websocket";
+    private static final int PORT = 8080;
+    private static final String ENDPOINT_PATH_PREFIX = "/websocket";
+    private static final String FULL_WS_URL = "ws://" + HOST + ":" + PORT + ENDPOINT_PATH_PREFIX;
 
     public static void main(String[] args) throws InterruptedException {
         NioEventLoopGroup group = new NioEventLoopGroup();
@@ -51,7 +52,7 @@ public class NettyWebSocketClient {
                         pipeline.addLast(new HttpObjectAggregator(8192));
                         pipeline.addLast(new WebSocketClientProtocolHandler(
                             WebSocketClientHandshakerFactory.newHandshaker(
-                                new URI("ws://" + HOST + ":" + PORT + URL),
+                                new URI(FULL_WS_URL),
                                 WebSocketVersion.V13,
                                 null,
                                 false,

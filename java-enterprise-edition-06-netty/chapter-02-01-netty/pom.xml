@@ -59,6 +59,13 @@
             <artifactId>gson</artifactId>
         </dependency>
         <!-- gson结束 -->
+
+        <!-- guava开始 -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <!-- guava结束 -->
     </dependencies>
 
 </project>

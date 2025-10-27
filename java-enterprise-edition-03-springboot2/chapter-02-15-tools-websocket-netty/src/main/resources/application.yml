@@ -1,4 +1,7 @@
+server:
+  port: 8088
 netty:
   websocket:
     host: localhost
-    port: 8088
+    port: 8080
+    ws-url: /websocket
