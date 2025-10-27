@@ -19,6 +19,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @author lingwh
@@ -51,6 +52,8 @@ public class ChatClient {
     private MessageCodecSharable messageCodecSharable;
 
     NioEventLoopGroup group = new NioEventLoopGroup();
+
+    CountDownLatch latch =new CountDownLatch(1);
 
     @PostConstruct
     public void startNettyClient() {
