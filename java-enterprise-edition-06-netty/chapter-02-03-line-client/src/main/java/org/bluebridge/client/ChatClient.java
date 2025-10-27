@@ -9,6 +9,7 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.domain.LoginRequestMessage;
+import org.bluebridge.domain.LoginResponseMessage;
 import org.bluebridge.protocol.MessageCodecSharable;
 import org.bluebridge.protocol.ProcotolFrameDecoder;
 import org.bluebridge.client.service.IUserService;
@@ -20,6 +21,7 @@ import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * @author lingwh
@@ -53,7 +55,9 @@ public class ChatClient {
 
     NioEventLoopGroup group = new NioEventLoopGroup();
 
-    CountDownLatch latch =new CountDownLatch(1);
+    CountDownLatch WAIT_FOR_LOGIN = new CountDownLatch(1);
+
+    AtomicBoolean LOGIN = new AtomicBoolean(false);
 
     @PostConstruct
     public void startNettyClient() {
@@ -94,12 +98,33 @@ public class ChatClient {
                                         // 发送消息
                                         ctx.writeAndFlush(message);
                                         log.info("已发送登录消息，等待后续操作......");
+                                        try {
+                                            // 停止等待
+                                            WAIT_FOR_LOGIN.await();
+                                        } catch (InterruptedException e) {
+                                            throw new RuntimeException(e);
+                                        }
+
+                                        // 如果登录失败，退出程序
+                                        if(!LOGIN.get()){
+                                            log.info("登录失败，退出程序");
+                                            ctx.channel().close();
+                                            return;
+                                        }
+                                        System.out.println("xxxx");
                                     }).start();
                                 }
 
                                 @Override
                                 public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
                                     log.info("{}", msg);
+                                    if(msg instanceof LoginResponseMessage){
+                                        LoginResponseMessage loginResponseMessage = (LoginResponseMessage) msg;
+                                        LOGIN.set(loginResponseMessage.isSuccess());
+                                    }
+
+                                    // 计数器减一
+                                    WAIT_FOR_LOGIN.countDown();
                                 }
 
                                 @Override
