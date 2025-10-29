@@ -8,6 +8,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
+import org.bluebridge.domain.ChatRequestMessage;
 import org.bluebridge.domain.LoginRequestMessage;
 import org.bluebridge.domain.LoginResponseMessage;
 import org.bluebridge.protocol.MessageCodecSharable;
@@ -19,7 +20,10 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -56,7 +60,7 @@ public class ChatClient {
     NioEventLoopGroup group = new NioEventLoopGroup();
 
     CountDownLatch WAIT_FOR_LOGIN = new CountDownLatch(1);
-
+    AtomicBoolean EXIT = new AtomicBoolean(false);
     AtomicBoolean LOGIN = new AtomicBoolean(false);
 
     @PostConstruct
@@ -84,14 +88,14 @@ public class ChatClient {
                                         log.info("请输入用户名:");
                                         Scanner scanner = new Scanner(System.in);
                                         String username = scanner.nextLine();
-//                                if(EXIT.get()){
-//                                    return;
-//                                }
+                                        if(EXIT.get()){
+                                            return;
+                                        }
                                         log.info("请输入密码:");
                                         String password = scanner.nextLine();
-//                                if(EXIT.get()){
-//                                    return;
-//                                }
+                                        if(EXIT.get()){
+                                            return;
+                                        }
                                         // 构造消息对象
                                         LoginRequestMessage message = new LoginRequestMessage(username, password);
                                         log.info("登录消息：{}", message);
@@ -111,7 +115,53 @@ public class ChatClient {
                                             ctx.channel().close();
                                             return;
                                         }
-                                        System.out.println("xxxx");
+
+                                        while (true) {
+                                            System.out.println("==================================");
+                                            System.out.println("send [username] [content]");
+                                            System.out.println("gsend [group name] [content]");
+                                            System.out.println("gcreate [group name] [m1,m2,m3...]");
+                                            System.out.println("gmembers [group name]");
+                                            System.out.println("gjoin [group name]");
+                                            System.out.println("gquit [group name]");
+                                            System.out.println("quit");
+                                            System.out.println("==================================");
+                                            String command = null;
+                                            try {
+                                                command = scanner.nextLine();
+                                            } catch (Exception e) {
+                                                break;
+                                            }
+                                            if(EXIT.get()){
+                                                return;
+                                            }
+                                            String[] s = command.split(" ");
+                                            switch (s[0]){
+                                                case "send":
+                                                    ctx.writeAndFlush(new ChatRequestMessage(username, s[1], s[2]));
+                                                    break;
+                                                case "gsend":
+                                                    //ctx.writeAndFlush(new GroupChatRequestMessage(username, s[1], s[2]));
+                                                    break;
+                                                case "gcreate":
+                                                    Set<String> set = new HashSet<>(Arrays.asList(s[2].split(",")));
+                                                    set.add(username); // 加入自己
+                                                    //ctx.writeAndFlush(new GroupCreateRequestMessage(s[1], set));
+                                                    break;
+                                                case "gmembers":
+                                                    //ctx.writeAndFlush(new GroupMembersRequestMessage(s[1]));
+                                                    break;
+                                                case "gjoin":
+                                                    //ctx.writeAndFlush(new GroupJoinRequestMessage(username, s[1]));
+                                                    break;
+                                                case "gquit":
+                                                    //ctx.writeAndFlush(new GroupQuitRequestMessage(username, s[1]));
+                                                    break;
+                                                case "quit":
+                                                    ctx.channel().close();
+                                                    return;
+                                            }
+                                        }
                                     }).start();
                                 }
 
