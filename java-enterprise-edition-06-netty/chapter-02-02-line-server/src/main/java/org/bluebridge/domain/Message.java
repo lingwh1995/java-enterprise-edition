@@ -59,8 +59,8 @@ public abstract class Message implements Serializable {
     static {
         MESSAGE_CLASSES.put(LoginRequestMessage, LoginRequestMessage.class);
         MESSAGE_CLASSES.put(LoginResponseMessage, LoginResponseMessage.class);
-//        MESSAGE_CLASSES.put(ChatRequestMessage, ChatRequestMessage.class);
-//        MESSAGE_CLASSES.put(ChatResponseMessage, ChatResponseMessage.class);
+        MESSAGE_CLASSES.put(ChatRequestMessage, ChatRequestMessage.class);
+        MESSAGE_CLASSES.put(ChatResponseMessage, ChatResponseMessage.class);
 //        MESSAGE_CLASSES.put(GroupCreateRequestMessage, GroupCreateRequestMessage.class);
 //        MESSAGE_CLASSES.put(GroupCreateResponseMessage, GroupCreateResponseMessage.class);
 //        MESSAGE_CLASSES.put(GroupJoinRequestMessage, GroupJoinRequestMessage.class);

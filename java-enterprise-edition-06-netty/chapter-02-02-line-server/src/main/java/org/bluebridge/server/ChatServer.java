@@ -8,10 +8,13 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
+import org.bluebridge.domain.ChatRequestMessage;
 import org.bluebridge.domain.LoginRequestMessage;
 import org.bluebridge.domain.LoginResponseMessage;
 import org.bluebridge.protocol.MessageCodecSharable;
 import org.bluebridge.protocol.ProcotolFrameDecoder;
+import org.bluebridge.server.handler.ChatRequestMessageHandler;
+import org.bluebridge.server.handler.LoginRequestMessageHandler;
 import org.bluebridge.server.service.IUserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -42,19 +45,23 @@ public class ChatServer {
     private int port;
 
     @Resource
-    private IUserService userService;
-
-    @Resource
     private LoggingHandler loggingHandler;
 
     @Resource
     private MessageCodecSharable messageCodecSharable;
+
+    @Resource
+    private LoginRequestMessageHandler loginRequestMessageHandler;
+
+    @Resource
+    private ChatRequestMessageHandler chatRequestMessageHandler;
 
     NioEventLoopGroup bossGroup = new NioEventLoopGroup();
     NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
     @PostConstruct
     public void startNettyServer() {
+        ChatRequestMessage chatRequestMessage = new ChatRequestMessage();
         ServerBootstrap serverBootstrap = new ServerBootstrap()
             .group(bossGroup, workerGroup)
             .channel(NioServerSocketChannel.class)
@@ -65,27 +72,8 @@ public class ChatServer {
                     pipeline.addLast(new ProcotolFrameDecoder());
                     pipeline.addLast(loggingHandler);
                     pipeline.addLast(messageCodecSharable);
-                    pipeline.addLast(new SimpleChannelInboundHandler<LoginRequestMessage>() {
-                        @Override
-                        protected void channelRead0(ChannelHandlerContext ctx, LoginRequestMessage msg) throws Exception {
-                            String username = msg.getUsername();
-                            String password = msg.getPassword();
-                            boolean isLogin = userService.login(username, password);
-                            LoginResponseMessage message = null;
-                            if(isLogin) {
-                                message = new LoginResponseMessage(true, "登录成功");
-                            } else {
-                                message = new LoginResponseMessage(false, "用户名或密码错误");
-                            }
-                            ctx.channel().writeAndFlush(message);
-                        }
-
-                        @Override
-                        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-                            log.info("server......");
-                            super.exceptionCaught(ctx, cause);
-                        }
-                    });
+                    pipeline.addLast(loginRequestMessageHandler);
+                    pipeline.addLast(chatRequestMessageHandler);
                 }
             });
         try {
