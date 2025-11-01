@@ -10,6 +10,8 @@
     </encoder>
     </appender>
 
+    <logger name="io.netty" level="debug"/>
+
     <!-- 日志输出级别,logback日志级别包括五个：TRACE < DEBUG < INFO < WARN < ERROR -->
     <root level="debug">
         <appender-ref ref="STDOUT"/>
