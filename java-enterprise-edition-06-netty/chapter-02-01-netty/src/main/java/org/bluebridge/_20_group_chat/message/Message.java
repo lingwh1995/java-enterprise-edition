@@ -25,10 +25,7 @@ public abstract class Message implements Serializable {
     public abstract int getMessageType();
 
     public Message() {
-    }
-
-    public Message(int messageType) {
-        this.messageType = messageType;
+        this.messageType = getMessageType();
     }
 
     public static final int LoginRequestMessage = 0;

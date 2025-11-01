@@ -16,8 +16,10 @@
         <module>chapter-01-02-jdk-nio</module>
         <module>chapter-01-03-jdk-aio</module>
         <module>chapter-02-01-netty</module>
-        <module>chapter-02-02-line-server</module>
-        <module>chapter-02-03-line-client</module>
+        <module>chapter-02-02-line-common</module>
+        <module>chapter-02-03-line-server</module>
+        <module>chapter-02-04-line-client</module>
+
     </modules>
 
     <properties>
