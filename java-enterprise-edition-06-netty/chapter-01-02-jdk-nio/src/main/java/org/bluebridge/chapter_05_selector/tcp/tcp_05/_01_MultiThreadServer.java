@@ -1,4 +1,4 @@
-package org.bluebridge.chapter_09_selector;
+package org.bluebridge.chapter_05_selector.tcp.tcp_05;
 
 import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.ByteBufferUtil;
@@ -37,6 +37,8 @@ public class _01_MultiThreadServer {
         SelectionKey bossKey = ssc.register(boss, 0, null);
         bossKey.interestOps(SelectionKey.OP_ACCEPT);
         ssc.bind(new InetSocketAddress(HOST, PORT));
+        log.info("非阻塞TCP Selector服务器启动，IP：{}，端口：{}......", HOST, PORT);
+
         // 创建固定数量的 worker
         Worker worker = new Worker("worker-0");
         worker.init();

@@ -1,4 +1,4 @@
-package org.bluebridge.chapter_07_selector;
+package org.bluebridge.chapter_05_selector.tcp.tcp_03;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -135,6 +135,7 @@ public class SelectorServer {
         /*--------------测试 selector api --------------*/
         // 6.绑定端口号
         ssc.bind(new InetSocketAddress(HOST, PORT));
+        log.info("非阻塞TCP Selector服务器启动，IP：{}，端口：{}......", HOST, PORT);
 
         /*--------------测试 selector api --------------*/
         // 测试wakeup(): 唤醒 selector，使 selector 不再处于阻塞状态

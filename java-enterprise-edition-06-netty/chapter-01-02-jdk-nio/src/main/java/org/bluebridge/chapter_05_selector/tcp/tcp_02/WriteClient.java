@@ -1,4 +1,4 @@
-package org.bluebridge.chapter_06_selector;
+package org.bluebridge.chapter_05_selector.tcp.tcp_02;
 
 import lombok.extern.slf4j.Slf4j;
 

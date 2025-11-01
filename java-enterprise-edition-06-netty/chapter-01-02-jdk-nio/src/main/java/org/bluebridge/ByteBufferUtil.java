@@ -1,5 +1,6 @@
 package org.bluebridge;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.util.internal.StringUtil;
 
 import java.nio.ByteBuffer;
@@ -96,7 +97,7 @@ public class ByteBufferUtil {
         int oldlimit = buffer.limit();
         buffer.limit(buffer.capacity());
         StringBuilder origin = new StringBuilder(256);
-        appendPrettyHexDump(origin, buffer, 0, buffer.capacity());
+        appendPrettyHexDump(origin, buffer, 0, (oldlimit / 16 + 1) * 16);
         System.out.println("+--------+-------------------- all ------------------------+----------------+");
         System.out.printf("position: [%d], limit: [%d]\n", buffer.position(), oldlimit);
         System.out.println(origin);

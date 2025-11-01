@@ -1,4 +1,4 @@
-package org.bluebridge.chapter_08_selector;
+package org.bluebridge.chapter_05_selector.tcp.tcp_04;
 
 import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.ByteBufferUtil;
@@ -28,6 +28,8 @@ public class SelectorServer {
         ssc.configureBlocking(false);
         // 3.绑定端口号
         ssc.bind(new InetSocketAddress(HOST, PORT));
+        log.info("非阻塞TCP Selector服务器启动，IP：{}，端口：{}......", HOST, PORT);
+
         // 4.创建 Selector 对象
         Selector selector = Selector.open();
         // 5.把 Channel 注册到 selector 上

@@ -1,4 +1,4 @@
-package org.bluebridge.chapter_05_selector;
+package org.bluebridge.chapter_05_selector.tcp.tcp_04;
 
 import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.ByteBufferUtil;
@@ -7,24 +7,26 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
-import java.nio.charset.Charset;
 import java.util.Scanner;
 
 /**
  * @author lingwh
- * @desc 测试使用 selector 实现 Server 的客户端
- * @date 2025/7/8 9:06
+ * @desc 测试从事件驱动角度理解 selector 网络通信的客户端
+ * @date 2025/6/28 17:38
  */
 @Slf4j
 public class Client {
+
+    private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;
 
     public static void main(String[] args) throws IOException {
         // 1.创建客户端
         SocketChannel sc = SocketChannel.open();
         // 2.连接服务端
-        sc.connect(new InetSocketAddress("localhost", PORT));
-        log.info("客户端启动......");
+        sc.connect(new InetSocketAddress(HOST, PORT));
+        log.info("非阻塞TCP Selector客户端启动......");
+
         Scanner scanner = new Scanner(System.in);
         // 3.发送消息
         while (true) {
