@@ -45,4 +45,11 @@ public interface Session {
      */
     Channel getChannel(String username);
 
+    /**
+     * 获取会话通道对应的用户名
+     * @param channel 通道
+     * @return 用户名
+     */
+    String getUsername(Channel channel);
+
 }

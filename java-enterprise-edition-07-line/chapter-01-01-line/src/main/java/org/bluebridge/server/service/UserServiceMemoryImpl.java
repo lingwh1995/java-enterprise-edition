@@ -9,11 +9,11 @@ public class UserServiceMemoryImpl implements UserService {
     private static Map<String, String> ALL_USER_MAP = new ConcurrentHashMap<>();
 
     static {
-        ALL_USER_MAP.put("001", "123");
-        ALL_USER_MAP.put("002", "123");
-        ALL_USER_MAP.put("003", "123");
-        ALL_USER_MAP.put("004", "123");
-        ALL_USER_MAP.put("005", "123");
+        ALL_USER_MAP.put("zhangsan", "123456");
+        ALL_USER_MAP.put("lisi", "123456");
+        ALL_USER_MAP.put("wangwu", "123456");
+        ALL_USER_MAP.put("zhaoliu", "123456");
+        ALL_USER_MAP.put("sunqi", "123456");
     }
 
     @Override

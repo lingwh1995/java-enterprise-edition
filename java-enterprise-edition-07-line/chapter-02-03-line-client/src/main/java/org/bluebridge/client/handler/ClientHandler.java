@@ -72,8 +72,8 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
                 System.out.println("send [username] [content]");
                 System.out.println("gcreate [group name] [m1,m2,m3...]");
                 System.out.println("gmembers [group name]");
-                System.out.println("gsend [group name] [content]");
                 System.out.println("gjoin [group name]");
+                System.out.println("gsend [group name] [content]");
                 System.out.println("gquit [group name]");
                 System.out.println("quit");
                 System.out.println("==================================");
@@ -100,11 +100,11 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
                     case "gmembers":
                         ctx.writeAndFlush(new GroupMembersRequestMessage(s[1]));
                         break;
+                    case "gjoin":
+                        ctx.writeAndFlush(new GroupJoinRequestMessage(username, s[1]));
+                        break;
                     case "gsend":
                         //ctx.writeAndFlush(new GroupChatRequestMessage(username, s[1], s[2]));
-                        break;
-                    case "gjoin":
-                        //ctx.writeAndFlush(new GroupJoinRequestMessage(username, s[1]));
                         break;
                     case "gquit":
                         //ctx.writeAndFlush(new GroupQuitRequestMessage(username, s[1]));

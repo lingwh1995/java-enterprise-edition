@@ -15,11 +15,13 @@ import java.util.Set;
 @AllArgsConstructor
 public class Group {
 
-    // 聊天室名称
-    private String name;
-    // 聊天室成员
+    // 聊天组名称
+    private String groupName;
+    // 聊天组成员
     private Set<String> members;
+    // 聊天组创建者
+    private String owner;
 
-    public static final Group EMPTY_GROUP = new Group("empty", Collections.emptySet());
+    public static final Group EMPTY_GROUP = new Group("empty", Collections.emptySet(), "");
 
 }

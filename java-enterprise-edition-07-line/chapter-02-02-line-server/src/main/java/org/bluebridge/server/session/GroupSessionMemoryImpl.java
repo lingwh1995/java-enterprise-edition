@@ -26,43 +26,48 @@ public class GroupSessionMemoryImpl implements GroupSession {
     private Session session;
 
     @Override
-    public Group createGroup(String name, Set<String> members) {
-        Group group = new Group(name, members);
-        return GROUP_MAP.putIfAbsent(name, group);
+    public Group createGroup(String groupName, Set<String> members, String owner) {
+        Group group = new Group(groupName, members, owner);
+        return GROUP_MAP.putIfAbsent(groupName, group);
     }
 
     @Override
-    public Group joinMember(String name, String member) {
-        return GROUP_MAP.computeIfPresent(name, (key, value) -> {
+    public Group joinMember(String groupName, String member) {
+        return GROUP_MAP.computeIfPresent(groupName, (key, value) -> {
             value.getMembers().add(member);
             return value;
         });
     }
 
     @Override
-    public Group removeMember(String name, String member) {
-        return GROUP_MAP.computeIfPresent(name, (key, value) -> {
+    public Group removeMember(String groupName, String member) {
+        return GROUP_MAP.computeIfPresent(groupName, (key, value) -> {
             value.getMembers().remove(member);
             return value;
         });
     }
 
     @Override
-    public Group removeGroup(String name) {
-        return GROUP_MAP.remove(name);
+    public Group removeGroup(String groupName) {
+        return GROUP_MAP.remove(groupName);
     }
 
     @Override
-    public Set<String> getMembers(String name) {
-        return GROUP_MAP.getOrDefault(name, Group.EMPTY_GROUP).getMembers();
+    public Set<String> getMembers(String groupName) {
+        return GROUP_MAP.getOrDefault(groupName, Group.EMPTY_GROUP).getMembers();
     }
 
     @Override
-    public List<Channel> getMembersChannel(String name) {
-        return getMembers(name).stream()
+    public List<Channel> getMembersChannel(String groupName) {
+        return getMembers(groupName).stream()
                 .map(member -> session.getChannel(member))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public String getOwner(String groupName) {
+        return GROUP_MAP.getOrDefault(groupName, Group.EMPTY_GROUP).getOwner();
     }
 
 }

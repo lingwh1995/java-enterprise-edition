@@ -6,20 +6,20 @@ import lombok.ToString;
 
 /**
  * @author lingwh
- * @desc 创建聊天组响应消息
- * @date 2025/11/01 17:14
+ * @desc 聊天组加入响应消息
+ * @date 2025/11/2 11:15
  */
 @Data
 @ToString(callSuper = true)
-public class GroupCreateResponseMessage extends AbstractResponseMessage {
+public class GroupJoinResponseMessage extends AbstractResponseMessage {
 
-    public GroupCreateResponseMessage(boolean success, String reason) {
+    public GroupJoinResponseMessage(boolean success, String reason) {
         super(success, reason);
     }
 
     @Override
     public int getMessageType() {
-        return Message.GROUP_CREATE_RESPONSE_MESSAGE;
+        return GROUP_JOIN_RESPONSE_MESSAGE;
     }
 
 }

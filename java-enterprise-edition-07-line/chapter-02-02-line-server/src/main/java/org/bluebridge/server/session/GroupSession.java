@@ -17,9 +17,10 @@ public interface GroupSession {
      * 创建聊天组
      * @param groupName 聊天组名称
      * @param members 聊天组成员
+     * @param owner 聊天组创建者
      * @return 聊天组
      */
-    Group createGroup(String groupName, Set<String> members);
+    Group createGroup(String groupName, Set<String> members, String owner);
 
     /**
      * 加入聊天组
@@ -57,5 +58,12 @@ public interface GroupSession {
      * @return 聊天组成员的Channel
      */
     List<Channel> getMembersChannel(String groupName);
+
+    /**
+     * 获取聊天组的所有者
+     * @param groupName 聊天组名称
+     * @return 聊天组的所有者
+     */
+    String getOwner(String groupName);
 
 }

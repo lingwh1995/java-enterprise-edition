@@ -35,12 +35,12 @@ public class LoginRequestMessageHandler extends SimpleChannelInboundHandler<Logi
         boolean isLogin = userService.login(username, password);
         LoginResponseMessage message = null;
         if(isLogin) {
-            log.info("用户{}登录成功", username);
+            log.info("用户 {} 登录成功", username);
             message = new LoginResponseMessage(true, "登录成功");
             // 登录成功后，将channel与用户名绑定
             session.bind(ctx.channel(), username);
         } else {
-            log.info("用户{}登录失败", username);
+            log.info("用户 {} 登录失败", username);
             message = new LoginResponseMessage(false, "用户名或密码错误");
         }
         ctx.channel().writeAndFlush(message);
@@ -48,7 +48,7 @@ public class LoginRequestMessageHandler extends SimpleChannelInboundHandler<Logi
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        log.info("server......");
+        log.info("用户 {} 登录异常", session.getUsername(ctx.channel()), cause);
         super.exceptionCaught(ctx, cause);
     }
 

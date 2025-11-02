@@ -41,22 +41,30 @@ public abstract class Message implements Serializable {
     public static final int CHAT_REQUEST_MESSAGE = 2;
     // 单聊响应消息
     public static final int CHAT_RESPONSE_MESSAGE = 3;
-    // 群聊创建请求消息
+    // 聊天组创建请求消息
     public static final int GROUP_CREATE_REQUEST_MESSAGE = 4;
-    // 群聊创建响应消息
+    // 聊天组创建响应消息
     public static final int GROUP_CREATE_RESPONSE_MESSAGE = 5;
     // 群成员查看请求消息
     public static final int GROUP_MEMBERS_REQUEST_MESSAGE = 6;
     // 群成员查看响应消息
     public static final int GROUP_MEMBERS_RESPONSE_MESSAGE = 7;
-    public static final int GroupJoinRequestMessage = 8;
-    public static final int GroupJoinResponseMessage = 9;
-    public static final int GroupQuitRequestMessage = 10;
-    public static final int GroupQuitResponseMessage = 11;
-    public static final int GroupChatRequestMessage = 12;
-    public static final int GroupChatResponseMessage = 13;
-    public static final int PingMessage = 14;
-    public static final int PongMessage = 15;
+    // 群加入请求消息
+    public static final int GROUP_JOIN_REQUEST_MESSAGE = 8;
+    // 群加入响应消息
+    public static final int GROUP_JOIN_RESPONSE_MESSAGE = 9;
+    // 群退出请求消息
+    public static final int GROUP_QUIT_REQUEST_MESSAGE = 10;
+    // 群退出响应消息
+    public static final int GROUP_QUIT_RESPONSE_MESSAGE = 11;
+    // 群聊请求消息
+    public static final int GROUP_CHAT_REQUEST_MESSAGE = 12;
+    // 群聊响应消息
+    public static final int GROUP_CHAT_RESPONSE_MESSAGE = 13;
+    // 心跳请求消息
+    public static final int PING_MESSAGE = 14;
+    // 心跳响应消息
+    public static final int PONG_MESSAGE = 15;
 
     private static final Map<Integer, Class<? extends Message>> MESSAGE_CLASSES = new HashMap<>();
 
@@ -69,8 +77,8 @@ public abstract class Message implements Serializable {
         MESSAGE_CLASSES.put(GROUP_CREATE_RESPONSE_MESSAGE, GroupCreateResponseMessage.class);
         MESSAGE_CLASSES.put(GROUP_MEMBERS_REQUEST_MESSAGE, GroupMembersRequestMessage.class);
         MESSAGE_CLASSES.put(GROUP_MEMBERS_RESPONSE_MESSAGE, GroupMembersResponseMessage.class);
-//        MESSAGE_CLASSES.put(GroupJoinRequestMessage, GroupJoinRequestMessage.class);
-//        MESSAGE_CLASSES.put(GroupJoinResponseMessage, GroupJoinResponseMessage.class);
+        MESSAGE_CLASSES.put(GROUP_JOIN_REQUEST_MESSAGE, GroupJoinRequestMessage.class);
+        MESSAGE_CLASSES.put(GROUP_JOIN_RESPONSE_MESSAGE, GroupJoinResponseMessage.class);
 //        MESSAGE_CLASSES.put(GroupQuitRequestMessage, GroupQuitRequestMessage.class);
 //        MESSAGE_CLASSES.put(GroupQuitResponseMessage, GroupQuitResponseMessage.class);
 //        MESSAGE_CLASSES.put(GroupChatRequestMessage, GroupChatRequestMessage.class);
