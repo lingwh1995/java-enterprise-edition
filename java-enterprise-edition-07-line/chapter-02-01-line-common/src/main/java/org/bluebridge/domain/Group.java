@@ -2,6 +2,7 @@ package org.bluebridge.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Collections;
 import java.util.Set;
@@ -12,6 +13,7 @@ import java.util.Set;
  * @date 2025/11/01 17:05
  */
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Group {
 

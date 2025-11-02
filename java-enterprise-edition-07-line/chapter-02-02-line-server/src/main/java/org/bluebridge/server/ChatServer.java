@@ -13,10 +13,7 @@ import org.bluebridge.domain.LoginRequestMessage;
 import org.bluebridge.domain.LoginResponseMessage;
 import org.bluebridge.protocol.MessageCodecSharable;
 import org.bluebridge.protocol.ProcotolFrameDecoder;
-import org.bluebridge.server.handler.ChatRequestMessageHandler;
-import org.bluebridge.server.handler.GroupCreateRequestMessageHandler;
-import org.bluebridge.server.handler.GroupMembersRequestMessageHandler;
-import org.bluebridge.server.handler.LoginRequestMessageHandler;
+import org.bluebridge.server.handler.*;
 import org.bluebridge.server.service.IUserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -64,6 +61,12 @@ public class ChatServer {
     @Resource
     private GroupMembersRequestMessageHandler groupMembersRequestMessageHandler;
 
+    @Resource
+    private GroupAddRequestMessageHandler groupAddRequestMessageHandler;
+
+    @Resource
+    private GroupJoinRequestMessageHandler groupJoinRequestMessageHandler;
+
     NioEventLoopGroup bossGroup = new NioEventLoopGroup();
     NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
@@ -84,6 +87,8 @@ public class ChatServer {
                     pipeline.addLast(chatRequestMessageHandler);
                     pipeline.addLast(groupCreateRequestMessageHandler);
                     pipeline.addLast(groupMembersRequestMessageHandler);
+                    pipeline.addLast(groupAddRequestMessageHandler);
+                    pipeline.addLast(groupJoinRequestMessageHandler);
                 }
             });
         try {

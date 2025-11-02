@@ -70,4 +70,14 @@ public class GroupSessionMemoryImpl implements GroupSession {
         return GROUP_MAP.getOrDefault(groupName, Group.EMPTY_GROUP).getOwner();
     }
 
+    @Override
+    public Group getGroupByGroupName(String groupName) {
+        return GROUP_MAP.getOrDefault(groupName, Group.EMPTY_GROUP);
+    }
+
+    @Override
+    public boolean isGroupNotExist(String groupName) {
+        return GROUP_MAP.getOrDefault(groupName, Group.EMPTY_GROUP) == Group.EMPTY_GROUP;
+    }
+
 }

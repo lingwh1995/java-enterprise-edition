@@ -26,13 +26,19 @@ public class GroupMembersRequestMessageHandler extends SimpleChannelInboundHandl
     private GroupSession groupSession;
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, GroupMembersRequestMessage groupMembersRequestMessage) throws Exception {
+    public void channelRead0(ChannelHandlerContext ctx, GroupMembersRequestMessage groupMembersRequestMessage) throws Exception {
         // 获取群名称
         String groupName = groupMembersRequestMessage.getGroupName();
         // 获取群组中的所有成员
         Set<String> members = groupSession.getMembers(groupName);
-        // 构建查看群成员响应消息
-        GroupMembersResponseMessage groupMembersResponseMessage = new GroupMembersResponseMessage(members);
+        GroupMembersResponseMessage groupMembersResponseMessage = null;
+        if(members.isEmpty()) {
+            log.info("群组 {} 中没有成员", groupName);
+            // 构建查看群成员响应消息
+            groupMembersResponseMessage = new GroupMembersResponseMessage(false, "群组 " + groupName + " 不存在");
+        } else {
+            groupMembersResponseMessage = new GroupMembersResponseMessage(members);
+        }
         ctx.writeAndFlush(groupMembersResponseMessage);
     }
 

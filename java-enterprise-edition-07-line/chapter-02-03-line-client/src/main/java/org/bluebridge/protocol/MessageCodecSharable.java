@@ -7,6 +7,7 @@ import io.netty.handler.codec.MessageToMessageCodec;
 import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.config.Config;
 import org.bluebridge.domain.Message;
+import org.bluebridge.domain.MessageType;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -64,7 +65,7 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
         // 找到反序列化算法
         Serializer.Algorithm algorithm = Serializer.Algorithm.values()[serializerType];
         // 确定具体消息类型
-        Class<? extends Message> messageClass = Message.getMessageClass(messageType);
+        Class<? extends Message> messageClass = MessageType.getMessageClassByCode(messageType);
         Message message = algorithm.deserialize(messageClass, bytes);
         log.info("{}, {}, {}, {}, {}, {}", magicNum, version, serializerType, messageType, sequenceId, length);
         out.add(message);

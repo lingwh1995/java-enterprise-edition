@@ -2,7 +2,7 @@ package org.bluebridge.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
@@ -12,16 +12,21 @@ import java.util.Set;
  * @date 2025/11/1 22:16
  */
 @Data
-@ToString(callSuper = true)
+@NoArgsConstructor
 @AllArgsConstructor
-public class GroupMembersResponseMessage extends AbstractRequestMessage {
+public class GroupMembersResponseMessage extends AbstractResponseMessage {
 
     // 聊天室成员
     private Set<String> members;
 
+    public GroupMembersResponseMessage(boolean success, String reason) {
+        this.success = success;
+        this.reason = reason;
+    }
+
     @Override
     public int getMessageType() {
-        return Message.GROUP_CREATE_RESPONSE_MESSAGE;
+        return MessageType.GROUP_MEMBERS_RESPONSE_MESSAGE.getCode();
     }
 
 }

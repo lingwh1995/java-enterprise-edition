@@ -66,4 +66,18 @@ public interface GroupSession {
      */
     String getOwner(String groupName);
 
+    /**
+     * 根据聊天组名称获取聊天组
+     * @param groupName 聊天组名称
+     * @return 聊天组
+     */
+    Group getGroupByGroupName(String groupName);
+
+    /**
+     * 判断聊天组是否存在
+     * @param groupName
+     * @return
+     */
+    boolean isGroupNotExist(String groupName);
+
 }

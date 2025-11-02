@@ -33,7 +33,7 @@ public class GroupCreateRequestMessageHandler extends SimpleChannelInboundHandle
     private GroupSession groupSession;
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, GroupCreateRequestMessage groupCreateRequestMessage) throws Exception {
+    public void channelRead0(ChannelHandlerContext ctx, GroupCreateRequestMessage groupCreateRequestMessage) throws Exception {
         // 获取聊天组名称
         String groupName = groupCreateRequestMessage.getGroupName();
         // 获取群成员

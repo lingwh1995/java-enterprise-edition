@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChatRequestMessage extends AbstractRequestMessage{
+public class ChatRequestMessage extends AbstractRequestMessage {
 
     private String from;
     private String to;
@@ -20,7 +20,7 @@ public class ChatRequestMessage extends AbstractRequestMessage{
 
     @Override
     public int getMessageType() {
-        return Message.CHAT_REQUEST_MESSAGE;
+        return MessageType.CHAT_REQUEST_MESSAGE.getCode();
     }
 
 }

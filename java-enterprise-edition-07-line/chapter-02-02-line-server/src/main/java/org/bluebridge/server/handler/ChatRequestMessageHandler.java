@@ -21,7 +21,7 @@ public class ChatRequestMessageHandler extends SimpleChannelInboundHandler<ChatR
     private Session session;
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, ChatRequestMessage msg) throws Exception {
+    public void channelRead0(ChannelHandlerContext ctx, ChatRequestMessage msg) throws Exception {
         // 获取消息接收方
         String to = msg.getTo();
         // 获取消息发送方

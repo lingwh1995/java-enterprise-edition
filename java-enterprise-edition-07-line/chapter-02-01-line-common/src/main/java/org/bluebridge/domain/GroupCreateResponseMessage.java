@@ -2,7 +2,7 @@ package org.bluebridge.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 /**
  * @author lingwh
@@ -10,16 +10,17 @@ import lombok.ToString;
  * @date 2025/11/01 17:14
  */
 @Data
-@ToString(callSuper = true)
+@AllArgsConstructor
 public class GroupCreateResponseMessage extends AbstractResponseMessage {
 
     public GroupCreateResponseMessage(boolean success, String reason) {
-        super(success, reason);
+        this.success = success;
+        this.reason = reason;
     }
 
     @Override
     public int getMessageType() {
-        return Message.GROUP_CREATE_RESPONSE_MESSAGE;
+        return MessageType.GROUP_CREATE_RESPONSE_MESSAGE.getCode();
     }
 
 }

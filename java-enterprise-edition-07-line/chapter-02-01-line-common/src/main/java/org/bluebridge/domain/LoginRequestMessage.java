@@ -3,7 +3,6 @@ package org.bluebridge.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 /**
  * @author lingwh
@@ -13,7 +12,6 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(callSuper = true)
 public class LoginRequestMessage extends AbstractRequestMessage {
 
     private String username;
@@ -21,7 +19,7 @@ public class LoginRequestMessage extends AbstractRequestMessage {
 
     @Override
     public int getMessageType() {
-        return Message.LOGIN_REQUEST_MESSAGE;
+        return MessageType.LOGIN_REQUEST_MESSAGE.getCode();
     }
 
 }

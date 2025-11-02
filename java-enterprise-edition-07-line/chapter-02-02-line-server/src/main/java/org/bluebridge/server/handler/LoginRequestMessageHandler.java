@@ -29,7 +29,7 @@ public class LoginRequestMessageHandler extends SimpleChannelInboundHandler<Logi
     private IUserService userService;
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, LoginRequestMessage msg) throws Exception {
+    public void channelRead0(ChannelHandlerContext ctx, LoginRequestMessage msg) throws Exception {
         String username = msg.getUsername();
         String password = msg.getPassword();
         boolean isLogin = userService.login(username, password);

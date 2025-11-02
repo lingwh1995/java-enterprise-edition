@@ -1,7 +1,8 @@
 package org.bluebridge.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 /**
  * @author lingwh
@@ -9,16 +10,20 @@ import lombok.ToString;
  * @date 2025/10/25 17:15
  */
 @Data
-@ToString(callSuper = true)
+@AllArgsConstructor
 public class LoginResponseMessage extends AbstractResponseMessage {
 
     public LoginResponseMessage(boolean success, String reason) {
-        super(success, reason);
+        this.success = success;
+        this.reason = reason;
     }
 
     @Override
     public int getMessageType() {
-        return Message.LOGIN_RESPONSE_MESSAGE;
+        return MessageType.LOGIN_RESPONSE_MESSAGE.getCode();
     }
 
+    public boolean isSuccess() {
+        return success;
+    }
 }

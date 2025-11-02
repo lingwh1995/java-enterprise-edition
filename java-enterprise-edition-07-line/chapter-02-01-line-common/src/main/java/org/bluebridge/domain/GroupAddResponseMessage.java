@@ -5,14 +5,14 @@ import lombok.Data;
 
 /**
  * @author lingwh
- * @desc 聊天组加入响应消息
+ * @desc 拉人进聊天组响应消息
  * @date 2025/11/2 11:15
  */
 @Data
 @AllArgsConstructor
-public class GroupJoinResponseMessage extends AbstractResponseMessage {
+public class GroupAddResponseMessage extends AbstractResponseMessage {
 
-    public GroupJoinResponseMessage(boolean success, String reason) {
+    public GroupAddResponseMessage(boolean success, String reason) {
         this.success = success;
         this.reason = reason;
     }
