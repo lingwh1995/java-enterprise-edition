@@ -34,9 +34,11 @@ public enum MessageType {
     // 聊天组聊天请求消息
     GROUP_CHAT_REQUEST_MESSAGE(12, GroupChatRequestMessage.class),
     // 聊天组聊天响应消息
-    GROUP_CHAT_RESPONSE_MESSAGE(13, GroupChatResponseMessage.class);
-    //    GROUP_QUIT_REQUEST(10, GroupQuitRequestMessage.class),
-//    GROUP_QUIT_RESPONSE(11, GroupQuitResponseMessage.class),
+    GROUP_CHAT_RESPONSE_MESSAGE(13, GroupChatResponseMessage.class),
+    // 退出聊天组请求消息
+    GROUP_QUIT_REQUEST_MESSAGE(14, GroupQuitRequestMessage.class),
+    // 退出聊天组响应消息
+    GROUP_QUIT_RESPONSE_MESSAGE(15, GroupQuitResponseMessage.class);
 //    PING(14, PingMessage.class),
 //    PONG(15, PongMessage.class);
 

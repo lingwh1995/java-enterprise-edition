@@ -111,7 +111,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
                         ctx.writeAndFlush(new GroupChatRequestMessage(s[1], s[2], username));
                         break;
                     case "gquit":
-                        //ctx.writeAndFlush(new GroupQuitRequestMessage(username, s[1]));
+                        ctx.writeAndFlush(new GroupQuitRequestMessage(username, s[1]));
                         break;
                     case "quit":
                         ctx.channel().close();

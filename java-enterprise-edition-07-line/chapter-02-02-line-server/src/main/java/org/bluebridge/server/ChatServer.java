@@ -70,6 +70,9 @@ public class ChatServer {
     @Resource
     private GroupChatRequestHandler groupChatRequestHandler;
 
+    @Resource
+    private GroupQuitRequestMessageHandler groupQuitRequestMessageHandler;
+
     NioEventLoopGroup bossGroup = new NioEventLoopGroup();
     NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
@@ -93,6 +96,7 @@ public class ChatServer {
                     pipeline.addLast(groupAddRequestMessageHandler);
                     pipeline.addLast(groupJoinRequestMessageHandler);
                     pipeline.addLast(groupChatRequestHandler);
+                    pipeline.addLast(groupQuitRequestMessageHandler);
                 }
             });
         try {
