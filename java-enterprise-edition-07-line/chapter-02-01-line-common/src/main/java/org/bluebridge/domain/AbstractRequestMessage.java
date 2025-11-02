@@ -13,4 +13,5 @@ public abstract class AbstractRequestMessage implements Message {
     public AbstractRequestMessage() {
         this.messageType = getMessageType();
     }
+
 }

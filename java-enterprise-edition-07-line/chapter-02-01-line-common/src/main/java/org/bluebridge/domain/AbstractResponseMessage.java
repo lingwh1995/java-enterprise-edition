@@ -12,4 +12,8 @@ public abstract class AbstractResponseMessage implements Message {
     protected boolean success;
     protected String reason;
 
+    public AbstractResponseMessage() {
+        this.messageType = getMessageType();
+    }
+
 }
