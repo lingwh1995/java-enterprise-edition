@@ -1,1 +1,3 @@
-定义完后，可以直接mvn install 或  mvn protobuf:compile，可以生成响应的proto文件对应的java代码。
+1.定义完后，可以直接mvn install 或  mvn protobuf:compile，可以生成响应的proto文件对应的java代码。
+2.启动程序
+3.使用Postman或test目录中ProtobufControllerTest测试接口
