@@ -12,16 +12,17 @@
     <artifactId>java-enterprise-edition-03-springboot2</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>chapter-01-01-component-helloworld</module>
-        <module>chapter-01-02-component-actuator</module>
-        <module>chapter-01-03-component-devtools</module>
-        <module>chapter-01-04-component-repository</module>
-        <module>chapter-01-05-component-configuration-processor</module>
-        <module>chapter-01-06-component-annotation-driven</module>
-        <module>chapter-01-07-component-json-xml</module>
-        <module>chapter-01-08-component-read-configuration-file</module>
-        <module>chapter-01-09-component-read-yml-configuration-file</module>
-        <module>chapter-01-10-component-bean-lifecycle</module>
+        <module>chapter-01-01-springboot-helloworld</module>
+        <module>chapter-01-02-springboot-actuator</module>
+        <module>chapter-01-03-springboot-devtools</module>
+        <module>chapter-01-04-springboot-test</module>
+        <module>chapter-01-05-springboot-aliyun-repository</module>
+        <module>chapter-01-06-springboot-annotation-driven</module>
+        <module>chapter-01-07-springboot-configuration-processor</module>
+        <module>chapter-01-08-springboot-json-xml</module>
+        <module>chapter-01-09-springboot-read-configuration-file</module>
+        <module>chapter-01-10-springboot-read-yml-configuration-file</module>
+        <module>chapter-01-11-springboot-bean-lifecycle</module>
         <module>chapter-02-01-integration-mail</module>
         <module>chapter-02-02-integration-schedule</module>
         <module>chapter-02-03-integration-async</module>
@@ -37,6 +38,7 @@
         <module>chapter-02-13-integration-websocket-stomp-ws</module>
         <module>chapter-02-14-integration-websocket-stomp-sockjs</module>
         <module>chapter-02-15-integration-websocket-netty</module>
+        <module>chapter-02-16-integration-protobuf</module>
         <module>chapter-03-01-framework-mybatis-plus-helloworld</module>
         <module>chapter-03-02-framework-mybatis-plus-mpg-generator</module>
         <module>chapter-03-03-framework-mybatis-plus-mpg-test</module>
@@ -58,7 +60,6 @@
         <module>chapter-04-05-production-multiyply-datasource</module>
         <module>chapter-04-06-production-package-to-war</module>
         <module>chapter-05-01-demo-restfulcrud</module>
-        <module>chapter-02-16-integration-protobuf</module>
     </modules>
 
     <properties>
