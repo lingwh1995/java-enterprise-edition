@@ -1,0 +1,1 @@
+定义完后，可以直接mvn install 或  mvn protobuf:compile，可以生成响应的proto文件对应的java代码。

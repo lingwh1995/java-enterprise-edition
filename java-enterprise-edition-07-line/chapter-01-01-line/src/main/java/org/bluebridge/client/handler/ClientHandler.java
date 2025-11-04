@@ -22,9 +22,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @ChannelHandler.Sharable
 public class ClientHandler extends ChannelInboundHandlerAdapter {
 
-    AtomicBoolean LOGIN = new AtomicBoolean(false);
-    AtomicBoolean EXIT = new AtomicBoolean(false);
-    CountDownLatch WAIT_FOR_LOGIN = new CountDownLatch(1);
+    private static final AtomicBoolean LOGIN = new AtomicBoolean(false);
+    private static final AtomicBoolean EXIT = new AtomicBoolean(false);
+    private static final CountDownLatch WAIT_FOR_LOGIN = new CountDownLatch(1);
 
     // 接收响应消息
     @Override

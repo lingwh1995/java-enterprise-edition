@@ -50,8 +50,8 @@ public class ChatServer {
                     pipeline.addLast(LOGGING_HANDLER);
                     pipeline.addLast(MESSAGE_CODEC_SHARABLE);
                     // 用来判断是不是 读空闲时间过长，或 写空闲时间过长
-                    // 30s 内如果没有收到 channel 的数据，会触发一个 IdleState#READER_IDLE 事件
-                    pipeline.addLast(new IdleStateHandler(30, 0, 0));
+                    // 60s 内如果没有收到 channel 的数据，会触发一个 IdleState#READER_IDLE 事件
+                    pipeline.addLast(new IdleStateHandler(60, 0, 0));
                     // ChannelDuplexHandler 可以同时作为入站和出站处理器
                     pipeline.addLast(new ChannelDuplexHandler() {
                         // 用来触发特殊事件
@@ -60,7 +60,7 @@ public class ChatServer {
                             IdleStateEvent event = (IdleStateEvent) evt;
                             // 触发了读空闲事件
                             if (event.state() == IdleState.READER_IDLE) {
-                                log.info("已经 30s 没有读到数据了......");
+                                log.info("已经 60s 没有读到数据了......");
                                 ctx.channel().close();
                             }
                         }

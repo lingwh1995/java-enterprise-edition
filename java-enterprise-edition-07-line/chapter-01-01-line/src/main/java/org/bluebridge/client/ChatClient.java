@@ -41,8 +41,8 @@ public class ChatClient {
                     pipeline.addLast(LOGGING_HANDLER);
                     pipeline.addLast(MESSAGE_CODEC_SHARABLE);
                     // 用来判断是不是 读空闲时间过长，或 写空闲时间过长
-                    // 10s 内如果没有向服务器写数据，会触发一个 IdleState#WRITER_IDLE 事件
-                    pipeline.addLast(new IdleStateHandler(0, 10, 0));
+                    // 50s 内如果没有向服务器写数据，会触发一个 IdleState#WRITER_IDLE 事件
+                    pipeline.addLast(new IdleStateHandler(0, 50, 0));
                     // ChannelDuplexHandler 可以同时作为入站和出站处理器
                     pipeline.addLast(new ChannelDuplexHandler() {
                         // 用来触发特殊事件
@@ -51,7 +51,7 @@ public class ChatClient {
                             IdleStateEvent event = (IdleStateEvent) evt;
                             // 触发了写空闲事件
                             if (event.state() == IdleState.WRITER_IDLE) {
-                                 log.info("10s 没有写数据了，发送一个心跳包");
+                                 log.info("50s 没有写数据了，发送一个心跳包");
                                  ctx.writeAndFlush(new PingMessage());
                             }
                         }

@@ -12,31 +12,31 @@
     <artifactId>java-enterprise-edition-03-springboot2</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>chapter-01-01-basic-helloworld</module>
-        <module>chapter-01-02-basic-actuator</module>
-        <module>chapter-01-03-basic-devtools</module>
-        <module>chapter-01-04-basic-repository</module>
-        <module>chapter-01-05-basic-configuration-processor</module>
-        <module>chapter-01-06-basic-annotation-driven</module>
-        <module>chapter-01-07-basic-json-xml</module>
-        <module>chapter-01-08-basic-read-configuration-file</module>
-        <module>chapter-01-09-basic-read-yml-configuration-file</module>
-        <module>chapter-02-01-tools-mail</module>
-        <module>chapter-02-02-tools-schedule</module>
-        <module>chapter-02-03-tools-async</module>
-        <module>chapter-02-04-tools-cache</module>
-        <module>chapter-02-05-tools-rest-template</module>
-        <module>chapter-02-06-tools-swagger</module>
-        <module>chapter-02-07-tools-jackson</module>
-        <module>chapter-02-08-tools-springutils</module>
-        <module>chapter-02-09-tools-stream-response</module>
-        <module>chapter-02-10-tools-websocket-javax</module>
-        <module>chapter-02-11-tools-websocket-spring-ws</module>
-        <module>chapter-02-12-tools-websocket-spring-sockjs</module>
-        <module>chapter-02-13-tools-websocket-stomp-ws</module>
-        <module>chapter-02-14-tools-websocket-stomp-sockjs</module>
-        <module>chapter-02-15-tools-websocket-netty</module>
-        <module>chapter-04-05-tools-multiyply-datasource</module>
+        <module>chapter-01-01-component-helloworld</module>
+        <module>chapter-01-02-component-actuator</module>
+        <module>chapter-01-03-component-devtools</module>
+        <module>chapter-01-04-component-repository</module>
+        <module>chapter-01-05-component-configuration-processor</module>
+        <module>chapter-01-06-component-annotation-driven</module>
+        <module>chapter-01-07-component-json-xml</module>
+        <module>chapter-01-08-component-read-configuration-file</module>
+        <module>chapter-01-09-component-read-yml-configuration-file</module>
+        <module>chapter-01-10-component-bean-lifecycle</module>
+        <module>chapter-02-01-integration-mail</module>
+        <module>chapter-02-02-integration-schedule</module>
+        <module>chapter-02-03-integration-async</module>
+        <module>chapter-02-04-integration-cache</module>
+        <module>chapter-02-05-integration-rest-template</module>
+        <module>chapter-02-06-integration-swagger</module>
+        <module>chapter-02-07-integration-jackson</module>
+        <module>chapter-02-08-integration-springutils</module>
+        <module>chapter-02-09-integration-stream-response</module>
+        <module>chapter-02-10-integration-websocket-javax</module>
+        <module>chapter-02-11-integration-websocket-spring-ws</module>
+        <module>chapter-02-12-integration-websocket-spring-sockjs</module>
+        <module>chapter-02-13-integration-websocket-stomp-ws</module>
+        <module>chapter-02-14-integration-websocket-stomp-sockjs</module>
+        <module>chapter-02-15-integration-websocket-netty</module>
         <module>chapter-03-01-framework-mybatis-plus-helloworld</module>
         <module>chapter-03-02-framework-mybatis-plus-mpg-generator</module>
         <module>chapter-03-03-framework-mybatis-plus-mpg-test</module>
@@ -55,9 +55,10 @@
         <module>chapter-04-02-production-freemarker</module>
         <module>chapter-04-03-production-thymeleaf</module>
         <module>chapter-04-04-production-multiyply-environment</module>
+        <module>chapter-04-05-production-multiyply-datasource</module>
         <module>chapter-04-06-production-package-to-war</module>
         <module>chapter-05-01-demo-restfulcrud</module>
-        <module>chapter-01-10-basic-bean-lifecycle</module>
+        <module>chapter-02-16-integration-protobuf</module>
     </modules>
 
     <properties>
@@ -79,6 +80,7 @@
         <swagger.version>2.9.2</swagger.version>
         <swagger-bootstrap-ui.version>1.9.1</swagger-bootstrap-ui.version>
         <netty.version>4.1.39.Final</netty.version>
+        <protobuf.version>4.33.0</protobuf.version>
     </properties>
 
     <dependencyManagement>
@@ -177,6 +179,16 @@
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>
                 <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+                <version>${protobuf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java-util</artifactId>
+                <version>${protobuf.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
