@@ -3,14 +3,13 @@ package org.bluebridge;
 import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.domain.PersonProto;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.*;
-import org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
-
-import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 
@@ -20,12 +19,13 @@ import static org.junit.Assert.assertEquals;
  * @date 2025/11/4 16:22
  */
 @Slf4j
-@SpringBootTest(classes = Application.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class ProtobufControllerTest {
 
-//    @Resource
-//    private RestTemplate restTemplate;
-    private RestTemplate restTemplate = new RestTemplate(Collections.singletonList(new ProtobufHttpMessageConverter()));
+    @Resource
+    private RestTemplate restTemplate;
+
     // 测试 GET 接口（响应 Protobuf）
     @Test
     public void testGetPersonById() {
