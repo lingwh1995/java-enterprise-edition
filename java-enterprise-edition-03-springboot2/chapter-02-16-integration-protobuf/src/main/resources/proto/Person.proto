@@ -1,6 +1,9 @@
 syntax = "proto3";
 package org.bluebridge;
 
+// 是否拆分生成的类，默认是 false
+option java_multiple_files = false;
+
 // 生成的文件存放在哪个包下
 option java_package = "org.bluebridge.domain";
 

@@ -8,10 +8,16 @@ option java_multiple_files = false;
 option java_package = "org.bluebridge.domain";
 
 // 生成的类名，如果没有指定，会根据文件名自动转驼峰来命名
-option java_outer_classname = "ResponseProto";
+option java_outer_classname = "ContactProto";
 
-message Response {
-  int32 code = 1;
-  string message = 2;
-  string data = 3;
+import "address.proto";
+
+message Phone {
+  string number = 1;
+}
+
+message ContactInfo {
+  string name = 1;
+  int32 age = 2;
+  repeated Phone phones = 3;
 }
