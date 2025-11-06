@@ -772,8 +772,8 @@ public final class ResponseProto extends com.google.protobuf.GeneratedFile {
     java.lang.String[] descriptorData = {
       "\n\016Response.proto\022\016org.bluebridge\"7\n\010Resp" +
       "onse\022\014\n\004code\030\001 \001(\005\022\017\n\007message\030\002 \001(\t\022\014\n\004d" +
-      "ata\030\003 \001(\tB&\n\025org.bluebridge.domainB\rResp" +
-      "onseProtob\006proto3"
+      "ata\030\003 \001(\tB(\n\025org.bluebridge.domainB\rResp" +
+      "onseProtoP\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

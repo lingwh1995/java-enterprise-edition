@@ -953,8 +953,8 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
     java.lang.String[] descriptorData = {
       "\n\014Person.proto\022\016org.bluebridge\"B\n\006Person" +
       "\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005email\030\003 \001(" +
-      "\t\022\017\n\007address\030\004 \001(\tB$\n\025org.bluebridge.dom" +
-      "ainB\013PersonProtob\006proto3"
+      "\t\022\017\n\007address\030\004 \001(\tB&\n\025org.bluebridge.dom" +
+      "ainB\013PersonProtoP\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
