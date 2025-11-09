@@ -5,16 +5,16 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
+import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
-import org.bluebridge.domain.ChatRequestMessage;
-import org.bluebridge.domain.LoginRequestMessage;
-import org.bluebridge.domain.LoginResponseMessage;
+import org.bluebridge.domain.PingMessage;
+import org.bluebridge.domain.PongMessage;
 import org.bluebridge.protocol.MessageCodecSharable;
 import org.bluebridge.protocol.ProcotolFrameDecoder;
 import org.bluebridge.server.handler.*;
-import org.bluebridge.server.service.IUserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -73,12 +73,14 @@ public class ChatServer {
     @Resource
     private GroupQuitRequestMessageHandler groupQuitRequestMessageHandler;
 
+    @Resource
+    private QuitRequestHandler quitRequestHandler;
+
     NioEventLoopGroup bossGroup = new NioEventLoopGroup();
     NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
     @PostConstruct
     public void startNettyServer() {
-        ChatRequestMessage chatRequestMessage = new ChatRequestMessage();
         ServerBootstrap serverBootstrap = new ServerBootstrap()
             .group(bossGroup, workerGroup)
             .channel(NioServerSocketChannel.class)
@@ -86,6 +88,22 @@ public class ChatServer {
                 @Override
                 protected void initChannel(NioSocketChannel ch) throws Exception {
                     ChannelPipeline pipeline = ch.pipeline();
+                    // 5s 内如果没有收到 channel 的读事件，就会触发 IdleState#READER_IDLE 事件
+                    pipeline.addLast(new IdleStateHandler(5, 0, 0));
+                    // ChannelDuplexHandler 可以同时处理读事件和写事件
+                    pipeline.addLast(new ChannelDuplexHandler() {
+                        @Override
+                        public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+                            if(evt instanceof IdleStateEvent) {
+                                IdleStateEvent event = (IdleStateEvent) evt;
+                                // 触发了读空闲事件
+                                if(event.state() == IdleState.READER_IDLE) {
+                                    log.info("5s 内未收到 channel 的读事件，触发 IdleState#READER_IDLE 事件[读空闲事件]......");
+                                    ctx.writeAndFlush(new PongMessage());
+                                }
+                            }
+                        }
+                    });
                     pipeline.addLast(new ProcotolFrameDecoder());
                     pipeline.addLast(loggingHandler);
                     pipeline.addLast(messageCodecSharable);
@@ -97,6 +115,7 @@ public class ChatServer {
                     pipeline.addLast(groupJoinRequestMessageHandler);
                     pipeline.addLast(groupChatRequestHandler);
                     pipeline.addLast(groupQuitRequestMessageHandler);
+                    pipeline.addLast(quitRequestHandler);
                 }
             });
         try {

@@ -38,9 +38,11 @@ public enum MessageType {
     // 退出聊天组请求消息
     GROUP_QUIT_REQUEST_MESSAGE(14, GroupQuitRequestMessage.class),
     // 退出聊天组响应消息
-    GROUP_QUIT_RESPONSE_MESSAGE(15, GroupQuitResponseMessage.class);
-//    PING(14, PingMessage.class),
-//    PONG(15, PongMessage.class);
+    GROUP_QUIT_RESPONSE_MESSAGE(15, GroupQuitResponseMessage.class),
+    // 退出请求消息
+    PING(14, PingMessage.class),
+    // 退出响应消息
+    PONG(15, PongMessage.class);
 
     private final int code;
     private final Class<? extends Message> messageClass;

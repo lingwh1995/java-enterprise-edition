@@ -11,7 +11,6 @@ import org.bluebridge.server.session.Session;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.Set;
 
 /**
  * @author lingwh
@@ -41,7 +40,7 @@ public class GroupChatRequestHandler extends SimpleChannelInboundHandler<GroupCh
         }
         // 获取发送者用户名
         String sendUsername = session.getUsername(ctx.channel());
-        // 遍历群组成员，将消息发送给每个群组成员
+        // 获取所有在线的组成员，遍历群组成员，将消息发送给每个群组成员
         groupSession.getMembers(groupName).stream().forEach(member -> {
             GroupChatResponseMessage groupChatResponseMessage = new GroupChatResponseMessage(true, sendUsername, groupChatRequestMessage.getContent());
             session.getChannel(member).writeAndFlush(groupChatResponseMessage);

@@ -5,11 +5,9 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.domain.Group;
-import org.bluebridge.domain.GroupAddRequestMessage;
 import org.bluebridge.domain.GroupAddResponseMessage;
 import org.bluebridge.domain.GroupJoinRequestMessage;
 import org.bluebridge.server.session.GroupSession;
-import org.bluebridge.server.session.Session;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

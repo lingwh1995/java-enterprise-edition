@@ -4,7 +4,6 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
-import org.bluebridge.domain.Group;
 import org.bluebridge.domain.GroupQuitRequestMessage;
 import org.bluebridge.domain.GroupQuitResponseMessage;
 import org.bluebridge.server.session.GroupSession;
