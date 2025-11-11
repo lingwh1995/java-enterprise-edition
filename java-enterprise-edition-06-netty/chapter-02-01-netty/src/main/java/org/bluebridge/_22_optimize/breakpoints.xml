@@ -1,0 +1,72 @@
+<breakpoints>
+    <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+        <url>jar://$PROJECT_DIR$/../../../../maven/io/netty/netty-transport/4.1.85.Final/netty-transport-4.1.85.Final-sources.jar!/io/netty/channel/nio/AbstractNioChannel.java</url>
+        <line>260</line>
+        <option name="timeStamp" value="3" />
+    </line-breakpoint>
+    <line-breakpoint enabled="true" type="java-line">
+        <url>jar://$PROJECT_DIR$/../../../../maven/io/netty/netty-transport/4.1.85.Final/netty-transport-4.1.85.Final-sources.jar!/io/netty/channel/nio/AbstractNioChannel.java</url>
+        <line>255</line>
+        <option name="timeStamp" value="5" />
+    </line-breakpoint>
+    <line-breakpoint enabled="true" type="java-line">
+        <url>jar://$PROJECT_DIR$/../../../../maven/io/netty/netty-transport/4.1.85.Final/netty-transport-4.1.85.Final-sources.jar!/io/netty/channel/nio/AbstractNioChannel.java</url>
+        <line>241</line>
+        <option name="timeStamp" value="6" />
+    </line-breakpoint>
+    <line-breakpoint enabled="true" type="java-line">
+        <url>jar://$PROJECT_DIR$/../../../../maven/io/netty/netty-transport/4.1.85.Final/netty-transport-4.1.85.Final-sources.jar!/io/netty/channel/DefaultChannelPipeline.java</url>
+        <line>1341</line>
+        <option name="timeStamp" value="7" />
+    </line-breakpoint>
+    <line-breakpoint enabled="true" type="java-line">
+        <url>jar://$PROJECT_DIR$/../../../../maven/io/netty/netty-transport/4.1.85.Final/netty-transport-4.1.85.Final-sources.jar!/io/netty/channel/AbstractChannelHandlerContext.java</url>
+        <line>652</line>
+        <option name="timeStamp" value="9" />
+    </line-breakpoint>
+    <line-breakpoint enabled="true" type="java-line">
+        <url>jar://$PROJECT_DIR$/../../../../maven/io/netty/netty-transport/4.1.85.Final/netty-transport-4.1.85.Final-sources.jar!/io/netty/channel/AbstractChannelHandlerContext.java</url>
+        <line>631</line>
+        <option name="timeStamp" value="11" />
+    </line-breakpoint>
+    <line-breakpoint enabled="true" type="java-line">
+        <url>file://$PROJECT_DIR$/java-enterprise-edition-06-netty/chapter-02-01-netty/src/main/java/org/bluebridge/_22_optimize/NettyConnectionTimeoutClient.java</url>
+        <line>39</line>
+        <option name="timeStamp" value="12" />
+    </line-breakpoint>
+    <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+        <url>jar://$PROJECT_DIR$/../../../../maven/io/netty/netty-transport/4.1.85.Final/netty-transport-4.1.85.Final-sources.jar!/io/netty/bootstrap/Bootstrap.java</url>
+        <line>170</line>
+        <option name="timeStamp" value="18" />
+    </line-breakpoint>
+    <line-breakpoint enabled="true" type="java-line">
+        <url>jar://$PROJECT_DIR$/../../../../maven/io/netty/netty-transport/4.1.85.Final/netty-transport-4.1.85.Final-sources.jar!/io/netty/bootstrap/Bootstrap.java</url>
+        <line>191</line>
+        <option name="timeStamp" value="20" />
+    </line-breakpoint>
+    <line-breakpoint enabled="true" type="java-line">
+        <url>jar://$PROJECT_DIR$/../../../../maven/io/netty/netty-transport/4.1.85.Final/netty-transport-4.1.85.Final-sources.jar!/io/netty/bootstrap/Bootstrap.java</url>
+        <line>216</line>
+        <option name="timeStamp" value="22" />
+    </line-breakpoint>
+    <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+        <url>jar://$PROJECT_DIR$/../../../../maven/io/netty/netty-transport/4.1.85.Final/netty-transport-4.1.85.Final-sources.jar!/io/netty/bootstrap/Bootstrap.java</url>
+        <line>248</line>
+        <option name="timeStamp" value="24" />
+    </line-breakpoint>
+    <line-breakpoint enabled="true" type="java-line">
+        <url>jar://$PROJECT_DIR$/../../../../maven/io/netty/netty-transport/4.1.85.Final/netty-transport-4.1.85.Final-sources.jar!/io/netty/channel/AbstractChannel.java</url>
+        <line>264</line>
+        <option name="timeStamp" value="25" />
+    </line-breakpoint>
+    <line-breakpoint enabled="true" type="java-line">
+        <url>jar://$PROJECT_DIR$/../../../../maven/io/netty/netty-transport/4.1.85.Final/netty-transport-4.1.85.Final-sources.jar!/io/netty/channel/DefaultChannelPipeline.java</url>
+        <line>977</line>
+        <option name="timeStamp" value="27" />
+    </line-breakpoint>
+    <line-breakpoint enabled="true" type="java-line">
+        <url>jar://$PROJECT_DIR$/../../../../maven/io/netty/netty-transport/4.1.85.Final/netty-transport-4.1.85.Final-sources.jar!/io/netty/channel/AbstractChannelHandlerContext.java</url>
+        <line>615</line>
+        <option name="timeStamp" value="28" />
+    </line-breakpoint>
+</breakpoints>
