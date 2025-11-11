@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2025/10/25 12:36
  */
 @Configuration
-public class Config {
+public class SerializerConfig {
 
     @Value("${netty.serializer.algorithm}")
     private String serializerAlgorithm;

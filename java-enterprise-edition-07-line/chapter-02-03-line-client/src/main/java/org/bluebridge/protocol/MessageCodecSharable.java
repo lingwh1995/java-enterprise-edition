@@ -5,7 +5,7 @@ import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageCodec;
 import lombok.extern.slf4j.Slf4j;
-import org.bluebridge.config.Config;
+import org.bluebridge.config.SerializerConfig;
 import org.bluebridge.domain.Message;
 import org.bluebridge.domain.MessageType;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ import java.util.List;
 public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message> {
 
     @Resource
-    private Config config;
+    private SerializerConfig serializerConfig;
 
     @Override
     public void encode(ChannelHandlerContext ctx, Message msg, List<Object> outList) throws Exception {
@@ -34,7 +34,7 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
         // 2.1 字节的版本,
         out.writeByte(1);
         // 3.1 字节的序列化方式 jdk 0 , json 1
-        out.writeByte(config.getSerializerAlgorithm().ordinal());
+        out.writeByte(serializerConfig.getSerializerAlgorithm().ordinal());
         // 4.1 字节的指令类型
         out.writeByte(msg.getMessageType());
         // 5.4 个字节
@@ -42,7 +42,7 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
         // 无意义，对齐填充
         out.writeByte(0xff);
         // 6.获取内容的字节数组
-        byte[] bytes = config.getSerializerAlgorithm().serialize(msg);
+        byte[] bytes = serializerConfig.getSerializerAlgorithm().serialize(msg);
         // 7.长度
         out.writeInt(bytes.length);
         // 8.写入内容

@@ -9,11 +9,11 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author lingwh
- * @desc 配置类
+ * @desc 序列化配置类
  * @date 2025/10/25 12:36
  */
 @Configuration
-public class Config {
+public class SerializerConfig {
 
     @Value("${netty.serializer.algorithm}")
     private String serializerAlgorithm;
