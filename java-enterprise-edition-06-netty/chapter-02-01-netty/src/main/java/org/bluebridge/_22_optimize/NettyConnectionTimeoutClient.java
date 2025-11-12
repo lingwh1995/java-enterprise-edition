@@ -27,7 +27,9 @@ public class NettyConnectionTimeoutClient {
             // 客户端通过 .options() 方法配置参数给 SocketChannel 配置参数
             Bootstrap bootstrap = new Bootstrap()
                 .group(group)
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 300) // 设置连接超时时间，单位毫秒
+                // 设置连接超时时间，单位毫秒
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 300)
+                // 设置非阻塞，用它来建立新accept的连接，用于构造SocketChannel的工厂类
                 .channel(NioSocketChannel.class)
                 .handler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
