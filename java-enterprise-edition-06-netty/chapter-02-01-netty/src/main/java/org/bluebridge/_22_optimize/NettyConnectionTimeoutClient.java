@@ -1,6 +1,7 @@
 package org.bluebridge._22_optimize;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.bootstrap.BootstrapConfig;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -38,6 +39,9 @@ public class NettyConnectionTimeoutClient {
                     }
                 });
             ChannelFuture future = bootstrap.connect(HOST, PORT);
+            // 获取 netty 配置
+            BootstrapConfig config = bootstrap.config();
+            log.info("config: {}", config);
             future.sync().channel().closeFuture().channel();
         }catch (Exception e) {
             log.error("发生了异常，异常原因：{}", e.getMessage());

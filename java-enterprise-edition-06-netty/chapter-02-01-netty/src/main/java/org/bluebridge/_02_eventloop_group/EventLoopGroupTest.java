@@ -7,12 +7,13 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author lingwh
- * @desc 事件循环测试
+ * @desc EventLoopGroup 测试
  * @date 2025/9/23 11:06
  */
 
 /**
- * NioEventLoop 除了可以处理 io 事件，也可以处理普通任务
+ * 1.EventLoopGroup 本质上是一个线程池， EventLoop 可以理解为线程池中的一个线程
+ * 2.NioEventLoop 除了可以处理 io 事件，也可以处理普通任务
  */
 @Slf4j
 public class EventLoopGroupTest {
@@ -42,7 +43,7 @@ public class EventLoopGroupTest {
             log.info("这是个定时任务......");
         },3,2000, TimeUnit.MILLISECONDS); // 延迟3秒，每2秒执行一次
 
-        log.info("main");
+        log.info("main......");
 
         // 5.让主线程等待30秒，确保定时任务有时间执行
         TimeUnit.SECONDS.sleep(30);

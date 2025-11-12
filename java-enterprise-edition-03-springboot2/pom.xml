@@ -68,8 +68,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.boot.version>2.7.6</spring.boot.version>
         <mybatis-spring-boot-starter.version>2.2.0</mybatis-spring-boot-starter.version>
-        <mybatis-plus-boot.version>3.5.0</mybatis-plus-boot.version>
-        <mybatis-plus-generator.version>3.5.0</mybatis-plus-generator.version>
+        <pagehelper-spring-boot-starter.version>1.2.8</pagehelper-spring-boot-starter.version>
+        <mybatis-plus-boot-starter.version>3.5.4</mybatis-plus-boot-starter.version>
+        <mybatis-plus-generator.version>3.5.4</mybatis-plus-generator.version>
         <lombok.version>1.18.0</lombok.version>
         <logback-classic.version>1.2.3</logback-classic.version>
         <mysql.connector.version>8.0.33</mysql.connector.version>
@@ -99,9 +100,14 @@
                 <version>${mybatis-spring-boot-starter.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus-boot.version}</version>
+                <version>${mybatis-plus-boot-starter.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
@@ -193,4 +199,16 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
