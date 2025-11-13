@@ -30,4 +30,5 @@ public class CorsController {
         userList.add(new User("003","王五",36));
         return userList;
     }
+
 }
