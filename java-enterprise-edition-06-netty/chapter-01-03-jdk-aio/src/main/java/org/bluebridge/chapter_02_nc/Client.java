@@ -16,13 +16,14 @@ import java.util.Scanner;
 @Slf4j
 public class Client {
 
+    private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;
 
     public static void main(String[] args) throws IOException {
         // 1.创建客户端
         SocketChannel sc = SocketChannel.open();
         // 2.连接服务端
-        sc.connect(new InetSocketAddress("localhost", PORT));
+        sc.connect(new InetSocketAddress(HOST, PORT));
         log.info("客户端启动......");
         Scanner scanner = new Scanner(System.in);
         // 3.发送消息

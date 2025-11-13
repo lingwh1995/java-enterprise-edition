@@ -24,7 +24,7 @@ public class CorsController {
     @ResponseBody
     @GetMapping("/user")
     public List<User> getUsers(){
-        List<User> userList = new ArrayList();
+        List<User> userList = new ArrayList<>();
         userList.add(new User("001","张三",18));
         userList.add(new User("002","李四",24));
         userList.add(new User("003","王五",36));
