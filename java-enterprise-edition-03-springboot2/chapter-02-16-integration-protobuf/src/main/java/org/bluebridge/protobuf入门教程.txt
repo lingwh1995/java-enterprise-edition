@@ -1,0 +1,41 @@
+1.安装编译器
+    1.下载对应版本的 protobuf 编译器
+        https://github.com/protocolbuffers/protobuf/releases
+        下拉找到 Windows 版本安装包，根据你的系统位数选择
+            64 位系统：下载 protoc-3.3.0-win64.zip
+            32 位系统：下载 protoc-3.3.0-win32.zip
+    2.配置环境变量
+        将protoc的bin目录添加到系统PATH
+    3.验证安装
+        命令行执行 protoc --version，输出版本号即成功。
+2.创建 user.proto 文件定义消息结构
+
+    // 1. 指定 proto3 版本（必须放在第一行）
+    syntax = "proto3";
+
+    // 2. 可选：指定生成的 Java 类的包名（默认是 proto 文件所在目录的包结构）
+    option java_package = "org.bluebridge.protobuf.entity";
+
+    // 3. 可选：指定生成的 Java 类名（默认是消息名的驼峰式，这里显式指定更清晰）
+    option java_outer_classname = "UserProto";
+
+    // 4. 定义消息（类似 Java 的 Class）：用户信息
+    message User {
+      // 字段格式：[规则] 类型 字段名 = 字段编号;
+      int32 id = 1;                // 用户ID（编号 1-15 占用空间更小，高频字段用小编号）
+      string name = 2;             // 用户名（必填逻辑需自己在 Java 中判断，proto3 默认可选）
+      int32 age = 3;               // 年龄
+      repeated string tags = 4;    // 标签（repeated 对应 Java 的 List<String>）
+      Address address = 5;         // 嵌套消息（对应 Java 的内部类 Address）
+    }
+
+    // 5. 定义嵌套消息（地址信息）
+    message Address {
+      string province = 1;         // 省份
+      string city = 2;             // 城市
+      string detail = 3;           // 详细地址
+    }
+
+3. 在和 pom.xml 同级别的目录中执行下面编译命令
+    # 编译成java支持的语言格式：--java_out=Java代码输出目录  proto文件路径
+    protoc --java_out=src/main/java  src/main/java/org/bluebridge/protobuf/user.proto
