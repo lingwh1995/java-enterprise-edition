@@ -21,7 +21,7 @@ import java.util.List;
 @Slf4j
 @Component
 @ChannelHandler.Sharable
-public class MessageCodec extends MessageToMessageCodec<ByteBuf, Message> {
+public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message> {
 
     @Resource
     private SerializerConfig serializerConfig;

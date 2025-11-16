@@ -11,7 +11,7 @@ import io.netty.handler.timeout.IdleStateHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.domain.PongMessage;
-import org.bluebridge.protocol.MessageCodec;
+import org.bluebridge.protocol.MessageCodecSharable;
 import org.bluebridge.protocol.ProcotolFrameDecoder;
 import org.bluebridge.server.handler.*;
 import org.springframework.stereotype.Component;
@@ -27,7 +27,7 @@ import org.springframework.stereotype.Component;
 public class ChannelInitializer extends io.netty.channel.ChannelInitializer<NioSocketChannel> {
 
     private final LoggingHandler LOGGING_HANDLER;
-    private final MessageCodec MESSAGE_CODEC;
+    private final MessageCodecSharable MESSAGE_CODEC_SHARABLE;
     private final LoginRequestMessageHandler LOGIN_REQUEST_MESSAGE_HANDLER;
     private final ChatRequestMessageHandler CHAT_REQUEST_MESSAGE_HANDLER;
     private final GroupCreateRequestMessageHandler GROUP_CREATE_REQUEST_MESSAGE_HANDLER;
@@ -59,7 +59,7 @@ public class ChannelInitializer extends io.netty.channel.ChannelInitializer<NioS
         });
         pipeline.addLast(new ProcotolFrameDecoder());
         pipeline.addLast(LOGGING_HANDLER);
-        pipeline.addLast(MESSAGE_CODEC);
+        pipeline.addLast(MESSAGE_CODEC_SHARABLE);
         pipeline.addLast(LOGIN_REQUEST_MESSAGE_HANDLER);
         pipeline.addLast(CHAT_REQUEST_MESSAGE_HANDLER);
         pipeline.addLast(GROUP_CREATE_REQUEST_MESSAGE_HANDLER);

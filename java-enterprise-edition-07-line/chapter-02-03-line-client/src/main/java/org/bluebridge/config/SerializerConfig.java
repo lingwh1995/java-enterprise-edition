@@ -1,10 +1,7 @@
 package org.bluebridge.config;
 
-import io.netty.handler.logging.LogLevel;
-import io.netty.handler.logging.LoggingHandler;
 import org.bluebridge.protocol.Serializer;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -24,11 +21,6 @@ public class SerializerConfig {
         } else {
             return Serializer.Algorithm.valueOf(serializerAlgorithm);
         }
-    }
-
-    @Bean
-    public LoggingHandler loggingHandler() {
-        return new LoggingHandler(LogLevel.DEBUG);
     }
 
 }
