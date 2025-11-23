@@ -40,23 +40,3 @@ mybatis:
   mapper-locations: classpath:/mybatis/mapper/*.xml
   config-location: classpath:/mybatis/mybatis-config.xml
   type-aliases-package: org.bluebridge.domain
-
-#会打印自动配置信息
-debug: true
-
----
-spring:
-  profiles: dev
-  datasource:
-    username: root
-    password: 123456
-    url: jdbc:mysql://host.docker.internal:3306/javaee
-
----
-spring:
-  profiles: test
-  datasource:
-    username: flyway
-    password: flyway
-    url: jdbc:oracle:thin:@20.20.30.112:1521:orcl
-

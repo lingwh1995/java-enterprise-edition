@@ -1,5 +1,8 @@
 package org.bluebridge.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.bluebridge.domain.PageEntity;
 import org.bluebridge.mapper.IUserDao;
 import org.bluebridge.domain.User;
 import org.bluebridge.service.IUserService;
@@ -15,12 +18,22 @@ public class UserServiceImpl implements IUserService {
     private IUserDao userDao;
 
     @Override
-    public User getUserById(int id) {
-        return userDao.getUserById(id);
+    public List<User> list() {
+        return userDao.list();
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userDao.getAllUsers();
+    public User getById(int id) {
+        return userDao.getById(id);
     }
+
+    @Override
+    public PageInfo<User> listPage(PageEntity<User> pageEntity) {
+        int currentPage = pageEntity.getCurrentPage();
+        int pageSize = pageEntity.getPageSize();
+        PageHelper.startPage(currentPage, pageSize);
+        List<User> userList = userDao.list();
+        return PageInfo.of(userList);
+    }
+
 }
