@@ -1,8 +1,11 @@
 package org.bluebridge.mapper;
 
 import org.apache.ibatis.jdbc.SQL;
+import org.bluebridge.entity.QueryWrapper;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Map;
 
 /**
@@ -10,12 +13,12 @@ import java.util.Map;
  * @desc 通用Mapper SQL提供者
  * @date 2025/12/10 18:46
  */
-public class BaseSqlProvider {
+public class BaseSqlProvider<T> {
 
     /**
      * 通用插入SQL生成
      */
-    public String insert(Object entity) {
+    public String insert(T entity) {
         if (entity == null) {
             throw new IllegalArgumentException("Entity cannot be null");
         }
@@ -47,6 +50,11 @@ public class BaseSqlProvider {
     public String deleteById(Map<String, Object> params) {
         String tableName = (String) params.get("tableName");
         String idColumn = params.get("idColumn") != null ? params.get("idColumn").toString() : "id";
+        Object idValue = params.get("id");
+
+        if (tableName == null || idValue == null) {
+            throw new IllegalArgumentException("Table name and ID value cannot be null");
+        }
 
         return new SQL() {{
             DELETE_FROM(tableName);
@@ -55,30 +63,24 @@ public class BaseSqlProvider {
     }
 
     /**
-     * 根据实体删除SQL生成
+     * 根据QueryWrapper删除SQL生成
      */
-    public String delete(Object entity) {
-        if (entity == null) {
-            throw new IllegalArgumentException("Entity cannot be null");
+    public String delete(QueryWrapper<T> queryWrapper) {
+        if (queryWrapper == null) {
+            throw new IllegalArgumentException("QueryWrapper cannot be null");
         }
 
-        Class<?> clazz = entity.getClass();
-        String tableName = getTableName(clazz);
+        // 获取实体类类型
+        Class<T> entityClass = queryWrapper.getEntityClass();
+
+        // 根据实体类类型获取表名
+        String tableName = getTableName(entityClass);
+        String conditionSql = queryWrapper.getConditionSql();
 
         return new SQL() {{
             DELETE_FROM(tableName);
-
-            Field[] fields = clazz.getDeclaredFields();
-            for (Field field : fields) {
-                field.setAccessible(true);
-                try {
-                    Object value = field.get(entity);
-                    if (value != null) {
-                        WHERE(getColumnName(field) + " = #{" + field.getName() + "}");
-                    }
-                } catch (IllegalAccessException e) {
-                    // 忽略无法访问的字段
-                }
+            if (conditionSql != null && !conditionSql.trim().isEmpty()) {
+                WHERE(conditionSql.substring(6)); // 去掉"WHERE "前缀
             }
         }}.toString();
     }
@@ -86,7 +88,7 @@ public class BaseSqlProvider {
     /**
      * 更新SQL生成
      */
-    public String update(Object entity) {
+    public String update(T entity) {
         if (entity == null) {
             throw new IllegalArgumentException("Entity cannot be null");
         }
@@ -98,19 +100,28 @@ public class BaseSqlProvider {
             UPDATE(tableName);
 
             Field[] fields = clazz.getDeclaredFields();
+            boolean hasSetClause = false;
+            // 添加SET子句
             for (Field field : fields) {
                 field.setAccessible(true);
                 try {
                     Object value = field.get(entity);
                     if (value != null && !isPrimaryKey(field)) {
                         SET(getColumnName(field) + " = #{" + field.getName() + "}");
+                        hasSetClause = true;
                     }
                 } catch (IllegalAccessException e) {
                     // 忽略无法访问的字段
                 }
             }
 
+            // 必须至少有一个SET子句
+            if (!hasSetClause) {
+                throw new IllegalArgumentException("Update operation requires at least one field to update");
+            }
+
             // 添加WHERE条件
+            boolean hasWhereClause = false;
             for (Field field : fields) {
                 if (isPrimaryKey(field)) {
                     field.setAccessible(true);
@@ -118,11 +129,17 @@ public class BaseSqlProvider {
                         Object value = field.get(entity);
                         if (value != null) {
                             WHERE(getColumnName(field) + " = #{" + field.getName() + "}");
+                            hasWhereClause = true;
                         }
                     } catch (IllegalAccessException e) {
                         // 忽略无法访问的字段
                     }
                 }
+            }
+
+            // 必须有WHERE条件
+            if (!hasWhereClause) {
+                throw new IllegalArgumentException("Update operation requires WHERE condition with primary key");
             }
         }}.toString();
     }
@@ -133,6 +150,11 @@ public class BaseSqlProvider {
     public String selectById(Map<String, Object> params) {
         String tableName = (String) params.get("tableName");
         String idColumn = params.get("idColumn") != null ? params.get("idColumn").toString() : "id";
+        Object idValue = params.get("id");
+
+        if (tableName == null || idValue == null) {
+            throw new IllegalArgumentException("Table name and ID value cannot be null");
+        }
 
         return new SQL() {{
             SELECT("*");
@@ -142,99 +164,100 @@ public class BaseSqlProvider {
     }
 
     /**
-     * 根据实体查询单条记录SQL生成
+     * 根据QueryWrapper查询单条记录SQL生成
      */
-    public String select(Object entity) {
-        if (entity == null) {
-            throw new IllegalArgumentException("Entity cannot be null");
+    public String select(QueryWrapper<T> queryWrapper) {
+        if (queryWrapper == null) {
+            throw new IllegalArgumentException("QueryWrapper cannot be null");
         }
 
-        Class<?> clazz = entity.getClass();
-        String tableName = getTableName(clazz);
+        // 获取实体类类型
+        Class<T> entityClass = queryWrapper.getEntityClass();
+
+        // 根据实体类类型获取表名
+        String tableName = getTableName(entityClass);
+        String conditionSql = queryWrapper.getConditionSql();
 
         return new SQL() {{
             SELECT("*");
             FROM(tableName);
-
-            Field[] fields = clazz.getDeclaredFields();
-            for (Field field : fields) {
-                field.setAccessible(true);
-                try {
-                    Object value = field.get(entity);
-                    if (value != null) {
-                        WHERE(getColumnName(field) + " = #{" + field.getName() + "}");
-                    }
-                } catch (IllegalAccessException e) {
-                    // 忽略无法访问的字段
-                }
+            if (conditionSql != null && !conditionSql.trim().isEmpty()) {
+                WHERE(conditionSql.substring(6)); // 去掉"WHERE "前缀
             }
-
-            // 添加LIMIT 1限制
-            // 注意：LIMIT在MyBatis的SQL类中需要特殊处理
         }}.toString() + " LIMIT 1";
     }
 
     /**
-     * 根据实体查询列表SQL生成
+     * 根据QueryWrapper查询列表SQL生成
      */
-    public String selectList(Object entity) {
-        if (entity == null) {
-            // 如果实体为空，查询所有记录
-            Class<?> clazz = entity.getClass();
-            String tableName = getTableName(clazz);
-
-            return new SQL() {{
-                SELECT("*");
-                FROM(tableName);
-            }}.toString();
+    public String selectList(QueryWrapper<T> queryWrapper) {
+        if (queryWrapper == null) {
+            throw new IllegalArgumentException("QueryWrapper cannot be null");
         }
 
-        Class<?> clazz = entity.getClass();
-        String tableName = getTableName(clazz);
+        // 获取实体类类型
+        Class<T> entityClass = queryWrapper.getEntityClass();
+
+        // 根据实体类类型获取表名
+        String tableName = getTableName(entityClass);
+        String conditionSql = queryWrapper.getConditionSql();
 
         return new SQL() {{
             SELECT("*");
             FROM(tableName);
-
-            Field[] fields = clazz.getDeclaredFields();
-            for (Field field : fields) {
-                field.setAccessible(true);
-                try {
-                    Object value = field.get(entity);
-                    if (value != null) {
-                        WHERE(getColumnName(field) + " = #{" + field.getName() + "}");
-                    }
-                } catch (IllegalAccessException e) {
-                    // 忽略无法访问的字段
-                }
+            if (conditionSql != null && !conditionSql.trim().isEmpty()) {
+                WHERE(conditionSql.substring(6)); // 去掉"WHERE "前缀
             }
         }}.toString();
     }
 
     /**
-     * 获取表名（可以根据类名转换规则自定义）
+     * 获取表名（根据类名转换规则）
      */
     private String getTableName(Class<?> clazz) {
-        // 可以根据具体需求定制表名生成规则
-        // 例如：User -> user, UserInfo -> user_info
-        return "table_name"; // 默认值，实际使用时需要替换
+        String className = clazz.getSimpleName();
+        // 驼峰转下划线
+        return camelToUnderline(className).toLowerCase();
     }
 
     /**
-     * 获取列名（可以根据字段名转换规则自定义）
+     * 获取列名（根据字段名转换规则）
      */
     private String getColumnName(Field field) {
-        // 可以根据具体需求定制列名生成规则
-        // 例如：userName -> user_name, firstName -> first_name
-        return field.getName(); // 默认使用字段名
+        // 驼峰转下划线
+        return camelToUnderline(field.getName()).toLowerCase();
+    }
+
+    /**
+     * 驼峰命名转下划线
+     */
+    private String camelToUnderline(String camelCase) {
+        if (camelCase == null || camelCase.isEmpty()) {
+            return camelCase;
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < camelCase.length(); i++) {
+            char c = camelCase.charAt(i);
+            if (Character.isUpperCase(c)) {
+                if (i > 0) {
+                    result.append("_");
+                }
+                result.append(Character.toLowerCase(c));
+            } else {
+                result.append(c);
+            }
+        }
+        return result.toString();
     }
 
     /**
      * 判断是否为主键字段
+     * 可以扩展为通过注解判断
      */
     private boolean isPrimaryKey(Field field) {
-        // 可以通过注解等方式判断主键
-        // 例如：@Id 注解标记的字段
-        return "id".equals(field.getName());
+        // 可以通过@Id等注解来判断主键
+        return "id".equalsIgnoreCase(field.getName());
     }
+
 }

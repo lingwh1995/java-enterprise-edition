@@ -1,6 +1,7 @@
 package org.bluebridge.controller;
 
 import org.bluebridge.entity.Employee;
+import org.bluebridge.entity.QueryWrapper;
 import org.bluebridge.service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +18,22 @@ public class EmployeeController {
     @Resource
     private IEmployeeService employeeService;
 
+    /**
+     * http://localhost:8080/employee/list
+     * @return
+     */
     @GetMapping("/list")
     public List<Employee> getEmployeeList(){
-        return employeeService.selectList(null);
+        QueryWrapper<Employee> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("last_name", "张三");
+        //String conditionSql = eq.getConditionSql();
+        //System.out.println(conditionSql);
+
+//        wrapper.eq("name", "张三")
+//                .gt("age", 18)
+//                .like("email", "zhang")
+//                .orderByAsc("create_time");
+        return employeeService.selectList(queryWrapper);
     }
 
 }

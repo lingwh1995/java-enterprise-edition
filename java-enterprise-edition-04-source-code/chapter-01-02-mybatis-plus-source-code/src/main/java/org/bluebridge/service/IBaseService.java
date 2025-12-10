@@ -1,5 +1,8 @@
 package org.bluebridge.service;
 
+import org.bluebridge.entity.QueryWrapper;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,25 +13,46 @@ import java.util.List;
 public interface IBaseService<T> {
 
     /**
-     * 插入一条记录
+     *
+     *  removeById(Serializable id);
+     *  remove(Wrapper<Employee> queryWrapper);
+     *
+     *
+     *  list();
+     *  list(Wrapper<Employee> queryWrapper);
+     *  count();
+     *  count(Wrapper<Employee> queryWrapper);
+     *  exists(Wrapper<Employee> queryWrapper);
+     *
+     *
+     *  getOne(Wrapper<Employee> queryWrapper);
+     *  getById(Serializable id);
+     *  page(IPage<Employee> page);
+     *  page(IPage<Employee> page, Wrapper<Employee> queryWrapper);
+     *
+     */
+
+
+    /**
+     * 新增一条记录
      * @param entity 实体对象
      * @return 影响行数
      */
-    int save(T entity);
+    int create(T entity);
 
     /**
      * 根据主键删除记录
      * @param id 主键ID
      * @return 影响行数
      */
-    int deleteById(Object id);
+    int deleteById(Serializable id);
 
     /**
-     * 根据实体删除记录
-     * @param entity 实体对象
-     * @return 影响行数
+     * 根据条件删除记录
+     * @param queryWrapper
+     * @return
      */
-    int delete(T entity);
+    int delete(QueryWrapper<T> queryWrapper);
 
     /**
      * 更新记录
@@ -42,20 +66,20 @@ public interface IBaseService<T> {
      * @param id 主键ID
      * @return 实体对象
      */
-    T selectById(Object id);
+    T selectById(Serializable id);
 
     /**
-     * 根据实体查询单条记录
-     * @param entity 实体对象
-     * @return 实体对象
+     * 根据条件查询单
+     * @param queryWrapper
+     * @return
      */
-    T select(T entity);
+    T select(QueryWrapper<T> queryWrapper);
 
     /**
-     * 根据实体查询记录列表
-     * @param entity 实体对象
-     * @return 实体对象列表
+     * 根据条件查询记录列表
+     * @param queryWrapper
+     * @return
      */
-    List<T> selectList(T entity);
+    List<T> selectList(QueryWrapper<T> queryWrapper);
 
 }

@@ -1,7 +1,9 @@
 package org.bluebridge.mapper;
 
 import org.apache.ibatis.annotations.*;
+import org.bluebridge.entity.QueryWrapper;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -25,15 +27,15 @@ public interface BaseMapper<T> {
      * @return 影响行数
      */
     @DeleteProvider(type = BaseSqlProvider.class, method = "deleteById")
-    int deleteById(Object id);
+    int deleteById(Serializable id);
 
     /**
-     * 根据实体删除记录
-     * @param entity 实体对象
-     * @return 影响行数
+     *  根据
+     * @param queryWrapper
+     * @return
      */
     @DeleteProvider(type = BaseSqlProvider.class, method = "delete")
-    int delete(T entity);
+    int delete(QueryWrapper<T> queryWrapper);
 
     /**
      * 更新记录
@@ -49,22 +51,23 @@ public interface BaseMapper<T> {
      * @return 实体对象
      */
     @SelectProvider(type = BaseSqlProvider.class, method = "selectById")
-    T selectById(Object id);
+    T selectById(Serializable id);
 
     /**
-     * 根据实体查询单条记录
-     * @param entity 实体对象
-     * @return 实体对象
+     * 根据条件查询单条记录
+     * @param queryWrapper
+     * @return
      */
     @SelectProvider(type = BaseSqlProvider.class, method = "select")
-    T select(T entity);
+    T select(QueryWrapper<T> queryWrapper);
 
     /**
-     * 根据实体查询记录列表
-     * @param entity 实体对象
-     * @return 实体对象列表
+     * 根据条件查询记录列表
+     * @param queryWrapper
+     * @return
      */
     @SelectProvider(type = BaseSqlProvider.class, method = "selectList")
-    List<T> selectList(T entity);
+    List<T> selectList(QueryWrapper<T> queryWrapper);
+
 }
 
