@@ -14,7 +14,7 @@ public interface IBaseService<T> {
      * @param entity 实体对象
      * @return 影响行数
      */
-    int insert(T entity);
+    int save(T entity);
 
     /**
      * 根据主键删除记录

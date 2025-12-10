@@ -20,7 +20,7 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
     private BaseMapper<T> baseMapper;
 
     @Override
-    public int insert(T entity) {
+    public int save(T entity) {
         return baseMapper.insert(entity);
     }
 

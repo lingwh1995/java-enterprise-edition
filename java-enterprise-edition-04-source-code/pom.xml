@@ -18,8 +18,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.boot.version>2.7.6</spring.boot.version>
         <mybatis-spring-boot-starter.version>2.2.0</mybatis-spring-boot-starter.version>
-        <pagehelper-spring-boot-starter.version>1.2.8</pagehelper-spring-boot-starter.version>
-        <mysql.connector.version>8.0.21</mysql.connector.version>
+        <pagehelper-spring-boot-starter.version>1.4.6</pagehelper-spring-boot-starter.version>
+        <mysql.connector.version>8.0.33</mysql.connector.version>
         <lombok.version>1.18.20</lombok.version>
         <dom4j.version>1.6.1</dom4j.version>
         <jaxen.version>1.2.0</jaxen.version>

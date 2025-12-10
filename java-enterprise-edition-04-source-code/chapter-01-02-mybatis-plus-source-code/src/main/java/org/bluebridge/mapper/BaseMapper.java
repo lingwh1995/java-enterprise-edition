@@ -9,7 +9,6 @@ import java.util.List;
  * @desc 基础Mapper接口，定义了通用的CRUD操作方法
  * @date 2025/12/10 18:45
  */
-@Mapper
 public interface BaseMapper<T> {
 
     /**
