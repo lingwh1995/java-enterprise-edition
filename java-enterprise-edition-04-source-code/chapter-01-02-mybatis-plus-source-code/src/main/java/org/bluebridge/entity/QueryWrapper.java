@@ -42,10 +42,20 @@ public class QueryWrapper<T> {
      * @return 泛型类型的Class对象
      */
     public Class<T> getGenericClass() {
-// 获取泛型变量
-        TypeVariable<? extends Class<? extends QueryWrapper>>[] typeParameters = getClass().getTypeParameters();
+        // 获取当前类的具体泛型类型
+
+        final Type[] genericInterfaces = getClass().getGenericInterfaces();
+        // 获取泛型变量
+        TypeVariable<Class<QueryWrapper>>[] typeParameters = QueryWrapper.class.getTypeParameters();
         System.out.println(typeParameters[0].getName()); // 输出：T
-        return (Class<T>) typeParameters[0].getBounds()[0];
+        // 通过反射获取当前类的泛型类型
+        Type genericSuperclass = getClass().getGenericSuperclass();
+        if (genericSuperclass instanceof ParameterizedType) {
+            ParameterizedType parameterizedType = (ParameterizedType) genericSuperclass;
+            Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
+            return (Class<T>) actualTypeArguments[0];
+        }
+        return null;
     }
 
     /**
