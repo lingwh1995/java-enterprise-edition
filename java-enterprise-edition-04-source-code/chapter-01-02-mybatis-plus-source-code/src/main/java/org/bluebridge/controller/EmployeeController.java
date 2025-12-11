@@ -24,7 +24,7 @@ public class EmployeeController {
     @GetMapping("/list")
     public List<Employee> getEmployeeList(){
         QueryWrapper<Employee> queryWrapper = new QueryWrapper<>(Employee.class);
-        queryWrapper.like("last_name", "张");
+        queryWrapper.like("last_name", "王");
         List<Employee> employeeList = employeeService.list(queryWrapper);
         System.out.println("employeeList = " + employeeList);
         return employeeList;

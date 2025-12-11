@@ -170,6 +170,14 @@ public class QueryWrapper<T> implements Wrapper<T> {
     }
 
     /**
+     * 获取条件SQL（与getSqlSegment相同，为了兼容BaseSqlProvider）
+     * @return 条件字符串
+     */
+    public String getConditionSql() {
+        return getSqlSegment();
+    }
+
+    /**
      * 获取参数列表
      * @return 参数列表
      */
@@ -183,6 +191,14 @@ public class QueryWrapper<T> implements Wrapper<T> {
      */
     public Class<T> getEntityClass() {
         return entityClass;
+    }
+
+    /**
+     * 设置实体类的Class对象
+     * @param entityClass 实体类的Class对象
+     */
+    public void setEntityClass(Class<T> entityClass) {
+        this.entityClass = entityClass;
     }
 
 }

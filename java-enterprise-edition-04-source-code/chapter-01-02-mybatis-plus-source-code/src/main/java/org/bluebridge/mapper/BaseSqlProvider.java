@@ -87,12 +87,19 @@ public class BaseSqlProvider {
         }};
 
         if (!condition.isEmpty()) {
-            sql.WHERE(condition.substring(7)); // Remove " WHERE "
+            // 移除开头的" WHERE "
+            if (condition.startsWith(" WHERE ")) {
+                condition = condition.substring(7);
+            }
+            sql.WHERE(condition);
         }
 
         return sql.toString();
     }
 
+    /**
+     * 获取表名（根据类名转换规则）
+     */
     private String getTableName(Class<?> clazz) {
         TableName tableAnnotation = clazz.getAnnotation(TableName.class);
         if (tableAnnotation != null && !tableAnnotation.value().isEmpty()) {
@@ -101,6 +108,9 @@ public class BaseSqlProvider {
         return camelToUnderline(clazz.getSimpleName());
     }
 
+    /**
+     * 获取列名（根据字段名转换规则）
+     */
     private String getColumnName(Field field) {
         TableField fieldAnnotation = field.getAnnotation(TableField.class);
         if (fieldAnnotation != null && !fieldAnnotation.value().isEmpty()) {
@@ -109,6 +119,9 @@ public class BaseSqlProvider {
         return camelToUnderline(field.getName());
     }
 
+    /**
+     * 驼峰命名转下划线
+     */
     private String camelToUnderline(String camelCase) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < camelCase.length(); i++) {
