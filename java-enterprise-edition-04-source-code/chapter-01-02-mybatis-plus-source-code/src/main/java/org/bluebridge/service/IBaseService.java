@@ -1,6 +1,6 @@
 package org.bluebridge.service;
 
-import org.bluebridge.entity.QueryWrapper;
+import org.bluebridge.wrapper.QueryWrapper;
 
 import java.io.Serializable;
 import java.util.List;
@@ -47,19 +47,19 @@ public interface IBaseService<T> {
      */
     int deleteById(Serializable id);
 
-    /**
-     * 根据条件删除记录
-     * @param queryWrapper
-     * @return
-     */
-    int delete(QueryWrapper<T> queryWrapper);
+//    /**
+//     * 根据条件删除记录
+//     * @param queryWrapper
+//     * @return
+//     */
+//    int delete(QueryWrapper<T> queryWrapper);
 
-    /**
-     * 更新记录
-     * @param entity 实体对象
-     * @return 影响行数
-     */
-    int update(T entity);
+//    /**
+//     * 更新记录
+//     * @param entity 实体对象
+//     * @return 影响行数
+//     */
+//    int update(T entity);
 
     /**
      * 根据主键查询记录
@@ -68,12 +68,12 @@ public interface IBaseService<T> {
      */
     T getById(Serializable id);
 
-    /**
-     * 根据条件查询单
-     * @param queryWrapper
-     * @return
-     */
-    T getOne(QueryWrapper<T> queryWrapper);
+//    /**
+//     * 根据条件查询单
+//     * @param queryWrapper
+//     * @return
+//     */
+//    T getOne(QueryWrapper<T> queryWrapper);
 
     /**
      * 根据条件查询记录列表

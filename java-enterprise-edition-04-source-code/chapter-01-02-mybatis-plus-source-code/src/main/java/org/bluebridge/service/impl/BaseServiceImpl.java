@@ -1,8 +1,8 @@
 package org.bluebridge.service.impl;
 
-import org.bluebridge.entity.QueryWrapper;
 import org.bluebridge.mapper.BaseMapper;
 import org.bluebridge.service.IBaseService;
+import org.bluebridge.wrapper.QueryWrapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -30,25 +30,25 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
         return baseMapper.deleteById(id);
     }
 
-    @Override
-    public int delete(QueryWrapper<T> queryWrapper) {
-        return baseMapper.delete(queryWrapper);
-    }
+//    @Override
+//    public int delete(QueryWrapper<T> queryWrapper) {
+//        return baseMapper.delete(queryWrapper);
+//    }
 
-    @Override
-    public int update(T entity) {
-        return baseMapper.update(entity);
-    }
+//    @Override
+//    public int update(T entity) {
+//        return baseMapper.update(entity);
+//    }
 
     @Override
     public T getById(Serializable id) {
         return baseMapper.selectById(id);
     }
 
-    @Override
-    public T getOne(QueryWrapper<T> queryWrapper) {
-        return baseMapper.select(queryWrapper);
-    }
+//    @Override
+//    public T getOne(QueryWrapper<T> queryWrapper) {
+//        return baseMapper.select(queryWrapper);
+//    }
 
     @Override
     public List<T> list(QueryWrapper<T> queryWrapper) {

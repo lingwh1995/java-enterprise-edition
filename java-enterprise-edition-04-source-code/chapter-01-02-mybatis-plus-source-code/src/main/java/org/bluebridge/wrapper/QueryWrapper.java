@@ -1,4 +1,4 @@
-package org.bluebridge.entity;
+package org.bluebridge.wrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.List;
 /**
  * @author lingwh
  * @desc
- * @date 2025/12/10 22:37
+ * @date 2025/12/11 18:37
  */
-public class QueryWrapper<T> {
+public class QueryWrapper<T> implements Wrapper<T> {
 
     private List<String> conditions;
     private List<Object> params;
@@ -23,14 +23,6 @@ public class QueryWrapper<T> {
         this.conditions = new ArrayList<>();
         this.params = new ArrayList<>();
         this.entityClass = entityClass;
-    }
-
-    /**
-     * 获取实体类的Class对象
-     * @return 实体类的Class对象
-     */
-    public Class<T> getEntityClass() {
-        return entityClass;
     }
 
     /**
@@ -162,7 +154,7 @@ public class QueryWrapper<T> {
      * 获取SQL条件部分
      * @return 条件字符串
      */
-    public String getConditionSql() {
+    public String getSqlSegment() {
         if (conditions.isEmpty()) {
             return "";
         }
@@ -183,6 +175,14 @@ public class QueryWrapper<T> {
      */
     public List<Object> getParams() {
         return params;
+    }
+
+    /**
+     * 获取实体类的Class对象
+     * @return 实体类的Class对象
+     */
+    public Class<T> getEntityClass() {
+        return entityClass;
     }
 
 }

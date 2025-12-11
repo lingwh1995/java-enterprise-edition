@@ -1,8 +1,8 @@
 package org.bluebridge.controller;
 
 import org.bluebridge.entity.Employee;
-import org.bluebridge.entity.QueryWrapper;
 import org.bluebridge.service.IEmployeeService;
+import org.bluebridge.wrapper.QueryWrapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
