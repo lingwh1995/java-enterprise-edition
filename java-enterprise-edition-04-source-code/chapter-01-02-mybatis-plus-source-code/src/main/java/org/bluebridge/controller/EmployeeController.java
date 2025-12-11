@@ -27,7 +27,7 @@ public class EmployeeController {
         queryWrapper.like("last_name", "张");
         List<Employee> employeeList = employeeService.list(queryWrapper);
         System.out.println("employeeList = " + employeeList);
-        return employeeService.list(queryWrapper);
+        return employeeList;
     }
 
 }

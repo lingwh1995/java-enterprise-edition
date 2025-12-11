@@ -211,6 +211,7 @@ public class BaseSqlProvider<T> {
 
         log.info("Sql语句: \n{}", sql);
         log.info("查询参数: {}", queryWrapper.getParams());
+        sql = "select t.id, t.last_name as lastName from t_employee t where 1=1 ";
         return sql;
     }
 
