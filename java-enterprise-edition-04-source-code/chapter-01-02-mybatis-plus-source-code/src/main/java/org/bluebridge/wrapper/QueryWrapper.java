@@ -1,0 +1,204 @@
+package org.bluebridge.wrapper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author lingwh
+ * @desc
+ * @date 2025/12/11 18:37
+ */
+public class QueryWrapper<T> implements Wrapper<T> {
+
+    private List<String> conditions;
+    private List<Object> params;
+    private Class<T> entityClass;
+
+    public QueryWrapper() {
+        this.conditions = new ArrayList<>();
+        this.params = new ArrayList<>();
+    }
+
+    public QueryWrapper(Class<T> entityClass) {
+        this.conditions = new ArrayList<>();
+        this.params = new ArrayList<>();
+        this.entityClass = entityClass;
+    }
+
+    /**
+     * 等于条件
+     * @param column 字段名
+     * @param value 值
+     * @return QueryWrapper
+     */
+    public QueryWrapper<T> eq(String column, Object value) {
+        conditions.add(column + " = #{params[" + params.size() + "]}");
+        params.add(value);
+        return this;
+    }
+
+    /**
+     * 不等于条件
+     * @param column 字段名
+     * @param value 值
+     * @return QueryWrapper
+     */
+    public QueryWrapper<T> ne(String column, Object value) {
+        conditions.add(column + " != #{params[" + params.size() + "]}");
+        params.add(value);
+        return this;
+    }
+
+    /**
+     * 大于条件
+     * @param column 字段名
+     * @param value 值
+     * @return QueryWrapper
+     */
+    public QueryWrapper<T> gt(String column, Object value) {
+        conditions.add(column + " > #{params[" + params.size() + "]}");
+        params.add(value);
+        return this;
+    }
+
+    /**
+     * 大于等于条件
+     * @param column 字段名
+     * @param value 值
+     * @return QueryWrapper
+     */
+    public QueryWrapper<T> ge(String column, Object value) {
+        conditions.add(column + " >= #{params[" + params.size() + "]}");
+        params.add(value);
+        return this;
+    }
+
+    /**
+     * 小于条件
+     * @param column 字段名
+     * @param value 值
+     * @return QueryWrapper
+     */
+    public QueryWrapper<T> lt(String column, Object value) {
+        conditions.add(column + " < #{params[" + params.size() + "]}");
+        params.add(value);
+        return this;
+    }
+
+    /**
+     * 小于等于条件
+     * @param column 字段名
+     * @param value 值
+     * @return QueryWrapper
+     */
+    public QueryWrapper<T> le(String column, Object value) {
+        conditions.add(column + " <= #{params[" + params.size() + "]}");
+        params.add(value);
+        return this;
+    }
+
+    /**
+     * LIKE条件
+     * @param column 字段名
+     * @param value 值
+     * @return QueryWrapper
+     */
+    public QueryWrapper<T> like(String column, Object value) {
+        conditions.add(column + " LIKE #{params[" + params.size() + "]}");
+        params.add("%" + value + "%");
+        return this;
+    }
+
+    /**
+     * IN条件
+     * @param column 字段名
+     * @param values 值列表
+     * @return QueryWrapper
+     */
+    public QueryWrapper<T> in(String column, List<Object> values) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(column).append(" IN (");
+        for (int i = 0; i < values.size(); i++) {
+            sb.append("#{params[").append(params.size() + i).append("]}");
+            if (i < values.size() - 1) {
+                sb.append(",");
+            }
+        }
+        sb.append(")");
+        conditions.add(sb.toString());
+        params.addAll(values);
+        return this;
+    }
+
+    /**
+     * 排序 ASC
+     * @param column 字段名
+     * @return QueryWrapper
+     */
+    public QueryWrapper<T> orderByAsc(String column) {
+        conditions.add("ORDER BY " + column + " ASC");
+        return this;
+    }
+
+    /**
+     * 排序 DESC
+     * @param column 字段名
+     * @return QueryWrapper
+     */
+    public QueryWrapper<T> orderByDesc(String column) {
+        conditions.add("ORDER BY " + column + " DESC");
+        return this;
+    }
+
+    /**
+     * 获取SQL条件部分
+     * @return 条件字符串
+     */
+    public String getSqlSegment() {
+        if (conditions.isEmpty()) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append(" WHERE ");
+        for (int i = 0; i < conditions.size(); i++) {
+            if (i > 0 && !conditions.get(i).startsWith("ORDER BY")) {
+                sb.append(" AND ");
+            }
+            sb.append(conditions.get(i));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 获取条件SQL（与getSqlSegment相同，为了兼容BaseSqlProvider）
+     * @return 条件字符串
+     */
+    public String getConditionSql() {
+        return getSqlSegment();
+    }
+
+    /**
+     * 获取参数列表
+     * @return 参数列表
+     */
+    public List<Object> getParams() {
+        return params;
+    }
+
+    /**
+     * 获取实体类的Class对象
+     * @return 实体类的Class对象
+     */
+    public Class<T> getEntityClass() {
+        return entityClass;
+    }
+
+    /**
+     * 设置实体类的Class对象
+     * @param entityClass 实体类的Class对象
+     */
+    public void setEntityClass(Class<T> entityClass) {
+        this.entityClass = entityClass;
+    }
+
+}
