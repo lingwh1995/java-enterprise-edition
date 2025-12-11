@@ -3,7 +3,6 @@ package org.bluebridge.controller;
 import org.bluebridge.entity.Employee;
 import org.bluebridge.entity.QueryWrapper;
 import org.bluebridge.service.IEmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +24,9 @@ public class EmployeeController {
     @GetMapping("/list")
     public List<Employee> getEmployeeList(){
         QueryWrapper<Employee> queryWrapper = new QueryWrapper<>(Employee.class);
-        queryWrapper.eq("last_name", "张三");
+        queryWrapper.like("last_name", "张");
+        List<Employee> employeeList = employeeService.selectList(queryWrapper);
+        System.out.println("employeeList = " + employeeList);
         return employeeService.selectList(queryWrapper);
     }
 

@@ -40,7 +40,7 @@ public class QueryWrapper<T> {
      * @return QueryWrapper
      */
     public QueryWrapper<T> eq(String column, Object value) {
-        conditions.add(column + " = ?");
+        conditions.add(column + " = #{params[" + params.size() + "]}");
         params.add(value);
         return this;
     }
@@ -52,7 +52,7 @@ public class QueryWrapper<T> {
      * @return QueryWrapper
      */
     public QueryWrapper<T> ne(String column, Object value) {
-        conditions.add(column + " != ?");
+        conditions.add(column + " != #{params[" + params.size() + "]}");
         params.add(value);
         return this;
     }
@@ -64,7 +64,7 @@ public class QueryWrapper<T> {
      * @return QueryWrapper
      */
     public QueryWrapper<T> gt(String column, Object value) {
-        conditions.add(column + " > ?");
+        conditions.add(column + " > #{params[" + params.size() + "]}");
         params.add(value);
         return this;
     }
@@ -76,7 +76,7 @@ public class QueryWrapper<T> {
      * @return QueryWrapper
      */
     public QueryWrapper<T> ge(String column, Object value) {
-        conditions.add(column + " >= ?");
+        conditions.add(column + " >= #{params[" + params.size() + "]}");
         params.add(value);
         return this;
     }
@@ -88,7 +88,7 @@ public class QueryWrapper<T> {
      * @return QueryWrapper
      */
     public QueryWrapper<T> lt(String column, Object value) {
-        conditions.add(column + " < ?");
+        conditions.add(column + " < #{params[" + params.size() + "]}");
         params.add(value);
         return this;
     }
@@ -100,7 +100,7 @@ public class QueryWrapper<T> {
      * @return QueryWrapper
      */
     public QueryWrapper<T> le(String column, Object value) {
-        conditions.add(column + " <= ?");
+        conditions.add(column + " <= #{params[" + params.size() + "]}");
         params.add(value);
         return this;
     }
@@ -112,7 +112,7 @@ public class QueryWrapper<T> {
      * @return QueryWrapper
      */
     public QueryWrapper<T> like(String column, Object value) {
-        conditions.add(column + " LIKE ?");
+        conditions.add(column + " LIKE #{params[" + params.size() + "]}");
         params.add("%" + value + "%");
         return this;
     }
@@ -127,7 +127,7 @@ public class QueryWrapper<T> {
         StringBuilder sb = new StringBuilder();
         sb.append(column).append(" IN (");
         for (int i = 0; i < values.size(); i++) {
-            sb.append("?");
+            sb.append("#{params[").append(params.size() + i).append("]}");
             if (i < values.size() - 1) {
                 sb.append(",");
             }

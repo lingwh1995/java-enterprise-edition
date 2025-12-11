@@ -1,11 +1,10 @@
 package org.bluebridge.mapper;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.jdbc.SQL;
 import org.bluebridge.entity.QueryWrapper;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.Map;
 
 /**
@@ -13,6 +12,7 @@ import java.util.Map;
  * @desc 通用Mapper SQL提供者
  * @date 2025/12/10 18:46
  */
+@Slf4j
 public class BaseSqlProvider<T> {
 
     /**
@@ -201,14 +201,17 @@ public class BaseSqlProvider<T> {
         // 根据实体类类型获取表名
         String tableName = getTableName(entityClass);
         String conditionSql = queryWrapper.getConditionSql();
-
-        return new SQL() {{
+        String sql = new SQL() {{
             SELECT("*");
             FROM(tableName);
             if (conditionSql != null && !conditionSql.trim().isEmpty()) {
                 WHERE(conditionSql.substring(6)); // 去掉"WHERE "前缀
             }
         }}.toString();
+
+        log.info("Sql语句: \n{}", sql);
+        log.info("查询参数: {}", queryWrapper.getParams());
+        return sql;
     }
 
     /**
@@ -217,7 +220,7 @@ public class BaseSqlProvider<T> {
     private String getTableName(Class<?> clazz) {
         String className = clazz.getSimpleName();
         // 驼峰转下划线
-        return camelToUnderline(className).toLowerCase();
+        return "t_" + camelToUnderline(className).toLowerCase();
     }
 
     /**
