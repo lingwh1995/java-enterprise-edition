@@ -24,15 +24,8 @@ public class EmployeeController {
      */
     @GetMapping("/list")
     public List<Employee> getEmployeeList(){
-        QueryWrapper<Employee> queryWrapper = new QueryWrapper<>();
+        QueryWrapper<Employee> queryWrapper = new QueryWrapper<>(Employee.class);
         queryWrapper.eq("last_name", "张三");
-        //String conditionSql = eq.getConditionSql();
-        //System.out.println(conditionSql);
-
-//        wrapper.eq("name", "张三")
-//                .gt("age", 18)
-//                .like("email", "zhang")
-//                .orderByAsc("create_time");
         return employeeService.selectList(queryWrapper);
     }
 
