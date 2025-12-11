@@ -21,7 +21,7 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
     @Resource
     private BaseMapper<T> baseMapper;
     @Override
-    public int create(T entity) {
+    public int save(T entity) {
         return baseMapper.insert(entity);
     }
 
@@ -41,17 +41,17 @@ public class BaseServiceImpl<T> implements IBaseService<T> {
     }
 
     @Override
-    public T selectById(Serializable id) {
+    public T getById(Serializable id) {
         return baseMapper.selectById(id);
     }
 
     @Override
-    public T select(QueryWrapper<T> queryWrapper) {
+    public T getOne(QueryWrapper<T> queryWrapper) {
         return baseMapper.select(queryWrapper);
     }
 
     @Override
-    public List<T> selectList(QueryWrapper<T> queryWrapper) {
+    public List<T> list(QueryWrapper<T> queryWrapper) {
         return baseMapper.selectList(queryWrapper);
     }
 

@@ -38,7 +38,7 @@ public interface IBaseService<T> {
      * @param entity 实体对象
      * @return 影响行数
      */
-    int create(T entity);
+    int save(T entity);
 
     /**
      * 根据主键删除记录
@@ -66,20 +66,20 @@ public interface IBaseService<T> {
      * @param id 主键ID
      * @return 实体对象
      */
-    T selectById(Serializable id);
+    T getById(Serializable id);
 
     /**
      * 根据条件查询单
      * @param queryWrapper
      * @return
      */
-    T select(QueryWrapper<T> queryWrapper);
+    T getOne(QueryWrapper<T> queryWrapper);
 
     /**
      * 根据条件查询记录列表
      * @param queryWrapper
      * @return
      */
-    List<T> selectList(QueryWrapper<T> queryWrapper);
+    List<T> list(QueryWrapper<T> queryWrapper);
 
 }
