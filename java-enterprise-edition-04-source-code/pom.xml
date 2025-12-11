@@ -28,7 +28,6 @@
 
     <modules>
         <module>chapter-01-01-mybatis-source-code</module>
-        <module>chapter-01-02-mybatis-plus-source-code</module>
     </modules>
 
     <dependencyManagement>
