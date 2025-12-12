@@ -21,7 +21,7 @@
         <pagehelper-spring-boot-starter.version>1.4.6</pagehelper-spring-boot-starter.version>
         <mysql.connector.version>8.0.33</mysql.connector.version>
         <lombok.version>1.18.30</lombok.version>
-        <dom4j.version>1.6.1</dom4j.version>
+        <dom4j.version>2.1.4</dom4j.version>
         <jaxen.version>1.2.0</jaxen.version>
         <ojdbc6.version>11.2.0.3</ojdbc6.version>
     </properties>
@@ -51,8 +51,8 @@
                 <version>${pagehelper-spring-boot-starter.version}</version>
             </dependency>
             <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
                 <version>${mysql.connector.version}</version>
             </dependency>
             <dependency>
@@ -61,7 +61,7 @@
                 <version>${lombok.version}</version>
             </dependency>
             <dependency>
-                <groupId>dom4j</groupId>
+                <groupId>org.dom4j</groupId>
                 <artifactId>dom4j</artifactId>
                 <version>${dom4j.version}</version>
             </dependency>

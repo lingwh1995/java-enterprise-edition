@@ -59,6 +59,7 @@
         <module>chapter-04-04-production-multiyply-environment</module>
         <module>chapter-04-05-production-multiyply-datasource</module>
         <module>chapter-04-06-production-package-to-war</module>
+        <module>chapter-04-07-production-alibaba-java-coding-guidelines</module>
         <module>chapter-05-01-demo-restfulcrud</module>
     </modules>
 
@@ -119,8 +120,8 @@
                 <version>${lombok.version}</version>
             </dependency>
             <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
                 <version>${mysql.connector.version}</version>
             </dependency>
             <dependency>

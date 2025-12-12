@@ -26,7 +26,7 @@
         <hibernate-validator.version>5.4.0.Final</hibernate-validator.version>
         <jackson.version>2.9.9</jackson.version>
         <c3p0.version>0.9.5.4</c3p0.version>
-        <mysql-connector.version>8.0.30</mysql-connector.version>
+        <mysql-connector.version>8.0.33</mysql-connector.version>
         <ojdbc6.version>11.2.0.4</ojdbc6.version>
         <mybatis.version>3.5.1</mybatis.version>
         <mybatis-spring.version>1.3.1</mybatis-spring.version>
@@ -111,8 +111,8 @@
             <version>${c3p0.version}</version>
         </dependency>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
             <version>${mysql-connector.version}</version>
         </dependency>
         <!--
