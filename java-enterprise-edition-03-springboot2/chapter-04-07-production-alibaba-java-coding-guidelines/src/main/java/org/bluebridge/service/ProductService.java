@@ -44,16 +44,14 @@ public interface ProductService {
     /**
      * 根据ID逻辑删除商品
      * @param id 商品ID
-     * @param isDeleted 删除标记（0：未删除，1：已删除）
      */
-    void logicDeleteProductById(Long id, Integer isDeleted);
+    void logicDeleteProductById(Long id);
 
     /**
      * 批量逻辑删除商品
      * @param ids 商品ID列表
-     * @param isDeleted 删除标记（0：未删除，1：已删除）
      */
-    void batchLogicDeleteProduct(List<Long> ids, Integer isDeleted);
+    void batchLogicDeleteProduct(List<Long> ids);
 
     /**
      * 根据ID全量更新商品

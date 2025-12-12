@@ -88,14 +88,11 @@ public class ProductController {
      * URL：/api/products/1/status
      *
      * @param id 商品ID
-     * @param isDeleted 删除标记（0：未删除，1：已删除）
      * @return 统一响应结果
      */
     @PatchMapping("/{id}/status")
-    public Result<Void> logicDeleteProductById(
-            @PathVariable Long id,
-            @RequestParam Integer isDeleted) {
-        productService.logicDeleteProductById(id, isDeleted);
+    public Result<Void> logicDeleteProductById(@PathVariable Long id) {
+        productService.logicDeleteProductById(id);
         return Result.success("根据ID逻辑删除商品成功");
     }
 
@@ -104,14 +101,13 @@ public class ProductController {
      * URL：/api/products/batch/status
      *
      * @param ids 商品ID列表
-     * @param isDeleted 删除标记（0：未删除，1：已删除）
      * @return 统一响应结果
      */
     @DeleteMapping("/batch/status")
     public Result<Void> batchLogicDeleteProduct(
             @RequestBody List<Long> ids,
             @RequestParam Integer isDeleted) {
-        productService.batchLogicDeleteProduct(ids, isDeleted);
+        productService.batchLogicDeleteProduct(ids);
         return Result.success("商品批量逻辑删除成功");
     }
 

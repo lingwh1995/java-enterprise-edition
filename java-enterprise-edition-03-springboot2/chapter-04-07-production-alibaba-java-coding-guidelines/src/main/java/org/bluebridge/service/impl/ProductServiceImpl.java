@@ -79,22 +79,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void logicDeleteProductById(Long id, Integer isDeleted) {
+    public void logicDeleteProductById(Long id) {
         Product product = productMap.get(id);
         if (product == null) {
             throw new ProductException(404, "商品不存在");
         }
 
         // 逻辑删除商品
-        product.setIsDeleted(isDeleted);
+        product.setIsDeleted(1);
         product.setUpdateTime(LocalDateTime.now());
         productMap.put(id, product);
     }
 
     @Override
-    public void batchLogicDeleteProduct(List<Long> ids, Integer isDeleted) {
+    public void batchLogicDeleteProduct(List<Long> ids) {
         for (Long id : ids) {
-            logicDeleteProductById(id, isDeleted);
+            logicDeleteProductById(id);
         }
     }
 
