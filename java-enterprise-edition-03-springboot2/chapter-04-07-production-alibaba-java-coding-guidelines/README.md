@@ -5,7 +5,7 @@
 ## 项目结构
 
 ```
-src/main/java/com/example/productmanagement/
+src/main/java/org/bluebridge/
 ├── controller/           # 控制器层
 ├── dto/                  # 数据传输对象
 ├── entity/               # 实体类
@@ -43,13 +43,13 @@ src/main/java/com/example/productmanagement/
 | 部分更新商品 | PATCH | /api/products/{id} | 部分更新指定ID的商品 |
 | 删除商品(物理) | DELETE | /api/products/{id} | 物理删除指定ID的商品 |
 | 批量删除商品(物理) | DELETE | /api/products/batch | 批量物理删除商品 |
-| 删除商品(逻辑) | DELETE | /api/products/{id}/logic | 逻辑删除指定ID的商品 |
-| 批量删除商品(逻辑) | DELETE | /api/products/batch/logic | 批量逻辑删除商品 |
+| 删除商品(逻辑) | PATCH | /api/products/{id}/status | 逻辑删除指定ID的商品 |
+| 批量删除商品(逻辑) | DELETE | /api/products/batch/status | 批量逻辑删除商品 |
 | 更新商品状态 | PATCH | /api/products/{id}/status | 更新商品状态 |
 | 获取商品详情 | GET | /api/products/{id} | 获取指定ID的商品详情 |
 | 根据名称获取商品 | GET | /api/products/by-name | 根据名称精确查询商品 |
-| 获取商品列表 | GET | /api/products/list | 获取所有商品 |
-| 条件查询商品 | POST | /api/products/search | 根据条件查询商品 |
+| 获取商品列表 | GET | /api/products | 获取所有商品 |
+| 条件查询商品 | GET | /api/products/search | 根据条件查询商品 |
 | 分页查询商品 | POST | /api/products/page | 分页查询商品 |
 
 ## 如何运行
@@ -120,18 +120,8 @@ Content-Type: application/json
 ```
 
 ### 条件查询商品
-```json
-POST /api/products/search
-Content-Type: application/json
-
-{
-  "name": "手机",
-  "minPrice": 5000,
-  "maxPrice": 10000,
-  "status": 1,
-  "sortBy": "price",
-  "sortOrder": "asc"
-}
+```
+GET /api/products/search?name=手机&minPrice=5000&maxPrice=10000&status=1
 ```
 
 ### 分页查询商品
@@ -151,7 +141,7 @@ Content-Type: application/json
 
 ### 更新商品状态
 ```
-PATCH /api/products/1/status?status=0
+PATCH /api/products/1/status
 ```
 
 ### 根据名称查询商品
@@ -160,7 +150,7 @@ GET /api/products/by-name?name=苹果手机
 ```
 
 ### 批量删除商品(物理)
-```
+```json
 DELETE /api/products/batch
 Content-Type: application/json
 
@@ -168,8 +158,8 @@ Content-Type: application/json
 ```
 
 ### 批量删除商品(逻辑)
-```
-DELETE /api/products/batch/logic
+```json
+DELETE /api/products/batch/status
 Content-Type: application/json
 
 [1,2,3]

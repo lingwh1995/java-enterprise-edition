@@ -13,8 +13,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -186,14 +189,34 @@ public class ProductController {
     }
     
     /**
-     * 条件查询-根据查询条件获取商品列表（阿里规范：方法名=list+资源名+By+Condition，如listProductByCondition）
-     * URL：/api/products/by-condition
+     * 条件查询-根据查询条件获取商品列表
+     * URL：/api/products
      * 
-     * @param queryProductDTO 查询条件
+     * @param name 商品名称（模糊匹配）
+     * @param minPrice 最低价格
+     * @param maxPrice 最高价格
+     * @param status 商品状态
+     * @param sortBy 排序字段
+     * @param sortOrder 排序方式
      * @return 统一响应结果
      */
-    @PostMapping("/by-condition")
-    public Result<List<ProductVO>> listProductByCondition(@RequestBody QueryProductDTO queryProductDTO) {
+    @GetMapping("/search")
+    public Result<List<ProductVO>> listProduct(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) @DecimalMin("0.0") BigDecimal minPrice,
+            @RequestParam(required = false) @DecimalMin("0.0") BigDecimal maxPrice,
+            @RequestParam(required = false) Integer status,
+            @RequestParam(required = false) @Pattern(regexp = "createTime|price") String sortBy,
+            @RequestParam(required = false) @Pattern(regexp = "asc|desc") String sortOrder) {
+        
+        QueryProductDTO queryProductDTO = new QueryProductDTO();
+        queryProductDTO.setName(name);
+        queryProductDTO.setMinPrice(minPrice);
+        queryProductDTO.setMaxPrice(maxPrice);
+        queryProductDTO.setStatus(status);
+        queryProductDTO.setSortBy(sortBy);
+        queryProductDTO.setSortOrder(sortOrder);
+        
         List<ProductVO> products = productService.listProductByCondition(queryProductDTO);
         return Result.success(products, "查询成功");
     }
