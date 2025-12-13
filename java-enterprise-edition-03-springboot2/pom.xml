@@ -72,7 +72,7 @@
         <pagehelper-spring-boot-starter.version>1.2.8</pagehelper-spring-boot-starter.version>
         <mybatis-plus-boot-starter.version>3.5.4</mybatis-plus-boot-starter.version>
         <mybatis-plus-generator.version>3.5.4</mybatis-plus-generator.version>
-        <lombok.version>1.18.0</lombok.version>
+        <lombok.version>1.18.30</lombok.version>
         <mysql.connector.version>8.0.33</mysql.connector.version>
         <ojdbc6.version>11.2.0.4</ojdbc6.version>
         <druid.version>1.1.10</druid.version>
