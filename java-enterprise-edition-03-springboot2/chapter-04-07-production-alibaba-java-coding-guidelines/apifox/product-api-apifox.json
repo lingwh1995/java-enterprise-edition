@@ -1,0 +1,1148 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "商品管理API",
+    "description": "基于阿里巴巴Java开发规约的商品管理接口文档",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "本地开发环境"
+    }
+  ],
+  "paths": {
+    "/api/products": {
+      "post": {
+        "summary": "创建商品",
+        "description": "创建一个新的商品",
+        "tags": ["商品管理"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProductDTO"
+              },
+              "examples": {
+                "example1": {
+                  "summary": "创建商品示例",
+                  "value": {
+                    "name": "示例商品",
+                    "description": "这是一个示例商品",
+                    "price": 99.99,
+                    "stock": 100
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultProductVO"
+                },
+                "examples": {
+                  "example1": {
+                    "summary": "成功响应示例",
+                    "value": {
+                      "code": 200,
+                      "message": "商品创建成功",
+                      "data": {
+                        "id": 1,
+                        "name": "示例商品",
+                        "description": "这是一个示例商品",
+                        "price": 99.99,
+                        "stock": 100,
+                        "status": 1,
+                        "createTime": "2023-01-01T12:00:00",
+                        "updateTime": "2023-01-01T12:00:00",
+                        "isDeleted": 0
+                      },
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "获取所有商品",
+        "description": "获取所有商品列表",
+        "tags": ["商品管理"],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListProductVO"
+                },
+                "examples": {
+                  "example1": {
+                    "summary": "成功响应示例",
+                    "value": {
+                      "code": 200,
+                      "message": "查询成功",
+                      "data": [
+                        {
+                          "id": 1,
+                          "name": "示例商品1",
+                          "description": "这是第一个示例商品",
+                          "price": 99.99,
+                          "stock": 100,
+                          "status": 1,
+                          "createTime": "2023-01-01T12:00:00",
+                          "updateTime": "2023-01-01T12:00:00",
+                          "isDeleted": 0
+                        },
+                        {
+                          "id": 2,
+                          "name": "示例商品2",
+                          "description": "这是第二个示例商品",
+                          "price": 199.99,
+                          "stock": 50,
+                          "status": 1,
+                          "createTime": "2023-01-02T12:00:00",
+                          "updateTime": "2023-01-02T12:00:00",
+                          "isDeleted": 0
+                        }
+                      ],
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "批量删除商品(物理)",
+        "description": "根据ID列表批量物理删除商品",
+        "tags": ["商品管理"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "example": [1, 2, 3]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultInteger"
+                },
+                "examples": {
+                  "example1": {
+                    "summary": "成功响应示例",
+                    "value": {
+                      "code": 200,
+                      "message": "商品批量删除成功",
+                      "data": 3,
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/products/batch": {
+      "post": {
+        "summary": "批量创建商品",
+        "description": "批量创建多个商品",
+        "tags": ["商品管理"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateProductDTO"
+                }
+              },
+              "examples": {
+                "example1": {
+                  "summary": "批量创建商品示例",
+                  "value": [
+                    {
+                      "name": "示例商品1",
+                      "description": "这是第一个示例商品",
+                      "price": 99.99,
+                      "stock": 100
+                    },
+                    {
+                      "name": "示例商品2",
+                      "description": "这是第二个示例商品",
+                      "price": 199.99,
+                      "stock": 50
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListProductVO"
+                },
+                "examples": {
+                  "example1": {
+                    "summary": "成功响应示例",
+                    "value": {
+                      "code": 200,
+                      "message": "商品批量创建成功",
+                      "data": [
+                        {
+                          "id": 1,
+                          "name": "示例商品1",
+                          "description": "这是第一个示例商品",
+                          "price": 99.99,
+                          "stock": 100,
+                          "status": 1,
+                          "createTime": "2023-01-01T12:00:00",
+                          "updateTime": "2023-01-01T12:00:00",
+                          "isDeleted": 0
+                        },
+                        {
+                          "id": 2,
+                          "name": "示例商品2",
+                          "description": "这是第二个示例商品",
+                          "price": 199.99,
+                          "stock": 50,
+                          "status": 1,
+                          "createTime": "2023-01-01T12:00:00",
+                          "updateTime": "2023-01-01T12:00:00",
+                          "isDeleted": 0
+                        }
+                      ],
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "批量逻辑删除商品",
+        "description": "根据ID列表批量逻辑删除商品",
+        "tags": ["商品管理"],
+        "parameters": [
+          {
+            "name": "isDeleted",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "删除状态标识"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "example": [1, 2, 3]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultInteger"
+                },
+                "examples": {
+                  "example1": {
+                    "summary": "成功响应示例",
+                    "value": {
+                      "code": 200,
+                      "message": "商品批量逻辑删除成功",
+                      "data": 3,
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/products/{id}": {
+      "get": {
+        "summary": "根据ID获取商品详情",
+        "description": "根据商品ID获取商品详细信息",
+        "tags": ["商品管理"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
+            },
+            "description": "商品ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultProductVO"
+                },
+                "examples": {
+                  "example1": {
+                    "summary": "成功响应示例",
+                    "value": {
+                      "code": 200,
+                      "message": "查询成功",
+                      "data": {
+                        "id": 1,
+                        "name": "示例商品",
+                        "description": "这是一个示例商品",
+                        "price": 99.99,
+                        "stock": 100,
+                        "status": 1,
+                        "createTime": "2023-01-01T12:00:00",
+                        "updateTime": "2023-01-01T12:00:00",
+                        "isDeleted": 0
+                      },
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "全量更新商品",
+        "description": "根据商品ID全量更新商品信息",
+        "tags": ["商品管理"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
+            },
+            "description": "商品ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProductDTO"
+              },
+              "examples": {
+                "example1": {
+                  "summary": "更新商品示例",
+                  "value": {
+                    "name": "更新后的商品名称",
+                    "description": "更新后的商品描述",
+                    "price": 199.99,
+                    "stock": 50
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                },
+                "examples": {
+                  "example1": {
+                    "summary": "成功响应示例",
+                    "value": {
+                      "code": 200,
+                      "message": "商品更新成功",
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "删除商品(物理)",
+        "description": "根据商品ID物理删除商品",
+        "tags": ["商品管理"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
+            },
+            "description": "商品ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultInteger"
+                },
+                "examples": {
+                  "example1": {
+                    "summary": "成功响应示例",
+                    "value": {
+                      "code": 200,
+                      "message": "商品删除成功",
+                      "data": 1,
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "部分更新商品",
+        "description": "根据商品ID部分更新商品信息",
+        "tags": ["商品管理"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
+            },
+            "description": "商品ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchProductDTO"
+              },
+              "examples": {
+                "example1": {
+                  "summary": "部分更新商品示例",
+                  "value": {
+                    "name": "部分更新的商品名称",
+                    "price": 149.99
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultVoid"
+                },
+                "examples": {
+                  "example1": {
+                    "summary": "成功响应示例",
+                    "value": {
+                      "code": 200,
+                      "message": "商品部分更新成功",
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/products/{id}/status": {
+      "patch": {
+        "summary": "逻辑删除商品",
+        "description": "根据商品ID逻辑删除商品(更新状态)",
+        "tags": ["商品管理"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "description": "商品ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultInteger"
+                },
+                "examples": {
+                  "example1": {
+                    "summary": "成功响应示例",
+                    "value": {
+                      "code": 200,
+                      "message": "根据ID逻辑删除商品成功",
+                      "data": 1,
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/products/by-name": {
+      "get": {
+        "summary": "根据名称获取商品",
+        "description": "根据商品名称精确查询商品",
+        "tags": ["商品管理"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "商品名称"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultProductVO"
+                },
+                "examples": {
+                  "example1": {
+                    "summary": "成功响应示例",
+                    "value": {
+                      "code": 200,
+                      "message": "查询成功",
+                      "data": {
+                        "id": 1,
+                        "name": "示例商品",
+                        "description": "这是一个示例商品",
+                        "price": 99.99,
+                        "stock": 100,
+                        "status": 1,
+                        "createTime": "2023-01-01T12:00:00",
+                        "updateTime": "2023-01-01T12:00:00",
+                        "isDeleted": 0
+                      },
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/products/search": {
+      "get": {
+        "summary": "条件查询商品",
+        "description": "根据查询条件获取商品列表",
+        "tags": ["商品管理"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "商品名称（模糊匹配）"
+          },
+          {
+            "name": "minPrice",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "double",
+              "minimum": 0
+            },
+            "description": "最低价格"
+          },
+          {
+            "name": "maxPrice",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "double",
+              "minimum": 0
+            },
+            "description": "最高价格"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "商品状态"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["createTime", "price"]
+            },
+            "description": "排序字段"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["asc", "desc"]
+            },
+            "description": "排序方式"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultListProductVO"
+                },
+                "examples": {
+                  "example1": {
+                    "summary": "成功响应示例",
+                    "value": {
+                      "code": 200,
+                      "message": "查询成功",
+                      "data": [
+                        {
+                          "id": 1,
+                          "name": "示例商品",
+                          "description": "这是一个示例商品",
+                          "price": 99.99,
+                          "stock": 100,
+                          "status": 1,
+                          "createTime": "2023-01-01T12:00:00",
+                          "updateTime": "2023-01-01T12:00:00",
+                          "isDeleted": 0
+                        }
+                      ],
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/products/page": {
+      "post": {
+        "summary": "分页查询商品",
+        "description": "分页获取商品列表",
+        "tags": ["商品管理"],
+        "parameters": [
+          {
+            "name": "pageNum",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "页码"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            },
+            "description": "每页数量"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "createTime"
+            },
+            "description": "排序字段"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "desc"
+            },
+            "description": "排序方式"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryProductDTO"
+              },
+              "examples": {
+                "example1": {
+                  "summary": "分页查询示例",
+                  "value": {
+                    "name": "示例",
+                    "minPrice": 0,
+                    "maxPrice": 200,
+                    "status": 1,
+                    "sortBy": "createTime",
+                    "sortOrder": "desc"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultPageInfoProductVO"
+                },
+                "examples": {
+                  "example1": {
+                    "summary": "成功响应示例",
+                    "value": {
+                      "code": 200,
+                      "message": "查询成功",
+                      "data": {
+                        "pageNum": 1,
+                        "pageSize": 10,
+                        "total": 100,
+                        "pages": 10,
+                        "list": [
+                          {
+                            "id": 1,
+                            "name": "示例商品",
+                            "description": "这是一个示例商品",
+                            "price": 99.99,
+                            "stock": 100,
+                            "status": 1,
+                            "createTime": "2023-01-01T12:00:00",
+                            "updateTime": "2023-01-01T12:00:00",
+                            "isDeleted": 0
+                          }
+                        ],
+                        "hasNextPage": true,
+                        "hasPreviousPage": false
+                      },
+                      "success": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateProductDTO": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "商品名称",
+            "maxLength": 100
+          },
+          "description": {
+            "type": "string",
+            "description": "商品描述",
+            "maxLength": 500
+          },
+          "price": {
+            "type": "number",
+            "format": "decimal",
+            "description": "商品价格",
+            "exclusiveMinimum": 0
+          },
+          "stock": {
+            "type": "integer",
+            "description": "商品库存",
+            "minimum": 0
+          }
+        },
+        "required": ["name", "price", "stock"]
+      },
+      "UpdateProductDTO": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "商品名称",
+            "maxLength": 100
+          },
+          "description": {
+            "type": "string",
+            "description": "商品描述",
+            "maxLength": 500
+          },
+          "price": {
+            "type": "number",
+            "format": "decimal",
+            "description": "商品价格",
+            "exclusiveMinimum": 0
+          },
+          "stock": {
+            "type": "integer",
+            "description": "商品库存",
+            "minimum": 0
+          }
+        }
+      },
+      "PatchProductDTO": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "商品名称"
+          },
+          "description": {
+            "type": "string",
+            "description": "商品描述"
+          },
+          "price": {
+            "type": "number",
+            "format": "decimal",
+            "description": "商品价格"
+          },
+          "stock": {
+            "type": "integer",
+            "description": "商品库存"
+          },
+          "status": {
+            "type": "integer",
+            "description": "商品状态"
+          }
+        }
+      },
+      "QueryProductDTO": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "商品名称（模糊匹配）"
+          },
+          "minPrice": {
+            "type": "number",
+            "format": "decimal",
+            "description": "最低价格"
+          },
+          "maxPrice": {
+            "type": "number",
+            "format": "decimal",
+            "description": "最高价格"
+          },
+          "status": {
+            "type": "integer",
+            "description": "商品状态"
+          },
+          "sortBy": {
+            "type": "string",
+            "description": "排序字段（createTime, price）",
+            "enum": ["createTime", "price"]
+          },
+          "sortOrder": {
+            "type": "string",
+            "description": "排序方式（asc, desc）",
+            "enum": ["asc", "desc"]
+          }
+        }
+      },
+      "ProductVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "商品ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "商品名称"
+          },
+          "description": {
+            "type": "string",
+            "description": "商品描述"
+          },
+          "price": {
+            "type": "number",
+            "format": "decimal",
+            "description": "商品价格"
+          },
+          "stock": {
+            "type": "integer",
+            "description": "商品库存"
+          },
+          "status": {
+            "type": "integer",
+            "description": "商品状态（0：下架，1：上架）"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "创建时间"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "更新时间"
+          },
+          "isDeleted": {
+            "type": "integer",
+            "description": "删除标记（0：未删除，1：已删除）"
+          }
+        }
+      },
+      "PageInfoProductVO": {
+        "type": "object",
+        "properties": {
+          "pageNum": {
+            "type": "integer",
+            "description": "当前页码"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "每页数量"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64",
+            "description": "总记录数"
+          },
+          "pages": {
+            "type": "integer",
+            "description": "总页数"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductVO"
+            },
+            "description": "数据列表"
+          },
+          "hasNextPage": {
+            "type": "boolean",
+            "description": "是否有下一页"
+          },
+          "hasPreviousPage": {
+            "type": "boolean",
+            "description": "是否有上一页"
+          }
+        }
+      },
+      "ResultVoid": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "响应码"
+          },
+          "message": {
+            "type": "string",
+            "description": "响应消息"
+          },
+          "data": {
+            "type": "object",
+            "description": "响应数据"
+          },
+          "success": {
+            "type": "boolean",
+            "description": "请求是否成功"
+          }
+        }
+      },
+      "ResultInteger": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "响应码"
+          },
+          "message": {
+            "type": "string",
+            "description": "响应消息"
+          },
+          "data": {
+            "type": "integer",
+            "description": "响应数据"
+          },
+          "success": {
+            "type": "boolean",
+            "description": "请求是否成功"
+          }
+        }
+      },
+      "ResultProductVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "响应码"
+          },
+          "message": {
+            "type": "string",
+            "description": "响应消息"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ProductVO",
+            "description": "响应数据"
+          },
+          "success": {
+            "type": "boolean",
+            "description": "请求是否成功"
+          }
+        }
+      },
+      "ResultListProductVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "响应码"
+          },
+          "message": {
+            "type": "string",
+            "description": "响应消息"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductVO"
+            },
+            "description": "响应数据"
+          },
+          "success": {
+            "type": "boolean",
+            "description": "请求是否成功"
+          }
+        }
+      },
+      "ResultPageInfoProductVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "响应码"
+          },
+          "message": {
+            "type": "string",
+            "description": "响应消息"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PageInfoProductVO",
+            "description": "响应数据"
+          },
+          "success": {
+            "type": "boolean",
+            "description": "请求是否成功"
+          }
+        }
+      }
+    },
+    "tags": [
+      {
+        "name": "商品管理",
+        "description": "商品管理相关接口"
+      }
+    ]
+  }
+}

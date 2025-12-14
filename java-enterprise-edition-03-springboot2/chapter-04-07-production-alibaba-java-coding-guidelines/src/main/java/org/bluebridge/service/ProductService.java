@@ -17,41 +17,47 @@ public interface ProductService {
 
     /**
      * 创建商品
-     * @param createProductDTO 商品传输对象
-     * @return 商品视图对象
+     * @param createProductDTO
+     * @return
      */
-    ProductVO createProduct(CreateProductDTO createProductDTO);
+    int createProduct(CreateProductDTO createProductDTO);
     
     /**
      * 批量创建商品
-     * @param createProductDTOList 商品传输对象列表
-     * @return 商品视图对象列表
+     * @param createProductDTOList
+     * @return
      */
-    List<ProductVO> batchCreateProduct(List<CreateProductDTO> createProductDTOList);
+    int batchCreateProduct(List<CreateProductDTO> createProductDTOList);
 
     /**
      * 根据ID删除商品（物理删除）
      * @param id 商品ID
      */
-    void deleteProductById(Long id);
+
+    /**
+     * 根据ID删除商品（逻辑删除）
+     * @param id
+     * @return
+     */
+    int deleteProductById(Long id);
 
     /**
      * 批量删除商品（物理删除）
      * @param ids 商品ID列表
      */
-    void batchDeleteProduct(List<Long> ids);
+    int batchDeleteProduct(List<Long> ids);
 
     /**
      * 根据ID逻辑删除商品
      * @param id 商品ID
      */
-    void logicDeleteProductById(Long id);
+    int logicDeleteProductById(Long id);
 
     /**
      * 批量逻辑删除商品
      * @param ids 商品ID列表
      */
-    void batchLogicDeleteProduct(List<Long> ids);
+    int batchLogicDeleteProduct(List<Long> ids);
 
     /**
      * 根据ID全量更新商品
@@ -59,7 +65,7 @@ public interface ProductService {
      * @param updateProductDTO 商品传输对象
      * @return 商品视图对象
      */
-    ProductVO updateProduct(Long id, UpdateProductDTO updateProductDTO);
+    int updateProduct(Long id, UpdateProductDTO updateProductDTO);
     
     /**
      * 根据ID部分更新商品
@@ -67,7 +73,7 @@ public interface ProductService {
      * @param patchProductDTO 商品部分更新传输对象
      * @return 商品视图对象
      */
-    ProductVO patchProduct(Long id, PatchProductDTO patchProductDTO);
+    int patchProduct(Long id, PatchProductDTO patchProductDTO);
     
     /**
      * 根据ID获取商品详情

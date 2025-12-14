@@ -3,4 +3,21 @@ server:
 
 spring:
   profiles:
-    active: '@environment@'
+    active: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/javaee?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-timeout: 20000
+      idle-timeout: 300000
+      max-lifetime: 1200000
+      maximum-pool-size: 20
+      minimum-idle: 5
+      pool-name: HikariCP
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: org.bluebridge.entity

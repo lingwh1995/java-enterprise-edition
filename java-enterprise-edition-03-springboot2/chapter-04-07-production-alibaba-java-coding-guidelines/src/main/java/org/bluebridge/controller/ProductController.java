@@ -8,10 +8,10 @@ import org.bluebridge.service.ProductService;
 import org.bluebridge.vo.PageInfo;
 import org.bluebridge.vo.ProductVO;
 import org.bluebridge.vo.Result;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
@@ -29,7 +29,7 @@ import java.util.List;
 @RequestMapping("/api/products")
 public class ProductController {
     
-    @Autowired
+    @Resource
     private ProductService productService;
     
     /**
@@ -40,9 +40,9 @@ public class ProductController {
      * @return 统一响应结果
      */
     @PostMapping
-    public Result<ProductVO> createProduct(@Valid @RequestBody CreateProductDTO createProductDTO) {
-        ProductVO productVO = productService.createProduct(createProductDTO);
-        return Result.success(productVO, "商品创建成功");
+    public Result<Integer> createProduct(@Valid @RequestBody CreateProductDTO createProductDTO) {
+        int i = productService.createProduct(createProductDTO);
+        return Result.success(i, "商品创建成功");
     }
     
     /**
@@ -53,9 +53,9 @@ public class ProductController {
      * @return 统一响应结果
      */
     @PostMapping("/batch")
-    public Result<List<ProductVO>> batchCreateProduct(@Valid @RequestBody List<CreateProductDTO> createProductDTOList) {
-        List<ProductVO> productVOList = productService.batchCreateProduct(createProductDTOList);
-        return Result.success(productVOList, "商品批量创建成功");
+    public Result<Integer> batchCreateProduct(@Valid @RequestBody List<CreateProductDTO> createProductDTOList) {
+        int i = productService.batchCreateProduct(createProductDTOList);
+        return Result.success(i, "商品批量创建成功");
     }
 
     /**
@@ -66,11 +66,11 @@ public class ProductController {
      * @return 统一响应结果
      */
     @DeleteMapping("/{id}")
-    public Result<Void> deleteProductById(
+    public Result<Integer> deleteProductById(
             @PathVariable @NotNull(message = "商品ID不能为空")
             @Min(value = 1, message = "商品ID必须大于0") Long id) {
-        productService.deleteProductById(id);
-        return Result.success("商品删除成功");
+        int i = productService.deleteProductById(id);
+        return Result.success(i, "商品删除成功");
     }
 
     /**
@@ -81,9 +81,9 @@ public class ProductController {
      * @return 统一响应结果
      */
     @DeleteMapping("/batch")
-    public Result<Void> batchDeleteProduct(@RequestBody List<Long> ids) {
-        productService.batchDeleteProduct(ids);
-        return Result.success("商品批量删除成功");
+    public Result<Integer> batchDeleteProduct(@RequestBody List<Long> ids) {
+        int i = productService.batchDeleteProduct(ids);
+        return Result.success(i, "商品批量删除成功");
     }
 
     /**
@@ -94,9 +94,9 @@ public class ProductController {
      * @return 统一响应结果
      */
     @PatchMapping("/{id}/status")
-    public Result<Void> logicDeleteProductById(@PathVariable Long id) {
-        productService.logicDeleteProductById(id);
-        return Result.success("根据ID逻辑删除商品成功");
+    public Result<Integer> logicDeleteProductById(@PathVariable Long id) {
+        int i = productService.logicDeleteProductById(id);
+        return Result.success(i, "根据ID逻辑删除商品成功");
     }
 
     /**
@@ -107,11 +107,11 @@ public class ProductController {
      * @return 统一响应结果
      */
     @DeleteMapping("/batch/status")
-    public Result<Void> batchLogicDeleteProduct(
+    public Result<Integer> batchLogicDeleteProduct(
             @RequestBody List<Long> ids,
             @RequestParam Integer isDeleted) {
-        productService.batchLogicDeleteProduct(ids);
-        return Result.success("商品批量逻辑删除成功");
+        int i = productService.batchLogicDeleteProduct(ids);
+        return Result.success(i,"商品批量逻辑删除成功");
     }
 
     /**
@@ -123,12 +123,12 @@ public class ProductController {
      * @return 统一响应结果
      */
     @PutMapping("/{id}")
-    public Result<ProductVO> updateProduct(
+    public Result<Void> updateProduct(
             @PathVariable @NotNull(message = "商品ID不能为空") 
             @Min(value = 1, message = "商品ID必须大于0") Long id, 
             @Valid @RequestBody UpdateProductDTO updateProductDTO) {
-        ProductVO productVO = productService.updateProduct(id, updateProductDTO);
-        return Result.success(productVO, "商品更新成功");
+        int i = productService.updateProduct(id, updateProductDTO);
+        return Result.success("商品更新成功");
     }
     
     /**
@@ -140,12 +140,12 @@ public class ProductController {
      * @return 统一响应结果
      */
     @PatchMapping("/{id}")
-    public Result<ProductVO> patchProduct(
+    public Result<Void> patchProduct(
             @PathVariable @NotNull(message = "商品ID不能为空") 
             @Min(value = 1, message = "商品ID必须大于0") Long id, 
             @Valid @RequestBody PatchProductDTO patchProductDTO) {
-        ProductVO productVO = productService.patchProduct(id, patchProductDTO);
-        return Result.success(productVO, "商品部分更新成功");
+        int i = productService.patchProduct(id, patchProductDTO);
+        return Result.success("商品部分更新成功");
     }
     
     /**

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.bluebridge.mapper.ProductMapper">
+
+    <!-- 结果映射 -->
+    <resultMap id="ProductResultMap" type="org.bluebridge.entity.Product">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="price" column="price"/>
+        <result property="stock" column="stock"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="isDeleted" column="is_deleted"/>
+    </resultMap>
+
+    <!-- 插入商品 -->
+    <insert id="insertProduct" parameterType="product" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO product (name, description, price, stock, status, create_time, update_time, is_deleted)
+        VALUES (#{name}, #{description}, #{price}, #{stock}, #{status}, #{createTime}, #{updateTime}, #{isDeleted})
+    </insert>
+
+    <!-- 批量插入商品 -->
+    <insert id="batchInsertProduct">
+        INSERT INTO product (name, description, price, stock, status, create_time, update_time, is_deleted)
+        VALUES
+        <foreach collection="products" item="product" separator=",">
+            (#{product.name}, #{product.description}, #{product.price}, #{product.stock}, #{product.status}, 
+             #{product.createTime}, #{product.updateTime}, #{product.isDeleted})
+        </foreach>
+    </insert>
+
+    <!-- 根据ID删除商品(物理删除) -->
+    <delete id="deleteProductById" parameterType="java.lang.Long">
+        DELETE FROM product WHERE id = #{id}
+    </delete>
+
+    <!-- 批量删除商品(物理删除) -->
+    <delete id="batchDeleteProduct">
+        DELETE FROM product WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!-- 根据ID逻辑删除商品 -->
+    <update id="logicDeleteProductById" parameterType="java.lang.Long">
+        UPDATE product SET is_deleted = 1, update_time = NOW() WHERE id = #{id}
+    </update>
+
+    <!-- 批量逻辑删除商品 -->
+    <update id="batchLogicDeleteProduct">
+        UPDATE product SET is_deleted = 1, update_time = NOW() WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <!-- 根据ID更新商品信息 -->
+    <update id="updateProduct" parameterType="org.bluebridge.entity.Product">
+        UPDATE product
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="stock != null">
+                stock = #{stock},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            update_time = NOW()
+        </set>
+        WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <!-- 根据ID部分更新商品信息 -->
+    <update id="patchProduct" parameterType="org.bluebridge.entity.Product">
+        UPDATE product
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="stock != null">
+                stock = #{stock},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            update_time = NOW()
+        </set>
+        WHERE id = #{id} AND is_deleted = 0
+    </update>
+
+    <!-- 根据ID查询商品 -->
+    <select id="getProductById" parameterType="java.lang.Long" resultMap="ProductResultMap">
+        SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
+        FROM product
+        WHERE id = #{id} AND is_deleted = 0
+    </select>
+
+    <!-- 根据名称查询商品 -->
+    <select id="getProductByName" parameterType="java.lang.String" resultMap="ProductResultMap">
+        SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
+        FROM product
+        WHERE name = #{name} AND is_deleted = 0
+    </select>
+
+    <!-- 根据条件查询商品列表 -->
+    <select id="listProductByCondition" parameterType="org.bluebridge.entity.Product" resultMap="ProductResultMap">
+        SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
+        FROM product
+        WHERE is_deleted = 0
+        <if test="name != null and name != ''">
+            AND name LIKE CONCAT('%', #{name}, '%')
+        </if>
+        <if test="price != null">
+            AND price = #{price}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+    </select>
+
+    <!-- 查询所有未删除商品 -->
+    <select id="listProduct" resultMap="ProductResultMap">
+        SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
+        FROM product
+        WHERE is_deleted = 0
+    </select>
+
+</mapper>
