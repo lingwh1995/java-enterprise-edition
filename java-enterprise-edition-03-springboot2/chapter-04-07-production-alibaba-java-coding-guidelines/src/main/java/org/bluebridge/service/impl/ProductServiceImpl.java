@@ -55,12 +55,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public int deleteProductById(Long id) {
-        Product product = productMapper.getProductById(id);
-        if (product == null) {
-            throw new ProductException(404, "商品不存在");
-        }
-
-        // 物理删除商品
         return productMapper.deleteProductById(id);
     }
 
