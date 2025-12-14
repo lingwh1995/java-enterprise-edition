@@ -30,11 +30,6 @@ public interface ProductService {
     int batchCreateProduct(List<CreateProductDTO> createProductDTOList);
 
     /**
-     * 根据ID删除商品（物理删除）
-     * @param id 商品ID
-     */
-
-    /**
      * 根据ID删除商品（逻辑删除）
      * @param id
      * @return
