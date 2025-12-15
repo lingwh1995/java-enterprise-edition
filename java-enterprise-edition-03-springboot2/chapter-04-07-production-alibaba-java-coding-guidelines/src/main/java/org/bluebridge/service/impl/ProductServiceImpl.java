@@ -65,11 +65,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public int logicDeleteProductById(Long id) {
-        Product product = productMapper.getProductById(id);
-        if (product == null) {
-            throw new ProductException(404, "商品不存在");
-        }
-
         // 逻辑删除商品
         return productMapper.logicDeleteProductById(id);
     }
@@ -81,21 +76,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public int updateProduct(Long id, UpdateProductDTO updateProductDTO) {
-        // 查找商品
-        Product product = productMapper.getProductById(id);
-        if (product == null) {
-            throw new ProductException(404, "商品不存在");
-        }
-
-        // 检查是否已被逻辑删除
-        if (product.getIsDeleted() == 1) {
-            throw new ProductException(404, "商品不存在");
-        }
-
-        // 更新商品信息
-        product = productConvertor.toProduct(updateProductDTO);
-
-        // 保存更新
+        Product product = productConvertor.toProduct(updateProductDTO);
         return productMapper.updateProduct(product);
     }
 

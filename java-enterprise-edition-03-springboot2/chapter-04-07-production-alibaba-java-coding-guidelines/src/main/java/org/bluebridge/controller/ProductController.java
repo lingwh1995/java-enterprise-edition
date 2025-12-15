@@ -107,9 +107,7 @@ public class ProductController {
      * @return 统一响应结果
      */
     @DeleteMapping("/batch/status")
-    public Result<Integer> batchLogicDeleteProduct(
-            @RequestBody List<Long> ids,
-            @RequestParam Integer isDeleted) {
+    public Result<Integer> batchLogicDeleteProduct(@RequestBody List<Long> ids) {
         int i = productService.batchLogicDeleteProduct(ids);
         return Result.success(i,"商品批量逻辑删除成功");
     }
