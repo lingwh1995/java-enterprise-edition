@@ -47,6 +47,8 @@ public interface ProductConvertor {
      * @return Product 实体
      */
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "description", ignore = true)
+    @Mapping(target = "stock", ignore = true)
     @Mapping(target = "status", constant = "1")
     @Mapping(target = "createTime", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "updateTime", expression = "java(java.time.LocalDateTime.now())")
