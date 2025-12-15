@@ -12,28 +12,11 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PatchProductDTO {
-    /**
-     * 商品名称
-     */
+
+    // 商品名称
     private String name;
-    
-    /**
-     * 商品描述
-     */
-    private String description;
-    
-    /**
-     * 商品价格
-     */
-    private BigDecimal price;
-    
-    /**
-     * 商品库存
-     */
+
+    // 商品库存
     private Integer stock;
-    
-    /**
-     * 商品状态
-     */
-    private Integer status;
+
 }

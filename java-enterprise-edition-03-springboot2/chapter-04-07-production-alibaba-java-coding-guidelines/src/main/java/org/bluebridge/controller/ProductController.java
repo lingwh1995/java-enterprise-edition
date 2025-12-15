@@ -138,12 +138,12 @@ public class ProductController {
      * @return 统一响应结果
      */
     @PatchMapping("/{id}")
-    public Result<Void> patchProduct(
+    public Result<Integer> patchProduct(
             @PathVariable @NotNull(message = "商品ID不能为空") 
             @Min(value = 1, message = "商品ID必须大于0") Long id, 
             @Valid @RequestBody PatchProductDTO patchProductDTO) {
         int i = productService.patchProduct(id, patchProductDTO);
-        return Result.success("商品部分更新成功");
+        return Result.success(i, "商品部分更新成功");
     }
     
     /**

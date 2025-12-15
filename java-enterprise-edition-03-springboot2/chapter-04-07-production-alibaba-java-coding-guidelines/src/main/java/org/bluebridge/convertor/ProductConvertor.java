@@ -1,5 +1,6 @@
 package org.bluebridge.convertor;
 
+import org.bluebridge.dto.PatchProductDTO;
 import org.bluebridge.dto.UpdateProductDTO;
 import org.bluebridge.entity.Product;
 import org.bluebridge.dto.CreateProductDTO;
@@ -25,20 +26,32 @@ public interface ProductConvertor {
     @Mapping(target = "status", constant = "1")
     @Mapping(target = "createTime", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "updateTime", expression = "java(java.time.LocalDateTime.now())")
-    @Mapping(target = "isDeleted", constant = "0") // 默认未删除
+    @Mapping(target = "isDeleted", constant = "0")
     Product toProduct(CreateProductDTO createProductDTO);
 
     /**
-     * 将 CreateProductDTO 转换为 Product 实体
-     * @param createProductDTO 创建商品 DTO
+     * 将 UpdateProductDTO 转换为 Product 实体
+     * @param updateProductDTO 创建商品 DTO
      * @return Product 实体
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "status", constant = "1")
     @Mapping(target = "createTime", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "updateTime", expression = "java(java.time.LocalDateTime.now())")
-    @Mapping(target = "isDeleted", constant = "0") // 默认未删除
+    @Mapping(target = "isDeleted", constant = "0")
     Product toProduct(UpdateProductDTO updateProductDTO);
+
+    /**
+     * 将 PatchProductDTO 转换为 Product 实体
+     * @param patchProductDTO 创建商品 DTO
+     * @return Product 实体
+     */
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "status", constant = "1")
+    @Mapping(target = "createTime", expression = "java(java.time.LocalDateTime.now())")
+    @Mapping(target = "updateTime", expression = "java(java.time.LocalDateTime.now())")
+    @Mapping(target = "isDeleted", constant = "0")
+    Product toProduct(PatchProductDTO patchProductDTO);
 
     /**
      * 将 Product 实体转换为 CreateProductDTO

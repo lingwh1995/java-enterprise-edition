@@ -76,7 +76,6 @@
             <if test="status != null">
                 status = #{status},
             </if>
-            update_time = NOW()
         </set>
         WHERE id = #{id} AND is_deleted = 0
     </update>
@@ -88,19 +87,9 @@
             <if test="name != null and name != ''">
                 name = #{name},
             </if>
-            <if test="description != null and description != ''">
-                description = #{description},
-            </if>
-            <if test="price != null">
-                price = #{price},
-            </if>
             <if test="stock != null">
-                stock = #{stock},
+                stock = #{stock}
             </if>
-            <if test="status != null">
-                status = #{status},
-            </if>
-            update_time = NOW()
         </set>
         WHERE id = #{id} AND is_deleted = 0
     </update>

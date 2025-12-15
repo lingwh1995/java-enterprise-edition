@@ -76,42 +76,37 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public int updateProduct(Long id, UpdateProductDTO updateProductDTO) {
-        Product product = productConvertor.toProduct(updateProductDTO);
+        // 1.查询用户是否存在（阿里手册：更新前先查，避免更新不存在的数据）
+        Product product = productMapper.getProductById(id);
+        if (product == null) {
+            throw new ProductException(404, "商品不存在或已被删除");
+        }
+
+        // 2.转换DTO为实体（阿里手册：避免直接操作DTO）
+        product = productConvertor.toProduct(updateProductDTO);
+
+        // 3.设置商品ID
+        product.setId(id);
+
+        // 4.更新商品
         return productMapper.updateProduct(product);
     }
 
     @Override
     public int patchProduct(Long id, PatchProductDTO patchProductDTO) {
-        // 查找商品
+        // 1.查询用户是否存在（阿里手册：更新前先查，避免更新不存在的数据）
         Product product = productMapper.getProductById(id);
         if (product == null) {
-            throw new ProductException(404, "商品不存在");
+            throw new ProductException(404, "商品不存在或已被删除");
         }
 
-        // 检查是否已被逻辑删除
-        if (product.getIsDeleted() == 1) {
-            throw new ProductException(404, "商品不存在");
-        }
+        // 2.转为实体
+        product = productConvertor.toProduct(patchProductDTO);
 
-        // 部分更新商品信息
-        if (patchProductDTO.getName() != null) {
-            product.setName(patchProductDTO.getName());
-        }
-        if (patchProductDTO.getDescription() != null) {
-            product.setDescription(patchProductDTO.getDescription());
-        }
-        if (patchProductDTO.getPrice() != null) {
-            product.setPrice(patchProductDTO.getPrice());
-        }
-        if (patchProductDTO.getStock() != null) {
-            product.setStock(patchProductDTO.getStock());
-        }
-        if (patchProductDTO.getStatus() != null) {
-            product.setStatus(patchProductDTO.getStatus());
-        }
-        product.setUpdateTime(LocalDateTime.now());
+        // 3.设置商品ID
+        product.setId(id);
 
-        // 保存更新
+        // 4.更新商品
         return productMapper.patchProduct(product);
     }
 
