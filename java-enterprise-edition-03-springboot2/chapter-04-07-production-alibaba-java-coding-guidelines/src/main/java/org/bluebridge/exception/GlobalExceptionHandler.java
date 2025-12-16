@@ -69,4 +69,5 @@ public class GlobalExceptionHandler {
     public Result<Void> handleException(Exception e) {
         return Result.failure(500, "系统内部错误：" + e.getMessage());
     }
+
 }

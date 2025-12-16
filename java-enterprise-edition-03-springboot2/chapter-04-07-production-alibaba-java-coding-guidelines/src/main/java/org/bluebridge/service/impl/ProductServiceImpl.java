@@ -4,24 +4,24 @@ import org.bluebridge.dto.CreateProductDTO;
 import org.bluebridge.dto.UpdateProductDTO;
 import org.bluebridge.dto.PatchProductDTO;
 import org.bluebridge.dto.QueryProductDTO;
-import org.bluebridge.entity.Product;
+import org.bluebridge.entity.ProductDO;
 import org.bluebridge.exception.ProductException;
 import org.bluebridge.convertor.ProductConvertor;
 import org.bluebridge.mapper.ProductMapper;
 import org.bluebridge.service.ProductService;
 import org.bluebridge.vo.PageInfo;
 import org.bluebridge.vo.ProductVO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 商品服务实现类
+ * @author lingwh
+ * @desc
+ * @date 2025/12/13 11:10
  */
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -36,21 +36,21 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int createProduct(CreateProductDTO createProductDTO) {
         // 使用 MapStruct 转换DTO为实体
-        Product product = productConvertor.toProduct(createProductDTO);
+        ProductDO productDO = productConvertor.toProductDO(createProductDTO);
         
         // 保存到数据库
-        return productMapper.insertProduct(product);
+        return productMapper.insertProduct(productDO);
     }
     
     @Override
     public int batchCreateProduct(List<CreateProductDTO> createProductDTOList) {
         // 转换DTO列表为实体列表
-        List<Product> productList = createProductDTOList.stream()
-                .map(productConvertor::toProduct)
+        List<ProductDO> productDOList = createProductDTOList.stream()
+                .map(productConvertor::toProductDO)
                 .collect(Collectors.toList());
         
         // 批量保存到数据库
-        return productMapper.batchInsertProduct(productList);
+        return productMapper.batchInsertProduct(productDOList);
     }
 
     @Override
@@ -77,48 +77,48 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int updateProduct(Long id, UpdateProductDTO updateProductDTO) {
         // 1.查询用户是否存在（阿里手册：更新前先查，避免更新不存在的数据）
-        Product product = productMapper.getProductById(id);
-        if (product == null) {
+        ProductDO productDO = productMapper.getProductById(id);
+        if (productDO == null) {
             throw new ProductException(404, "商品不存在或已被删除");
         }
 
         // 2.转换DTO为实体（阿里手册：避免直接操作DTO）
-        product = productConvertor.toProduct(updateProductDTO);
+        productDO = productConvertor.toProductDO(updateProductDTO);
 
         // 3.设置商品ID
-        product.setId(id);
+        productDO.setId(id);
 
         // 4.更新商品
-        return productMapper.updateProduct(product);
+        return productMapper.updateProduct(productDO);
     }
 
     @Override
     public int patchProduct(Long id, PatchProductDTO patchProductDTO) {
         // 1.查询用户是否存在（阿里手册：更新前先查，避免更新不存在的数据）
-        Product product = productMapper.getProductById(id);
-        if (product == null) {
+        ProductDO productDO = productMapper.getProductById(id);
+        if (productDO == null) {
             throw new ProductException(404, "商品不存在或已被删除");
         }
 
         // 2.转为实体
-        product = productConvertor.toProduct(patchProductDTO);
+        productDO = productConvertor.toProductDO(patchProductDTO);
 
         // 3.设置商品ID
-        product.setId(id);
+        productDO.setId(id);
 
         // 4.更新商品
-        return productMapper.patchProduct(product);
+        return productMapper.patchProduct(productDO);
     }
 
     @Override
     public ProductVO getProductById(Long id) {
-        Product product = productMapper.getProductById(id);
-        if (product == null) {
+        ProductDO productDO = productMapper.getProductById(id);
+        if (productDO == null) {
             throw new ProductException(404, "商品不存在");
         }
         
         // 检查是否已被逻辑删除
-        if (product.getIsDeleted() == 1) {
+        if (productDO.getIsDeleted() == 1) {
             throw new ProductException(404, "商品不存在");
         }
         
@@ -128,8 +128,8 @@ public class ProductServiceImpl implements ProductService {
     
     @Override
     public ProductVO getProductByName(String name) {
-        Product product = productMapper.getProductByName(name);
-        if (product == null) {
+        ProductDO productDO = productMapper.getProductByName(name);
+        if (productDO == null) {
             throw new ProductException(404, "商品不存在");
         }
         // return productMapper.toProductVO(product);
@@ -139,17 +139,17 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductVO> listProductByCondition(QueryProductDTO queryDTO) {
         // 构造查询条件
-        Product queryProduct = new Product();
+        ProductDO productDO = new ProductDO();
         if (queryDTO.getName() != null && !queryDTO.getName().isEmpty()) {
-            queryProduct.setName(queryDTO.getName());
+            productDO.setName(queryDTO.getName());
         }
         if (queryDTO.getStatus() != null) {
-            queryProduct.setStatus(queryDTO.getStatus());
+            productDO.setStatus(queryDTO.getStatus());
         }
         // 注意：价格区间查询需要在Mapper中特殊处理，这里简化处理
 
         // 查询商品列表
-        List<Product> products = productMapper.listProductByCondition(queryProduct);
+        List<ProductDO> productDOList = productMapper.listProductByCondition(productDO);
 
         // 转换为VO列表返回
         // return products.stream().map(productMapper::toProductVO).collect(Collectors.toList());
@@ -158,7 +158,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductVO> listProduct() {
-        List<Product> products = productMapper.listProduct();
+        List<ProductDO> productDOList = productMapper.listProduct();
         // return products.stream().map(productMapper::toProductVO).collect(Collectors.toList());
         return new ArrayList<>();
     }
@@ -196,4 +196,5 @@ public class ProductServiceImpl implements ProductService {
         
         return pageInfo;
     }
+
 }

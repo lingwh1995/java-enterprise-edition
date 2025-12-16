@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class ProductException extends RuntimeException {
+
     /**
      * 异常码
      */
@@ -34,4 +35,5 @@ public class ProductException extends RuntimeException {
         super(message, cause);
         this.code = code;
     }
+
 }

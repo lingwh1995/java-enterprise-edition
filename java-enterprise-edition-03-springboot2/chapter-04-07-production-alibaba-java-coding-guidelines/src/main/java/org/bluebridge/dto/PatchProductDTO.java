@@ -6,7 +6,9 @@ import lombok.AllArgsConstructor;
 import java.math.BigDecimal;
 
 /**
- * 商品部分更新DTO
+ * @author lingwh
+ * @desc 部分更新商品DTO
+ * @date 2025/12/13 10:20
  */
 @Data
 @NoArgsConstructor

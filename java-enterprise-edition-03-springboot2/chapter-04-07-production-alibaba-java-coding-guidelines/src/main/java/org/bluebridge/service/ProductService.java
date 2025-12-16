@@ -4,14 +4,15 @@ import org.bluebridge.dto.CreateProductDTO;
 import org.bluebridge.dto.UpdateProductDTO;
 import org.bluebridge.dto.PatchProductDTO;
 import org.bluebridge.dto.QueryProductDTO;
-import org.bluebridge.entity.Product;
 import org.bluebridge.vo.PageInfo;
 import org.bluebridge.vo.ProductVO;
 
 import java.util.List;
 
 /**
- * 商品服务接口
+ * @author lingwh
+ * @desc
+ * @date 2025/12/13 11:00
  */
 public interface ProductService {
 

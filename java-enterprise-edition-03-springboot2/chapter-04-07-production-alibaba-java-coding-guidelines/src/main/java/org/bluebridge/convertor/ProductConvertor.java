@@ -2,15 +2,16 @@ package org.bluebridge.convertor;
 
 import org.bluebridge.dto.PatchProductDTO;
 import org.bluebridge.dto.UpdateProductDTO;
-import org.bluebridge.entity.Product;
+import org.bluebridge.entity.ProductDO;
 import org.bluebridge.dto.CreateProductDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 /**
- * 商品对象映射器
- * 使用 MapStruct 实现 Entity、DTO、VO 之间的自动转换
+ * @author lingwh
+ * @desc 商品对象映射器
+ * @date 2025/12/13 11:20
  */
 @Mapper(componentModel = "spring")
 public interface ProductConvertor {
@@ -27,24 +28,24 @@ public interface ProductConvertor {
     @Mapping(target = "createTime", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "updateTime", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "isDeleted", constant = "0")
-    Product toProduct(CreateProductDTO createProductDTO);
+    ProductDO toProductDO(CreateProductDTO createProductDTO);
 
     /**
      * 将 UpdateProductDTO 转换为 Product 实体
      * @param updateProductDTO 创建商品 DTO
-     * @return Product 实体
+     * @return ProductDO 实体
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "status", constant = "1")
     @Mapping(target = "createTime", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "updateTime", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "isDeleted", constant = "0")
-    Product toProduct(UpdateProductDTO updateProductDTO);
+    ProductDO toProductDO(UpdateProductDTO updateProductDTO);
 
     /**
      * 将 PatchProductDTO 转换为 Product 实体
      * @param patchProductDTO 创建商品 DTO
-     * @return Product 实体
+     * @return ProductDO 实体
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "description", ignore = true)
@@ -53,7 +54,7 @@ public interface ProductConvertor {
     @Mapping(target = "createTime", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "updateTime", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "isDeleted", constant = "0")
-    Product toProduct(PatchProductDTO patchProductDTO);
+    ProductDO toProductDO(PatchProductDTO patchProductDTO);
 
     /**
      * 将 Product 实体转换为 CreateProductDTO
@@ -98,4 +99,5 @@ public interface ProductConvertor {
      * @param productVO 商品视图对象
      */
 //    void updateProductVOFromProduct(Product product, @MappingTarget ProductVO productVO);
+
 }

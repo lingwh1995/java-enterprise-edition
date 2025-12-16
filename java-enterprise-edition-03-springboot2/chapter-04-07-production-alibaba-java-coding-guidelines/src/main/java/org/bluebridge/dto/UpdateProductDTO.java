@@ -9,7 +9,9 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 /**
- * 更新商品数据传输对象
+ * @author lingwh
+ * @desc 更新商品DTO
+ * @date 2025/12/13 10:40
  */
 @Data
 @NoArgsConstructor

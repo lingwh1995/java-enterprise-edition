@@ -3,7 +3,7 @@
 <mapper namespace="org.bluebridge.mapper.ProductMapper">
 
     <!-- 结果映射 -->
-    <resultMap id="ProductResultMap" type="org.bluebridge.entity.Product">
+    <resultMap id="ProductResultMap" type="org.bluebridge.entity.ProductDO">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="description" column="description"/>
@@ -58,7 +58,7 @@
     </update>
 
     <!-- 根据ID更新商品信息 -->
-    <update id="updateProduct" parameterType="org.bluebridge.entity.Product">
+    <update id="updateProduct" parameterType="org.bluebridge.entity.ProductDO">
         UPDATE product
         <set>
             <if test="name != null and name != ''">
@@ -81,7 +81,7 @@
     </update>
 
     <!-- 根据ID部分更新商品信息 -->
-    <update id="patchProduct" parameterType="org.bluebridge.entity.Product">
+    <update id="patchProduct" parameterType="org.bluebridge.entity.ProductDO">
         UPDATE product
         <set>
             <if test="name != null and name != ''">
@@ -109,7 +109,7 @@
     </select>
 
     <!-- 根据条件查询商品列表 -->
-    <select id="listProductByCondition" parameterType="org.bluebridge.entity.Product" resultMap="ProductResultMap">
+    <select id="listProductByCondition" parameterType="org.bluebridge.entity.ProductDO" resultMap="ProductResultMap">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM product
         WHERE is_deleted = 0

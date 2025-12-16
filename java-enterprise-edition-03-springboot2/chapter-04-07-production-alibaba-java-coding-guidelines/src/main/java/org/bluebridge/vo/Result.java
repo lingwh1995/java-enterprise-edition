@@ -5,13 +5,15 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
 /**
- * 统一API响应结果封装类
- * @param <T> 数据载荷类型
+ * @author lingwh
+ * @desc 统一API响应结果封装类
+ * @date 2025/12/13 11:40
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Result<T> {
+
     /**
      * 响应码
      */
@@ -73,4 +75,5 @@ public class Result<T> {
         result.setSuccess(false);
         return result;
     }
+
 }

@@ -21,8 +21,10 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * 商品管理控制器（阿里规范：类名=资源名+Controller，如ProductController）
- * 路径规范：/api/资源复数（版本+复数资源，阿里微服务规范）
+ * @author lingwh
+ * @desc 商品管理控制器（阿里规范：类名=资源名+Controller，如ProductController）
+ *       路径规范：/api/资源复数（版本+复数资源，阿里微服务规范）
+ * @date 2025/12/16 17:02
  */
 @Validated
 @RestController
@@ -238,4 +240,5 @@ public class ProductController {
         PageInfo<ProductVO> pageInfo = productService.pageProduct(queryProductDTO, pageNum, pageSize, sortBy, sortOrder);
         return Result.success(pageInfo, "查询成功");
     }
+
 }

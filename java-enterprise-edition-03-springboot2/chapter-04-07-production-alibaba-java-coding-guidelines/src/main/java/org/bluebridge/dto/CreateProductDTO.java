@@ -11,7 +11,9 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 /**
- * 创建商品数据传输对象
+ * @author lingwh
+ * @desc 创建商品数据DTO
+ * @date 2025/12/13 10:10
  */
 @Data
 @NoArgsConstructor
