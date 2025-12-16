@@ -41,6 +41,12 @@ public class ProductDO {
     private LocalDateTime updateTime;
     
     // 删除标记（0：未删除，1：已删除）
-    private Integer isDeleted = 0;
+    private Integer isDeleted;
+
+    // 排序字段（createTime, price）
+    private String sortBy;
+
+    // 排序方式（asc, desc）
+    private String sortOrder;
 
 }
