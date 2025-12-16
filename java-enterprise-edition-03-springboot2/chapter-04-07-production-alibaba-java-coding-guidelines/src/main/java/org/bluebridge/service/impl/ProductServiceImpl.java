@@ -7,7 +7,7 @@ import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductQueryDTO;
-import org.bluebridge.exception.ProductException;
+import org.bluebridge.common.exception.ProductException;
 import org.bluebridge.convertor.ProductConvertor;
 import org.bluebridge.dao.mapper.ProductMapper;
 import org.bluebridge.service.ProductService;

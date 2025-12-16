@@ -1,4 +1,4 @@
-package org.bluebridge.controller.vo;
+package org.bluebridge.common.response;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
