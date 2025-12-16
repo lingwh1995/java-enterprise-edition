@@ -1,5 +1,7 @@
 package org.bluebridge.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.bluebridge.dao.domain.ProductDO;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
@@ -9,12 +11,10 @@ import org.bluebridge.exception.ProductException;
 import org.bluebridge.convertor.ProductConvertor;
 import org.bluebridge.dao.mapper.ProductMapper;
 import org.bluebridge.service.ProductService;
-import org.bluebridge.controller.vo.PageInfo;
 import org.bluebridge.controller.vo.ProductVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -152,34 +152,12 @@ public class ProductServiceImpl implements ProductService {
     public PageInfo<ProductVO> pageProduct(
                 ProductQueryDTO productQueryDTO,
                 Integer pageNum,
-                Integer pageSize,
-                String sortBy,
-                String sortOrder) {
+                Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         List<ProductVO> productVOList = searchProduct(productQueryDTO);
-        
-        // 计算分页信息
-        int total = productVOList.size();
-        int pages = (int) Math.ceil((double) total / pageSize);
-        int startIndex = (pageNum - 1) * pageSize;
-        int endIndex = Math.min(startIndex + pageSize, total);
-        
-        // 获取当前页数据
-        List<ProductVO> pageList = new ArrayList<>();
-        if (startIndex < total) {
-            pageList = productVOList.subList(startIndex, endIndex);
-        }
-        
-        // 构建分页结果
-        PageInfo<ProductVO> pageInfo = new PageInfo<>();
-        pageInfo.setPageNum(pageNum);
-        pageInfo.setPageSize(pageSize);
-        pageInfo.setTotal((long) total);
-        pageInfo.setPages(pages);
-        pageInfo.setList(pageList);
-        pageInfo.setHasNextPage(pageNum < pages);
-        pageInfo.setHasPreviousPage(pageNum > 1);
-        
-        return pageInfo;
+
+        // 将结果转换为PageInfo返回
+        return new PageInfo<>(productVOList);
     }
 
 }

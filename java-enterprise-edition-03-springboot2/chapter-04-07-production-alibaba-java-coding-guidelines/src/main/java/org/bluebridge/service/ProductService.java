@@ -1,11 +1,10 @@
 package org.bluebridge.service;
 
-import org.apache.ibatis.annotations.Param;
+import com.github.pagehelper.PageInfo;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductQueryDTO;
-import org.bluebridge.controller.vo.PageInfo;
 import org.bluebridge.controller.vo.ProductVO;
 
 import java.util.List;
@@ -104,15 +103,11 @@ public interface ProductService {
      * @param queryDTO 查询条件
      * @param pageNum 页码
      * @param pageSize 每页数量
-     * @param sortBy 排序字段
-     * @param sortOrder 排序顺序（asc/desc）
      * @return 分页结果
      */
     PageInfo<ProductVO> pageProduct(
             ProductQueryDTO queryDTO,
             Integer pageNum,
-            Integer pageSize,
-            String sortBy,
-            String sortOrder);
+            Integer pageSize);
 
 }

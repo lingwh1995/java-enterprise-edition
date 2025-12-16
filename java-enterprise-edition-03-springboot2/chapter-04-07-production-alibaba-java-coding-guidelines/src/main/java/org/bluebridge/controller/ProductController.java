@@ -1,11 +1,11 @@
 package org.bluebridge.controller;
 
+import com.github.pagehelper.PageInfo;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductQueryDTO;
 import org.bluebridge.service.ProductService;
-import org.bluebridge.controller.vo.PageInfo;
 import org.bluebridge.controller.vo.ProductVO;
 import org.bluebridge.controller.vo.Result;
 import org.springframework.validation.annotation.Validated;
@@ -233,10 +233,8 @@ public class ProductController {
     public Result<PageInfo<ProductVO>> pageProduct(
             @RequestBody ProductQueryDTO queryProductDTO,
             @RequestParam(defaultValue = "1") Integer pageNum,
-            @RequestParam(defaultValue = "10") Integer pageSize,
-            @RequestParam(defaultValue = "createTime") String sortBy,
-            @RequestParam(defaultValue = "desc") String sortOrder) {
-        PageInfo<ProductVO> pageInfo = productService.pageProduct(queryProductDTO, pageNum, pageSize, sortBy, sortOrder);
+            @RequestParam(defaultValue = "10") Integer pageSize) {
+        PageInfo<ProductVO> pageInfo = productService.pageProduct(queryProductDTO, pageNum, pageSize);
         return Result.success(pageInfo, "查询成功");
     }
 
