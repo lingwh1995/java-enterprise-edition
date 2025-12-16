@@ -1,5 +1,6 @@
 package org.bluebridge.service;
 
+import org.apache.ibatis.annotations.Param;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
@@ -90,7 +91,7 @@ public interface ProductService {
      * @param productQueryDTO 商品查询条件
      * @return 商品视图对象列表
      */
-    List<ProductVO> listProductByCondition(ProductQueryDTO productQueryDTO);
+    List<ProductVO> searchProduct(ProductQueryDTO productQueryDTO);
 
     /**
      * 获取商品列表

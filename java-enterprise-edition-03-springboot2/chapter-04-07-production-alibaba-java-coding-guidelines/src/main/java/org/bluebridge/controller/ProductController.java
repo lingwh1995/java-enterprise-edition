@@ -201,7 +201,7 @@ public class ProductController {
      * @return 统一响应结果
      */
     @GetMapping("/search")
-    public Result<List<ProductVO>> listProduct(
+    public Result<List<ProductVO>> searchProduct(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) @DecimalMin("0.0") BigDecimal minPrice,
             @RequestParam(required = false) @DecimalMin("100.0") BigDecimal maxPrice,
@@ -216,7 +216,7 @@ public class ProductController {
         queryProductDTO.setSortBy(sortBy);
         queryProductDTO.setSortOrder(sortOrder);
         
-        List<ProductVO> products = productService.listProductByCondition(queryProductDTO);
+        List<ProductVO> products = productService.searchProduct(queryProductDTO);
         return Result.success(products, "查询成功");
     }
     

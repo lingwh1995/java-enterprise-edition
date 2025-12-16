@@ -87,7 +87,7 @@ public interface ProductMapper {
      * @param productDO 查询条件
      * @return 商品列表
      */
-    List<ProductDO> listProductByCondition(ProductDO productDO);
+    List<ProductDO> searchProduct(ProductDO productDO);
     
     /**
      * 查询所有未删除商品

@@ -131,12 +131,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductVO> listProductByCondition(ProductQueryDTO productQueryDTO) {
+    public List<ProductVO> searchProduct(ProductQueryDTO productQueryDTO) {
         // 构造查询条件
         ProductDO productDO = productConvertor.toProductDO(productQueryDTO);
 
         // 查询商品列表
-        List<ProductDO> productDOList = productMapper.listProductByCondition(productDO);
+        List<ProductDO> productDOList = productMapper.searchProduct(productDO);
 
         // 转换为VO列表返回
         return productConvertor.toProductVOList(productDOList);
@@ -155,7 +155,7 @@ public class ProductServiceImpl implements ProductService {
                 Integer pageSize,
                 String sortBy,
                 String sortOrder) {
-        List<ProductVO> productVOList = listProductByCondition(productQueryDTO);
+        List<ProductVO> productVOList = searchProduct(productQueryDTO);
         
         // 计算分页信息
         int total = productVOList.size();
