@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Data
 public class PageEntity<T> implements Serializable {
 
-    private int currentPage = 1;
+    private int pageNum = 1;
     private int pageSize = 10;
     private T entity;
 

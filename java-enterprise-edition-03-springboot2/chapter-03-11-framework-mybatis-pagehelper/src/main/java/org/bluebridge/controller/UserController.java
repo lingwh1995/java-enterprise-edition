@@ -44,7 +44,7 @@ public class UserController {
         int currentPage = 1;
         int pageSize = 10;
         PageEntity<User> pageEntity = new PageEntity<>();
-        pageEntity.setCurrentPage(currentPage);
+        pageEntity.setPageNum(currentPage);
         pageEntity.setPageSize(pageSize);
 
         return userService.listPage(pageEntity);

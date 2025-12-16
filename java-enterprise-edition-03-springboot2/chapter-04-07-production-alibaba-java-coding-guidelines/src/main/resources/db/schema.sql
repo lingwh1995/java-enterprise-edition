@@ -1,8 +1,8 @@
 use javaee;
 
 -- 创建商品表
-CREATE TABLE IF NOT EXISTS `product` (
-                                         `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '商品ID',
+CREATE TABLE IF NOT EXISTS `t_product` (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '商品ID',
     `name` varchar(100) NOT NULL COMMENT '商品名称',
     `description` varchar(500) DEFAULT NULL COMMENT '商品描述',
     `price` decimal(10,2) NOT NULL COMMENT '商品价格',
@@ -15,10 +15,10 @@ CREATE TABLE IF NOT EXISTS `product` (
     KEY `idx_name` (`name`),
     KEY `idx_status` (`status`),
     KEY `idx_is_deleted` (`is_deleted`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='商品表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='商品表';
 
 -- 添加10条测试数据
-INSERT INTO `product` (`name`, `description`, `price`, `stock`, `status`) VALUES
+INSERT INTO `t_product` (`name`, `description`, `price`, `stock`, `status`) VALUES
     ('商品1', '测试商品1', 19.99, 100, 1),
     ('商品2', '测试商品2', 29.99, 50, 1),
     ('商品3', '测试商品3', 39.99, 20, 1),

@@ -29,7 +29,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public PageInfo<User> listPage(PageEntity<User> pageEntity) {
-        int currentPage = pageEntity.getCurrentPage();
+        int currentPage = pageEntity.getPageNum();
         int pageSize = pageEntity.getPageSize();
         PageHelper.startPage(currentPage, pageSize);
         List<User> userList = userDao.list();
