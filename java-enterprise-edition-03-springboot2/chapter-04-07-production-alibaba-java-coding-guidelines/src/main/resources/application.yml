@@ -20,4 +20,6 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: org.bluebridge.do
+  type-aliases-package: org.bluebridge.entity
+  configuration:
+    map-underscore-to-camel-case: true

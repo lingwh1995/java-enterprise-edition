@@ -83,7 +83,7 @@ public interface ProductService {
      * @param name 商品名称
      * @return 商品视图对象
      */
-    ProductVO getProductByName(String name);
+    List<ProductVO> listProductByName(String name);
 
     /**
      * 根据查询条件获取商品列表

@@ -171,9 +171,9 @@ public class ProductController {
      * @return 统一响应结果
      */
     @GetMapping("/by-name")
-    public Result<ProductVO> getProductByName(@RequestParam String name) {
-        ProductVO productVO = productService.getProductByName(name);
-        return Result.success(productVO, "查询成功");
+    public Result<List<ProductVO>> listProductByName(@RequestParam String name) {
+        List<ProductVO> productVOList = productService.listProductByName(name);
+        return Result.success(productVOList, "查询成功");
     }
     
     /**

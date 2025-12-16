@@ -2,6 +2,7 @@ package org.bluebridge.mapper;
 
 import org.apache.ibatis.annotations.Param;
 import org.bluebridge.entity.ProductDO;
+import org.bluebridge.vo.ProductVO;
 
 import java.util.List;
 
@@ -80,7 +81,7 @@ public interface ProductMapper {
      * @param name 商品名称
      * @return 商品实体
      */
-    ProductDO getProductByName(String name);
+    List<ProductDO> listProductByName(String name);
     
     /**
      * 根据条件查询商品列表

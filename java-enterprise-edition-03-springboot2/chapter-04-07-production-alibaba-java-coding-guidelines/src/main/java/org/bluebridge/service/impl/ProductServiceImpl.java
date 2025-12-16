@@ -126,13 +126,12 @@ public class ProductServiceImpl implements ProductService {
     }
     
     @Override
-    public ProductVO getProductByName(String name) {
-        ProductDO productDO = productMapper.getProductByName(name);
-        if (productDO == null) {
+    public List<ProductVO> listProductByName(String name) {
+        List<ProductDO> productDOList = productMapper.listProductByName(name);
+        if (productDOList == null) {
             throw new ProductException(404, "商品不存在");
         }
-        // return productMapper.toProductVO(product);
-        return null;
+        return productConvertor.toProductVO(productDOList);
     }
 
     @Override

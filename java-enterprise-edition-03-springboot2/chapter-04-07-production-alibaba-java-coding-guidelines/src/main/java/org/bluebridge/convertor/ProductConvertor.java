@@ -9,6 +9,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
  * @author lingwh
  * @desc 商品对象映射器
@@ -47,7 +49,20 @@ public interface ProductConvertor {
     @Mapping(target = "status", constant = "1")
     ProductDO toProductDO(PatchProductDTO patchProductDTO);
 
+    /**
+     * 将 ProductDO 转换为 ProductVO
+     * @param productDO 商品实体
+     * @return ProductVO 商品视图对象
+     */
     ProductVO toProductVO(ProductDO productDO);
+
+    /**
+     * 将 ProductDO 列表转换为 ProductVO 列表
+     * @param productDOList 商品实体列表
+     * @return ProductVO 列表
+     */
+    @Mapping(target = "isDeleted", ignore = true)
+    List<ProductVO> toProductVO(List<ProductDO> productDOList);
 
     /**
      * 将 Product 实体转换为 CreateProductDTO
