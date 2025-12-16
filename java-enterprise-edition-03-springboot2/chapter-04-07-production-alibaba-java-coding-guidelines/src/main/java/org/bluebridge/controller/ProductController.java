@@ -123,12 +123,12 @@ public class ProductController {
      * @return 统一响应结果
      */
     @PutMapping("/{id}")
-    public Result<Void> updateProduct(
+    public Result<Integer> updateProduct(
             @PathVariable @NotNull(message = "商品ID不能为空") 
             @Min(value = 1, message = "商品ID必须大于0") Long id, 
             @Valid @RequestBody UpdateProductDTO updateProductDTO) {
         int i = productService.updateProduct(id, updateProductDTO);
-        return Result.success("商品更新成功");
+        return Result.success(i, "商品更新成功");
     }
     
     /**

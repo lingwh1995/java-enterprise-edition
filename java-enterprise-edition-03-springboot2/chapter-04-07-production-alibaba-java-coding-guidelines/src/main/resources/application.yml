@@ -20,4 +20,4 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: org.bluebridge.entity
+  type-aliases-package: org.bluebridge.do

@@ -16,7 +16,7 @@
     </resultMap>
 
     <!-- 插入商品 -->
-    <insert id="insertProduct" parameterType="product" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertProduct" parameterType="org.bluebridge.entity.ProductDO" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_product (name, description, price, stock, status, create_time, update_time, is_deleted)
         VALUES (#{name}, #{description}, #{price}, #{stock}, #{status}, #{createTime}, #{updateTime}, #{isDeleted})
     </insert>
