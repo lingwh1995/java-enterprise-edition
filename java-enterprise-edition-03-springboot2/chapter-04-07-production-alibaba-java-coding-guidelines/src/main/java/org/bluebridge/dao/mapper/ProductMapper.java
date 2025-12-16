@@ -1,8 +1,7 @@
 package org.bluebridge.dao.mapper;
 
 import org.apache.ibatis.annotations.Param;
-import org.bluebridge.dto.ProductCreateDTO;
-import org.bluebridge.entity.ProductDO;
+import org.bluebridge.dao.domain.ProductDO;
 
 import java.util.List;
 

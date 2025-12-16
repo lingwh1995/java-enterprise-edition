@@ -2,8 +2,9 @@ package org.bluebridge.convertor;
 
 import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductCreateDTO;
+import org.bluebridge.dto.ProductQueryDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
-import org.bluebridge.entity.ProductDO;
+import org.bluebridge.dao.domain.ProductDO;
 import org.bluebridge.controller.vo.ProductVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -29,6 +30,13 @@ public interface ProductConvertor {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "status", constant = "1")
     ProductDO toProductDO(ProductCreateDTO createProductDTO);
+
+    /**
+     * 将 QueryProductDTO 转换为 ProductDO 实体
+     * @param queryProductDTO 查询商品 DTO
+     * @return ProductDO 实体
+     */
+    ProductDO toProductDO(ProductQueryDTO queryProductDTO);
 
     /**
      * 将 UpdateProductDTO 转换为 ProductDO 实体

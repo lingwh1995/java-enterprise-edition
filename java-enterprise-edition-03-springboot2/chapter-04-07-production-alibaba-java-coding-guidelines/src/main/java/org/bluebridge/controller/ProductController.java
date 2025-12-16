@@ -206,9 +206,8 @@ public class ProductController {
             @RequestParam(required = false) @DecimalMin("0.0") BigDecimal minPrice,
             @RequestParam(required = false) @DecimalMin("100.0") BigDecimal maxPrice,
             @RequestParam(required = false) Integer status,
-            @RequestParam(required = false) @Pattern(regexp = "createTime|price") String sortBy,
-            @RequestParam(required = false) @Pattern(regexp = "asc|desc") String sortOrder) {
-        
+            @RequestParam(required = false, defaultValue = "create_time") @Pattern(regexp = "create_time|price") String sortBy,
+            @RequestParam(required = false, defaultValue = "desc") @Pattern(regexp = "asc|desc") String sortOrder) {
         ProductQueryDTO queryProductDTO = new ProductQueryDTO();
         queryProductDTO.setName(name);
         queryProductDTO.setMinPrice(minPrice);

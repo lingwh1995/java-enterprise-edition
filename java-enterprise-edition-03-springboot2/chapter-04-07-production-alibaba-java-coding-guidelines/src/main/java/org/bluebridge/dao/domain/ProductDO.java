@@ -1,4 +1,4 @@
-package org.bluebridge.entity;
+package org.bluebridge.dao.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

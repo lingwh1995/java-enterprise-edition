@@ -1,10 +1,10 @@
 package org.bluebridge.service.impl;
 
+import org.bluebridge.dao.domain.ProductDO;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductQueryDTO;
-import org.bluebridge.entity.ProductDO;
 import org.bluebridge.exception.ProductException;
 import org.bluebridge.convertor.ProductConvertor;
 import org.bluebridge.dao.mapper.ProductMapper;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author lingwh
@@ -134,21 +133,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductVO> listProductByCondition(ProductQueryDTO productQueryDTO) {
         // 构造查询条件
-        ProductDO productDO = new ProductDO();
-        if (productQueryDTO.getName() != null && !productQueryDTO.getName().isEmpty()) {
-            productDO.setName(productQueryDTO.getName());
-        }
-        if (productQueryDTO.getStatus() != null) {
-            productDO.setStatus(productQueryDTO.getStatus());
-        }
-        // 注意：价格区间查询需要在Mapper中特殊处理，这里简化处理
+        ProductDO productDO = productConvertor.toProductDO(productQueryDTO);
 
         // 查询商品列表
         List<ProductDO> productDOList = productMapper.listProductByCondition(productDO);
 
         // 转换为VO列表返回
-        // return products.stream().map(productMapper::toProductVO).collect(Collectors.toList());
-        return new ArrayList<>();
+        return productConvertor.toProductVOList(productDOList);
     }
 
     @Override
