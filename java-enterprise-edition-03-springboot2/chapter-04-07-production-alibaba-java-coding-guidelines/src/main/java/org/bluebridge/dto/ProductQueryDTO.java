@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class QueryProductDTO {
+public class ProductQueryDTO {
 
     //商品名称（模糊匹配）
     private String name;

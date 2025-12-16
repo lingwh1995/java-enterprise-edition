@@ -1,13 +1,13 @@
 package org.bluebridge.controller;
 
-import org.bluebridge.dto.CreateProductDTO;
-import org.bluebridge.dto.UpdateProductDTO;
-import org.bluebridge.dto.PatchProductDTO;
-import org.bluebridge.dto.QueryProductDTO;
+import org.bluebridge.dto.ProductCreateDTO;
+import org.bluebridge.dto.ProductPatchDTO;
+import org.bluebridge.dto.ProductUpdateDTO;
+import org.bluebridge.dto.ProductQueryDTO;
 import org.bluebridge.service.ProductService;
-import org.bluebridge.vo.PageInfo;
-import org.bluebridge.vo.ProductVO;
-import org.bluebridge.vo.Result;
+import org.bluebridge.controller.vo.PageInfo;
+import org.bluebridge.controller.vo.ProductVO;
+import org.bluebridge.controller.vo.Result;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,12 +38,12 @@ public class ProductController {
      * 创建商品（阿里规范：方法名=create+资源名，如createProduct）
      * URL：/api/products
      * 
-     * @param createProductDTO 商品传输对象
+     * @param productCreateDTO 商品创建传输对象
      * @return 统一响应结果
      */
     @PostMapping
-    public Result<Integer> createProduct(@Valid @RequestBody CreateProductDTO createProductDTO) {
-        int i = productService.createProduct(createProductDTO);
+    public Result<Integer> createProduct(@Valid @RequestBody ProductCreateDTO productCreateDTO) {
+        int i = productService.createProduct(productCreateDTO);
         return Result.success(i, "商品创建成功");
     }
     
@@ -51,12 +51,12 @@ public class ProductController {
      * 批量创建商品（阿里规范：方法名=batch+动词+资源名，如batchCreateProduct）
      * URL：/api/products/batch
      * 
-     * @param createProductDTOList 商品传输对象列表
+     * @param productCreateDTOList 商品创建传输对象列表
      * @return 统一响应结果
      */
     @PostMapping("/batch")
-    public Result<Integer> batchCreateProduct(@Valid @RequestBody List<CreateProductDTO> createProductDTOList) {
-        int i = productService.batchCreateProduct(createProductDTOList);
+    public Result<Integer> batchCreateProduct(@Valid @RequestBody List<ProductCreateDTO> productCreateDTOList) {
+        int i = productService.batchCreateProduct(productCreateDTOList);
         return Result.success(i, "商品批量创建成功");
     }
 
@@ -119,15 +119,15 @@ public class ProductController {
      * URL：/api/products/1
      * 
      * @param id 商品ID
-     * @param updateProductDTO 商品传输对象
+     * @param productUpdateDTO 商品传输对象
      * @return 统一响应结果
      */
     @PutMapping("/{id}")
     public Result<Integer> updateProduct(
             @PathVariable @NotNull(message = "商品ID不能为空") 
             @Min(value = 1, message = "商品ID必须大于0") Long id, 
-            @Valid @RequestBody UpdateProductDTO updateProductDTO) {
-        int i = productService.updateProduct(id, updateProductDTO);
+            @Valid @RequestBody ProductUpdateDTO productUpdateDTO) {
+        int i = productService.updateProduct(id, productUpdateDTO);
         return Result.success(i, "商品更新成功");
     }
     
@@ -136,15 +136,15 @@ public class ProductController {
      * URL：/api/products/1
      * 
      * @param id 商品ID
-     * @param patchProductDTO 商品部分更新传输对象
+     * @param productPatchDTO 商品部分更新传输对象
      * @return 统一响应结果
      */
     @PatchMapping("/{id}")
     public Result<Integer> patchProduct(
             @PathVariable @NotNull(message = "商品ID不能为空") 
             @Min(value = 1, message = "商品ID必须大于0") Long id, 
-            @Valid @RequestBody PatchProductDTO patchProductDTO) {
-        int i = productService.patchProduct(id, patchProductDTO);
+            @Valid @RequestBody ProductPatchDTO productPatchDTO) {
+        int i = productService.patchProduct(id, productPatchDTO);
         return Result.success(i, "商品部分更新成功");
     }
     
@@ -204,12 +204,12 @@ public class ProductController {
     public Result<List<ProductVO>> listProduct(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) @DecimalMin("0.0") BigDecimal minPrice,
-            @RequestParam(required = false) @DecimalMin("0.0") BigDecimal maxPrice,
+            @RequestParam(required = false) @DecimalMin("100.0") BigDecimal maxPrice,
             @RequestParam(required = false) Integer status,
             @RequestParam(required = false) @Pattern(regexp = "createTime|price") String sortBy,
             @RequestParam(required = false) @Pattern(regexp = "asc|desc") String sortOrder) {
         
-        QueryProductDTO queryProductDTO = new QueryProductDTO();
+        ProductQueryDTO queryProductDTO = new ProductQueryDTO();
         queryProductDTO.setName(name);
         queryProductDTO.setMinPrice(minPrice);
         queryProductDTO.setMaxPrice(maxPrice);
@@ -232,7 +232,7 @@ public class ProductController {
      */
     @PostMapping("/page")
     public Result<PageInfo<ProductVO>> pageProduct(
-            @RequestBody QueryProductDTO queryProductDTO,
+            @RequestBody ProductQueryDTO queryProductDTO,
             @RequestParam(defaultValue = "1") Integer pageNum,
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "createTime") String sortBy,

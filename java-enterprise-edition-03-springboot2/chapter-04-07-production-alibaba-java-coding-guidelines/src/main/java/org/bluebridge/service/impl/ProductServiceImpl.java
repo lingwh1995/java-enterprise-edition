@@ -1,16 +1,16 @@
 package org.bluebridge.service.impl;
 
-import org.bluebridge.dto.CreateProductDTO;
-import org.bluebridge.dto.UpdateProductDTO;
-import org.bluebridge.dto.PatchProductDTO;
-import org.bluebridge.dto.QueryProductDTO;
+import org.bluebridge.dto.ProductCreateDTO;
+import org.bluebridge.dto.ProductUpdateDTO;
+import org.bluebridge.dto.ProductPatchDTO;
+import org.bluebridge.dto.ProductQueryDTO;
 import org.bluebridge.entity.ProductDO;
 import org.bluebridge.exception.ProductException;
 import org.bluebridge.convertor.ProductConvertor;
-import org.bluebridge.mapper.ProductMapper;
+import org.bluebridge.dao.mapper.ProductMapper;
 import org.bluebridge.service.ProductService;
-import org.bluebridge.vo.PageInfo;
-import org.bluebridge.vo.ProductVO;
+import org.bluebridge.controller.vo.PageInfo;
+import org.bluebridge.controller.vo.ProductVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,21 +34,18 @@ public class ProductServiceImpl implements ProductService {
     private final ProductConvertor productConvertor = ProductConvertor.INSTANCE;
     
     @Override
-    public int createProduct(CreateProductDTO createProductDTO) {
+    public int createProduct(ProductCreateDTO productCreateDTO) {
         // 使用 MapStruct 转换DTO为实体
-        ProductDO productDO = productConvertor.toProductDO(createProductDTO);
+        ProductDO productDO = productConvertor.toProductDO(productCreateDTO);
         
         // 保存到数据库
         return productMapper.insertProduct(productDO);
     }
     
     @Override
-    public int batchCreateProduct(List<CreateProductDTO> createProductDTOList) {
-        // 转换DTO列表为实体列表
-        List<ProductDO> productDOList = createProductDTOList.stream()
-                .map(productConvertor::toProductDO)
-                .collect(Collectors.toList());
-        
+    public int batchCreateProduct(List<ProductCreateDTO> productCreateDTOList) {
+        List<ProductDO> productDOList = productConvertor.toProductDOList(productCreateDTOList);
+
         // 批量保存到数据库
         return productMapper.batchInsertProduct(productDOList);
     }
@@ -75,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int updateProduct(Long id, UpdateProductDTO updateProductDTO) {
+    public int updateProduct(Long id, ProductUpdateDTO productUpdateDTO) {
         // 1.查询用户是否存在（阿里手册：更新前先查，避免更新不存在的数据）
         ProductDO productDO = productMapper.getProductById(id);
         if (productDO == null) {
@@ -83,7 +80,7 @@ public class ProductServiceImpl implements ProductService {
         }
 
         // 2.转换DTO为实体（阿里手册：避免直接操作DTO）
-        productDO = productConvertor.toProductDO(updateProductDTO);
+        productDO = productConvertor.toProductDO(productUpdateDTO);
 
         // 3.设置商品ID
         productDO.setId(id);
@@ -93,7 +90,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int patchProduct(Long id, PatchProductDTO patchProductDTO) {
+    public int patchProduct(Long id, ProductPatchDTO productPatchDTO) {
         // 1.查询用户是否存在（阿里手册：更新前先查，避免更新不存在的数据）
         ProductDO productDO = productMapper.getProductById(id);
         if (productDO == null) {
@@ -101,7 +98,7 @@ public class ProductServiceImpl implements ProductService {
         }
 
         // 2.转为实体
-        productDO = productConvertor.toProductDO(patchProductDTO);
+        productDO = productConvertor.toProductDO(productPatchDTO);
 
         // 3.设置商品ID
         productDO.setId(id);
@@ -131,18 +128,18 @@ public class ProductServiceImpl implements ProductService {
         if (productDOList == null) {
             throw new ProductException(404, "商品不存在");
         }
-        return productConvertor.toProductVO(productDOList);
+        return productConvertor.toProductVOList(productDOList);
     }
 
     @Override
-    public List<ProductVO> listProductByCondition(QueryProductDTO queryDTO) {
+    public List<ProductVO> listProductByCondition(ProductQueryDTO productQueryDTO) {
         // 构造查询条件
         ProductDO productDO = new ProductDO();
-        if (queryDTO.getName() != null && !queryDTO.getName().isEmpty()) {
-            productDO.setName(queryDTO.getName());
+        if (productQueryDTO.getName() != null && !productQueryDTO.getName().isEmpty()) {
+            productDO.setName(productQueryDTO.getName());
         }
-        if (queryDTO.getStatus() != null) {
-            productDO.setStatus(queryDTO.getStatus());
+        if (productQueryDTO.getStatus() != null) {
+            productDO.setStatus(productQueryDTO.getStatus());
         }
         // 注意：价格区间查询需要在Mapper中特殊处理，这里简化处理
 
@@ -157,21 +154,20 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductVO> listProduct() {
         List<ProductDO> productDOList = productMapper.listProduct();
-        // return products.stream().map(productMapper::toProductVO).collect(Collectors.toList());
-        return new ArrayList<>();
+        return productConvertor.toProductVOList(productDOList);
     }
 
     @Override
     public PageInfo<ProductVO> pageProduct(
-                QueryProductDTO queryDTO,
+                ProductQueryDTO productQueryDTO,
                 Integer pageNum,
                 Integer pageSize,
                 String sortBy,
                 String sortOrder) {
-        List<ProductVO> allProducts = listProductByCondition(queryDTO);
+        List<ProductVO> productVOList = listProductByCondition(productQueryDTO);
         
         // 计算分页信息
-        int total = allProducts.size();
+        int total = productVOList.size();
         int pages = (int) Math.ceil((double) total / pageSize);
         int startIndex = (pageNum - 1) * pageSize;
         int endIndex = Math.min(startIndex + pageSize, total);
@@ -179,7 +175,7 @@ public class ProductServiceImpl implements ProductService {
         // 获取当前页数据
         List<ProductVO> pageList = new ArrayList<>();
         if (startIndex < total) {
-            pageList = allProducts.subList(startIndex, endIndex);
+            pageList = productVOList.subList(startIndex, endIndex);
         }
         
         // 构建分页结果

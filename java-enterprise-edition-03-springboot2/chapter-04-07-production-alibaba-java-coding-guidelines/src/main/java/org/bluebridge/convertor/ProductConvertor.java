@@ -1,10 +1,10 @@
 package org.bluebridge.convertor;
 
-import org.bluebridge.dto.PatchProductDTO;
-import org.bluebridge.dto.UpdateProductDTO;
+import org.bluebridge.dto.ProductPatchDTO;
+import org.bluebridge.dto.ProductCreateDTO;
+import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.entity.ProductDO;
-import org.bluebridge.dto.CreateProductDTO;
-import org.bluebridge.vo.ProductVO;
+import org.bluebridge.controller.vo.ProductVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -28,7 +28,7 @@ public interface ProductConvertor {
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "status", constant = "1")
-    ProductDO toProductDO(CreateProductDTO createProductDTO);
+    ProductDO toProductDO(ProductCreateDTO createProductDTO);
 
     /**
      * 将 UpdateProductDTO 转换为 ProductDO 实体
@@ -37,7 +37,7 @@ public interface ProductConvertor {
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "status", constant = "1")
-    ProductDO toProductDO(UpdateProductDTO updateProductDTO);
+    ProductDO toProductDO(ProductUpdateDTO updateProductDTO);
 
     /**
      * 将 PatchProductDTO 转换为 ProductDO 实体
@@ -47,7 +47,16 @@ public interface ProductConvertor {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "description", ignore = true)
     @Mapping(target = "status", constant = "1")
-    ProductDO toProductDO(PatchProductDTO patchProductDTO);
+    ProductDO toProductDO(ProductPatchDTO patchProductDTO);
+
+    /**
+     * 将 ProductCreateDTO 列表转换为 ProductDO 列表
+     * @param productCreateDTOList
+     * @return
+     */
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "status", constant = "1")
+    List<ProductDO> toProductDOList(List<ProductCreateDTO> productCreateDTOList);
 
     /**
      * 将 ProductDO 转换为 ProductVO
@@ -62,50 +71,6 @@ public interface ProductConvertor {
      * @return ProductVO 列表
      */
     @Mapping(target = "isDeleted", ignore = true)
-    List<ProductVO> toProductVO(List<ProductDO> productDOList);
-
-    /**
-     * 将 Product 实体转换为 CreateProductDTO
-     * @param product 商品实体
-     * @return CreateProductDTO 创建商品 DTO
-     */
-    //@Mapping(target = "id", ignore = true)
-    //CreateProductDTO toCreateProductDTO(Product product);
-    /**
-     * 将 UpdateProductDTO 更新到 Product 实体
-     * @param updateProductDTO 更新商品 DTO
-     * @param product 商品实体
-     */
-//    @Mapping(target = "id", ignore = true)
-//    @Mapping(target = "status", ignore = true)
-//    @Mapping(target = "createTime", ignore = true)
-//    @Mapping(target = "updateTime", expression = "java(java.time.LocalDateTime.now())")
-//    @Mapping(target = "isDeleted", ignore = true)
-//    void updateProductFromDto(UpdateProductDTO updateProductDTO, @MappingTarget Product product);
-    
-    /**
-     * 将 PatchProductDTO 更新到 Product 实体
-     * @param patchProductDTO 部分更新商品 DTO
-     * @param product 商品实体
-     */
-//    @Mapping(target = "id", ignore = true)
-//    @Mapping(target = "createTime", ignore = true)
-//    @Mapping(target = "updateTime", expression = "java(java.time.LocalDateTime.now())")
-//    @Mapping(target = "isDeleted", ignore = true)
-//    void updateProductFromPatchDto(PatchProductDTO patchProductDTO, @MappingTarget Product product);
-
-    /**
-     * 将 Product 实体转换为 ProductVO
-     * @param product 商品实体
-     * @return ProductVO 商品视图对象
-     */
-//    ProductVO toProductVO(Product product);
-
-    /**
-     * 将 Product 实体更新到 ProductVO
-     * @param product 商品实体
-     * @param productVO 商品视图对象
-     */
-//    void updateProductVOFromProduct(Product product, @MappingTarget ProductVO productVO);
+    List<ProductVO> toProductVOList(List<ProductDO> productDOList);
 
 }

@@ -3,7 +3,6 @@ package org.bluebridge.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import java.math.BigDecimal;
 
 /**
  * @author lingwh
@@ -13,7 +12,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatchProductDTO {
+public class ProductPatchDTO {
 
     // 商品名称
     private String name;

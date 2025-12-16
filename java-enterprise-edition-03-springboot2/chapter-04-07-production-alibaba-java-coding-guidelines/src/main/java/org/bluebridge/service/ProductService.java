@@ -1,11 +1,11 @@
 package org.bluebridge.service;
 
-import org.bluebridge.dto.CreateProductDTO;
-import org.bluebridge.dto.UpdateProductDTO;
-import org.bluebridge.dto.PatchProductDTO;
-import org.bluebridge.dto.QueryProductDTO;
-import org.bluebridge.vo.PageInfo;
-import org.bluebridge.vo.ProductVO;
+import org.bluebridge.dto.ProductCreateDTO;
+import org.bluebridge.dto.ProductUpdateDTO;
+import org.bluebridge.dto.ProductPatchDTO;
+import org.bluebridge.dto.ProductQueryDTO;
+import org.bluebridge.controller.vo.PageInfo;
+import org.bluebridge.controller.vo.ProductVO;
 
 import java.util.List;
 
@@ -18,17 +18,17 @@ public interface ProductService {
 
     /**
      * 创建商品
-     * @param createProductDTO
+     * @param productCreateDTO
      * @return
      */
-    int createProduct(CreateProductDTO createProductDTO);
+    int createProduct(ProductCreateDTO productCreateDTO);
     
     /**
      * 批量创建商品
-     * @param createProductDTOList
+     * @param productCreateDTOList
      * @return
      */
-    int batchCreateProduct(List<CreateProductDTO> createProductDTOList);
+    int batchCreateProduct(List<ProductCreateDTO> productCreateDTOList);
 
     /**
      * 根据ID删除商品（逻辑删除）
@@ -58,18 +58,18 @@ public interface ProductService {
     /**
      * 根据ID全量更新商品
      * @param id 商品ID
-     * @param updateProductDTO 商品传输对象
+     * @param productUpdateDTO 商品更新传输对象
      * @return 商品视图对象
      */
-    int updateProduct(Long id, UpdateProductDTO updateProductDTO);
+    int updateProduct(Long id, ProductUpdateDTO productUpdateDTO);
     
     /**
      * 根据ID部分更新商品
      * @param id 商品ID
-     * @param patchProductDTO 商品部分更新传输对象
+     * @param productPatchDTO 商品部分更新传输对象
      * @return 商品视图对象
      */
-    int patchProduct(Long id, PatchProductDTO patchProductDTO);
+    int patchProduct(Long id, ProductPatchDTO productPatchDTO);
     
     /**
      * 根据ID获取商品详情
@@ -87,10 +87,10 @@ public interface ProductService {
 
     /**
      * 根据查询条件获取商品列表
-     * @param queryDTO 查询条件
+     * @param productQueryDTO 商品查询条件
      * @return 商品视图对象列表
      */
-    List<ProductVO> listProductByCondition(QueryProductDTO queryDTO);
+    List<ProductVO> listProductByCondition(ProductQueryDTO productQueryDTO);
 
     /**
      * 获取商品列表
@@ -108,7 +108,7 @@ public interface ProductService {
      * @return 分页结果
      */
     PageInfo<ProductVO> pageProduct(
-            QueryProductDTO queryDTO,
+            ProductQueryDTO queryDTO,
             Integer pageNum,
             Integer pageSize,
             String sortBy,

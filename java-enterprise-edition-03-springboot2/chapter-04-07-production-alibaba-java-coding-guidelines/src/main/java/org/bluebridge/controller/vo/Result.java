@@ -1,4 +1,4 @@
-package org.bluebridge.vo;
+package org.bluebridge.controller.vo;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
 package org.bluebridge.exception;
 
-import org.bluebridge.vo.Result;
+import org.bluebridge.controller.vo.Result;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;

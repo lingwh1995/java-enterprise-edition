@@ -1,0 +1,15 @@
+1.DTO/BO/VO命名规范
+    核心语义前置：ProductCreateDTO 是更合适的命名
+        ProductCreateDTO：核心词是Product（实体/领域对象），Create表示操作类型，DTO表示数据对象类型。这种“主体+操作+类型”的结构更符合英语自然阅读习惯（如“产品创建DTO”）。
+        CreateProductDTO：动词前置（Create）更像是“创建产品的DTO”，将操作放在主体前，降低了领域对象的突出性，在复杂业务中可能降低可读性。
+    领域驱动命名：强调业务实体为核心，这样可以提升代码可读性
+2.全场景 DTO 命名范式
+    产品创建	        ProductCreateDTO
+    产品更新	        ProductUpdateDTO
+    产品查询（条件）	ProductQueryDTO
+    产品详情（返回）	ProductDetailDTO
+    产品列表（返回）	ProductListDTO
+3.核心命名思路（按优先级从高到低排列）
+    统一大于绝对
+    约定优于配置
+    符合代码自解释原则，即见名知意
