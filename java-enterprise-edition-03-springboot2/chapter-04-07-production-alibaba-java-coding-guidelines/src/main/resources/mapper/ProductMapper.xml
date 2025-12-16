@@ -10,24 +10,20 @@
         <result property="price" column="price"/>
         <result property="stock" column="stock"/>
         <result property="status" column="status"/>
-        <result property="createTime" column="create_time"/>
-        <result property="updateTime" column="update_time"/>
-        <result property="isDeleted" column="is_deleted"/>
     </resultMap>
 
     <!-- 插入商品 -->
     <insert id="insertProduct" parameterType="org.bluebridge.entity.ProductDO" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO t_product (name, description, price, stock, status, create_time, update_time, is_deleted)
-        VALUES (#{name}, #{description}, #{price}, #{stock}, #{status}, #{createTime}, #{updateTime}, #{isDeleted})
+        INSERT INTO t_product (name, description, price, stock, status)
+        VALUES (#{name}, #{description}, #{price}, #{stock}, #{status})
     </insert>
 
     <!-- 批量插入商品 -->
     <insert id="batchInsertProduct">
-        INSERT INTO t_product (name, description, price, stock, status, create_time, update_time, is_deleted)
+        INSERT INTO t_product (name, description, price, stock, status)
         VALUES
         <foreach collection="products" item="product" separator=",">
-            (#{product.name}, #{product.description}, #{product.price}, #{product.stock}, #{product.status}, 
-             #{product.createTime}, #{product.updateTime}, #{product.isDeleted})
+            (#{product.name}, #{product.description}, #{product.price}, #{product.stock}, #{product.status})
         </foreach>
     </insert>
 

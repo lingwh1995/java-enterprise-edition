@@ -122,8 +122,7 @@ public class ProductServiceImpl implements ProductService {
             throw new ProductException(404, "商品不存在");
         }
         
-        //return productMapper.toProductVO(product);
-        return null;
+        return productConvertor.toProductVO(productDO);
     }
     
     @Override

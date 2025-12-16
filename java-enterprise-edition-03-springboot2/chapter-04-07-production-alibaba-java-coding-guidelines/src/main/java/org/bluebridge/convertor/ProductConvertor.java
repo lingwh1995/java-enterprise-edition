@@ -4,6 +4,7 @@ import org.bluebridge.dto.PatchProductDTO;
 import org.bluebridge.dto.UpdateProductDTO;
 import org.bluebridge.entity.ProductDO;
 import org.bluebridge.dto.CreateProductDTO;
+import org.bluebridge.vo.ProductVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -19,42 +20,34 @@ public interface ProductConvertor {
     ProductConvertor INSTANCE = Mappers.getMapper(ProductConvertor.class);
 
     /**
-     * 将 CreateProductDTO 转换为 Product 实体
+     * 将 CreateProductDTO 转换为 ProductDO 实体
      * @param createProductDTO 创建商品 DTO
-     * @return Product 实体
-     */
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "status", constant = "1")
-    @Mapping(target = "createTime", expression = "java(java.time.LocalDateTime.now())")
-    @Mapping(target = "updateTime", expression = "java(java.time.LocalDateTime.now())")
-    @Mapping(target = "isDeleted", constant = "0")
-    ProductDO toProductDO(CreateProductDTO createProductDTO);
-
-    /**
-     * 将 UpdateProductDTO 转换为 Product 实体
-     * @param updateProductDTO 创建商品 DTO
      * @return ProductDO 实体
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "status", constant = "1")
-    @Mapping(target = "createTime", expression = "java(java.time.LocalDateTime.now())")
-    @Mapping(target = "updateTime", expression = "java(java.time.LocalDateTime.now())")
-    @Mapping(target = "isDeleted", constant = "0")
+    ProductDO toProductDO(CreateProductDTO createProductDTO);
+
+    /**
+     * 将 UpdateProductDTO 转换为 ProductDO 实体
+     * @param updateProductDTO 更新商品 DTO
+     * @return ProductDO 实体
+     */
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "status", constant = "1")
     ProductDO toProductDO(UpdateProductDTO updateProductDTO);
 
     /**
-     * 将 PatchProductDTO 转换为 Product 实体
-     * @param patchProductDTO 创建商品 DTO
+     * 将 PatchProductDTO 转换为 ProductDO 实体
+     * @param patchProductDTO 部分更新商品 DTO
      * @return ProductDO 实体
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "description", ignore = true)
-    @Mapping(target = "stock", ignore = true)
     @Mapping(target = "status", constant = "1")
-    @Mapping(target = "createTime", expression = "java(java.time.LocalDateTime.now())")
-    @Mapping(target = "updateTime", expression = "java(java.time.LocalDateTime.now())")
-    @Mapping(target = "isDeleted", constant = "0")
     ProductDO toProductDO(PatchProductDTO patchProductDTO);
+
+    ProductVO toProductVO(ProductDO productDO);
 
     /**
      * 将 Product 实体转换为 CreateProductDTO
