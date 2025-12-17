@@ -1,10 +1,10 @@
-package org.bluebridge.common.model;
+package org.bluebridge.common.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bluebridge.dto.SortDTO;
+import org.bluebridge.enums.OrderEnum;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SortEntity<T> {
+public class SortQueryDTO<T> {
 
     // 排序对象
     private T entity;

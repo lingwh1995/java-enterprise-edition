@@ -127,7 +127,6 @@ public class JsonUtils {
      * @return 转换后的对象
      * @throws RuntimeException 转换失败时抛出
      */
-    @SuppressWarnings("unused")
     public static <T> T fromJson(String json, JavaType javaType) {
         if (json == null || json.isEmpty()) {
             return null;
@@ -202,4 +201,5 @@ public class JsonUtils {
             throw new RuntimeException("JSON转对象失败", e);
         }
     }
+
 }

@@ -1,8 +1,8 @@
 package org.bluebridge.controller;
 
 import com.github.pagehelper.PageInfo;
-import org.bluebridge.dto.SortDTO;
-import org.bluebridge.common.model.PageEntity;
+import org.bluebridge.common.dto.SortDTO;
+import org.bluebridge.common.dto.PageQueryDTO;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
@@ -262,13 +262,13 @@ public class ProductController {
                 .build();
 
         // 注意这里基于Lombok的@Builder注解链式构造泛型对象时的写法
-        PageEntity<ProductQueryDTO> pageEntity = PageEntity.<ProductQueryDTO>builder()
+        PageQueryDTO<ProductQueryDTO> pageQueryDTO = PageQueryDTO.<ProductQueryDTO>builder()
                 .entity(productQueryDTO)
                 .pageNum(pageNum)
                 .pageSize(pageSize)
                 .build();
 
-        PageInfo<ProductVO> pageInfo = productService.pageProduct(pageEntity);
+        PageInfo<ProductVO> pageInfo = productService.pageProduct(pageQueryDTO);
         return Result.success(pageInfo, "查询成功");
     }
 
@@ -287,13 +287,13 @@ public class ProductController {
             @RequestParam(defaultValue = "1") Integer pageNum,
             @RequestParam(defaultValue = "10") Integer pageSize) {
 
-        PageEntity<ProductQueryDTO> pageEntity = PageEntity.<ProductQueryDTO>builder()
+        PageQueryDTO<ProductQueryDTO> pageQueryDTO = PageQueryDTO.<ProductQueryDTO>builder()
                 .entity(queryProductDTO)
                 .pageNum(pageNum)
                 .pageSize(pageSize)
                 .build();
 
-        PageInfo<ProductVO> pageInfo = productService.pageProduct(pageEntity);
+        PageInfo<ProductVO> pageInfo = productService.pageProduct(pageQueryDTO);
         return Result.success(pageInfo, "查询成功");
     }
 

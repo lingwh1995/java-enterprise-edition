@@ -1,4 +1,4 @@
-package org.bluebridge.common.model;
+package org.bluebridge.common.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PageEntity<T> {
+public class PageQueryDTO<T> {
 
     private T entity;
     private int pageNum;

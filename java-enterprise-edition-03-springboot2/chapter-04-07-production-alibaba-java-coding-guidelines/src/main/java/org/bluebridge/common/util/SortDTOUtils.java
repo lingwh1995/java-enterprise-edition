@@ -1,6 +1,6 @@
 package org.bluebridge.common.util;
 
-import org.bluebridge.dto.SortDTO;
+import org.bluebridge.common.dto.SortDTO;
 
 import java.util.ArrayList;
 import java.util.List;
