@@ -3,6 +3,7 @@ package org.bluebridge.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.bluebridge.dao.entity.ProductDO;
+import org.bluebridge.dao.entity.SortDO;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
@@ -135,8 +136,11 @@ public class ProductServiceImpl implements ProductService {
         // 构造查询条件
         ProductDO productDO = productConvertor.toProductDO(productQueryDTO);
 
+        // 把DO转换为SortDO
+        SortDO<ProductDO> productSortDO = new SortDO<>(productDO, productQueryDTO.getSortBy(), productQueryDTO.getSortOrder());
+
         // 查询商品列表
-        List<ProductDO> productDOList = productMapper.searchProduct(productDO);
+        List<ProductDO> productDOList = productMapper.searchProduct(productSortDO);
 
         // 转换为VO列表返回
         return productConvertor.toProductVOList(productDOList);

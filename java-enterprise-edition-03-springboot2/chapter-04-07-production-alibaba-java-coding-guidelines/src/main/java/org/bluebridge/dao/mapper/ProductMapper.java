@@ -2,6 +2,7 @@ package org.bluebridge.dao.mapper;
 
 import org.apache.ibatis.annotations.Param;
 import org.bluebridge.dao.entity.ProductDO;
+import org.bluebridge.dao.entity.SortDO;
 
 import java.util.List;
 
@@ -84,10 +85,10 @@ public interface ProductMapper {
     
     /**
      * 根据条件查询商品列表
-     * @param productDO 查询条件
+     * @param productSortDO 查询条件
      * @return 商品列表
      */
-    List<ProductDO> searchProduct(ProductDO productDO);
+    List<ProductDO> searchProduct(SortDO<ProductDO> productSortDO);
     
     /**
      * 查询所有未删除商品

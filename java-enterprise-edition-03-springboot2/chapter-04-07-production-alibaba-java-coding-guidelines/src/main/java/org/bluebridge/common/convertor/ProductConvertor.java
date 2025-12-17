@@ -36,6 +36,8 @@ public interface ProductConvertor {
      * @param queryProductDTO 查询商品 DTO
      * @return ProductDO 实体
      */
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "price", ignore = true) // 忽略price字段，因为查询时使用minPrice和maxPrice
     ProductDO toProductDO(ProductQueryDTO queryProductDTO);
 
     /**

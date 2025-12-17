@@ -95,18 +95,20 @@
     </select>
 
     <!-- 根据条件查询商品列表 -->
-    <select id="searchProduct" parameterType="org.bluebridge.dao.entity.ProductDO" resultType="org.bluebridge.dao.entity.ProductDO">
+    <select id="searchProduct" parameterType="org.bluebridge.dao.entity.SortDO" resultType="org.bluebridge.dao.entity.ProductDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM t_product
         WHERE is_deleted = 0
-        <if test="name != null and name != ''">
-            AND name LIKE CONCAT('%', #{name}, '%')
-        </if>
-        <if test="price != null">
-            AND price = #{price}
-        </if>
-        <if test="status != null">
-            AND status = #{status}
+        <if test="t != null">
+            <if test="t.name != null and t.name != ''">
+                AND name LIKE CONCAT('%', #{t.name}, '%')
+            </if>
+            <if test="t.price != null">
+                AND price = #{t.price}
+            </if>
+            <if test="t.status != null">
+                AND status = #{t.status}
+            </if>
         </if>
         <choose>
             <when test="sortBy != null and sortOrder != null">
