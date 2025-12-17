@@ -1,7 +1,7 @@
 package org.bluebridge.service;
 
 import com.github.pagehelper.PageInfo;
-import org.bluebridge.dao.entity.PageEntity;
+import org.bluebridge.common.entity.PageEntity;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
