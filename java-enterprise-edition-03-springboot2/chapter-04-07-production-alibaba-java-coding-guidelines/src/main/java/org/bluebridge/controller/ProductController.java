@@ -6,7 +6,7 @@ import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductQueryDTO;
 import org.bluebridge.service.ProductService;
-import org.bluebridge.controller.vo.ProductVO;
+import org.bluebridge.vo.ProductVO;
 import org.bluebridge.common.response.Result;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

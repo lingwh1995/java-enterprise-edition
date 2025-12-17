@@ -2,16 +2,16 @@ package org.bluebridge.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.bluebridge.dao.domain.ProductDO;
+import org.bluebridge.repository.entity.ProductDO;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductQueryDTO;
 import org.bluebridge.common.exception.ProductException;
 import org.bluebridge.common.convertor.ProductConvertor;
-import org.bluebridge.dao.mapper.ProductMapper;
+import org.bluebridge.repository.mapper.ProductMapper;
 import org.bluebridge.service.ProductService;
-import org.bluebridge.controller.vo.ProductVO;
+import org.bluebridge.vo.ProductVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

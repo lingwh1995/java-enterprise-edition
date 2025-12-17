@@ -5,7 +5,7 @@ import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductQueryDTO;
-import org.bluebridge.controller.vo.ProductVO;
+import org.bluebridge.vo.ProductVO;
 
 import java.util.List;
 
