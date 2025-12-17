@@ -1,10 +1,10 @@
-package org.bluebridge.common.domain;
+package org.bluebridge.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bluebridge.common.dto.SortDTO;
+import org.bluebridge.dto.SortDTO;
 
 import java.util.List;
 

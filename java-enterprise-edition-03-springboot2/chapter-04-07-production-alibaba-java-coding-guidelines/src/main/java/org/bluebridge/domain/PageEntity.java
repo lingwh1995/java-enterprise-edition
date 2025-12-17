@@ -1,4 +1,4 @@
-package org.bluebridge.common.domain;
+package org.bluebridge.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
