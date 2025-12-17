@@ -4,7 +4,7 @@ import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductQueryDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
-import org.bluebridge.repository.entity.ProductDO;
+import org.bluebridge.dao.entity.ProductDO;
 import org.bluebridge.vo.ProductVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -17,7 +17,7 @@ import java.util.List;
  * @desc 商品对象映射器
  * @date 2025/12/13 11:20
  */
-@Mapper(componentModel = "spring")
+@Mapper
 public interface ProductConvertor {
 
     ProductConvertor INSTANCE = Mappers.getMapper(ProductConvertor.class);
