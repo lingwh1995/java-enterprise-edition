@@ -137,7 +137,7 @@ public class ProductServiceImpl implements ProductService {
         // 构造查询条件
         ProductDO productDO = productConvertor.toProductDO(productQueryDTO);
 
-        // 把DO转换为SortQueryDTO
+        // 把ProductDO转换为SortQueryDTO
         SortQueryDTO<ProductDO> sortQueryDTO = SortQueryDTO.<ProductDO>builder()
                 .entity(productDO)
                 .sortDTOList(productQueryDTO.getSortDTOList())

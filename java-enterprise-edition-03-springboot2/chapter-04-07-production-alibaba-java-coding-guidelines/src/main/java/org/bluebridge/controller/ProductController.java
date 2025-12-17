@@ -3,10 +3,12 @@ package org.bluebridge.controller;
 import com.github.pagehelper.PageInfo;
 import org.bluebridge.common.dto.SortDTO;
 import org.bluebridge.common.dto.PageQueryDTO;
+import org.bluebridge.common.dto.SortQueryDTO;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductQueryDTO;
+import org.bluebridge.entity.ProductDO;
 import org.bluebridge.service.ProductService;
 import org.bluebridge.common.util.SortDTOUtils;
 import org.bluebridge.vo.ProductVO;
@@ -214,6 +216,7 @@ public class ProductController {
 
         List<SortDTO> sortDTOList = SortDTOUtils.toSortDTOList(orderBy, order);
 
+        // 构建查询条件
         ProductQueryDTO productQueryDTO = ProductQueryDTO.builder()
                 .name(name)
                 .minPrice(minPrice)
