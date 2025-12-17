@@ -8,9 +8,7 @@ import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductQueryDTO;
-import org.bluebridge.entity.ProductDO;
 import org.bluebridge.service.ProductService;
-import org.bluebridge.common.util.SortDTOUtils;
 import org.bluebridge.vo.ProductVO;
 import org.bluebridge.common.response.Result;
 import org.springframework.validation.annotation.Validated;
@@ -214,7 +212,7 @@ public class ProductController {
             @RequestParam(required = false, defaultValue = "create_time") @Pattern(regexp = "create_time") String orderBy,
             @RequestParam(required = false, defaultValue = "desc") @Pattern(regexp = "asc|desc") String order) {
 
-        List<SortDTO> sortDTOList = SortDTOUtils.toSortDTOList(orderBy, order);
+        List<SortDTO> sortDTOList = SortQueryDTO.toSortDTOList(orderBy, order);
 
         // 构建查询条件
         ProductQueryDTO productQueryDTO = ProductQueryDTO.builder()
@@ -254,7 +252,7 @@ public class ProductController {
             @RequestParam(defaultValue = "1") Integer pageNum,
             @RequestParam(defaultValue = "10") Integer pageSize) {
 
-        List<SortDTO> sortDTOList = SortDTOUtils.toSortDTOList(orderBy, order);
+        List<SortDTO> sortDTOList = SortQueryDTO.toSortDTOList(orderBy, order);
 
         ProductQueryDTO productQueryDTO = ProductQueryDTO.builder()
                 .name(name)
