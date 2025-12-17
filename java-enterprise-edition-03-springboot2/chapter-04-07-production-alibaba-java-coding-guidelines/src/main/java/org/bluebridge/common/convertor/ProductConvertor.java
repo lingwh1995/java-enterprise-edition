@@ -1,4 +1,4 @@
-package org.bluebridge.convertor;
+package org.bluebridge.common.convertor;
 
 import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductCreateDTO;
