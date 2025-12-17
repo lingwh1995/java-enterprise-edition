@@ -95,25 +95,27 @@
     </select>
 
     <!-- 根据条件查询商品列表 -->
-    <select id="searchProduct" parameterType="org.bluebridge.dao.entity.SortDO" resultType="org.bluebridge.dao.entity.ProductDO">
+    <select id="searchProduct" parameterType="org.bluebridge.dao.entity.SortEntity" resultType="org.bluebridge.dao.entity.ProductDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM t_product
         WHERE is_deleted = 0
-        <if test="t != null">
-            <if test="t.name != null and t.name != ''">
-                AND name LIKE CONCAT('%', #{t.name}, '%')
+        <if test="entity != null">
+            <if test="entity.name != null and entity.name != ''">
+                AND name LIKE CONCAT('%', #{entity.name}, '%')
             </if>
-            <if test="t.price != null">
-                AND price = #{t.price}
+            <if test="entity.price != null">
+                AND price = #{entity.price}
             </if>
-            <if test="t.status != null">
-                AND status = #{t.status}
+            <if test="entity.status != null">
+                AND status = #{entity.status}
             </if>
         </if>
         <choose>
-            <when test="sortBy != null and sortOrder != null">
-                <!-- 直接拼接SQL，因为排序字段和顺序不能使用预编译参数 -->
-                ORDER BY ${sortBy} ${sortOrder}
+            <when test="sortDTOList != null and sortDTOList.size() > 0">
+                ORDER BY
+                <foreach collection="sortDTOList" item="sort" separator=",">
+                    ${sort.orderBy} ${sort.order}
+                </foreach>
             </when>
             <otherwise>
                 ORDER BY create_time DESC

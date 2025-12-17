@@ -1,6 +1,7 @@
 package org.bluebridge.service;
 
 import com.github.pagehelper.PageInfo;
+import org.bluebridge.dao.entity.PageEntity;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
@@ -100,14 +101,9 @@ public interface ProductService {
 
     /**
      * 分页查询商品
-     * @param queryDTO 查询条件
-     * @param pageNum 页码
-     * @param pageSize 每页数量
+     * @param pageEntity 分页查询实体对象
      * @return 分页结果
      */
-    PageInfo<ProductVO> pageProduct(
-            ProductQueryDTO queryDTO,
-            Integer pageNum,
-            Integer pageSize);
+    PageInfo<ProductVO> pageProduct(PageEntity<ProductQueryDTO> pageEntity);
 
 }

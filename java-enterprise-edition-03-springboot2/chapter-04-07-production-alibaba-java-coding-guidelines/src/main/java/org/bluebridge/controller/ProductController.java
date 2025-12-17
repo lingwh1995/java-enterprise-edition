@@ -1,11 +1,14 @@
 package org.bluebridge.controller;
 
 import com.github.pagehelper.PageInfo;
+import org.bluebridge.common.dto.SortDTO;
+import org.bluebridge.dao.entity.PageEntity;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductQueryDTO;
 import org.bluebridge.service.ProductService;
+import org.bluebridge.util.SortDTOUtils;
 import org.bluebridge.vo.ProductVO;
 import org.bluebridge.common.response.Result;
 import org.springframework.validation.annotation.Validated;
@@ -196,8 +199,8 @@ public class ProductController {
      * @param minPrice 最低价格
      * @param maxPrice 最高价格
      * @param status 商品状态
-     * @param sortBy 排序字段
-     * @param sortOrder 排序方式
+     * @param orderBy 排序字段
+     * @param order 排序方式
      * @return 统一响应结果
      */
     @GetMapping("/search")
@@ -206,24 +209,73 @@ public class ProductController {
             @RequestParam(required = false) @DecimalMin("0.0") BigDecimal minPrice,
             @RequestParam(required = false) @DecimalMin("100.0") BigDecimal maxPrice,
             @RequestParam(required = false) Integer status,
-            @RequestParam(required = false, defaultValue = "create_time") @Pattern(regexp = "create_time|price") String sortBy,
-            @RequestParam(required = false, defaultValue = "desc") @Pattern(regexp = "asc|desc") String sortOrder) {
-        ProductQueryDTO queryProductDTO = new ProductQueryDTO();
-        queryProductDTO.setName(name);
-        queryProductDTO.setMinPrice(minPrice);
-        queryProductDTO.setMaxPrice(maxPrice);
-        queryProductDTO.setStatus(status);
-        queryProductDTO.setSortBy(sortBy);
-        queryProductDTO.setSortOrder(sortOrder);
-        
-        List<ProductVO> products = productService.searchProduct(queryProductDTO);
+            @RequestParam(required = false, defaultValue = "create_time") @Pattern(regexp = "create_time") String orderBy,
+            @RequestParam(required = false, defaultValue = "desc") @Pattern(regexp = "asc|desc") String order) {
+
+        List<SortDTO> sortDTOList = SortDTOUtils.toSortDTOList(orderBy, order);
+
+        ProductQueryDTO productQueryDTO = ProductQueryDTO.builder()
+                .name(name)
+                .minPrice(minPrice)
+                .maxPrice(maxPrice)
+                .status(status)
+                .sortDTOList(sortDTOList)
+                .build();
+
+        List<ProductVO> products = productService.searchProduct(productQueryDTO);
         return Result.success(products, "查询成功");
     }
-    
+
     /**
      * 分页查询-分页获取商品列表（阿里规范：方法名=page+资源名，如pageProduct）
      * URL：/api/products/page
-     * 
+     *
+     * @param name 商品名称（模糊匹配）
+     * @param minPrice 最低价格
+     * @param maxPrice 最高价格
+     * @param status 商品状态
+     * @param orderBy 排序字段
+     * @param order 排序方式
+     * @param pageNum 页码
+     * @param pageSize 每页数量
+     * @return 统一响应结果
+     */
+    @GetMapping("/page")
+    public Result<PageInfo<ProductVO>> pageProduct(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) @DecimalMin("0.0") BigDecimal minPrice,
+            @RequestParam(required = false) @DecimalMin("100.0") BigDecimal maxPrice,
+            @RequestParam(required = false) Integer status,
+            @RequestParam(required = false, defaultValue = "create_time") @Pattern(regexp = "create_time") String orderBy,
+            @RequestParam(required = false, defaultValue = "desc") @Pattern(regexp = "asc|desc") String order,
+            @RequestParam(defaultValue = "1") Integer pageNum,
+            @RequestParam(defaultValue = "10") Integer pageSize) {
+
+        List<SortDTO> sortDTOList = SortDTOUtils.toSortDTOList(orderBy, order);
+
+        ProductQueryDTO productQueryDTO = ProductQueryDTO.builder()
+                .name(name)
+                .minPrice(minPrice)
+                .maxPrice(maxPrice)
+                .status(status)
+                .sortDTOList(sortDTOList)
+                .build();
+
+        // 注意这里基于Lombok的@Builder注解链式构造泛型对象时的写法
+        PageEntity<ProductQueryDTO> pageEntity = PageEntity.<ProductQueryDTO>builder()
+                .entity(productQueryDTO)
+                .pageNum(pageNum)
+                .pageSize(pageSize)
+                .build();
+
+        PageInfo<ProductVO> pageInfo = productService.pageProduct(pageEntity);
+        return Result.success(pageInfo, "查询成功");
+    }
+
+    /**
+     * 分页查询-分页获取商品列表（阿里规范：方法名=page+资源名，如pageProduct）
+     * URL：/api/products/page
+     *
      * @param queryProductDTO 查询条件
      * @param pageNum 页码
      * @param pageSize 每页数量
@@ -234,7 +286,14 @@ public class ProductController {
             @RequestBody ProductQueryDTO queryProductDTO,
             @RequestParam(defaultValue = "1") Integer pageNum,
             @RequestParam(defaultValue = "10") Integer pageSize) {
-        PageInfo<ProductVO> pageInfo = productService.pageProduct(queryProductDTO, pageNum, pageSize);
+
+        PageEntity<ProductQueryDTO> pageEntity = PageEntity.<ProductQueryDTO>builder()
+                .entity(queryProductDTO)
+                .pageNum(pageNum)
+                .pageSize(pageSize)
+                .build();
+
+        PageInfo<ProductVO> pageInfo = productService.pageProduct(pageEntity);
         return Result.success(pageInfo, "查询成功");
     }
 

@@ -1,15 +1,20 @@
 package org.bluebridge.dto;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import org.bluebridge.common.dto.SortDTO;
+
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @author lingwh
  * @desc 查询商品DTO
  * @date 2025/12/13 10:30
  */
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,11 +31,8 @@ public class ProductQueryDTO {
     
     // 商品状态
     private Integer status;
-    
-    // 排序字段（createTime, price）
-    private String sortBy;
-    
-    // 排序方式（asc, desc）
-    private String sortOrder;
+
+    // 排序字段列表
+    private List<SortDTO> sortDTOList;
 
 }
