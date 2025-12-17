@@ -1,8 +1,8 @@
 package org.bluebridge.dao;
 
 import org.apache.ibatis.annotations.Param;
-import org.bluebridge.domain.ProductDO;
-import org.bluebridge.domain.SortEntity;
+import org.bluebridge.entity.ProductDO;
+import org.bluebridge.common.model.SortEntity;
 
 import java.util.List;
 

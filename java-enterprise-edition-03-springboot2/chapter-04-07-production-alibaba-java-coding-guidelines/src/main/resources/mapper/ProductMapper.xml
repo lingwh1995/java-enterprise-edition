@@ -3,7 +3,7 @@
 <mapper namespace="org.bluebridge.dao.ProductMapper">
 
     <!-- 插入商品 -->
-    <insert id="insertProduct" parameterType="org.bluebridge.domain.ProductDO" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertProduct" parameterType="org.bluebridge.entity.ProductDO" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_product (name, description, price, stock, status)
         VALUES (#{name}, #{description}, #{price}, #{stock}, #{status})
     </insert>
@@ -44,7 +44,7 @@
     </update>
 
     <!-- 根据ID更新商品信息 -->
-    <update id="updateProduct" parameterType="org.bluebridge.domain.ProductDO">
+    <update id="updateProduct" parameterType="org.bluebridge.entity.ProductDO">
         UPDATE t_product
         <set>
             <if test="name != null and name != ''">
@@ -67,7 +67,7 @@
     </update>
 
     <!-- 根据ID部分更新商品信息 -->
-    <update id="patchProduct" parameterType="org.bluebridge.domain.ProductDO">
+    <update id="patchProduct" parameterType="org.bluebridge.entity.ProductDO">
         UPDATE t_product
         <set>
             <if test="name != null and name != ''">
@@ -81,21 +81,21 @@
     </update>
 
     <!-- 根据ID查询商品 -->
-    <select id="getProductById" parameterType="java.lang.Long" resultType="org.bluebridge.domain.ProductDO">
+    <select id="getProductById" parameterType="java.lang.Long" resultType="org.bluebridge.entity.ProductDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM t_product
         WHERE id = #{id} AND is_deleted = 0
     </select>
 
     <!-- 根据名称查询商品 -->
-    <select id="listProductByName" parameterType="java.lang.String" resultType="org.bluebridge.domain.ProductDO">
+    <select id="listProductByName" parameterType="java.lang.String" resultType="org.bluebridge.entity.ProductDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM t_product
         WHERE name like CONCAT('%', #{name}, '%') AND is_deleted = 0
     </select>
 
     <!-- 根据条件查询商品列表 -->
-    <select id="searchProduct" parameterType="org.bluebridge.domain.SortEntity" resultType="org.bluebridge.domain.ProductDO">
+    <select id="searchProduct" parameterType="org.bluebridge.common.model.SortEntity" resultType="org.bluebridge.entity.ProductDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM t_product
         WHERE is_deleted = 0
@@ -124,7 +124,7 @@
     </select>
 
     <!-- 查询所有未删除商品 -->
-    <select id="listProduct"  resultType="org.bluebridge.domain.ProductDO">
+    <select id="listProduct"  resultType="org.bluebridge.entity.ProductDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM t_product
         WHERE is_deleted = 0

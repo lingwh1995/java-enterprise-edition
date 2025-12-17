@@ -1,4 +1,4 @@
-package org.bluebridge.util;
+package org.bluebridge.common.util;
 
 import org.bluebridge.dto.SortDTO;
 

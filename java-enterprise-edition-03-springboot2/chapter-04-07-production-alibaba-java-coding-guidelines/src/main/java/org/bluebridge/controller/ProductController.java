@@ -2,13 +2,13 @@ package org.bluebridge.controller;
 
 import com.github.pagehelper.PageInfo;
 import org.bluebridge.dto.SortDTO;
-import org.bluebridge.domain.PageEntity;
+import org.bluebridge.common.model.PageEntity;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductQueryDTO;
 import org.bluebridge.service.ProductService;
-import org.bluebridge.util.SortDTOUtils;
+import org.bluebridge.common.util.SortDTOUtils;
 import org.bluebridge.vo.ProductVO;
 import org.bluebridge.common.response.Result;
 import org.springframework.validation.annotation.Validated;
