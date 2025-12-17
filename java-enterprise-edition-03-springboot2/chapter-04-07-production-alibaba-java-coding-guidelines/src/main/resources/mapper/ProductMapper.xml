@@ -95,7 +95,7 @@
     </select>
 
     <!-- 根据条件查询商品列表 -->
-    <select id="searchProduct" parameterType="org.bluebridge.common.entity.SortEntity" resultType="org.bluebridge.dao.entity.ProductDO">
+    <select id="searchProduct" parameterType="org.bluebridge.common.domain.SortEntity" resultType="org.bluebridge.dao.entity.ProductDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM t_product
         WHERE is_deleted = 0

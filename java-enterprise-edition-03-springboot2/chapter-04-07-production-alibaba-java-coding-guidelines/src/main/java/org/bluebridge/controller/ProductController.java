@@ -2,7 +2,7 @@ package org.bluebridge.controller;
 
 import com.github.pagehelper.PageInfo;
 import org.bluebridge.common.dto.SortDTO;
-import org.bluebridge.common.entity.PageEntity;
+import org.bluebridge.common.domain.PageEntity;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductUpdateDTO;

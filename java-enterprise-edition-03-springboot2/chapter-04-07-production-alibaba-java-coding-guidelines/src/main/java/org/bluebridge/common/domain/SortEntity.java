@@ -1,4 +1,4 @@
-package org.bluebridge.common.entity;
+package org.bluebridge.common.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

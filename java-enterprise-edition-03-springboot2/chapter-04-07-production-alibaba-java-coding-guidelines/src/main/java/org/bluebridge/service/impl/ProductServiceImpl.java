@@ -2,9 +2,9 @@ package org.bluebridge.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.bluebridge.common.entity.PageEntity;
+import org.bluebridge.common.domain.PageEntity;
 import org.bluebridge.dao.entity.ProductDO;
-import org.bluebridge.common.entity.SortEntity;
+import org.bluebridge.common.domain.SortEntity;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
