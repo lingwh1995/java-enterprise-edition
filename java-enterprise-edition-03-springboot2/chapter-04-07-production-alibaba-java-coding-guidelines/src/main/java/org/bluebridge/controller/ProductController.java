@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -100,7 +97,7 @@ public class ProductController {
      * @return 统一响应结果
      */
     @PatchMapping("/{id}/status")
-    public Result<Integer> logicDeleteProductById(@PathVariable Long id) {
+    public Result<Integer> softDeleteProductById(@PathVariable Long id) {
         int i = productService.softDeleteProductById(id);
         return Result.success(i, "根据ID逻辑删除商品成功");
     }
@@ -112,8 +109,8 @@ public class ProductController {
      * @param ids 商品ID列表
      * @return 统一响应结果
      */
-    @DeleteMapping("/batch/status")
-    public Result<Integer> batchLogicDeleteProduct(@RequestBody List<Long> ids) {
+    @PatchMapping("/batch/status")
+    public Result<Integer> batchSoftDeleteProduct(@RequestBody List<Long> ids) {
         int i = productService.batchSoftDeleteProduct(ids);
         return Result.success(i,"商品批量逻辑删除成功");
     }
@@ -127,11 +124,11 @@ public class ProductController {
      * @return 统一响应结果
      */
     @PutMapping("/{id}")
-    public Result<Integer> updateProduct(
+    public Result<Integer> updateProductById(
             @PathVariable @NotNull(message = "商品ID不能为空") 
             @Min(value = 1, message = "商品ID必须大于0") Long id, 
             @Valid @RequestBody ProductUpdateDTO productUpdateDTO) {
-        int i = productService.updateProduct(id, productUpdateDTO);
+        int i = productService.updateProductById(id, productUpdateDTO);
         return Result.success(i, "商品更新成功");
     }
     
@@ -144,11 +141,11 @@ public class ProductController {
      * @return 统一响应结果
      */
     @PatchMapping("/{id}")
-    public Result<Integer> patchProduct(
+    public Result<Integer> patchProductById(
             @PathVariable @NotNull(message = "商品ID不能为空") 
             @Min(value = 1, message = "商品ID必须大于0") Long id, 
             @Valid @RequestBody ProductPatchDTO productPatchDTO) {
-        int i = productService.patchProduct(id, productPatchDTO);
+        int i = productService.patchProductById(id, productPatchDTO);
         return Result.success(i, "商品部分更新成功");
     }
     
@@ -175,7 +172,8 @@ public class ProductController {
      * @return 统一响应结果
      */
     @GetMapping("/by-name")
-    public Result<List<ProductVO>> listProductByName(@RequestParam String name) {
+    public Result<List<ProductVO>> listProductByName(
+            @RequestParam @NotBlank(message = "商品名称不能为空") String name) {
         List<ProductVO> productVOList = productService.listProductByName(name);
         return Result.success(productVOList, "查询成功");
     }
@@ -256,8 +254,8 @@ public class ProductController {
             @RequestParam(required = false) Integer status,
             @RequestParam(required = false, defaultValue = "create_time") @Pattern(regexp = "create_time") String orderBy,
             @RequestParam(required = false, defaultValue = "desc") @Pattern(regexp = "asc|desc") String order,
-            @RequestParam(defaultValue = "1") Integer pageNum,
-            @RequestParam(defaultValue = "10") Integer pageSize) {
+            @RequestParam(defaultValue = "1") @Min(value = 1, message = "页码必须大于0") Integer pageNum,
+            @RequestParam(defaultValue = "10") @Min(value = 1, message = "每页数量必须大于0") Integer pageSize) {
 
         // 构建排序条件列表
         List<SortDTO> sortDTOList = SortUtils.toSortDTOList(orderBy, order);
@@ -298,8 +296,8 @@ public class ProductController {
             @RequestBody ProductQueryDTO productQueryDTO,
             @RequestParam(required = false, defaultValue = "create_time") @Pattern(regexp = "create_time") String orderBy,
             @RequestParam(required = false, defaultValue = "desc") @Pattern(regexp = "asc|desc") String order,
-            @RequestParam(defaultValue = "1") Integer pageNum,
-            @RequestParam(defaultValue = "10") Integer pageSize) {
+            @RequestParam(defaultValue = "1") @Min(value = 1, message = "页码必须大于0") Integer pageNum,
+            @RequestParam(defaultValue = "10") @Min(value = 1, message = "每页数量必须大于0") Integer pageSize) {
 
         // 构建排序条件列表
         List<SortDTO> sortDTOList = SortUtils.toSortDTOList(orderBy, order);

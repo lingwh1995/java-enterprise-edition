@@ -79,7 +79,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int updateProduct(Long id, ProductUpdateDTO productUpdateDTO) {
+    public int updateProductById(Long id, ProductUpdateDTO productUpdateDTO) {
         // 1.查询用户是否存在（阿里手册：更新前先查，避免更新不存在的数据）
         ProductDO productDO = productMapper.getProductById(id);
         if (productDO == null) {
@@ -97,7 +97,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int patchProduct(Long id, ProductPatchDTO productPatchDTO) {
+    public int patchProductById(Long id, ProductPatchDTO productPatchDTO) {
         // 1.查询用户是否存在（阿里手册：更新前先查，避免更新不存在的数据）
         ProductDO productDO = productMapper.getProductById(id);
         if (productDO == null) {

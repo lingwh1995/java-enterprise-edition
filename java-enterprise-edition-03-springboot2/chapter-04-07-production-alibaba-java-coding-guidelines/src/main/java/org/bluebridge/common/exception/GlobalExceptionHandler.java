@@ -1,5 +1,6 @@
 package org.bluebridge.common.exception;
 
+import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.common.response.Result;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 /**
  * 全局异常处理器
  */
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     
@@ -67,7 +69,9 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public Result<Void> handleException(Exception e) {
-        return Result.failure(500, "系统内部错误：" + e.getMessage());
+        // 添加堆栈信息
+        log.error("系统内部错误: {}", e.getMessage(), e);
+        return Result.failure(500, "系统内部错误，请稍后重试!");
     }
 
 }

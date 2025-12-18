@@ -44,7 +44,6 @@ public interface ProductConverter {
      * @return ProductDO 实体
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "status", constant = "1")
     ProductDO toProductDO(ProductUpdateDTO updateProductDTO);
 
     /**

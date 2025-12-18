@@ -66,7 +66,7 @@ public interface ProductService {
      * @param productUpdateDTO 商品更新传输对象
      * @return 影响行数
      */
-    int updateProduct(Long id, ProductUpdateDTO productUpdateDTO);
+    int updateProductById(Long id, ProductUpdateDTO productUpdateDTO);
 
     /**
      * 根据ID部分更新商品
@@ -74,7 +74,7 @@ public interface ProductService {
      * @param productPatchDTO  商品部分更新传输对象
      * @return 影响行数
      */
-    int patchProduct(Long id, ProductPatchDTO productPatchDTO);
+    int patchProductById(Long id, ProductPatchDTO productPatchDTO);
 
     /**
      * 根据ID查询商品
