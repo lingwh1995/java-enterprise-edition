@@ -15,6 +15,7 @@ import org.bluebridge.dao.ProductMapper;
 import org.bluebridge.service.ProductService;
 import org.bluebridge.vo.ProductVO;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -46,6 +47,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int batchCreateProduct(List<ProductCreateDTO> productCreateDTOList) {
         List<ProductDO> productDOList = productConvertor.toProductDOList(productCreateDTOList);
+
+        // 检查列表是否为空
+        if(CollectionUtils.isEmpty(productDOList)){
+            throw new ProductException(400, "商品列表不能为空");
+        }
 
         // 批量保存到数据库
         return productMapper.batchInsertProduct(productDOList);
@@ -126,7 +132,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductVO> listProductByName(String name) {
         List<ProductDO> productDOList = productMapper.listProductByName(name);
-        if (productDOList == null) {
+        if(CollectionUtils.isEmpty(productDOList)){
             throw new ProductException(404, "商品不存在");
         }
         return productConvertor.toProductVOList(productDOList);
@@ -136,6 +142,11 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductVO> searchProduct(QueryDTO<ProductQueryDTO> queryDTO) {
         // 查询商品列表
         List<ProductDO> productDOList = productMapper.searchProduct(queryDTO);
+
+        // 检查列表是否为空
+        if(CollectionUtils.isEmpty(productDOList)){
+            throw new ProductException(404, "商品不存在");
+        }
 
         // 转换为VO列表返回
         return productConvertor.toProductVOList(productDOList);
