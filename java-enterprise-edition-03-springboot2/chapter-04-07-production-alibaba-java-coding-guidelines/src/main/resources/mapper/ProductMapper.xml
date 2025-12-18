@@ -81,14 +81,14 @@
     </update>
 
     <!-- 根据ID查询商品 -->
-    <select id="getProductById" parameterType="java.lang.Long" resultType="org.bluebridge.entity.ProductDO">
+    <select id="getProductById" resultType="org.bluebridge.entity.ProductDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM t_product
         WHERE id = #{id} AND is_deleted = 0
     </select>
 
     <!-- 根据名称查询商品 -->
-    <select id="listProductByName" parameterType="java.lang.String" resultType="org.bluebridge.entity.ProductDO">
+    <select id="listProductByName" resultType="org.bluebridge.entity.ProductDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM t_product
         WHERE name like CONCAT('%', #{name}, '%') AND is_deleted = 0
@@ -99,15 +99,18 @@
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM t_product
         WHERE is_deleted = 0
-        <if test="productDO != null">
-            <if test="productDO.name != null and productDO.name != ''">
-                AND name LIKE CONCAT('%', #{productDO.name}, '%')
+        <if test="query != null">
+            <if test="query.name != null and query.name != ''">
+                AND name LIKE CONCAT('%', #{query.name}, '%')
             </if>
-            <if test="productDO.price != null">
-                AND price = #{productDO.price}
+            <if test="query.minPrice != null">
+                AND price >= #{query.minPrice}
             </if>
-            <if test="productDO.status != null">
-                AND status = #{productDO.status}
+            <if test="query.maxPrice != null">
+                AND price &lt;= #{query.maxPrice}
+            </if>
+            <if test="query.status != null">
+                AND status = #{query.status}
             </if>
         </if>
         <choose>

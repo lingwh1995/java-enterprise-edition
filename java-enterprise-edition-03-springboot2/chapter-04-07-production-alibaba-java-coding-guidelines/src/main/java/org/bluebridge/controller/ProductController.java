@@ -1,6 +1,7 @@
 package org.bluebridge.controller;
 
 import com.github.pagehelper.PageInfo;
+import org.bluebridge.common.dto.QueryDTO;
 import org.bluebridge.common.dto.SortDTO;
 import org.bluebridge.common.dto.PageQueryDTO;
 import org.bluebridge.common.util.SortUtils;
@@ -215,7 +216,7 @@ public class ProductController {
         // 构建排序条件列表
         List<SortDTO> sortDTOList = SortUtils.toSortDTOList(orderBy, order);
 
-        // 构建查询条件
+        // 构建查询参数
         ProductQueryDTO productQueryDTO = ProductQueryDTO.builder()
                 .name(name)
                 .minPrice(minPrice)
@@ -223,7 +224,13 @@ public class ProductController {
                 .status(status)
                 .build();
 
-        List<ProductVO> products = productService.searchProduct(productQueryDTO, sortDTOList);
+        // 构建排序查询参数
+        QueryDTO<ProductQueryDTO> queryDTO = QueryDTO.<ProductQueryDTO>builder()
+                .query(productQueryDTO)
+                .sortDTOList(sortDTOList)
+                .build();
+
+        List<ProductVO> products = productService.searchProduct(queryDTO);
         return Result.success(products, "查询成功");
     }
 
@@ -255,7 +262,7 @@ public class ProductController {
         // 构建排序条件列表
         List<SortDTO> sortDTOList = SortUtils.toSortDTOList(orderBy, order);
 
-        // 构建查询条件
+        // 构建查询参数
         ProductQueryDTO productQueryDTO = ProductQueryDTO.builder()
                 .name(name)
                 .minPrice(minPrice)
@@ -263,12 +270,17 @@ public class ProductController {
                 .status(status)
                 .build();
 
-        // 构建分页参数
-        PageQueryDTO<ProductQueryDTO> pageQueryDTO = PageQueryDTO.<ProductQueryDTO>builder()
+        // 构建排序查询参数
+        QueryDTO<ProductQueryDTO> queryDTO = QueryDTO.<ProductQueryDTO>builder()
                 .query(productQueryDTO)
+                .sortDTOList(sortDTOList)
+                .build();
+
+        // 构建分页排序参数
+        PageQueryDTO<ProductQueryDTO> pageQueryDTO = PageQueryDTO.<ProductQueryDTO>builder()
+                .queryDTO(queryDTO)
                 .pageNum(pageNum)
                 .pageSize(pageSize)
-                .sortDTOList(sortDTOList)
                 .build();
 
         PageInfo<ProductVO> pageInfo = productService.pageProduct(pageQueryDTO);
@@ -297,12 +309,17 @@ public class ProductController {
         // 构建排序条件列表
         List<SortDTO> sortDTOList = SortUtils.toSortDTOList(orderBy, order);
 
-        // 构建分页参数
-        PageQueryDTO<ProductQueryDTO> pageQueryDTO = PageQueryDTO.<ProductQueryDTO>builder()
+        // 构建排序查询参数
+        QueryDTO<ProductQueryDTO> queryDTO = QueryDTO.<ProductQueryDTO>builder()
                 .query(productQueryDTO)
+                .sortDTOList(sortDTOList)
+                .build();
+
+        // 构建分页排序参数
+        PageQueryDTO<ProductQueryDTO> pageQueryDTO = PageQueryDTO.<ProductQueryDTO>builder()
+                .queryDTO(queryDTO)
                 .pageNum(pageNum)
                 .pageSize(pageSize)
-                .sortDTOList(sortDTOList)
                 .build();
 
         PageInfo<ProductVO> pageInfo = productService.pageProduct(pageQueryDTO);
