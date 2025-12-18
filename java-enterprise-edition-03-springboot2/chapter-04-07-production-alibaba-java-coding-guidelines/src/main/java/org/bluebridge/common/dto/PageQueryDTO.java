@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class PageQueryDTO<T> {
 
     // 查询参数(包含查询条件和排序条件)
-    private QueryDTO<T> queryDTO;
+    private QueryDTO<T> query;
 
     // 页码
     private int pageNum;

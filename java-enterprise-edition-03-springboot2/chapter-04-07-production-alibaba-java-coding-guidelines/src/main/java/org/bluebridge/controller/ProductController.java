@@ -278,7 +278,7 @@ public class ProductController {
 
         // 构建分页排序参数
         PageQueryDTO<ProductQueryDTO> pageQueryDTO = PageQueryDTO.<ProductQueryDTO>builder()
-                .queryDTO(queryDTO)
+                .query(queryDTO)
                 .pageNum(pageNum)
                 .pageSize(pageSize)
                 .build();
@@ -317,7 +317,7 @@ public class ProductController {
 
         // 构建分页排序参数
         PageQueryDTO<ProductQueryDTO> pageQueryDTO = PageQueryDTO.<ProductQueryDTO>builder()
-                .queryDTO(queryDTO)
+                .query(queryDTO)
                 .pageNum(pageNum)
                 .pageSize(pageSize)
                 .build();
