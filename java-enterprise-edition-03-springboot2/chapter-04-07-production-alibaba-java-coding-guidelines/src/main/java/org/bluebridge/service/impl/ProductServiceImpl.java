@@ -3,8 +3,8 @@ package org.bluebridge.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.bluebridge.common.dto.PageQueryDTO;
+import org.bluebridge.common.dto.SortDTO;
 import org.bluebridge.entity.ProductDO;
-import org.bluebridge.common.dto.SortQueryDTO;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
@@ -133,18 +133,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductVO> searchProduct(ProductQueryDTO productQueryDTO) {
+    public List<ProductVO> searchProduct(ProductQueryDTO productQueryDTO, List<SortDTO> sortDTOList) {
         // 构造查询条件
         ProductDO productDO = productConvertor.toProductDO(productQueryDTO);
 
-        // 把ProductDO转换为SortQueryDTO
-        SortQueryDTO<ProductDO> sortQueryDTO = SortQueryDTO.<ProductDO>builder()
-                .entity(productDO)
-                .sortDTOList(productQueryDTO.getSortDTOList())
-                .build();
-
         // 查询商品列表
-        List<ProductDO> productDOList = productMapper.searchProduct(sortQueryDTO);
+        List<ProductDO> productDOList = productMapper.searchProduct(productDO, sortDTOList);
 
         // 转换为VO列表返回
         return productConvertor.toProductVOList(productDOList);
@@ -157,9 +151,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public PageInfo<ProductVO> pageProduct(PageQueryDTO<ProductQueryDTO> pageQueryDTO) {
+    public PageInfo<ProductVO> pageProduct(ProductQueryDTO productQueryDTO, PageQueryDTO pageQueryDTO, List<SortDTO> sortDTOList) {
         PageHelper.startPage(pageQueryDTO.getPageNum(), pageQueryDTO.getPageSize());
-        List<ProductVO> productVOList = searchProduct(pageQueryDTO.getEntity());
+
+        List<ProductVO> productVOList = searchProduct(productQueryDTO, sortDTOList);
 
         // 将结果转换为PageInfo返回
         return new PageInfo<>(productVOList);

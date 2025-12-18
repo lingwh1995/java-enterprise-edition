@@ -95,19 +95,19 @@
     </select>
 
     <!-- 根据条件查询商品列表 -->
-    <select id="searchProduct" parameterType="org.bluebridge.common.dto.SortQueryDTO" resultType="org.bluebridge.entity.ProductDO">
+    <select id="searchProduct" resultType="org.bluebridge.entity.ProductDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM t_product
         WHERE is_deleted = 0
-        <if test="entity != null">
-            <if test="entity.name != null and entity.name != ''">
-                AND name LIKE CONCAT('%', #{entity.name}, '%')
+        <if test="productDO != null">
+            <if test="productDO.name != null and productDO.name != ''">
+                AND name LIKE CONCAT('%', #{productDO.name}, '%')
             </if>
-            <if test="entity.price != null">
-                AND price = #{entity.price}
+            <if test="productDO.price != null">
+                AND price = #{productDO.price}
             </if>
-            <if test="entity.status != null">
-                AND status = #{entity.status}
+            <if test="productDO.status != null">
+                AND status = #{productDO.status}
             </if>
         </if>
         <choose>

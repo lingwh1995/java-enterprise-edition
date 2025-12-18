@@ -3,7 +3,7 @@ package org.bluebridge.controller;
 import com.github.pagehelper.PageInfo;
 import org.bluebridge.common.dto.SortDTO;
 import org.bluebridge.common.dto.PageQueryDTO;
-import org.bluebridge.common.dto.SortQueryDTO;
+import org.bluebridge.common.util.SortUtils;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
@@ -212,7 +212,8 @@ public class ProductController {
             @RequestParam(required = false, defaultValue = "create_time") @Pattern(regexp = "create_time") String orderBy,
             @RequestParam(required = false, defaultValue = "desc") @Pattern(regexp = "asc|desc") String order) {
 
-        List<SortDTO> sortDTOList = SortQueryDTO.toSortDTOList(orderBy, order);
+        // 构建排序条件列表
+        List<SortDTO> sortDTOList = SortUtils.toSortDTOList(orderBy, order);
 
         // 构建查询条件
         ProductQueryDTO productQueryDTO = ProductQueryDTO.builder()
@@ -220,10 +221,9 @@ public class ProductController {
                 .minPrice(minPrice)
                 .maxPrice(maxPrice)
                 .status(status)
-                .sortDTOList(sortDTOList)
                 .build();
 
-        List<ProductVO> products = productService.searchProduct(productQueryDTO);
+        List<ProductVO> products = productService.searchProduct(productQueryDTO, sortDTOList);
         return Result.success(products, "查询成功");
     }
 
@@ -252,24 +252,22 @@ public class ProductController {
             @RequestParam(defaultValue = "1") Integer pageNum,
             @RequestParam(defaultValue = "10") Integer pageSize) {
 
-        List<SortDTO> sortDTOList = SortQueryDTO.toSortDTOList(orderBy, order);
+        List<SortDTO> sortDTOList = SortUtils.toSortDTOList(orderBy, order);
 
         ProductQueryDTO productQueryDTO = ProductQueryDTO.builder()
                 .name(name)
                 .minPrice(minPrice)
                 .maxPrice(maxPrice)
                 .status(status)
-                .sortDTOList(sortDTOList)
                 .build();
 
-        // 注意这里基于Lombok的@Builder注解链式构造泛型对象时的写法
-        PageQueryDTO<ProductQueryDTO> pageQueryDTO = PageQueryDTO.<ProductQueryDTO>builder()
-                .entity(productQueryDTO)
+        // 构建分页参数
+        PageQueryDTO pageQueryDTO = PageQueryDTO.builder()
                 .pageNum(pageNum)
                 .pageSize(pageSize)
                 .build();
 
-        PageInfo<ProductVO> pageInfo = productService.pageProduct(pageQueryDTO);
+        PageInfo<ProductVO> pageInfo = productService.pageProduct(productQueryDTO, pageQueryDTO, sortDTOList);
         return Result.success(pageInfo, "查询成功");
     }
 
@@ -285,16 +283,19 @@ public class ProductController {
     @PostMapping("/page")
     public Result<PageInfo<ProductVO>> pageProduct(
             @RequestBody ProductQueryDTO queryProductDTO,
+            @RequestParam(required = false, defaultValue = "create_time") @Pattern(regexp = "create_time") String orderBy,
+            @RequestParam(required = false, defaultValue = "desc") @Pattern(regexp = "asc|desc") String order,
             @RequestParam(defaultValue = "1") Integer pageNum,
             @RequestParam(defaultValue = "10") Integer pageSize) {
 
-        PageQueryDTO<ProductQueryDTO> pageQueryDTO = PageQueryDTO.<ProductQueryDTO>builder()
-                .entity(queryProductDTO)
+        List<SortDTO> sortDTOList = SortUtils.toSortDTOList(orderBy, order);
+
+        PageQueryDTO pageQueryDTO = PageQueryDTO.builder()
                 .pageNum(pageNum)
                 .pageSize(pageSize)
                 .build();
 
-        PageInfo<ProductVO> pageInfo = productService.pageProduct(pageQueryDTO);
+        PageInfo<ProductVO> pageInfo = productService.pageProduct(queryProductDTO, pageQueryDTO, sortDTOList);
         return Result.success(pageInfo, "查询成功");
     }
 
