@@ -15,7 +15,6 @@ import org.bluebridge.dao.ProductMapper;
 import org.bluebridge.service.ProductService;
 import org.bluebridge.vo.ProductVO;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -31,10 +30,11 @@ public class ProductServiceImpl implements ProductService {
     // 注入ProductMapper
     @Resource
     private ProductMapper productMapper;
-    
+
     // 注入 MapStruct 映射器
-    private final ProductConvertor productConvertor = ProductConvertor.INSTANCE;
-    
+    @Resource
+    private ProductConvertor productConvertor;
+
     @Override
     public int createProduct(ProductCreateDTO productCreateDTO) {
         // 使用 MapStruct 转换DTO为实体
@@ -49,7 +49,7 @@ public class ProductServiceImpl implements ProductService {
         List<ProductDO> productDOList = productConvertor.toProductDOList(productCreateDTOList);
 
         // 检查列表是否为空
-        if(CollectionUtils.isEmpty(productDOList)){
+        if(productDOList.isEmpty()){
             throw new ProductException(400, "商品列表不能为空");
         }
 
@@ -132,7 +132,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductVO> listProductByName(String name) {
         List<ProductDO> productDOList = productMapper.listProductByName(name);
-        if(CollectionUtils.isEmpty(productDOList)){
+        if(productDOList.isEmpty()){
             throw new ProductException(404, "商品不存在");
         }
         return productConvertor.toProductVOList(productDOList);
@@ -144,7 +144,7 @@ public class ProductServiceImpl implements ProductService {
         List<ProductDO> productDOList = productMapper.searchProduct(queryDTO);
 
         // 检查列表是否为空
-        if(CollectionUtils.isEmpty(productDOList)){
+        if(productDOList.isEmpty()){
             throw new ProductException(404, "商品不存在");
         }
 
@@ -155,6 +155,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductVO> listProduct() {
         List<ProductDO> productDOList = productMapper.listProduct();
+
+        // 检查列表是否为空
+        if(productDOList.isEmpty()){
+            throw new ProductException(404, "商品不存在");
+        }
+
         return productConvertor.toProductVOList(productDOList);
     }
 

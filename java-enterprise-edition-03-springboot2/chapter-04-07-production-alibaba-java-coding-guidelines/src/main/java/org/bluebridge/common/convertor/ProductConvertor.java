@@ -8,7 +8,6 @@ import org.bluebridge.entity.ProductDO;
 import org.bluebridge.vo.ProductVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
@@ -17,10 +16,9 @@ import java.util.List;
  * @desc 商品对象映射器
  * @date 2025/12/13 11:20
  */
-@Mapper
+// 组件模型设置为Spring，使MapStruct生成的实现类可以被Spring管理
+@Mapper(componentModel = "spring")
 public interface ProductConvertor {
-
-    ProductConvertor INSTANCE = Mappers.getMapper(ProductConvertor.class);
 
     /**
      * 将 CreateProductDTO 转换为 ProductDO 实体
@@ -80,7 +78,6 @@ public interface ProductConvertor {
      * @param productDOList 商品实体列表
      * @return ProductVO 列表
      */
-    @Mapping(target = "isDeleted", ignore = true)
     List<ProductVO> toProductVOList(List<ProductDO> productDOList);
 
 }

@@ -20,7 +20,6 @@ public interface ProductService {
 
     /**
      * 创建商品
-     *
      * @param productCreateDTO 商品创建传输对象
      * @return 影响行数
      */
@@ -28,7 +27,6 @@ public interface ProductService {
 
     /**
      * 批量创建商品
-     *
      * @param productCreateDTOList 商品创建传输对象列表
      * @return 影响行数
      */
@@ -36,7 +34,6 @@ public interface ProductService {
 
     /**
      * 根据ID删除商品（物理删除）
-     *
      * @param id 商品ID
      * @return 影响行数
      */
@@ -44,7 +41,6 @@ public interface ProductService {
 
     /**
      * 批量删除商品（物理删除）
-     *
      * @param ids 商品ID列表
      * @return 影响行数
      */
@@ -52,7 +48,6 @@ public interface ProductService {
 
     /**
      * 根据ID逻辑删除商品
-     *
      * @param id 商品ID
      * @return 影响行数
      */
@@ -60,7 +55,6 @@ public interface ProductService {
 
     /**
      * 批量逻辑删除商品
-     *
      * @param ids 商品ID列表
      * @return 影响行数
      */
@@ -68,7 +62,6 @@ public interface ProductService {
 
     /**
      * 根据ID全量更新商品
-     *
      * @param id               商品ID
      * @param productUpdateDTO 商品更新传输对象
      * @return 影响行数
@@ -77,7 +70,6 @@ public interface ProductService {
 
     /**
      * 根据ID部分更新商品
-     *
      * @param id               商品ID
      * @param productPatchDTO  商品部分更新传输对象
      * @return 影响行数
@@ -86,7 +78,6 @@ public interface ProductService {
 
     /**
      * 根据ID查询商品
-     *
      * @param id 商品ID
      * @return 商品展示对象
      */
@@ -94,7 +85,6 @@ public interface ProductService {
 
     /**
      * 根据名称精确查询商品列表
-     *
      * @param name 商品名称
      * @return 商品展示对象列表
      */
@@ -102,7 +92,6 @@ public interface ProductService {
 
     /**
      * 根据查询条件搜索商品
-     *
      * @param queryDTO 查询参数传输对象
      * @return 商品展示对象列表
      */
@@ -110,14 +99,12 @@ public interface ProductService {
 
     /**
      * 获取所有商品列表
-     *
      * @return 商品展示对象列表
      */
     List<ProductVO> listProduct();
 
     /**
      * 分页查询商品
-     *
      * @param pageQueryDTO 分页查询参数传输对象
      * @return 分页信息
      */
