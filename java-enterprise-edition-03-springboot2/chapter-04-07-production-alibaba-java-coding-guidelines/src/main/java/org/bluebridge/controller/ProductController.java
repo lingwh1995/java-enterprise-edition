@@ -270,15 +270,10 @@ public class ProductController {
                 .status(status)
                 .build();
 
-        // 构建排序查询参数
-        QueryDTO<ProductQueryDTO> queryDTO = QueryDTO.<ProductQueryDTO>builder()
-                .query(productQueryDTO)
-                .sortDTOList(sortDTOList)
-                .build();
-
         // 构建分页排序参数
         PageQueryDTO<ProductQueryDTO> pageQueryDTO = PageQueryDTO.<ProductQueryDTO>builder()
-                .query(queryDTO)
+                .query(productQueryDTO)
+                .sortDTOList(sortDTOList)
                 .pageNum(pageNum)
                 .pageSize(pageSize)
                 .build();
@@ -309,15 +304,10 @@ public class ProductController {
         // 构建排序条件列表
         List<SortDTO> sortDTOList = SortUtils.toSortDTOList(orderBy, order);
 
-        // 构建排序查询参数
-        QueryDTO<ProductQueryDTO> queryDTO = QueryDTO.<ProductQueryDTO>builder()
-                .query(productQueryDTO)
-                .sortDTOList(sortDTOList)
-                .build();
-
         // 构建分页排序参数
         PageQueryDTO<ProductQueryDTO> pageQueryDTO = PageQueryDTO.<ProductQueryDTO>builder()
-                .query(queryDTO)
+                .query(productQueryDTO)
+                .sortDTOList(sortDTOList)
                 .pageNum(pageNum)
                 .pageSize(pageSize)
                 .build();

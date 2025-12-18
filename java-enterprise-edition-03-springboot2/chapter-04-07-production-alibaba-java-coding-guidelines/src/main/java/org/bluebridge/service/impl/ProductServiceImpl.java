@@ -151,7 +151,13 @@ public class ProductServiceImpl implements ProductService {
     public PageInfo<ProductVO> pageProduct(PageQueryDTO<ProductQueryDTO> pageQueryDTO) {
         PageHelper.startPage(pageQueryDTO.getPageNum(), pageQueryDTO.getPageSize());
 
-        List<ProductVO> productVOList = searchProduct(pageQueryDTO.getQuery());
+        // 把分页查询参数转换为查询参数
+        QueryDTO<ProductQueryDTO> queryDTO = QueryDTO.<ProductQueryDTO>builder()
+                .query(pageQueryDTO.getQuery())
+                .sortDTOList(pageQueryDTO.getSortDTOList())
+                .build();
+
+        List<ProductVO> productVOList = searchProduct(queryDTO);
 
         // 将结果转换为PageInfo返回
         return new PageInfo<>(productVOList);
