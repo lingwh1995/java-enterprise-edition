@@ -101,7 +101,7 @@ public class ProductController {
      */
     @PatchMapping("/{id}/status")
     public Result<Integer> logicDeleteProductById(@PathVariable Long id) {
-        int i = productService.logicDeleteProductById(id);
+        int i = productService.softDeleteProductById(id);
         return Result.success(i, "根据ID逻辑删除商品成功");
     }
 
@@ -114,7 +114,7 @@ public class ProductController {
      */
     @DeleteMapping("/batch/status")
     public Result<Integer> batchLogicDeleteProduct(@RequestBody List<Long> ids) {
-        int i = productService.batchLogicDeleteProduct(ids);
+        int i = productService.batchSoftDeleteProduct(ids);
         return Result.success(i,"商品批量逻辑删除成功");
     }
 

@@ -1,4 +1,4 @@
-package org.bluebridge.common.convertor;
+package org.bluebridge.common.converter;
 
 import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductCreateDTO;
@@ -18,7 +18,7 @@ import java.util.List;
  */
 // 组件模型设置为Spring，使MapStruct生成的实现类可以被Spring管理
 @Mapper(componentModel = "spring")
-public interface ProductConvertor {
+public interface ProductConverter {
 
     /**
      * 将 CreateProductDTO 转换为 ProductDO 实体

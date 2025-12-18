@@ -51,14 +51,14 @@ public interface ProductService {
      * @param id 商品ID
      * @return 影响行数
      */
-    int logicDeleteProductById(Long id);
+    int softDeleteProductById(Long id);
 
     /**
      * 批量逻辑删除商品
      * @param ids 商品ID列表
      * @return 影响行数
      */
-    int batchLogicDeleteProduct(List<Long> ids);
+    int batchSoftDeleteProduct(List<Long> ids);
 
     /**
      * 根据ID全量更新商品

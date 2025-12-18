@@ -16,6 +16,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ProductDO {
 
+    // 逻辑删除常量定义
+    public static final int NOT_DELETED = 0;
+    public static final int DELETED = 1;
+
     // 商品ID
     private Long id;
     

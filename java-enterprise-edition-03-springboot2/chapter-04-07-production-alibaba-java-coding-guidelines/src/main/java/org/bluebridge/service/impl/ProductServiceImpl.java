@@ -2,6 +2,7 @@ package org.bluebridge.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.bluebridge.common.converter.ProductConverter;
 import org.bluebridge.common.dto.PageQueryDTO;
 import org.bluebridge.common.dto.QueryDTO;
 import org.bluebridge.entity.ProductDO;
@@ -10,7 +11,6 @@ import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductQueryDTO;
 import org.bluebridge.common.exception.ProductException;
-import org.bluebridge.common.convertor.ProductConvertor;
 import org.bluebridge.dao.ProductMapper;
 import org.bluebridge.service.ProductService;
 import org.bluebridge.vo.ProductVO;
@@ -33,12 +33,12 @@ public class ProductServiceImpl implements ProductService {
 
     // 注入 MapStruct 映射器
     @Resource
-    private ProductConvertor productConvertor;
+    private ProductConverter productConverter;
 
     @Override
     public int createProduct(ProductCreateDTO productCreateDTO) {
         // 使用 MapStruct 转换DTO为实体
-        ProductDO productDO = productConvertor.toProductDO(productCreateDTO);
+        ProductDO productDO = productConverter.toProductDO(productCreateDTO);
         
         // 保存到数据库
         return productMapper.insertProduct(productDO);
@@ -46,7 +46,7 @@ public class ProductServiceImpl implements ProductService {
     
     @Override
     public int batchCreateProduct(List<ProductCreateDTO> productCreateDTOList) {
-        List<ProductDO> productDOList = productConvertor.toProductDOList(productCreateDTOList);
+        List<ProductDO> productDOList = productConverter.toProductDOList(productCreateDTOList);
 
         // 检查列表是否为空
         if(productDOList.isEmpty()){
@@ -68,13 +68,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int logicDeleteProductById(Long id) {
+    public int softDeleteProductById(Long id) {
         // 逻辑删除商品
         return productMapper.logicDeleteProductById(id);
     }
 
     @Override
-    public int batchLogicDeleteProduct(List<Long> ids) {
+    public int batchSoftDeleteProduct(List<Long> ids) {
         return productMapper.batchLogicDeleteProduct(ids);
     }
 
@@ -87,7 +87,7 @@ public class ProductServiceImpl implements ProductService {
         }
 
         // 2.转换DTO为实体（阿里手册：避免直接操作DTO）
-        productDO = productConvertor.toProductDO(productUpdateDTO);
+        productDO = productConverter.toProductDO(productUpdateDTO);
 
         // 3.设置商品ID
         productDO.setId(id);
@@ -105,7 +105,7 @@ public class ProductServiceImpl implements ProductService {
         }
 
         // 2.转为实体
-        productDO = productConvertor.toProductDO(productPatchDTO);
+        productDO = productConverter.toProductDO(productPatchDTO);
 
         // 3.设置商品ID
         productDO.setId(id);
@@ -122,11 +122,11 @@ public class ProductServiceImpl implements ProductService {
         }
         
         // 检查是否已被逻辑删除
-        if (productDO.getIsDeleted() == 1) {
+        if (productDO.getIsDeleted() == ProductDO.DELETED) {
             throw new ProductException(404, "商品不存在");
         }
         
-        return productConvertor.toProductVO(productDO);
+        return productConverter.toProductVO(productDO);
     }
     
     @Override
@@ -135,7 +135,7 @@ public class ProductServiceImpl implements ProductService {
         if(productDOList.isEmpty()){
             throw new ProductException(404, "商品不存在");
         }
-        return productConvertor.toProductVOList(productDOList);
+        return productConverter.toProductVOList(productDOList);
     }
 
     @Override
@@ -149,7 +149,7 @@ public class ProductServiceImpl implements ProductService {
         }
 
         // 转换为VO列表返回
-        return productConvertor.toProductVOList(productDOList);
+        return productConverter.toProductVOList(productDOList);
     }
 
     @Override
@@ -161,7 +161,7 @@ public class ProductServiceImpl implements ProductService {
             throw new ProductException(404, "商品不存在");
         }
 
-        return productConvertor.toProductVOList(productDOList);
+        return productConverter.toProductVOList(productDOList);
     }
 
     @Override
