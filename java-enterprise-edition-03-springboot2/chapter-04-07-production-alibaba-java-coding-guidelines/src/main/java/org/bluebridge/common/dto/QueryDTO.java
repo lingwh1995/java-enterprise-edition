@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * @author lingwh
- * @desc 分页参数传输对象，仅负责分页参数的传输
+ * @desc 查询参数传输对象，包含查询条件和排序条件
  * @date 2025/12/17 16:15
  */
 @Data
