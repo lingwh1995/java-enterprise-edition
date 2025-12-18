@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * @author lingwh
  * @desc 分页参数传输对象，仅负责分页参数的传输
@@ -14,16 +16,18 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PageQueryDTO {
+public class PageQueryDTO<T> {
 
-    /**
-     * 页码
-     */
+    // 查询参数
+    private T query;
+
+    // 页码
     private int pageNum;
     
-    /**
-     * 每页数量
-     */
+    // 每页数量
     private int pageSize;
+
+    // 排序条件
+    private List<SortDTO> sortDTOList;
 
 }

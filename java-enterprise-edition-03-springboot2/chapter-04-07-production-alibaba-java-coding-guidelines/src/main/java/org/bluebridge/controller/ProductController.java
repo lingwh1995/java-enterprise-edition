@@ -252,8 +252,10 @@ public class ProductController {
             @RequestParam(defaultValue = "1") Integer pageNum,
             @RequestParam(defaultValue = "10") Integer pageSize) {
 
+        // 构建排序条件列表
         List<SortDTO> sortDTOList = SortUtils.toSortDTOList(orderBy, order);
 
+        // 构建查询条件
         ProductQueryDTO productQueryDTO = ProductQueryDTO.builder()
                 .name(name)
                 .minPrice(minPrice)
@@ -262,12 +264,14 @@ public class ProductController {
                 .build();
 
         // 构建分页参数
-        PageQueryDTO pageQueryDTO = PageQueryDTO.builder()
+        PageQueryDTO<ProductQueryDTO> pageQueryDTO = PageQueryDTO.<ProductQueryDTO>builder()
+                .query(productQueryDTO)
                 .pageNum(pageNum)
                 .pageSize(pageSize)
+                .sortDTOList(sortDTOList)
                 .build();
 
-        PageInfo<ProductVO> pageInfo = productService.pageProduct(productQueryDTO, pageQueryDTO, sortDTOList);
+        PageInfo<ProductVO> pageInfo = productService.pageProduct(pageQueryDTO);
         return Result.success(pageInfo, "查询成功");
     }
 
@@ -275,27 +279,33 @@ public class ProductController {
      * 分页查询-分页获取商品列表（阿里规范：方法名=page+资源名，如pageProduct）
      * URL：/api/products/page
      *
-     * @param queryProductDTO 查询条件
+     * @param productQueryDTO 查询条件
      * @param pageNum 页码
      * @param pageSize 每页数量
+     * @param orderBy 排序字段
+     * @param order 排序方式
      * @return 统一响应结果
      */
     @PostMapping("/page")
     public Result<PageInfo<ProductVO>> pageProduct(
-            @RequestBody ProductQueryDTO queryProductDTO,
+            @RequestBody ProductQueryDTO productQueryDTO,
             @RequestParam(required = false, defaultValue = "create_time") @Pattern(regexp = "create_time") String orderBy,
             @RequestParam(required = false, defaultValue = "desc") @Pattern(regexp = "asc|desc") String order,
             @RequestParam(defaultValue = "1") Integer pageNum,
             @RequestParam(defaultValue = "10") Integer pageSize) {
 
+        // 构建排序条件列表
         List<SortDTO> sortDTOList = SortUtils.toSortDTOList(orderBy, order);
 
-        PageQueryDTO pageQueryDTO = PageQueryDTO.builder()
+        // 构建分页参数
+        PageQueryDTO<ProductQueryDTO> pageQueryDTO = PageQueryDTO.<ProductQueryDTO>builder()
+                .query(productQueryDTO)
                 .pageNum(pageNum)
                 .pageSize(pageSize)
+                .sortDTOList(sortDTOList)
                 .build();
 
-        PageInfo<ProductVO> pageInfo = productService.pageProduct(queryProductDTO, pageQueryDTO, sortDTOList);
+        PageInfo<ProductVO> pageInfo = productService.pageProduct(pageQueryDTO);
         return Result.success(pageInfo, "查询成功");
     }
 

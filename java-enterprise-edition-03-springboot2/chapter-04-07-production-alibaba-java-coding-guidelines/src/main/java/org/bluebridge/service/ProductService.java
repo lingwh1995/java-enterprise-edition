@@ -119,11 +119,9 @@ public interface ProductService {
     /**
      * 分页查询商品
      *
-     * @param productQueryDTO 商品查询传输对象
      * @param pageQueryDTO    分页参数传输对象
-     * @param sortDTOList    排序参数列表
      * @return 分页信息
      */
-    PageInfo<ProductVO> pageProduct(ProductQueryDTO productQueryDTO, PageQueryDTO pageQueryDTO, List<SortDTO> sortDTOList);
+    PageInfo<ProductVO> pageProduct(PageQueryDTO<ProductQueryDTO> pageQueryDTO);
 
 }
