@@ -31,13 +31,13 @@ import org.apache.ibatis.executor.Executor;
 })
 public class SqlCostInterceptor implements Interceptor {
 
-    // 慢查询阈值（毫秒）
-    private long slowQueryThreshold = 1000;
+    /** 慢查询阈值（毫秒）*/
+    private long longQueryTime = 1000;
 
-    // 是否打印参数
+    /** 是否显示SQL参数 */
     private boolean showParameters = true;
 
-    private final ExecutorService logExecutor = Executors.newSingleThreadExecutor();
+    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
@@ -52,7 +52,8 @@ public class SqlCostInterceptor implements Interceptor {
 
         long start = System.currentTimeMillis();
         try {
-            return invocation.proceed(); // 执行目标方法
+            // 执行目标方法
+            return invocation.proceed();
         } finally {
             long cost = System.currentTimeMillis() - start;
             logSqlPerformance(sqlId, sql, parameterObject, cost);
@@ -61,9 +62,9 @@ public class SqlCostInterceptor implements Interceptor {
 
     private void logSqlPerformance(String sqlId, String sql,
                                    Object params, long cost) {
-        logExecutor.submit(() -> {
+        executorService.submit(() -> {
             // 基础日志
-            String logMsg = String.format("SQL执行耗时: %dms | ID: %s | SQL: %s",
+            String logMsg = String.format("SQL执行耗时: %dms | %s - ==> %s",
                     cost, sqlId, sql);
 
             // 参数日志（敏感数据需脱敏）
@@ -76,7 +77,7 @@ public class SqlCostInterceptor implements Interceptor {
             }
 
             // 分级日志输出
-            if (cost > slowQueryThreshold) {
+            if (cost > longQueryTime) {
                 log.warn("[慢查询告警] {}", logMsg);
             } else if (cost > 500) {
                 log.info("{}", logMsg);
@@ -94,9 +95,10 @@ public class SqlCostInterceptor implements Interceptor {
     @Override
     public void setProperties(Properties properties) {
         // 从配置加载参数
-        String threshold = properties.getProperty("slowQueryThreshold");
-        if (threshold != null) {
-            this.slowQueryThreshold = Long.parseLong(threshold);
+        // 获取用户自定义的慢查询阈值
+        String longQueryTimeUserDefined = properties.getProperty("longQueryTime");
+        if (longQueryTimeUserDefined != null) {
+            this.longQueryTime = Long.parseLong(longQueryTimeUserDefined);
         }
 
         String showParams = properties.getProperty("showParameters");

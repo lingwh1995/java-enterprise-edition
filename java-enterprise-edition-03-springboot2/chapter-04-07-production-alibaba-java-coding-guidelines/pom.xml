@@ -57,6 +57,13 @@
             <artifactId>mapstruct</artifactId>
             <version>${org.mapstruct.version}</version>
         </dependency>
+        
+        <!-- 日志相关依赖 -->
+<!--        <dependency>-->
+<!--            <groupId>ch.qos.logback</groupId>-->
+<!--            <artifactId>logback-classic</artifactId>-->
+<!--            <version>1.4.11</version>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>
