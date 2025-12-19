@@ -19,7 +19,7 @@ import org.apache.ibatis.executor.Executor;
  * @desc SQL执行耗时统计拦截器
  * @date 2025/12/19 12:40
  */
-@Slf4j
+@Slf4j(topic = "-")
 @Intercepts({
         @Signature(type = Executor.class, method = "update",
                 args = {MappedStatement.class, Object.class}),

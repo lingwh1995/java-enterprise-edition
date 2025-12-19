@@ -23,3 +23,7 @@ mybatis:
   type-aliases-package: org.bluebridge.dao.entity
   configuration:
     map-underscore-to-camel-case: true
+
+# 配置log4j2
+logging:
+  config: classpath:log4j2-${spring.profiles.active}.xml

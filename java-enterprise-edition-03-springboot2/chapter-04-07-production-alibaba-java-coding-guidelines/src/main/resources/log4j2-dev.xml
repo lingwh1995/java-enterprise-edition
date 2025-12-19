@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <!-- 日志输出格式 -->
+        <Property name="LOG_PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
+        </Property>
+        <!-- 日志文件路径 -->
+        <Property name="LOG_HOME">./logs</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- 控制台输出 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <!-- 开发环境只输出INFO及以上级别的日志 -->
+            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+        </Console>
+
+        <!-- 正常日志单独输出 -->
+        <RollingFile name="RollingFile" fileName="${LOG_HOME}/app.log"
+                     filePattern="${LOG_HOME}/app-dev-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <!-- 每天滚动一次 -->
+                <TimeBasedTriggeringPolicy/>
+                <!-- 单个文件最大10MB -->
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <!-- 最多保留10个文件 -->
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+
+        <!-- 错误日志单独输出 -->
+        <RollingFile name="ErrorFile" fileName="${LOG_HOME}/error.log"
+                     filePattern="${LOG_HOME}/error-dev-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <!-- 每天滚动一次 -->
+                <TimeBasedTriggeringPolicy/>
+                <!-- 单个文件最大50MB -->
+                <SizeBasedTriggeringPolicy size="50MB"/>
+            </Policies>
+            <!-- 最多保留30个文件 -->
+            <DefaultRolloverStrategy max="30"/>
+            <!-- 只记录ERROR级别日志 -->
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- Spring框架日志级别 -->
+        <Logger name="org.springframework" level="INFO"/>
+        <!-- MyBatis框架日志级别 -->
+        <Logger name="org.mybatis" level="DEBUG"/>
+        <!-- SQL日志级别 -->
+        <Logger name="java.sql" level="DEBUG"/>
+        <!-- 数据库连接池日志级别 -->
+        <Logger name="com.zaxxer.hikari" level="DEBUG"/>
+        <!-- 打印Controller接口映射信息的关键配置：将RequestMappingHandlerMapping的日志级别设置为TRACE，以输出最详细的映射信息 -->
+        <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="TRACE"/>
+        <!-- 业务包日志级别 -->
+        <Logger name="org.bluebridge" level="DEBUG"/>
+
+        <!-- 日志输出级别,logback日志级别包括五个：TRACE < DEBUG < INFO < WARN < ERROR -->
+        <Root level="DEBUG">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+            <AppenderRef ref="ErrorFile"/>
+        </Root>
+    </Loggers>
+</Configuration>
