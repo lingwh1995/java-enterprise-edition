@@ -18,16 +18,16 @@ import java.util.List;
 @NoArgsConstructor
 public class PageQueryDTO<T> {
 
-    // 查询参数
+    /** 查询参数 */
     private T query;
 
-    // 排序条件
+    /** 排序条件 */
     private List<SortDTO> sortDTOList;
 
-    // 页码
+    /** 页码 */
     private int pageNum;
 
-    // 每页数量
+    /** 每页数量 */
     private int pageSize;
 
 }

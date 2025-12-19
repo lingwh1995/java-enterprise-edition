@@ -11,7 +11,10 @@ import org.bluebridge.enums.OrderEnum;
 @Data
 public class SortDTO {
 
+    /** 排序字段 */
     private String orderBy;
+
+    /** 排序方向 */
     private String order = OrderEnum.ASC.name();
 
 }

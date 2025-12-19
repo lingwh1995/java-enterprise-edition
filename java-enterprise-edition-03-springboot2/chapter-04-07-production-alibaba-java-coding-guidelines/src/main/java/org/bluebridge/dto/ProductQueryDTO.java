@@ -18,15 +18,15 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class ProductQueryDTO {
 
-    //商品名称（模糊匹配）
+    /** 商品名称（模糊匹配） */
     private String name;
     
-    // 最低价格
+    /** 最低价格 */
     private BigDecimal minPrice;
     
-    // 最高价格
+    /** 最高价格 */
     private BigDecimal maxPrice;
     
-    // 商品状态
+    /** 商品状态 */
     private Integer status;
 }

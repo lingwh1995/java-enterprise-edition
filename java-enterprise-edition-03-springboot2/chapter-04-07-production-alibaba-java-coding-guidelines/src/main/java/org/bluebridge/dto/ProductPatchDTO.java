@@ -14,10 +14,10 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ProductPatchDTO {
 
-    // 商品名称
+    /** 商品名称 */
     private String name;
 
-    // 商品库存
+    /** 商品库存 */
     private Integer stock;
 
 }

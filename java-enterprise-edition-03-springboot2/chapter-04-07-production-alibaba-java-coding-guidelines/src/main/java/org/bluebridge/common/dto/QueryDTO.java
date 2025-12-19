@@ -18,10 +18,10 @@ import java.util.List;
 @NoArgsConstructor
 public class QueryDTO<T> {
 
-    // 查询参数
+    /** 查询参数 */
     private T query;
 
-    // 排序条件
+    /** 排序条件 */
     private List<SortDTO> sortDTOList;
 
 }
