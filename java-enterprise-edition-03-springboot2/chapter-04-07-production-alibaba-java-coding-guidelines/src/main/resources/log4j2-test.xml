@@ -20,7 +20,7 @@
         <!-- INFO日志单独输出 -->
         <RollingFile name="RollingFileInfo"
                      fileName="${LOG_HOME}/info.log"
-                     filePattern="${LOG_HOME}/$${date:yyyy-MM}/%d{yyyy-MM-dd}-INFO-%i.log">
+                     filePattern="${LOG_HOME}/info-%d{yyyy-MM-dd}-%i.log">
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
                 <!-- 每天滚动一次 -->
@@ -35,7 +35,7 @@
         <!-- ERROR日志单独输出 -->
         <RollingFile name="RollingFileError"
                      fileName="${LOG_HOME}/error.log"
-                     filePattern="${LOG_HOME}/$${date:yyyy-MM}/%d{yyyy-MM-dd}-ERROR-%i.log">
+                     filePattern="${LOG_HOME}/error-%d{yyyy-MM-dd}-%i.log">
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
                 <!-- 每天滚动一次 -->
