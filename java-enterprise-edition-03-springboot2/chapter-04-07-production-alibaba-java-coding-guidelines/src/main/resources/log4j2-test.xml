@@ -48,6 +48,16 @@
             <!-- 只记录ERROR级别日志 -->
             <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
         </RollingFile>
+        
+        <!-- 异步INFO日志输出 -->
+        <Async name="AsyncInfo">
+            <AppenderRef ref="RollingFileInfo"/>
+        </Async>
+        
+        <!-- 异步ERROR日志输出 -->
+        <Async name="AsyncError">
+            <AppenderRef ref="RollingFileError"/>
+        </Async>
     </Appenders>
 
     <Loggers>
@@ -73,8 +83,8 @@
         <!-- 日志输出级别,log4j2日志级别包括五个：TRACE < DEBUG < INFO < WARN < ERROR -->
         <Root level="INFO">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="RollingFileInfo"/>
-            <AppenderRef ref="RollingFileError"/>
+            <AppenderRef ref="AsyncInfo"/>
+            <AppenderRef ref="AsyncError"/>
         </Root>
     </Loggers>
 </Configuration>
