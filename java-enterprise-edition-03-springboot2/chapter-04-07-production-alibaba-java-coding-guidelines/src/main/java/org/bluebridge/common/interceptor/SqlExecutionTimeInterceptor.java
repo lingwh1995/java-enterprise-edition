@@ -19,7 +19,7 @@ import org.apache.ibatis.executor.Executor;
  * @desc SQL执行耗时统计拦截器
  * @date 2025/12/19 12:40
  */
-@Slf4j(topic = "-")
+@Slf4j
 @Intercepts({
         @Signature(type = Executor.class, method = "update",
                 args = {MappedStatement.class, Object.class}),
@@ -71,7 +71,7 @@ public class SqlExecutionTimeInterceptor implements Interceptor {
                                    Object params, long executionTime) {
         executorService.submit(() -> {
             // 基础日志
-            String sqlExecutionLog = String.format("SQL执行耗时: %dms | %s - ==> %s",
+            String sqlExecutionLog = String.format("SQL执行耗时: %dms | %s ==> %s",
                     executionTime, sqlId, sql);
 
             // 参数日志（敏感数据需脱敏）
@@ -80,7 +80,7 @@ public class SqlExecutionTimeInterceptor implements Interceptor {
                 // 简单脱敏处理（实际项目应使用专业脱敏工具）
                 paramStr = paramStr.replaceAll("(\"password\":\")([^\"]+)(\")",
                         "$1****$3");
-                sqlExecutionLog += " | 参数: " + paramStr;
+                sqlExecutionLog += " | params: " + paramStr;
             }
 
             // 分级日志输出
