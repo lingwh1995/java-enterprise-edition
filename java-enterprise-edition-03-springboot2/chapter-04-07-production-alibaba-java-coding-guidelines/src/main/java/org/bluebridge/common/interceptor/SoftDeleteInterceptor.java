@@ -74,9 +74,37 @@ public class SoftDeleteInterceptor implements Interceptor {
     private boolean isInjectSoftDelete(String sql) {
         // 转为大写进行比较
         String upperSql = sql.toUpperCase();
-
-        // 如果SQL中已经包含了逻辑删除字段，则不再注入
-        return !upperSql.contains(softDeleteColumn.toUpperCase());
+        
+        // 查找WHERE子句的位置
+        int whereIndex = upperSql.indexOf(" WHERE ");
+        
+        // 如果没有WHERE子句，则需要注入
+        if (whereIndex == -1) {
+            return true;
+        }
+        
+        // 查找WHERE子句的结束位置（ORDER BY, LIMIT等之前的部分）
+        int endIndex = upperSql.length();
+        int orderByIndex = upperSql.indexOf(" ORDER BY ", whereIndex);
+        int limitIndex = upperSql.indexOf(" LIMIT ", whereIndex);
+        int groupByIndex = upperSql.indexOf(" GROUP BY ", whereIndex);
+        
+        // 找到最先出现的关键字位置
+        if (orderByIndex != -1 && orderByIndex < endIndex) {
+            endIndex = orderByIndex;
+        }
+        if (limitIndex != -1 && limitIndex < endIndex) {
+            endIndex = limitIndex;
+        }
+        if (groupByIndex != -1 && groupByIndex < endIndex) {
+            endIndex = groupByIndex;
+        }
+        
+        // 提取WHERE子句部分（排除SELECT子句中的字段）
+        String whereClause = upperSql.substring(whereIndex + 7, endIndex); // +7 是为了跳过" WHERE "这几个字符
+        
+        // 检查WHERE子句中是否已经包含了逻辑删除字段
+        return !whereClause.contains(softDeleteColumn.toUpperCase());
     }
 
     /**
