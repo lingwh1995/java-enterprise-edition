@@ -18,8 +18,9 @@
         </Console>
 
         <!-- INFO日志单独输出 -->
-        <RollingFile name="RollingFileInfo" fileName="${LOG_HOME}/app-pro.log"
-                     filePattern="${LOG_HOME}/app-pro-%d{yyyy-MM-dd}-%i.log">
+        <RollingFile name="RollingFileInfo"
+                     fileName="${LOG_HOME}/info.log"
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM}/%d{yyyy-MM-dd}-INFO-%i.log">
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
                 <!-- 每天滚动一次 -->
@@ -32,8 +33,9 @@
         </RollingFile>
         
         <!-- ERROR日志单独输出 -->
-        <RollingFile name="RollingFileError" fileName="${LOG_HOME}/error-pro.log"
-                     filePattern="${LOG_HOME}/error-pro-%d{yyyy-MM-dd}-%i.log">
+        <RollingFile name="RollingFileError"
+                     fileName="${LOG_HOME}/error.log"
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM}/%d{yyyy-MM-dd}-ERROR-%i.log">
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
                 <!-- 每天滚动一次 -->
