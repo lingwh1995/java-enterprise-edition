@@ -29,7 +29,7 @@
                 <SizeBasedTriggeringPolicy size="100MB"/>
             </Policies>
             <!-- 最多保留30个文件 -->
-            <DefaultRolloverStrategy max="30"/>
+            <DefaultRolloverStrategy max="30" fileIndex="0"/>
         </RollingFile>
 
         <!-- ERROR日志单独输出 -->
@@ -44,7 +44,7 @@
                 <SizeBasedTriggeringPolicy size="100MB"/>
             </Policies>
             <!-- 最多保留30个文件 -->
-            <DefaultRolloverStrategy max="30"/>
+            <DefaultRolloverStrategy max="30" fileIndex="0"/>
             <!-- 只记录ERROR级别日志 -->
             <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
         </RollingFile>

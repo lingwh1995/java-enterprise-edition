@@ -97,9 +97,12 @@ public class SqlExecutionTimeInterceptor implements Interceptor {
         return Plugin.wrap(target, this);
     }
 
+    /**
+     * 从配置加载参数
+     * @param properties
+     */
     @Override
     public void setProperties(Properties properties) {
-        // 从配置加载参数
         // 获取用户自定义的慢查询阈值
         String longQueryTimeUserDefined = properties.getProperty("longQueryTime");
         if (longQueryTimeUserDefined != null) {
