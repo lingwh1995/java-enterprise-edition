@@ -22,12 +22,16 @@ public class MybatisConfig {
     public SoftDeleteInterceptor logicDeleteInterceptor() {
         SoftDeleteInterceptor interceptor = new SoftDeleteInterceptor();
         Properties properties = new Properties();
-        properties.setProperty("logicDeleteColumn", "is_deleted");
-        properties.setProperty("notDeletedValue", "0");
+        properties.setProperty("softDeleteColumn", "is_deleted");
+        properties.setProperty("softDeleteValue", "0");
         interceptor.setProperties(properties);
         return interceptor;
     }
 
+    /**
+     * 注册SQL执行耗时拦截器
+     * @return
+     */
     @Bean
     public SqlCostInterceptor sqlCostInterceptor() {
         SqlCostInterceptor interceptor = new SqlCostInterceptor();

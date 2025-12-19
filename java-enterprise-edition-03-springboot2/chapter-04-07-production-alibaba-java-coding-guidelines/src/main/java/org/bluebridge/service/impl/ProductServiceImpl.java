@@ -2,7 +2,7 @@ package org.bluebridge.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.bluebridge.common.constant.SoftDeleteStatus;
+import org.bluebridge.common.constant.SoftDeleteConstant;
 import org.bluebridge.common.converter.ProductConverter;
 import org.bluebridge.common.dto.PageQueryDTO;
 import org.bluebridge.common.dto.QueryDTO;
@@ -121,7 +121,7 @@ public class ProductServiceImpl implements ProductService {
         }
         
         // 检查是否已被逻辑删除
-        if (productDO.getIsDeleted() == SoftDeleteStatus.DELETED.getCode()) {
+        if (productDO.getIsDeleted() == SoftDeleteConstant.DELETED_VALUE) {
             throw new ProductException(404, "商品不存在");
         }
         

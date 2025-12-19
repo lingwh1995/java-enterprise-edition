@@ -7,6 +7,7 @@ import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
+import org.bluebridge.common.constant.SoftDeleteConstant;
 import org.springframework.stereotype.Component;
 
 import java.util.Properties;
@@ -23,9 +24,8 @@ import java.lang.reflect.Field;
 @Component
 public class SoftDeleteInterceptor implements Interceptor {
 
-    // 逻辑删除字段配置
-    private String softDeleteColumn = "is_deleted";
-    private String notDeletedValue = "0";
+    private String softDeleteColumn = SoftDeleteConstant.DELETE_COLUMN;
+    private int softDeleteValue = SoftDeleteConstant.NOT_DELETED_VALUE;
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
@@ -90,7 +90,7 @@ public class SoftDeleteInterceptor implements Interceptor {
 
         if (whereIndex != -1) {
             // 如果已有WHERE子句，在其后添加AND条件
-            return originalSql + " AND " + softDeleteColumn + " = " + notDeletedValue;
+            return originalSql + " AND " + softDeleteColumn + " = " + softDeleteValue;
         } else {
             // 如果没有WHERE子句，查找合适的位置插入WHERE条件
             return injectWhereClause(originalSql);
@@ -123,7 +123,7 @@ public class SoftDeleteInterceptor implements Interceptor {
 
         // 在确定的位置插入WHERE子句
         return originalSql.substring(0, insertIndex) +
-                " WHERE " + softDeleteColumn + " = " + notDeletedValue +
+                " WHERE " + softDeleteColumn + " = " + softDeleteValue +
                 originalSql.substring(insertIndex);
     }
 
@@ -144,14 +144,14 @@ public class SoftDeleteInterceptor implements Interceptor {
 
     @Override
     public void setProperties(Properties properties) {
-        String column = properties.getProperty("logicDeleteColumn");
+        String column = properties.getProperty("softDeleteColumn");
         if (column != null && !column.isEmpty()) {
             this.softDeleteColumn = column;
         }
 
-        String value = properties.getProperty("notDeletedValue");
+        String value = properties.getProperty("softDeleteValue");
         if (value != null && !value.isEmpty()) {
-            this.notDeletedValue = value;
+            this.softDeleteValue = Integer.parseInt(value);
         }
     }
 }
