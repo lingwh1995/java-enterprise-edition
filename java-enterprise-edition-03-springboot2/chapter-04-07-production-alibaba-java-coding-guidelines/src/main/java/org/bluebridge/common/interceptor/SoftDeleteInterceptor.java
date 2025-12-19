@@ -1,237 +1,157 @@
 package org.bluebridge.common.interceptor;
 
-import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
-import org.apache.ibatis.mapping.SqlSource;
 import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Field;
 import java.util.Properties;
+import java.lang.reflect.Field;
 
 /**
- * @author lingwh
- * @desc MyBatis逻辑删除拦截器
- * @date 2025/12/19 11:23
+ * MyBatis逻辑删除拦截器
+ * 符合阿里巴巴Java开发手册要求，在DAO层统一处理逻辑删除过滤
  */
-@Slf4j
 @Intercepts({
-        @Signature(type = Executor.class, method = "query",
-                args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class})
+        @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
+        @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class})
 })
+@Component
 public class SoftDeleteInterceptor implements Interceptor {
 
-    /**
-     * 逻辑删除字段名
-     */
-    private static final String DELETE_FIELD = "is_deleted";
-    
-    /**
-     * 未删除状态值
-     */
-    private static final int NOT_DELETED_VALUE = 0;
-    
+    // 逻辑删除字段配置
+    private String softDeleteColumn = "is_deleted";
+    private String notDeletedValue = "0";
+
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
         Object[] args = invocation.getArgs();
-        MappedStatement mappedStatement = (MappedStatement) args[0];
-        Object parameter = args[1];
-        
-        // 获取原始SQL
-        BoundSql boundSql = mappedStatement.getBoundSql(parameter);
-        String originalSql = boundSql.getSql().trim();
-        
-        // 处理SELECT语句，添加逻辑删除过滤条件
-        String processedSql = processSelectSql(originalSql);
-        
-        if (!originalSql.equals(processedSql)) {
-            // 如果SQL发生变化，则创建新的MappedStatement
-            MappedStatement newMappedStatement = copyMappedStatement(mappedStatement, processedSql, boundSql);
-            args[0] = newMappedStatement;
+        MappedStatement ms = (MappedStatement) args[0];
+
+        // 只处理SELECT语句
+        if (ms.getSqlCommandType().name().equals("SELECT")) {
+            // 获取原始SQL
+            BoundSql boundSql = getBoundSql(invocation);
+            String originalSql = boundSql.getSql().trim();
+
+            // 检查是否需要注入逻辑删除条件
+            if (isInjectSoftDelete(originalSql)) {
+                // 注入逻辑删除条件
+                String newSql = injectSoftDeleteCondition(originalSql);
+
+                // 更新BoundSql中的SQL
+                updateBoundSql(boundSql, newSql);
+            }
         }
-        
+
         return invocation.proceed();
     }
 
     /**
-     * 处理SELECT语句，添加逻辑删除过滤条件
-     *
-     * @param originalSql 原始SQL
-     * @return 处理后的SQL
+     * 获取BoundSql对象
      */
-    private String processSelectSql(String originalSql) {
-        // 只处理SELECT语句
-        if (!originalSql.toUpperCase().startsWith("SELECT")) {
-            return originalSql;
+    private BoundSql getBoundSql(Invocation invocation) {
+        Object[] args = invocation.getArgs();
+        MappedStatement ms = (MappedStatement) args[0];
+        Object parameter = args[1];
+
+        if (args.length >= 6) {
+            // 如果是6参数的方法调用，直接返回第6个参数
+            return (BoundSql) args[5];
+        } else {
+            // 否则通过MappedStatement获取
+            return ms.getBoundSql(parameter);
         }
-        
-        // 检查是否已经包含了逻辑删除条件（更严格的检查）
-        String lowerSql = originalSql.toLowerCase();
-        if (lowerSql.contains(DELETE_FIELD)) {
-            // 如果已经明确处理了逻辑删除，则不再添加
-            log.debug("SQL已包含逻辑删除条件，无需重复添加: {}", originalSql);
-            return originalSql;
-        }
-        
-        // 添加逻辑删除过滤条件
-        String processedSql = addLogicDeleteFilter(originalSql);
-        log.debug("逻辑删除拦截器处理SQL: {} -> {}", originalSql, processedSql);
-        
-        return processedSql;
     }
 
     /**
-     * 为SQL添加逻辑删除过滤条件
-     *
-     * @param sql 原始SQL
-     * @return 添加逻辑删除条件后的SQL
+     * 判断是否需要注入逻辑删除条件
      */
-    private String addLogicDeleteFilter(String sql) {
-        // 统一转换为大写进行比较，但保留原始大小写用于返回
+    private boolean isInjectSoftDelete(String sql) {
+        // 转为大写进行比较
         String upperSql = sql.toUpperCase();
-        
+
+        // 如果SQL中已经包含了逻辑删除字段，则不再注入
+        return !upperSql.contains(softDeleteColumn.toUpperCase());
+    }
+
+    /**
+     * 注入逻辑删除条件
+     */
+    private String injectSoftDeleteCondition(String originalSql) {
+        String upperSql = originalSql.toUpperCase();
+
         // 查找WHERE子句的位置
-        int whereIndex = upperSql.lastIndexOf(" WHERE ");
-        
+        int whereIndex = upperSql.indexOf(" WHERE ");
+
         if (whereIndex != -1) {
-            // 如果已有WHERE子句，在末尾添加AND条件
-            // 确保在正确的括号内添加条件
-            int orderByIndex = upperSql.lastIndexOf(" ORDER BY ");
-            int limitIndex = upperSql.lastIndexOf(" LIMIT ");
-            int groupByIndex = upperSql.lastIndexOf(" GROUP BY ");
-            
-            // 找到WHERE子句结束位置
-            int endIndex = sql.length();
-            if (orderByIndex != -1 && orderByIndex > whereIndex) {
-                endIndex = orderByIndex;
-            } else if (limitIndex != -1 && limitIndex > whereIndex) {
-                endIndex = limitIndex;
-            } else if (groupByIndex != -1 && groupByIndex > whereIndex) {
-                endIndex = groupByIndex;
-            }
-            
-            // 检查WHERE子句是否已经有逻辑删除相关的条件
-            String whereClause = sql.substring(whereIndex, endIndex).toLowerCase();
-            if (whereClause.contains(DELETE_FIELD.toLowerCase())) {
-                log.debug("WHERE子句已包含逻辑删除字段，无需重复添加: {}", whereClause);
-                return sql; // 已经有相关条件，不需要再添加
-            }
-            
-            return sql.substring(0, endIndex) + " AND " + DELETE_FIELD + " = " + NOT_DELETED_VALUE +
-                    sql.substring(endIndex);
+            // 如果已有WHERE子句，在其后添加AND条件
+            return originalSql + " AND " + softDeleteColumn + " = " + notDeletedValue;
         } else {
-            // 如果没有WHERE子句，添加WHERE条件
-            // 查找ORDER BY或LIMIT的位置
-            int orderByIndex = upperSql.lastIndexOf(" ORDER BY ");
-            int limitIndex = upperSql.lastIndexOf(" LIMIT ");
-            int groupByIndex = upperSql.lastIndexOf(" GROUP BY ");
-            
-            int insertPosition = sql.length();
-            if (orderByIndex != -1) {
-                insertPosition = orderByIndex;
-            } else if (limitIndex != -1) {
-                insertPosition = limitIndex;
-            } else if (groupByIndex != -1) {
-                insertPosition = groupByIndex;
-            }
-            
-            return sql.substring(0, insertPosition) + " WHERE " + DELETE_FIELD + " = " + NOT_DELETED_VALUE +
-                    sql.substring(insertPosition);
+            // 如果没有WHERE子句，查找合适的位置插入WHERE条件
+            return injectWhereClause(originalSql);
         }
     }
-    
+
     /**
-     * 复制MappedStatement并替换SQL
-     *
-     * @param mappedStatement 原始MappedStatement
-     * @param newSql 新的SQL
-     * @param boundSql BoundSql对象
-     * @return 新的MappedStatement
-     * @throws Exception 反射异常
+     * 在合适位置插入WHERE子句
      */
-    private MappedStatement copyMappedStatement(MappedStatement mappedStatement, String newSql, BoundSql boundSql) throws Exception {
-        // 使用反射创建新的BoundSql
-        BoundSql newBoundSql = new BoundSql(
-                mappedStatement.getConfiguration(),
-                newSql,
-                boundSql.getParameterMappings(),
-                boundSql.getParameterObject()
-        );
-        
-        // 复制原始BoundSql中的附加参数
-        Field metaParamsField = BoundSql.class.getDeclaredField("metaParameters");
-        metaParamsField.setAccessible(true);
-        metaParamsField.set(newBoundSql, metaParamsField.get(boundSql));
-        
-        Field additionalParamsField = BoundSql.class.getDeclaredField("additionalParameters");
-        additionalParamsField.setAccessible(true);
-        additionalParamsField.set(newBoundSql, additionalParamsField.get(boundSql));
-        
-        // 创建新的SqlSource
-        SqlSource sqlSource = new SqlSource() {
-            @Override
-            public BoundSql getBoundSql(Object parameterObject) {
-                return newBoundSql;
-            }
-        };
-        
-        // 构建新的MappedStatement
-        return new MappedStatement.Builder(
-                mappedStatement.getConfiguration(),
-                mappedStatement.getId(),
-                sqlSource,
-                mappedStatement.getSqlCommandType()
-        )
-                .resource(mappedStatement.getResource())
-                .fetchSize(mappedStatement.getFetchSize())
-                .timeout(mappedStatement.getTimeout())
-                .statementType(mappedStatement.getStatementType())
-                .keyGenerator(mappedStatement.getKeyGenerator())
-                .keyProperty(arrayToString(mappedStatement.getKeyProperties()))
-                .keyColumn(arrayToString(mappedStatement.getKeyColumns()))
-                .databaseId(mappedStatement.getDatabaseId())
-                .lang(mappedStatement.getLang())
-                .resultMaps(mappedStatement.getResultMaps())
-                .resultSetType(mappedStatement.getResultSetType())
-                .flushCacheRequired(mappedStatement.isFlushCacheRequired())
-                .useCache(mappedStatement.isUseCache())
-                .resultOrdered(mappedStatement.isResultOrdered())
-                .build();
+    private String injectWhereClause(String originalSql) {
+        String upperSql = originalSql.toUpperCase();
+
+        // 查找常见的SQL关键字位置
+        int groupByIndex = upperSql.indexOf(" GROUP BY ");
+        int orderByIndex = upperSql.indexOf(" ORDER BY ");
+        int limitIndex = upperSql.indexOf(" LIMIT ");
+
+        // 确定插入位置
+        int insertIndex = originalSql.length(); // 默认在末尾
+
+        if (groupByIndex != -1 && groupByIndex < insertIndex) {
+            insertIndex = groupByIndex;
+        }
+        if (orderByIndex != -1 && orderByIndex < insertIndex) {
+            insertIndex = orderByIndex;
+        }
+        if (limitIndex != -1 && limitIndex < insertIndex) {
+            insertIndex = limitIndex;
+        }
+
+        // 在确定的位置插入WHERE子句
+        return originalSql.substring(0, insertIndex) +
+                " WHERE " + softDeleteColumn + " = " + notDeletedValue +
+                originalSql.substring(insertIndex);
     }
-    
+
+    /**
+     * 更新BoundSql中的SQL语句
+     */
+    private void updateBoundSql(BoundSql boundSql, String newSql) throws NoSuchFieldException, IllegalAccessException {
+        // 通过反射修改BoundSql中的SQL
+        Field sqlField = BoundSql.class.getDeclaredField("sql");
+        sqlField.setAccessible(true);
+        sqlField.set(boundSql, newSql);
+    }
+
     @Override
     public Object plugin(Object target) {
         return Plugin.wrap(target, this);
     }
-    
+
     @Override
     public void setProperties(Properties properties) {
-        // 可以在这里设置自定义属性
-    }
-    
-    /**
-     * 将字符串数组转换为逗号分隔的字符串
-     *
-     * @param array 字符串数组
-     * @return 逗号分隔的字符串
-     */
-    private String arrayToString(String[] array) {
-        if (array == null || array.length == 0) {
-            return null;
+        String column = properties.getProperty("logicDeleteColumn");
+        if (column != null && !column.isEmpty()) {
+            this.softDeleteColumn = column;
         }
-        
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < array.length; i++) {
-            if (i > 0) {
-                sb.append(",");
-            }
-            sb.append(array[i]);
+
+        String value = properties.getProperty("notDeletedValue");
+        if (value != null && !value.isEmpty()) {
+            this.notDeletedValue = value;
         }
-        return sb.toString();
     }
 }

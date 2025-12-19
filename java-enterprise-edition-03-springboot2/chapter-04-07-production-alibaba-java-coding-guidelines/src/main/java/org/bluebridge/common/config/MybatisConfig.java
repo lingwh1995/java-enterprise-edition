@@ -14,14 +14,17 @@ import java.util.Properties;
  */
 @Configuration
 public class MybatisConfig {
-    
+
+    /**
+     * 注册逻辑删除拦截器
+     */
     @Bean
-    public SoftDeleteInterceptor softDeleteInterceptor() {
+    public SoftDeleteInterceptor logicDeleteInterceptor() {
         SoftDeleteInterceptor interceptor = new SoftDeleteInterceptor();
-//        Properties properties = new Properties();
-//        properties.setProperty("slowQueryThreshold", "500"); // 500ms以上视为慢查询
-//        properties.setProperty("showParameters", "true");
-//        interceptor.setProperties(properties);
+        Properties properties = new Properties();
+        properties.setProperty("logicDeleteColumn", "is_deleted");
+        properties.setProperty("notDeletedValue", "0");
+        interceptor.setProperties(properties);
         return interceptor;
     }
 
