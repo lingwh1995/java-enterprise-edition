@@ -17,8 +17,8 @@
             <ThresholdFilter level="TRACE" onMatch="ACCEPT" onMismatch="DENY"/>
         </Console>
 
-        <!-- 正常日志单独输出 -->
-        <RollingFile name="RollingFile" fileName="${LOG_HOME}/app-test.log"
+        <!-- INFO日志单独输出 -->
+        <RollingFile name="RollingFileInfo" fileName="${LOG_HOME}/app-test.log"
                      filePattern="${LOG_HOME}/app-test-%d{yyyy-MM-dd}-%i.log">
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
@@ -31,8 +31,8 @@
             <DefaultRolloverStrategy max="30"/>
         </RollingFile>
 
-        <!-- 错误日志单独输出 -->
-        <RollingFile name="ErrorFile" fileName="${LOG_HOME}/error-test.log"
+        <!-- ERROR日志单独输出 -->
+        <RollingFile name="RollingFileError" fileName="${LOG_HOME}/error-test.log"
                      filePattern="${LOG_HOME}/error-test-%d{yyyy-MM-dd}-%i.log">
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
@@ -71,8 +71,8 @@
         <!-- 日志输出级别,log4j2日志级别包括五个：TRACE < DEBUG < INFO < WARN < ERROR -->
         <Root level="INFO">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="RollingFile"/>
-            <AppenderRef ref="ErrorFile"/>
+            <AppenderRef ref="RollingFileInfo"/>
+            <AppenderRef ref="RollingFileError"/>
         </Root>
     </Loggers>
 </Configuration>
