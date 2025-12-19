@@ -32,9 +32,12 @@
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
     </root>
-    
+
     <!-- 特定包的日志级别 -->
     <logger name="org.bluebridge" level="DEBUG"/>
     <logger name="org.mybatis" level="DEBUG"/>
     <logger name="com.zaxxer.hikari" level="DEBUG"/>
+    <!-- 打印Controller接口映射信息的关键配置：将RequestMappingHandlerMapping的日志级别设置为TRACE，以输出最详细的映射信息 -->
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="TRACE"/>
+
 </configuration>
