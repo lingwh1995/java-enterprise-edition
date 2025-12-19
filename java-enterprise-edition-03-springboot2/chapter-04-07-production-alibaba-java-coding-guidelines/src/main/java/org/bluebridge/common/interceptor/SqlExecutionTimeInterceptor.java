@@ -29,7 +29,7 @@ import org.apache.ibatis.executor.Executor;
                 args = {MappedStatement.class, Object.class, RowBounds.class,
                         ResultHandler.class, CacheKey.class, BoundSql.class})
 })
-public class SqlCostInterceptor implements Interceptor {
+public class SqlExecutionTimeInterceptor implements Interceptor {
 
     /** 慢查询阈值（毫秒）*/
     private long longQueryTime = 1000;
@@ -55,17 +55,24 @@ public class SqlCostInterceptor implements Interceptor {
             // 执行目标方法
             return invocation.proceed();
         } finally {
-            long cost = System.currentTimeMillis() - start;
-            logSqlPerformance(sqlId, sql, parameterObject, cost);
+            long executionTime = System.currentTimeMillis() - start;
+            showSqlExecutionTime(sqlId, sql, parameterObject, executionTime);
         }
     }
 
-    private void logSqlPerformance(String sqlId, String sql,
-                                   Object params, long cost) {
+    /**
+     * 显示SQL执行耗时
+     * @param sqlId
+     * @param sql
+     * @param params
+     * @param executionTime
+     */
+    private void showSqlExecutionTime(String sqlId, String sql,
+                                   Object params, long executionTime) {
         executorService.submit(() -> {
             // 基础日志
-            String logMsg = String.format("SQL执行耗时: %dms | %s - ==> %s",
-                    cost, sqlId, sql);
+            String sqlExecutionLog = String.format("SQL执行耗时: %dms | %s - ==> %s",
+                    executionTime, sqlId, sql);
 
             // 参数日志（敏感数据需脱敏）
             if (showParameters && params != null) {
@@ -73,16 +80,14 @@ public class SqlCostInterceptor implements Interceptor {
                 // 简单脱敏处理（实际项目应使用专业脱敏工具）
                 paramStr = paramStr.replaceAll("(\"password\":\")([^\"]+)(\")",
                         "$1****$3");
-                logMsg += " | 参数: " + paramStr;
+                sqlExecutionLog += " | 参数: " + paramStr;
             }
 
             // 分级日志输出
-            if (cost > longQueryTime) {
-                log.warn("[慢查询告警] {}", logMsg);
-            } else if (cost > 500) {
-                log.info("{}", logMsg);
-            } else {
-                log.debug("{}", logMsg);
+            if (executionTime > longQueryTime) {
+                log.warn("[慢查询告警] {}", sqlExecutionLog);
+            }else {
+                log.debug("{}", sqlExecutionLog);
             }
         });
     }
