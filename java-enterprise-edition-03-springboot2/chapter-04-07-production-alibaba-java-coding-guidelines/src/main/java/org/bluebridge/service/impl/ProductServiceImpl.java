@@ -2,6 +2,7 @@ package org.bluebridge.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.bluebridge.common.constant.SoftDeleteStatus;
 import org.bluebridge.common.converter.ProductConverter;
 import org.bluebridge.common.dto.PageQueryDTO;
 import org.bluebridge.common.dto.QueryDTO;
@@ -27,11 +28,9 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
     
-    // 注入ProductMapper
     @Resource
     private ProductMapper productMapper;
 
-    // 注入 MapStruct 映射器
     @Resource
     private ProductConverter productConverter;
 
@@ -122,7 +121,7 @@ public class ProductServiceImpl implements ProductService {
         }
         
         // 检查是否已被逻辑删除
-        if (productDO.getIsDeleted() == ProductDO.DELETED) {
+        if (productDO.getIsDeleted() == SoftDeleteStatus.DELETED.getCode()) {
             throw new ProductException(404, "商品不存在");
         }
         

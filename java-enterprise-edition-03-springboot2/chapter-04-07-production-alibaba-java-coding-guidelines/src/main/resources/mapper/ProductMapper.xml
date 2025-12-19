@@ -63,7 +63,7 @@
                 status = #{status},
             </if>
         </set>
-        WHERE id = #{id} AND is_deleted = 0
+        WHERE id = #{id}
     </update>
 
     <!-- 根据ID部分更新商品信息 -->
@@ -77,42 +77,43 @@
                 stock = #{stock}
             </if>
         </set>
-        WHERE id = #{id} AND is_deleted = 0
+        WHERE id = #{id}
     </update>
 
     <!-- 根据ID查询商品 -->
     <select id="getProductById" resultType="org.bluebridge.entity.ProductDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM t_product
-        WHERE id = #{id} AND is_deleted = 0
+        WHERE id = #{id}
     </select>
 
     <!-- 根据名称查询商品 -->
     <select id="listProductByName" resultType="org.bluebridge.entity.ProductDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM t_product
-        WHERE name like CONCAT('%', #{name}, '%') AND is_deleted = 0
+        WHERE name like CONCAT('%', #{name}, '%')
     </select>
 
     <!-- 根据条件查询商品列表 -->
     <select id="searchProduct" resultType="org.bluebridge.entity.ProductDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM t_product
-        WHERE is_deleted = 0
-        <if test="query != null">
-            <if test="query.name != null and query.name != ''">
-                AND name LIKE CONCAT('%', #{query.name}, '%')
+        <where>
+            <if test="query != null">
+                <if test="query.name != null and query.name != ''">
+                    AND name LIKE CONCAT('%', #{query.name}, '%')
+                </if>
+                <if test="query.minPrice != null">
+                    AND price >= #{query.minPrice}
+                </if>
+                <if test="query.maxPrice != null">
+                    AND price &lt;= #{query.maxPrice}
+                </if>
+                <if test="query.status != null">
+                    AND status = #{query.status}
+                </if>
             </if>
-            <if test="query.minPrice != null">
-                AND price >= #{query.minPrice}
-            </if>
-            <if test="query.maxPrice != null">
-                AND price &lt;= #{query.maxPrice}
-            </if>
-            <if test="query.status != null">
-                AND status = #{query.status}
-            </if>
-        </if>
+        </where>
         <choose>
             <when test="sortDTOList != null and sortDTOList.size() > 0">
                 ORDER BY
@@ -130,7 +131,6 @@
     <select id="listProduct"  resultType="org.bluebridge.entity.ProductDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM t_product
-        WHERE is_deleted = 0
     </select>
 
 </mapper>

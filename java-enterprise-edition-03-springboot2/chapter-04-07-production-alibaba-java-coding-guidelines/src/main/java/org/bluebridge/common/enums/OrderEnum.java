@@ -1,4 +1,4 @@
-package org.bluebridge.enums;
+package org.bluebridge.common.enums;
 
 /**
  * @author lingwh

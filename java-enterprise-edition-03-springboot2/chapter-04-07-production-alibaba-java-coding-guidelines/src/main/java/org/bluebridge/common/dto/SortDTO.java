@@ -1,7 +1,7 @@
 package org.bluebridge.common.dto;
 
 import lombok.Data;
-import org.bluebridge.enums.OrderEnum;
+import org.bluebridge.common.enums.OrderEnum;
 
 /**
  * @author lingwh

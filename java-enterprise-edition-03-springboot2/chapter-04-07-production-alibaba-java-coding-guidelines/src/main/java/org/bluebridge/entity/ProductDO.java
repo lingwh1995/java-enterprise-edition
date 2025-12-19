@@ -3,6 +3,7 @@ package org.bluebridge.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -15,12 +16,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDO {
-
-    /** 逻辑删除状态常量 - 未删除状态 */
-    public static final int NOT_DELETED = 0;
-
-    /** 逻辑删除状态常量 - 已删除状态 */
-    public static final int DELETED = 1;
 
     /** 商品ID */
     private Long id;
