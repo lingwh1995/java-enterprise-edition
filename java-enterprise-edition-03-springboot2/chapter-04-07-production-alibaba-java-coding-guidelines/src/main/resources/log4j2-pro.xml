@@ -24,22 +24,22 @@
             <Policies>
                 <!-- 每天滚动一次 -->
                 <TimeBasedTriggeringPolicy/>
-                <!-- 单个文件最大50MB -->
-                <SizeBasedTriggeringPolicy size="50MB"/>
+                <!-- 单个文件最大100MB -->
+                <SizeBasedTriggeringPolicy size="100MB"/>
             </Policies>
             <!-- 最多保留30个文件 -->
             <DefaultRolloverStrategy max="30"/>
         </RollingFile>
         
         <!-- 错误日志单独输出 -->
-        <RollingFile name="ErrorFile" fileName="${LOG_HOME}/error.log"
+        <RollingFile name="ErrorFile" fileName="${LOG_HOME}/error-pro.log"
                      filePattern="${LOG_HOME}/error-pro-%d{yyyy-MM-dd}-%i.log">
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
                 <!-- 每天滚动一次 -->
                 <TimeBasedTriggeringPolicy/>
-                <!-- 单个文件最大50MB -->
-                <SizeBasedTriggeringPolicy size="50MB"/>
+                <!-- 单个文件最大100MB -->
+                <SizeBasedTriggeringPolicy size="100MB"/>
             </Policies>
             <!-- 最多保留30个文件 -->
             <DefaultRolloverStrategy max="30"/>
