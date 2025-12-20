@@ -107,12 +107,7 @@ public class SqlPerformanceInterceptor implements Interceptor {
             StringBuilder sqlExecutionLog = new StringBuilder();
 
             sqlExecutionLog.append("\n====================================  SQL START  ====================================");
-            sqlExecutionLog.append("\nSQL语句ID   ===>   ").append(sqlId);
-            // 分析是否出现慢查询
-            sqlExecutionLog.append("\n执行总用时   ===>   ").append(executionTime).append(" ms");
-            sqlExecutionLog.append("\n慢查询阈值   ===>   ").append(longQueryTime).append(" ms");
-            sqlExecutionLog.append("\n是否慢查询   ===>   ").append(executionTime > longQueryTime ? "是" : "否");
-            sqlExecutionLog.append("\n原始SQL语句  ===>   ").append(sql);
+            sqlExecutionLog.append("\n原始SQL     ===>   ").append(sql);
             // 打印参数，模拟MyBatis官方日志格式
             String parameters = formatParameters(boundSql, configuration);
             if (!parameters.isEmpty()) {
@@ -123,11 +118,16 @@ public class SqlPerformanceInterceptor implements Interceptor {
                 String completeSql = getCompleteSql(boundSql, configuration);
                 // 格式化 SQL 语句，添加换行符
                 completeSql = SqlFormatterUtils.format(completeSql);
-                sqlExecutionLog.append("\n完整SQL语句  ===>  \n\n").append(completeSql).append("\n");
+                sqlExecutionLog.append("\n完整SQL     ===>  \n\n").append(completeSql).append("\n");
             }else {
                 String completeSql = getCompleteSql(boundSql, configuration);
-                sqlExecutionLog.append("\n完整SQL语句  ===>   ").append(completeSql);
+                sqlExecutionLog.append("\n完整SQL     ===>   ").append(completeSql);
             }
+            sqlExecutionLog.append("\nSQL语句ID   ===>   ").append(sqlId);
+            // 分析是否出现慢查询
+            sqlExecutionLog.append("\n执行总用时   ===>   ").append(executionTime).append(" ms");
+            sqlExecutionLog.append("\n慢查询阈值   ===>   ").append(longQueryTime).append(" ms");
+            sqlExecutionLog.append("\n是否慢查询   ===>   ").append(executionTime > longQueryTime ? "是" : "否");
             sqlExecutionLog.append("\n====================================  SQL   END  ====================================\n");
 
             // 分级日志输出
@@ -193,7 +193,7 @@ public class SqlPerformanceInterceptor implements Interceptor {
     private String getParameterValue(Object obj) {
         String value;
         if (obj instanceof String) {
-            value = "'" + obj.toString() + "'";
+            value = obj.toString();
         } else if (obj instanceof Date) {
             DateFormat formatter = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, Locale.CHINA);
             value = "'" + formatter.format(obj) + "'";
@@ -250,8 +250,9 @@ public class SqlPerformanceInterceptor implements Interceptor {
         }
         
         StringBuilder paramsBuilder = new StringBuilder();
-        paramsBuilder.append("Parameters  ===>  ");
-        
+        paramsBuilder.append("参数列表    ===>  ");
+        paramsBuilder.append(String.format("%-20s", "参数名称"));
+
         try {
             TypeHandlerRegistry typeHandlerRegistry = configuration.getTypeHandlerRegistry();
             
