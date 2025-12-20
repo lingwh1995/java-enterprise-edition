@@ -23,11 +23,8 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import org.apache.ibatis.executor.Executor;
-import org.bluebridge.common.dto.QueryDTO;
 import org.bluebridge.common.util.SqlFormatterUtils;
 
 /**
