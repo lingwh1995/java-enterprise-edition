@@ -1,6 +1,6 @@
 package org.bluebridge.common.config;
 
-import org.bluebridge.common.interceptor.SqlExecutionTimeInterceptor;
+import org.bluebridge.common.interceptor.SqlPerformanceInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,13 +19,13 @@ public class MybatisConfig {
      * @return
      */
     @Bean
-    public SqlExecutionTimeInterceptor sqlCostInterceptor() {
-        SqlExecutionTimeInterceptor interceptor = new SqlExecutionTimeInterceptor();
+    public SqlPerformanceInterceptor sqlCostInterceptor() {
+        SqlPerformanceInterceptor interceptor = new SqlPerformanceInterceptor();
         Properties properties = new Properties();
         // 设置慢查询阈值为500ms
-        properties.setProperty("longQueryTime", "500");
-        // 设置是否显示SQL参数为
-        properties.setProperty("showParameters", "true");
+        properties.setProperty("longQueryTime", "1000");
+        // 是否显示格式化后的SQL
+        properties.setProperty("showFormattedSql", Boolean.FALSE.toString());
         interceptor.setProperties(properties);
         return interceptor;
     }

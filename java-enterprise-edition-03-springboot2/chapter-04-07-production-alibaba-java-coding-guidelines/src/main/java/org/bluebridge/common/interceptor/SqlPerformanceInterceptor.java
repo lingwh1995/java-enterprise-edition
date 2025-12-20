@@ -25,10 +25,11 @@ import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 
 import org.apache.ibatis.executor.Executor;
+import org.bluebridge.common.util.SqlFormatterUtils;
 
 /**
  * @author lingwh
- * @desc SQL执行耗时统计拦截器
+ * @desc SQL执行耗时统计+格式化拦截器
  * @date 2025/12/19 12:40
  */
 @Slf4j
@@ -43,16 +44,13 @@ import org.apache.ibatis.executor.Executor;
                 args = {MappedStatement.class, Object.class, RowBounds.class,
                         ResultHandler.class, CacheKey.class, BoundSql.class})
 })
-public class SqlExecutionTimeInterceptor implements Interceptor {
+public class SqlPerformanceInterceptor implements Interceptor {
 
     /** 慢查询阈值（毫秒）*/
     private long longQueryTime = 1000;
 
-    /** 是否显示SQL参数 */
-    private boolean showParameters = true;
-
-    /** 是否显示完整SQL（带参数） */
-    private boolean showCompleteSql = true;
+    /** 是否显示格式化后的SQL */
+    private boolean showFormattedSql = true;
 
     /** 线程池，用于异步日志记录 */
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -89,7 +87,7 @@ public class SqlExecutionTimeInterceptor implements Interceptor {
                 return invocation.proceed();
             } finally {
                 long executionTime = System.currentTimeMillis() - start;
-                showSqlExecutionTime(sqlId, sql, parameterObject, boundSql, configuration, executionTime);
+                showSqlExecutionLog(sqlId, sql, parameterObject, boundSql, configuration, executionTime);
             }
         } else {
             // 不是我们关心的拦截点，直接放行
@@ -106,40 +104,38 @@ public class SqlExecutionTimeInterceptor implements Interceptor {
      * @param configuration
      * @param executionTime
      */
-    private void showSqlExecutionTime(String sqlId, String sql, Object params,
+    private void showSqlExecutionLog(String sqlId, String sql, Object params,
                                       BoundSql boundSql, Configuration configuration,
                                       long executionTime) {
         executorService.submit(() -> {
             StringBuilder sqlExecutionLog = new StringBuilder();
-            sqlExecutionLog.append(String.format("SQL执行耗时: %dms | %s ==> %s", executionTime, sqlId, sql));
 
-            // 参数日志（敏感数据需脱敏）
-            if (showParameters && params != null) {
-                String paramStr = params.toString();
-                // 简单脱敏处理（实际项目应使用专业脱敏工具）
-                paramStr = paramStr.replaceAll("(\"password\":\")([^\"]+)(\")",
-                        "$1****$3");
-                sqlExecutionLog.append(" | params: ").append(paramStr);
-            }
-
+            sqlExecutionLog.append("\n====================================  SQL START  ====================================");
+            sqlExecutionLog.append("\nSQL语句ID   ===>   ").append(sqlId);
+            // 分析是否出现慢查询
+            sqlExecutionLog.append("\n执行总用时   ===>   ").append(executionTime).append(" ms");
+            sqlExecutionLog.append("\n慢查询阈值   ===>   ").append(longQueryTime).append(" ms");
+            sqlExecutionLog.append("\n是否慢查询   ===>   ").append(executionTime > longQueryTime ? "是" : "否");
+            sqlExecutionLog.append("\n原始SQL语句  ===>   ").append(sql);
             // 完整SQL日志（带参数）
-            if (showCompleteSql) {
+            if(showFormattedSql){
                 String completeSql = getSql(configuration, boundSql, params, sqlId);
-                sqlExecutionLog.append(" | 完整SQL: ").append(completeSql);
+                // 格式化 SQL 语句，添加换行符
+                completeSql = SqlFormatterUtils.format(completeSql);
+                sqlExecutionLog.append("\n完整SQL语句  ===>  \n\n").append(completeSql).append("\n");
+            }else {
+                String completeSql = getSql(configuration, boundSql, params, sqlId);
+                sqlExecutionLog.append("\n完整SQL语句  ===>   ").append(completeSql);
             }
+            sqlExecutionLog.append("\n====================================  SQL   END  ====================================\n");
 
             // 分级日志输出
-            if (executionTime > longQueryTime) {
-                log.warn("[慢查询告警] {}", sqlExecutionLog.toString());
-            } else {
-                log.debug("{}", sqlExecutionLog.toString());
-            }
+            log.debug("\033[31m{}\033[0m", sqlExecutionLog.toString());
         });
     }
 
     /**
      * 获取完整的带参数SQL语句
-     *
      * @param configuration
      * @param boundSql
      * @param parameterObject
@@ -228,17 +224,9 @@ public class SqlExecutionTimeInterceptor implements Interceptor {
             this.longQueryTime = Long.parseLong(longQueryTimeUserDefined);
         }
 
-        String showParams = properties.getProperty("showParameters");
-        if (showParams != null) {
-            this.showParameters = Boolean.parseBoolean(showParams);
-        }
-
-        String showCompleteSql = properties.getProperty("showCompleteSql");
-        if (showCompleteSql != null) {
-            this.showCompleteSql = Boolean.parseBoolean(showCompleteSql);
-        } else {
-            // 默认开启完整SQL显示
-            this.showCompleteSql = true;
+        String showFormattedSql = properties.getProperty("showFormattedSql");
+        if (showFormattedSql != null) {
+            this.showFormattedSql = Boolean.parseBoolean(showFormattedSql);
         }
     }
 

@@ -13,7 +13,4 @@ public class SoftDeleteConstant {
     /** 已删除状态码 */
     public static final int DELETED_VALUE = 1;
 
-    /** 逻辑删除条件 */
-    public static final String DELETE_COLUMN = "is_deleted";
-
 }
