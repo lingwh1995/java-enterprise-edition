@@ -109,7 +109,7 @@ public class SqlPerformanceInterceptor implements Interceptor {
         executorService.submit(() -> {
             StringBuilder sqlExecutionLog = new StringBuilder();
 
-            sqlExecutionLog.append("\n=======================================  SQL START  =======================================");
+            sqlExecutionLog.append("\n============================  SQL START  ============================");
 
             // 是否显示原始SQL
             if(showOriginalSql && boundSql.getParameterObject() != null) {
@@ -137,7 +137,7 @@ public class SqlPerformanceInterceptor implements Interceptor {
             sqlExecutionLog.append("\n执行总用时   ===>   ").append(executionTime).append(" ms");
             sqlExecutionLog.append("\n慢查询阈值   ===>   ").append(longQueryTime).append(" ms");
             sqlExecutionLog.append("\n是否慢查询   ===>   ").append(executionTime > longQueryTime ? "是" : "否");
-            sqlExecutionLog.append("\n=======================================  SQL   END  =======================================\n");
+            sqlExecutionLog.append("\n============================  SQL   END  ============================\n");
 
             // 分级日志输出
             log.debug("\033[31m{}\033[0m", sqlExecutionLog.toString());
