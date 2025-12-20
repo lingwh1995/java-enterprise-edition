@@ -195,7 +195,6 @@ public class SqlPerformanceInterceptor implements Interceptor {
 
     /**
      * 格式化参数对象，用于日志输出
-     *
      * @param parameterObject 参数对象
      * @return 格式化后的参数字符串
      */
@@ -222,7 +221,6 @@ public class SqlPerformanceInterceptor implements Interceptor {
 
     /**
      * 格式化参数映射，模拟MyBatis官方日志格式
-     *
      * @param boundSql
      * @param configuration
      * @return 格式化后的参数映射字符串
