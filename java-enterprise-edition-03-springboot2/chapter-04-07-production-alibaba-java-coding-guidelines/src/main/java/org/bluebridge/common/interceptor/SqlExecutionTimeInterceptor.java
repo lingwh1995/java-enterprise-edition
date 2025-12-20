@@ -5,15 +5,24 @@ import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
+import org.apache.ibatis.mapping.ParameterMapping;
+import org.apache.ibatis.mapping.ParameterMode;
 import org.apache.ibatis.plugin.*;
+import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.type.TypeHandlerRegistry;
 
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.regex.Matcher;
 
 import org.apache.ibatis.executor.Executor;
 
@@ -42,29 +51,50 @@ public class SqlExecutionTimeInterceptor implements Interceptor {
     /** 是否显示SQL参数 */
     private boolean showParameters = true;
 
+    /** 是否显示完整SQL（带参数） */
+    private boolean showCompleteSql = true;
+
     /** 线程池，用于异步日志记录 */
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
-        Object[] args = invocation.getArgs();
-        MappedStatement mappedStatement = (MappedStatement) args[0];
-        Object parameterObject = args[1];
+        // 获取拦截的方法
+        String methodName = invocation.getMethod().getName();
+        Object target = invocation.getTarget();
 
-        // 获取SQL信息
-        BoundSql boundSql = mappedStatement.getBoundSql(parameterObject);
-        String sqlId = mappedStatement.getId();
-        String sql = boundSql.getSql().replaceAll("\\s+", " ");
-        final Configuration configuration = mappedStatement.getConfiguration();
-        long start = System.currentTimeMillis();
-        try {
-            // 执行目标方法
+        // 如果是StatementHandler的parameterize方法，直接放行
+        if ("parameterize".equals(methodName) && target instanceof StatementHandler) {
             return invocation.proceed();
-        } finally {
-            long executionTime = System.currentTimeMillis() - start;
-            showSqlExecutionTime(sqlId, sql, parameterObject, executionTime);
         }
 
+        Object[] args = invocation.getArgs();
+
+        // 确保第一个参数是MappedStatement
+        if (args.length > 0 && args[0] instanceof MappedStatement) {
+            MappedStatement mappedStatement = (MappedStatement) args[0];
+            Object parameterObject = null;
+            if (args.length > 1) {
+                parameterObject = args[1];
+            }
+
+            // 获取SQL信息
+            BoundSql boundSql = mappedStatement.getBoundSql(parameterObject);
+            String sqlId = mappedStatement.getId();
+            String sql = boundSql.getSql().replaceAll("\\s+", " ");
+            final Configuration configuration = mappedStatement.getConfiguration();
+            long start = System.currentTimeMillis();
+            try {
+                // 执行目标方法
+                return invocation.proceed();
+            } finally {
+                long executionTime = System.currentTimeMillis() - start;
+                showSqlExecutionTime(sqlId, sql, parameterObject, boundSql, configuration, executionTime);
+            }
+        } else {
+            // 不是我们关心的拦截点，直接放行
+            return invocation.proceed();
+        }
     }
 
     /**
@@ -72,14 +102,16 @@ public class SqlExecutionTimeInterceptor implements Interceptor {
      * @param sqlId
      * @param sql
      * @param params
+     * @param boundSql
+     * @param configuration
      * @param executionTime
      */
-    private void showSqlExecutionTime(String sqlId, String sql,
-                                   Object params, long executionTime) {
+    private void showSqlExecutionTime(String sqlId, String sql, Object params,
+                                      BoundSql boundSql, Configuration configuration,
+                                      long executionTime) {
         executorService.submit(() -> {
-            // 基础日志
-            String sqlExecutionLog = String.format("SQL执行耗时: %dms | %s ==> %s",
-                    executionTime, sqlId, sql);
+            StringBuilder sqlExecutionLog = new StringBuilder();
+            sqlExecutionLog.append(String.format("SQL执行耗时: %dms | %s ==> %s", executionTime, sqlId, sql));
 
             // 参数日志（敏感数据需脱敏）
             if (showParameters && params != null) {
@@ -87,16 +119,96 @@ public class SqlExecutionTimeInterceptor implements Interceptor {
                 // 简单脱敏处理（实际项目应使用专业脱敏工具）
                 paramStr = paramStr.replaceAll("(\"password\":\")([^\"]+)(\")",
                         "$1****$3");
-                sqlExecutionLog += " | params: " + paramStr;
+                sqlExecutionLog.append(" | params: ").append(paramStr);
+            }
+
+            // 完整SQL日志（带参数）
+            if (showCompleteSql) {
+                String completeSql = getSql(configuration, boundSql, params, sqlId);
+                sqlExecutionLog.append(" | 完整SQL: ").append(completeSql);
             }
 
             // 分级日志输出
             if (executionTime > longQueryTime) {
-                log.warn("[慢查询告警] {}", sqlExecutionLog);
-            }else {
-                log.debug("{}", sqlExecutionLog);
+                log.warn("[慢查询告警] {}", sqlExecutionLog.toString());
+            } else {
+                log.debug("{}", sqlExecutionLog.toString());
             }
         });
+    }
+
+    /**
+     * 获取完整的带参数SQL语句
+     *
+     * @param configuration
+     * @param boundSql
+     * @param parameterObject
+     * @param sqlId
+     * @return
+     */
+    private String getSql(Configuration configuration, BoundSql boundSql, Object parameterObject, String sqlId) {
+        String sql = boundSql.getSql();
+        StringBuilder completeSql = new StringBuilder();
+        try {
+            // 获取参数映射列表
+            List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
+            // 获取类型处理器注册表
+            TypeHandlerRegistry typeHandlerRegistry = configuration.getTypeHandlerRegistry();
+
+            if (parameterMappings != null) {
+                // 遍历参数映射
+                for (int i = 0; i < parameterMappings.size(); i++) {
+                    ParameterMapping parameterMapping = parameterMappings.get(i);
+                    if (parameterMapping.getMode() != ParameterMode.OUT) {
+                        // 获取参数名
+                        String propertyName = parameterMapping.getProperty();
+                        Object value;
+                        // 获取参数值
+                        if (boundSql.hasAdditionalParameter(propertyName)) {
+                            value = boundSql.getAdditionalParameter(propertyName);
+                        } else if (parameterObject == null) {
+                            value = null;
+                        } else if (typeHandlerRegistry.hasTypeHandler(parameterObject.getClass())) {
+                            value = parameterObject;
+                        } else {
+                            MetaObject metaObject = configuration.newMetaObject(parameterObject);
+                            value = metaObject.getValue(propertyName);
+                        }
+                        // 格式化参数值
+                        String formattedValue = getParameterValue(value);
+                        // 替换SQL中的占位符
+                        sql = sql.replaceFirst("\\?", Matcher.quoteReplacement(formattedValue));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            log.error("解析SQL参数失败: {}", e.getMessage(), e);
+        }
+        completeSql.append(sql);
+        return completeSql.toString().replaceAll("\\s+", " ");
+    }
+
+    /**
+     * 格式化参数值
+     *
+     * @param obj
+     * @return
+     */
+    private String getParameterValue(Object obj) {
+        String value;
+        if (obj instanceof String) {
+            value = "'" + obj.toString() + "'";
+        } else if (obj instanceof Date) {
+            DateFormat formatter = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, Locale.CHINA);
+            value = "'" + formatter.format(obj) + "'";
+        } else {
+            if (obj != null) {
+                value = obj.toString();
+            } else {
+                value = "null";
+            }
+        }
+        return value;
     }
 
     @Override
@@ -119,6 +231,14 @@ public class SqlExecutionTimeInterceptor implements Interceptor {
         String showParams = properties.getProperty("showParameters");
         if (showParams != null) {
             this.showParameters = Boolean.parseBoolean(showParams);
+        }
+
+        String showCompleteSql = properties.getProperty("showCompleteSql");
+        if (showCompleteSql != null) {
+            this.showCompleteSql = Boolean.parseBoolean(showCompleteSql);
+        } else {
+            // 默认开启完整SQL显示
+            this.showCompleteSql = true;
         }
     }
 
