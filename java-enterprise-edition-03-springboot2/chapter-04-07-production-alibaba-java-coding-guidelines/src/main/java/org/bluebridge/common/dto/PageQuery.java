@@ -16,13 +16,13 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PageQueryDTO<T> {
+public class PageQuery<T> {
 
     /** 查询参数 */
     private T query;
 
     /** 排序条件 */
-    private List<SortDTO> sortDTOList;
+    private List<Sort> sortDTOList;
 
     /** 页码 */
     private int pageNum;

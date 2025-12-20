@@ -16,12 +16,12 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class QueryDTO<T> {
+public class Query<T> {
 
     /** 查询参数 */
     private T query;
 
     /** 排序条件 */
-    private List<SortDTO> sortDTOList;
+    private List<Sort> sortDTOList;
 
 }

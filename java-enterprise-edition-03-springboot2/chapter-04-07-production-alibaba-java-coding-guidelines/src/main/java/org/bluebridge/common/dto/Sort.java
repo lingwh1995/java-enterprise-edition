@@ -9,7 +9,7 @@ import org.bluebridge.common.enums.OrderEnum;
  * @date 2025/12/17 15:19
  */
 @Data
-public class SortDTO {
+public class Sort {
 
     /** 排序字段 */
     private String orderBy;

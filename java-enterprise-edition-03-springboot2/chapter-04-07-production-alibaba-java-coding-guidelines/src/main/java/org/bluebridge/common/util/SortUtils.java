@@ -1,6 +1,6 @@
 package org.bluebridge.common.util;
 
-import org.bluebridge.common.dto.SortDTO;
+import org.bluebridge.common.dto.Sort;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +21,8 @@ public class SortUtils {
      * @param order   排序方向，多个方向用逗号分隔
      * @return 排序DTO列表
      */
-    public static List<SortDTO> toSortDTOList(String orderBy, String order) {
-        List<SortDTO> sortDTOList = new ArrayList<>();
+    public static List<Sort> toSortDTOList(String orderBy, String order) {
+        List<Sort> sortDTOList = new ArrayList<>();
         if (orderBy != null && order != null) {
             String[] orderBys = orderBy.split(",");
             String[] orders = order.split(",");
@@ -30,7 +30,7 @@ public class SortUtils {
             // 基于Stream把字符串数组转换成SortDTO对象
             sortDTOList = IntStream.range(0, Math.min(orderBys.length, orders.length))
                     .mapToObj(i -> {
-                        SortDTO dto = new SortDTO();
+                        Sort dto = new Sort();
                         dto.setOrderBy(orderBys[i]);
                         dto.setOrder(orders[i]);
                         return dto;
@@ -48,7 +48,7 @@ public class SortUtils {
      * @return 排序SQL语句
      */
     public static String toSortSQL(String orderBy, String order) {
-        List<SortDTO> sortDTOList = toSortDTOList(orderBy, order);
+        List<Sort> sortDTOList = toSortDTOList(orderBy, order);
         return sortDTOList.stream()
                 .map(dto -> dto.getOrderBy() + " " + dto.getOrder())
                 .collect(Collectors.joining(", "));

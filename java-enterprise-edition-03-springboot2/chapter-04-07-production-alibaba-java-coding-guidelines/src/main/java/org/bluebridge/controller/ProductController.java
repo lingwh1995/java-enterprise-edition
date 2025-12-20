@@ -1,9 +1,9 @@
 package org.bluebridge.controller;
 
 import com.github.pagehelper.PageInfo;
-import org.bluebridge.common.dto.QueryDTO;
-import org.bluebridge.common.dto.SortDTO;
-import org.bluebridge.common.dto.PageQueryDTO;
+import org.bluebridge.common.dto.Query;
+import org.bluebridge.common.dto.Sort;
+import org.bluebridge.common.dto.PageQuery;
 import org.bluebridge.common.util.SortUtils;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
@@ -212,7 +212,7 @@ public class ProductController {
             @RequestParam(required = false, defaultValue = "desc") @Pattern(regexp = "asc|desc") String order) {
 
         // 构建排序条件列表
-        List<SortDTO> sortDTOList = SortUtils.toSortDTOList(orderBy, order);
+        List<Sort> sortDTOList = SortUtils.toSortDTOList(orderBy, order);
 
         // 构建查询参数
         ProductQueryDTO productQueryDTO = ProductQueryDTO.builder()
@@ -223,12 +223,12 @@ public class ProductController {
                 .build();
 
         // 构建排序查询参数
-        QueryDTO<ProductQueryDTO> queryDTO = QueryDTO.<ProductQueryDTO>builder()
+        Query<ProductQueryDTO> query = Query.<ProductQueryDTO>builder()
                 .query(productQueryDTO)
                 .sortDTOList(sortDTOList)
                 .build();
 
-        List<ProductVO> products = productService.searchProduct(queryDTO);
+        List<ProductVO> products = productService.searchProduct(query);
         return Result.success(products, "查询成功");
     }
 
@@ -258,7 +258,7 @@ public class ProductController {
             @RequestParam(defaultValue = "10") @Min(value = 1, message = "每页数量必须大于0") Integer pageSize) {
 
         // 构建排序条件列表
-        List<SortDTO> sortDTOList = SortUtils.toSortDTOList(orderBy, order);
+        List<Sort> sortDTOList = SortUtils.toSortDTOList(orderBy, order);
 
         // 构建查询参数
         ProductQueryDTO productQueryDTO = ProductQueryDTO.builder()
@@ -269,14 +269,14 @@ public class ProductController {
                 .build();
 
         // 构建分页排序参数
-        PageQueryDTO<ProductQueryDTO> pageQueryDTO = PageQueryDTO.<ProductQueryDTO>builder()
+        PageQuery<ProductQueryDTO> pageQuery = PageQuery.<ProductQueryDTO>builder()
                 .query(productQueryDTO)
                 .sortDTOList(sortDTOList)
                 .pageNum(pageNum)
                 .pageSize(pageSize)
                 .build();
 
-        PageInfo<ProductVO> pageInfo = productService.pageProduct(pageQueryDTO);
+        PageInfo<ProductVO> pageInfo = productService.pageProduct(pageQuery);
         return Result.success(pageInfo, "查询成功");
     }
 
@@ -300,17 +300,17 @@ public class ProductController {
             @RequestParam(defaultValue = "10") @Min(value = 1, message = "每页数量必须大于0") Integer pageSize) {
 
         // 构建排序条件列表
-        List<SortDTO> sortDTOList = SortUtils.toSortDTOList(orderBy, order);
+        List<Sort> sortDTOList = SortUtils.toSortDTOList(orderBy, order);
 
         // 构建分页排序参数
-        PageQueryDTO<ProductQueryDTO> pageQueryDTO = PageQueryDTO.<ProductQueryDTO>builder()
+        PageQuery<ProductQueryDTO> pageQuery = PageQuery.<ProductQueryDTO>builder()
                 .query(productQueryDTO)
                 .sortDTOList(sortDTOList)
                 .pageNum(pageNum)
                 .pageSize(pageSize)
                 .build();
 
-        PageInfo<ProductVO> pageInfo = productService.pageProduct(pageQueryDTO);
+        PageInfo<ProductVO> pageInfo = productService.pageProduct(pageQuery);
         return Result.success(pageInfo, "查询成功");
     }
 

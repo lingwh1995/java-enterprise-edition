@@ -1,8 +1,8 @@
 package org.bluebridge.service;
 
 import com.github.pagehelper.PageInfo;
-import org.bluebridge.common.dto.PageQueryDTO;
-import org.bluebridge.common.dto.QueryDTO;
+import org.bluebridge.common.dto.PageQuery;
+import org.bluebridge.common.dto.Query;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
@@ -92,10 +92,10 @@ public interface ProductService {
 
     /**
      * 根据查询条件搜索商品
-     * @param queryDTO 查询参数传输对象
+     * @param query 查询参数传输对象
      * @return 商品展示对象列表
      */
-    List<ProductVO> searchProduct(QueryDTO<ProductQueryDTO> queryDTO);
+    List<ProductVO> searchProduct(Query<ProductQueryDTO> query);
 
     /**
      * 获取所有商品列表
@@ -105,9 +105,9 @@ public interface ProductService {
 
     /**
      * 分页查询商品
-     * @param pageQueryDTO 分页查询参数传输对象
+     * @param pageQuery 分页查询参数传输对象
      * @return 分页信息
      */
-    PageInfo<ProductVO> pageProduct(PageQueryDTO<ProductQueryDTO> pageQueryDTO);
+    PageInfo<ProductVO> pageProduct(PageQuery<ProductQueryDTO> pageQuery);
 
 }

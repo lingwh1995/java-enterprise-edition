@@ -4,8 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.bluebridge.common.constant.SoftDeleteConstant;
 import org.bluebridge.common.converter.ProductConverter;
-import org.bluebridge.common.dto.PageQueryDTO;
-import org.bluebridge.common.dto.QueryDTO;
+import org.bluebridge.common.dto.PageQuery;
+import org.bluebridge.common.dto.Query;
 import org.bluebridge.entity.ProductDO;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
@@ -138,9 +138,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductVO> searchProduct(QueryDTO<ProductQueryDTO> queryDTO) {
+    public List<ProductVO> searchProduct(Query<ProductQueryDTO> query) {
         // 查询商品列表
-        List<ProductDO> productDOList = productMapper.searchProduct(queryDTO);
+        List<ProductDO> productDOList = productMapper.searchProduct(query);
 
         // 检查列表是否为空
         if(productDOList.isEmpty()){
@@ -164,16 +164,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public PageInfo<ProductVO> pageProduct(PageQueryDTO<ProductQueryDTO> pageQueryDTO) {
-        PageHelper.startPage(pageQueryDTO.getPageNum(), pageQueryDTO.getPageSize());
+    public PageInfo<ProductVO> pageProduct(PageQuery<ProductQueryDTO> pageQuery) {
+        PageHelper.startPage(pageQuery.getPageNum(), pageQuery.getPageSize());
 
         // 把分页查询参数转换为查询参数
-        QueryDTO<ProductQueryDTO> queryDTO = QueryDTO.<ProductQueryDTO>builder()
-                .query(pageQueryDTO.getQuery())
-                .sortDTOList(pageQueryDTO.getSortDTOList())
+        Query<ProductQueryDTO> query = Query.<ProductQueryDTO>builder()
+                .query(pageQuery.getQuery())
+                .sortDTOList(pageQuery.getSortDTOList())
                 .build();
 
-        List<ProductVO> productVOList = searchProduct(queryDTO);
+        List<ProductVO> productVOList = searchProduct(query);
 
         // 将结果转换为PageInfo返回
         return new PageInfo<>(productVOList);
