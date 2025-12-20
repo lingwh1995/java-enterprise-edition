@@ -49,6 +49,9 @@ public class SqlPerformanceInterceptor implements Interceptor {
     /** 慢查询阈值（毫秒）*/
     private long longQueryTime = 1000;
 
+    // 是否打印原始SQL，默认为true
+    private boolean showOriginalSql = true;
+
     /** 是否显示格式化后的SQL */
     private boolean showFormattedSql = true;
 
@@ -106,29 +109,32 @@ public class SqlPerformanceInterceptor implements Interceptor {
         executorService.submit(() -> {
             StringBuilder sqlExecutionLog = new StringBuilder();
 
-            sqlExecutionLog.append("\n====================================  SQL START  ====================================");
-            sqlExecutionLog.append("\n原始SQL     ===>   ").append(sql);
-            // 打印参数，模拟MyBatis官方日志格式
-            String parameters = formatParameters(boundSql, configuration);
-            if (!parameters.isEmpty()) {
-                sqlExecutionLog.append("\n").append(parameters);
+            sqlExecutionLog.append("\n=======================================  SQL START  =======================================");
+
+            // 是否显示原始SQL
+            if(showOriginalSql) {
+                sqlExecutionLog.append("\n原始SQL     ===>   ").append(sql);
+                // 打印参数，模拟MyBatis官方日志格式
+                String parameters = formatParameters(boundSql, configuration);
+                if (!parameters.isEmpty()) {
+                    sqlExecutionLog.append("\n").append(parameters);
+                }
             }
-            // 完整SQL日志（带参数）
+
+            String completeSql = getCompleteSql(boundSql, configuration);
+            // 是否显示格式化后的SQL
             if(showFormattedSql){
-                String completeSql = getCompleteSql(boundSql, configuration);
                 // 格式化 SQL 语句，添加换行符
                 completeSql = SqlFormatterUtils.format(completeSql);
-                sqlExecutionLog.append("\n完整SQL     ===>  \n\n").append(completeSql).append("\n");
-            }else {
-                String completeSql = getCompleteSql(boundSql, configuration);
-                sqlExecutionLog.append("\n完整SQL     ===>   ").append(completeSql);
             }
+            sqlExecutionLog.append("\n完整SQL     ===>   ").append(completeSql);
+
             sqlExecutionLog.append("\nSQL语句ID   ===>   ").append(sqlId);
             // 分析是否出现慢查询
             sqlExecutionLog.append("\n执行总用时   ===>   ").append(executionTime).append(" ms");
             sqlExecutionLog.append("\n慢查询阈值   ===>   ").append(longQueryTime).append(" ms");
             sqlExecutionLog.append("\n是否慢查询   ===>   ").append(executionTime > longQueryTime ? "是" : "否");
-            sqlExecutionLog.append("\n====================================  SQL   END  ====================================\n");
+            sqlExecutionLog.append("\n=======================================  SQL   END  =======================================\n");
 
             // 分级日志输出
             log.debug("\033[31m{}\033[0m", sqlExecutionLog.toString());
@@ -250,8 +256,7 @@ public class SqlPerformanceInterceptor implements Interceptor {
         }
         
         StringBuilder paramsBuilder = new StringBuilder();
-        paramsBuilder.append("参数列表    ===>  ");
-        paramsBuilder.append(String.format("%-20s", "参数名称"));
+        paramsBuilder.append("SQL参数     ===>   ");
 
         try {
             TypeHandlerRegistry typeHandlerRegistry = configuration.getTypeHandlerRegistry();
@@ -310,6 +315,13 @@ public class SqlPerformanceInterceptor implements Interceptor {
             this.longQueryTime = Long.parseLong(longQueryTimeUserDefined);
         }
 
+        // 获取用户自定义的是否显示原始SQL
+        String showOriginalSql = properties.getProperty("showOriginalSql");
+        if (showOriginalSql != null) {
+            this.showOriginalSql = Boolean.parseBoolean(showOriginalSql);
+        }
+
+        // 获取用户自定义的是否显示格式化SQL
         String showFormattedSql = properties.getProperty("showFormattedSql");
         if (showFormattedSql != null) {
             this.showFormattedSql = Boolean.parseBoolean(showFormattedSql);

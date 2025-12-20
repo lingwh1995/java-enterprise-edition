@@ -24,6 +24,8 @@ public class MybatisConfig {
         Properties properties = new Properties();
         // 设置慢查询阈值为500ms
         properties.setProperty("longQueryTime", "1000");
+        // 是否显示原始SQL
+        properties.setProperty("showOriginalSql", Boolean.TRUE.toString());
         // 是否显示格式化后的SQL
         properties.setProperty("showFormattedSql", Boolean.FALSE.toString());
         interceptor.setProperties(properties);
