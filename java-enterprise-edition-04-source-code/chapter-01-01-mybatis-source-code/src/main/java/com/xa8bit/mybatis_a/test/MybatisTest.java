@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @author ronin
  */
-public class Client {
+public class MybatisTest {
     public static void main(String[] args) {
         SqlSessioFactory sqlSessioFactory = new SqlSessioFactory();
         SqlSession sqlSession = sqlSessioFactory.openSession();
@@ -20,7 +20,7 @@ public class Client {
             System.out.println(employee);
         }
         System.out.println("-------------------------------------------------");
-        //获取EmployeeMapper接口的代理对象
+        // 获取EmployeeMapper接口的代理对象
         EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
         Employee employee = employeeMapper.getEmployeeById("4");
         System.out.println(employee);

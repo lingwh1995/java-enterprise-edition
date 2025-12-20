@@ -2,12 +2,15 @@ package org.bluebridge.common.interceptor;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.cache.CacheKey;
+import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.plugin.*;
+import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
+import java.sql.Statement;
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -23,6 +26,8 @@ import org.apache.ibatis.executor.Executor;
 @Intercepts({
         @Signature(type = Executor.class, method = "update",
                 args = {MappedStatement.class, Object.class}),
+        @Signature(type = StatementHandler.class, method = "parameterize",
+                args = {Statement.class}),
         @Signature(type = Executor.class, method = "query",
                 args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
         @Signature(type = Executor.class, method = "query",
@@ -37,6 +42,7 @@ public class SqlExecutionTimeInterceptor implements Interceptor {
     /** 是否显示SQL参数 */
     private boolean showParameters = true;
 
+    /** 线程池，用于异步日志记录 */
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     @Override
@@ -49,7 +55,7 @@ public class SqlExecutionTimeInterceptor implements Interceptor {
         BoundSql boundSql = mappedStatement.getBoundSql(parameterObject);
         String sqlId = mappedStatement.getId();
         String sql = boundSql.getSql().replaceAll("\\s+", " ");
-
+        final Configuration configuration = mappedStatement.getConfiguration();
         long start = System.currentTimeMillis();
         try {
             // 执行目标方法
@@ -58,6 +64,7 @@ public class SqlExecutionTimeInterceptor implements Interceptor {
             long executionTime = System.currentTimeMillis() - start;
             showSqlExecutionTime(sqlId, sql, parameterObject, executionTime);
         }
+
     }
 
     /**

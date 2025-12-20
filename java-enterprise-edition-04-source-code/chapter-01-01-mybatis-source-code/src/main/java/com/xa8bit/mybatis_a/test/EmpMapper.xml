@@ -3,6 +3,7 @@
 		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis_a.test.EmployeeMapper">
+
 	<select id="selectList" resultType="com.xa8bit.mybatis_a.test.Employee">
 		SELECT * FROM TBL_EMPLOYEE WHERE ID = #{id}
 	</select>
@@ -13,4 +14,5 @@
 	<select id="getEmployeeByLastName" resultType="com.xa8bit.mybatis_a.test.Employee">
 		SELECT ID,LAST_NAME LASTNAME,EMAIL,GENDER FROM TBL_EMPLOYEE WHERE LAST_NAME = #{lastName}
 	</select>
+
 </mapper>

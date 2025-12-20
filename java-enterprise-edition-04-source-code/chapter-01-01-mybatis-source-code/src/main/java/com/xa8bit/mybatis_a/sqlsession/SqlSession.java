@@ -33,4 +33,5 @@ public interface SqlSession {
      * @return
      */
     <T> T getMapper(Class<T> type);
+
 }

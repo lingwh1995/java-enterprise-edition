@@ -1,4 +1,4 @@
-package com.xa8bit.mybatis_a.utils;
+package com.xa8bit.mybatis_a.util;
 
 import com.xa8bit.mybatis_a.entity.Configuration;
 import com.xa8bit.mybatis_a.mapper.MapperStatement;
@@ -29,7 +29,7 @@ public class JdbcUtils {
      * @throws SQLException 如果参数有误,则抛出此异常
      */
     public static Connection getConnection(Configuration configuration) throws SQLException, ClassNotFoundException {
-        final Map<String, String> dbConfigMap = configuration.getDbConfigMap();
+        Map<String, String> dbConfigMap = configuration.getDbConfigMap();
         Class.forName(dbConfigMap.get("driver"));
         Connection connection;
         if(Objects.isNull(connection = connectionContainer.get())) {

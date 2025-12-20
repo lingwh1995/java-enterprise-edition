@@ -17,7 +17,9 @@ import java.util.List;
  * @author ronin
  */
 public class DefaultSqlSession implements SqlSession {
+
     private final Configuration config;
+
     /**
      * 注意:这个执行器不能定义为final类型
      */
@@ -54,4 +56,5 @@ public class DefaultSqlSession implements SqlSession {
         MapperProxy mapperProxy = new MapperProxy(this);
         return (T)Proxy.newProxyInstance(type.getClassLoader(),new Class[]{type},mapperProxy);
     }
+
 }

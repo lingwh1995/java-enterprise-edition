@@ -10,22 +10,35 @@ import java.util.Properties;
  * @author ronin
  */
 public class Configuration {
-    private String driverClassName;
+
+    /** 数据库连接驱动类名 */
+    private String driver;
+
+    /** 数据库连接URL */
     private String url;
+
+    /** 数据库连接用户名 */
     private String username;
+
+    /** 密码 */
     private String password;
+
+    /** 保存所有的MapperStatement对象 */
     private Map<String,MapperStatement> mapStatements = new HashMap<> ();
-    /**保存所有的配置文件*/
+
+    /** 保存所有的配置文件 */
     private final Properties properties = new Properties();
-    /**保存所有的数据库配置信息*/
+
+    /** 保存所有的数据库配置信息 */
     private final Map<String,String> dbConfigMap = new HashMap<>();
 
-    public String getDriverClassName() {
-        return driverClassName;
+    public String getDriver() {
+        return driver;
     }
 
-    public void setDriverClassName(String driverClassName) {
-        this.driverClassName = driverClassName;
+    public void setDriver(String driver) {
+        this.driver = driver;
+        dbConfigMap.put("driver",driver);
     }
 
     public String getUrl() {
@@ -34,6 +47,7 @@ public class Configuration {
 
     public void setUrl(String url) {
         this.url = url;
+        dbConfigMap.put("url",url);
     }
 
     public String getUsername() {
@@ -42,6 +56,7 @@ public class Configuration {
 
     public void setUsername(String username) {
         this.username = username;
+        dbConfigMap.put("username",username);
     }
 
     public String getPassword() {
@@ -50,6 +65,7 @@ public class Configuration {
 
     public void setPassword(String password) {
         this.password = password;
+        dbConfigMap.put("password",password);
     }
 
     public Map<String, MapperStatement> getMapStatements() {
@@ -67,4 +83,5 @@ public class Configuration {
     public Map<String,String> getDbConfigMap() {
         return dbConfigMap;
     }
+
 }

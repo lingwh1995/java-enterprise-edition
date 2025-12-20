@@ -4,15 +4,20 @@ package com.xa8bit.mybatis_a.mapper;
  * @author ronin
  */
 public class MapperStatement {
-    /**crud标签的类型 SELECT | UPDATE| DELETE | INSERT*/
+
+    /** crud标签的类型 SELECT | UPDATE| DELETE | INSERT */
     private String tagType;
-    /**Mapper.xml文件的名称空间*/
+
+    /** Mapper.xml文件的名称空间 */
     private String namespace;
-    /**crud标签的id*/
+
+    /** crud标签的id */
     private String id;
-    /**crud标签的返回值类型*/
+
+    /** crud标签的返回值类型 */
     private String resultType;
-    /**crud标签里面的sql*/
+
+    /** crud标签里面的sql */
     private String sql;
 
     public String getTagType() {
@@ -54,4 +59,5 @@ public class MapperStatement {
     public void setSql(String sql) {
         this.sql = sql;
     }
+
 }

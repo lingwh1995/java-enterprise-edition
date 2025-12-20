@@ -8,6 +8,7 @@ import java.util.List;
  * @author ronin
  */
 public interface Executor {
+
     /**
      * Executor会真正的执行查询操作
      * @param mapperStatement 封装了Mapper.xml中<select></select>等标签中保存的信息
@@ -16,4 +17,5 @@ public interface Executor {
      * @return
      */
     <E> List<E> query(MapperStatement mapperStatement, Object... params);
+
 }
