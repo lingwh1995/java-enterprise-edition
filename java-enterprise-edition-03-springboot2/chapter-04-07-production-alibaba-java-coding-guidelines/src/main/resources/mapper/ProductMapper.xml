@@ -3,7 +3,7 @@
 <mapper namespace="org.bluebridge.dao.ProductMapper">
 
     <!-- 插入商品 -->
-    <insert id="insertProduct" parameterType="org.bluebridge.entity.ProductDO" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertProduct" parameterType="productDO" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_product (name, description, price, stock, status)
         VALUES (#{name}, #{description}, #{price}, #{stock}, #{status})
     </insert>
@@ -12,13 +12,13 @@
     <insert id="batchInsertProduct">
         INSERT INTO t_product (name, description, price, stock, status)
         VALUES
-        <foreach collection="products" item="product" separator=",">
-            (#{product.name}, #{product.description}, #{product.price}, #{product.stock}, #{product.status})
+        <foreach collection="productDOList" item="productDO" separator=",">
+            (#{productDO.name}, #{productDO.description}, #{productDO.price}, #{productDO.stock}, #{productDO.status})
         </foreach>
     </insert>
 
     <!-- 根据ID删除商品(物理删除) -->
-    <delete id="deleteProductById" parameterType="java.lang.Long">
+    <delete id="deleteProductById" parameterType="long">
         DELETE FROM t_product WHERE id = #{id}
     </delete>
 
@@ -31,7 +31,7 @@
     </delete>
 
     <!-- 根据ID逻辑删除商品 -->
-    <update id="logicDeleteProductById" parameterType="java.lang.Long">
+    <update id="logicDeleteProductById" parameterType="long">
         UPDATE t_product SET is_deleted = 1 WHERE id = #{id}
     </update>
 
@@ -44,7 +44,7 @@
     </update>
 
     <!-- 根据ID更新商品信息 -->
-    <update id="updateProduct" parameterType="org.bluebridge.entity.ProductDO">
+    <update id="updateProduct" parameterType="productDO">
         UPDATE t_product
         <set>
             <if test="name != null and name != ''">
@@ -67,7 +67,7 @@
     </update>
 
     <!-- 根据ID部分更新商品信息 -->
-    <update id="patchProduct" parameterType="org.bluebridge.entity.ProductDO">
+    <update id="patchProduct" parameterType="productDO">
         UPDATE t_product
         <set>
             <if test="name != null and name != ''">
@@ -81,21 +81,21 @@
     </update>
 
     <!-- 根据ID查询商品 -->
-    <select id="getProductById" resultType="org.bluebridge.entity.ProductDO">
+    <select id="getProductById" resultType="productDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM t_product
         WHERE id = #{id} AND is_deleted = 0
     </select>
 
     <!-- 根据名称查询商品 -->
-    <select id="listProductByName" resultType="org.bluebridge.entity.ProductDO">
+    <select id="listProductByName" resultType="productDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM t_product
         WHERE name like CONCAT('%', #{name}, '%') AND is_deleted = 0
     </select>
 
     <!-- 根据条件查询商品列表 -->
-    <select id="searchProduct" resultType="org.bluebridge.entity.ProductDO">
+    <select id="searchProduct" resultType="productDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM t_product
         <where>
@@ -130,7 +130,7 @@
     </select>
 
     <!-- 查询所有未删除商品 -->
-    <select id="listProduct"  resultType="org.bluebridge.entity.ProductDO">
+    <select id="listProduct"  resultType="productDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
         FROM t_product
         WHERE is_deleted = 0

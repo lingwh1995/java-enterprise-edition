@@ -26,7 +26,7 @@ public interface ProductMapper {
      * @param productDOList 商品列表
      * @return 影响行数
      */
-    int batchInsertProduct(@Param("products") List<ProductDO> productDOList);
+    int batchInsertProduct(List<ProductDO> productDOList);
     
     /**
      * 根据ID删除商品(物理删除)
@@ -54,7 +54,7 @@ public interface ProductMapper {
      * @param ids 商品ID列表
      * @return 影响行数
      */
-    int batchLogicDeleteProduct(@Param("ids") List<Long> ids);
+    int batchLogicDeleteProduct(List<Long> ids);
     
     /**
      * 根据ID更新商品信息
