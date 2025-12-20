@@ -115,7 +115,7 @@ public class SqlPerformanceInterceptor implements Interceptor {
             sqlExecutionLog.append("\n=======================================  SQL START  =======================================");
 
             // 是否显示原始SQL
-            if(showOriginalSql) {
+            if(showOriginalSql && boundSql.getParameterObject() != null) {
                 sqlExecutionLog.append("\nSQL语句     ===>   ").append(sql);
                 // 打印参数，模拟MyBatis官方日志格式
                 String parameters = formatParameters(boundSql, configuration);
