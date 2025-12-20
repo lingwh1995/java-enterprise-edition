@@ -113,6 +113,11 @@ public class SqlPerformanceInterceptor implements Interceptor {
             sqlExecutionLog.append("\n慢查询阈值   ===>   ").append(longQueryTime).append(" ms");
             sqlExecutionLog.append("\n是否慢查询   ===>   ").append(executionTime > longQueryTime ? "是" : "否");
             sqlExecutionLog.append("\n原始SQL语句  ===>   ").append(sql);
+            // 打印参数，模拟MyBatis官方日志格式
+            String parameters = formatParameters(boundSql, configuration);
+            if (!parameters.isEmpty()) {
+                sqlExecutionLog.append("\n").append(parameters);
+            }
             // 完整SQL日志（带参数）
             if(showFormattedSql){
                 String completeSql = getCompleteSql(boundSql, configuration);
@@ -200,6 +205,91 @@ public class SqlPerformanceInterceptor implements Interceptor {
             }
         }
         return value;
+    }
+
+    /**
+     * 格式化参数对象，用于日志输出
+     *
+     * @param parameterObject 参数对象
+     * @return 格式化后的参数字符串
+     */
+    private String formatParameter(Object parameterObject) {
+        if (parameterObject == null) {
+            return "null";
+        }
+        
+        // 如果是基本类型或其包装类型，直接返回值
+        if (parameterObject instanceof String || parameterObject instanceof Number || 
+            parameterObject instanceof Boolean || parameterObject instanceof Character ||
+            parameterObject instanceof Date) {
+            return getParameterValue(parameterObject);
+        }
+        
+        // 对于其他对象，使用toString()方法并限制长度
+        String paramString = parameterObject.toString();
+        // 限制参数字符串长度，避免日志过长
+        if (paramString.length() > 1000) {
+            paramString = paramString.substring(0, 1000) + "...(truncated)";
+        }
+        return paramString;
+    }
+
+    /**
+     * 格式化参数映射，模拟MyBatis官方日志格式
+     *
+     * @param boundSql
+     * @param configuration
+     * @return 格式化后的参数映射字符串
+     */
+    private String formatParameters(BoundSql boundSql, Configuration configuration) {
+        Object parameterObject = boundSql.getParameterObject();
+        List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
+        
+        if (parameterMappings == null || parameterMappings.isEmpty()) {
+            return "";
+        }
+        
+        StringBuilder paramsBuilder = new StringBuilder();
+        paramsBuilder.append("Parameters  ===>  ");
+        
+        try {
+            TypeHandlerRegistry typeHandlerRegistry = configuration.getTypeHandlerRegistry();
+            
+            for (int i = 0; i < parameterMappings.size(); i++) {
+                ParameterMapping parameterMapping = parameterMappings.get(i);
+                if (parameterMapping.getMode() != ParameterMode.OUT) {
+                    String propertyName = parameterMapping.getProperty();
+                    Object value;
+                    
+                    if (boundSql.hasAdditionalParameter(propertyName)) {
+                        value = boundSql.getAdditionalParameter(propertyName);
+                    } else if (parameterObject == null) {
+                        value = null;
+                    } else if (typeHandlerRegistry.hasTypeHandler(parameterObject.getClass())) {
+                        value = parameterObject;
+                    } else {
+                        MetaObject metaObject = configuration.newMetaObject(parameterObject);
+                        value = metaObject.getValue(propertyName);
+                    }
+                    
+                    // 格式化参数值
+                    String formattedValue = getParameterValue(value);
+                    
+                    // 添加参数类型信息
+                    String typeName = value != null ? value.getClass().getSimpleName() : "null";
+                    
+                    if (i > 0) {
+                        paramsBuilder.append(", ");
+                    }
+                    paramsBuilder.append(formattedValue).append("(").append(typeName).append(")");
+                }
+            }
+        } catch (Exception e) {
+            log.warn("解析参数失败: {}", e.getMessage());
+            return "Parameters: unknown";
+        }
+        
+        return paramsBuilder.toString();
     }
 
     @Override
