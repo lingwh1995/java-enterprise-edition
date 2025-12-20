@@ -23,8 +23,11 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.apache.ibatis.executor.Executor;
+import org.bluebridge.common.dto.QueryDTO;
 import org.bluebridge.common.util.SqlFormatterUtils;
 
 /**
@@ -209,7 +212,7 @@ public class SqlPerformanceInterceptor implements Interceptor {
             parameterObject instanceof Date) {
             return getParameterValue(parameterObject, false);
         }
-        
+
         // 对于其他对象，使用toString()方法并限制长度
         String paramString = parameterObject.toString();
         // 限制参数字符串长度，避免日志过长
@@ -272,7 +275,7 @@ public class SqlPerformanceInterceptor implements Interceptor {
             log.warn("解析参数失败: {}", e.getMessage());
             return "Parameters: unknown";
         }
-        
+
         return paramsBuilder.toString();
     }
 
