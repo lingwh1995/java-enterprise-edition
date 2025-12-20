@@ -79,15 +79,14 @@ public class SqlPerformanceInterceptor implements Interceptor {
             // 获取SQL信息
             BoundSql boundSql = mappedStatement.getBoundSql(parameterObject);
             String sqlId = mappedStatement.getId();
-            String sql = boundSql.getSql().replaceAll("\\s+", " ");
-            final Configuration configuration = mappedStatement.getConfiguration();
+            Configuration configuration = mappedStatement.getConfiguration();
             long start = System.currentTimeMillis();
             try {
                 // 执行目标方法
                 return invocation.proceed();
             } finally {
                 long executionTime = System.currentTimeMillis() - start;
-                showSqlExecutionLog(sqlId, sql, parameterObject, boundSql, configuration, executionTime);
+                showSqlExecutionLog(sqlId, boundSql, configuration, executionTime);
             }
         } else {
             // 不是我们关心的拦截点，直接放行
@@ -98,15 +97,12 @@ public class SqlPerformanceInterceptor implements Interceptor {
     /**
      * 显示SQL执行耗时
      * @param sqlId
-     * @param sql
-     * @param params
      * @param boundSql
      * @param configuration
      * @param executionTime
      */
-    private void showSqlExecutionLog(String sqlId, String sql, Object params,
-                                      BoundSql boundSql, Configuration configuration,
-                                      long executionTime) {
+    private void showSqlExecutionLog(String sqlId, BoundSql boundSql, Configuration configuration, long executionTime) {
+        String sql = boundSql.getSql().replaceAll("\\s+", " ");
         executorService.submit(() -> {
             StringBuilder sqlExecutionLog = new StringBuilder();
 
@@ -119,12 +115,12 @@ public class SqlPerformanceInterceptor implements Interceptor {
             sqlExecutionLog.append("\n原始SQL语句  ===>   ").append(sql);
             // 完整SQL日志（带参数）
             if(showFormattedSql){
-                String completeSql = getSql(configuration, boundSql, params, sqlId);
+                String completeSql = getCompleteSql(boundSql, configuration);
                 // 格式化 SQL 语句，添加换行符
                 completeSql = SqlFormatterUtils.format(completeSql);
                 sqlExecutionLog.append("\n完整SQL语句  ===>  \n\n").append(completeSql).append("\n");
             }else {
-                String completeSql = getSql(configuration, boundSql, params, sqlId);
+                String completeSql = getCompleteSql(boundSql, configuration);
                 sqlExecutionLog.append("\n完整SQL语句  ===>   ").append(completeSql);
             }
             sqlExecutionLog.append("\n====================================  SQL   END  ====================================\n");
@@ -136,14 +132,13 @@ public class SqlPerformanceInterceptor implements Interceptor {
 
     /**
      * 获取完整的带参数SQL语句
-     * @param configuration
      * @param boundSql
-     * @param parameterObject
-     * @param sqlId
+     * @param configuration
      * @return
      */
-    private String getSql(Configuration configuration, BoundSql boundSql, Object parameterObject, String sqlId) {
+    private String getCompleteSql(BoundSql boundSql, Configuration configuration) {
         String sql = boundSql.getSql();
+        Object parameterObject = boundSql.getParameterObject();
         StringBuilder completeSql = new StringBuilder();
         try {
             // 获取参数映射列表
