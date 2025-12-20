@@ -84,13 +84,11 @@ public class SqlPerformanceInterceptor implements Interceptor {
             String sqlId = mappedStatement.getId();
             Configuration configuration = mappedStatement.getConfiguration();
             long start = System.currentTimeMillis();
-            try {
-                // 执行目标方法
-                return invocation.proceed();
-            } finally {
-                long executionTime = System.currentTimeMillis() - start;
-                showSqlExecutionLog(sqlId, boundSql, configuration, executionTime);
-            }
+            // 执行目标方法
+            Object invocationResult = invocation.proceed();
+            long executionTime = System.currentTimeMillis() - start;
+            showSqlExecutionLog(sqlId, boundSql, configuration, executionTime, invocationResult);
+            return invocationResult;
         } else {
             // 不是我们关心的拦截点，直接放行
             return invocation.proceed();
@@ -103,8 +101,10 @@ public class SqlPerformanceInterceptor implements Interceptor {
      * @param boundSql
      * @param configuration
      * @param executionTime
+     * @param invocationResult
      */
-    private void showSqlExecutionLog(String sqlId, BoundSql boundSql, Configuration configuration, long executionTime) {
+    private void showSqlExecutionLog(String sqlId, BoundSql boundSql,
+                                     Configuration configuration, long executionTime, Object invocationResult) {
         String sql = boundSql.getSql().replaceAll("\\s+", " ");
         executorService.submit(() -> {
             StringBuilder sqlExecutionLog = new StringBuilder();
@@ -113,7 +113,7 @@ public class SqlPerformanceInterceptor implements Interceptor {
 
             // 是否显示原始SQL
             if(showOriginalSql) {
-                sqlExecutionLog.append("\n原始SQL     ===>   ").append(sql);
+                sqlExecutionLog.append("\nSQL语句     ===>   ").append(sql);
                 // 打印参数，模拟MyBatis官方日志格式
                 String parameters = formatParameters(boundSql, configuration);
                 if (!parameters.isEmpty()) {
@@ -127,8 +127,11 @@ public class SqlPerformanceInterceptor implements Interceptor {
                 // 格式化 SQL 语句，添加换行符
                 completeSql = SqlFormatterUtils.format(completeSql);
             }
-            sqlExecutionLog.append("\n完整SQL     ===>   ").append(completeSql);
-
+            sqlExecutionLog.append("\nSQL语句     ===>   ").append(completeSql);
+            // 是否打印返回结果
+            if(invocationResult != null){
+                sqlExecutionLog.append("\nSQL结果     ===>   ").append(invocationResult);
+            }
             sqlExecutionLog.append("\nSQL语句ID   ===>   ").append(sqlId);
             // 分析是否出现慢查询
             sqlExecutionLog.append("\n执行总用时   ===>   ").append(executionTime).append(" ms");
@@ -177,7 +180,7 @@ public class SqlPerformanceInterceptor implements Interceptor {
                             value = metaObject.getValue(propertyName);
                         }
                         // 格式化参数值
-                        String formattedValue = getParameterValue(value);
+                        String formattedValue = getParameterValue(value, false);
                         // 替换SQL中的占位符
                         sql = sql.replaceFirst("\\?", Matcher.quoteReplacement(formattedValue));
                     }
@@ -188,29 +191,6 @@ public class SqlPerformanceInterceptor implements Interceptor {
         }
         completeSql.append(sql);
         return completeSql.toString().replaceAll("\\s+", " ");
-    }
-
-    /**
-     * 格式化参数值
-     *
-     * @param obj
-     * @return
-     */
-    private String getParameterValue(Object obj) {
-        String value;
-        if (obj instanceof String) {
-            value = obj.toString();
-        } else if (obj instanceof Date) {
-            DateFormat formatter = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, Locale.CHINA);
-            value = "'" + formatter.format(obj) + "'";
-        } else {
-            if (obj != null) {
-                value = obj.toString();
-            } else {
-                value = "null";
-            }
-        }
-        return value;
     }
 
     /**
@@ -228,7 +208,7 @@ public class SqlPerformanceInterceptor implements Interceptor {
         if (parameterObject instanceof String || parameterObject instanceof Number || 
             parameterObject instanceof Boolean || parameterObject instanceof Character ||
             parameterObject instanceof Date) {
-            return getParameterValue(parameterObject);
+            return getParameterValue(parameterObject, false);
         }
         
         // 对于其他对象，使用toString()方法并限制长度
@@ -279,7 +259,7 @@ public class SqlPerformanceInterceptor implements Interceptor {
                     }
                     
                     // 格式化参数值
-                    String formattedValue = getParameterValue(value);
+                    String formattedValue = getParameterValue(value, true);
                     
                     // 添加参数类型信息
                     String typeName = value != null ? value.getClass().getSimpleName() : "null";
@@ -296,6 +276,29 @@ public class SqlPerformanceInterceptor implements Interceptor {
         }
         
         return paramsBuilder.toString();
+    }
+
+    /**
+     * 格式化参数值
+     * @param obj 参数对象
+     * @param isInvokeInShowParameter 是否在显示参数值时调用
+     * @return
+     */
+    private String getParameterValue(Object obj, boolean isInvokeInShowParameter) {
+        String value;
+        if (obj instanceof String) {
+            value = isInvokeInShowParameter ? obj.toString() : "'" + obj.toString() + "'";
+        } else if (obj instanceof Date) {
+            DateFormat formatter = DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT, Locale.CHINA);
+            value = "'" + formatter.format(obj) + "'";
+        } else {
+            if (obj != null) {
+                value = obj.toString();
+            } else {
+                value = "null";
+            }
+        }
+        return value;
     }
 
     @Override
