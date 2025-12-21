@@ -1,7 +1,7 @@
 package org.bluebridge.dao;
 
 import org.apache.ibatis.annotations.Param;
-import org.bluebridge.common.dto.Query;
+import org.bluebridge.common.model.Query;
 import org.bluebridge.model.dto.ProductQueryDTO;
 import org.bluebridge.model.entity.ProductDO;
 

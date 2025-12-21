@@ -1,4 +1,4 @@
-package org.bluebridge.common.dto;
+package org.bluebridge.common.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

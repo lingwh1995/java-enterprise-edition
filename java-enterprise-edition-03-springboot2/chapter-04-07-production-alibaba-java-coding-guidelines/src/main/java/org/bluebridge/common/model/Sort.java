@@ -1,4 +1,4 @@
-package org.bluebridge.common.dto;
+package org.bluebridge.common.model;
 
 import lombok.Data;
 import org.bluebridge.common.enums.OrderEnum;

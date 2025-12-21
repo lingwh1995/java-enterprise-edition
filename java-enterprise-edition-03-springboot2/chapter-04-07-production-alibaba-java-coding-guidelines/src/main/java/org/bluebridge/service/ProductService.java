@@ -1,8 +1,8 @@
 package org.bluebridge.service;
 
 import com.github.pagehelper.PageInfo;
-import org.bluebridge.common.dto.PageQuery;
-import org.bluebridge.common.dto.Query;
+import org.bluebridge.common.model.PageQuery;
+import org.bluebridge.common.model.Query;
 import org.bluebridge.model.dto.ProductCreateDTO;
 import org.bluebridge.model.dto.ProductUpdateDTO;
 import org.bluebridge.model.dto.ProductPatchDTO;
