@@ -117,9 +117,9 @@
         </where>
 
         <choose>
-            <when test="sortDTOList != null and sortDTOList.size() > 0">
+            <when test="sortList != null and sortList.size() > 0">
                 ORDER BY
-                <foreach collection="sortDTOList" item="sort" separator=",">
+                <foreach collection="sortList" item="sort" separator=",">
                     ${sort.orderBy} ${sort.order}
                 </foreach>
             </when>

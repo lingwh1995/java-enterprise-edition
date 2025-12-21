@@ -1,4 +1,4 @@
-package org.bluebridge.common.exception;
+package org.bluebridge.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.common.response.Result;

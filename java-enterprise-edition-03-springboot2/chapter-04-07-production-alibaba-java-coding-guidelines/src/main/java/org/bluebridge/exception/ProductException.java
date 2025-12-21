@@ -1,4 +1,4 @@
-package org.bluebridge.common.exception;
+package org.bluebridge.exception;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
