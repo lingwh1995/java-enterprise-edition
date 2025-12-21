@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 import org.bluebridge.common.constant.SoftDeleteConstant;
 import org.bluebridge.common.converter.ProductConverter;
 import org.bluebridge.common.query.PageQuery;
-import org.bluebridge.common.query.Query;
+import org.bluebridge.common.query.SortedQuery;
 import org.bluebridge.entity.ProductDO;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
@@ -138,9 +138,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductVO> searchProduct(Query<ProductQueryDTO> query) {
+    public List<ProductVO> searchProduct(SortedQuery<ProductQueryDTO> sortedQuery) {
         // 查询商品列表
-        List<ProductDO> productDOList = productMapper.searchProduct(query);
+        List<ProductDO> productDOList = productMapper.searchProduct(sortedQuery);
 
         // 检查列表是否为空
         if(productDOList.isEmpty()){
@@ -168,7 +168,7 @@ public class ProductServiceImpl implements ProductService {
         PageHelper.startPage(pageQuery.getPageNum(), pageQuery.getPageSize());
 
         // 把分页查询参数转换为查询参数
-        Query<ProductQueryDTO> query = Query.<ProductQueryDTO>builder()
+        SortedQuery<ProductQueryDTO> query = SortedQuery.<ProductQueryDTO>builder()
                 .query(pageQuery.getQuery())
                 .sortList(pageQuery.getSortList())
                 .build();

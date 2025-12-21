@@ -2,7 +2,7 @@ package org.bluebridge.service;
 
 import com.github.pagehelper.PageInfo;
 import org.bluebridge.common.query.PageQuery;
-import org.bluebridge.common.query.Query;
+import org.bluebridge.common.query.SortedQuery;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
@@ -92,10 +92,10 @@ public interface ProductService {
 
     /**
      * 根据查询条件搜索商品
-     * @param query 查询参数传输对象
+     * @param sortedQuery 查询参数传输对象
      * @return 商品展示对象列表
      */
-    List<ProductVO> searchProduct(Query<ProductQueryDTO> query);
+    List<ProductVO> searchProduct(SortedQuery<ProductQueryDTO> sortedQuery);
 
     /**
      * 获取所有商品列表

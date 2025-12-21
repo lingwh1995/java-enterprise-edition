@@ -1,7 +1,7 @@
 package org.bluebridge.dao;
 
 import org.apache.ibatis.annotations.Param;
-import org.bluebridge.common.query.Query;
+import org.bluebridge.common.query.SortedQuery;
 import org.bluebridge.dto.ProductQueryDTO;
 import org.bluebridge.entity.ProductDO;
 
@@ -89,7 +89,7 @@ public interface ProductMapper {
      * @param query 查询条件
      * @return 商品列表
      */
-    List<ProductDO> searchProduct(Query<ProductQueryDTO> query);
+    List<ProductDO> searchProduct(SortedQuery<ProductQueryDTO> query);
     
     /**
      * 查询所有未删除商品

@@ -16,7 +16,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Query<T> {
+public class SortedQuery<T> {
 
     /** 查询参数 */
     private T query;

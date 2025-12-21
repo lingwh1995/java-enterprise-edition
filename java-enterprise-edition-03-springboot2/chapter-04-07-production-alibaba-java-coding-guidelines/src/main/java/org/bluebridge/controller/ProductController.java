@@ -1,7 +1,7 @@
 package org.bluebridge.controller;
 
 import com.github.pagehelper.PageInfo;
-import org.bluebridge.common.query.Query;
+import org.bluebridge.common.query.SortedQuery;
 import org.bluebridge.common.query.Sort;
 import org.bluebridge.common.query.PageQuery;
 import org.bluebridge.common.util.SortUtils;
@@ -223,12 +223,12 @@ public class ProductController {
                 .build();
 
         // 构建排序查询参数
-        Query<ProductQueryDTO> query = Query.<ProductQueryDTO>builder()
+        SortedQuery<ProductQueryDTO> sortedQuery = SortedQuery.<ProductQueryDTO>builder()
                 .query(productQueryDTO)
                 .sortList(sortList)
                 .build();
 
-        List<ProductVO> products = productService.searchProduct(query);
+        List<ProductVO> products = productService.searchProduct(sortedQuery);
         return Result.success(products, "查询成功");
     }
 
