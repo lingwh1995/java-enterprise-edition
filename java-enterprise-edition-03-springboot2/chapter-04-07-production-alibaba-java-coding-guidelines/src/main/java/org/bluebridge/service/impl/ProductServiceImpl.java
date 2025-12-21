@@ -4,17 +4,17 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.bluebridge.common.constant.SoftDeleteConstant;
 import org.bluebridge.common.converter.ProductConverter;
-import org.bluebridge.common.model.PageQuery;
-import org.bluebridge.common.model.Query;
-import org.bluebridge.model.entity.ProductDO;
-import org.bluebridge.model.dto.ProductCreateDTO;
-import org.bluebridge.model.dto.ProductUpdateDTO;
-import org.bluebridge.model.dto.ProductPatchDTO;
-import org.bluebridge.model.dto.ProductQueryDTO;
+import org.bluebridge.common.query.PageQuery;
+import org.bluebridge.common.query.Query;
+import org.bluebridge.entity.ProductDO;
+import org.bluebridge.dto.ProductCreateDTO;
+import org.bluebridge.dto.ProductUpdateDTO;
+import org.bluebridge.dto.ProductPatchDTO;
+import org.bluebridge.dto.ProductQueryDTO;
 import org.bluebridge.common.exception.ProductException;
 import org.bluebridge.dao.ProductMapper;
 import org.bluebridge.service.ProductService;
-import org.bluebridge.model.vo.ProductVO;
+import org.bluebridge.vo.ProductVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -170,7 +170,7 @@ public class ProductServiceImpl implements ProductService {
         // 把分页查询参数转换为查询参数
         Query<ProductQueryDTO> query = Query.<ProductQueryDTO>builder()
                 .query(pageQuery.getQuery())
-                .sortDTOList(pageQuery.getSortDTOList())
+                .sortList(pageQuery.getSortList())
                 .build();
 
         List<ProductVO> productVOList = searchProduct(query);

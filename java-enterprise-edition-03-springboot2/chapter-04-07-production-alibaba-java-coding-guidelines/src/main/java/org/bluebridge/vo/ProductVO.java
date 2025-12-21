@@ -1,4 +1,4 @@
-package org.bluebridge.model.vo;
+package org.bluebridge.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

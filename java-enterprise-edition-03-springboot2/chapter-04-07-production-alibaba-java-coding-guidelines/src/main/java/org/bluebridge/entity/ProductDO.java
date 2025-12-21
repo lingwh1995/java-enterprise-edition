@@ -1,4 +1,4 @@
-package org.bluebridge.model.entity;
+package org.bluebridge.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
