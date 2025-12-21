@@ -3,11 +3,11 @@ package org.bluebridge.service;
 import com.github.pagehelper.PageInfo;
 import org.bluebridge.common.dto.PageQuery;
 import org.bluebridge.common.dto.Query;
-import org.bluebridge.dto.ProductCreateDTO;
-import org.bluebridge.dto.ProductUpdateDTO;
-import org.bluebridge.dto.ProductPatchDTO;
-import org.bluebridge.dto.ProductQueryDTO;
-import org.bluebridge.vo.ProductVO;
+import org.bluebridge.model.dto.ProductCreateDTO;
+import org.bluebridge.model.dto.ProductUpdateDTO;
+import org.bluebridge.model.dto.ProductPatchDTO;
+import org.bluebridge.model.dto.ProductQueryDTO;
+import org.bluebridge.model.vo.ProductVO;
 
 import java.util.List;
 

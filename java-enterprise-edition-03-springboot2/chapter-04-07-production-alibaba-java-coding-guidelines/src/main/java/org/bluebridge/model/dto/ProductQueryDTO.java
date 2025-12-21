@@ -1,4 +1,4 @@
-package org.bluebridge.dto;
+package org.bluebridge.model.dto;
 
 import lombok.Builder;
 import lombok.Data;

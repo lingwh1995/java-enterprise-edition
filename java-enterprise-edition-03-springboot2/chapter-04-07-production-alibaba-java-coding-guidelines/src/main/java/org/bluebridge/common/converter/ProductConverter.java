@@ -1,11 +1,11 @@
 package org.bluebridge.common.converter;
 
-import org.bluebridge.dto.ProductPatchDTO;
-import org.bluebridge.dto.ProductCreateDTO;
-import org.bluebridge.dto.ProductQueryDTO;
-import org.bluebridge.dto.ProductUpdateDTO;
-import org.bluebridge.entity.ProductDO;
-import org.bluebridge.vo.ProductVO;
+import org.bluebridge.model.dto.ProductPatchDTO;
+import org.bluebridge.model.dto.ProductCreateDTO;
+import org.bluebridge.model.dto.ProductQueryDTO;
+import org.bluebridge.model.dto.ProductUpdateDTO;
+import org.bluebridge.model.entity.ProductDO;
+import org.bluebridge.model.vo.ProductVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

@@ -2,8 +2,8 @@ package org.bluebridge.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.bluebridge.common.dto.Query;
-import org.bluebridge.dto.ProductQueryDTO;
-import org.bluebridge.entity.ProductDO;
+import org.bluebridge.model.dto.ProductQueryDTO;
+import org.bluebridge.model.entity.ProductDO;
 
 import java.util.List;
 
