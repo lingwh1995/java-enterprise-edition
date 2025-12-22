@@ -1,7 +1,7 @@
 package org.bluebridge.dao;
 
 import org.apache.ibatis.annotations.Param;
-import org.bluebridge.common.query.SortedQuery;
+import org.bluebridge.common.query.Query;
 import org.bluebridge.dto.ProductQueryDTO;
 import org.bluebridge.entity.ProductDO;
 
@@ -47,14 +47,14 @@ public interface ProductMapper {
      * @param id 商品ID
      * @return 影响行数
      */
-    int logicDeleteProductById(Long id);
+    int softDeleteProductById(Long id);
     
     /**
      * 批量逻辑删除商品
      * @param ids 商品ID列表
      * @return 影响行数
      */
-    int batchLogicDeleteProduct(List<Long> ids);
+    int batchSoftDeleteProduct(List<Long> ids);
     
     /**
      * 根据ID更新商品信息
@@ -75,26 +75,20 @@ public interface ProductMapper {
      * @param id 商品ID
      * @return 商品实体
      */
-    ProductDO getProductById(Long id);
+    ProductDO selectProductById(Long id);
     
     /**
      * 根据名称查询商品
      * @param name 商品名称
      * @return 商品实体
      */
-    List<ProductDO> listProductByName(String name);
-
-    /**
-     * 查询所有未删除商品
-     * @return 商品列表
-     */
-    List<ProductDO> listProduct();
+    List<ProductDO> selectProductListByName(String name);
 
     /**
      * 根据条件查询商品列表并且对查询结果进行排序
      * @param query 查询条件
      * @return 商品列表
      */
-    List<ProductDO> searchProduct(SortedQuery<ProductQueryDTO> query);
+    List<ProductDO> selectProductList(Query<ProductQueryDTO> query);
 
 }

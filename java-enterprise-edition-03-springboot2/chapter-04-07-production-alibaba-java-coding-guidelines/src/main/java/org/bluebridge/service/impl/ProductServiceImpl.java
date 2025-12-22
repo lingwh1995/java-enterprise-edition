@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 import org.bluebridge.common.constant.SoftDeleteConstant;
 import org.bluebridge.converter.ProductConverter;
 import org.bluebridge.common.query.PageQuery;
-import org.bluebridge.common.query.SortedQuery;
+import org.bluebridge.common.query.Query;
 import org.bluebridge.entity.ProductDO;
 import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
@@ -69,18 +69,18 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int softDeleteProductById(Long id) {
         // 逻辑删除商品
-        return productMapper.logicDeleteProductById(id);
+        return productMapper.softDeleteProductById(id);
     }
 
     @Override
     public int batchSoftDeleteProduct(List<Long> ids) {
-        return productMapper.batchLogicDeleteProduct(ids);
+        return productMapper.batchSoftDeleteProduct(ids);
     }
 
     @Override
     public int updateProductById(Long id, ProductUpdateDTO productUpdateDTO) {
         // 1.查询用户是否存在（阿里手册：更新前先查，避免更新不存在的数据）
-        ProductDO productDO = productMapper.getProductById(id);
+        ProductDO productDO = productMapper.selectProductById(id);
         if (productDO == null) {
             throw new ProductException(404, "商品不存在或已被删除");
         }
@@ -98,7 +98,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int patchProductById(Long id, ProductPatchDTO productPatchDTO) {
         // 1.查询用户是否存在（阿里手册：更新前先查，避免更新不存在的数据）
-        ProductDO productDO = productMapper.getProductById(id);
+        ProductDO productDO = productMapper.selectProductById(id);
         if (productDO == null) {
             throw new ProductException(404, "商品不存在或已被删除");
         }
@@ -115,7 +115,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductVO getProductById(Long id) {
-        ProductDO productDO = productMapper.getProductById(id);
+        ProductDO productDO = productMapper.selectProductById(id);
         if (productDO == null) {
             throw new ProductException(404, "商品不存在");
         }
@@ -130,7 +130,7 @@ public class ProductServiceImpl implements ProductService {
     
     @Override
     public List<ProductVO> listProductByName(String name) {
-        List<ProductDO> productDOList = productMapper.listProductByName(name);
+        List<ProductDO> productDOList = productMapper.selectProductListByName(name);
         if(productDOList.isEmpty()){
             throw new ProductException(404, "商品不存在");
         }
@@ -139,7 +139,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductVO> listProduct() {
-        List<ProductDO> productDOList = productMapper.listProduct();
+        List<ProductDO> productDOList = productMapper.selectProductList(null);
 
         // 检查列表是否为空
         if(productDOList.isEmpty()){
@@ -150,9 +150,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductVO> searchProduct(SortedQuery<ProductQueryDTO> sortedQuery) {
+    public List<ProductVO> searchProduct(Query<ProductQueryDTO> query) {
         // 查询商品列表
-        List<ProductDO> productDOList = productMapper.searchProduct(sortedQuery);
+        List<ProductDO> productDOList = productMapper.selectProductList(query);
 
         // 检查列表是否为空
         if(productDOList.isEmpty()){
@@ -168,12 +168,12 @@ public class ProductServiceImpl implements ProductService {
         PageHelper.startPage(pageQuery.getPageNum(), pageQuery.getPageSize());
 
         // 把分页查询参数转换为查询参数
-        SortedQuery<ProductQueryDTO> sortedQuery = SortedQuery.<ProductQueryDTO>builder()
+        Query<ProductQueryDTO> query = Query.<ProductQueryDTO>builder()
                 .query(pageQuery.getQuery())
                 .sortList(pageQuery.getSortList())
                 .build();
 
-        List<ProductVO> productVOList = searchProduct(sortedQuery);
+        List<ProductVO> productVOList = searchProduct(query);
 
         // 将结果转换为PageInfo返回
         return new PageInfo<>(productVOList);
