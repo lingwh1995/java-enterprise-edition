@@ -84,6 +84,7 @@
         <netty.version>4.1.39.Final</netty.version>
         <protobuf.version>4.33.0</protobuf.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
+        <hutool.version>5.8.42</hutool.version>
     </properties>
 
     <dependencyManagement>
@@ -195,6 +196,11 @@
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
                 <version>${org.mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
