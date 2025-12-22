@@ -138,6 +138,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductVO> listProduct() {
+        List<ProductDO> productDOList = productMapper.listProduct();
+
+        // 检查列表是否为空
+        if(productDOList.isEmpty()){
+            throw new ProductException(404, "商品不存在");
+        }
+
+        return productConverter.toProductVOList(productDOList);
+    }
+
+    @Override
     public List<ProductVO> searchProduct(SortedQuery<ProductQueryDTO> sortedQuery) {
         // 查询商品列表
         List<ProductDO> productDOList = productMapper.searchProduct(sortedQuery);
@@ -152,28 +164,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductVO> listProduct() {
-        List<ProductDO> productDOList = productMapper.listProduct();
-
-        // 检查列表是否为空
-        if(productDOList.isEmpty()){
-            throw new ProductException(404, "商品不存在");
-        }
-
-        return productConverter.toProductVOList(productDOList);
-    }
-
-    @Override
     public PageInfo<ProductVO> pageProduct(PageQuery<ProductQueryDTO> pageQuery) {
         PageHelper.startPage(pageQuery.getPageNum(), pageQuery.getPageSize());
 
         // 把分页查询参数转换为查询参数
-        SortedQuery<ProductQueryDTO> query = SortedQuery.<ProductQueryDTO>builder()
+        SortedQuery<ProductQueryDTO> sortedQuery = SortedQuery.<ProductQueryDTO>builder()
                 .query(pageQuery.getQuery())
                 .sortList(pageQuery.getSortList())
                 .build();
 
-        List<ProductVO> productVOList = searchProduct(query);
+        List<ProductVO> productVOList = searchProduct(sortedQuery);
 
         // 将结果转换为PageInfo返回
         return new PageInfo<>(productVOList);

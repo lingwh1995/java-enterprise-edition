@@ -91,17 +91,17 @@ public interface ProductService {
     List<ProductVO> listProductByName(String name);
 
     /**
+     * 获取所有商品列表
+     * @return 商品展示对象列表
+     */
+    List<ProductVO> listProduct();
+
+    /**
      * 根据查询条件搜索商品
      * @param sortedQuery 查询参数传输对象
      * @return 商品展示对象列表
      */
     List<ProductVO> searchProduct(SortedQuery<ProductQueryDTO> sortedQuery);
-
-    /**
-     * 获取所有商品列表
-     * @return 商品展示对象列表
-     */
-    List<ProductVO> listProduct();
 
     /**
      * 分页查询商品
