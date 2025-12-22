@@ -19,11 +19,16 @@ server:
       disable-http10: true # 禁用HTTP1.0（仅保留HTTP1.1/2）
       tcp-no-delay: true   # 禁用Nagle算法（减少网络延迟）
 
+spring:
+  profiles:
+    active: pro
+
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: org.bluebridge.entity,org.bluebridge.common.model
   configuration:
     map-underscore-to-camel-case: true
+    cache-enabled: true
 
 # 配置log4j2
 logging:
