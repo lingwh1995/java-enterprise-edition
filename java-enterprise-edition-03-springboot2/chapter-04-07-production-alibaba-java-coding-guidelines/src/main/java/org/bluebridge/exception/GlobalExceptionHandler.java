@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
                 .stream()
                 .map(ConstraintViolation::getMessage)
                 .collect(Collectors.joining(", "));
-        return Result.failure(400, message);
+        return Result.error(400, message);
     }
     
     /**
@@ -41,7 +41,7 @@ public class GlobalExceptionHandler {
                 .stream()
                 .map(FieldError::getDefaultMessage)
                 .collect(Collectors.joining(", "));
-        return Result.failure(400, message);
+        return Result.error(400, message);
     }
     
     /**
@@ -53,7 +53,7 @@ public class GlobalExceptionHandler {
                 .stream()
                 .map(FieldError::getDefaultMessage)
                 .collect(Collectors.joining(", "));
-        return Result.failure(400, message);
+        return Result.error(400, message);
     }
     
     /**
@@ -61,7 +61,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(ProductException.class)
     public Result<Void> handleProductException(ProductException e) {
-        return Result.failure(e.getCode(), e.getMessage());
+        return Result.error(e.getCode(), e.getMessage());
     }
     
     /**
@@ -71,7 +71,7 @@ public class GlobalExceptionHandler {
     public Result<Void> handleException(Exception e) {
         // 添加堆栈信息
         log.error("系统内部错误: {}", e.getMessage(), e);
-        return Result.failure(500, "系统内部错误，请稍后重试!");
+        return Result.error(500, "系统内部错误，请稍后重试!");
     }
 
 }

@@ -1,8 +1,9 @@
 package org.bluebridge.common.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import org.bluebridge.common.enums.CrudTypeEnum;
 
 /**
  * @author lingwh
@@ -30,11 +31,6 @@ public class Result<T> {
     private T data;
     
     /**
-     * 请求是否成功
-     */
-    private Boolean success;
-    
-    /**
      * 成功响应结果（无数据）
      * @param message 响应消息
      * @return Result<Void>
@@ -43,7 +39,6 @@ public class Result<T> {
         Result<Void> result = new Result<>();
         result.setCode(200);
         result.setMessage(message);
-        result.setSuccess(true);
         return result;
     }
     
@@ -58,21 +53,72 @@ public class Result<T> {
         result.setCode(200);
         result.setMessage(message);
         result.setData(data);
-        result.setSuccess(true);
         return result;
     }
     
     /**
      * 失败响应结果
-     * @param code 响应码
      * @param message 响应消息
      * @return Result<Void>
      */
-    public static Result<Void> failure(Integer code, String message) {
+    public static Result<Void> error(Integer code, String message) {
         Result<Void> result = new Result<>();
         result.setCode(code);
         result.setMessage(message);
-        result.setSuccess(false);
+        return result;
+    }
+
+    /**
+     * 失败响应结果
+     * @param message 响应消息
+     * @return Result<Void>
+     */
+    public static Result<Void> error(String message) {
+        Result<Void> result = new Result<>();
+        result.setCode(500);
+        result.setMessage(message);
+        return result;
+    }
+
+    /**
+     * 成功响应结果（带数据）
+     * @param data 响应数据
+     * @return Result<T>
+     */
+    public static <T> Result<T> data(T data) {
+        Result<T> result = new Result<>();
+        result.setCode(200);
+        result.setMessage("ok");
+        result.setData(data);
+        return result;
+    }
+
+    /**
+     * crud操作结果
+     * @param rows
+     * @param crudTypeEnum
+     * @return
+     */
+    public static Result<Integer> build(Integer rows, CrudTypeEnum crudTypeEnum) {
+        Result<Integer> result = new Result<>();
+        result.setCode(200);
+        result.setData(rows);
+        result.setMessage(crudTypeEnum.getDesc() + (rows > 0 ? "成功！": "失败！"));
+        return result;
+    }
+
+    /**
+     * crud操作结果
+     * @param data
+     * @param crudTypeEnum
+     * @return
+     * @param <T>
+     */
+    public static <T> Result<T> build(T data, CrudTypeEnum crudTypeEnum) {
+        Result<T> result = new Result<>();
+        result.setCode(200);
+        result.setMessage(crudTypeEnum.getDesc() + "成功！");
+        result.setData(data);
         return result;
     }
 
