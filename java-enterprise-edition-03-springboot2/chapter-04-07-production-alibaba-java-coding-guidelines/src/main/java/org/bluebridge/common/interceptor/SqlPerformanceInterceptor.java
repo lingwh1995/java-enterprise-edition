@@ -55,6 +55,9 @@ public class SqlPerformanceInterceptor implements Interceptor {
     /** 是否显示格式化后的SQL */
     private boolean showFormattedSql = true;
 
+    /** 是否高亮显示SQL */
+    private boolean showHighlightSql = true;
+
     /** 线程池，用于异步日志记录 */
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
@@ -136,11 +139,11 @@ public class SqlPerformanceInterceptor implements Interceptor {
             // 分析是否出现慢查询
             sqlExecutionLog.append("\n执行总用时   ===>   ").append(executionTime).append(" ms");
             sqlExecutionLog.append("\n慢查询阈值   ===>   ").append(longQueryTime).append(" ms");
-            sqlExecutionLog.append("\n是否慢查询   ===>   ").append(executionTime > longQueryTime ? "是" : "否");
+            sqlExecutionLog.append("\n是否慢查询   ===>   ").append(executionTime > longQueryTime ? "\033[31m是\033[0m" : "否");
             sqlExecutionLog.append("\n============================  SQL   END  ============================\n");
 
             // 分级日志输出
-            log.debug("\033[31m{}\033[0m", sqlExecutionLog.toString());
+            log.debug(showHighlightSql ? "\033[31m{}\033[0m" : "{}", sqlExecutionLog.toString());
         });
     }
 
@@ -326,6 +329,12 @@ public class SqlPerformanceInterceptor implements Interceptor {
         String showFormattedSql = properties.getProperty("showFormattedSql");
         if (showFormattedSql != null) {
             this.showFormattedSql = Boolean.parseBoolean(showFormattedSql);
+        }
+
+        // 获取用户自定义的是否高亮SQL
+        String showHighlightSql = properties.getProperty("showHighlightSql");
+        if (showHighlightSql != null) {
+            this.showHighlightSql = Boolean.parseBoolean(showHighlightSql);
         }
     }
 

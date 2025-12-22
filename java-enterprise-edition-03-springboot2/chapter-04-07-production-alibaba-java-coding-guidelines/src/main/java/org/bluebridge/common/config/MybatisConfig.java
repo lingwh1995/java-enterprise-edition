@@ -28,6 +28,8 @@ public class MybatisConfig {
         properties.setProperty("showOriginalSql", Boolean.TRUE.toString());
         // 是否显示格式化后的SQL
         properties.setProperty("showFormattedSql", Boolean.FALSE.toString());
+        // 是否高亮显示SQL
+        properties.setProperty("showHighlightSql", Boolean.FALSE.toString());
         interceptor.setProperties(properties);
         return interceptor;
     }
