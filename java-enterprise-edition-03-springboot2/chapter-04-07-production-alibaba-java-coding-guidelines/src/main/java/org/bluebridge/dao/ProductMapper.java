@@ -83,18 +83,18 @@ public interface ProductMapper {
      * @return 商品实体
      */
     List<ProductDO> listProductByName(String name);
-    
+
+    /**
+     * 查询所有未删除商品
+     * @return 商品列表
+     */
+    List<ProductDO> listProduct();
+
     /**
      * 根据条件查询商品列表并且对查询结果进行排序
      * @param query 查询条件
      * @return 商品列表
      */
     List<ProductDO> searchProduct(SortedQuery<ProductQueryDTO> query);
-    
-    /**
-     * 查询所有未删除商品
-     * @return 商品列表
-     */
-    List<ProductDO> listProduct();
 
 }
