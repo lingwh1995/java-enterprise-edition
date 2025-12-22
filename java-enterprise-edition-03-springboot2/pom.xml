@@ -73,6 +73,7 @@
         <mybatis-plus-boot-starter.version>3.5.4</mybatis-plus-boot-starter.version>
         <mybatis-plus-generator.version>3.5.4</mybatis-plus-generator.version>
         <lombok.version>1.18.30</lombok.version>
+        <mapstruct.version>1.4.2.Final</mapstruct.version>
         <mysql.connector.version>8.0.33</mysql.connector.version>
         <ojdbc6.version>11.2.0.4</ojdbc6.version>
         <druid.version>1.1.10</druid.version>
@@ -83,7 +84,6 @@
         <swagger-bootstrap-ui.version>1.9.1</swagger-bootstrap-ui.version>
         <netty.version>4.1.39.Final</netty.version>
         <protobuf.version>4.33.0</protobuf.version>
-        <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
         <hutool.version>5.8.42</hutool.version>
     </properties>
 
@@ -120,6 +120,11 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.mysql</groupId>
@@ -191,11 +196,6 @@
                 <groupId>com.google.protobuf</groupId>
                 <artifactId>protobuf-java-util</artifactId>
                 <version>${protobuf.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mapstruct</groupId>
-                <artifactId>mapstruct</artifactId>
-                <version>${org.mapstruct.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.hutool</groupId>
