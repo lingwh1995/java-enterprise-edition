@@ -25,9 +25,15 @@ public interface ProductConverter {
      * @param createProductDTO 创建商品 DTO
      * @return ProductDO 实体
      */
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "status", constant = "1")
     ProductDO toProductDO(ProductCreateDTO createProductDTO);
+
+    /**
+     * 将 ProductCreateDTO 列表转换为 ProductDO 列表
+     * @param productCreateDTOList
+     * @return
+     */
+    List<ProductDO> toProductDOList(List<ProductCreateDTO> productCreateDTOList);
 
     /**
      * 将 QueryProductDTO 转换为 ProductDO 实体
@@ -55,15 +61,6 @@ public interface ProductConverter {
     @Mapping(target = "description", ignore = true)
     @Mapping(target = "status", constant = "1")
     ProductDO toProductDO(ProductPatchDTO patchProductDTO);
-
-    /**
-     * 将 ProductCreateDTO 列表转换为 ProductDO 列表
-     * @param productCreateDTOList
-     * @return
-     */
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "status", constant = "1")
-    List<ProductDO> toProductDOList(List<ProductCreateDTO> productCreateDTOList);
 
     /**
      * 将 ProductDO 转换为 ProductVO

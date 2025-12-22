@@ -10,10 +10,10 @@
 
     <!-- 批量插入商品 -->
     <insert id="batchInsertProduct">
-        INSERT INTO t_product (name, description, price, stock, status)
+        INSERT INTO t_product (name, description, price, stock)
         VALUES
         <foreach collection="productDOList" item="productDO" separator=",">
-            (#{productDO.name}, #{productDO.description}, #{productDO.price}, #{productDO.stock}, #{productDO.status})
+            (#{productDO.name}, #{productDO.description}, #{productDO.price}, #{productDO.stock})
         </foreach>
     </insert>
 
