@@ -1,13 +1,13 @@
 # 使用国内OpenJDK 21 JRE Alpine镜像
-FROM openjdk:21-jre-alpine
+FROM eclipse-temurin:21.0.9_10-jre-alpine-3.23
 
 # 维护者信息
 LABEL maintainer="lingwh"
 
 # 安装时区数据
-RUN apk add --no-cache tzdata && \
-    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    echo "Asia/Shanghai" > /etc/timezone
+RUN apk add --no-cache tzdata
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN echo "Asia/Shanghai" > /etc/timezone
 
 # 设置工作目录
 WORKDIR /app

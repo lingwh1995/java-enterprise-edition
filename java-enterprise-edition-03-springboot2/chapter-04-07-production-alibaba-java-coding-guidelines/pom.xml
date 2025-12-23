@@ -118,7 +118,6 @@
                 </configuration>
             </plugin>
             
-            <!-- Spring Boot Maven插件，用于构建可执行JAR和Docker镜像 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
