@@ -4,7 +4,7 @@ import io.netty.buffer.ByteBuf;
 import lombok.extern.slf4j.Slf4j;
 
 import static io.netty.buffer.ByteBufUtil.appendPrettyHexDump;
-import static sun.security.pkcs11.wrapper.Constants.NEWLINE;
+
 
 @Slf4j
 public class DebugUtil {
@@ -21,7 +21,7 @@ public class DebugUtil {
                 .append(" write index:")
                 .append(buffer.writerIndex())
                 .append(" capacity:").append(buffer.capacity())
-                .append(NEWLINE);
+                .append("\n");
         appendPrettyHexDump(buf, buffer);
         log.info(buf.toString());
     }
