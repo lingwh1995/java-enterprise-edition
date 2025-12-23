@@ -142,7 +142,9 @@ public class SqlPerformanceInterceptor implements Interceptor {
             sqlExecutionLog.append("\n是否慢查询   ===>   ").append(executionTime > longQueryTime ? "\033[31m是\033[0m" : "否");
             sqlExecutionLog.append("\n============================  SQL   END  ============================\n");
 
-            // 分级日志输出
+            // 分级日志输出（红色字体显示）
+            //log.debug(showHighlightSql ? "\033[31m{}\033[0m" : "{}", sqlExecutionLog);
+            // 分级日志输出（绿色字体显示）
             log.debug(showHighlightSql ? "\033[32m{}\033[0m" : "{}", sqlExecutionLog);
         });
     }
