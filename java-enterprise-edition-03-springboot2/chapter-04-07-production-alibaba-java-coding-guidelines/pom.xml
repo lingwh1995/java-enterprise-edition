@@ -138,7 +138,7 @@
                     </execution>
                     <execution>
                         <id>copy-jar</id>
-                        <phase>package</phase>
+                        <phase>install</phase>
                         <configuration>
                             <tasks>
                                 <!-- 这是将当前模块下的target下的jar包copy到当前模块根目录下docker目录中-->
@@ -157,18 +157,11 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <!--把当前插件repackage命令和maven的package绑定-->
-                        <id>repackage-original</id>
-                        <phase>package</phase>
                         <goals>
                             <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <fork>true</fork>
-                    <addResources>true</addResources>
-                </configuration>
             </plugin>
         </plugins>
     </build>
