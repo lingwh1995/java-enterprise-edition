@@ -110,7 +110,7 @@ public class Result<T> {
     /**
      * crud操作结果
      * @param data
-     * @param crudTypeEnum
+     * @param operationTypeEnum
      * @return
      * @param <T>
      */
