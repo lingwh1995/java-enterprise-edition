@@ -143,7 +143,7 @@ public class SqlPerformanceInterceptor implements Interceptor {
             sqlExecutionLog.append("\n============================  SQL   END  ============================\n");
 
             // 分级日志输出
-            log.debug(showHighlightSql ? "\033[31m{}\033[0m" : "{}", sqlExecutionLog.toString());
+            log.debug(showHighlightSql ? "\033[32m{}\033[0m" : "{}", sqlExecutionLog);
         });
     }
 
