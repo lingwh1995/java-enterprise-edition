@@ -98,7 +98,9 @@ public class ProductController {
      * @return 统一响应结果
      */
     @PatchMapping("/{id}/status")
-    public Result<Integer> softDeleteProductById(@PathVariable Long id) {
+    public Result<Integer> softDeleteProductById(
+            @PathVariable @NotNull(message = "商品ID不能为空")
+            @Min(value = 1, message = "商品ID必须大于0") Long id) {
         int rows = productService.softDeleteProductById(id);
         return Result.build(rows, OperationTypeEnum.SOFT_DELETE);
     }
