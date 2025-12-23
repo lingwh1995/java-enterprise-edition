@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import static io.netty.buffer.ByteBufUtil.appendPrettyHexDump;
 
+import java.lang.System;
+
 
 @Slf4j
 public class DebugUtil {
@@ -21,7 +23,7 @@ public class DebugUtil {
                 .append(" write index:")
                 .append(buffer.writerIndex())
                 .append(" capacity:").append(buffer.capacity())
-                .append("\n");
+                .append(System.lineSeparator());
         appendPrettyHexDump(buf, buffer);
         log.info(buf.toString());
     }
