@@ -19,17 +19,17 @@ public class Result<T> {
      * 响应码
      */
     private Integer code;
-    
+
     /**
      * 响应消息
      */
     private String message;
-    
+
     /**
      * 响应数据
      */
     private T data;
-    
+
     /**
      * 成功响应结果（无数据）
      * @param message 响应消息
@@ -41,7 +41,7 @@ public class Result<T> {
         result.setMessage(message);
         return result;
     }
-    
+
     /**
      * 成功响应结果（带数据）
      * @param data 响应数据
@@ -55,7 +55,7 @@ public class Result<T> {
         result.setData(data);
         return result;
     }
-    
+
     /**
      * 失败响应结果
      * @param message 响应消息
@@ -103,7 +103,12 @@ public class Result<T> {
         Result<Integer> result = new Result<>();
         result.setCode(200);
         result.setData(rows);
-        result.setMessage(operationTypeEnum.getDesc() + (rows > 0 ? "成功！": "失败！"));
+        String operationDesc = operationTypeEnum.getDesc();
+        if (rows > 0) {
+            result.setMessage(operationDesc + "成功！影响" + rows + "条记录！");
+        } else {
+            result.setMessage(operationDesc + "完成，但未影响任何记录！");
+        }
         return result;
     }
 
