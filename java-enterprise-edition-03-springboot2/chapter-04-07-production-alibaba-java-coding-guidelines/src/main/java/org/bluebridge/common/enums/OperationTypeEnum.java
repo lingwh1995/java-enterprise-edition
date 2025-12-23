@@ -5,7 +5,7 @@ package org.bluebridge.common.enums;
  * @desc
  * @date 2025/12/22 20:34
  */
-public enum CrudTypeEnum {
+public enum OperationTypeEnum {
 
     CREATE("新增"),
     BATCH_CREATE("批量新增"),
@@ -25,7 +25,7 @@ public enum CrudTypeEnum {
 
     private final String desc;
 
-    CrudTypeEnum(String desc) {
+    OperationTypeEnum(String desc) {
         this.desc = desc;
     }
 

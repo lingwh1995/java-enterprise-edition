@@ -1,7 +1,7 @@
 package org.bluebridge.controller;
 
 import com.github.pagehelper.PageInfo;
-import org.bluebridge.common.enums.CrudTypeEnum;
+import org.bluebridge.common.enums.OperationTypeEnum;
 import org.bluebridge.common.query.Query;
 import org.bluebridge.common.query.Sort;
 import org.bluebridge.common.query.PageQuery;
@@ -46,7 +46,7 @@ public class ProductController {
     @PostMapping
     public Result<Integer> createProduct(@Valid @RequestBody ProductCreateDTO productCreateDTO) {
         int rows = productService.createProduct(productCreateDTO);
-        return Result.build(rows, CrudTypeEnum.CREATE);
+        return Result.build(rows, OperationTypeEnum.CREATE);
     }
     
     /**
@@ -59,7 +59,7 @@ public class ProductController {
     @PostMapping("/batch")
     public Result<Integer> batchCreateProduct(@Valid @RequestBody List<ProductCreateDTO> productCreateDTOList) {
         int rows = productService.batchCreateProduct(productCreateDTOList);
-        return Result.build(rows, CrudTypeEnum.BATCH_CREATE);
+        return Result.build(rows, OperationTypeEnum.BATCH_CREATE);
     }
 
     /**
@@ -74,7 +74,7 @@ public class ProductController {
             @PathVariable @NotNull(message = "商品ID不能为空")
             @Min(value = 1, message = "商品ID必须大于0") Long id) {
         int rows = productService.deleteProductById(id);
-        return Result.build(rows, CrudTypeEnum.DELETE);
+        return Result.build(rows, OperationTypeEnum.DELETE);
     }
 
     /**
@@ -87,7 +87,7 @@ public class ProductController {
     @DeleteMapping("/batch")
     public Result<Integer> batchDeleteProduct(@RequestBody List<Long> ids) {
         int rows = productService.batchDeleteProduct(ids);
-        return Result.build(rows, CrudTypeEnum.BATCH_DELETE);
+        return Result.build(rows, OperationTypeEnum.BATCH_DELETE);
     }
 
     /**
@@ -100,7 +100,7 @@ public class ProductController {
     @PatchMapping("/{id}/status")
     public Result<Integer> softDeleteProductById(@PathVariable Long id) {
         int rows = productService.softDeleteProductById(id);
-        return Result.build(rows, CrudTypeEnum.SOFT_DELETE);
+        return Result.build(rows, OperationTypeEnum.SOFT_DELETE);
     }
 
     /**
@@ -113,7 +113,7 @@ public class ProductController {
     @PatchMapping("/batch/status")
     public Result<Integer> batchSoftDeleteProduct(@RequestBody List<Long> ids) {
         int rows = productService.batchSoftDeleteProduct(ids);
-        return Result.build(rows, CrudTypeEnum.BATCH_SOFT_DELETE);
+        return Result.build(rows, OperationTypeEnum.BATCH_SOFT_DELETE);
     }
 
     /**
@@ -130,7 +130,7 @@ public class ProductController {
             @Min(value = 1, message = "商品ID必须大于0") Long id, 
             @Valid @RequestBody ProductUpdateDTO productUpdateDTO) {
         int rows = productService.updateProductById(id, productUpdateDTO);
-        return Result.build(rows, CrudTypeEnum.UPDATE);
+        return Result.build(rows, OperationTypeEnum.UPDATE);
     }
     
     /**
@@ -147,7 +147,7 @@ public class ProductController {
             @Min(value = 1, message = "商品ID必须大于0") Long id, 
             @Valid @RequestBody ProductPatchDTO productPatchDTO) {
         int rows = productService.patchProductById(id, productPatchDTO);
-        return Result.build(rows, CrudTypeEnum.PATCH);
+        return Result.build(rows, OperationTypeEnum.PATCH);
     }
     
     /**
@@ -162,7 +162,7 @@ public class ProductController {
             @PathVariable @NotNull(message = "商品ID不能为空") 
             @Min(value = 1, message = "商品ID必须大于0") Long id) {
         ProductVO productVO = productService.getProductById(id);
-        return Result.build(productVO, CrudTypeEnum.QUERY_ONE);
+        return Result.build(productVO, OperationTypeEnum.QUERY_ONE);
     }
     
     /**
@@ -176,7 +176,7 @@ public class ProductController {
     public Result<List<ProductVO>> listProductByName(
             @RequestParam @NotBlank(message = "商品名称不能为空") String name) {
         List<ProductVO> productVOList = productService.listProductByName(name);
-        return Result.build(productVOList, CrudTypeEnum.QUERY_LIST_CONDITION);
+        return Result.build(productVOList, OperationTypeEnum.QUERY_LIST_CONDITION);
     }
     
     /**
@@ -188,7 +188,7 @@ public class ProductController {
     @GetMapping
     public Result<List<ProductVO>> listProduct() {
         List<ProductVO> productVOList = productService.listProduct();
-        return Result.build(productVOList, CrudTypeEnum.QUERY_LIST);
+        return Result.build(productVOList, OperationTypeEnum.QUERY_LIST);
     }
     
     /**
@@ -230,7 +230,7 @@ public class ProductController {
                 .build();
 
         List<ProductVO> productVOList = productService.searchProduct(query);
-        return Result.build(productVOList, CrudTypeEnum.QUERY_LIST);
+        return Result.build(productVOList, OperationTypeEnum.QUERY_LIST);
     }
 
     /**
@@ -278,7 +278,7 @@ public class ProductController {
                 .build();
 
         PageInfo<ProductVO> pageInfo = productService.pageProduct(pageQuery);
-        return Result.build(pageInfo, CrudTypeEnum.QUERY_PAGE);
+        return Result.build(pageInfo, OperationTypeEnum.QUERY_PAGE);
     }
 
     /**
@@ -312,7 +312,7 @@ public class ProductController {
                 .build();
 
         PageInfo<ProductVO> pageInfo = productService.pageProduct(pageQuery);
-        return Result.build(pageInfo, CrudTypeEnum.QUERY_PAGE);
+        return Result.build(pageInfo, OperationTypeEnum.QUERY_PAGE);
     }
 
 }

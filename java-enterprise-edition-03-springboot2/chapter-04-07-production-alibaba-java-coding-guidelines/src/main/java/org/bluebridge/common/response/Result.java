@@ -3,7 +3,7 @@ package org.bluebridge.common.response;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bluebridge.common.enums.CrudTypeEnum;
+import org.bluebridge.common.enums.OperationTypeEnum;
 
 /**
  * @author lingwh
@@ -96,14 +96,14 @@ public class Result<T> {
     /**
      * crud操作结果
      * @param rows
-     * @param crudTypeEnum
+     * @param operationTypeEnum
      * @return
      */
-    public static Result<Integer> build(Integer rows, CrudTypeEnum crudTypeEnum) {
+    public static Result<Integer> build(Integer rows, OperationTypeEnum operationTypeEnum) {
         Result<Integer> result = new Result<>();
         result.setCode(200);
         result.setData(rows);
-        result.setMessage(crudTypeEnum.getDesc() + (rows > 0 ? "成功！": "失败！"));
+        result.setMessage(operationTypeEnum.getDesc() + (rows > 0 ? "成功！": "失败！"));
         return result;
     }
 
@@ -114,10 +114,10 @@ public class Result<T> {
      * @return
      * @param <T>
      */
-    public static <T> Result<T> build(T data, CrudTypeEnum crudTypeEnum) {
+    public static <T> Result<T> build(T data, OperationTypeEnum operationTypeEnum) {
         Result<T> result = new Result<>();
         result.setCode(200);
-        result.setMessage(crudTypeEnum.getDesc() + "成功！");
+        result.setMessage(operationTypeEnum.getDesc() + "成功！");
         result.setData(data);
         return result;
     }
