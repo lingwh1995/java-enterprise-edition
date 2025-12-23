@@ -1,7 +1,8 @@
-package org.bluebridge.exception;
+package org.bluebridge.common.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.common.response.Result;
+import org.bluebridge.exception.ProductException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
