@@ -94,7 +94,7 @@ public class Result<T> {
     }
 
     /**
-     * crud操作结果
+     * 构造操作结果
      * @param rows
      * @param operationTypeEnum
      * @return
@@ -108,7 +108,7 @@ public class Result<T> {
     }
 
     /**
-     * crud操作结果
+     * 构造操作结果
      * @param data
      * @param operationTypeEnum
      * @return
