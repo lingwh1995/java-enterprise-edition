@@ -16,8 +16,7 @@ WORKDIR /app
 RUN apk add --no-cache fontconfig ttf-dejavu
 
 # 复制打包好的JAR文件到容器中
-# 构建时需要先在项目目录执行: mvn clean package
-COPY ../target/chapter-04-07-production-alibaba-java-coding-guidelines-*.jar app.jar
+COPY application.jar app.jar
 
 # 暴露应用端口（通常Spring Boot默认是8080）
 EXPOSE 8080
