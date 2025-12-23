@@ -6,7 +6,7 @@
             %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
         </Property>
         <!-- 日志文件路径 -->
-        <Property name="LOG_HOME">./logs</Property>
+        <Property name="LOG_HOME">./mnt/logs</Property>
     </Properties>
 
     <Appenders>
