@@ -6,3 +6,8 @@
 ## 4. 服务器基于Undertow而非tomcat
 ## 5. 日志框架基于异步log4j2而非logback或同步log4j2
 ## 6. 数据库连接池基于HikariCP而非allibaba druid或其他
+
+## 使用docker构建
+    1.mvn clean package
+    2.cd docker
+    3.docker build -t alibaba-java-coding-guidelines:latest .
