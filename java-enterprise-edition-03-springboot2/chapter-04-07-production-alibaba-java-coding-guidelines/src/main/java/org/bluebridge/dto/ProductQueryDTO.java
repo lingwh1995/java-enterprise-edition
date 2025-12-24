@@ -12,10 +12,8 @@ import java.math.BigDecimal;
  * @desc 查询商品DTO
  * @date 2025/12/13 10:30
  */
-@Builder
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder
 public class ProductQueryDTO {
 
     /** 商品名称（模糊匹配） */
