@@ -2,6 +2,7 @@ package org.bluebridge.common.interceptor;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.cache.CacheKey;
+import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -13,6 +14,9 @@ import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.TypeHandlerRegistry;
+import org.bluebridge.common.query.Query;
+import org.bluebridge.common.query.Sort;
+import org.bluebridge.common.util.SqlFormatterUtils;
 
 import java.sql.Statement;
 import java.text.DateFormat;
@@ -23,9 +27,6 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
-
-import org.apache.ibatis.executor.Executor;
-import org.bluebridge.common.util.SqlFormatterUtils;
 
 /**
  * @author lingwh
@@ -233,49 +234,73 @@ public class SqlPerformanceInterceptor implements Interceptor {
     private String formatParameters(BoundSql boundSql, Configuration configuration) {
         Object parameterObject = boundSql.getParameterObject();
         List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
-        
-        if (parameterMappings == null || parameterMappings.isEmpty()) {
-            return "";
-        }
-        
+
         StringBuilder paramsBuilder = new StringBuilder();
         paramsBuilder.append("SQL参数     ===>   ");
 
-        try {
-            TypeHandlerRegistry typeHandlerRegistry = configuration.getTypeHandlerRegistry();
-            
-            for (int i = 0; i < parameterMappings.size(); i++) {
-                ParameterMapping parameterMapping = parameterMappings.get(i);
-                if (parameterMapping.getMode() != ParameterMode.OUT) {
-                    String propertyName = parameterMapping.getProperty();
-                    Object value;
-                    
-                    if (boundSql.hasAdditionalParameter(propertyName)) {
-                        value = boundSql.getAdditionalParameter(propertyName);
-                    } else if (parameterObject == null) {
-                        value = null;
-                    } else if (typeHandlerRegistry.hasTypeHandler(parameterObject.getClass())) {
-                        value = parameterObject;
-                    } else {
-                        MetaObject metaObject = configuration.newMetaObject(parameterObject);
-                        value = metaObject.getValue(propertyName);
+        // 打印参数
+        if (!parameterMappings.isEmpty()) {
+            try {
+                TypeHandlerRegistry typeHandlerRegistry = configuration.getTypeHandlerRegistry();
+
+                for (int i = 0; i < parameterMappings.size(); i++) {
+                    ParameterMapping parameterMapping = parameterMappings.get(i);
+                    if (parameterMapping.getMode() != ParameterMode.OUT) {
+                        String propertyName = parameterMapping.getProperty();
+                        Object value;
+
+                        if (boundSql.hasAdditionalParameter(propertyName)) {
+                            value = boundSql.getAdditionalParameter(propertyName);
+                        } else if (parameterObject == null) {
+                            value = null;
+                        } else if (typeHandlerRegistry.hasTypeHandler(parameterObject.getClass())) {
+                            value = parameterObject;
+                        } else {
+                            MetaObject metaObject = configuration.newMetaObject(parameterObject);
+                            value = metaObject.getValue(propertyName);
+                        }
+
+                        // 格式化参数值
+                        String formattedValue = getParameterValue(value, true);
+
+                        // 添加参数类型信息
+                        String typeName = value != null ? value.getClass().getSimpleName() : "null";
+
+                        if (i > 0) {
+                            paramsBuilder.append(", ");
+                        }
+                        paramsBuilder.append(formattedValue).append("(").append(typeName).append(")");
                     }
-                    
-                    // 格式化参数值
-                    String formattedValue = getParameterValue(value, true);
-                    
-                    // 添加参数类型信息
-                    String typeName = value != null ? value.getClass().getSimpleName() : "null";
-                    
-                    if (i > 0) {
-                        paramsBuilder.append(", ");
-                    }
-                    paramsBuilder.append(formattedValue).append("(").append(typeName).append(")");
                 }
+
+            } catch (Exception e) {
+                log.warn("解析参数失败: {}", e.getMessage());
+                return "Parameters: unknown";
             }
-        } catch (Exception e) {
-            log.warn("解析参数失败: {}", e.getMessage());
-            return "Parameters: unknown";
+        }
+
+        // 打印排序条件
+        if(parameterObject != null && parameterObject instanceof Query<?>) {
+            if(!parameterMappings.isEmpty()) {
+                paramsBuilder.append(" | ");
+            }
+            try {
+                List<Sort> sortList = ((Query) parameterObject).getSortList();
+
+                if (! sortList.isEmpty()) {
+                    paramsBuilder.append("排序条件: [");
+                    for (int i = 0; i < sortList.size(); i++) {
+                        Sort sort = sortList.get(i);
+                        if (i > 0) {
+                            paramsBuilder.append(", ");
+                        }
+                        paramsBuilder.append("'").append(sort.getOrderBy()).append("' ").append(sort.getOrder());
+                    }
+                    paramsBuilder.append("]");
+                }
+            } catch (Exception e) {
+                log.warn("解析排序条件失败: {}", e.getMessage());
+            }
         }
 
         return paramsBuilder.toString();
