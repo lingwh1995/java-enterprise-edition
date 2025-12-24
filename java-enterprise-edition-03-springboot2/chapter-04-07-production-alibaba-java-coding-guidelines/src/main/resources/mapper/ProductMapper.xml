@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.bluebridge.dao.ProductMapper">
+<mapper namespace="org.bluebridge.mapper.ProductMapper">
 
     <!-- 插入商品 -->
     <insert id="insertProduct" parameterType="productDO" useGeneratedKeys="true" keyProperty="id">

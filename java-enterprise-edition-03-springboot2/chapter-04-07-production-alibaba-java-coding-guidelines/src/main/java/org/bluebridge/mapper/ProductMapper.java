@@ -1,4 +1,4 @@
-package org.bluebridge.dao;
+package org.bluebridge.mapper;
 
 import org.apache.ibatis.annotations.Param;
 import org.bluebridge.common.query.Query;
