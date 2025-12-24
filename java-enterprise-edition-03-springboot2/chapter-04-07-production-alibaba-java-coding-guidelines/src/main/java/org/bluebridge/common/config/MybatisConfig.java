@@ -29,7 +29,7 @@ public class MybatisConfig {
         // 是否显示格式化后的SQL
         properties.setProperty("showFormattedSql", Boolean.FALSE.toString());
         // 是否高亮显示SQL
-        properties.setProperty("showHighlightSql", Boolean.FALSE.toString());
+        properties.setProperty("showHighlightSql", Boolean.TRUE.toString());
         interceptor.setProperties(properties);
         return interceptor;
     }
