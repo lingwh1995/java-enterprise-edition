@@ -102,7 +102,7 @@
             is_deleted = 0
             <if test="conditions != null">
                 <if test="conditions.name != null and conditions.name != ''">
-                    AND name LIKE CONCAT('%', #{conditions}, '%')
+                    AND name LIKE CONCAT('%', #{conditions.name}, '%')
                 </if>
                 <if test="conditions.minPrice != null">
                     AND price >= #{conditions.minPrice}

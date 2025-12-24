@@ -14,6 +14,8 @@ import java.math.BigDecimal;
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductQueryDTO {
 
     /** 商品名称（模糊匹配） */
