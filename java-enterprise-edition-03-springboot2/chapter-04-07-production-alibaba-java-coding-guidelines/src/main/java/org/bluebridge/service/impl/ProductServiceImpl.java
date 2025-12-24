@@ -2,7 +2,6 @@ package org.bluebridge.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.bluebridge.common.constant.SoftDeleteConstant;
 import org.bluebridge.common.enums.ResponseStatusEnum;
 import org.bluebridge.common.exception.BusinessException;
 import org.bluebridge.converter.ProductConverter;
@@ -47,14 +46,11 @@ public class ProductServiceImpl implements ProductService {
     
     @Override
     public int batchCreateProduct(List<ProductCreateDTO> productCreateDTOList) {
-        List<ProductDO> productDOList = productConverter.toProductDOList(productCreateDTOList);
-
-        // 检查列表是否为空
-        if(productDOList.isEmpty()){
-            throw new ProductException(400, "商品列表不能为空");
+        if (productCreateDTOList.isEmpty()) {
+            throw new BusinessException(ResponseStatusEnum.BAD_REQUEST, "商品列表不能为空");
         }
 
-        // 批量保存到数据库
+        List<ProductDO> productDOList = productConverter.toProductDOList(productCreateDTOList);
         return productMapper.batchInsertProduct(productDOList);
     }
 
@@ -119,47 +115,25 @@ public class ProductServiceImpl implements ProductService {
         if (productDO == null) {
             throw new BusinessException(ResponseStatusEnum.NOT_FOUND, "商品不存在或已删除，ID: " + id);
         }
-        
-        // 检查是否已被逻辑删除
-        if (productDO.getIsDeleted() == SoftDeleteConstant.DELETED_VALUE) {
-            throw new ProductException(404, "商品不存在");
-        }
-        
+
         return productConverter.toProductVO(productDO);
     }
     
     @Override
     public List<ProductVO> listProductByName(String name) {
         List<ProductDO> productDOList = productMapper.selectProductListByName(name);
-        if(productDOList.isEmpty()){
-            throw new ProductException(404, "商品不存在");
-        }
         return productConverter.toProductVOList(productDOList);
     }
 
     @Override
     public List<ProductVO> listProduct() {
         List<ProductDO> productDOList = productMapper.selectProductList(null);
-
-        // 检查列表是否为空
-        if(productDOList.isEmpty()){
-            throw new ProductException(404, "商品不存在");
-        }
-
         return productConverter.toProductVOList(productDOList);
     }
 
     @Override
     public List<ProductVO> searchProduct(Query<ProductQueryDTO> query) {
-        // 查询商品列表
         List<ProductDO> productDOList = productMapper.selectProductList(query);
-
-        // 检查列表是否为空
-        if(productDOList.isEmpty()){
-            throw new ProductException(404, "商品不存在");
-        }
-
-        // 转换为VO列表返回
         return productConverter.toProductVOList(productDOList);
     }
 
