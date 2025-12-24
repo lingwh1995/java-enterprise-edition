@@ -142,7 +142,7 @@ public class ProductServiceImpl implements ProductService {
 
         // 把分页查询参数转换为查询参数
         Query<ProductQueryDTO> query = Query.<ProductQueryDTO>builder()
-                .query(pageQuery.getQuery())
+                .conditions(pageQuery.getConditions())
                 .sortList(pageQuery.getSortList())
                 .build();
 

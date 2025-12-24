@@ -19,7 +19,7 @@ import java.util.List;
 public class Query<T> {
 
     /** 查询参数 */
-    private T query;
+    private T conditions;
 
     /** 排序条件 */
     private List<Sort> sortList;

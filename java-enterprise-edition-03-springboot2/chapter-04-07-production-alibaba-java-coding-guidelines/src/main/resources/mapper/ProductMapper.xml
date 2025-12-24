@@ -100,18 +100,18 @@
         FROM t_product
         <where>
             is_deleted = 0
-            <if test="query != null">
-                <if test="query.name != null and query.name != ''">
-                    AND name LIKE CONCAT('%', #{query.name}, '%')
+            <if test="conditions != null">
+                <if test="conditions.name != null and conditions.name != ''">
+                    AND name LIKE CONCAT('%', #{conditions}, '%')
                 </if>
-                <if test="query.minPrice != null">
-                    AND price >= #{query.minPrice}
+                <if test="conditions.minPrice != null">
+                    AND price >= #{conditions.minPrice}
                 </if>
-                <if test="query.maxPrice != null">
-                    AND price &lt;= #{query.maxPrice}
+                <if test="conditions.maxPrice != null">
+                    AND price &lt;= #{conditions.maxPrice}
                 </if>
-                <if test="query.status != null">
-                    AND status = #{query.status}
+                <if test="conditions.status != null">
+                    AND status = #{conditions.status}
                 </if>
             </if>
         </where>
