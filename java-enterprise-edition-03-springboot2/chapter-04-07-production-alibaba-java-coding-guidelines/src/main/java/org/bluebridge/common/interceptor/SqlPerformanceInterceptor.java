@@ -14,7 +14,6 @@ import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.TypeHandlerRegistry;
-import org.bluebridge.common.query.Query;
 import org.bluebridge.common.query.Sort;
 import org.bluebridge.common.util.SqlFormatterUtils;
 
@@ -36,8 +35,6 @@ import java.util.regex.Matcher;
                 args = {MappedStatement.class, Object.class}),
         @Signature(type = StatementHandler.class, method = "parameterize",
                 args = {Statement.class}),
-        @Signature(type = Executor.class, method = "query",
-                args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
         @Signature(type = Executor.class, method = "query",
                 args = {MappedStatement.class, Object.class, RowBounds.class,
                         ResultHandler.class, CacheKey.class, BoundSql.class})
