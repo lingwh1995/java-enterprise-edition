@@ -1,72 +1,87 @@
 package org.bluebridge.common.handler;
 
+import cn.dev33.satoken.exception.NotLoginException;
+import cn.dev33.satoken.exception.SaTokenException;
+import cn.dev33.satoken.util.SaResult;
 import lombok.extern.slf4j.Slf4j;
+import org.bluebridge.common.enums.ResponseStatusEnum;
+import org.bluebridge.common.exception.BusinessException;
 import org.bluebridge.common.response.Result;
-import org.bluebridge.exception.ProductException;
-import org.springframework.validation.BindException;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import java.util.stream.Collectors;
+import javax.naming.NoPermissionException;
 
 /**
- * 全局异常处理器
+ * @author lingwh
+ * @desc 全局异常处理类
+ * @date 2025/11/22 17:35
  */
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    
-    /**
-     * 处理请求参数校验异常（适用于@RequestParam/@PathVariable参数校验）
-     */
-    @ExceptionHandler(ConstraintViolationException.class)
-    public Result<Void> handleConstraintViolationException(ConstraintViolationException e) {
-        String message = e.getConstraintViolations()
-                .stream()
-                .map(ConstraintViolation::getMessage)
-                .collect(Collectors.joining(", "));
-        return Result.error(400, message);
+
+    @ExceptionHandler({
+            NotLoginException.class,
+            NoPermissionException.class,
+            SaTokenException.class
+    })
+    public SaResult handleSaTokenException(Exception e) {
+        // 日志记录异常信息
+        log.error("Sa-Token 异常：{}", e.getMessage());
+
+        ResponseStatusEnum responseStatus = null;
+        if (e instanceof NotLoginException) {
+            NotLoginException nle = (NotLoginException) e;
+            // 使用 switch 语句判断具体的未登录原因
+            switch (nle.getType()) {
+                case NotLoginException.NOT_TOKEN:
+                    responseStatus = ResponseStatusEnum.TOKEN_MISSING;
+                    break;
+                case NotLoginException.INVALID_TOKEN:
+                    responseStatus = ResponseStatusEnum.TOKEN_INVALID;
+                    break;
+                case NotLoginException.TOKEN_TIMEOUT:
+                    responseStatus = ResponseStatusEnum.TOKEN_EXPIRED;
+                    break;
+                case NotLoginException.BE_REPLACED:
+                    responseStatus = ResponseStatusEnum.TOKEN_REPLACED;
+                    break;
+                case NotLoginException.KICK_OUT:
+                    responseStatus = ResponseStatusEnum.TOKEN_KICK_OUT;
+                    break;
+                default:
+                    // 涵盖其他可能的类型，如 NotLoginException.TOKEN_FREEZE
+                    responseStatus = ResponseStatusEnum.UNAUTHENTICATED;
+                    break;
+            }
+        } else if (e instanceof NoPermissionException) {
+            responseStatus = ResponseStatusEnum.FORBIDDEN;
+        } else {
+            // 对于其他所有 Sa-Token 异常（如 NoRoleException），统一视为未授权
+            responseStatus = ResponseStatusEnum.UNAUTHENTICATED;
+        }
+
+        return SaResult.error(responseStatus.getMessage())
+                .setCode(responseStatus.getCode());
     }
-    
+
     /**
-     * 处理请求体参数校验异常（适用于@RequestBody参数校验）
+     * 全局异常处理，捕获所有未被其他异常处理程序捕获的异常
+     * @param e
+     * @return
      */
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Result<Void> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        String message = e.getBindingResult()
-                .getFieldErrors()
-                .stream()
-                .map(FieldError::getDefaultMessage)
-                .collect(Collectors.joining(", "));
-        return Result.error(400, message);
-    }
-    
-    /**
-     * 处理绑定异常
-     */
-    @ExceptionHandler(BindException.class)
-    public Result<Void> handleBindException(BindException e) {
-        String message = e.getFieldErrors()
-                .stream()
-                .map(FieldError::getDefaultMessage)
-                .collect(Collectors.joining(", "));
-        return Result.error(400, message);
-    }
-    
-    /**
-     * 处理自定义业务异常
-     */
-    @ExceptionHandler(ProductException.class)
-    public Result<Void> handleProductException(ProductException e) {
+    @ExceptionHandler(BusinessException.class)
+    public Result<Void> handleBusinessException(BusinessException e) {
+        // 添加堆栈信息
+        log.error("业务异常: {}", e.getMessage(), e);
         return Result.error(e.getCode(), e.getMessage());
     }
-    
+
     /**
-     * 处理系统异常
+     * 全局异常处理，捕获所有未被其他异常处理程序捕获的异常
+     * @param e
+     * @return
      */
     @ExceptionHandler(Exception.class)
     public Result<Void> handleException(Exception e) {

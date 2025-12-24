@@ -3,6 +3,8 @@ package org.bluebridge.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.bluebridge.common.constant.SoftDeleteConstant;
+import org.bluebridge.common.enums.ResponseStatusEnum;
+import org.bluebridge.common.exception.BusinessException;
 import org.bluebridge.converter.ProductConverter;
 import org.bluebridge.common.query.PageQuery;
 import org.bluebridge.common.query.Query;
@@ -11,7 +13,7 @@ import org.bluebridge.dto.ProductCreateDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductQueryDTO;
-import org.bluebridge.exception.ProductException;
+import org.bluebridge.common.exception.ProductException;
 import org.bluebridge.dao.ProductMapper;
 import org.bluebridge.service.ProductService;
 import org.bluebridge.vo.ProductVO;
@@ -82,16 +84,14 @@ public class ProductServiceImpl implements ProductService {
         // 1.查询用户是否存在（阿里手册：更新前先查，避免更新不存在的数据）
         ProductDO productDO = productMapper.selectProductById(id);
         if (productDO == null) {
-            throw new ProductException(404, "商品不存在或已被删除");
+            throw new BusinessException(ResponseStatusEnum.NOT_FOUND, "商品不存在或已删除，ID: " + id);
         }
 
         // 2.转换DTO为实体（阿里手册：避免直接操作DTO）
         productDO = productConverter.toProductDO(productUpdateDTO);
-
-        // 3.设置商品ID
         productDO.setId(id);
 
-        // 4.更新商品
+        // 3.更新商品
         return productMapper.updateProduct(productDO);
     }
 
@@ -100,7 +100,7 @@ public class ProductServiceImpl implements ProductService {
         // 1.查询用户是否存在（阿里手册：更新前先查，避免更新不存在的数据）
         ProductDO productDO = productMapper.selectProductById(id);
         if (productDO == null) {
-            throw new ProductException(404, "商品不存在或已被删除");
+            throw new BusinessException(ResponseStatusEnum.NOT_FOUND, "商品不存在或已删除，ID: " + id);
         }
 
         // 2.转为实体
@@ -117,7 +117,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductVO getProductById(Long id) {
         ProductDO productDO = productMapper.selectProductById(id);
         if (productDO == null) {
-            throw new ProductException(404, "商品不存在");
+            throw new BusinessException(ResponseStatusEnum.NOT_FOUND, "商品不存在或已删除，ID: " + id);
         }
         
         // 检查是否已被逻辑删除
