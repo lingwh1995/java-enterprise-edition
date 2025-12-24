@@ -1,5 +1,6 @@
 package org.bluebridge.controller;
 
+import cn.dev33.satoken.annotation.SaIgnore;
 import com.github.pagehelper.PageInfo;
 import org.bluebridge.common.enums.OperationTypeEnum;
 import org.bluebridge.common.query.Query;
