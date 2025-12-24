@@ -20,10 +20,7 @@ import org.bluebridge.common.util.SqlFormatterUtils;
 
 import java.sql.Statement;
 import java.text.DateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Properties;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
@@ -280,12 +277,12 @@ public class SqlPerformanceInterceptor implements Interceptor {
         }
 
         // 打印排序条件
-        if(parameterObject != null && parameterObject instanceof Query<?>) {
+        if(parameterObject != null && parameterObject instanceof HashMap<?,?>) {
             if(!parameterMappings.isEmpty()) {
                 paramsBuilder.append(" | ");
             }
             try {
-                List<Sort> sortList = ((Query) parameterObject).getSortList();
+                List<Sort> sortList = (List<Sort>) ((HashMap) parameterObject).get("sortList");
 
                 if (! sortList.isEmpty()) {
                     paramsBuilder.append("排序条件: [");
