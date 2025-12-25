@@ -1,8 +1,8 @@
 package org.bluebridge.converter;
 
+import com.github.pagehelper.PageInfo;
 import org.bluebridge.dto.ProductPatchDTO;
 import org.bluebridge.dto.ProductCreateDTO;
-import org.bluebridge.dto.ProductQueryDTO;
 import org.bluebridge.dto.ProductUpdateDTO;
 import org.bluebridge.entity.ProductDO;
 import org.bluebridge.vo.ProductVO;
@@ -67,4 +67,10 @@ public interface ProductConverter {
      */
     List<ProductVO> toProductVOList(List<ProductDO> productDOList);
 
+    /**
+     * 将 PageInfo<ProductDO> 转换为 PageInfo<ProductVO>
+     * @param productDOPageInfo
+     * @return
+     */
+    PageInfo<ProductVO> toProductVOPageInfo(PageInfo<ProductDO> productDOPageInfo);
 }

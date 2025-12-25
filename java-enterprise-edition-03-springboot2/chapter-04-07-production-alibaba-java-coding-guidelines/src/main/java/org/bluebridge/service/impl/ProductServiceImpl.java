@@ -146,10 +146,10 @@ public class ProductServiceImpl implements ProductService {
                 .sortList(pageQuery.getSortList())
                 .build();
 
-        List<ProductVO> productVOList = searchProduct(query);
+        List<ProductDO> productDOList = productMapper.selectProductList(query);
+        PageInfo<ProductDO> dataSourceDOPageInfo = new PageInfo<>(productDOList);
 
-        // 将结果转换为PageInfo返回
-        return new PageInfo<>(productVOList);
+        return productConverter.toProductVOPageInfo(dataSourceDOPageInfo);
     }
 
 }
