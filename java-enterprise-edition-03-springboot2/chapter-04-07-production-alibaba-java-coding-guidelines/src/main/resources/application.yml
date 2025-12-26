@@ -1,5 +1,7 @@
 server:
   port: 8080
+  servlet:
+    context-path: /product
   undertow:
     # 1. 线程调优（核心！匹配CPU核心数）
     io-threads: ${spring.processors:4}          # I/O线程数 = CPU核心数（如8核则设8）
@@ -26,9 +28,11 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: org.bluebridge.entity,org.bluebridge.common.query
+  type-handlers-package: com.xa8bit.common.typehandler
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: true
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
 
 # 配置log4j2
 logging:
