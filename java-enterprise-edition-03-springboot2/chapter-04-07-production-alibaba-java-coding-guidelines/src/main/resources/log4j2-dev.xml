@@ -63,6 +63,7 @@
     <Loggers>
         <!-- Spring框架日志级别 -->
         <Logger name="org.springframework" level="INFO"/>
+
         <!-- MyBatis框架日志级别 -->
         <Logger name="org.mybatis" level="DEBUG"/>
         <!-- SQL日志级别 -->
