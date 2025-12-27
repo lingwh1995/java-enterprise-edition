@@ -23,20 +23,18 @@ server:
 
 spring:
   profiles:
-    active: dev
+    active: pro
+
+logging:
+  config: classpath:log4j2-${spring.profiles.active}.xml
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: org.bluebridge.entity,org.bluebridge.common.query
-  type-handlers-package: com.xa8bit.common.typehandler
+  type-handlers-package: org.bluebridge.common.typehandler
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: true
-    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
-
-# 配置log4j2
-logging:
-  config: classpath:log4j2-${spring.profiles.active}.xml
 
 sa-token:
   # token名称 (同时也是cookie名称)

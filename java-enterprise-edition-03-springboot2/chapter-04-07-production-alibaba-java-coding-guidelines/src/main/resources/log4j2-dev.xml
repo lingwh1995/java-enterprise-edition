@@ -13,7 +13,7 @@
         <!-- 控制台输出 -->
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="${LOG_PATTERN}"/>
-            <!-- 开发环境输出TRACE及以上级别的日志 -->
+            <!-- 开发环境只输出TRACE及以上级别的日志 -->
             <ThresholdFilter level="TRACE" onMatch="ACCEPT" onMismatch="DENY"/>
         </Console>
 
@@ -25,7 +25,7 @@
             <Policies>
                 <!-- 每天滚动一次 -->
                 <TimeBasedTriggeringPolicy/>
-                <!-- 单个文件最大100MB -->
+                <!-- 单个文件最大1MB -->
                 <SizeBasedTriggeringPolicy size="1MB"/>
             </Policies>
             <!-- 最多保留30个文件 -->
@@ -48,12 +48,12 @@
             <!-- 只记录ERROR级别日志 -->
             <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
         </RollingFile>
-        
+
         <!-- 异步INFO日志输出 -->
         <Async name="AsyncInfo">
             <AppenderRef ref="RollingFileInfo"/>
         </Async>
-        
+
         <!-- 异步ERROR日志输出 -->
         <Async name="AsyncError">
             <AppenderRef ref="RollingFileError"/>
@@ -61,25 +61,29 @@
     </Appenders>
 
     <Loggers>
+        <!-- 设置 p6spy 日志级别为 INFO -->
+        <Logger name="p6spy" level="INFO" />
+
+        <!-- SQL日志级别 -->
+        <Logger name="java.sql" level="DEBUG"/>
+
         <!-- Spring框架日志级别 -->
         <Logger name="org.springframework" level="INFO"/>
 
         <!-- MyBatis框架日志级别 -->
         <Logger name="org.mybatis" level="DEBUG"/>
-        <!-- SQL日志级别 -->
-        <Logger name="java.sql" level="DEBUG"/>
 
         <!-- 连接池日志级别 -->
         <Logger name="com.zaxxer.hikari" level="INFO"/>
         <!-- 连接池详细配置信息 -->
         <Logger name="com.zaxxer.hikari.HikariConfig" level="INFO"/>
         <!-- 连接池运行时详细信息 -->
-        <Logger name="com.zaxxer.hikari.pool.HikariPool" level="INFO"/>
+        <Logger name="com.zaxxer.hikari.pool.HikariPool" level="DEBUG"/>
 
         <!-- 打印Controller接口映射信息的关键配置：将RequestMappingHandlerMapping的日志级别设置为TRACE，以输出最详细的映射信息 -->
         <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="TRACE"/>
         <!-- 业务包日志级别 -->
-        <Logger name="org.bluebridge" level="DEBUG"/>
+        <Logger name="com.xa8bit" level="DEBUG"/>
 
         <!-- 日志输出级别,log4j2日志级别包括五个：TRACE < DEBUG < INFO < WARN < ERROR -->
         <Root level="INFO">

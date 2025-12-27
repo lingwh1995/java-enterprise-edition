@@ -71,6 +71,7 @@
         <sa-token.version>1.34.0</sa-token.version>
         <mybatis-spring-boot-starter.version>2.2.0</mybatis-spring-boot-starter.version>
         <pagehelper-spring-boot-starter.version>1.4.6</pagehelper-spring-boot-starter.version>
+        <p6spy.version>1.8.1</p6spy.version>
         <mybatis-plus-boot-starter.version>3.5.4</mybatis-plus-boot-starter.version>
         <mybatis-plus-generator.version>3.5.4</mybatis-plus-generator.version>
         <lombok.version>1.18.30</lombok.version>
@@ -111,6 +112,11 @@
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.gavlyukovskiy</groupId>
+                <artifactId>p6spy-spring-boot-starter</artifactId>
+                <version>${p6spy.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>

@@ -2,6 +2,7 @@ package org.bluebridge.common.config;
 
 import cn.dev33.satoken.interceptor.SaInterceptor;
 import cn.dev33.satoken.stp.StpUtil;
+import org.bluebridge.common.constant.EnvironmentConstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -18,9 +19,6 @@ import java.util.List;
 @Configuration
 public class WebSecurityConfig implements WebMvcConfigurer {
 
-    /** 开发环境标识 */
-    private static final String DEV_PROFILE = "dev";
-
     /** 获取当前运行环境 */
     @Value("${spring.profiles.active:default}")
     private String activeProfile;
@@ -32,7 +30,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 如果是开发环境，则不注册拦截器
-        if (DEV_PROFILE.equals(activeProfile)) {
+        if (EnvironmentConstants.DEV.equals(activeProfile)) {
             return;
         }
 

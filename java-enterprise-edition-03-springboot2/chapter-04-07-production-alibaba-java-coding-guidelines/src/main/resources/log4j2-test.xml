@@ -61,13 +61,14 @@
     </Appenders>
 
     <Loggers>
+        <!-- SQL日志级别 -->
+        <Logger name="java.sql" level="DEBUG"/>
+
         <!-- Spring框架日志级别 -->
         <Logger name="org.springframework" level="INFO"/>
 
         <!-- MyBatis框架日志级别 -->
         <Logger name="org.mybatis" level="DEBUG"/>
-        <!-- SQL日志级别 -->
-        <Logger name="java.sql" level="DEBUG"/>
 
         <!-- 连接池日志级别 -->
         <Logger name="com.zaxxer.hikari" level="INFO"/>
@@ -79,7 +80,7 @@
         <!-- 打印Controller接口映射信息的关键配置：将RequestMappingHandlerMapping的日志级别设置为TRACE，以输出最详细的映射信息 -->
         <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="TRACE"/>
         <!-- 业务包日志级别 -->
-        <Logger name="org.bluebridge" level="DEBUG"/>
+        <Logger name="com.xa8bit" level="DEBUG"/>
 
         <!-- 日志输出级别,log4j2日志级别包括五个：TRACE < DEBUG < INFO < WARN < ERROR -->
         <Root level="INFO">
