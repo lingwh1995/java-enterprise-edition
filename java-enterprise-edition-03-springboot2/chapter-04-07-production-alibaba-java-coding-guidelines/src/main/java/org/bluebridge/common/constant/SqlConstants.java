@@ -1,6 +1,7 @@
 package org.bluebridge.common.constant;
 
 import org.bluebridge.common.enums.SqlHighlightColorEnum;
+import org.bluebridge.common.enums.SqlShowFormattedStyleEnum;
 
 public class SqlConstants {
 
@@ -9,7 +10,10 @@ public class SqlConstants {
     
     /** 是否格式化SQL */
     public static final boolean SHOW_FORMATTED_SQL = true;
-    
+
+    /** 格式化SQL样式 */
+    public static final SqlShowFormattedStyleEnum SQL_SHOW_FORMATTED_STYLE = SqlShowFormattedStyleEnum.SELFT;
+
     /** SQL高亮显示颜色 */
     public static final SqlHighlightColorEnum SQL_HIGHLIGHT_COLOR = SqlHighlightColorEnum.RED;
 

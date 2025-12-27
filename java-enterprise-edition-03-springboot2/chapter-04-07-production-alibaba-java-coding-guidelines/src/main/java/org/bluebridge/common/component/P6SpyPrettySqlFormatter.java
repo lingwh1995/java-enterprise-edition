@@ -4,6 +4,8 @@ import cn.hutool.db.sql.SqlFormatter;
 import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
 import org.bluebridge.common.constant.SqlConstants;
 import org.bluebridge.common.enums.SqlHighlightColorEnum;
+import org.bluebridge.common.enums.SqlShowFormattedStyleEnum;
+import org.bluebridge.common.util.SqlFormatterUtils;
 
 /**
  * @author lingwh
@@ -22,8 +24,20 @@ public class P6SpyPrettySqlFormatter implements MessageFormattingStrategy {
 
         // 格式化SQL
         if(SqlConstants.SHOW_FORMATTED_SQL) {
-            prepared = SqlFormatter.format(prepared);
-            sql = SqlFormatter.format(sql);
+            switch (SqlConstants.SQL_SHOW_FORMATTED_STYLE) {
+                case SqlShowFormattedStyleEnum.HUTOOL:
+                    prepared = SqlFormatter.format(prepared);
+                    sql = SqlFormatter.format(sql);
+                    break;
+                case SqlShowFormattedStyleEnum.SELFT:
+                    prepared = SqlFormatterUtils.format(prepared);
+                    sql = SqlFormatterUtils.format(sql);
+                    break;
+                default:
+                    prepared = SqlFormatter.format(prepared);
+                    sql = SqlFormatter.format(sql);
+                    break;
+            }
         }
 
         StringBuilder sqlBuilder = new StringBuilder();
