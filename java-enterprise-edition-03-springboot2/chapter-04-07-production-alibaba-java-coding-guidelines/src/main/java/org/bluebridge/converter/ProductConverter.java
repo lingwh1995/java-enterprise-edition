@@ -1,11 +1,11 @@
 package org.bluebridge.converter;
 
 import com.github.pagehelper.PageInfo;
-import org.bluebridge.dto.ProductPatchDTO;
-import org.bluebridge.dto.ProductCreateDTO;
-import org.bluebridge.dto.ProductUpdateDTO;
-import org.bluebridge.entity.ProductDO;
-import org.bluebridge.vo.ProductVO;
+import org.bluebridge.domain.dto.ProductPatchDTO;
+import org.bluebridge.domain.dto.ProductCreateDTO;
+import org.bluebridge.domain.dto.ProductUpdateDTO;
+import org.bluebridge.domain.entity.ProductDO;
+import org.bluebridge.domain.vo.ProductVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

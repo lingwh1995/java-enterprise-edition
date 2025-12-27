@@ -1,9 +1,9 @@
 package org.bluebridge.mapper;
 
 import org.apache.ibatis.annotations.Param;
-import org.bluebridge.common.query.Query;
-import org.bluebridge.dto.ProductQueryDTO;
-import org.bluebridge.entity.ProductDO;
+import org.bluebridge.common.domain.query.Query;
+import org.bluebridge.domain.dto.ProductQueryDTO;
+import org.bluebridge.domain.entity.ProductDO;
 
 import java.util.List;
 

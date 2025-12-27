@@ -1,6 +1,6 @@
 package org.bluebridge.common.util;
 
-import org.bluebridge.common.query.Sort;
+import org.bluebridge.common.domain.query.Sort;
 
 import java.util.ArrayList;
 import java.util.List;

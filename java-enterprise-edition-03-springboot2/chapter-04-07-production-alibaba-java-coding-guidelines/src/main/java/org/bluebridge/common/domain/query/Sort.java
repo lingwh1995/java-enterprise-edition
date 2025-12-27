@@ -1,4 +1,4 @@
-package org.bluebridge.common.query;
+package org.bluebridge.common.domain.query;
 
 import lombok.Data;
 import org.bluebridge.common.enums.OrderEnum;
