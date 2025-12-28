@@ -1,7 +1,7 @@
 package org.bluebridge.security.mapper;
 
-import org.bluebridge.security.domain.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.bluebridge.security.domain.UserDO;
 
 /**
  * @author lingwh
@@ -11,6 +11,11 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
 
-    User select(User user);
+    /**
+     * 根据用户名查询用户
+     * @param userDO
+     * @return
+     */
+    UserDO selectUserByUsername(UserDO userDO);
 
 }

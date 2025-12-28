@@ -1,6 +1,7 @@
 package org.bluebridge.security.service;
 
-import org.bluebridge.security.domain.User;
+
+import org.bluebridge.security.domain.UserLoginDTO;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -12,6 +13,6 @@ import java.security.spec.InvalidKeySpecException;
  */
 public interface UserService {
 
-    boolean login(User user) throws NoSuchAlgorithmException, InvalidKeySpecException;
+    boolean login(UserLoginDTO userLoginDTO) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
 }

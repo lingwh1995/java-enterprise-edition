@@ -30,8 +30,8 @@ logging:
 
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
-  type-aliases-package: com.xa8bit.*.domain,com.xa8bit.common.domain.query
-  type-handlers-package: com.xa8bit.common.typehandler
+  type-aliases-package: org.bluebridge.*.domain,org.bluebridge.common.domain.query
+  type-handlers-package: org.bluebridge.common.typehandler
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: true

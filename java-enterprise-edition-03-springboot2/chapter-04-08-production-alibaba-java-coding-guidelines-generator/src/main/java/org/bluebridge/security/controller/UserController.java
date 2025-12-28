@@ -1,15 +1,19 @@
 package org.bluebridge.security.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
+import org.bluebridge.common.domain.response.Result;
+import org.bluebridge.common.enums.OperationTypeEnum;
 import org.bluebridge.common.enums.ResponseStatusEnum;
-import org.bluebridge.security.domain.User;
+import org.bluebridge.security.domain.UserLoginDTO;
 import org.bluebridge.security.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
@@ -25,19 +29,20 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    @SaIgnore
     @PostMapping("/login")
-    public SaResult login(@RequestBody User user) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        boolean isLogin = userService.login(user);
+    public Result login(@RequestBody @Valid UserLoginDTO userLoginDTO) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        boolean isLogin = userService.login(userLoginDTO);
         if (isLogin) {
             // 第1步，先登录上
-            StpUtil.login(user.getUsername());
+            StpUtil.login(userLoginDTO.getUsername());
             // 第2步，获取 Token  相关参数
             SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
             // 第3步，返回给前端
-            return SaResult.data(tokenInfo);
+            return Result.buildDataResult(tokenInfo, OperationTypeEnum.USER_LOGIN);
         } else {
             ResponseStatusEnum invalidCredentials = ResponseStatusEnum.INVALID_CREDENTIALS;
-            return SaResult.error(invalidCredentials.getMessage()).setCode(invalidCredentials.getCode());
+            return Result.error(invalidCredentials.getMessage());
         }
     }
 
@@ -47,14 +52,5 @@ public class UserController {
         StpUtil.logout();
         return SaResult.ok();
     }
-
-//    @SaCheckLogin
-//    @GetMapping("/login")
-//    public SaResult getLoginUser() {
-//        String operateUser = (String) StpUtil.getLoginId();
-//        Map<String, String> operateUserMap = new HashMap<>();
-//        operateUserMap.put("user", operateUser);
-//        return SaResult.ok(JsonUtil.toJsonString(operateUserMap));
-//    }
 
 }

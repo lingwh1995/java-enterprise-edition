@@ -1,10 +1,8 @@
 package org.bluebridge.security.domain;
 
-import org.bluebridge.common.domain.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.time.LocalDateTime;
+import org.bluebridge.common.domain.entity.BaseEntity;
 
 /**
  * @author lingwh
@@ -13,15 +11,36 @@ import java.time.LocalDateTime;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class User extends BaseEntity {
+public class UserDO extends BaseEntity {
 
+    /**
+     * 主键
+     */
     private Long id;
+
+    /**
+     *  用户名
+     */
     private String username;
+
+    /**
+     * 昵称
+     */
     private String nickname;
+
+    /**
+     * 密码
+     */
     private String password;
+
+    /**
+     * 邮箱
+     */
     private String email;
+
+    /**
+     * 盐值
+     */
     private String salt;
-    private LocalDateTime createTime;
-    private LocalDateTime updateTime;
 
 }
