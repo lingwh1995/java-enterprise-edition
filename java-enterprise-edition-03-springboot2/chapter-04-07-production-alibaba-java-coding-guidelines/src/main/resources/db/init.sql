@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS t_bus_product (
     update_user BIGINT COMMENT '更新人id',
     update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     is_deleted  TINYINT(1) NOT NULL DEFAULT 0 COMMENT '逻辑删除标记 0-未逻辑删除，1-已逻辑删除',
-    KEY idx_username (username),
+    KEY idx_name (name),
     KEY idx_is_deleted (is_deleted)
 ) ENGINE = INNODB CHARSET = utf8mb4 COMMENT = '商品表';
 
