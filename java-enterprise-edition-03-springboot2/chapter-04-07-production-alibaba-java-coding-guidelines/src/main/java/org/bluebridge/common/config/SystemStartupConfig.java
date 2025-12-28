@@ -34,7 +34,6 @@ public class SystemStartupConfig {
     @Resource
     private RedisTemplate redisTemplate;
 
-
     @PostConstruct
     public void init() {
         log.info(" ===>   系统启动预热开始......");
