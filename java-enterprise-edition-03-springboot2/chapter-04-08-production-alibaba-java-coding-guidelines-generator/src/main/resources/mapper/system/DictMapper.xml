@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.xa8bit.system.mapper.DictMapper">
+<mapper namespace="org.bluebridge.system.mapper.DictMapper">
 
     <!-- Dict实体的ResultMap，用于映射嵌套的dictDataList -->
     <resultMap id="dictResultMap" type="dictDO">
@@ -14,9 +14,9 @@
         <result column="dict_desc" property="dictDesc" />
         <result column="sort_order" property="sortOrder" />
         <result column="create_user" property="createUser" />
-        <result column="create_time" property="createTime" typeHandler="com.xa8bit.common.typehandler.LocalDateTimeTypeHandler"/>
+        <result column="create_time" property="createTime" typeHandler="org.bluebridge.common.typehandler.LocalDateTimeTypeHandler"/>
         <result column="update_user" property="updateUser" />
-        <result column="update_time" property="updateTime" typeHandler="com.xa8bit.common.typehandler.LocalDateTimeTypeHandler"/>
+        <result column="update_time" property="updateTime" typeHandler="org.bluebridge.common.typehandler.LocalDateTimeTypeHandler"/>
 
         <!-- 嵌套映射dictDataList -->
         <collection property="dictDataList" ofType="dictDataDO">
@@ -29,9 +29,9 @@
             <result column="dict_data_desc" property="dictDataDesc" />
             <result column="dd_sort_order" property="sortOrder" />
             <result column="dd_create_user" property="createUser" />
-            <result column="dd_create_time" property="createTime" typeHandler="com.xa8bit.common.typehandler.LocalDateTimeTypeHandler"/>
+            <result column="dd_create_time" property="createTime" typeHandler="org.bluebridge.common.typehandler.LocalDateTimeTypeHandler"/>
             <result column="dd_update_user" property="updateUser" />
-            <result column="dd_update_time" property="updateTime" typeHandler="com.xa8bit.common.typehandler.LocalDateTimeTypeHandler"/>
+            <result column="dd_update_time" property="updateTime" typeHandler="org.bluebridge.common.typehandler.LocalDateTimeTypeHandler"/>
         </collection>
     </resultMap>
 
