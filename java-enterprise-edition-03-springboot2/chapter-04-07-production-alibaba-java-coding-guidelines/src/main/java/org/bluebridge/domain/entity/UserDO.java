@@ -1,6 +1,8 @@
 package org.bluebridge.domain.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.bluebridge.common.domain.entity.BaseEntity;
 
 import java.time.LocalDateTime;
 
@@ -10,7 +12,8 @@ import java.time.LocalDateTime;
  * @date 2025/11/22 17:21
  */
 @Data
-public class UserDO {
+@EqualsAndHashCode(callSuper = true)
+public class UserDO extends BaseEntity {
 
     /**
      * 主键
@@ -46,25 +49,5 @@ public class UserDO {
      * 创建人id
      */
     private Long createUser;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    /**
-     * 更新人id
-     */
-    private Long updateUser;
-
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
-
-    /**
-     * 逻辑删除标记 0-未逻辑删除，1-已逻辑删除
-     */
-    private Integer isDeleted;
 
 }

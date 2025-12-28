@@ -1,8 +1,7 @@
 package org.bluebridge.domain.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
+import org.bluebridge.common.domain.entity.BaseEntity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -13,9 +12,8 @@ import java.time.LocalDateTime;
  * @date 2025/12/13 10:00
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class ProductDO {
+@EqualsAndHashCode(callSuper = true)
+public class ProductDO extends BaseEntity {
 
     /** 商品ID */
     private Long id;
@@ -34,30 +32,5 @@ public class ProductDO {
     
     /** 商品状态（0：下架，1：上架） */
     private Integer status;
-
-    /**
-     * 创建人id
-     */
-    private Long createUser;
-
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-
-    /**
-     * 更新人id
-     */
-    private Long updateUser;
-
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
-
-    /**
-     * 逻辑删除标记 0-未逻辑删除，1-已逻辑删除
-     */
-    private Integer isDeleted;
 
 }
