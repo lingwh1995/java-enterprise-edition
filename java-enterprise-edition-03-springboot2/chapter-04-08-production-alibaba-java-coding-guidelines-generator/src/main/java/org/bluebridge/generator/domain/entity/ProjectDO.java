@@ -5,5 +5,5 @@ package org.bluebridge.generator.domain.entity;
  * @desc
  * @date 2025/12/8 20:53
  */
-public class Project {
+public class ProjectDO {
 }

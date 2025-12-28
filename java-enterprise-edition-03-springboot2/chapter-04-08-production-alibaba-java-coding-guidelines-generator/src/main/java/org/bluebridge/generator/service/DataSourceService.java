@@ -5,7 +5,7 @@ import org.bluebridge.common.domain.query.PageQuery;
 import org.bluebridge.common.domain.query.Query;
 import org.bluebridge.generator.domain.dto.DataSourceQueryDTO;
 import org.bluebridge.generator.domain.dto.DataSourceUpdateDTO;
-import org.bluebridge.generator.domain.entity.DataSourceMetaData;
+import org.bluebridge.generator.domain.bo.DataSourceMetaData;
 import org.bluebridge.generator.domain.dto.DataSourceCreateDTO;
 import org.bluebridge.generator.domain.vo.DataSourceVO;
 

@@ -10,7 +10,7 @@ import org.bluebridge.common.domain.response.Result;
 import org.bluebridge.common.util.SortUtils;
 import org.bluebridge.generator.domain.dto.DataSourceQueryDTO;
 import org.bluebridge.generator.domain.dto.DataSourceUpdateDTO;
-import org.bluebridge.generator.domain.entity.DataSourceMetaData;
+import org.bluebridge.generator.domain.bo.DataSourceMetaData;
 import org.bluebridge.generator.domain.dto.DataSourceCreateDTO;
 import org.bluebridge.generator.service.DataSourceService;
 import org.bluebridge.generator.domain.vo.DataSourceVO;

@@ -1,4 +1,4 @@
-package org.bluebridge.generator.domain.entity;
+package org.bluebridge.generator.domain.bo;
 
 import lombok.Data;
 
