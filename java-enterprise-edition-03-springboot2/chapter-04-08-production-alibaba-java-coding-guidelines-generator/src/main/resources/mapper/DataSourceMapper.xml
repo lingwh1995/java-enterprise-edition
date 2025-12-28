@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xa8bit.generator.mapper.DataSourceMapper">
+
+    <!-- 插入数据库信息 -->
+     <insert id="insertDataSource" parameterType="dataSourceDO">
+        insert into t_bus_datasource(name, type, host, port, `database`, username, password)
+        values(#{name}, #{type}, #{host}, #{port}, #{database}, #{username}, #{password})
+    </insert>
+
+    <!-- 根据ID删除数据库信息 -->
+    <delete id="deleteDataSourceById" parameterType="int">
+        delete from t_bus_datasource where id = #{id}
+    </delete>
+
+    <!-- 更新数据源 -->
+    <update id="updateDataSource" parameterType="dataSourceDO">
+        update t_bus_datasource
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="host != null">
+                host = #{host},
+            </if>
+            <if test="port != null">
+                port = #{port},
+            </if>
+            <if test="database != null">
+                `database` = #{database},
+            </if>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="enable != null">
+                enable = #{enable},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!-- 根据ID查询数据源 -->
+    <select id="selectDataSourceById" parameterType="int" resultType="dataSourceDO">
+        select * from t_bus_datasource where id = #{id}
+    </select>
+
+    <select id="selectDataSourceList" resultType="dataSourceDO">
+        select * from t_bus_datasource
+        <where>
+            is_deleted = 0
+            <if test="conditions != null">
+                <if test="conditions.name != null and conditions.name != ''">
+                    and name like concat('%', #{conditions.name} ,'%')
+                </if>
+                <if test="conditions.type != null and conditions.type != ''">
+                    and type = #{conditions.type}
+                </if>
+            </if>
+        </where>
+
+        <choose>
+            <when test="sortList != null and sortList.size() > 0">
+                ORDER BY
+                <foreach collection="sortList" item="sort" separator=",">
+                    ${sort.orderBy} ${sort.order}
+                </foreach>
+            </when>
+            <otherwise>
+                ORDER BY create_time DESC
+            </otherwise>
+        </choose>
+    </select>
+
+</mapper>
