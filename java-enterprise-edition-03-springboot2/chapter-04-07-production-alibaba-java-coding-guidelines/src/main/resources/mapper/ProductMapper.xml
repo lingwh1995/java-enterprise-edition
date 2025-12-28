@@ -4,13 +4,13 @@
 
     <!-- 插入商品 -->
     <insert id="insertProduct" parameterType="productDO" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO t_product (name, description, price, stock, status)
+        INSERT INTO t_bus_product (name, description, price, stock, status)
         VALUES (#{name}, #{description}, #{price}, #{stock}, #{status})
     </insert>
 
     <!-- 批量插入商品 -->
     <insert id="batchInsertProduct">
-        INSERT INTO t_product (name, description, price, stock)
+        INSERT INTO t_bus_product (name, description, price, stock)
         VALUES
         <foreach collection="productDOList" item="productDO" separator=",">
             (#{productDO.name}, #{productDO.description}, #{productDO.price}, #{productDO.stock})
@@ -19,12 +19,12 @@
 
     <!-- 根据ID删除商品(物理删除) -->
     <delete id="deleteProductById" parameterType="long">
-        DELETE FROM t_product WHERE id = #{id}
+        DELETE FROM t_bus_product WHERE id = #{id}
     </delete>
 
     <!-- 批量删除商品(物理删除) -->
     <delete id="batchDeleteProduct">
-        DELETE FROM t_product WHERE id IN
+        DELETE FROM t_bus_product WHERE id IN
         <foreach collection="ids" item="id" open="(" separator="," close=")">
             #{id}
         </foreach>
@@ -32,12 +32,12 @@
 
     <!-- 根据ID逻辑删除商品 -->
     <update id="softDeleteProductById" parameterType="long">
-        UPDATE t_product SET is_deleted = 1 WHERE id = #{id}
+        UPDATE t_bus_product SET is_deleted = 1 WHERE id = #{id}
     </update>
 
     <!-- 批量逻辑删除商品 -->
     <update id="batchSoftDeleteProduct">
-        UPDATE t_product SET is_deleted = 1 WHERE id IN
+        UPDATE t_bus_product SET is_deleted = 1 WHERE id IN
         <foreach collection="ids" item="id" open="(" separator="," close=")">
             #{id}
         </foreach>
@@ -45,7 +45,7 @@
 
     <!-- 根据ID更新商品信息 -->
     <update id="updateProduct" parameterType="productDO">
-        UPDATE t_product
+        UPDATE t_bus_product
         <set>
             <if test="name != null and name != ''">
                 name = #{name},
@@ -68,7 +68,7 @@
 
     <!-- 根据ID部分更新商品信息 -->
     <update id="patchProduct" parameterType="productDO">
-        UPDATE t_product
+        UPDATE t_bus_product
         <set>
             <if test="name != null and name != ''">
                 name = #{name},
@@ -83,21 +83,21 @@
     <!-- 根据ID查询商品 -->
     <select id="selectProductById" resultType="productDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
-        FROM t_product
+        FROM t_bus_product
         WHERE id = #{id} AND is_deleted = 0
     </select>
 
     <!-- 根据名称查询商品 -->
     <select id="selectProductListByName" resultType="productDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
-        FROM t_product
+        FROM t_bus_product
         WHERE name like CONCAT('%', #{name}, '%') AND is_deleted = 0
     </select>
 
     <!-- 根据条件查询商品列表 -->
     <select id="selectProductList" resultType="productDO">
         SELECT id, name, description, price, stock, status, create_time, update_time, is_deleted
-        FROM t_product
+        FROM t_bus_product
         <where>
             is_deleted = 0
             <if test="conditions != null">

@@ -26,7 +26,7 @@ INSERT INTO t_sys_user (username, nickname, password, salt, create_user)
 VALUES ('admin', '管理员', '87B63A5A6286C569121B3C5444CE154C', '899DF0EADE99EA70', null);
 
 -- 创建商品表
-CREATE TABLE IF NOT EXISTS t_product (
+CREATE TABLE IF NOT EXISTS t_bus_product (
     id          BIGINT(20) AUTO_INCREMENT PRIMARY KEY COMMENT '商品ID',
     name        VARCHAR(100) NOT NULL COMMENT '商品名称',
     description VARCHAR(500) DEFAULT NULL COMMENT '商品描述',
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS t_product (
 ) ENGINE = INNODB CHARSET = utf8mb4 COMMENT = '商品表';
 
 -- 添加测试数据
-INSERT INTO t_product (name, description, price, stock, status, create_user)
+INSERT INTO t_bus_product (name, description, price, stock, status, create_user)
 VALUES ('商品1', '测试商品1', 19.99, 100, 1, null),
        ('商品2', '测试商品2', 29.99, 50, 1, null),
        ('商品3', '测试商品3', 39.99, 20, 1, null),
