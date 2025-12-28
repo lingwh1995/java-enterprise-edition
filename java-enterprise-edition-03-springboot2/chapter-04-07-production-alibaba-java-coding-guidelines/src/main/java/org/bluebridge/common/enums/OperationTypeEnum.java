@@ -1,10 +1,13 @@
 package org.bluebridge.common.enums;
 
+import lombok.Getter;
+
 /**
  * @author lingwh
  * @desc
  * @date 2025/12/22 20:34
  */
+@Getter
 public enum OperationTypeEnum {
 
     CREATE("新增"),
@@ -19,18 +22,17 @@ public enum OperationTypeEnum {
     SOFT_DELETE("逻辑删除"),
     BATCH_SOFT_DELETE("批量逻辑删除"),
     QUERY_ONE("查询单个"),
+    QUERY_ONE_CONDITION("条件查询单个"),
     QUERY_LIST("查询列表"),
     QUERY_LIST_CONDITION("条件查询列表"),
-    QUERY_PAGE("分页查询");
+    QUERY_PAGE("分页查询"),
+    USER_LOGIN("用户登录"),
+    USER_LOGOUT("用户退出登录");
 
     private final String desc;
 
     OperationTypeEnum(String desc) {
         this.desc = desc;
-    }
-
-    public String getDesc() {
-        return desc;
     }
 
 }

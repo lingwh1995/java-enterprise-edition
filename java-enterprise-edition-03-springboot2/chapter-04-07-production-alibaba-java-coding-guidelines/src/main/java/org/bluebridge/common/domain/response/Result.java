@@ -1,4 +1,4 @@
-package org.bluebridge.common.response;
+package org.bluebridge.common.domain.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

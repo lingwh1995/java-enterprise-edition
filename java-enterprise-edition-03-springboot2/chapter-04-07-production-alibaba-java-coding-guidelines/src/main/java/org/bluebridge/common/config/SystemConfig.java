@@ -10,7 +10,7 @@ import javax.annotation.PostConstruct;
  * @date 2025/12/9 10:53
  */
 @Configuration
-public class StartupConfig {
+public class SystemConfig {
 
     @PostConstruct
     public void init() {

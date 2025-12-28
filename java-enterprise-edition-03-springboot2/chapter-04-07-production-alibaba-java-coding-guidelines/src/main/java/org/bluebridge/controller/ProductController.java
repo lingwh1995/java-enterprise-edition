@@ -12,7 +12,7 @@ import org.bluebridge.domain.dto.ProductUpdateDTO;
 import org.bluebridge.domain.dto.ProductQueryDTO;
 import org.bluebridge.service.ProductService;
 import org.bluebridge.domain.vo.ProductVO;
-import org.bluebridge.common.response.Result;
+import org.bluebridge.common.domain.response.Result;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

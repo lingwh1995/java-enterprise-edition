@@ -26,18 +26,18 @@ public class PasswordUtils {
     /**
      * 对用户输入的密码进行验证
      *
-     * @param passwordFromUser 用户输入的密码
+     * @param passwordFromUserLoginDTO 用户输入的密码
      * @param salt             盐值
-     * @param passwordFromDb   数据库中存储的密码
+     * @param passwordFromExistingUser   数据库中存储的密码
      * @return
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeySpecException
      */
-    public static boolean verify(String passwordFromUser, String salt, String passwordFromDb) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public static boolean verify(String passwordFromUserLoginDTO, String salt, String passwordFromExistingUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
         // 用相同的盐值对用户输入的密码进行加密  
-        String passwordFromUserEncry = getPBKDF2(passwordFromUser, salt);
+        String passwordFromUserLoginDTOEncry = getPBKDF2(passwordFromUserLoginDTO, salt);
         // 把加密后的密文和原密文进行比较，相同则验证成功，否则失败  
-        return passwordFromUserEncry.equals(passwordFromDb);
+        return passwordFromUserLoginDTOEncry.equals(passwordFromExistingUser);
     }
 
     /**

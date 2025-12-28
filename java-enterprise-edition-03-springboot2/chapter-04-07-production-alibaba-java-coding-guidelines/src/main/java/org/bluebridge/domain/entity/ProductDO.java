@@ -34,14 +34,30 @@ public class ProductDO {
     
     /** 商品状态（0：下架，1：上架） */
     private Integer status;
-    
-    /** 创建时间 */
+
+    /**
+     * 创建人id
+     */
+    private Long createUser;
+
+    /**
+     * 创建时间
+     */
     private LocalDateTime createTime;
-    
-    /** 更新时间 */
+
+    /**
+     * 更新人id
+     */
+    private Long updateUser;
+
+    /**
+     * 更新时间
+     */
     private LocalDateTime updateTime;
-    
-    /** 删除标记（0：未删除，1：已删除） */
+
+    /**
+     * 逻辑删除标记 0-未逻辑删除，1-已逻辑删除
+     */
     private Integer isDeleted;
 
 }

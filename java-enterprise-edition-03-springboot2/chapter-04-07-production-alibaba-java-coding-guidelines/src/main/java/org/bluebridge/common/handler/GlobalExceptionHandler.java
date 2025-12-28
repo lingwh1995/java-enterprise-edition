@@ -6,7 +6,7 @@ import cn.dev33.satoken.util.SaResult;
 import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.common.enums.ResponseStatusEnum;
 import org.bluebridge.common.exception.BusinessException;
-import org.bluebridge.common.response.Result;
+import org.bluebridge.common.domain.response.Result;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
