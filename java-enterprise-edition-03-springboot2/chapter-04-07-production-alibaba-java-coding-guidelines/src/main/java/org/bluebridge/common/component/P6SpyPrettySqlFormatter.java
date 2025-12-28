@@ -16,13 +16,14 @@ public class P6SpyPrettySqlFormatter implements MessageFormattingStrategy {
 
     @Override
     public String formatMessage(int connectionId, String now, long elapsed, String category, String prepared, String sql, String url) {
-        if (sql == null || sql.trim().isEmpty()) return "";
+        // 1. 判断SQL是否合法
+        if (sql == null || sql.trim().isEmpty() || connectionId == 0 || connectionId == 1) return "";
 
-        // 移除多余的空格
+        // 2.移除多余的空格
         prepared = prepared.replaceAll("\\s+", " ").trim();
         sql = sql.replaceAll("\\s+", " ").trim();
 
-        // 格式化SQL
+        // 3.格式化SQL
         if(SqlConstants.SHOW_FORMATTED_SQL) {
             switch (SqlConstants.SQL_SHOW_FORMATTED_STYLE) {
                 case SqlShowFormattedStyleEnum.HUTOOL:
@@ -40,6 +41,7 @@ public class P6SpyPrettySqlFormatter implements MessageFormattingStrategy {
             }
         }
 
+        // 4. 构建SQL日志
         StringBuilder sqlBuilder = new StringBuilder();
         sqlBuilder.append("\n============================  SQL START  ============================");
         if(prepared.length() != sql.length()) {
@@ -51,7 +53,7 @@ public class P6SpyPrettySqlFormatter implements MessageFormattingStrategy {
         sqlBuilder.append("\n是否慢查询 ===>   ").append(elapsed > SqlConstants.LONG_QUERY_TIME ? "是" : "否");
         sqlBuilder.append("\n============================  SQL   END  ============================");
 
-        // 高亮显示SQL
+        // 5.高亮显示SQL
         switch (SqlConstants.SQL_HIGHLIGHT_COLOR) {
             // 红色字体显示sql
             case SqlHighlightColorEnum.RED:
