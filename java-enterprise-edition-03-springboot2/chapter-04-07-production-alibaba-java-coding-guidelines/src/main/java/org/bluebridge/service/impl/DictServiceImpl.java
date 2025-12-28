@@ -31,7 +31,7 @@ public class DictServiceImpl implements DictService {
 
     @Override
     public DictVO getDictByDictCode(String dictCode) {
-        DictDO dictDO = cacheHolder.get(dictCode);
+        DictDO dictDO = cacheHolder.get(dictCode).orElse(null);
         return dictConverter.toDictVO(dictDO);
     }
 
