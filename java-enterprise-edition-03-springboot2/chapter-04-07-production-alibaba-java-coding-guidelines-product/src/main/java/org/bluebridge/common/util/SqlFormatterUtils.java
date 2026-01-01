@@ -83,8 +83,44 @@ public class SqlFormatterUtils {
                 .replaceAll("(?i) UPDATE ", "UPDATE ")
                 .replaceAll("(?i) SET ", "\n    SET ");
 
+        // 2. 针对 SELECT 和 FROM 之间的字段列表进行长文本换行处理
+        String upperSql = sql.toUpperCase();
+        int selectIndex = upperSql.indexOf("SELECT");
+        int fromIndex = upperSql.indexOf("FROM");
+        if (selectIndex != -1 && fromIndex != -1 && fromIndex > selectIndex) {
+            // 1. 提取字段部分
+            String fieldsPart = sql.substring(selectIndex + 6, fromIndex).trim();
 
-        // 2. 关键逻辑：找到 WHERE 的位置，仅对 WHERE 之后的内容进行 AND 换行处理
+            // 2. 设定阈值：总长度超过 50 才处理，每行最大宽度设定为 60
+            if (fieldsPart.length() > 50) {
+                String[] fields = fieldsPart.split(",\\s*");
+                StringBuilder sb = new StringBuilder("\n        "); // 初始换行并缩进
+                int currentLineLength = 8; // 初始缩进占据 8 个空格
+                int maxRowWidth = 60;      // 每行大概显示的字符数限制
+
+                for (int i = 0; i < fields.length; i++) {
+                    String field = fields[i];
+                    // 拼接时判断：如果不是最后一个字段，加上逗号和空格
+                    String appendStr = (i == fields.length - 1) ? field : field + ", ";
+
+                    // 核心逻辑：如果当前行加上这个字段超过了最大宽度，就先换行
+                    if (currentLineLength + appendStr.length() > maxRowWidth) {
+                        sb.append("\n        "); // 换行
+                        currentLineLength = 8;   // 重置当前行长度计数
+                    }
+
+                    sb.append(appendStr);
+                    currentLineLength += appendStr.length();
+                }
+
+                // 3. 拼接回原 SQL
+                sql = sql.substring(0, selectIndex + 6)
+                        + sb.toString()
+                        + "\n    " + sql.substring(fromIndex);
+            }
+        }
+
+        // 3. 关键逻辑：找到 WHERE 的位置，仅对 WHERE 之后的内容进行 AND 换行处理
         int whereIndex = sql.toUpperCase().lastIndexOf("WHERE");
         if (whereIndex != -1) {
             String beforeWhere = sql.substring(0, whereIndex + 5);
@@ -98,7 +134,7 @@ public class SqlFormatterUtils {
             sql = beforeWhere + afterWhere;
         }
 
-        // 3. 格式化SQL 专门针对 INSERT INTO 结构的格式化
+        // 4. 格式化SQL 专门针对 INSERT INTO 结构的格式化
         if (sql.toUpperCase().startsWith("INSERT INTO")) {
             sql = sql.trim()
                 .replaceAll("(?i)INSERT INTO ", "INSERT INTO ")
