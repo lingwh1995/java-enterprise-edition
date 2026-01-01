@@ -22,10 +22,10 @@ public class SqlFormatterUtils {
         if (SqlConstants.PRETTY_PRINT_ENABLED) {
             switch (SqlConstants.PRETTY_PRINT_STYLE) {
                 case HUTOOL:
-                    sql = SqlFormatter.format(sql);
+                    sql = formatSqlByHutool(sql);
                     break;
                 case SELF:
-                    sql = formatSqlSelf(sql);
+                    sql = formatSqlBySelf(sql);
                     break;
                 default:
                     sql = SqlFormatter.format(sql);
@@ -49,11 +49,20 @@ public class SqlFormatterUtils {
     }
 
     /**
+     * 使用Hutool格式化SQL语句
+     * @param sql
+     * @return
+     */
+    private static String formatSqlByHutool(String sql) {
+        return SqlFormatter.format(sql);
+    }
+
+    /**
      * 手动简单美化SQL语句
      * @param sql
      * @return
      */
-    private static String formatSqlSelf(String sql) {
+    private static String formatSqlBySelf(String sql) {
         if (StrUtil.isBlank(sql)) return sql;
 
         // 1. 先进行基础格式化（不处理 AND）

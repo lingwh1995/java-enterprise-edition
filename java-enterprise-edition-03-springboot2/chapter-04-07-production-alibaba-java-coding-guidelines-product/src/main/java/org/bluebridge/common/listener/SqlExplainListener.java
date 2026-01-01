@@ -80,13 +80,17 @@ public class SqlExplainListener extends JdbcEventListener {
                 }
 
                 explainResult.append(String.format(
-                        "Plan分析  --->   | 表名: %-20s | Type: %-15s | Key: %-15s | Rows: %-8s | Extra: %s\n",
+                        "Plan分析  --->   | 表名: %-20s | Type: %-15s | Key: %-15s | Rows: %-8s | Extra: %s",
                         tableName,
                         type,
                         (key == null ? "NULL" : key),
                         rows,
                         extra
                 ));
+
+                if(!rs.isLast()){
+                    explainResult.append("\n");
+                }
             }
 
             // 格式化 SQL
