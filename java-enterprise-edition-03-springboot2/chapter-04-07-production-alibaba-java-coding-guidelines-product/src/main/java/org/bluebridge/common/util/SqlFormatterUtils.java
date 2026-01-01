@@ -31,7 +31,9 @@ public class SqlFormatterUtils {
                 .replaceAll("(?i) ON ", " ON ")
                 .replaceAll("(?i) ORDER BY ", "\n    ORDER BY ")
                 .replaceAll("(?i) GROUP BY ", "\n    GROUP BY ")
-                .replaceAll("(?i) LIMIT ", "\n    LIMIT ");
+                .replaceAll("(?i) LIMIT ", "\n    LIMIT ")
+                .replaceAll("(?i) UPDATE ", "UPDATE ")
+                .replaceAll("(?i) SET ", "\n    SET ");
 
 
         // 2. 关键逻辑：找到 WHERE 的位置，仅对 WHERE 之后的内容进行 AND 换行处理
@@ -46,6 +48,18 @@ public class SqlFormatterUtils {
             afterWhere = afterWhere.replaceAll("(?i)\\s+\\bAND\\b", "\n      AND");
 
             formattedSql = beforeWhere + afterWhere;
+        }
+
+        // 3. 格式化SQL 专门针对 INSERT INTO 结构的格式化
+        if (formattedSql.toUpperCase().startsWith("INSERT INTO")) {
+            formattedSql = formattedSql.trim()
+                .replaceAll("(?i)INSERT INTO ", "INSERT INTO ")
+                // 在表名后的左括号前换行
+                .replaceAll("(?i)\\s+\\(", "\n        (")
+                // 处理 VALUES 关键字换行
+                .replaceAll("(?i)\\s+VALUES\\s+", "\n    VALUES ")
+                // 处理 VALUES 后的左括号换行
+                .replaceAll("(?i)VALUES\\s+\\(", "VALUES\n        (");
         }
 
         return formattedSql;
