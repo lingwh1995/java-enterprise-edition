@@ -19,7 +19,6 @@ public class SqlFormatterUtils {
     public static String format(String sql) {
         sql = cleanSql(sql);
 
-        // 3.格式化SQL
         if (SqlConstants.PRETTY_PRINT_ENABLED) {
             switch (SqlConstants.PRETTY_PRINT_STYLE) {
                 case HUTOOL:
