@@ -71,6 +71,8 @@ public class SqlExplainListener extends JdbcEventListener {
                 String key = rs.getString("key");
                 String rows = rs.getString("rows");
                 String extra = rs.getString("Extra");
+                // 获取表名
+                String tableName = rs.getString("table");
 
                 // 核心预警逻辑：全表扫描(ALL) 或 全索引扫描(index)
                 if ("ALL".equalsIgnoreCase(type) || "index".equalsIgnoreCase(type)) {
@@ -78,8 +80,12 @@ public class SqlExplainListener extends JdbcEventListener {
                 }
 
                 explainResult.append(String.format(
-                        "Plan分析  --->   Type: %s, Key: %s, Rows: %s, Extra: %s",
-                        type, (key == null ? "NULL" : key), rows, extra
+                        "Plan分析  --->   | 表名: %-20s | Type: %-15s | Key: %-15s | Rows: %-8s | Extra: %s\n",
+                        tableName,
+                        type,
+                        (key == null ? "NULL" : key),
+                        rows,
+                        extra
                 ));
             }
 
