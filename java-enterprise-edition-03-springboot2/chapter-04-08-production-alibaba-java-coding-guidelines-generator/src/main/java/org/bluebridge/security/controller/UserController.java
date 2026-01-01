@@ -42,7 +42,7 @@ public class UserController {
             return Result.buildDataResult(tokenInfo, OperationTypeEnum.USER_LOGIN);
         } else {
             ResponseStatusEnum invalidCredentials = ResponseStatusEnum.INVALID_CREDENTIALS;
-            return Result.error(invalidCredentials.getMessage());
+            return Result.error(invalidCredentials.getCode(), invalidCredentials.getMessage());
         }
     }
 

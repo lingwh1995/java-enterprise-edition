@@ -23,7 +23,7 @@ CREATE TABLE t_sys_user (
 
 -- 插入示例数据
 INSERT INTO t_sys_user (username, nickname, password, salt, create_user)
-VALUES ('admin', '管理员', '87B63A5A6286C569121B3C5444CE154C', '899DF0EADE99EA70', null);
+VALUES ('admin', '管理员', 'E4A486E6C062E3ED80F32931DD1EEFB9BEFC8A78370C4F9A9A283427BC752139', '899DF0EADE99EA70', null);
 
 -- 字典表
 CREATE TABLE t_sys_dict (

@@ -25,7 +25,7 @@ public class DictController {
     private DictService dictService;
 
     /**
-     * http://localhost:8080/p3c-mybatis-common/api/v1/dicts/DATABASE_TYPE
+     * http://localhost:8080/product/api/v1/dicts/DATABASE_TYPE
      *
      * 根据字典编码查询字典
      * @param dictCode

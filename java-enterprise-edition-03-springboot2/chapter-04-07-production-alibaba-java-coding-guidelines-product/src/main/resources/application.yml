@@ -37,6 +37,13 @@ mybatis:
     cache-enabled: true
 
 boost:
+  security:
+    crypto:
+      pbkdf2:
+        enabled: true
+        algorithm: PBKDF2WithHmacSHA1
+        key-size-bits: 256
+        iteration-count: 10000
   sql:
     # 慢SQL阈值（毫秒）
     slow-sql-threshold: 1000
