@@ -15,4 +15,4 @@
 
 ## 3.运行注意事项
   默认的运行环境是pro,有token校验,在idea中把配置环境改为dev,即可绕过token校验
-  详细见 com.xa8bit.common.config.WebSecurityConfig 中代码
+  详细见 org.bluebridge.common.config.WebSecurityConfig 中代码

@@ -36,7 +36,7 @@ public class DictServiceImpl implements DictService {
     }
 
     @Override
-    public List<DictDO> searchProduct(Query<DictDO> query) {
+    public List<DictDO> searchDict(Query<DictDO> query) {
         return dictMapper.selectListWithJoin(query);
     }
 

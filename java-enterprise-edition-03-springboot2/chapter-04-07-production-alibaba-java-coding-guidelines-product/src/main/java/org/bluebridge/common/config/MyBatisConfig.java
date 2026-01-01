@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-import javax.annotation.Resource;
 
 /**
  * @author lingwh
@@ -19,9 +18,14 @@ import javax.annotation.Resource;
 @Configuration
 public class MyBatisConfig {
 
-    /** 获取当前运行环境 */
-    @Resource
-    private Environment environment;
+    // 1. 使用 final 修饰符，确保变量不可变且必须在构造时初始化
+    private final Environment environment;
+
+    // 2. 构造函数注入：这是 Spring 官方最推荐、最健壮的方式
+    // Spring Boot 启动时，如果发现只有这一个构造函数，会自动把 Environment 传进来
+    public MyBatisConfig(Environment environment) {
+        this.environment = environment;
+    }
 
     @Bean
     public ConfigurationCustomizer configurationCustomizer() {

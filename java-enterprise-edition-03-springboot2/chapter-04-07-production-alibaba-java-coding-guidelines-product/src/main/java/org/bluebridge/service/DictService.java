@@ -25,6 +25,6 @@ public interface DictService {
      * @param query 查询条件
      * @return 字典列表
      */
-    List<DictDO> searchProduct(Query<DictDO> query);
+    List<DictDO> searchDict(Query<DictDO> query);
 
 }

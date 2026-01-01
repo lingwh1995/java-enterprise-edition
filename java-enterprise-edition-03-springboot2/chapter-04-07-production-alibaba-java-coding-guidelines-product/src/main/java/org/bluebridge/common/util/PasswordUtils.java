@@ -1,6 +1,7 @@
 package org.bluebridge.common.util;
 
 import cn.hutool.core.util.HexUtil;
+import org.bluebridge.common.constant.Pbkdf2Constants;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -14,14 +15,6 @@ import java.security.spec.KeySpec;
  * @date 2025/11/22 17:16
  */
 public class PasswordUtils {
-
-    public static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
-
-    //生成密文的长度
-    public static final int HASH_SIZE = 32;
-
-    // 迭代次数
-    public static final int PBKDF2_ITERATIONS = 1000;
 
     /**
      * 对用户输入的密码进行验证
@@ -52,8 +45,9 @@ public class PasswordUtils {
     private static String getPBKDF2(String password, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
         //将16进制字符串形式的salt转换成byte数组
         byte[] saltHexBytes = HexUtil.decodeHex(salt);
-        KeySpec spec = new PBEKeySpec(password.toCharArray(), saltHexBytes, PBKDF2_ITERATIONS, HASH_SIZE * 4);
-        SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance(PBKDF2_ALGORITHM);
+        KeySpec spec = new PBEKeySpec(password.toCharArray(), saltHexBytes,
+                Pbkdf2Constants.ITERATION_COUNT, Pbkdf2Constants.KEY_SIZE_BITS);
+        SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance(Pbkdf2Constants.ALGORITHM);
         byte[] hashBytes = secretKeyFactory.generateSecret(spec).getEncoded();
         //将byte数组转换为16进制的字符串
         return HexUtil.encodeHexStr(hashBytes).toUpperCase();

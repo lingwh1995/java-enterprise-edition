@@ -21,9 +21,14 @@ import java.util.List;
 @Configuration
 public class WebSecurityConfig implements WebMvcConfigurer {
 
-    /** 获取当前运行环境 */
-    @Resource
-    private Environment environment;
+    // 1. 使用 final 修饰符，确保变量不可变且必须在构造时初始化
+    private final Environment environment;
+
+    // 2. 构造函数注入：这是 Spring 官方最推荐、最健壮的方式
+    // Spring Boot 启动时，如果发现只有这一个构造函数，会自动把 Environment 传进来
+    public WebSecurityConfig(Environment environment) {
+        this.environment = environment;
+    }
 
     /**
      * 添加拦截器
@@ -31,8 +36,8 @@ public class WebSecurityConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        // 3. 在这里使用 environment 绝对不会是 null
         String activeProfile = environment.getActiveProfiles()[0];
-
         // 如果是开发环境，则不注册拦截器
         if (EnvironmentConstants.DEV.equals(activeProfile)) {
             return;
@@ -41,12 +46,13 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         //存放拦截器放行的的路径
         List<String> excludePathPatterns = new ArrayList<>();
         excludePathPatterns.add("/");
+        excludePathPatterns.add("/logo.ico");
         excludePathPatterns.add("/index.html");
         excludePathPatterns.add("/assets/*.css");
         excludePathPatterns.add("/assets/*.js");
         excludePathPatterns.add("/assets/*.jpg");
-        excludePathPatterns.add("/users/login");
-        excludePathPatterns.add("/users/logout");
+        excludePathPatterns.add("/assets/*.png");
+
         // 注册 Sa-Token 拦截器，校验规则为 StpUtil.checkLogin() 登录校验。
         registry.addInterceptor(new SaInterceptor(handle -> StpUtil.checkLogin()))
                 .addPathPatterns("/**")

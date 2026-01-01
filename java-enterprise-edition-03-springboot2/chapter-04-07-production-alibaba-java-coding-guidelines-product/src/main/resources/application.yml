@@ -36,6 +36,22 @@ mybatis:
     map-underscore-to-camel-case: true
     cache-enabled: true
 
+boost:
+  sql:
+    # 慢SQL阈值（毫秒）
+    slow-sql-threshold: 1000
+    # 是否打印未填充参数的原始SQL
+    show-original-sql: true
+    # 是否开启美化打印
+    pretty-print-enabled: true
+    # 美化打印样式（hutool、self）
+    pretty-print-style: self
+    # 美化打印颜色
+    pretty-print-color: green
+  dict:
+    # 是否启用字典缓存
+    load-on-startup: true
+
 sa-token:
   # token名称 (同时也是cookie名称)
   token-name: token

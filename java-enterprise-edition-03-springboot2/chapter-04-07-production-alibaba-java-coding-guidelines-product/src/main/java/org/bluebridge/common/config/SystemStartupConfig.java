@@ -2,8 +2,11 @@ package org.bluebridge.common.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.common.component.CacheHolder;
+import org.bluebridge.common.constant.SqlConstants;
+import org.bluebridge.common.enums.SlowSqlThresholdTypeEnum;
 import org.bluebridge.domain.entity.DictDO;
 import org.bluebridge.service.DictService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -34,15 +37,21 @@ public class SystemStartupConfig {
     @Resource
     private RedisTemplate redisTemplate;
 
+    @Value("${boost.dict.load-on-startup:false}")
+    private boolean dictLoadOnStartup;
+
     @PostConstruct
-    public void init() {
+    public void startUp() throws Exception {
         log.info(" ===>   系统启动预热开始......");
 
         // 检查运行时环境
         checkRuntimeEnvironment();
 
-        // 打印系统元数据信息
+        // 打印系统信息
         printSystemMetadataInfo();
+
+        // 加载慢查询参数
+        loadLongQueryTime();
 
         // 加载字典数据
         loadDict();
@@ -59,7 +68,7 @@ public class SystemStartupConfig {
     private void checkRuntimeEnvironment() {
         log.info(" ===>   正在检查运行环境......");
         String timezone = TimeZone.getDefault().getID();
-        log.info(" ===>   检查运行时环境: 时区 [{}], 文件编码 [{}]", timezone, System.getProperty("file.encoding"));
+        log.info(" ===>   检查运行环境: 时区 [{}], 文件编码 [{}]", timezone, System.getProperty("file.encoding"));
         if (!"Asia/Shanghai".equals(timezone) && !"GMT+8".equals(timezone)) {
             log.warn(" ===>   注意：当前时区不是 Asia/Shanghai，请确认业务是否允许。");
         }
@@ -75,13 +84,47 @@ public class SystemStartupConfig {
     }
 
     /**
+     * 查询慢查询参数
+     */
+    private void loadLongQueryTime() {
+        try {
+            String databaseType = jdbcTemplate.getDataSource().getConnection()
+                    .getMetaData().getDatabaseProductName();
+            if ("MySQL".equalsIgnoreCase(databaseType)) {
+                // 1. 执行 SQL 查询 MySQL 自身的慢查询阈值
+                // 如果你想查自定义的表，只需更换 SQL 即可
+                String mysqlValue = jdbcTemplate.queryForObject(
+                        "SHOW VARIABLES LIKE 'long_query_time'",
+                        (rs, rowNum) -> rs.getString("Value")
+                );
+
+                if (mysqlValue != null) {
+                    // MySQL 默认单位是秒，转为毫秒
+                    int threshold = (int) (Double.parseDouble(mysqlValue) * 1000);
+
+                    // 2. 更新静态常量
+                    SqlConstants.SLOW_SQL_THRESHOLD = threshold;
+                    SqlConstants.SLOW_SQL_THRESHOLD_TYPE = SlowSqlThresholdTypeEnum.DB;
+                    log.info(" ===>   SqlConstants.SLOW_SQL_THRESHOLD 同步成功！当前慢查询阈值已设为: {} ms", threshold);
+                }
+            }
+        } catch (Exception e) {
+            // 3. 异常处理：查不到则保持现状（即使用 SqlConstants 中的默认值或 yml 中的值）
+            log.warn(" ===>   SqlConstants.LONG_QUERY_TIME 未能从数据库获取参数（原因: {}），将使用常量默认值: {} ms",
+                    e.getMessage(), SqlConstants.SLOW_SQL_THRESHOLD);
+        }
+    }
+
+    /**
      * 加载字典数据到缓存中
      */
     private void loadDict() {
-        log.info(" ===>   正在加载字典数据......");
-        // 缓存字典到缓存中
-        List<DictDO> dictDOList = dictService.searchProduct(null);
-        dictDOList.forEach(dictDO -> cacheHolder.put(dictDO.getDictCode(), dictDO));
+        if(dictLoadOnStartup) {
+            log.info(" ===>   正在加载字典数据......");
+            // 缓存字典到缓存中
+            List<DictDO> dictDOList = dictService.searchDict(null);
+            dictDOList.forEach(dictDO -> cacheHolder.put(dictDO.getDictCode(), dictDO));
+        }
     }
 
     /**

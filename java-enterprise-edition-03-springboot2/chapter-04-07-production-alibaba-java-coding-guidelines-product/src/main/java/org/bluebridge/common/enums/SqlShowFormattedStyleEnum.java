@@ -15,6 +15,6 @@ public enum SqlShowFormattedStyleEnum {
     /**
      * 自定义
      */
-    SELFT
+    SELF
 
 }
