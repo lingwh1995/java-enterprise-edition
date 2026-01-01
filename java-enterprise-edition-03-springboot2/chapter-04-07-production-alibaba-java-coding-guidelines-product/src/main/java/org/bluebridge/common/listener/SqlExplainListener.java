@@ -87,24 +87,31 @@ public class SqlExplainListener extends JdbcEventListener {
             String formattedSql = SqlFormatterUtils.format(sql);
 
             StringBuilder explainBuilder = new StringBuilder();
-            // 3. 根据危险程度输出不同级别的日志
+            // 根据危险程度输出不同级别的日志
             if (isDanger) {
                 explainBuilder.append("\n--------------------------------------  EXPLAIN START  --------------------------------------");
                 explainBuilder.append("\n全扫描警告 --->   检测到全表扫描或风险操作！");
                 explainBuilder.append("\n执行总耗时 --->   {} ms");
-                explainBuilder.append("\n执行SQL   --->   {}");
+                explainBuilder.append("\n执行SQL   --->   ").append("\n\t").append("{}");
                 explainBuilder.append("\n").append("{}");
                 explainBuilder.append("\n--------------------------------------  EXPLAIN   END  --------------------------------------");
                 log.warn(explainBuilder.toString(), elapsedMillis, formattedSql, explainResult);
             } else if (elapsedMillis > SqlConstants.SLOW_SQL_THRESHOLD) {
                 explainBuilder.append("\n--------------------------------------  EXPLAIN START  --------------------------------------");
+                explainBuilder.append("\n慢查询警告 --->   检测到慢查询操作！");
                 explainBuilder.append("\n慢查询分析 --->   耗时超过阈值 ({}ms): {}ms");
-                explainBuilder.append("\n执行SQL   --->   {}");
+                explainBuilder.append("\n执行SQL   --->   ").append("\n\t").append("{}");
                 explainBuilder.append("\n").append("{}");
                 explainBuilder.append("\n--------------------------------------  EXPLAIN   END  --------------------------------------");
                 log.info(explainBuilder.toString(), elapsedMillis, formattedSql, explainResult);
             }else {
-                // 暂无其他风险，不记录日志
+                explainBuilder.append("\n--------------------------------------  EXPLAIN START  --------------------------------------");
+                explainBuilder.append("\n执行计划优 --->   索引已命中，查询效率较高！");
+                explainBuilder.append("\n执行总耗时 --->   {} ms");
+                explainBuilder.append("\n执行SQL   --->   ").append("\n\t").append("{}");
+                explainBuilder.append("\n").append("{}");
+                explainBuilder.append("\n--------------------------------------  EXPLAIN   END  --------------------------------------");
+                log.info(explainBuilder.toString(), elapsedMillis, formattedSql, explainResult);
             }
 
         } catch (Exception ex) {

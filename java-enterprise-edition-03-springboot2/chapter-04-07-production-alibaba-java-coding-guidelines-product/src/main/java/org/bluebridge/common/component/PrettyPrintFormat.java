@@ -30,7 +30,7 @@ public class PrettyPrintFormat implements MessageFormattingStrategy {
 
         // 4. 构建SQL日志
         StringBuilder sqlBuilder = new StringBuilder();
-        sqlBuilder.append("\n--------------------------------------  SQL START  --------------------------------------");
+        sqlBuilder.append("\n--------------------------------------  SQL     START  --------------------------------------");
         if(SqlConstants.SHOW_ORIGINAL_SQL && prepared.length() != sql.length()) {
             sqlBuilder.append("\n原始SQL   --->   ").append("\n\t").append(prepared);
         }
@@ -39,7 +39,7 @@ public class PrettyPrintFormat implements MessageFormattingStrategy {
         sqlBuilder.append("\n慢查询阈值 --->   ").append(SqlConstants.SLOW_SQL_THRESHOLD).append(" ms");
         sqlBuilder.append("\n慢阈值来源 --->   ").append(SqlConstants.SLOW_SQL_THRESHOLD_TYPE.getType());
         sqlBuilder.append("\n是否慢查询 --->   ").append(elapsed > SqlConstants.SLOW_SQL_THRESHOLD ? "是" : "否");
-        sqlBuilder.append("\n--------------------------------------  SQL   END  --------------------------------------");
+        sqlBuilder.append("\n--------------------------------------  SQL       END  --------------------------------------");
 
         // 5. 高亮显示SQL日志
         sql = PrintUtils.highlight(sqlBuilder.toString());
