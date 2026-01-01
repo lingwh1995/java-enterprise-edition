@@ -4,6 +4,7 @@ import com.p6spy.engine.common.PreparedStatementInformation;
 import com.p6spy.engine.event.JdbcEventListener;
 import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.common.constant.SqlConstants;
+import org.bluebridge.common.util.SqlFormatterUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
@@ -62,7 +63,7 @@ public class SqlExplainListener extends JdbcEventListener {
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(explainSql)) {
 
-            StringBuilder analysisResult = new StringBuilder();
+            StringBuilder explainResult = new StringBuilder();
             boolean isDanger = false;
 
             while (rs.next()) {
@@ -76,25 +77,32 @@ public class SqlExplainListener extends JdbcEventListener {
                     isDanger = true;
                 }
 
-                analysisResult.append(String.format(
-                        "\n[Plan] -> Type: %s, Key: %s, Rows: %s, Extra: %s",
+                explainResult.append(String.format(
+                        "Plan分析  --->   Type: %s, Key: %s, Rows: %s, Extra: %s",
                         type, (key == null ? "NULL" : key), rows, extra
                 ));
             }
 
+            // 格式化 SQL
+            String formattedSql = SqlFormatterUtils.format(sql);
+
+            StringBuilder explainBuilder = new StringBuilder();
             // 3. 根据危险程度输出不同级别的日志
             if (isDanger) {
-                log.warn("\n【SQL索引警告】检测到全表扫描或风险操作！" +
-                        "\n执行耗时: {} ms" +
-                        "\n原始 SQL: {}" +
-                        "{}\n" +
-                        "---------------------------------------", elapsedMillis, sql, analysisResult);
+                explainBuilder.append("\n--------------------------------------  EXPLAIN START  --------------------------------------");
+                explainBuilder.append("\n全扫描警告 --->   检测到全表扫描或风险操作！");
+                explainBuilder.append("\n执行总耗时 --->   {} ms");
+                explainBuilder.append("\n执行SQL   --->   {}");
+                explainBuilder.append("\n").append("{}");
+                explainBuilder.append("\n--------------------------------------  EXPLAIN   END  --------------------------------------");
+                log.warn(explainBuilder.toString(), elapsedMillis, formattedSql, explainResult);
             } else if (elapsedMillis > SqlConstants.SLOW_SQL_THRESHOLD) {
-                log.info("\n【慢SQL分析】耗时超过阈值 ({}ms): {}ms" +
-                                "\nSQL: {}" +
-                                "{}\n" +
-                                "---------------------------------------",
-                        SqlConstants.SLOW_SQL_THRESHOLD, elapsedMillis, sql, analysisResult);
+                explainBuilder.append("\n--------------------------------------  EXPLAIN START  --------------------------------------");
+                explainBuilder.append("\n慢查询分析 --->   耗时超过阈值 ({}ms): {}ms");
+                explainBuilder.append("\n执行SQL   --->   {}");
+                explainBuilder.append("\n").append("{}");
+                explainBuilder.append("\n--------------------------------------  EXPLAIN   END  --------------------------------------");
+                log.info(explainBuilder.toString(), elapsedMillis, formattedSql, explainResult);
             }else {
                 // 暂无其他风险，不记录日志
             }

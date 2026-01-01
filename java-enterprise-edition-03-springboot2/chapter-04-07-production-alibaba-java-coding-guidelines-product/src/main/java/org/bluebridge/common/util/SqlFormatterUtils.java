@@ -1,6 +1,8 @@
 package org.bluebridge.common.util;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.db.sql.SqlFormatter;
+import org.bluebridge.common.constant.SqlConstants;
 
 /**
  * @author lingwh
@@ -10,15 +12,53 @@ import cn.hutool.core.util.StrUtil;
 public class SqlFormatterUtils {
 
     /**
-     * 手动简单美化
+     * 格式化SQL语句
      * @param sql
      * @return
      */
     public static String format(String sql) {
+        sql = cleanSql(sql);
+
+        // 3.格式化SQL
+        if (SqlConstants.PRETTY_PRINT_ENABLED) {
+            switch (SqlConstants.PRETTY_PRINT_STYLE) {
+                case HUTOOL:
+                    sql = SqlFormatter.format(sql);
+                    break;
+                case SELF:
+                    sql = formatSqlSelf(sql);
+                    break;
+                default:
+                    sql = SqlFormatter.format(sql);
+                    break;
+            }
+        }
+        return sql;
+    }
+
+    /**
+     * 清洗 SQL：去除换行、回车、制表符，并将多个连续空格压缩为一个
+     * @param sql 原始乱序 SQL
+     * @return 紧凑的一行 SQL
+     */
+    private static String cleanSql(String sql) {
+        if (StrUtil.isBlank(sql)) return sql;
+
+        return sql.replaceAll("[\\r\\n\\t]", " ") // 替换换行符、回车符、制表符为空格
+                .replaceAll("\\s+", " ")        // 将多个连续空格合并为一个
+                .trim();                        // 去除首尾空格
+    }
+
+    /**
+     * 手动简单美化SQL语句
+     * @param sql
+     * @return
+     */
+    private static String formatSqlSelf(String sql) {
         if (StrUtil.isBlank(sql)) return sql;
 
         // 1. 先进行基础格式化（不处理 AND）
-        String formattedSql = sql.trim()
+        sql = sql.trim()
                 .replaceAll("(?i)SELECT ", "SELECT\n        ")
                 .replaceAll("(?i) FROM ", "\n    FROM ")
                 .replaceAll("(?i) count\\(", "COUNT(")
@@ -37,22 +77,22 @@ public class SqlFormatterUtils {
 
 
         // 2. 关键逻辑：找到 WHERE 的位置，仅对 WHERE 之后的内容进行 AND 换行处理
-        int whereIndex = formattedSql.toUpperCase().lastIndexOf("WHERE");
+        int whereIndex = sql.toUpperCase().lastIndexOf("WHERE");
         if (whereIndex != -1) {
-            String beforeWhere = formattedSql.substring(0, whereIndex + 5);
-            String afterWhere = formattedSql.substring(whereIndex + 5);
+            String beforeWhere = sql.substring(0, whereIndex + 5);
+            String afterWhere = sql.substring(whereIndex + 5);
 
             // 只有在 WHERE 之后的 AND 才会被替换
             // 并且我们限制只替换到下一个主关键字（如 ORDER BY）之前的内容
             // 这里简单处理：对 WHERE 后的所有 AND 换行
             afterWhere = afterWhere.replaceAll("(?i)\\s+\\bAND\\b", "\n      AND");
 
-            formattedSql = beforeWhere + afterWhere;
+            sql = beforeWhere + afterWhere;
         }
 
         // 3. 格式化SQL 专门针对 INSERT INTO 结构的格式化
-        if (formattedSql.toUpperCase().startsWith("INSERT INTO")) {
-            formattedSql = formattedSql.trim()
+        if (sql.toUpperCase().startsWith("INSERT INTO")) {
+            sql = sql.trim()
                 .replaceAll("(?i)INSERT INTO ", "INSERT INTO ")
                 // 在表名后的左括号前换行
                 .replaceAll("(?i)\\s+\\(", "\n        (")
@@ -62,7 +102,7 @@ public class SqlFormatterUtils {
                 .replaceAll("(?i)VALUES\\s+\\(", "VALUES\n        (");
         }
 
-        return formattedSql;
+        return sql;
     }
 
 }
