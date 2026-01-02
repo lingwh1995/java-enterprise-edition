@@ -62,7 +62,6 @@
         <module>chapter-04-07-production-alibaba-java-coding-guidelines-product-1</module>
         <module>chapter-04-08-production-alibaba-java-coding-guidelines-product-2</module>
         <module>chapter-05-01-demo-restfulcrud</module>
-        <module>chapter-04-08-production-alibaba-java-coding-guidelines-generator</module>
     </modules>
 
     <properties>
