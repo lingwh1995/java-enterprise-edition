@@ -12,9 +12,4 @@ public enum SqlShowFormattedStyleEnum {
      */
     HUTOOL,
 
-    /**
-     * 自定义
-     */
-    SELF
-
 }

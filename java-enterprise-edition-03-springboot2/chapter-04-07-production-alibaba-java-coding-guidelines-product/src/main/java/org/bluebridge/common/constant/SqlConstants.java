@@ -1,6 +1,5 @@
 package org.bluebridge.common.constant;
 
-
 import org.bluebridge.common.enums.SlowSqlThresholdTypeEnum;
 import org.bluebridge.common.enums.SqlHighlightColorEnum;
 import org.bluebridge.common.enums.SqlShowFormattedStyleEnum;
@@ -25,12 +24,12 @@ public final class SqlConstants {
     /**
      * SQL 配置格式化打印SQL样式
      */
-    public static SqlShowFormattedStyleEnum PRETTY_PRINT_STYLE = SqlShowFormattedStyleEnum.SELF;
+    public static SqlShowFormattedStyleEnum PRETTY_PRINT_STYLE = SqlShowFormattedStyleEnum.HUTOOL;
 
     /**
      * SQL 配置格式化打印SQL颜色
      */
-    public static SqlHighlightColorEnum PRETTY_PRINT_COLOR = SqlHighlightColorEnum.RED;
+    public static SqlHighlightColorEnum PRETTY_PRINT_COLOR = SqlHighlightColorEnum.BLUE;
 
     /**
      * SQL 配置慢查询时间阈值参数类型
