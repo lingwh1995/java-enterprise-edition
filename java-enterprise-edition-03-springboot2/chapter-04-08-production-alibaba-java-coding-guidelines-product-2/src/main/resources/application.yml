@@ -1,0 +1,82 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /product
+  undertow:
+    # 1. 线程调优（核心！匹配CPU核心数）
+    io-threads: ${spring.processors:4}          # I/O线程数 = CPU核心数（如8核则设8）
+    worker-threads: ${spring.processors:4} * 8  # 工作线程数 = CPU核心数×8（8核则设64）
+    thread-name-prefix: undertow-http-          # 线程名前缀（便于排查）
+
+    # 2. 内存/缓冲区优化（减少拷贝）
+    buffer-size: 1024      # 缓冲区大小1KB（适配多数API请求）
+    direct-buffers: true   # 启用堆外内存（必开，提升读写效率）
+
+    # 3. 连接限制（防雪崩）
+    max-connections: 40000 # 最大并发连接数（根据服务器配置调整，如65535的70%）
+    no-request-timeout: 5  # 空闲连接超时5秒（释放无效连接）
+
+    # 4. HTTP协议优化（禁用老旧协议）
+    http:
+      disable-http10: true # 禁用HTTP1.0（仅保留HTTP1.1/2）
+      tcp-no-delay: true   # 禁用Nagle算法（减少网络延迟）
+
+spring:
+  profiles:
+    active: pro
+  application:
+    name: product
+
+logging:
+  config: classpath:log4j2-${spring.profiles.active}.xml
+
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: org.bluebridge.*.domain.entity
+  type-handlers-package: org.bluebridge.common.typehandler
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+
+boost:
+  security:
+    crypto:
+      pbkdf2:
+        enabled: true
+        algorithm: PBKDF2WithHmacSHA1
+        key-size-bits: 256
+        iteration-count: 10000
+  sql:
+    slow-sql-threshold: 1000    # 慢SQL阈值（毫秒）
+    show-original-sql: true     # 是否打印未填充参数的原始SQL
+    pretty-print-enabled: true  # 是否开启美化打印
+    pretty-print-style: hutool  # 美化打印样式（hutool、self）
+    pretty-print-color: green   # 美化打印颜色
+  dict:
+    load-on-startup: true # 是否启用字典缓存
+
+management:
+  server:
+    port: 9000
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: ${spring.application.name} # 给指标打上应用名标签
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: 'prometheus,health,info'     # 暴露 prometheus 端点
+
+sa-token:
+  token-name: token                # token名称 (同时也是cookie名称)
+  timeout: 2592000                 # token有效期，单位s 默认30天, -1代表永不过期
+  activity-timeout: -1             # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
+  is-concurrent: true              # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
+  is-share: false                  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
+  token-style: uuid                # token风格 uuid|random|simple-uuid|timestamp|random-key
+  is-log: true                     # 是否输出操作日志
+  is-print-exception: true         # 是否打印异常信息
+  is-read-cookie: true             # 是否从cookie中读取token

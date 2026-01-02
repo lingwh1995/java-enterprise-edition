@@ -1,12 +1,12 @@
-package org.bluebridge.service.impl;
+package org.bluebridge.system.service.impl;
 
-import org.bluebridge.common.component.CacheHolder;
 import org.bluebridge.common.domain.query.Query;
-import org.bluebridge.converter.DictConverter;
-import org.bluebridge.domain.entity.DictDO;
-import org.bluebridge.domain.vo.DictVO;
-import org.bluebridge.mapper.DictMapper;
-import org.bluebridge.service.DictService;
+import org.bluebridge.system.component.CacheHolder;
+import org.bluebridge.system.converter.DictConverter;
+import org.bluebridge.system.domain.entity.DictDO;
+import org.bluebridge.system.domain.vo.DictVO;
+import org.bluebridge.system.mapper.DictMapper;
+import org.bluebridge.system.service.DictService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

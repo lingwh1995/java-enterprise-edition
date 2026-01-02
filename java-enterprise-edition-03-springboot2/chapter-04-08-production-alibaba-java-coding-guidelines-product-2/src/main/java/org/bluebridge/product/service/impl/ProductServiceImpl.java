@@ -1,0 +1,155 @@
+package org.bluebridge.product.service.impl;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.bluebridge.common.domain.query.PageQuery;
+import org.bluebridge.common.domain.query.Query;
+import org.bluebridge.common.enums.ResponseStatusEnum;
+import org.bluebridge.common.exception.BusinessException;
+import org.bluebridge.product.converter.ProductConverter;
+import org.bluebridge.product.domain.dto.ProductCreateDTO;
+import org.bluebridge.product.domain.dto.ProductPatchDTO;
+import org.bluebridge.product.domain.dto.ProductQueryDTO;
+import org.bluebridge.product.domain.dto.ProductUpdateDTO;
+import org.bluebridge.product.domain.entity.ProductDO;
+import org.bluebridge.product.domain.vo.ProductVO;
+import org.bluebridge.product.mapper.ProductMapper;
+import org.bluebridge.product.service.ProductService;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+/**
+ * @author lingwh
+ * @desc
+ * @date 2025/12/13 11:10
+ */
+@Service
+public class ProductServiceImpl implements ProductService {
+    
+    @Resource
+    private ProductMapper productMapper;
+
+    @Resource
+    private ProductConverter productConverter;
+
+    @Override
+    public int createProduct(ProductCreateDTO productCreateDTO) {
+        // 使用 MapStruct 转换DTO为实体
+        ProductDO productDO = productConverter.toProductDO(productCreateDTO);
+        
+        // 保存到数据库
+        return productMapper.insertProduct(productDO);
+    }
+    
+    @Override
+    public int batchCreateProduct(List<ProductCreateDTO> productCreateDTOList) {
+        if (productCreateDTOList.isEmpty()) {
+            throw new BusinessException(ResponseStatusEnum.BAD_REQUEST, "商品列表不能为空");
+        }
+
+        List<ProductDO> productDOList = productConverter.toProductDOList(productCreateDTOList);
+        return productMapper.batchInsertProduct(productDOList);
+    }
+
+    @Override
+    public int deleteProductById(Long id) {
+        return productMapper.deleteProductById(id);
+    }
+
+    @Override
+    public int batchDeleteProduct(List<Long> ids) {
+        return productMapper.batchDeleteProduct(ids);
+    }
+
+    @Override
+    public int softDeleteProductById(Long id) {
+        // 逻辑删除商品
+        return productMapper.softDeleteProductById(id);
+    }
+
+    @Override
+    public int batchSoftDeleteProduct(List<Long> ids) {
+        return productMapper.batchSoftDeleteProduct(ids);
+    }
+
+    @Override
+    public int updateProductById(Long id, ProductUpdateDTO productUpdateDTO) {
+        // 1.查询用户是否存在（阿里手册：更新前先查，避免更新不存在的数据）
+        ProductDO productDO = productMapper.selectProductById(id);
+        if (productDO == null) {
+            throw new BusinessException(ResponseStatusEnum.NOT_FOUND, "商品不存在或已删除，ID: " + id);
+        }
+
+        // 2.转换DTO为实体（阿里手册：避免直接操作DTO）
+        productDO = productConverter.toProductDO(productUpdateDTO);
+        productDO.setId(id);
+
+        // 3.更新商品
+        return productMapper.updateProduct(productDO);
+    }
+
+    @Override
+    public int patchProductById(Long id, ProductPatchDTO productPatchDTO) {
+        // 1.查询用户是否存在（阿里手册：更新前先查，避免更新不存在的数据）
+        ProductDO productDO = productMapper.selectProductById(id);
+        if (productDO == null) {
+            throw new BusinessException(ResponseStatusEnum.NOT_FOUND, "商品不存在或已删除，ID: " + id);
+        }
+
+        // 2.转为实体
+        productDO = productConverter.toProductDO(productPatchDTO);
+
+        // 3.设置商品ID
+        productDO.setId(id);
+
+        // 4.更新商品
+        return productMapper.patchProduct(productDO);
+    }
+
+    @Override
+    public ProductVO getProductById(Long id) {
+        ProductDO productDO = productMapper.selectProductById(id);
+        if (productDO == null) {
+            throw new BusinessException(ResponseStatusEnum.NOT_FOUND, "商品不存在或已删除，ID: " + id);
+        }
+
+        return productConverter.toProductVO(productDO);
+    }
+    
+    @Override
+    public List<ProductVO> listProductByName(String name) {
+        List<ProductDO> productDOList = productMapper.selectProductListByName(name);
+        return productConverter.toProductVOList(productDOList);
+    }
+
+    @Override
+    public List<ProductVO> listProduct() {
+        List<ProductDO> productDOList = productMapper.selectProductList(null);
+        return productConverter.toProductVOList(productDOList);
+    }
+
+    @Override
+    public List<ProductVO> searchProduct(Query<ProductQueryDTO> query) {
+        List<ProductDO> productDOList = productMapper.selectProductList(query);
+        return productConverter.toProductVOList(productDOList);
+    }
+
+    @Override
+    public PageInfo<ProductVO> pageProduct(PageQuery<ProductQueryDTO> pageQuery) {
+        PageHelper.startPage(pageQuery.getPageNum(), pageQuery.getPageSize());
+
+        // 把分页查询参数转换为查询参数
+        Query<ProductQueryDTO> query = Query.<ProductQueryDTO>builder()
+                .conditions(pageQuery.getConditions())
+                .sortList(pageQuery.getSortList())
+                .build();
+
+        List<ProductDO> productDOList = productMapper.selectProductList(query);
+        PageInfo<ProductDO> dataSourceDOPageInfo = new PageInfo<>(productDOList);
+
+        return productConverter.toProductVOPageInfo(dataSourceDOPageInfo);
+    }
+
+}

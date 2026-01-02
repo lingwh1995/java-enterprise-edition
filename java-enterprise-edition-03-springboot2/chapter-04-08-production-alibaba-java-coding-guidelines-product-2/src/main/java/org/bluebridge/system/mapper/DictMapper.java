@@ -1,8 +1,8 @@
-package org.bluebridge.mapper;
+package org.bluebridge.system.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.bluebridge.common.domain.query.Query;
-import org.bluebridge.domain.entity.DictDO;
+import org.bluebridge.system.domain.entity.DictDO;
 
 import java.util.List;
 

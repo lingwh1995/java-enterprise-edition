@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/j2ee?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: HikariCP
+      connection-test-query: SELECT 1
+      connection-timeout: 20000
+      idle-timeout: 300000
+      max-lifetime: 1200000
+      maximum-pool-size: 20
+      minimum-idle: 5
+
+  redis:
+    host: localhost
+    port: 6379
+    database: 1
+
+decorator:
+  datasource:
+    enabled: true                                      # 是否开启 P6Spy 代理
+    p6spy:
+      enable-logging: true                             # 是否开启 P6Spy 日志记录
+      enable-event-listener: true                      # 是否开启 P6Spy 事件监听器
+      custom-event-listener-class: org.bluebridge.common.listener.SqlExplainListener # 配置 P6Spy 自定义事件监听器类
+
+sa-token:
+  timeout: -1                                           # token有效期，单位s 默认30天, -1代表永不过期
