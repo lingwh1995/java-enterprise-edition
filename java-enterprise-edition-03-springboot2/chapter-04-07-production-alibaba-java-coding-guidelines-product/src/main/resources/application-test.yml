@@ -21,16 +21,11 @@ spring:
 
 decorator:
   datasource:
-    # 是否开启 P6Spy 代理
-    enabled: false
+    enabled: false                                      # 是否开启 P6Spy 代理
     p6spy:
-      # 是否开启 P6Spy 日志记录
-      enable-logging: false
-      # 是否开启 P6Spy 事件监听器
-      enable-event-listener: true
-      # 配置 P6Spy 自定义事件监听器类
-      custom-event-listener-class: org.bluebridge.common.listener.SqlExplainListener
+      enable-logging: false                             # 是否开启 P6Spy 日志记录
+      enable-event-listener: true                       # 是否开启 P6Spy 事件监听器
+      custom-event-listener-class: org.bluebridge.common.listener.SqlExplainListener # 配置 P6Spy 自定义事件监听器类
 
 sa-token:
-  # token有效期，单位s 默认30天, -1代表永不过期
-  timeout: -1
+  timeout: -1                                           # token有效期，单位s 默认30天, -1代表永不过期

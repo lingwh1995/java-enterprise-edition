@@ -24,6 +24,8 @@ server:
 spring:
   profiles:
     active: pro
+  application:
+    name: product
 
 logging:
   config: classpath:log4j2-${spring.profiles.active}.xml
@@ -45,36 +47,36 @@ boost:
         key-size-bits: 256
         iteration-count: 10000
   sql:
-    # 慢SQL阈值（毫秒）
-    slow-sql-threshold: 1000
-    # 是否打印未填充参数的原始SQL
-    show-original-sql: true
-    # 是否开启美化打印
-    pretty-print-enabled: true
-    # 美化打印样式（hutool、self）
-    pretty-print-style: self
-    # 美化打印颜色
-    pretty-print-color: green
+    slow-sql-threshold: 1000    # 慢SQL阈值（毫秒）
+    show-original-sql: true     # 是否打印未填充参数的原始SQL
+    pretty-print-enabled: true  # 是否开启美化打印
+    pretty-print-style: hutool  # 美化打印样式（hutool、self）
+    pretty-print-color: green   # 美化打印颜色
   dict:
-    # 是否启用字典缓存
-    load-on-startup: true
+    load-on-startup: true # 是否启用字典缓存
+
+management:
+  server:
+    port: 9000
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: ${spring.application.name} # 给指标打上应用名标签
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: 'prometheus,health,info'     # 暴露 prometheus 端点
 
 sa-token:
-  # token名称 (同时也是cookie名称)
-  token-name: token
-  # token有效期，单位s 默认30天, -1代表永不过期
-  timeout: 2592000
-  # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
-  activity-timeout: -1
-  # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
-  is-concurrent: true
-  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
-  is-share: false
-  # token风格 uuid|random|simple-uuid|timestamp|random-key
-  token-style: uuid
-  # 是否输出操作日志
-  is-log: true
-  # 是否打印异常信息
-  is-print-exception: true
-  # 是否从cookie中读取token
-  is-read-cookie: true
+  token-name: token                # token名称 (同时也是cookie名称)
+  timeout: 2592000                 # token有效期，单位s 默认30天, -1代表永不过期
+  activity-timeout: -1             # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
+  is-concurrent: true              # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
+  is-share: false                  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
+  token-style: uuid                # token风格 uuid|random|simple-uuid|timestamp|random-key
+  is-log: true                     # 是否输出操作日志
+  is-print-exception: true         # 是否打印异常信息
+  is-read-cookie: true             # 是否从cookie中读取token
