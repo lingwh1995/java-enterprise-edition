@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>chapter-04-07-production-alibaba-java-coding-guidelines-product</artifactId>
+    <artifactId>chapter-04-07-production-alibaba-java-coding-guidelines-product-1</artifactId>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
