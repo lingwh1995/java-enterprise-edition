@@ -4,6 +4,11 @@ import org.bluebridge.common.enums.SlowSqlThresholdTypeEnum;
 import org.bluebridge.common.enums.SqlHighlightColorEnum;
 import org.bluebridge.common.enums.SqlShowFormattedStyleEnum;
 
+/**
+ * @author lingwh
+ * @desc SQL 配置常量
+ * @date 2025/1/03 18:59
+ */
 public final class SqlConstants {
 
     /**

@@ -1,4 +1,4 @@
-package org.bluebridge.common.util;
+package org.bluebridge.system.util;
 
 import org.bluebridge.system.constant.SqlConstants;
 

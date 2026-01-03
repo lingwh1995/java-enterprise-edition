@@ -3,7 +3,7 @@ package org.bluebridge.system.component;
 import cn.hutool.core.util.StrUtil;
 import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
 import org.bluebridge.system.constant.SqlConstants;
-import org.bluebridge.common.util.PrintUtils;
+import org.bluebridge.system.util.PrintUtils;
 import org.bluebridge.system.util.SqlFormatterUtils;
 
 /**
