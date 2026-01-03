@@ -11,9 +11,14 @@ import org.bluebridge.common.enums.ResponseStatusEnum;
 @Getter
 public class BusinessException extends RuntimeException {
 
-    /** 错误码 */
+    /**
+     * 错误码
+     */
     private final Integer code;
-    /** 扩展数据 */
+
+    /**
+     * 扩展数据
+     */
     private final Object data;
 
     /**
