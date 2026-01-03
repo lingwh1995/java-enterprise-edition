@@ -1,4 +1,4 @@
-package org.bluebridge.system.processor;
+package org.bluebridge.system.component;
 
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;

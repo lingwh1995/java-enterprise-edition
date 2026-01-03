@@ -1,4 +1,4 @@
-package org.bluebridge.common.processor;
+package org.bluebridge.common.component;
 
 import org.bluebridge.common.constant.Pbkdf2Constants;
 import org.springframework.boot.SpringApplication;

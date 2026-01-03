@@ -1,4 +1,4 @@
-package org.bluebridge.guard.processor;
+package org.bluebridge.guard.component;
 
 import org.bluebridge.guard.constant.Pbkdf2Constants;
 import org.springframework.boot.SpringApplication;
