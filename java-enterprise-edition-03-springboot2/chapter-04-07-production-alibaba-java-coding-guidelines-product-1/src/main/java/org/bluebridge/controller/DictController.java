@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  * @date 2025/12/10 14:30
  */
 @RestController
-@RequestMapping("/api/v1/dicts")
+@RequestMapping("/dicts")
 public class DictController {
 
     @Resource
