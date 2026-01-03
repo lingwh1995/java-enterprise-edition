@@ -50,7 +50,7 @@ boost:
     slow-sql-threshold: 1000    # 慢SQL阈值（毫秒）
     show-original-sql: true     # 是否打印未填充参数的原始SQL
     pretty-print-enabled: true  # 是否开启美化打印
-    pretty-print-style: hutool  # 美化打印样式（hutool、self）
+    pretty-print-style: hutool  # 美化打印样式（hutool）
     pretty-print-color: green   # 美化打印颜色
   dict:
     load-on-startup: true # 是否启用字典缓存
