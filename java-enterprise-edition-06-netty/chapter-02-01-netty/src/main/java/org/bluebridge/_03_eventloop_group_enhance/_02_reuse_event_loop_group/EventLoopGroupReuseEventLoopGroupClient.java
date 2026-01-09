@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author lingwh
- * @desc  创建多个Server时复用EventLoopGroup 客户端
+ * @desc  创建多个Client时复用EventLoopGroup 客户端（优化版）
  * @date 2025/9/23 11:58
  */
 @Slf4j
@@ -37,25 +37,37 @@ public class EventLoopGroupReuseEventLoopGroupClient {
      */
     private static final Integer PORT_THIRD = 8003;
 
-    public static void main(String[] args) throws InterruptedException {
-        EventLoopGroupReuseEventLoopGroupClient eventLoopGroupReuseEventLoopGroupClient = new EventLoopGroupReuseEventLoopGroupClient();
-        // 启动第一个客户端
-        eventLoopGroupReuseEventLoopGroupClient.startFirstClient();
-//        // 启动第二个客户端
-//        eventLoopGroupReuseEventLoopGroupClient.startSecondClient();
-//        // 启动第三个客户端
-//        eventLoopGroupReuseEventLoopGroupClient.startThirdClient();
+    /**
+     * 全局共享的EventLoopGroup（所有客户端复用），手动指定4个线程，优化资源占用
+     */
+    private final NioEventLoopGroup sharedEventLoopGroup = new NioEventLoopGroup(4);
+
+    public static void main(String[] args) {
+        EventLoopGroupReuseEventLoopGroupClient client = new EventLoopGroupReuseEventLoopGroupClient();
+        // 并发启动三个客户端（无阻塞，主线程快速执行）
+        client.startClient(HOST, PORT_FIRST, "这是发给第一个服务器的数据......");
+        client.startClient(HOST, PORT_SECOND, "这是发给第二个服务器的数据......");
+        client.startClient(HOST, PORT_THIRD, "这是发给第三个服务器的数据......");
+
+        // 应用退出时，统一关闭共享的EventLoopGroup（此处仅做演示，实际可通过钩子函数关闭）
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            log.info("开始优雅关闭共享EventLoopGroup......");
+            client.sharedEventLoopGroup.shutdownGracefully();
+            log.info("共享EventLoopGroup已关闭......");
+        }));
     }
 
     /**
-     * 启动第一个Netty客户端
+     * 启动客户端
+     * @param host
+     * @param port
+     * @param msg
      */
-    public void startFirstClient() throws InterruptedException {
-        // 创建EventLoopGroup实例并保持引用
-        NioEventLoopGroup group = new NioEventLoopGroup();
+    public void startClient(String host, Integer port, String msg) {
         try {
-            Channel channel = new Bootstrap()
-                .group(group)
+            Bootstrap bootstrap = new Bootstrap()
+                // 复用全局共享的EventLoopGroup
+                .group(sharedEventLoopGroup)
                 .channel(NioSocketChannel.class)
                 .handler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
@@ -64,80 +76,31 @@ public class EventLoopGroupReuseEventLoopGroupClient {
                         // 内部使用 CharBuffer.wrap(msg)
                         pipeline.addLast(new StringEncoder());
                     }
-                })
-                .connect(HOST, PORT_FIRST)
-                .sync()
-                .channel();
-            channel.writeAndFlush("这是发给第一个服务器的数据......");
-            
-            // 等待连接关闭，确保数据发送完成
-            channel.closeFuture().sync();
-        } finally {
-            // 关闭EventLoopGroup
-            group.shutdownGracefully();
+                });
+
+            // 异步连接服务器，避免阻塞主线程
+            bootstrap.connect(host, port).addListener(future -> {
+                if (future.isSuccess()) {
+                    // 连接成功，获取Channel并发送数据
+                    Channel channel = ((io.netty.channel.ChannelFuture) future).channel();
+                    channel.writeAndFlush(msg).addListener(writeFuture -> {
+                        if (writeFuture.isSuccess()) {
+                            log.info("客户端连接端口 {} 成功，数据发送完成：{}", port, msg);
+                        } else {
+                            log.error("客户端连接端口 {} 成功，但数据发送失败!", port, writeFuture.cause());
+                        }
+                    });
+
+                    // 异步监听连接关闭事件，不阻塞主线程
+                    channel.closeFuture().addListener(closeFuture -> {
+                        log.info("客户端连接端口 {} 已关闭", port);
+                    });
+                } else {
+                    log.error("客户端连接端口 {} 失败", port, future.cause());
+                }
+            });
+        } catch (Exception e) {
+            log.error("客户端启动异常（端口：{}）", port, e);
         }
     }
-
-    /**
-     * 启动第二个Netty客户端
-     */
-    public void startSecondClient() throws InterruptedException {
-        // 创建EventLoopGroup实例并保持引用
-        NioEventLoopGroup group = new NioEventLoopGroup();
-        try {
-            Channel channel = new Bootstrap()
-                .group(group)
-                .channel(NioSocketChannel.class)
-                .handler(new ChannelInitializer<NioSocketChannel>() {
-                    @Override
-                    protected void initChannel(NioSocketChannel ch) {
-                        ChannelPipeline pipeline = ch.pipeline();
-                        // 内部使用 CharBuffer.wrap(msg)
-                        pipeline.addLast(new StringEncoder());
-                    }
-                })
-                .connect(HOST, PORT_SECOND)
-                .sync()
-                .channel();
-            channel.writeAndFlush("这是发给第二个服务器的数据......");
-            
-            // 等待连接关闭，确保数据发送完成
-            channel.closeFuture().sync();
-        } finally {
-            // 关闭EventLoopGroup
-            group.shutdownGracefully();
-        }
-    }
-
-    /**
-     * 启动第三个Netty客户端
-     */
-    public void startThirdClient() throws InterruptedException {
-        // 创建EventLoopGroup实例并保持引用
-        NioEventLoopGroup group = new NioEventLoopGroup();
-        try {
-            Channel channel = new Bootstrap()
-                .group(group)
-                .channel(NioSocketChannel.class)
-                .handler(new ChannelInitializer<NioSocketChannel>() {
-                    @Override
-                    protected void initChannel(NioSocketChannel ch) {
-                        ChannelPipeline pipeline = ch.pipeline();
-                        // 内部使用 CharBuffer.wrap(msg)
-                        pipeline.addLast(new StringEncoder());
-                    }
-                })
-                .connect(HOST, PORT_THIRD)
-                .sync()
-                .channel();
-            channel.writeAndFlush("这是发给第三个服务器的数据......");
-            
-            // 等待连接关闭，确保数据发送完成
-            channel.closeFuture().sync();
-        } finally {
-            // 关闭EventLoopGroup
-            group.shutdownGracefully();
-        }
-    }
-
 }
