@@ -1,4 +1,4 @@
-package org.bluebridge._03_eventloop_group_enhance;
+package org.bluebridge._03_eventloop_group_enhance._01_handle_high_cost_task;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2025/9/23 13:47
  */
 @Slf4j
-public class EventLoopGroupEnhanceServer {
+public class EventLoopGroupHandleHighCostTaskServer {
 
     private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;

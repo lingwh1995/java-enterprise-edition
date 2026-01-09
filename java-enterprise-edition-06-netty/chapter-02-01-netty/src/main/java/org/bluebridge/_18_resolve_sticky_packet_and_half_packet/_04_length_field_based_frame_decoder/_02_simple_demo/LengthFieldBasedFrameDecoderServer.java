@@ -1,4 +1,4 @@
-package org.bluebridge._18_resolve_sticky_packet_and_half_packet._04_length_field_based_frame_decoder;
+package org.bluebridge._18_resolve_sticky_packet_and_half_packet._04_length_field_based_frame_decoder._02_simple_demo;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author lingwh
- * @desc 预设长度解码器解决黏包半包问题 服务端
+ * @desc 预设长度解码器解决黏包半包问题 - 案例一服务端（一个简单的示例）
  * @date 2025/10/14 11:47
  */
 @Slf4j

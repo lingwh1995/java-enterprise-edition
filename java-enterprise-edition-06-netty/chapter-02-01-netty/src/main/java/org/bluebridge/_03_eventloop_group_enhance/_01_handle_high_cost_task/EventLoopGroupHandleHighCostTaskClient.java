@@ -1,4 +1,4 @@
-package org.bluebridge._03_eventloop_group_enhance;
+package org.bluebridge._03_eventloop_group_enhance._01_handle_high_cost_task;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2025/9/23 11:58
  */
 @Slf4j
-public class EventLoopGroupEnhanceClient {
+public class EventLoopGroupHandleHighCostTaskClient {
 
     private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;
