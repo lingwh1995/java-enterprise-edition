@@ -20,12 +20,12 @@ import lombok.extern.slf4j.Slf4j;
 public class EventLoopGroupReuseEventLoopGroupServer {
 
     /**
-     * 全局线程池 - bossGroup
+     * 全局共享的EventLoopGroup（所有服务端端复用）
      */
     private final EventLoopGroup sharedBossGroup = new NioEventLoopGroup();
 
     /**
-     * 全局线程池 - workerGroup
+     * 全局共享的EventLoopGroup（所有服务端端复用）
      */
     private final EventLoopGroup sharedWorkerGroup = new NioEventLoopGroup();
 
