@@ -40,6 +40,8 @@ public class LengthFieldBasedFrameDecoderServer {
                         pipeline.addLast(new ChannelInboundHandlerAdapter() {
                             @Override
                             public void channelActive(ChannelHandlerContext ctx) throws Exception {
+                                // 打印整个 pipeline 的结构，即处理器链
+                                log.info("pipeline: {}", ctx.pipeline());
                                 log.info("connected {}", ctx.channel());
                                 super.channelActive(ctx);
                             }
