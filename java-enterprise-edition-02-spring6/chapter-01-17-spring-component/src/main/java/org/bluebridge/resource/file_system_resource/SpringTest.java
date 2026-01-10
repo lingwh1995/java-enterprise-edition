@@ -1,4 +1,4 @@
-package org.bluebridge.resource.filesystemresource;
+package org.bluebridge.resource.file_system_resource;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -19,4 +19,5 @@ public class SpringTest {
         String path = "D:\\repository\\workspace\\IDEA\\PERSONAL\\JavaEE2.0\\chapter-01-017-spring-component\\src\\main\\resources\\applicationContext-resource.xml";
         fileSystemResourceDemo.loadAndParseFileSystemResource(path);
     }
+
 }

@@ -1,4 +1,4 @@
-package org.bluebridge.resource.springioc;
+package org.bluebridge.resource.spring_ioc;
 
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.ResourceLoader;
@@ -25,4 +25,5 @@ public class SpringIocContainerAsResourceLoader implements ResourceLoaderAware {
     public ResourceLoader getResourceLoader() {
         return resourceLoader;
     }
+
 }

@@ -1,4 +1,4 @@
-package org.bluebridge.resource.autochoiceresource;
+package org.bluebridge.resource.auto_choice_resource;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -53,4 +53,5 @@ public class AutoChoiceResourceBySpringIoC {
             logger.info(new String(buffer));
         }
     }
+
 }

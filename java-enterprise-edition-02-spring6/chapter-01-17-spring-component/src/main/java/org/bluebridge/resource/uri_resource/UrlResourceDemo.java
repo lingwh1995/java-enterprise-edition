@@ -1,4 +1,4 @@
-package org.bluebridge.resource.uriresource;
+package org.bluebridge.resource.uri_resource;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -52,4 +52,5 @@ public class UrlResourceDemo {
             inputStream.close();
         }
     }
+
 }

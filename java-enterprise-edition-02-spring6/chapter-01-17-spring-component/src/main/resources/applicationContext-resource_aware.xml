@@ -7,5 +7,5 @@
         这个bean中有一个ResourceLoader类型的属性，正常来说，如果要使用这个属性是要我们手动给这个属性配置值的，
         但是这里我们没有做任何配置，这个属性还是被赋值了，是因为Spring的IoC容器将自身的引用赋值给这个属性了
     -->
-    <bean id="springIocContainerAsResourceLoader" class="org.bluebridge.resource.springioc.SpringIocContainerAsResourceLoader"/>
+    <bean id="springIocContainerAsResourceLoader" class="org.bluebridge.resource.spring_ioc.SpringIocContainerAsResourceLoader"/>
 </beans>

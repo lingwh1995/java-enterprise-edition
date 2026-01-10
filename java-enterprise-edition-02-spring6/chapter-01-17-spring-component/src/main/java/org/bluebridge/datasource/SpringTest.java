@@ -24,4 +24,5 @@ public class SpringTest {
         Connection connection = dataSource.getConnection();
         logger.info("Spring提供的数据源实现" + connection.toString());
     }
+
 }

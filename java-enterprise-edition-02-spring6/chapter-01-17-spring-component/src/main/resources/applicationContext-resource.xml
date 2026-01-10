@@ -4,11 +4,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- UrlResource-->
-    <bean id="urlResourceDemo" class="org.bluebridge.resource.uriresource.UrlResourceDemo"/>
+    <bean id="urlResourceDemo" class="org.bluebridge.resource.uri_resource.UrlResourceDemo"/>
 
     <!-- ClassPathResourceDemo-->
-    <bean id="classPathResourceDemo" class="org.bluebridge.resource.classpathresource.ClassPathResourceDemo"/>
+    <bean id="classPathResourceDemo" class="org.bluebridge.resource.class_path_resource.ClassPathResourceDemo"/>
 
     <!-- FileSystemResourceDemo-->
-    <bean id="fileSystemResourceDemo" class="org.bluebridge.resource.filesystemresource.FileSystemResourceDemo"/>
+    <bean id="fileSystemResourceDemo" class="org.bluebridge.resource.file_system_resource.FileSystemResourceDemo"/>
 </beans>

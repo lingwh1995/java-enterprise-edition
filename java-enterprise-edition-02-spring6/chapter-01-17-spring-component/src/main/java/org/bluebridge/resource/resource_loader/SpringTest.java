@@ -1,4 +1,4 @@
-package org.bluebridge.resource.resourceloader;
+package org.bluebridge.resource.resource_loader;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,4 +30,5 @@ public class SpringTest {
         Resource urlResource = applicationContext.getResource("http://www.baidu.com");
         logger.info(urlResource.getClass().getName());
     }
+
 }
