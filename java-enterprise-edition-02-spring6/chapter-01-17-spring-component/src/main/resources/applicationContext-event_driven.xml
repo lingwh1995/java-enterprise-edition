@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-                           http://www.springframework.org/schema/beans/spring-beans.xsd
-                           http://www.springframework.org/schema/context
-                           http://www.springframework.org/schema/context/spring-context.xsd">
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/task
+           http://www.springframework.org/schema/task/spring-task.xsd">
 
     <!-- 单独注册一下SpringUtils -->
     <bean id="springUtils" class="org.bluebridge.aware.SpringUtils"/>
 
     <!-- 启用组件扫描 -->
-    <context:component-scan base-package="org.bluebridge"/>
+    <context:component-scan base-package="org.bluebridge.event_driven" />
 
-    <!-- 可选：启用注解驱动 -->
-    <context:annotation-config/>
+    <!-- 可选：启用注解驱动(同步模式) -->
+    <!-- <context:annotation-config/> -->
+
+    <!-- 可选：启用注解驱动(异步模式) -->
+    <task:executor id="executor" pool-size="5-10" queue-capacity="100" />
+    <task:annotation-driven executor="executor" />
 </beans>

@@ -1,6 +1,5 @@
 package org.bluebridge.event_driven;
 
-import org.bluebridge.aware.SpringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
