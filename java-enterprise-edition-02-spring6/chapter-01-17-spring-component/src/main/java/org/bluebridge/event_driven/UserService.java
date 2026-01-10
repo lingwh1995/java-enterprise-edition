@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     public void register(String name) {
+        // 打印注册成功日志
         System.out.println("用户注册成功：" + name);
         // 使用 SpringUtils 发布事件，或者注入 ApplicationEventPublisher
         SpringUtils.publishEvent(new UserRegisterEvent(this, name));

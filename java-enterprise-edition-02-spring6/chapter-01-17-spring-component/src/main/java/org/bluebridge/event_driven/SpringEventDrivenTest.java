@@ -3,6 +3,7 @@ package org.bluebridge.event_driven;
 import org.bluebridge.aware.SpringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -17,13 +18,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = "classpath:applicationContext-event_driven.xml")
 public class SpringEventDrivenTest {
 
+    @Autowired
+    private UserService userService;
+
     /**
      * 测试 Spring 工具类
      */
     @Test
     public void testSpringUtils() {
         // 发布事件
-        SpringUtils.publishEvent(new UserRegisterEvent(this, "TestUser"));
+        userService.register("zhangsan");
     }
 
 }

@@ -18,13 +18,14 @@ public class MessageListener {
      */
     @EventListener
     public void sendEmail(UserRegisterEvent event) {
-        System.out.println("【邮件服务】给 " + event.getUsername() + " 发送欢迎邮件");
+        System.out.println("邮件服务 开始处理注册事件......");
+        System.out.println(String.format("邮件服务 给 %s 发送欢迎邮件", event.getUsername()));
     }
 
     @Async // 如果想异步执行，不阻塞主流程，加这个注解
     @EventListener
     public void addScore(UserRegisterEvent event) {
-        System.out.println("【积分服务】给 " + event.getUsername() + " 增加 100 积分");
+        System.out.println(String.format("积分服务 给 %s 增加 100 积分", event.getUsername()));
     }
 
 }
