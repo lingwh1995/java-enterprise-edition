@@ -88,6 +88,7 @@
         <swagger-bootstrap-ui.version>1.9.1</swagger-bootstrap-ui.version>
         <netty.version>4.1.39.Final</netty.version>
         <protobuf.version>4.33.0</protobuf.version>
+        <protobuf.spring.version>1.4</protobuf.spring.version>
     </properties>
 
     <dependencyManagement>
@@ -214,6 +215,12 @@
                 <groupId>com.google.protobuf</groupId>
                 <artifactId>protobuf-java-util</artifactId>
                 <version>${protobuf.version}</version>
+            </dependency>
+            <!-- Protobuf与Spring集成工具 -->
+            <dependency>
+                <groupId>com.googlecode.protobuf-java-format</groupId>
+                <artifactId>protobuf-java-format</artifactId>
+                <version>${protobuf.spring.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
