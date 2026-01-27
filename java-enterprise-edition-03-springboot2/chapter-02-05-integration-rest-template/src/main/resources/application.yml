@@ -11,7 +11,7 @@ http:
   connectTimeout: 5000
   connectionRequestTimeout: 5000
   # 服务器返回数据(response)的时间，超过抛出read timeout
-  socketTimeout: 500
+  socketTimeout: 5000
   # 提交前检测是否可用
   staleConnectionCheckEnabled: true
   # 最大空闲时间
