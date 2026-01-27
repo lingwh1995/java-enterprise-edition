@@ -1,4 +1,4 @@
-package org.bluebridge.resource.filesystemresource;
+package org.bluebridge.resource.file_system_resource;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

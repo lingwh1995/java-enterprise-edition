@@ -75,6 +75,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>6.0.6</spring.version>
         <log4j.version>2.19.0</log4j.version>
+        <lombok.version>1.18.30</lombok.version>
         <junit4.version>4.12</junit4.version>
         <junit5.version>5.10.0</junit5.version>
         <jakarta.annotation-api.version>2.1.1</jakarta.annotation-api.version>
@@ -130,7 +131,20 @@
                 <artifactId>log4j-core</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j2-impl</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
             <!-- log4j结束 -->
+
+            <!-- lombok开始 -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <!-- lombok结束 -->
 
             <!-- junit开始 -->
             <dependency>

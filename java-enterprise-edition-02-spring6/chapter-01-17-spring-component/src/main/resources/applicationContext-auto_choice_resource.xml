@@ -7,7 +7,7 @@
         让Spring的IoC容器根据配置的value的值的前缀自动选择创建什么类型的Resource的实现类
         放开哪个注释，就会创建哪个value的值对应的Resource解析器
     -->
-    <bean id="autoChoiceResourceBySpringIoC" class="org.bluebridge.resource.autochoiceresource.AutoChoiceResourceBySpringIoC">
+    <bean id="autoChoiceResourceBySpringIoC" class="org.bluebridge.resource.auto_choice_resource.AutoChoiceResourceBySpringIoC">
         <!--<property name="resource" value="classpath:applicationContext-resource.xml"/>-->
         <!-- 注意:这个路径放开会报错，但是代码没有问题，报错是因为file开头的路径写的不正确，这个不要在意 -->
         <!--<property name="resource" value="file:applicationContext-resource.xml"/>-->

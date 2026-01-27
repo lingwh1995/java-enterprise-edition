@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <Configuration status="WARN">
+
     <Appenders>
-        <!-- 配置输出目标为 Console（控制台） -->
         <Console name="Console" target="SYSTEM_OUT">
-            <!-- 日志信息输出格式 -->
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
     </Appenders>
 
     <Loggers>
-        <!-- 配置根日志，设置日志级别和输出目标 -->
-        <!--trace < debug < info < warn < error < fatal < off-->
         <Root level="info">
             <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
 </Configuration>
-

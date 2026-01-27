@@ -1,4 +1,4 @@
-package org.bluebridge.resource.autochoiceresource;
+package org.bluebridge.resource.auto_choice_resource;
 
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -12,9 +12,10 @@ public class SpringTest {
      */
     @Test
     public void testAutoChoiceResourceBySpringIoC() throws IOException {
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext-autochoiceresource.xml");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext-auto_choice_resource.xml");
         //让Spring容器根据
         AutoChoiceResourceBySpringIoC autoChoiceResourceBySpringIoC = applicationContext.getBean("autoChoiceResourceBySpringIoC", AutoChoiceResourceBySpringIoC.class);
         autoChoiceResourceBySpringIoC.parseResource();
     }
+
 }

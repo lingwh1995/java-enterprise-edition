@@ -1,4 +1,4 @@
-package org.bluebridge.resource.uriresource;
+package org.bluebridge.resource.uri_resource;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;

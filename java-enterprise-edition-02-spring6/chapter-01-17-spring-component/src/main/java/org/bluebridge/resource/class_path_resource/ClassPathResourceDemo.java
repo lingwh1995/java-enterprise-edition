@@ -1,4 +1,4 @@
-package org.bluebridge.resource.classpathresource;
+package org.bluebridge.resource.class_path_resource;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

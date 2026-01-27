@@ -51,7 +51,6 @@
         <dependency>
             <groupId>com.googlecode.protobuf-java-format</groupId>
             <artifactId>protobuf-java-format</artifactId>
-            <version>1.4</version>
         </dependency>
     </dependencies>
 

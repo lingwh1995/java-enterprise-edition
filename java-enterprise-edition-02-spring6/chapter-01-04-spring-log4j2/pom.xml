@@ -32,6 +32,23 @@
         </dependency>
         <!-- log4j结束 -->
 
+        <!-- Log4j2 核心依赖 -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
+
+        <!-- log4j开始 -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j2-impl</artifactId>
+        </dependency>
+        <!-- log4j结束 -->
+
         <!-- junit开始 -->
         <dependency>
             <groupId>junit</groupId>

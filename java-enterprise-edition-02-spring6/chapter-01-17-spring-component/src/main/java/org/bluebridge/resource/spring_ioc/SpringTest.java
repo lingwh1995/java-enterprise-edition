@@ -1,4 +1,4 @@
-package org.bluebridge.resource.springioc;
+package org.bluebridge.resource.spring_ioc;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,7 +18,7 @@ public class SpringTest {
     @Test
     public void testSpringIocContainerAsResourceLoader() {
         //Spring的IoC容器的实例
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext-resourceaware.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext-resource_aware.xml");
         //从Spring的IoC容器中共获取ResourceLoaderAware的实现类
         SpringIocContainerAsResourceLoader springIocContainerAsResourceLoader = applicationContext.getBean("springIocContainerAsResourceLoader", SpringIocContainerAsResourceLoader.class);
         //获取ResourceLoaderAware的实现类中的ResourceLoader类型的属性的值
@@ -36,4 +36,5 @@ public class SpringTest {
         Resource urlResource = resourceLoader.getResource("http://www.baidu.com");
         logger.info(urlResource.getClass().getName());
     }
+
 }
