@@ -1,7 +1,9 @@
 package org.bluebridge.service.impl;
 
-import org.bluebridge.common.component.CacheHolder;
+import com.alicp.jetcache.anno.Cached;
+import org.bluebridge.common.constant.CacheKeyConstants;
 import org.bluebridge.common.domain.query.Query;
+import org.bluebridge.common.util.SpringUtils;
 import org.bluebridge.converter.DictConverter;
 import org.bluebridge.domain.entity.DictDO;
 import org.bluebridge.domain.vo.DictVO;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author lingwh
@@ -24,17 +27,29 @@ public class DictServiceImpl implements DictService {
     private DictMapper dictMapper;
 
     @Resource
-    private CacheHolder<DictDO> cacheHolder;
-
-    @Resource
     private DictConverter dictConverter;
 
     @Override
     public DictVO getDictByDictCode(String dictCode) {
-        DictDO dictDO = cacheHolder.get(dictCode).orElse(null);
-        return dictConverter.toDictVO(dictDO);
+        // 1. 查询dictDOList，如果有缓存则从缓存中获取dictDOList
+        // 2. 在 dictDOList 中找到 dictCode 对应的 dictDO
+        // 3. 把 dictDO 转换为 DictVO并返回
+        List<DictDO> dictDOList = SpringUtils.getBean(DictService.class).searchDict(null);
+        return dictDOList.stream().filter(dictDO -> dictDO.getDictCode().equals(dictCode))
+                .findFirst().map(dictDO -> dictConverter.toDictVO(dictDO))
+                .get();
     }
 
+    /*
+    // 指定使用本地缓存
+    @Cached(name = ":dict:search_dict", key = CacheKeyConstants.CACHE_KEY, cacheType = CacheType.LOCAL, expire = 1, timeUnit = TimeUnit.DAYS)
+    // 指定使用远程缓存
+    @Cached(name = ":dict:search_dict", key = CacheKeyConstants.CACHE_KEY, cacheType = CacheType.REMOTE, expire = 1, timeUnit = TimeUnit.DAYS)
+    // 指定使用二级缓存
+    @Cached(name = ":dict:search_dict", key = CacheKeyConstants.CACHE_KEY, cacheType = CacheType.BOTH, expire = 1, timeUnit = TimeUnit.DAYS)
+    */
+    // 使用配置文件中默认配置
+    @Cached(name = ":dict:search_dict", key = CacheKeyConstants.CACHE_KEY, expire = 1, timeUnit = TimeUnit.DAYS)
     @Override
     public List<DictDO> searchDict(Query<DictDO> query) {
         return dictMapper.selectDictListWithJoin(query);

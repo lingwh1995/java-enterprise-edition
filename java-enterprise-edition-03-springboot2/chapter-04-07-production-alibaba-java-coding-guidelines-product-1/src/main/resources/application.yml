@@ -84,3 +84,32 @@ sa-token:
   is-log: true                     # 是否输出操作日志
   is-print-exception: true         # 是否打印异常信息
   is-read-cookie: true             # 是否从cookie中读取token
+
+jetcache:                                           # JetCache 原生基础配置 (针对全局存储)
+  statIntervalMinutes: 1                            # 统计间隔，0表示关闭
+  areaInCacheName: false                            # 是否将 area 作为缓存名称前缀
+  local:                                            # 本地缓存配置（仅当 default-cache-type 为 local/twoLevel 时生效）
+    default:                                        # 默认本地缓存区域
+      type: caffeine                                # 支持 caffeine, linkedhashmap
+      keyConvertor: fastjson2                       # 序列化方式
+      limit: 1000                                   # 最大个数
+      defaultExpireInSeconds: 3600                  # 原生默认过期时间（单位：秒）
+      keyPrefix: ${spring.application.name}:local   # 缓存前缀
+  remote:                                           # 远程缓存配置（仅当 default-cache-type 为 remote/twoLevel 时生效）
+    default:                                        # 默认远程缓存区域
+      type: redis
+      keyConvertor: fastjson2                       # 指定key编码器
+      valueEncoder: kryo                            # 指定value解码器
+      valueDecoder: kryo                            # 指定value编码器
+      host: ${spring.redis.host}
+      port: ${spring.redis.port}
+      #password: ${spring.data.redis.password}
+      database: ${spring.redis.database}
+      poolConfig:
+        minIdle: 5                                  # Redis 连接池最小空闲连接
+        maxIdle: 20                                 # 最大空闲连接
+        maxTotal: 50                                # 最大总连接数
+      defaultExpireInSeconds: 3600                  # 原生默认过期时间（单位：秒）
+      keyPrefix: ${spring.application.name}:remote  # 缓存前缀
+      # 指定广播频道的名称，解决分布式数据一致性的关键机制，最佳方案：与 应用名 + 环境名 挂钩
+      broadcastChannel: ${spring.application.name}:${spring.profiles.active}:cache_sync
