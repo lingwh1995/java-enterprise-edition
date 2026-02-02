@@ -10,6 +10,6 @@ public class CacheKeyConstants {
     /**
      * 定义静态常量，抽离完整的key名称
      */
-    public static final String CACHE_KEY = "T(com.studio.mybatis.common.util.CacheKeyUtils).generateKey(#root.args)";
+    public static final String CACHE_KEY = "T(org.bluebridge.common.util.CacheKeyUtils).generateKey(#root.args)";
 
 }

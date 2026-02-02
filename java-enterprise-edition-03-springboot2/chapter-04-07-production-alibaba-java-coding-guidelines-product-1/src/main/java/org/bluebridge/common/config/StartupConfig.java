@@ -1,7 +1,6 @@
 package org.bluebridge.common.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.bluebridge.common.component.CacheHolder;
 import org.bluebridge.common.constant.SqlConstants;
 import org.bluebridge.common.enums.SlowSqlThresholdTypeEnum;
 import org.bluebridge.domain.entity.DictDO;
@@ -23,13 +22,10 @@ import java.util.TimeZone;
  */
 @Slf4j
 @Configuration
-public class SystemStartupConfig {
+public class StartupConfig {
 
     @Resource
     private DictService dictService;
-
-    @Resource
-    private CacheHolder<DictDO> cacheHolder;
 
     @Resource
     private JdbcTemplate jdbcTemplate;
@@ -123,7 +119,6 @@ public class SystemStartupConfig {
             log.info(" ===>   正在加载字典数据......");
             // 缓存字典到缓存中
             List<DictDO> dictDOList = dictService.searchDict(null);
-            dictDOList.forEach(dictDO -> cacheHolder.put(dictDO.getDictCode(), dictDO));
         }
     }
 
