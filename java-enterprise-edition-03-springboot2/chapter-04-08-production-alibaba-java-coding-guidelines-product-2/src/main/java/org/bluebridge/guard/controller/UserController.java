@@ -23,7 +23,7 @@ import java.security.spec.InvalidKeySpecException;
  * @date 2025/11/22 17:30
  */
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/users")
 public class UserController {
 
     @Resource

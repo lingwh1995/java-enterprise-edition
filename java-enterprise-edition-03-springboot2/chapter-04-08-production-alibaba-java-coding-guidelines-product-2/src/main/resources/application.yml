@@ -39,6 +39,8 @@ mybatis:
     cache-enabled: true
 
 boost:
+  api:
+    base-path: /api/v1          # @RequestMapping路径前缀
   security:
     crypto:
       pbkdf2:

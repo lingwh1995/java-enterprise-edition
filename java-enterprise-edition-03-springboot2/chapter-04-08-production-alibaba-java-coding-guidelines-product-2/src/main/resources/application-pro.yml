@@ -25,7 +25,7 @@ decorator:
     p6spy:
       enable-logging: false                             # 是否开启 P6Spy 日志记录
       enable-event-listener: true                       # 是否开启 P6Spy 事件监听器
-      custom-event-listener-class: org.bluebridge.common.listener.SqlExplainListener # 配置 P6Spy 自定义事件监听器类
+      custom-event-listener-class: org.bluebridge.monitor.listener.SqlExplainListener # 配置 P6Spy 自定义事件监听器类
 
 
 sa-token:
