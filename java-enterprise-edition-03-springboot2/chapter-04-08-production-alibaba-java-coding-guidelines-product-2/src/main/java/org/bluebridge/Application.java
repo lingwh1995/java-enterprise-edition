@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("org.bluebridge.*.mapper")
-@EnableMethodCache(basePackages = "org.bluebridge.*.service")  // 启用方法缓存
+@EnableMethodCache(basePackages = "org.bluebridge")  // 启用方法缓存
 @EnableCreateCacheAnnotation  // 启用创建缓存注解(可选)
 public class Application {
 
