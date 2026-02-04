@@ -42,14 +42,14 @@ public class DictServiceImpl implements DictService {
 
     /*
     // 指定使用本地缓存
-    @Cached(name = ":dict:search_dict", key = CacheKeyConstants.CACHE_KEY, cacheType = CacheType.LOCAL, expire = 1, timeUnit = TimeUnit.DAYS)
+    @Cached(name = ":dict:search_dict", key = CacheKeyConstants.CACHE_KEY, cacheType = CacheType.LOCAL, expire = 24, timeUnit = TimeUnit.HOURS)
     // 指定使用远程缓存
-    @Cached(name = ":dict:search_dict", key = CacheKeyConstants.CACHE_KEY, cacheType = CacheType.REMOTE, expire = 1, timeUnit = TimeUnit.DAYS)
+    @Cached(name = ":dict:search_dict", key = CacheKeyConstants.CACHE_KEY, cacheType = CacheType.REMOTE, expire = 24, timeUnit = TimeUnit.HOURS)
     // 指定使用二级缓存
-    @Cached(name = ":dict:search_dict", key = CacheKeyConstants.CACHE_KEY, cacheType = CacheType.BOTH, expire = 1, timeUnit = TimeUnit.DAYS)
+    @Cached(name = ":dict:search_dict", key = CacheKeyConstants.CACHE_KEY, cacheType = CacheType.BOTH, expire = 24, timeUnit = TimeUnit.HOURS)
     */
     // 使用配置文件中默认配置
-    @Cached(name = ":dict:search_dict", key = CacheKeyConstants.CACHE_KEY, expire = 1, timeUnit = TimeUnit.DAYS)
+    @Cached(name = ":dict:search_dict", key = CacheKeyConstants.CACHE_KEY, expire = 24, timeUnit = TimeUnit.HOURS)
     @Override
     public List<DictDO> searchDict(Query<DictDO> query) {
         return dictMapper.selectDictListWithJoin(query);

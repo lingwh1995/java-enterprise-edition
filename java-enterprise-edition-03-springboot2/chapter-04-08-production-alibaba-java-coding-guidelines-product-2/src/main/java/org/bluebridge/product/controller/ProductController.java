@@ -30,7 +30,7 @@ import java.util.List;
  */
 @Validated
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/products")
 public class ProductController {
     
     @Resource
