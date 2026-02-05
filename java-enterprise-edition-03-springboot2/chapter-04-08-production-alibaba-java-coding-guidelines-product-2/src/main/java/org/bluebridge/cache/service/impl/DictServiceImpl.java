@@ -3,12 +3,12 @@ package org.bluebridge.cache.service.impl;
 import com.alicp.jetcache.anno.Cached;
 import org.bluebridge.cache.constant.CacheKeyConstants;
 import org.bluebridge.common.domain.query.Query;
-import org.bluebridge.cache.component.CacheHolder;
 import org.bluebridge.cache.converter.DictConverter;
 import org.bluebridge.cache.domain.entity.DictDO;
 import org.bluebridge.cache.domain.vo.DictVO;
 import org.bluebridge.cache.mapper.DictMapper;
 import org.bluebridge.cache.service.DictService;
+import org.bluebridge.common.util.SpringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -27,15 +27,17 @@ public class DictServiceImpl implements DictService {
     private DictMapper dictMapper;
 
     @Resource
-    private CacheHolder<DictDO> cacheHolder;
-
-    @Resource
     private DictConverter dictConverter;
 
     @Override
     public DictVO getDictByDictCode(String dictCode) {
-        DictDO dictDO = cacheHolder.get(dictCode).orElse(null);
-        return dictConverter.toDictVO(dictDO);
+        // 1. 查询dictDOList，如果有缓存则从缓存中获取dictDOList
+        // 2. 在 dictDOList 中找到 dictCode 对应的 dictDO
+        // 3. 把 dictDO 转换为 DictVO并返回
+        List<DictDO> dictDOList = SpringUtils.getBean(DictService.class).searchDict(null);
+        return dictDOList.stream().filter(dictDO -> dictDO.getDictCode().equals(dictCode))
+                .findFirst().map(dictDO -> dictConverter.toDictVO(dictDO))
+                .get();
     }
 
     /*
