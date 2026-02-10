@@ -34,6 +34,7 @@ public class DictServiceImpl implements DictService {
         // 1. 查询dictDOList，如果有缓存则从缓存中获取dictDOList
         // 2. 在 dictDOList 中找到 dictCode 对应的 dictDO
         // 3. 把 dictDO 转换为 DictVO并返回
+        // 为了使代理生效，这里必须通过 SpringUtils 获取 bean
         List<DictDO> dictDOList = SpringUtils.getBean(DictService.class).searchDict(null);
         return dictDOList.stream().filter(dictDO -> dictDO.getDictCode().equals(dictCode))
                 .findFirst().map(dictDO -> dictConverter.toDictVO(dictDO))
