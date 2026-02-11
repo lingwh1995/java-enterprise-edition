@@ -100,6 +100,8 @@ jetcache:                                           # JetCache 原生基础配�
   remote:                                           # 远程缓存配置（仅当 default-cache-type 为 remote/twoLevel 时生效）
     default:                                        # 默认远程缓存区域
       type: redis
+      config:
+        timeout: 10000                              # 设置超时时间为 10 秒
       keyConvertor: fastjson2                       # 指定key编码器
       valueEncoder: kryo                            # 指定value解码器
       valueDecoder: kryo                            # 指定value编码器
