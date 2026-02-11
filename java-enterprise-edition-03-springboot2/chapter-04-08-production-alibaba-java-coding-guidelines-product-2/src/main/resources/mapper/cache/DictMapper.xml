@@ -84,4 +84,34 @@
         </choose>
     </select>
 
+    <!-- 根据条件查询商品列表 -->
+    <select id="selectDictList" resultType="dictDO">
+        SELECT
+            d.id,
+            d.dict_code,
+            d.dict_name,
+            d.dict_type,
+            d.dict_status,
+            d.dict_desc,
+            d.sort_order,
+            d.create_user,
+            d.create_time,
+            d.update_user,
+            d.update_time,
+        FROM t_sys_dict d
+        <where>
+            d.is_deleted = 0
+            <if test="conditions != null">
+                <if test="conditions.dict_code != null and conditions.dict_code != ''">
+                    AND dict_code LIKE CONCAT('%', #{conditions.dict_code}, '%')
+                </if>
+                <if test="conditions.dict_name != null and conditions.dict_name != ''">
+                    AND dict_name LIKE CONCAT('%', #{conditions.dict_name}, '%')
+                </if>
+                <if test="conditions.dict_type != null and conditions.dict_type != ''">
+                    AND dict_type LIKE CONCAT('%', #{conditions.dict_type}, '%')
+                </if>
+            </if>
+        </where>
+    </select>
 </mapper>

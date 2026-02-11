@@ -4,15 +4,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * @author lingwh
- * @desc 字典类型
- * @date 2025/11/15 19:19
+ * @desc 字典数据
+ * @date 2025/11/15 19:20
  */
 @Data
-public class DictVO {
+public class DictDataVO {
 
     /**
      * 主键
@@ -25,34 +24,34 @@ public class DictVO {
     private String dictCode;
 
     /**
-     * 字典名称
+     * 字典标签
      */
-    private String dictName;
+    private String dictLabel;
 
     /**
-     * 字典类型 0:系统字典 1:业务字典
+     * 字典值
      */
-    private Integer dictType;
+    private String dictValue;
 
     /**
-     * 字典状态 0:正常 1:停用
+     * 是否默认 0:是 1:否
+     */
+    private Integer isDefault;
+
+    /**
+     * 字典数据状态 0:正常 1:停用
      */
     private Integer dictStatus;
 
     /**
-     * 字典描述
+     * 字典数据描述
      */
-    private String dictDesc;
+    private String dictDataDesc;
 
     /**
      * 排序
      */
     private Integer sortOrder;
-
-    /**
-     * 字典数据列表
-     */
-    private List<DictDataVO> dictDataList;
 
     /**
      * 创建时间
@@ -65,4 +64,5 @@ public class DictVO {
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime updateTime;
+
 }

@@ -1,7 +1,7 @@
 package org.bluebridge.service;
 
 import org.bluebridge.common.domain.query.Query;
-import org.bluebridge.domain.entity.DictDO;
+import org.bluebridge.domain.dto.DictQueryDTO;
 import org.bluebridge.domain.vo.DictVO;
 
 import java.util.List;
@@ -21,10 +21,17 @@ public interface DictService {
     DictVO getDictByDictCode(String dictCode);
 
     /**
+     * 关联查询字典列表
+     * @param query 查询条件
+     * @return 字典列表
+     */
+    List<DictVO> listDictWithJoin(Query<DictQueryDTO> query);
+
+    /**
      * 查询字典列表
      * @param query 查询条件
      * @return 字典列表
      */
-    List<DictDO> searchDict(Query<DictDO> query);
+    List<DictVO> listDict(Query<DictQueryDTO> query);
 
 }

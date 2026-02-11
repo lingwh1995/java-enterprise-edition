@@ -1,8 +1,9 @@
 package org.bluebridge.cache.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.bluebridge.common.domain.query.Query;
+import org.bluebridge.cache.domain.dto.DictQueryDTO;
 import org.bluebridge.cache.domain.entity.DictDO;
+import org.bluebridge.common.domain.query.Query;
 
 import java.util.List;
 
@@ -14,6 +15,8 @@ import java.util.List;
 @Mapper
 public interface DictMapper {
 
-    List<DictDO> selectDictListWithJoin(Query<DictDO> query);
+    List<DictDO> selectDictListWithJoin(Query<DictQueryDTO> query);
+
+    List<DictDO> selectDictList(Query<DictQueryDTO> query);
 
 }

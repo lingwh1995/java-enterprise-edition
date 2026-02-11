@@ -4,6 +4,8 @@ import org.bluebridge.cache.domain.entity.DictDO;
 import org.bluebridge.cache.domain.vo.DictVO;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 /**
  * @author lingwh
  * @desc 字典对象映射器
@@ -19,5 +21,12 @@ public interface DictConverter {
      * @return
      */
     DictVO toDictVO(DictDO dictDO);
+
+    /**
+     * 将 DictDOList 转换为 DictVOList
+     * @param dictDOList
+     * @return
+     */
+    List<DictVO> toDictVOList(List<DictDO> dictDOList);
 
 }

@@ -5,6 +5,7 @@ import org.bluebridge.common.constant.CacheKeyConstants;
 import org.bluebridge.common.domain.query.Query;
 import org.bluebridge.common.util.SpringUtils;
 import org.bluebridge.converter.DictConverter;
+import org.bluebridge.domain.dto.DictQueryDTO;
 import org.bluebridge.domain.entity.DictDO;
 import org.bluebridge.domain.vo.DictVO;
 import org.bluebridge.mapper.DictMapper;
@@ -31,13 +32,9 @@ public class DictServiceImpl implements DictService {
 
     @Override
     public DictVO getDictByDictCode(String dictCode) {
-        // 1. 查询dictDOList，如果有缓存则从缓存中获取dictDOList
-        // 2. 在 dictDOList 中找到 dictCode 对应的 dictDO
-        // 3. 把 dictDO 转换为 DictVO并返回
-        // 为了使代理生效，这里必须通过 SpringUtils 获取 bean
-        List<DictDO> dictDOList = SpringUtils.getBean(DictService.class).searchDict(null);
-        return dictDOList.stream().filter(dictDO -> dictDO.getDictCode().equals(dictCode))
-                .findFirst().map(dictDO -> dictConverter.toDictVO(dictDO))
+        List<DictVO> dictVOList = SpringUtils.getBean(DictService.class).listDictWithJoin(null);
+        return dictVOList.stream().filter(dictVO -> dictVO.getDictCode().equals(dictCode))
+                .findFirst()
                 .get();
     }
 
@@ -52,8 +49,15 @@ public class DictServiceImpl implements DictService {
     // 使用配置文件中默认配置
     @Cached(name = ":dict:search_dict", key = CacheKeyConstants.CACHE_KEY, expire = 24, timeUnit = TimeUnit.HOURS)
     @Override
-    public List<DictDO> searchDict(Query<DictDO> query) {
-        return dictMapper.selectDictListWithJoin(query);
+    public List<DictVO> listDictWithJoin(Query<DictQueryDTO> query) {
+        List<DictDO> dictDOList = dictMapper.selectDictListWithJoin(query);
+        return dictConverter.toDictVOList(dictDOList);
+    }
+
+    @Override
+    public List<DictVO> listDict(Query<DictQueryDTO> query) {
+        List<DictDO> dictDOList = dictMapper.selectDictList(query);
+        return dictConverter.toDictVOList(dictDOList);
     }
 
 }

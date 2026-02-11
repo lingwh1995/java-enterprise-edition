@@ -3,7 +3,7 @@ package org.bluebridge.common.config;
 import lombok.extern.slf4j.Slf4j;
 import org.bluebridge.common.constant.SqlConstants;
 import org.bluebridge.common.enums.SlowSqlThresholdTypeEnum;
-import org.bluebridge.domain.entity.DictDO;
+import org.bluebridge.domain.vo.DictVO;
 import org.bluebridge.service.DictService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -118,7 +118,7 @@ public class StartupConfig {
         if(dictLoadOnStartup) {
             log.info(" ===>   正在加载字典数据......");
             // 缓存字典到缓存中
-            List<DictDO> dictDOList = dictService.searchDict(null);
+            List<DictVO> dictDOList = dictService.listDictWithJoin(null);
         }
     }
 

@@ -1,8 +1,8 @@
 package org.bluebridge.common.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.bluebridge.cache.domain.vo.DictVO;
 import org.bluebridge.monitor.constant.SqlConstants;
-import org.bluebridge.cache.domain.entity.DictDO;
 import org.bluebridge.monitor.enums.SlowSqlThresholdTypeEnum;
 import org.bluebridge.cache.service.DictService;
 import org.springframework.beans.factory.annotation.Value;
@@ -118,7 +118,7 @@ public class StartupConfig {
         if(dictLoadOnStartup) {
             log.info(" ===>   正在加载字典数据......");
             // 缓存字典到缓存中
-            List<DictDO> dictDOList = dictService.searchDict(null);
+            List<DictVO> dictDOList = dictService.listDictWithJoin(null);
         }
     }
 
