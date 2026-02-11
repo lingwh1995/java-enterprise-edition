@@ -117,21 +117,9 @@ public class ProductServiceImpl implements ProductService {
 
         return productConverter.toProductVO(productDO);
     }
-    
-    @Override
-    public List<ProductVO> listProductByName(String name) {
-        List<ProductDO> productDOList = productMapper.selectProductListByName(name);
-        return productConverter.toProductVOList(productDOList);
-    }
 
     @Override
-    public List<ProductVO> listProduct() {
-        List<ProductDO> productDOList = productMapper.selectProductList(null);
-        return productConverter.toProductVOList(productDOList);
-    }
-
-    @Override
-    public List<ProductVO> searchProduct(Query<ProductQueryDTO> query) {
+    public List<ProductVO> listProduct(Query<ProductQueryDTO> query) {
         List<ProductDO> productDOList = productMapper.selectProductList(query);
         return productConverter.toProductVOList(productDOList);
     }

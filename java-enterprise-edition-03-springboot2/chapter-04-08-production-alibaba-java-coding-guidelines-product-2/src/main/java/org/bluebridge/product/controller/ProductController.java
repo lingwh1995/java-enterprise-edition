@@ -24,8 +24,8 @@ import java.util.List;
 
 /**
  * @author lingwh
- * @desc 商品管理控制器（阿里规范：类名=资源名+Controller，如ProductController）
- *       路径规范：/api/资源复数（版本+复数资源，阿里微服务规范）
+ * @desc 商品管理控制器（阿里规范：类名 = 资源名 + Controller，如 ProductController）
+ *       路径规范：/api/资源复数（版本 + 复数资源，阿里微服务规范）
  * @date 2025/12/16 17:02
  */
 @Validated
@@ -37,7 +37,7 @@ public class ProductController {
     private ProductService productService;
     
     /**
-     * 创建商品（阿里规范：方法名=create+资源名，如createProduct）
+     * 创建商品（阿里规范：方法名 = create + 资源名，如 createProduct）
      * URL：/api/products
      * 
      * @param productCreateDTO 商品创建传输对象
@@ -50,7 +50,7 @@ public class ProductController {
     }
     
     /**
-     * 批量创建商品（阿里规范：方法名=batch+动词+资源名，如batchCreateProduct）
+     * 批量创建商品（阿里规范：方法名 = batch + 动词 + 资源名，如 batchCreateProduct）
      * URL：/api/products/batch
      * 
      * @param productCreateDTOList 商品创建传输对象列表
@@ -63,7 +63,7 @@ public class ProductController {
     }
 
     /**
-     * 根据ID删除商品（物理删除）（阿里规范：方法名=delete+资源名+By+主键，如deleteProductById）
+     * 根据ID删除商品（物理删除）（阿里规范：方法名 = delete + 资源名 + By + 主键，如 deleteProductById）
      * URL：/api/products/1
      *
      * @param id 商品ID
@@ -78,7 +78,7 @@ public class ProductController {
     }
 
     /**
-     * 批量删除商品（物理删除）（阿里规范：方法名=batchDelete+资源名，如batchDeleteProduct）
+     * 批量删除商品（物理删除）（阿里规范：方法名 = batchDelete + 资源名，如 batchDeleteProduct）
      * URL：/api/products
      *
      * @param ids 商品ID列表
@@ -91,7 +91,7 @@ public class ProductController {
     }
 
     /**
-     * 根据ID逻辑删除商品（阿里规范：方法名=patch+资源名+状态相关词汇，如patchProductStatus）
+     * 根据ID逻辑删除商品（阿里规范：方法名 = patch + 资源名 + 状态相关词汇，如 patchProductStatus）
      * URL：/api/products/1/status
      *
      * @param id 商品ID
@@ -106,7 +106,7 @@ public class ProductController {
     }
 
     /**
-     * 批量逻辑删除商品（阿里规范：方法名=batchPatch+资源名+状态相关词汇，如batchPatchProductStatus）
+     * 批量逻辑删除商品（阿里规范：方法名 = batchPatch + 资源名 + 状态相关词汇，如 batchPatchProductStatus）
      * URL：/api/products/batch/status
      *
      * @param ids 商品ID列表
@@ -119,7 +119,7 @@ public class ProductController {
     }
 
     /**
-     * 根据ID全量更新商品（阿里规范：方法名=update+资源名+By+主键，如updateProductById）
+     * 根据ID全量更新商品（阿里规范：方法名 = update + 资源名 + By + 主键，如 updateProductById）
      * URL：/api/products/1
      * 
      * @param id 商品ID
@@ -136,7 +136,7 @@ public class ProductController {
     }
     
     /**
-     * 根据ID部分更新商品（阿里规范：方法名=patch+资源名，如patchProduct）
+     * 根据ID部分更新商品（阿里规范：方法名 = patch + 资源名，如 patchProduct）
      * URL：/api/products/1
      * 
      * @param id 商品ID
@@ -153,7 +153,7 @@ public class ProductController {
     }
     
     /**
-     * 主键查询-根据ID查询商品（阿里规范：方法名=get+资源名+By+主键，如getProductById）
+     * 主键查询-根据ID查询商品（阿里规范：方法名 = get + 资源名 + By + 主键，如 getProductById）
      * URL：/api/products/1
      * 
      * @param id 商品ID
@@ -168,32 +168,6 @@ public class ProductController {
     }
     
     /**
-     * 唯一条件查询-根据名称精确查询商品（阿里规范：方法名=get+资源名+By+条件，如getProductByName）
-     * URL：/api/products/by-name?name=商品名称
-     * 
-     * @param name 商品名称
-     * @return 统一响应结果
-     */
-    @GetMapping("/by-name")
-    public Result<List<ProductVO>> listProductByName(
-            @RequestParam @NotBlank(message = "商品名称不能为空") String name) {
-        List<ProductVO> productVOList = productService.listProductByName(name);
-        return Result.buildDataResult(productVOList, OperationTypeEnum.QUERY_LIST_CONDITION);
-    }
-    
-    /**
-     * 列表查询-获取所有商品（阿里规范：方法名=list+资源名，如listProduct）
-     * URL：/api/products
-     * 
-     * @return 统一响应结果
-     */
-    @GetMapping
-    public Result<List<ProductVO>> listProduct() {
-        List<ProductVO> productVOList = productService.listProduct();
-        return Result.buildDataResult(productVOList, OperationTypeEnum.QUERY_LIST);
-    }
-    
-    /**
      * 条件查询-根据查询条件获取商品列表
      * URL：/api/products
      * 
@@ -205,8 +179,8 @@ public class ProductController {
      * @param order 排序方式
      * @return 统一响应结果
      */
-    @GetMapping("/search")
-    public Result<List<ProductVO>> searchProduct(
+    @GetMapping
+    public Result<List<ProductVO>> listProduct(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) @DecimalMin("0.0") BigDecimal minPrice,
             @RequestParam(required = false) @DecimalMin("100.0") BigDecimal maxPrice,
@@ -231,12 +205,12 @@ public class ProductController {
                 .sortList(sortList)
                 .build();
 
-        List<ProductVO> productVOList = productService.searchProduct(query);
+        List<ProductVO> productVOList = productService.listProduct(query);
         return Result.buildDataResult(productVOList, OperationTypeEnum.QUERY_LIST);
     }
 
     /**
-     * 分页查询-分页获取商品列表（阿里规范：方法名=page+资源名，如pageProduct）
+     * 分页查询-分页获取商品列表（阿里规范：方法名 = page + 资源名，如 pageProduct）
      * URL：/api/products/page
      *
      * @param name 商品名称（模糊匹配）
@@ -284,7 +258,7 @@ public class ProductController {
     }
 
     /**
-     * 分页查询-分页获取商品列表（阿里规范：方法名=page+资源名，如pageProduct）
+     * 分页查询-分页获取商品列表（阿里规范：方法名 = page + 资源名，如 pageProduct）
      * URL：/api/products/page
      *
      * @param productQueryDTO 查询条件

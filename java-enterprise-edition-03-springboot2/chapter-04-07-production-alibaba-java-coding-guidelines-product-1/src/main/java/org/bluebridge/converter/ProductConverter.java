@@ -29,7 +29,7 @@ public interface ProductConverter {
     ProductDO toProductDO(ProductCreateDTO createProductDTO);
 
     /**
-     * 将 ProductCreateDTO 列表转换为 ProductDO 列表
+     * 将 ProductCreateDTOList 转换为 ProductDOList
      * @param productCreateDTOList
      * @return
      */
@@ -61,9 +61,9 @@ public interface ProductConverter {
     ProductVO toProductVO(ProductDO productDO);
 
     /**
-     * 将 ProductDO 列表转换为 ProductVO 列表
-     * @param productDOList 商品实体列表
-     * @return ProductVO 列表
+     * 将 ProductDOList 转换为 ProductVOList
+     * @param productDOList
+     * @return ProductVO
      */
     List<ProductVO> toProductVOList(List<ProductDO> productDOList);
 

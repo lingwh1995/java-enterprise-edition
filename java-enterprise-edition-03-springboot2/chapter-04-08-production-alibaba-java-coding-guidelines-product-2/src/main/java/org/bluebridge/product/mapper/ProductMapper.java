@@ -78,13 +78,6 @@ public interface ProductMapper {
     ProductDO selectProductById(Long id);
     
     /**
-     * 根据名称查询商品
-     * @param name 商品名称
-     * @return 商品实体
-     */
-    List<ProductDO> selectProductListByName(String name);
-
-    /**
      * 根据条件查询商品列表并且对查询结果进行排序
      * @param query 查询条件
      * @return 商品列表

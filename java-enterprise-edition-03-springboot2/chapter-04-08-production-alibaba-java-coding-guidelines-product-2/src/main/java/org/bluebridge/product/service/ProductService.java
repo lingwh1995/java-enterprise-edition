@@ -84,24 +84,11 @@ public interface ProductService {
     ProductVO getProductById(Long id);
 
     /**
-     * 根据名称精确查询商品列表
-     * @param name 商品名称
-     * @return 商品展示对象列表
-     */
-    List<ProductVO> listProductByName(String name);
-
-    /**
-     * 获取所有商品列表
-     * @return 商品展示对象列表
-     */
-    List<ProductVO> listProduct();
-
-    /**
      * 根据查询条件搜索商品
      * @param query 查询参数传输对象
      * @return 商品展示对象列表
      */
-    List<ProductVO> searchProduct(Query<ProductQueryDTO> query);
+    List<ProductVO> listProduct(Query<ProductQueryDTO> query);
 
     /**
      * 分页查询商品

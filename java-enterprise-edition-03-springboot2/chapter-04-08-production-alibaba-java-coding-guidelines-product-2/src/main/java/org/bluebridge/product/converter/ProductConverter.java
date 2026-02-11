@@ -29,7 +29,7 @@ public interface ProductConverter {
     ProductDO toProductDO(ProductCreateDTO createProductDTO);
 
     /**
-     * 将 ProductCreateDTO 列表转换为 ProductDO 列表
+     * 将 ProductCreateDTOList 转换为 ProductDOList
      * @param productCreateDTOList
      * @return
      */
