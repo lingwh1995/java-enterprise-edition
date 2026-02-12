@@ -30,7 +30,7 @@ CREATE TABLE t_sys_dict (
     id          INT AUTO_INCREMENT PRIMARY KEY COMMENT '字典主键',
     dict_code   VARCHAR(16) UNIQUE NOT NULL COMMENT '字典编码',
     dict_name   VARCHAR(32) NOT NULL COMMENT '字典名称',
-    dict_type   TINYINT(1) UNIQUE NOT NULL COMMENT '字典类型 0:系统字典 1:业务字典',
+    dict_type   TINYINT(1) NOT NULL COMMENT '字典类型 0:系统字典 1:业务字典',
     dict_status TINYINT(1) DEFAULT 0 COMMENT '字典状态 0:正常 1:停用',
     dict_desc   VARCHAR(512) COMMENT '字典描述',
     sort_order  SMALLINT DEFAULT 0 COMMENT '排序',
