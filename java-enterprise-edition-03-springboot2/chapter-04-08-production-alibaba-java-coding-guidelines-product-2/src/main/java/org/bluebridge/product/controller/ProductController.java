@@ -123,7 +123,7 @@ public class ProductController {
      * URL：/api/products/1
      * 
      * @param id 商品ID
-     * @param productUpdateDTO 商品传输对象
+     * @param productUpdateDTO 商品更新传输对象
      * @return 统一响应结果
      */
     @PutMapping("/{id}")
