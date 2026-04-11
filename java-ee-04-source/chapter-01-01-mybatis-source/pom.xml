@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.bluebridge</groupId>
-        <artifactId>java-ee-04-source-code</artifactId>
+        <artifactId>java-ee-04-source</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>chapter-01-01-mybatis-source-code</artifactId>
+    <artifactId>chapter-01-01-mybatis-source</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
