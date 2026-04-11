@@ -10,16 +10,16 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>java-ee-01-spring5</module>
-        <module>java-ee-02-spring6</module>
-        <module>java-ee-03-boot2</module>
-        <module>java-ee-04-source</module>
-        <module>java-ee-05-auth</module>
-        <module>java-ee-06-netty</module>
-        <module>java-ee-07-line</module>
-        <module>java-ee-08-workflow</module>
-        <module>java-ee-09-mq</module>
-        <module>java-ee-10-ml</module>
+        <module>javaee-01-spring5</module>
+        <module>javaee-02-spring6</module>
+        <module>javaee-03-springboot2</module>
+        <module>javaee-04-source</module>
+        <module>javaee-05-auth</module>
+        <module>javaee-06-netty</module>
+        <module>javaee-07-line</module>
+        <module>javaee-08-workflow</module>
+        <module>javaee-09-mq</module>
+        <module>javaee-10-ml</module>
     </modules>
 
     <properties>
