@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>02-spring6-tutorial</artifactId>
+    <artifactId>02-spring6</artifactId>
     <packaging>pom</packaging>
 
     <modules>
