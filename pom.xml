@@ -17,7 +17,7 @@
         <module>05-auth-security</module>
         <module>06-netty-io</module>
         <module>07-netty-im</module>
-        <module>08-workflow-flowable</module>
+        <module>08-workflow</module>
         <module>09-message-queue</module>
         <module>10-machine-learning</module>
     </modules>

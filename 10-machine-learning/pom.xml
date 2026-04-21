@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>machine-learning</artifactId>
+    <artifactId>10-machine-learning</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>chapter-01-01-ml-opencv-helloworld</module>
