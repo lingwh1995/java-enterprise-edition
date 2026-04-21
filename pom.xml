@@ -5,21 +5,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.bluebridge</groupId>
-    <artifactId>java-enterprise-edition</artifactId>
+    <artifactId>javaee-tutorial</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>javaee-01-spring5</module>
-        <module>javaee-02-spring6</module>
-        <module>javaee-03-springboot2</module>
-        <module>javaee-04-source</module>
-        <module>javaee-05-auth</module>
-        <module>javaee-06-netty</module>
-        <module>javaee-07-line</module>
-        <module>javaee-08-workflow</module>
-        <module>javaee-09-mq</module>
-        <module>javaee-10-ml</module>
+        <module>01-spring5</module>
+        <module>02-spring6</module>
+        <module>03-springboot2</module>
+        <module>04-source-analysis</module>
+        <module>05-auth-security</module>
+        <module>06-netty-io</module>
+        <module>07-netty-im</module>
+        <module>08-workflow-flowable</module>
+        <module>09-message-queue</module>
+        <module>10-machine-learning</module>
     </modules>
 
     <properties>
