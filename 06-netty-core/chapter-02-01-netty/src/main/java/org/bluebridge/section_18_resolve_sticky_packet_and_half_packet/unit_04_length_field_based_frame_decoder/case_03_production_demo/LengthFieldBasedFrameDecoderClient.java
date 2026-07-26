@@ -45,13 +45,13 @@ public class LengthFieldBasedFrameDecoderClient {
                             // 半包测试数据
                             String halfPacketHex = "122106150000000901261800340100008320122106328512C225107508868900B10468CF01DC16";
 
-                            // 2. 组装第一包数据（产生黏包现象的数据）用的ByteBuf
+                            // 2. 组装第一包数据（产生黏包现象的数据）用的 ByteBuf
                             ByteBuf spByteBuf = ctx.alloc().buffer();
                             spByteBuf.writeBytes(HexUtil.decodeHex(stickyPacketHex));
                             // 发送第一包数据并刷新
                             ctx.writeAndFlush(spByteBuf);
 
-                            // 3. 组装第二包数据（产生半包现象的数据）用的ByteBuf
+                            // 3. 组装第二包数据（产生半包现象的数据）用的 ByteBuf
                             ByteBuf hpByteBuf = ctx.alloc().buffer();
                             hpByteBuf.writeBytes(HexUtil.decodeHex(halfPacketHex));
                             // 发送第二包数据并刷新

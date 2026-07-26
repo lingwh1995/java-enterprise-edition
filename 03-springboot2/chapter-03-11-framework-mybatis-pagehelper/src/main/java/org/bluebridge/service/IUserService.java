@@ -15,20 +15,20 @@ import java.util.List;
 public interface IUserService {
 
     /**
-     * 查询所有的User对象
+     * 查询所有的 User 对象
      * @return
      */
     List<User> list();
 
     /**
-     * 根据id查询User
+     * 根据 id 查询 User
      * @param id
      * @return
      */
     User getById(int id);
 
     /**
-     * 分页查询所有的User对象
+     * 分页查询所有的 User 对象
      * @param pageEntity
      * @return
      */

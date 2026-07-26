@@ -23,11 +23,11 @@ public class LengthFieldBasedFrameDecoder_2_Test {
         /**
          * 预设长度解码器参数说明
          *
-         * @param maxFrameLength       帧的最大长度。如果帧的长度大于此值，将抛出 {@link TooLongFrameException} 异常。
-         * @param lengthFieldOffset    长度字段的偏移量
-         * @param lengthFieldLength    长度字段的长度
-         * @param lengthAdjustment     要添加到长度字段值的补偿值
-         * @param initialBytesToStrip  从解码后的帧中剥离的起始字节数
+         * @param maxFrameLength 帧的最大长度。如果帧的长度大于此值，将抛出 {@link TooLongFrameException} 异常。
+         * @param lengthFieldOffset 长度字段的偏移量
+         * @param lengthFieldLength 长度字段的长度
+         * @param lengthAdjustment 要添加到长度字段值的补偿值
+         * @param initialBytesToStrip 从解码后的帧中剥离的起始字节数
          *
          * public LengthFieldBasedFrameDecoder(int maxFrameLength, int lengthFieldOffset, int lengthFieldLength, int lengthAdjustment, int initialBytesToStrip)
          */
@@ -36,7 +36,7 @@ public class LengthFieldBasedFrameDecoder_2_Test {
                 new LoggingHandler(LogLevel.DEBUG)
         );
 
-        // 4个字节的内容长度， 实际内容
+        // 4 个字节的内容长度， 实际内容
         ByteBuf buffer = ByteBufAllocator.DEFAULT.buffer();
         send(buffer, "Hello, world");
         send(buffer, "Hi!");

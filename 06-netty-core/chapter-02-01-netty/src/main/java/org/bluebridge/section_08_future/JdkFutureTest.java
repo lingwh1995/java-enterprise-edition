@@ -41,5 +41,4 @@ public class JdkFutureTest {
         log.info("取消了吗?: {}", future.isCancelled());
         log.info("线程池结束了吗?: {}", executorService.isShutdown());
     }
-
 }

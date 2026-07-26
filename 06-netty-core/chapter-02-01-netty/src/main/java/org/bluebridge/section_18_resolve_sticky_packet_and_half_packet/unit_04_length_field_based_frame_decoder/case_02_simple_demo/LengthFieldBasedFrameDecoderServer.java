@@ -36,7 +36,7 @@ public class LengthFieldBasedFrameDecoderServer {
                         // 预设长度解码器
                         // 最大长度，长度偏移，长度占用字节，长度调整，剥离字节数
                         pipeline.addLast(new LengthFieldBasedFrameDecoder(1024, 0, 1, 0, 1));
-                        // 特别注意：这里的LoggingHandler不能放在第一个位，否则打印出来的数据是原始数据，不是解码器处理后的数据，很有可能有黏包半包情况
+                        // 特别注意：这里的 LoggingHandler 不能放在第一个位，否则打印出来的数据是原始数据，不是解码器处理后的数据，很有可能有黏包半包情况
                         pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
                         pipeline.addLast(new ChannelInboundHandlerAdapter() {
                             @Override

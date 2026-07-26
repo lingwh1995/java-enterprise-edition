@@ -36,7 +36,7 @@ public class LengthFieldBasedFrameDecoder_1_Test {
                 new LoggingHandler(LogLevel.DEBUG)
         );
 
-        // 4个字节的内容长度， 实际内容
+        // 4 个字节的内容长度， 实际内容
         ByteBuf buffer = ByteBufAllocator.DEFAULT.buffer();
         send(buffer, "Hello, world");
         send(buffer, "Hi!");

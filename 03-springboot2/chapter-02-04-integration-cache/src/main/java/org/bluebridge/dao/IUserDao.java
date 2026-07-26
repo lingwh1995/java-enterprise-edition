@@ -58,7 +58,7 @@ public interface IUserDao {
     User getUserByUsernameWithCaching(String username);
 
     /**
-     * 更新User对象
+     * 更新 User 对象
      * @param user
      * @return
      */
@@ -66,7 +66,7 @@ public interface IUserDao {
     int updateUser(User user);
 
     /**
-     * 根据id删除User对象
+     * 根据 id 删除 User 对象
      * @param id
      * @return
      */

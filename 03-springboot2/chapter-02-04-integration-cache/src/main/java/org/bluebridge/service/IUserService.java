@@ -49,7 +49,7 @@ public interface IUserService {
     User getUserByUsernameWithCaching(String username);
 
     /**
-     * 更新User对象
+     * 更新 User 对象
      * @param user
      * @return
      */
@@ -63,7 +63,7 @@ public interface IUserService {
     int deleteUser(String id);
 
     /**
-     * 测试CacheManger的API
+     * 测试 CacheManger 的 API
      * @return
      */
     String cacheManager();

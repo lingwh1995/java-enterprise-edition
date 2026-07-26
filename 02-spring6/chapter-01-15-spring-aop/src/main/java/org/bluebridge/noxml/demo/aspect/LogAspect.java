@@ -47,6 +47,6 @@ public class LogAspect {
         logger.info("操作执行时间: " + date);
         logger.info("前置通知执行了...[使用全注解开发AOP]");
         // String methodName = joinPoint.getSignature().getName();
-        // logger.info("MethodName: " + methodName);
+        // logger.info("MethodName ： " + methodName);
     }
 }

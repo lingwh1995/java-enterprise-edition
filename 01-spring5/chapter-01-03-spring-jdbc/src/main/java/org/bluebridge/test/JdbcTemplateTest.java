@@ -80,7 +80,7 @@ public class JdbcTemplateTest {
         System.out.println("---------------------------------------------------------");
         RowMapper<Account> accountRowMapper = new BeanPropertyRowMapper<>(Account.class);
         Account accountByRowMapper = jdbcTemplate.queryForObject("select * from t_account where id = ?", accountRowMapper, "002");
-        //Account accountByRowMapper = jdbcTemplate.queryForObject("select * from t_account where id = ?", accountRowMapper, new Object[]{"002"});
+        // Account accountByRowMapper = jdbcTemplate.queryForObject("select * from t_account where id = ?", accountRowMapper, new Object[]{"002"});
         System.out.println("RowMapper方式:" + accountByRowMapper);
         System.out.println("---------------------------------------------------------");
     }

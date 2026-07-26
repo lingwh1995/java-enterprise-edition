@@ -28,6 +28,6 @@ public class LogAspect {
         logger.info("操作执行时间: " + date);
         logger.info("前置通知执行了...[使用XML配置开发AOP]");
         // String methodName = joinPoint.getSignature().getName();
-        // logger.info("MethodName: " + methodName);
+        // logger.info("MethodName ： " + methodName);
     }
 }

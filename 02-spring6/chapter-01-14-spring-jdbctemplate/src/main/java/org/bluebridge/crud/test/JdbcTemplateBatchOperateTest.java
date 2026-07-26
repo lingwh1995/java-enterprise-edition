@@ -44,7 +44,7 @@ public class JdbcTemplateBatchOperateTest {
     }
 
     /**
-     * 测试批量新增方式一    非常推荐使用
+     * 测试批量新增方式一  非常推荐使用
      */
     @Test
     public void testJdbcTemplateBatchOperateInsert1() {
@@ -60,7 +60,7 @@ public class JdbcTemplateBatchOperateTest {
     }
 
     /**
-     * 测试批量新增方式二    不推荐使用
+     * 测试批量新增方式二  不推荐使用
      */
     @Test
     public void testJdbcTemplateBatchOperateInsert2() {
@@ -72,8 +72,8 @@ public class JdbcTemplateBatchOperateTest {
     }
 
     /**
-     * 测试批量新增方式三    一般推荐使用
-     *      使用匿名内部类完成批量新增操作
+     * 测试批量新增方式三  一般推荐使用
+     *   使用匿名内部类完成批量新增操作
      */
     @Test
     public void testJdbcTemplateBatchOperateInsert3() {
@@ -89,7 +89,7 @@ public class JdbcTemplateBatchOperateTest {
     }
 
     /**
-     * 测试批量更新方式一    非常推荐
+     * 测试批量更新方式一  非常推荐
      */
     @Test
     public void testJdbcTemplateBatchOperateUpdate1() {
@@ -106,7 +106,7 @@ public class JdbcTemplateBatchOperateTest {
     }
 
     /**
-     * 测试批量新增方式二    不推荐使用
+     * 测试批量新增方式二  不推荐使用
      */
     @Test
     public void testJdbcTemplateBatchOperateUpdate2() {
@@ -118,8 +118,8 @@ public class JdbcTemplateBatchOperateTest {
     }
 
     /**
-     * 测试批量更新方式三    一般推荐
-     *      使用匿名内部类完成批量新增操作
+     * 测试批量更新方式三  一般推荐
+     *   使用匿名内部类完成批量新增操作
      */
     @Test
     public void testJdbcTemplateBatchOperateUpdate3() {
@@ -135,13 +135,13 @@ public class JdbcTemplateBatchOperateTest {
     }
 
     /**
-     * 测试批量删除方式一    非常推荐
+     * 测试批量删除方式一  非常推荐
      */
     @Test
     public void testJdbcTemplateBatchOperateDelete1() {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
         JdbcTemplateBatchOperate jdbcTemplateBatchOperate = applicationContext.getBean("jdbcTemplateBatchOperate", JdbcTemplateBatchOperate.class);
-        // 参数为 List，泛型为 Object[]
+        // 参数为 List ，泛型为 Object[]
         List<Object[]> users = new ArrayList<>();
         users.add(new Object[]{"001"});
         users.add(new Object[]{"002"});
@@ -151,7 +151,7 @@ public class JdbcTemplateBatchOperateTest {
     }
 
     /**
-     * 测试批量删除方式二    不推荐使用
+     * 测试批量删除方式二  不推荐使用
      */
     @Test
     public void testJdbcTemplateBatchOperateDelete2() {
