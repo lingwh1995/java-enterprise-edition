@@ -1,0 +1,1 @@
+hadoop freebsd windows centos redhat

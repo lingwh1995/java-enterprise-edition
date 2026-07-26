@@ -1,0 +1,1 @@
+arch redhat hadoop suse macos
