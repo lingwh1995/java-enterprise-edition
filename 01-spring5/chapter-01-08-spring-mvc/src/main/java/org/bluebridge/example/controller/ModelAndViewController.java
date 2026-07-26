@@ -23,7 +23,7 @@ public class ModelAndViewController {
     private static final String VIEWNAME = "modelView";
 
     /**
-     * ModelAndView 使用案例 1：
+     * ModelAndView 使用案例1：
      *
      * @return
      */
@@ -35,7 +35,7 @@ public class ModelAndViewController {
     }
 
     /**
-     * ModelAndView 使用案例 2：
+     * ModelAndView 使用案例2：
      *
      * @return
      */
@@ -48,7 +48,7 @@ public class ModelAndViewController {
     }
 
     /**
-     * ModelAndView 使用案例 3：
+     * ModelAndView 使用案例3：
      *
      * @return
      */
@@ -60,7 +60,7 @@ public class ModelAndViewController {
 
 
     /**
-     * 重定向到另一个 jsp 页面，并传递值过去：方式 1：HttpServletRequest+ModelAndView
+     * 重定向到另一个 jsp 页面，并传递值过去：方式1：HttpServletRequest+ModelAndView
      *
      * @param request
      * @return
@@ -73,7 +73,7 @@ public class ModelAndViewController {
     }
 
     /**
-     * 重定向到另一个 jsp 页面，并传递值过去：方式 2：@SessiuonAttribuates+直接返回 String
+     * 重定向到另一个 jsp 页面，并传递值过去：方式2：@SessiuonAttribuates+直接返回 String
      *
      * @param model
      * @return
@@ -85,7 +85,7 @@ public class ModelAndViewController {
     }
 
     /**
-     * 重定向到另一个 Controller，并传值过去，方式 1：@SessiuonAttribuates+ModelAndView
+     * 重定向到另一个 Controller，并传值过去，方式1：@SessiuonAttribuates+ModelAndView
      *
      * @return
      */
@@ -97,7 +97,7 @@ public class ModelAndViewController {
     }
 
     /**
-     * 重定向到另一个 Controller，并传值过去，方式 2：直接返回 String
+     * 重定向到另一个 Controller，并传值过去，方式2：直接返回 String
      *
      * @return
      */
@@ -108,7 +108,7 @@ public class ModelAndViewController {
     }
 
     /**
-     * 转发向到另一个 Controller，并传值过去，方式 1：ModelAndView
+     * 转发向到另一个 Controller，并传值过去，方式1：ModelAndView
      *
      * @return
      */
@@ -120,7 +120,7 @@ public class ModelAndViewController {
     }
 
     /**
-     * 转发向到另一个 Controller，并传值过去，方式 2：直接返回 String
+     * 转发向到另一个 Controller，并传值过去，方式2：直接返回 String
      *
      * @param model
      * @return

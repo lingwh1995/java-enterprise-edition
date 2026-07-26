@@ -29,15 +29,15 @@ public class MessageCodecSharable extends MessageToMessageCodec<ByteBuf, Message
     @Override
     protected void encode(ChannelHandlerContext ctx, Message msg, List<Object> outList) throws Exception {
         ByteBuf out = ctx.alloc().buffer();
-        // 1. 4字节的魔数
+        // 1. 4 字节的魔数
         out.writeBytes(new byte[]{1, 2, 3, 4});
-        // 2. 1字节的版本,
+        // 2. 1 字节的版本，
         out.writeByte(1);
-        // 3. 1字节的序列化方式 jdk 0 , json 1
+        // 3. 1 字节的序列化方式 jdk 0 ， json 1
         out.writeByte(0);
-        // 4. 1字节的指令类型
+        // 4. 1 字节的指令类型
         out.writeByte(msg.getMessageType());
-        // 5. 4个字节
+        // 5. 4 个字节
         out.writeInt(msg.getSequenceId());
         // 无意义，对齐填充
         out.writeByte(0xff);

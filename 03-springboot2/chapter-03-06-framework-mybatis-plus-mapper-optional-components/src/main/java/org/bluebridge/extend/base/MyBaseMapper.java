@@ -20,7 +20,7 @@ import java.util.List;
 public interface MyBaseMapper<T> extends BaseMapper<T> {
 
     /**
-     * 以下定义的 4个 default method, copy from {@link com.baomidou.mybatisplus.extension.toolkit.ChainWrappers}
+     * 以下定义的 4 个 default method，copy from {@link com.baomidou.mybatisplus.extension.toolkit.ChainWrappers}
      */
     default QueryChainWrapper<T> queryChain() {
         return new QueryChainWrapper<>(this);
@@ -39,7 +39,7 @@ public interface MyBaseMapper<T> extends BaseMapper<T> {
     }
 
     /**
-     * 以下定义的 4个 method 其中 3 个是内置的选装件
+     * 以下定义的 4 个 method 其中 3 个是内置的选装件
      *
      * 功能
      * 这个方法用于批量插入实体对象，但只插入实体对象中指定的某些字段。这在需要批量插入数据，但又不希望插入所有字段时非常有用。

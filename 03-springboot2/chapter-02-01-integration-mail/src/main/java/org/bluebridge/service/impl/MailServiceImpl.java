@@ -114,9 +114,9 @@ public class MailServiceImpl implements IMailService {
      *
      * @param to 邮件接收人
      * @param subject 邮件主题
-     * @param content 邮件内容(Dom片段)
+     * @param content 邮件内容(Dom 片段)
      * @param rscPath 邮件中静态资源路径
-     * @param rscId 资源id
+     * @param rscId 资源 id
      */
     @Override
     public void sendInlineResourceMail(String to, String subject, String content, String rscPath, String rscId) {
