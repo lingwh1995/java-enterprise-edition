@@ -54,7 +54,7 @@ public class ByteBufUtil {
             BYTE2HEX[i] = ' ' + StringUtil.byteToHexStringPadded(i);
         }
 
-        // 初始化ASCII填充字符串
+        // 初始化 ASCII 填充字符串
         for (i = 0; i < BYTEPADDING.length; i++) {
             int padding = BYTEPADDING.length - i;
             StringBuilder buf = new StringBuilder(padding);
@@ -69,7 +69,7 @@ public class ByteBufUtil {
     }
 
     /**
-     * 打印 ByteBuf 所有内容（从 0 到 capacity）
+     * 打印 ByteBuf 所有内容（从 0 到 capacity ）
      */
     public static void debugAll(ByteBuf buf) {
         // 复制缓冲区，避免修改原始索引
@@ -77,7 +77,7 @@ public class ByteBufUtil {
         int originalReaderIndex = duplicate.readerIndex();
         int originalWriterIndex = duplicate.writerIndex();
 
-        // 临时设置为可读所有内容（0 到 capacity）
+        // 临时设置为可读所有内容（0 到 capacity ）
         duplicate.readerIndex(0);
         duplicate.writerIndex(duplicate.capacity());
 
@@ -99,7 +99,7 @@ public class ByteBufUtil {
     }
 
     /**
-     * 打印 ByteBuf 可读内容（从 readerIndex 到 writerIndex）
+     * 打印 ByteBuf 可读内容（从 readerIndex 到 writerIndex ）
      */
     public static void debugRead(ByteBuf buf) {
         StringBuilder dump = new StringBuilder(256);
@@ -112,7 +112,7 @@ public class ByteBufUtil {
     }
 
     /**
-     * 生成十六进制+ASCII格式的 ByteBuf 内容（核心逻辑）
+     * 生成十六进制 + ASCII 格式的 ByteBuf 内容（核心逻辑）
      */
     private static void appendPrettyHexDump(StringBuilder dump, ByteBuf buf, int offset, int length) {
         if (isOutOfBounds(offset, length, buf.capacity())) {

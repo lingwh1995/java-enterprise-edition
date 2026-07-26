@@ -10,7 +10,7 @@ import io.netty.handler.codec.string.StringEncoder;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 创建多个Client时复用EventLoopGroup 客户端（优化版）
+ * 创建多个 Client 时复用 EventLoopGroup 客户端（优化版）
  *
  * @author lingwh
  * @date 2025/9/23 11:58
@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class EventLoopGroupReuseEventLoopGroupClient {
 
     /**
-     * 服务器的IP地址
+     * 服务器的 IP 地址
      */
     private static final String HOST = "127.0.0.1";
 
@@ -39,7 +39,7 @@ public class EventLoopGroupReuseEventLoopGroupClient {
     private static final Integer PORT_THIRD = 8003;
 
     /**
-     * 全局共享的EventLoopGroup（所有客户端复用），手动指定4个线程，优化资源占用
+     * 全局共享的 EventLoopGroup（所有客户端复用），手动指定 4 个线程，优化资源占用
      */
     private final NioEventLoopGroup sharedEventLoopGroup = new NioEventLoopGroup(4);
 

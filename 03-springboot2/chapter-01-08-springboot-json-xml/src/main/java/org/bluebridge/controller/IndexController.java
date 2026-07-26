@@ -22,5 +22,4 @@ public class IndexController {
         logger.info("跳转到首页...");
         return "index";
     }
-
 }

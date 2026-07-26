@@ -8,7 +8,7 @@ import static io.netty.util.internal.MathUtil.isOutOfBounds;
 import static io.netty.util.internal.StringUtil.NEWLINE;
 
 /**
- * ByteBuffer工具类
+ * ByteBuffer 工具类
  *
  * @author lingwh
  * @date 2025/6/20 09:30

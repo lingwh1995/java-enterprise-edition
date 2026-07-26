@@ -15,11 +15,11 @@ import java.util.Iterator;
 /**
  * 使用 selector 实现 Server 并处理粘包半包问题
  *
- * Selector（IO多路复用模型）网络通信 Server 端
+ * Selector（IO 多路复用模型）网络通信 Server 端
  * 实现了 IO 多路复用，处理了粘包半包问题
  *
  * 测试方法
- * 1. cmd -> telnet 127.0.0.1 8080/telnet localhost 8080 -> 直接输入内容（只能发送单个字符）/按下Ctrl+]后输入 send + 内容（可以发送字符串） -> 查看idea控制台接收到的信息
+ * 1. cmd -> telnet 127.0.0.1 8080/telnet localhost 8080 -> 直接输入内容（只能发送单个字符）/按下 Ctrl+]后输入 send + 内容（可以发送字符串） -> 查看 idea 控制台接收到的信息
  * 2. 启动多个客户端
  *
  * 测试结论
@@ -52,7 +52,7 @@ public class Case_02_SelectorServer {
         /*
         // SelectionKey 就是将来事件发生后，通过它可以知道事件和哪个 channel 的事件
         SelectionKey sscKey = ssc.register(selector, 0, null);
-        // 5.key 只关注 accept 事件
+        // 5. key 只关注 accept 事件
         sscKey.interestOps(SelectionKey.OP_ACCEPT);
         log.info("register key: {}", sscKey);
         */
@@ -71,7 +71,7 @@ public class Case_02_SelectorServer {
             while (iterator.hasNext()) {
                 SelectionKey key = iterator.next();
                 log.info("key: {}", key);
-                // 处理完key时，要从 selectKeys 集合中删除，否则下次处理就会有问题
+                // 处理完 key 时，要从 selectKeys 集合中删除，否则下次处理就会有问题
                 iterator.remove();
                 // 9. 区分事件类型
                 if (key.isAcceptable()) { // 如果是 accept 事件

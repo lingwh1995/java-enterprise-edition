@@ -64,10 +64,10 @@ public class ChannelOutboundHandlerAdapterServer {
                          * 方法作用
                          *    处理 Channel 绑定到本地地址的出站操作，这是一个 ChannelOutboundHandler 接口的方法，用于处理绑定请求
                          * 典型应用场景
-                         *    地址绑定前的验证: 在绑定操作前验证地址的有效性
-                         *    日志记录: 记录绑定操作的信息
-                         *    权限检查: 检查是否有权限绑定到指定地址
-                         *    资源准备: 为绑定操作准备必要的资源
+                         *    地址绑定前的验证：在绑定操作前验证地址的有效性
+                         *    日志记录：记录绑定操作的信息
+                         *    权限检查：检查是否有权限绑定到指定地址
+                         *    资源准备：为绑定操作准备必要的资源
                          *
                          * @param ctx
                          * @param localAddress
@@ -85,10 +85,10 @@ public class ChannelOutboundHandlerAdapterServer {
                          * 方法作用
                          *    处理 Channel 连接到远程地址的出站操作，这是 ChannelOutboundHandler 接口的方法，用于处理连接请求
                          * 典型应用场景
-                         *    连接前验证: 在发起连接前验证地址的有效性
-                         *    日志记录: 记录连接操作的信息
-                         *    连接参数设置: 设置连接超时时间、套接字选项等
-                         *    权限检查: 检查是否有权限连接到指定地址
+                         *    连接前验证：在发起连接前验证地址的有效性
+                         *    日志记录：记录连接操作的信息
+                         *    连接参数设置：设置连接超时时间、套接字选项等
+                         *    权限检查：检查是否有权限连接到指定地址
                          *
                          * @param ctx
                          * @param remoteAddress
@@ -108,10 +108,10 @@ public class ChannelOutboundHandlerAdapterServer {
                          * 方法作用
                          *    处理 Channel 断开连接的出站操作，这是 ChannelOutboundHandler 接口的方法，用于处理断开连接请求
                          * 典型应用场景
-                         *    断开前清理: 在断开连接前执行清理工作
-                         *    日志记录: 记录断开连接的操作信息
-                         *    资源释放: 释放与连接相关的资源
-                         *    状态更新: 更新连接状态或统计信息
+                         *    断开前清理：在断开连接前执行清理工作
+                         *    日志记录：记录断开连接的操作信息
+                         *    资源释放：释放与连接相关的资源
+                         *    状态更新：更新连接状态或统计信息
                          *
                          * @param ctx
                          * @param promise
@@ -128,10 +128,10 @@ public class ChannelOutboundHandlerAdapterServer {
                          * 方法作用
                          *    处理 Channel 关闭的出站操作，这是 ChannelOutboundHandler 接口的方法，用于处理关闭 Channel 的请求
                          * 典型应用场景
-                         *    关闭前清理: 在关闭 Channel 前执行清理工作
-                         *    日志记录: 记录 Channel 关闭的操作信息
-                         *    资源释放: 释放与 Channel 相关的资源
-                         *    连接统计: 更新连接统计信息或状态
+                         *    关闭前清理：在关闭 Channel 前执行清理工作
+                         *    日志记录：记录 Channel 关闭的操作信息
+                         *    资源释放：释放与 Channel 相关的资源
+                         *    连接统计：更新连接统计信息或状态
                          *
                          * @param ctx
                          * @param promise
@@ -148,10 +148,10 @@ public class ChannelOutboundHandlerAdapterServer {
                          * 方法作用
                          *    处理 Channel 从 EventLoop 取消注册的出站操作，这是 ChannelOutboundHandler 接口的方法，用于处理取消注册请求
                          * 典型应用场景
-                         *    取消注册前清理: 在 Channel 从 EventLoop 取消注册前执行清理工作
-                         *    日志记录: 记录 Channel 取消注册的操作信息
-                         *    资源释放: 释放与 EventLoop 注册相关的资源
-                         *    状态更新: 更新 Channel 的注册状态信息
+                         *    取消注册前清理：在 Channel 从 EventLoop 取消注册前执行清理工作
+                         *    日志记录：记录 Channel 取消注册的操作信息
+                         *    资源释放：释放与 EventLoop 注册相关的资源
+                         *    状态更新：更新 Channel 的注册状态信息
                          *
                          * @param ctx
                          * @param promise
@@ -168,10 +168,10 @@ public class ChannelOutboundHandlerAdapterServer {
                          * 方法作用
                          *    处理读取操作的出站方法，这是 ChannelOutboundHandler 接口的方法，用于触发从 Channel 读取数据的操作
                          * 典型应用场景
-                         *    控制读取操作: 在适当的时候触发读取操作
-                         *    流量控制: 根据应用状态决定何时读取数据
-                         *    资源管理: 在资源准备好后再触发读取
-                         *    自定义读取策略: 实现特定的读取逻辑
+                         *    控制读取操作：在适当的时候触发读取操作
+                         *    流量控制：根据应用状态决定何时读取数据
+                         *    资源管理：在资源准备好后再触发读取
+                         *    自定义读取策略：实现特定的读取逻辑
                          *
                          * @param ctx
                          * @throws Exception
@@ -217,10 +217,10 @@ public class ChannelOutboundHandlerAdapterServer {
                          * 方法作用
                          *    处理刷新操作的出站方法，这是 ChannelOutboundHandler 接口的方法，用于将缓冲区中的数据立即写出到网络
                          * 典型应用场景
-                         *    数据立即发送: 强制将缓冲区中的数据立即发送出去
-                         *    批量发送优化: 结合 write 操作实现批量发送后统一刷新
-                         *    性能调优: 控制数据发送时机以优化网络性能
-                         *    协议要求: 某些协议要求特定时机发送数据
+                         *    数据立即发送：强制将缓冲区中的数据立即发送出去
+                         *    批量发送优化：结合 write 操作实现批量发送后统一刷新
+                         *    性能调优：控制数据发送时机以优化网络性能
+                         *    协议要求：某些协议要求特定时机发送数据
                          *
                          * @param ctx
                          * @throws Exception
@@ -236,5 +236,4 @@ public class ChannelOutboundHandlerAdapterServer {
             })
             .bind(HOST, PORT);
     }
-
 }

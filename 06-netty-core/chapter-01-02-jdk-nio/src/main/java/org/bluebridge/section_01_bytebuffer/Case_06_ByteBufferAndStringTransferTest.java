@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 public class Case_06_ByteBufferAndStringTransferTest {
 
     /**
-     * 字符串转换为ByteBuffer
+     * 字符串转换为 ByteBuffer
      */
     @Test
     public void testByteBufferAndStringTransfer() {

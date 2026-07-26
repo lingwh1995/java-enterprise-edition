@@ -8,11 +8,11 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
 /**
- * ByteBuffer的常用方法：
+ * ByteBuffer 的常用方法：
  *
  * position()  设置 postion 的值
  * limit()     设置 limit 的值
- * rewind()    把 position 移动到0索引位置
+ * rewind()    把 position 移动到 0 索引位置
  * mark()      mark 做一个标记，记录 position 位置
  * reset()     reset 是将 position 重置到 mark 位置
  * clear()     切换为写模式
@@ -58,8 +58,8 @@ public class Case_02_ByteBufferAPITest {
     }
 
     /**
-     * rewind()  把 position 移动到0索引位置
-     * mark() & reset()   mark 做一个标记，记录 position 位置，reset 是将 position 重置到 mark 位置
+     * rewind()  把 position 移动到 0 索引位置
+     * mark() & reset()   mark 做一个标记，记录 position 位置， reset 是将 position 重置到 mark 位置
      */
     @Test
     public void testByteBufferRewindMarkAndReset() {
@@ -76,7 +76,7 @@ public class Case_02_ByteBufferAPITest {
         log.info("destStr: {}", destStr);
         ByteBufferUtil.debugAll(buffer, 1);
 
-        // 把 position 移动到0索引位置
+        // 把 position 移动到 0 索引位置
         buffer.rewind();
         ByteBufferUtil.debugAll(buffer, 2);
         log.info("(char)buffer.get() = {}", (char)buffer.get());

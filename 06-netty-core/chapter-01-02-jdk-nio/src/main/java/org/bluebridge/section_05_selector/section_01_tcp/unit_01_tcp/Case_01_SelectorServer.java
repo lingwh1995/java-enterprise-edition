@@ -16,15 +16,15 @@ import java.util.Iterator;
 /**
  * 使用 Selector 实现 Server
  *
- * Selector（IO多路复用模型）网络通信 Server 端 - 实现了 IO 多路复用，没有处理粘包半包问题
+ * Selector（IO 多路复用模型）网络通信 Server 端 - 实现了 IO 多路复用，没有处理粘包半包问题
  *
  * 测试方法
- * 1. cmd -> telnet 127.0.0.1 8080/telnet localhost 8080 -> 直接输入内容（只能发送单个字符）/按下Ctrl+]后输入 send + 内容（可以发送字符串） -> 查看idea控制台接收到的信息
+ * 1. cmd -> telnet 127.0.0.1 8080/telnet localhost 8080 -> 直接输入内容（只能发送单个字符）/按下 Ctrl+]后输入 send + 内容（可以发送字符串） -> 查看 idea 控制台接收到的信息
  * 2. 启动多个客户端
  *
  * 测试结论
  * 1. 单线程可以配合 Selector 完成对多个 Channel 可读写事件的监控，这称之为多路复用
- * 2. 多路复用仅针对网络 IO、普通文件IO没法利用多路复用
+ * 2. 多路复用仅针对网络 IO、普通文件 IO 没法利用多路复用
  * 3. 如果不用 Selector 的非阻塞模式，线程大部分时间都在做无用功，而 Selector 能够保证
  *      有可连接事件时才去连接
  *      有可读事件才去读取
@@ -89,7 +89,7 @@ public class Case_01_SelectorServer {
                         ByteBuffer buffer = ByteBuffer.allocate(16);
                         int read = channel.read(buffer);
                         if (read == -1) {
-                            // 客户端调用了socket.close()方法断开了
+                            // 客户端调用了 socket.close()方法断开了
                             key.cancel();
                         } else {
                             buffer.flip();
@@ -98,7 +98,7 @@ public class Case_01_SelectorServer {
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
-                        // 因为客户端由于异常关闭断开了，所以要将key取消注册
+                        // 因为客户端由于异常关闭断开了，所以要将 key 取消注册
                         key.cancel();
                     }
                 }

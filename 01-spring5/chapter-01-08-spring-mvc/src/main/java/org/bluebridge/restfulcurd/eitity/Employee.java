@@ -24,7 +24,7 @@ public class Employee {
     @Email(message = "不合法的邮箱格式")
     private String email;
 
-    //1 male, 0 female
+    // 1 male，0 female
     private Integer gender;
 
     private Department department;

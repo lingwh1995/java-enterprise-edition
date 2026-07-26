@@ -14,8 +14,8 @@ import lombok.extern.slf4j.Slf4j;
  * Netty 半包测试 服务端
  *
  * 1. 黏包现象分析
- *    客户端总共发送10次消息，每次消息是16字节
- *    服务器端一次就接收了160个字节，而非分10次接收，这样就发生了黏包现象
+ *    客户端总共发送 10 次消息，每次消息是 16 字节
+ *    服务器端一次就接收了 160 个字节，而非分 10 次接收，这样就发生了黏包现象
  *
  * 2. 半包现象分析
  *    现象
@@ -41,7 +41,7 @@ public class HalfPacketServer {
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap()
                 .channel(NioServerSocketChannel.class)
-                // 设置系统接收缓冲区（即滑动窗口）大小为10字节
+                // 设置系统接收缓冲区（即滑动窗口）大小为 10 字节
                 .option(ChannelOption.SO_RCVBUF, 3)
                 .group(boss, worker)
                 .childHandler(new ChannelInitializer<SocketChannel>() {

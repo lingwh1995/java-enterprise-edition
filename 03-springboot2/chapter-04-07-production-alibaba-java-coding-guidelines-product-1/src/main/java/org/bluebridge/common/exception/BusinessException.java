@@ -22,20 +22,20 @@ public class BusinessException extends RuntimeException {
     private final Object data;
 
     /**
-     * 构造一个BusinessException异常实例
+     * 构造一个 BusinessException 异常实例
      *
      * @param message 异常描述信息
      */
     public BusinessException(String message) {
         super(message);
-        // 设置异常状态码为BAD_REQUEST
+        // 设置异常状态码为 BAD_REQUEST
         this.code = ResponseStatusEnum.BAD_REQUEST.getCode();
-        // 初始化数据对象为null
+        // 初始化数据对象为 null
         this.data = null;
     }
 
     /**
-     * 构造BusinessException异常实例
+     * 构造 BusinessException 异常实例
      *
      * @param responseStatusEnum 响应状态枚举，包含异常的消息和错误码
      */
@@ -46,7 +46,7 @@ public class BusinessException extends RuntimeException {
     }
 
     /**
-     * 构造BusinessException异常实例
+     * 构造 BusinessException 异常实例
      *
      * @param responseStatusEnum 响应状态枚举，包含异常码信息
      * @param message 异常描述信息
@@ -58,7 +58,7 @@ public class BusinessException extends RuntimeException {
     }
 
     /**
-     * 构造BusinessException实例
+     * 构造 BusinessException 实例
      *
      * @param code 业务异常代码，用于标识异常类型
      * @param message 异常描述信息，将传递给父类构造函数
@@ -70,7 +70,7 @@ public class BusinessException extends RuntimeException {
     }
 
     /**
-     * 构造BusinessException异常实例
+     * 构造 BusinessException 异常实例
      *
      * @param code 异常代码，用于标识具体的业务异常类型
      * @param message 异常描述信息，提供关于异常的详细说明
@@ -83,7 +83,7 @@ public class BusinessException extends RuntimeException {
     }
 
     /**
-     * 构造BusinessException异常实例
+     * 构造 BusinessException 异常实例
      *
      * @param code 异常代码，用于标识具体的错误类型
      * @param message 异常描述信息，提供错误的详细说明
@@ -97,7 +97,7 @@ public class BusinessException extends RuntimeException {
     }
 
     /**
-     * 构造BusinessException异常实例
+     * 构造 BusinessException 异常实例
      *
      * @param responseStatusEnum 响应状态枚举，用于设置异常的错误码
      * @param message 异常消息描述

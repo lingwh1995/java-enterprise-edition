@@ -45,7 +45,7 @@ public interface IEmpDao {
     List<Map<String,Object>> getEmpLsitMap();
 
     /**
-     * 多条查询结果返回 Map，并使用主键作为 Map 的 key
+     * 多条查询结果返回 Map ，并使用主键作为 Map 的 key
      * @return
      */
     @MapKey("id")

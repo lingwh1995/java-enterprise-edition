@@ -58,7 +58,7 @@ public class GlobalExceptionHandler {
         } else if (e instanceof NoPermissionException) {
             responseStatus = ResponseStatusEnum.FORBIDDEN;
         } else {
-            // 对于其他所有 Sa-Token 异常（如 NoRoleException），统一视为未授权
+            // 对于其他所有 Sa-Token 异常（如 NoRoleException ），统一视为未授权
             responseStatus = ResponseStatusEnum.UNAUTHENTICATED;
         }
 

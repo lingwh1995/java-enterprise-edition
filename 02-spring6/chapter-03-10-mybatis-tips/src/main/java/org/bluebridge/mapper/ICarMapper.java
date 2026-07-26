@@ -95,7 +95,7 @@ public interface ICarMapper {
     int insertUseMysqlAutoSetPrimaryKeyWhenInsert_2(Car car);
 
     /**
-     * Mysql 插入数据时设置主键方式二(写法一): 使用 Mybatis 读取 Mysql 生成的主键，在 sql 语句中使用，sql 语句中要出现主键
+     * Mysql 插入数据时设置主键方式二(写法一): 使用 Mybatis 读取 Mysql 生成的主键，在 sql 语句中使用， sql 语句中要出现主键
      *
      * @param car
      * @return
@@ -103,7 +103,7 @@ public interface ICarMapper {
     int insertUseMybatisReadMysqlGeneratedPrimaryKeyWhenInsert_1(Car car);
 
     /**
-     * Mysql 插入数据时设置主键方式二(写法二): 使用 Mybatis 读取 Mysql 生成的主键，在 sql 语句中使用，sql 语句中要出现主键
+     * Mysql 插入数据时设置主键方式二(写法二): 使用 Mybatis 读取 Mysql 生成的主键，在 sql 语句中使用， sql 语句中要出现主键
      *
      * @param car
      * @return

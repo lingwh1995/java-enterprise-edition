@@ -37,7 +37,7 @@ public class FixedLengthFrameDecoderServer {
                     @Override
                     protected void initChannel(SocketChannel ch) {
                         ChannelPipeline pipeline = ch.pipeline();
-                        // 每10个字节拆分一次
+                        // 每 10 个字节拆分一次
                         pipeline.addLast(new FixedLengthFrameDecoder(10));
                         pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
                         pipeline.addLast(new ChannelInboundHandlerAdapter() {

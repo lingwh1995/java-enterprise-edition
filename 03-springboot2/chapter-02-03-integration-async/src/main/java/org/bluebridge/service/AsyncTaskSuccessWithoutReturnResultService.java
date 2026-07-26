@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class AsyncTaskSuccessWithoutReturnResultService {
 
     /**
-     * 任务1
+     * 任务 1
      * @throws InterruptedException
      */
     @Async
@@ -25,7 +25,7 @@ public class AsyncTaskSuccessWithoutReturnResultService {
     }
 
     /**
-     * 任务2
+     * 任务 2
      * @throws InterruptedException
      */
     @Async
@@ -37,7 +37,7 @@ public class AsyncTaskSuccessWithoutReturnResultService {
     }
 
     /**
-     * 任务3
+     * 任务 3
      * @throws InterruptedException
      */
     @Async

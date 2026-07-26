@@ -45,7 +45,7 @@ public class Case_01_ByteBufferHelloWorldTest {
          *  // position 位置会后移一位
          *  1. position = position + 1;
          */
-        // 读取到的数据会转换为10进制数
+        // 读取到的数据会转换为 10 进制数
         log.info("buffer.get() = {}", (char)buffer.get());
         log.info("buffer.get() = {}", (char)buffer.get());
         ByteBufferUtil.debugAll(buffer, 5);
@@ -55,7 +55,7 @@ public class Case_01_ByteBufferHelloWorldTest {
          *
          * 1. 将缓冲区切换为写模式
          * 2. position‌：移动到上次读取的末尾位置，已经读取过的部分直接压缩掉
-         * 3. limit‌：设置为缓冲区的容量（capacity）
+         * 3. limit‌：设置为缓冲区的容量（capacity ）
          */
         buffer.compact();
         ByteBufferUtil.debugAll(buffer, 6);

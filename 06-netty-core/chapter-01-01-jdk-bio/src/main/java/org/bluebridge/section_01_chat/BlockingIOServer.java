@@ -24,7 +24,7 @@ public class BlockingIOServer {
 
     public static void main(String[] args) {
         try {
-            // 创建 ServerSocket ，监听8080端口
+            // 创建 ServerSocket，监听 8080 端口
             ServerSocket ss = new ServerSocket();
             ss.bind(new InetSocketAddress(HOST, PORT));
             log.info("服务器启动，端口：{}......", PORT);

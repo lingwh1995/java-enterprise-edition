@@ -17,7 +17,7 @@ public class Case_07_StickyPacketAndHalfPacketTest {
 
     /**
      * 网络上有多条数据发送给服务端，数据之间使用 \n 进行分隔
-     * 但由于某种原因这些数据在接收时，被进行了重新组合，例如原始数据有3条为
+     * 但由于某种原因这些数据在接收时，被进行了重新组合，例如原始数据有 3 条为
      *
      *   Hello,world\n
      *   I'm zhangsan\n

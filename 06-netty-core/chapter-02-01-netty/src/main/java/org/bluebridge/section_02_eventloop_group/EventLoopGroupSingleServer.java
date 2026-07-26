@@ -17,7 +17,7 @@ import java.nio.charset.Charset;
  * 单事件循环组 服务端
  *
  * 单参数版本 => public ServerBootstrap group(EventLoopGroup group)
- * 1. 用于父级和子级 EventLoopGroup 使用同一个实例的场景，内部会将同一个 group 同时作为 parentGroup 和 childGroup使用
+ * 1. 用于父级和子级 EventLoopGroup 使用同一个实例的场景，内部会将同一个 group 同时作为 parentGroup 和 childGroup 使用
  * 2. 适用于单线程模型的场景，如简单的服务器应用，不需要复杂的线程模型配置
  *
  * 关于 Netty 的 NioEventLoopGroup 的默认线程数量大小，以下是关键信息

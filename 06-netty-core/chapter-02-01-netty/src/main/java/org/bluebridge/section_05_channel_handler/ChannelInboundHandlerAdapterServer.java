@@ -38,7 +38,7 @@ public class ChannelInboundHandlerAdapterServer {
                     pipeline.addLast(new ChannelInboundHandlerAdapter() {
                         /**
                          * 方法作用
-                         *    当 Channel 注册到 EventLoop 时调用，标志着 Channel 已经准备好处理I/O操作
+                         *    当 Channel 注册到 EventLoop 时调用，标志着 Channel 已经准备好处理 I/O 操作
                          * 典型应用场景
                          *    记录通道注册日志
                          *    初始化与通道相关的资源
@@ -129,9 +129,9 @@ public class ChannelInboundHandlerAdapterServer {
                          * 方法作用
                          *    当一次数据读取操作完全完成时被调用，标志着当前批次的数据读取结束
                          * 典型应用场景
-                         *    刷新数据: 通常在此方法中调用 ctx.flush() 将缓冲的数据发送出去
-                         *    批量处理完成: 标识一批数据处理的结束
-                         *    资源清理: 清理与本次读取操作相关的临时资源
+                         *    刷新数据：通常在此方法中调用 ctx.flush() 将缓冲的数据发送出去
+                         *    批量处理完成：标识一批数据处理的结束
+                         *    资源清理：清理与本次读取操作相关的临时资源
                          *
                          * @param ctx
                          * @throws Exception
@@ -148,7 +148,7 @@ public class ChannelInboundHandlerAdapterServer {
                          * 方法作用
                          *    处理用户自定义事件的回调方法，当 ChannelPipeline 是由多个 ChannelHander 组成的 中触发用户事件时被调用
                          * 典型应用场景
-                         *    处理空闲检测事件（如 IdleStateEvent）
+                         *    处理空闲检测事件（如 IdleStateEvent ）
                          *    处理自定义业务事件
                          *    心跳检测和超时处理
                          *    协议升级等特殊事件处理
@@ -176,9 +176,9 @@ public class ChannelInboundHandlerAdapterServer {
                          *    当 Channel 从不可写状态变为可写状态时触发
                          *    通常与 Channel 的写缓冲区状态相关
                          * 典型应用场景
-                         *    流量控制: 监控和控制数据发送速率
-                         *    缓冲区管理: 根据可写状态调整数据写入策略
-                         *    性能优化: 在通道不可写时暂停数据发送，避免内存溢出
+                         *    流量控制：监控和控制数据发送速率
+                         *    缓冲区管理：根据可写状态调整数据写入策略
+                         *    性能优化：在通道不可写时暂停数据发送，避免内存溢出
                          *
                          * @param ctx
                          * @throws Exception
@@ -199,10 +199,10 @@ public class ChannelInboundHandlerAdapterServer {
                          * 方法作用
                          *    处理 ChannelPipeline 是由多个 ChannelHander 组成的 中发生的异常事件，当 ChannelHandler 处理过程中抛出异常时被调用
                          * 典型应用场景
-                         *    异常处理: 捕获和处理网络通信过程中的各种异常
-                         *    错误日志记录: 记录异常信息用于调试和监控
-                         *    连接清理: 在发生严重异常时关闭连接或执行清理操作
-                         *    故障恢复: 根据异常类型采取相应的恢复措施
+                         *    异常处理：捕获和处理网络通信过程中的各种异常
+                         *    错误日志记录：记录异常信息用于调试和监控
+                         *    连接清理：在发生严重异常时关闭连接或执行清理操作
+                         *    故障恢复：根据异常类型采取相应的恢复措施
                          *
                          * @param ctx
                          * @param cause
@@ -215,7 +215,7 @@ public class ChannelInboundHandlerAdapterServer {
 
                             // 根据异常类型决定是否关闭连接
                             if (cause instanceof IOException) {
-                                // IO异常通常需要关闭连接
+                                // IO 异常通常需要关闭连接
                                 ctx.close();
                             } else {
                                 // 其他异常继续传播
@@ -228,5 +228,4 @@ public class ChannelInboundHandlerAdapterServer {
             })
             .bind(HOST, PORT);
     }
-
 }

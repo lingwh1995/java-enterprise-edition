@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * 界面版即时通讯Server端(群聊、单聊)
+ * 界面版即时通讯 Server 端(群聊、单聊)
  *
  * @author lingwh
  * @date 2025/9/23 15:10
@@ -103,7 +103,7 @@ class ChatServerThread extends Thread {
                 for(String name : onlineNames){
                     rs.append(name + Constants.SPILIT);
                 }
-                // 波仔003197♣♣㏘♣④④♣zhangsan003197♣♣㏘♣④④♣波妞003197♣♣㏘♣④④♣
+                // 波仔 003197♣♣㏘♣④④♣zhangsan003197♣♣㏘♣④④♣波妞 003197♣♣㏘♣④④♣
                 // 去掉最后一个分隔符
                 msg = rs.substring(0,rs.lastIndexOf(Constants.SPILIT));
                 // 将消息发送给所有的客户端
@@ -141,11 +141,11 @@ class ChatServerThread extends Thread {
      * @throws Exception
      */
     private void sendMsgToOne(String destName, String msg) throws Exception{
-        // 拿到所有在线的socket管道 给这些管道写出消息
+        // 拿到所有在线的 socket 管道 给这些管道写出消息
         Set<Socket> allOnLineSockets = ChatServer.onLineSockets.keySet();
         for(Socket sk : allOnLineSockets){
-            // 得到当前需要私发的Socket
-            // 只对这个名字对应的socket私发消息
+            // 得到当前需要私发的 Socket
+            // 只对这个名字对应的 socket 私发消息
             if(ChatServer.onLineSockets.get(sk).trim().equals(destName)){
                 DataOutputStream dos = new DataOutputStream(sk.getOutputStream());
                 dos.writeInt(2);// 消息类型
@@ -156,7 +156,7 @@ class ChatServerThread extends Thread {
     }
 
     private void sendMsgToAll(int flag, String msg) throws Exception {
-        // 拿到所有的在线socket管道 给这些管道写出消息
+        // 拿到所有的在线 socket 管道 给这些管道写出消息
         Set<Socket> allOnLineSockets = ChatServer.onLineSockets.keySet();
         for(Socket sk : allOnLineSockets){
             DataOutputStream dos = new DataOutputStream(sk.getOutputStream());

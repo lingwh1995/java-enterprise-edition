@@ -43,12 +43,12 @@ public class ChannelHandlerLifeCycleServer {
                             String s = buf.toString(Charset.defaultCharset());
                             log.info("来自客户端的消息: {}", s);
 
-                            // 创建新的ByteBuf并写入数据
+                            // 创建新的 ByteBuf 并写入数据
                             ByteBuf responseBuf = ctx.alloc().buffer();
                             responseBuf.writeBytes(s.getBytes(Charset.defaultCharset()));
                             ctx.writeAndFlush(responseBuf);
 
-                            // 释放原始ByteBuf资源
+                            // 释放原始 ByteBuf 资源
                             buf.release();
                         }
 

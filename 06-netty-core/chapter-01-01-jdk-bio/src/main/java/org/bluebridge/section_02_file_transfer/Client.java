@@ -23,7 +23,7 @@ public class Client {
     public static void main(String[] args) {
         try {
             log.info("Client启动......");
-            // 1. 获取Socket
+            // 1. 获取 Socket
             Socket socket = new Socket(HOST, PORT);
             // 2. 获取输出流
             OutputStream socketOutputStream = socket.getOutputStream();
@@ -42,7 +42,7 @@ public class Client {
             }
             // 7. 从管道中刷出数据
             dataOutputStream.flush();
-            // 8. 通知服务端Client的数据发送完毕(不处理的话发送的图片过去打不开,本质是没有成功发送成功)
+            // 8. 通知服务端 Client 的数据发送完毕(不处理的话发送的图片过去打不开，本质是没有成功发送成功)
             // 加了下面这句，服务端这个异常就不会出现了 java.net.SocketException: Connection reset
             socket.shutdownOutput();
             log.info("Client发送文件完成......");

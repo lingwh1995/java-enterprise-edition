@@ -10,7 +10,7 @@ import java.nio.channels.*;
 import java.util.Iterator;
 
 /**
- * 使用 多线程 + selector 实现Server（单个worker版）
+ * 使用 多线程 + selector 实现 Server （单个 worker 版）
  *
  * V1.0 客户端无法与服务端可以建立连接，无法正常通信
  *
@@ -51,7 +51,7 @@ public class Case_01_MultiThreadServer {
                     SocketChannel sc = ssc.accept();
                     sc.configureBlocking(false);
                     log.info("connected......{}", sc.getRemoteAddress());
-                    // 2. 关联worker中的selector
+                    // 2. 关联 worker 中的 selector
                     log.info("before register......{}", sc.getRemoteAddress());
                     SelectionKey selectionKey = sc.register(worker.selector, SelectionKey.OP_READ, null); // 在boss线程中执行
                     log.info("selectionKey: {}", selectionKey);

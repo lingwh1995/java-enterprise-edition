@@ -11,7 +11,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 /**
- * NIO群聊客户端已实现功能
+ * NIO 群聊客户端已实现功能
  *
  * 1. 连接服务器
  * 2. 发送消息
@@ -40,9 +40,9 @@ public class GroupChatClient {
         socketChannel = SocketChannel.open(new InetSocketAddress(HOST,PORT));
         // 设置非阻塞
         socketChannel.configureBlocking(false);
-        // 将channel注册到selector
+        // 将 channel 注册到 selector
         socketChannel.register(selector, SelectionKey.OP_READ);
-        // 得到username
+        // 得到 username
         username = socketChannel.getLocalAddress().toString().substring(1);
         System.out.println(username + " is ok ...");
     }
@@ -101,7 +101,7 @@ public class GroupChatClient {
                     if(selectionKey.isReadable()) {
                         // 得到相关的通道
                         SocketChannel sc = (SocketChannel)selectionKey.channel();
-                        // 得到一个Buffer
+                        // 得到一个 Buffer
                         ByteBuffer buffer = ByteBuffer.allocate(1024);
                         // 读取
                         sc.read(buffer);
@@ -109,7 +109,7 @@ public class GroupChatClient {
                         String message = new String(buffer.array());
                         System.out.println(message.trim());
                     }
-                    // 移除已经处理过的key
+                    // 移除已经处理过的 key
                     iterator.remove();
                 }
             }else {

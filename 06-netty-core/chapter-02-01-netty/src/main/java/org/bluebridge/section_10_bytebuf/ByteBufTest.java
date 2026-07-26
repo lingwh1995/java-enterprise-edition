@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.util.Arrays;
 
 /**
- * Netty中的ByteBuf
+ * Netty 中的 ByteBuf
  *
  * 1. 创建 ByteBuf
  *     直接内存创建和销毁的代价昂贵，但读写性能高（少一次内存复制），适合配合池化功能一起用
@@ -46,7 +46,7 @@ public class ByteBufTest {
 
     @Test
     public void testByteBufHelloWorld() {
-        // ByteBuf 可以动态扩容(初始为256)
+        // ByteBuf 可以动态扩容(初始为 256)
         ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer();
 
         log.info("初始的  byteBuf： {}", byteBuf);
@@ -58,23 +58,23 @@ public class ByteBufTest {
 
         // 写入字节数组
         byteBuf.writeBytes(sb.toString().getBytes());
-        // 扩容至512
+        // 扩容至 512
         log.info("扩容后的byteBuf： {}", byteBuf);
         ByteBufUtil.debugAll(byteBuf);
     }
 
     @Test
     public void testByteBufAllocator() {
-        // 直接内存: 分配效率低，读写效率高
+        // 直接内存：分配效率低，读写效率高
         ByteBuf buffer = ByteBufAllocator.DEFAULT.buffer(16);
-        // 堆内存: 分配效率高，读写效率低
+        // 堆内存：分配效率高，读写效率低
         buffer = ByteBufAllocator.DEFAULT.heapBuffer(16);
         // 创建池化基于直接内存的 ByteBuf
         buffer = ByteBufAllocator.DEFAULT.directBuffer(16);
     }
 
     /**
-     * 测试ByteBuf写入
+     * 测试 ByteBuf 写入
      */
     @Test
     public void testByteBufWrite() {
@@ -112,7 +112,7 @@ public class ByteBufTest {
     }
 
     /**
-     * 测试ByteBuf读取
+     * 测试 ByteBuf 读取
      */
     @Test
     public void testByteBufRead() {
@@ -126,5 +126,4 @@ public class ByteBufTest {
         byteBuf.readBytes(dst);
         log.info("{}", Arrays.toString(dst));
     }
-
 }

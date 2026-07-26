@@ -16,7 +16,7 @@ public class Employee {
 
     private String email;
 
-    //1 male， 0 female
+    //1 male，0 female
     private Integer gender;
 
     private Department department;

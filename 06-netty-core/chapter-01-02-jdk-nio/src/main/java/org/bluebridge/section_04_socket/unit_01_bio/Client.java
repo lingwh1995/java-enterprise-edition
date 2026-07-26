@@ -9,9 +9,9 @@ import java.net.Socket;
 import java.util.Scanner;
 
 /**
- * 测试阻塞方式实现网络通信-基于BIO的流理解阻塞通信模型的客户端
+ * 测试阻塞方式实现网络通信-基于 BIO 的流理解阻塞通信模型的客户端
  *
- * 目标: 服务端接收单个客户端单条消息发送和接收需求
+ * 目标：服务端接收单个客户端单条消息发送和接收需求
  *
  * @author lingwh
  * @date 2025/7/7 18:01
@@ -26,7 +26,7 @@ public class Client {
         PrintStream printStream = null;
         try {
             log.info("客户端启动......");
-            // 1. 获取Socket对象，从Socket对象中可以获得与服务端的连接
+            // 1. 获取 Socket 对象，从 Socket 对象中可以获得与服务端的连接
             Socket socket = new Socket("localhost", PORT);
             // 2. 获取输出流
             socketOutputStream = socket.getOutputStream();
@@ -37,7 +37,7 @@ public class Client {
             while(true) {
                 String line = scanner.nextLine();
                 printStream.println(line);
-                // 5. 把数据从内存中写出，一般用在close()方法之前
+                // 5. 把数据从内存中写出，一般用在 close()方法之前
                 printStream.flush();
             }
         } catch (IOException e) {

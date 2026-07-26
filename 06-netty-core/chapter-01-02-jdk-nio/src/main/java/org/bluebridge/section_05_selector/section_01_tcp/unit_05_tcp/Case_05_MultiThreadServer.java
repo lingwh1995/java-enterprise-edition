@@ -52,7 +52,7 @@ public class Case_05_MultiThreadServer {
                     SocketChannel sc = ssc.accept();
                     sc.configureBlocking(false);
                     log.info("connected......{}", sc.getRemoteAddress());
-                    // 2.关联 worker 中的selector
+                    // 2.关联 worker 中的 selector
                     log.info("before register......{}", sc.getRemoteAddress());
                     worker.init();
                     sc.register(worker.selector, SelectionKey.OP_READ, null);  // 在 boss 线程中执行

@@ -11,14 +11,14 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.LocalDateTime;
 
 /**
- * 处理文本消息的handler
+ * 处理文本消息的 handler
  *
  * @author lingwh
  * @date 2025/10/16 14:08
  */
 @Slf4j
 public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
-    //用于记录和管理所有客户端的channel
+    // 用于记录和管理所有客户端的 channel
 
     private static ChannelGroup clients = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 

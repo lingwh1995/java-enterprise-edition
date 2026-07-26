@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *           详细见 org.bluebridge.config.IndexViewResolver
  *
  * @author lingwh
+ * @date 2024/11/15 11:42
  */
 @Controller
 public class IndexController {
 
-//    @RequestMapping({"/","/index.html"})
+//    @RequestMapping({"/"，"/index.html"})
 //    public String index(){
 //        return "index";
 //    }

@@ -6,9 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 首页控制器
- * 注意：启动时要使用spring-boot-maven-plugin的springboot:run启动，否则会报404
+ * 注意：启动时要使用spring-boot-maven-plugin的springboot:run 启动，否则会报 404
  *
  * @author lingwh
+ * @date 2024/11/15 11:42
  */
 @Controller
 public class IndexController {

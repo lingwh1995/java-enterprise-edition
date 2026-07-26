@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- * 缓存Key工具类
+ * 缓存 Key 工具类
  *
  * @author lingwh
  * @date 2026/2/1 15:55
@@ -24,7 +24,6 @@ public class CacheKeyUtils {
         String combinedJson = Arrays.stream(params)
                 .map(param -> param != null ? JsonUtils.toJsonString(param) : "null")
                 .collect(Collectors.joining("|"));
-
         return ":" + CryptoUtils.Md5.encrypt(combinedJson);
     }
 }

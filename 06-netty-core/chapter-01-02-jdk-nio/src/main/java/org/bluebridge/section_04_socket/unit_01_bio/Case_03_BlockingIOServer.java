@@ -19,20 +19,20 @@ import java.util.concurrent.TimeUnit;
  * V3.0 1.服务端接收多个客户端多条消息发送和接收需求(一个客户端对应一个线程)  2.通过线程池实现伪异步通信架构
  *
  * 测试方法
- * 1.cmd -> telnet 127.0.0.1 8080/telnet localhost 8080 -> 直接输入内容（只能发送单个字符）/按下Ctrl+]后输入 send + 内容（可以发送字符串） -> 查看idea控制台接收到的信息
+ * 1.cmd -> telnet 127.0.0.1 8080/telnet localhost 8080 -> 直接输入内容（只能发送单个字符）/按下 Ctrl+]后输入 send + 内容（可以发送字符串） -> 查看 idea 控制台接收到的信息
  * 2.启动多个客户端
  *
  * 测试结论
  * 1. 使用 BIO 模型时，有多少个客户端，服务端就会产生多少个线程，即服务端会为每一个客户端创建一个线程
  * 2. BIO 会阻塞
- * 3. 32位机器下每个线程320kb，64位机器下每个线程1024kb，如果创建的线程过多，极有可能出现 OOM 现象，可以使用线程池进行优化，但是
+ * 3. 32 位机器下每个线程 320kb，64 位机器下每个线程 1024kb，如果创建的线程过多，极有可能出现 OOM 现象，可以使用线程池进行优化，但是
  *    仍要注意，即使使用了线程池进行优化，也不适用于处理连接线程过多且都是长连接的的情况，一定程度上具备处理多个短连接的能力
  *
  * @author lingwh
  * @date 2025/7/7 18:27
  */
 @Slf4j
-public class _03_BlockingIOServer {
+public class Case_03_BlockingIOServer {
 
     private static final String HOST = "127.0.0.1";
     private static final int PORT = 8080;
@@ -48,7 +48,7 @@ public class _03_BlockingIOServer {
             while (true) {
                 // 3. 获取 Socket
                 Socket socket = serverSocket.accept();
-                // 4. 把 Socket封装成任务对象交给线程池处理
+                // 4. 把 Socket 封装成任务对象交给线程池处理
                 ServerRunnableTask task = new ServerRunnableTask(socket);
                 // 5. 使用线程池处理任务
                 serverThreadPool.execute(task);
@@ -76,13 +76,13 @@ class ServerThreadPool {
      */
     public ServerThreadPool(int maxThreadNum, int taskQueueSize) {
         /**
-         * 创建一个线程池对象,最好使用这个API进行创建,不推荐使用Executors.xxx()来创建
+         * 创建一个线程池对象，最好使用这个 API 进行创建，不推荐使用 Executors.xxx()来创建
          * 参数信息：
-         * int corePoolSize     核心线程大小，同时可以处理的线程数目，如果超过这个数目，则先会在队列中进行缓存
-         * int maximumPoolSize  线程池最大容量大小
-         * long keepAliveTime   线程空闲时，线程存活的时间
-         * TimeUnit unit        时间单位
-         * BlockingQueue<Runnable> workQueue  任务队列大小(一个阻塞队列)
+         * int corePoolSize 核心线程大小，同时可以处理的线程数目，如果超过这个数目，则先会在队列中进行缓存
+         * int maximumPoolSize 线程池最大容量大小
+         * long keepAliveTime 线程空闲时，线程存活的时间
+         * TimeUnit unit 时间单位
+         * BlockingQueue<Runnable> workQueue 任务队列大小(一个阻塞队列)
          */
         this.executorService =
                 new ThreadPoolExecutor(3, maxThreadNum, 120, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(taskQueueSize));
@@ -99,7 +99,7 @@ class ServerThreadPool {
 }
 
 /**
- * 封装了Socket的任务对象
+ * 封装了 Socket 的任务对象
  *
  * @author lingwh
  * @date 2025/7/7 18:27

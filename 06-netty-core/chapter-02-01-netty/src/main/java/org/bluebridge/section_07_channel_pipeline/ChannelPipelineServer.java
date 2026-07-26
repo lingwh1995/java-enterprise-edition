@@ -32,10 +32,10 @@ public class ChannelPipelineServer {
             .childHandler(new ChannelInitializer<NioSocketChannel>() {
                 @Override
                 protected void initChannel(NioSocketChannel ch) {
-                    // 1.通过 channel 拿到 pipeline
+                    // 1. 通过 channel 拿到 pipeline
                     ChannelPipeline pipeline = ch.pipeline();
 
-                    // 2.添加 Handler : head -> h1 -> h2 -> h3 -> tail
+                    // 2. 添加 Handler : head -> h1 -> h2 -> h3 -> tail
                     pipeline.addLast("h1", new ChannelInboundHandlerAdapter() {
                         @Override
                         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -43,7 +43,7 @@ public class ChannelPipelineServer {
                             ByteBuf byteBuf = (ByteBuf) msg;
                             String name = byteBuf.toString(Charset.defaultCharset());
                             log.info("原始数据: {}", name);
-                            // 内部执行ctx.fireChannelRead(name); 传递且只能传递给下一个handler, 如果不调用, 那么调用链就会断开
+                            // 内部执行 ctx.fireChannelRead(name); 传递且只能传递给下一个 handler，如果不调用，那么调用链就会断开
                             super.channelRead(ctx, name);
                         }
                     });
@@ -65,22 +65,22 @@ public class ChannelPipelineServer {
                             log.info("h3......");
                             Student student = (Student) msg;
                             log.info("student: {}", student);
-                            // super.channelRead(ctx, msg);// 后面没有了,所以这个方法没用
+                            // super.channelRead(ctx, msg);// 后面没有了，所以这个方法没用
 
                             // 写一些数据，触发出站处理器
-                            // 使用pipeline则从最后开始找出站处理器h6->h5->h4
+                            // 使用 pipeline 则从最后开始找出站处理器 h6->h5->h4
                             //pipeline.writeAndFlush(ctx.alloc().buffer().writeBytes("Server".getBytes()));
 
-                            // 使用ch则从最后开始找出站处理器h6->h5->h4
+                            // 使用 ch 则从最后开始找出站处理器 h6->h5->h4
                             ch.writeAndFlush(ctx.alloc().buffer().writeBytes("Server".getBytes()));
 
-                            // 使用cxt从当前处理器往前找出站处理器，即从h3往前找，那么就找不到h4,h5,h6
+                            // 使用 cxt 从当前处理器往前找出站处理器，即从 h3 往前找，那么就找不到 h4，h5，h6
                             //ctx.writeAndFlush(ctx.alloc().buffer().writeBytes("Server".getBytes()));
                         }
                     });
 
-                    // 增加出站处理器(建议使用addFirst，不易弄混) ---> 只有写数据的时候才会触发write方法
-                    // 出站顺序: 6->5->4
+                    // 增加出站处理器(建议使用 addFirst ，不易弄混) ---> 只有写数据的时候才会触发 write 方法
+                    // 出站顺序：6->5->4
                     pipeline.addLast("h4", new ChannelOutboundHandlerAdapter() {
                         @Override
                         public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
@@ -108,5 +108,4 @@ public class ChannelPipelineServer {
             })
             .bind(HOST, PORT);
     }
-
 }

@@ -16,7 +16,7 @@ import java.net.Socket;
  * BIO 模型网络通信 Server 端 - V1.0 服务端接收单个客户端多条消息发送和接收需求
  *
  * 测试方法
- * 1. cmd -> telnet 127.0.0.1 8080/telnet localhost 8080 -> 直接输入内容（只能发送单个字符）/按下Ctrl+]后输入 send + 内容（可以发送字符串） -> 查看idea控制台接收到的信息
+ * 1. cmd -> telnet 127.0.0.1 8080/telnet localhost 8080 -> 直接输入内容（只能发送单个字符）/按下 Ctrl+]后输入 send + 内容（可以发送字符串） -> 查看 idea 控制台接收到的信息
  * 2. 启动多个客户端
  *
  * @author lingwh
@@ -31,11 +31,11 @@ public class Case_01_BlockingIOServer {
     public static void main(String[] args) {
         BufferedReader bufferedReader = null;
         try {
-            // 1. 创建ServerSocket
+            // 1. 创建 ServerSocket
             ServerSocket serverSocket = new ServerSocket();
             serverSocket.bind(new InetSocketAddress(HOST, PORT));
             log.info("阻塞服务器启动，端口：{}......", PORT);
-            // 2. 获取Socket
+            // 2. 获取 Socket
             Socket socket = serverSocket.accept();
             // 3. 获取输入流
             InputStream socketInputStream = socket.getInputStream();

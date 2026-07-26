@@ -24,11 +24,11 @@ public class EventLoopGroupHandleHighCostTaskServer {
     private static final int PORT = 8080;
 
     public static void main(String[] args) {
-        // 细分: 独立出来一个 EventLoopGroup 来处理耗时较长的任务
+        // 细分：独立出来一个 EventLoopGroup 来处理耗时较长的任务
         EventLoopGroup eventExecutors = new DefaultEventLoopGroup();
 
         /**
-         * 注意到两次输出的thread名不一样(nioEventLoopGroup-4-1， nioEventLoopGroup-2-1 )， 说明提交给不同的Group执行， 其中nioEventLoopGroup-4-1的4指的是第4个Group， 1为当前Group的线程号
+         * 注意到两次输出的 thread 名不一样(nioEventLoopGroup-4-1 ，nioEventLoopGroup-2-1)， 说明提交给不同的 Group 执行， 其中 nioEventLoopGroup-4-1 的 4 指的是第 4 个 Group ，1 为当前 Group 的线程号
          */
         new ServerBootstrap()
             .group(new NioEventLoopGroup(1), new NioEventLoopGroup(2))// (parentGroup, childGroup)--->(负责Accept事件, 负责I/O事件)

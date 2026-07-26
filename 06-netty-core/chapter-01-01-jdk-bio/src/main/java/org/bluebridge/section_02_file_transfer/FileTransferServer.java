@@ -24,12 +24,12 @@ public class FileTransferServer {
 
     public static void main(String[] args) {
         try {
-            // 1. 获取ServerSocket
+            // 1. 获取 ServerSocket
             InetAddress address = InetAddress.getByName(HOST);
             ServerSocket serverSocket = new ServerSocket(PORT, 50, address);
             log.info("文件传输服务器启动......");
             while (true) {
-                // 2. 获取Socket
+                // 2. 获取 Socket
                 Socket socket = serverSocket.accept();
                 // 3. 接收文件并存储到另一个地方
                 new Thread(new ServerThread(socket)).start();

@@ -65,7 +65,7 @@ public class ChatClient implements ActionListener {
         bottomPanel.add(btns,BorderLayout.EAST);
         //-----------------------------------------------
         // 给发送消息按钮绑定点击事件监听器
-        // 将展示消息区centerPanel添加到窗口的中间
+        // 将展示消息区 centerPanel 添加到窗口的中间
         smsContent.setBackground(new Color(0xdd,0xdd,0xdd));
         // 让展示消息区可以滚动
         win.add(new JScrollPane(smsContent),BorderLayout.CENTER);
@@ -88,9 +88,9 @@ public class ChatClient implements ActionListener {
     }
 
     /**
-     * 显示一个qq的登录框
+     * 显示一个 qq 的登录框
      * 先让用户进行登录
-     * 服务端ip
+     * 服务端 ip
      * 用户名
      * id
      */
@@ -119,7 +119,7 @@ public class ChatClient implements ActionListener {
         // 关闭窗口退出当前程序
         loginView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setWindowCenter(loginView,400,260,true);
-        /** 给登录和取消绑定点击事件 */
+        // 给登录和取消绑定点击事件
         login.addActionListener(this);
         cancle.addActionListener(this);
     }
@@ -157,18 +157,18 @@ public class ChatClient implements ActionListener {
                     msg = "姓名必须1个字符以上";
                 }
                 if(!msg.equals("")){
-                // msg有内容说明参数有为空
+                // msg 有内容说明参数有为空
                 // 参数一：弹出放到那个窗口里面
                     JOptionPane.showMessageDialog(loginView,msg);
                 }else {
                     try{
                         // 参数都合法了
                         // 当前登录的用户，去服务器登录
-                        /** 先把当前用户的名称展示到界面*/
+                        // 先把当前用户的名称展示到界面
                         win.setTitle(name);
-                        // 去服务端登录连接一个socket管道
+                        // 去服务端登录连接一个 socket 管道
                         socket = new Socket(ip, PORT);
-                        // 为客户端的socket分配一个线程 专门负责收消息
+                        // 为客户端的 socket 分配一个线程 专门负责收消息
                         new ChatClientThread(this,socket).start();
                         // 带上用户信息过去
                         DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
@@ -188,7 +188,7 @@ public class ChatClient implements ActionListener {
                 }
                 break;
             case "取消":
-                /** 退出系统*/
+                // 退出系统
                 System.exit(0);
                 break;
             case "发送":
@@ -243,9 +243,9 @@ class ChatClientThread extends Thread {
     public void run() {
         try {
             DataInputStream dis = new DataInputStream(socket.getInputStream());
-            /** 循环一直等待客户端的消息 */
+            // 循环一直等待客户端的消息
             while (true){
-                /** 读取当前的消息类型： 登录，群发，私聊，@消息 */
+                // 读取当前的消息类型： 登录，群发，私聊，@消息
                 int flag = dis.readInt();
                 if(flag == 1){
                     // 在线人数消息回来了

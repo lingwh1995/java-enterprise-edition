@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author lingwh
- * @desc 客户端到代理的处理器：负责连接MySQL服务器并转发数据
+ * @desc 客户端到代理的处理器：负责连接 MySQL 服务器并转发数据
  * @date 2025/10/27 17:25
  */
 @Slf4j
@@ -17,7 +17,7 @@ public class ClientToProxyHandler extends ChannelInboundHandlerAdapter {
 
     private final String targetHost;
     private final int targetPort;
-    // 代理到MySQL服务器的通道
+    // 代理到 MySQL 服务器的通道
     private Channel serverChannel;
 
     public ClientToProxyHandler(String targetHost, int targetPort) {
@@ -27,7 +27,7 @@ public class ClientToProxyHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        // 客户端连接后，代理主动连接MySQL服务器
+        // 客户端连接后，代理主动连接 MySQL 服务器
         Bootstrap bootstrap = new Bootstrap();
         bootstrap.group(ctx.channel().eventLoop())
             .channel(NioSocketChannel.class)
@@ -39,7 +39,7 @@ public class ClientToProxyHandler extends ChannelInboundHandlerAdapter {
                 }
             });
 
-        // 连接MySQL服务器
+        // 连接 MySQL 服务器
         bootstrap.connect(targetHost, targetPort).addListener((ChannelFutureListener) future -> {
             if (future.isSuccess()) {
                 serverChannel = future.channel();
@@ -52,10 +52,10 @@ public class ClientToProxyHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        // 客户端数据转发到MySQL服务器
+        // 客户端数据转发到 MySQL 服务器
         if (serverChannel != null && serverChannel.isActive()) {
             ByteBuf buf = (ByteBuf) msg;
-            // 这里可以添加自定义逻辑（如解析MySQL协议、日志记录等）
+            // 这里可以添加自定义逻辑（如解析 MySQL 协议、日志记录等）
             log.info("客户端 -> 服务器: {} bytes", buf.readableBytes());
             serverChannel.writeAndFlush(msg);
         } else {
@@ -76,5 +76,4 @@ public class ClientToProxyHandler extends ChannelInboundHandlerAdapter {
         cause.printStackTrace();
         ctx.close();
     }
-
 }

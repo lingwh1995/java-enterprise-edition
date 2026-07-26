@@ -9,7 +9,7 @@ import java.nio.channels.SocketChannel;
 import java.util.Scanner;
 
 /**
- * 测试阻塞方式实现网络通信-基于NIO的Channel理解阻塞通信模型的客户端
+ * 测试阻塞方式实现网络通信-基于 NIO 的 Channel 理解阻塞通信模型的客户端
  *
  * @author lingwh
  * @date 2025/6/26 18:01

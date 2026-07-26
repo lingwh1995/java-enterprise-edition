@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 
 /**
- * 开启基于注解的缓存:
+ * 开启基于注解的缓存：
  *   @EnableCaching
- * 使用基于注解的缓存:
- *   @Cacheable:将方法缓存的结果缓存起来
+ * 使用基于注解的缓存
+ *   @Cacheable：将方法缓存的结果缓存起来
  *   @CacheEvict
  *   @CachePut
  *

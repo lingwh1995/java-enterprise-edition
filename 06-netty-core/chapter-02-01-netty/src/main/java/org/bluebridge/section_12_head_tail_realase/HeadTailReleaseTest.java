@@ -15,7 +15,7 @@ import org.bluebridge.utils.ByteBufUtil;
 public class HeadTailReleaseTest {
 
     /**
-     * DefaultChannelPipeline.HeadContext中
+     * DefaultChannelPipeline.HeadContext 中
      *
      * @Override
      * public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) {
@@ -26,7 +26,7 @@ public class HeadTailReleaseTest {
      */
 
     /**
-     * DefaultChannelPipeline.TailContext中
+     * DefaultChannelPipeline.TailContext 中
      *
      * @Override
      * public void channelRead(ChannelHandlerContext ctx, Object msg) {
@@ -44,11 +44,10 @@ public class HeadTailReleaseTest {
     public static void main(String[] args) {
         ByteBuf byteBuf = ByteBufAllocator.DEFAULT.buffer();
         byteBuf.writeBytes(new byte[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' });
-        // byteBuf 引用计数加1
+        // byteBuf 引用计数加 1
         byteBuf.retain();
-        // byteBuf 引用计数减1，当byteBuf的引用计数为0时，会释放资源，虽然 byteBuf 对象还存在，再次调用 debugAll() 方法会抛出异常
+        // byteBuf 引用计数减 1，当 byteBuf 的引用计数为 0 时，会释放资源，虽然 byteBuf 对象还存在，再次调用 debugAll() 方法会抛出异常
         byteBuf.release();
         ByteBufUtil.debugAll(byteBuf);
     }
-
 }

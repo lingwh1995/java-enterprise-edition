@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Case_02_JDK7FilesTest {
 
     /**
-     * 测试JDK7 新增的 Files 类基础用法
+     * 测试 JDK7 新增的 Files 类基础用法
      */
     @Test
     public void testJDK7FilesBasic() throws IOException {
@@ -45,7 +45,7 @@ public class Case_02_JDK7FilesTest {
     }
 
     /**
-     * 测试JDK7 新增的 Files 类拷贝文件
+     * 测试 JDK7 新增的 Files 类拷贝文件
      *
      * 如果文件已存在，会抛异常 FileAlreadyExistsException
      * 如果希望用 source 覆盖掉 target，需要用 StandardCopyOption 来控制
@@ -60,7 +60,7 @@ public class Case_02_JDK7FilesTest {
     }
 
     /**
-     * 测试JDK7 新增的 Files 类移动文件
+     * 测试 JDK7 新增的 Files 类移动文件
      *
      * 如果文件已存在，会抛异常 FileAlreadyExistsException
      * StandardCopyOption.ATOMIC_MOVE 保证文件移动的原子性
@@ -75,7 +75,7 @@ public class Case_02_JDK7FilesTest {
     }
 
     /**
-     * 测试JDK7 新增的 Files 类删除文件
+     * 测试 JDK7 新增的 Files 类删除文件
      *
      * 如果文件不存在，会抛异常 NoSuchFileException
      */
@@ -86,7 +86,7 @@ public class Case_02_JDK7FilesTest {
     }
 
     /**
-     * 测试JDK7 新增的 Files 类删除文件夹
+     * 测试 JDK7 新增的 Files 类删除文件夹
      *
      * 如果目录还有内容，会抛异常 DirectoryNotEmptyException
      */
@@ -97,7 +97,7 @@ public class Case_02_JDK7FilesTest {
     }
 
     /**
-     * 测试JDK7 新增的 Files 类统计文件和文件夹数量
+     * 测试 JDK7 新增的 Files 类统计文件和文件夹数量
      */
     @Test
     public void testJDK7FilesListFiles() throws IOException {
@@ -126,7 +126,7 @@ public class Case_02_JDK7FilesTest {
     }
 
     /**
-     * 测试JDK7 新增的 Files 类统计jar包数量
+     * 测试 JDK7 新增的 Files 类统计 jar 包数量
      */
     @Test
     public void testJDK7FilesCountJarFiles() throws IOException {
@@ -146,7 +146,7 @@ public class Case_02_JDK7FilesTest {
     }
 
     /**
-     * 测试JDK7 新增的 Files 类删除多级目录
+     * 测试 JDK7 新增的 Files 类删除多级目录
      */
     @Test
     public void testJDK7FilesDeleteDirs() throws IOException {
@@ -169,7 +169,7 @@ public class Case_02_JDK7FilesTest {
     }
 
     /**
-     * 测试JDK7 新增的 Files 类拷贝多级目录
+     * 测试 JDK7 新增的 Files 类拷贝多级目录
      */
     @Test
     public void testJDK7FilesCopyDirs() throws IOException {

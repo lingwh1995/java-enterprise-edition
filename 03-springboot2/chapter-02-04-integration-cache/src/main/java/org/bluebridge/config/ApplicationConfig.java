@@ -18,7 +18,7 @@ public class ApplicationConfig {
 
     /**
      * 自定义的缓存主键生成策略
-     * 如何查看自定义的key:进入如下方法断点查看
+     * 如何查看自定义的 key：进入如下方法断点查看
      *      org.springframework.cache.concurrent.ConcurrentMapCache#lookup(java.lang.Object)
      * @return
      */

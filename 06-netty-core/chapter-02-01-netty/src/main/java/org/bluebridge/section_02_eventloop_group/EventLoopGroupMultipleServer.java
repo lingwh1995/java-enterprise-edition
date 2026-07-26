@@ -20,7 +20,7 @@ import java.nio.charset.Charset;
  *
  * 双参数版本 => public ServerBootstrap group(EventLoopGroup parentGroup, EventLoopGroup childGroup)
  * 1. 允许分别指定父级和子级 EventLoopGroup 提供更灵活的线程模型配置
- *    parentGroup: 负责接收新连接(accept操作)，childGroup: 负责处理已建立连接的 I/O 操作
+ *    parentGroup：负责接收新连接(accept 操作)，childGroup：负责处理已建立连接的 I/O 操作
  * 2. 适用于需要精细控制线程资源分配的高性能应用，可以为 accept 操作和 I/O 操作分配不同的线程池
  * 3. parentGroup 相当于 boss 线程，childGroup 处理 worker 线程
  *
@@ -52,7 +52,7 @@ public class EventLoopGroupMultipleServer {
                         public void channelRead(ChannelHandlerContext ctx, Object msg) {
                             ByteBuf buf = (ByteBuf) msg;
                             String s = buf.toString(Charset.defaultCharset());
-                            // 在这里打印线程名称，可以看到两个 NioEventLoopGroup 在轮询处理来自3个客户端的连接
+                            // 在这里打印线程名称，可以看到两个 NioEventLoopGroup 在轮询处理来自 3 个客户端的连接
                             log.info("NioEventLoopGroup 名称：{}，接收到的字符串： {}", Thread.currentThread().getName(), s);
                         }
                     });
@@ -61,5 +61,4 @@ public class EventLoopGroupMultipleServer {
             .bind(HOST, PORT)
             .sync();
     }
-
 }

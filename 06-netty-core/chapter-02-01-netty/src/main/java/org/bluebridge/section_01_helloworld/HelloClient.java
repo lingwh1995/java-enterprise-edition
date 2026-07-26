@@ -51,5 +51,4 @@ public class HelloClient {
             // 6. 向服务器发送消息并清空缓冲区
             .writeAndFlush("hello, world");
     }
-
 }

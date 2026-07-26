@@ -8,8 +8,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * EventLoopGroup 测试
  *
- * 1.EventLoopGroup 本质上是一个线程池， EventLoop 可以理解为线程池中的一个线程
- * 2.NioEventLoop 除了可以处理 io 事件，也可以处理普通任务
+ * 1. EventLoopGroup 本质上是一个线程池，EventLoop 可以理解为线程池中的一个线程
+ * 2. NioEventLoop 除了可以处理 io 事件，也可以处理普通任务
  *
  * @author lingwh
  * @date 2025/9/23 11:06
@@ -18,14 +18,14 @@ import java.util.concurrent.TimeUnit;
 public class EventLoopGroupTest {
 
     public static void main(String[] args) throws InterruptedException {
-        // 1.创建事件循环组
+        // 1. 创建事件循环组
         // 可以负责 io 事件，普通任务，定时任务(内部使用 ScheduledThreadPool 实现)
         // 默认使用 MAX(1，电脑核心数 * 2) 线程数
         NioEventLoopGroup group = new NioEventLoopGroup(4);
         // 普通任务， 定时任务
 //        DefaultEventLoopGroup defaultEventLoopGroup = new DefaultEventLoopGroup();
 
-        // 2.获取下一个事件循环对象(相当于一个循环链表做轮询)， 上面设置为4， 那么每4个为依次循环
+        // 2. 获取下一个事件循环对象(相当于一个循环链表做轮询)， 上面设置为 4， 那么每 4 个为依次循环
         log.info("next: {}", group.next());
         log.info("next: {}", group.next());
         log.info("next: {}", group.next());
@@ -34,20 +34,20 @@ public class EventLoopGroupTest {
         log.info("next: {}", group.next());
         log.info("next: {}", group.next());
 
-        // 3.执行普通任务
+        // 3. 执行普通任务
         group.next().submit(() -> log.info("这是个普通任务......"));
 
-        // 4.执行定时任务，可以用于实现 keepalive 这样的心跳包功能
+        // 4. 执行定时任务，可以用于实现 keepalive 这样的心跳包功能
         group.next().scheduleAtFixedRate(() -> {
             log.info("这是个定时任务......");
         },3,2000, TimeUnit.MILLISECONDS); // 延迟3秒，每2秒执行一次
 
         log.info("main......");
 
-        // 5.让主线程等待30秒，确保定时任务有时间执行
+        // 5. 让主线程等待 30 秒，确保定时任务有时间执行
         TimeUnit.SECONDS.sleep(30);
 
-        // 6.优雅的关闭(任务全部执行完后关闭)
+        // 6. 优雅的关闭(任务全部执行完后关闭)
         //group.shutdownGracefully();
     }
 }

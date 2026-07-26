@@ -8,7 +8,7 @@ import static io.netty.buffer.ByteBufUtil.appendPrettyHexDump;
 import java.lang.System;
 
 /**
- * 处理Json数据的控制器
+ * 处理 Json 数据的控制器
  *
  * @author lingwh
  * @date 2025/8/20 18:30
@@ -17,7 +17,7 @@ import java.lang.System;
 public class DebugUtil {
 
     /**
-     * 一个简单的debug()
+     * 一个简单的 debug()
      */
     public static void debug(ByteBuf buffer) {
         int length = buffer.readableBytes();
@@ -32,5 +32,4 @@ public class DebugUtil {
         appendPrettyHexDump(buf, buffer);
         log.info(buf.toString());
     }
-
 }

@@ -23,8 +23,8 @@ import java.util.stream.IntStream;
  *
  * 核心思路：保证 sc.register(selector, SelectionKey.OP_READ, null); 执行之前， selector 处于非阻塞状态
  *
- * worker 数量建议设置为cpu核心数
- *   使用 Runtime.getRuntime().availableProcessors() 获取cpu核心数，docker 下获取的是物理机核心数，而非 docker 容器核心数，所以手工指定最好
+ * worker 数量建议设置为 cpu 核心数
+ *   使用 Runtime.getRuntime().availableProcessors() 获取 cpu 核心数，docker 下获取的是物理机核心数，而非 docker 容器核心数，所以手工指定最好
  *
  * @author lingwh
  * @date 2025/6/29 15:43
@@ -46,7 +46,7 @@ public class Case_06_MultiThreadServer {
         log.info("非阻塞TCP Selector服务器启动，IP：{}，端口：{}......", HOST, PORT);
 
         // 创建固定数量的 worker
-        // Worker[] workers = new Worker[Runtime.getRuntime().availableProcessors()];  // 获取cpu核心数
+        // Worker[] workers = new Worker[Runtime.getRuntime().availableProcessors()];  // 获取 cpu 核心数
         Worker[] workers = new Worker[3];
         IntStream.range(0, 3).forEach(i -> {
             workers[i] = new Worker("worker-" + i);
@@ -62,7 +62,7 @@ public class Case_06_MultiThreadServer {
                     SocketChannel sc = ssc.accept();
                     sc.configureBlocking(false);
                     log.info("connected......{}", sc.getRemoteAddress());
-                    // 2. 关联worker中的selector
+                    // 2. 关联 worker 中的 selector
                     log.info("before register......{}", sc.getRemoteAddress());
                     workers[index.getAndIncrement() % workers.length].init(sc);  // boss线程调用，初始化selector，启动worker
                     log.info("after register......{}", sc.getRemoteAddress());

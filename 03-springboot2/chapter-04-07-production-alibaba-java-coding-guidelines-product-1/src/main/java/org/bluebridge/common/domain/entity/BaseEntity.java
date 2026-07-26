@@ -16,7 +16,7 @@ public abstract class BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 创建人id
+     * 创建人 id
      */
     private Long createUser;
 
@@ -26,7 +26,7 @@ public abstract class BaseEntity implements Serializable {
     private LocalDateTime createTime;
 
     /**
-     * 更新人id
+     * 更新人 id
      */
     private Long updateUser;
 

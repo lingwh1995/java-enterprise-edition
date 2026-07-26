@@ -13,10 +13,10 @@ import java.net.Socket;
 /**
  * 阻塞方式实现网络通信-基于 BIO 的流理解阻塞通信模型
  *
- * BIO模型网络通信 Server 端 - V2.0 服务端接收多个客户端多条消息发送和接收需求(一个客户端对应一个线程)
+ * BIO 模型网络通信 Server 端 - V2.0 服务端接收多个客户端多条消息发送和接收需求(一个客户端对应一个线程)
  *
  * 测试方法
- * 1. cmd -> telnet 127.0.0.1 8080/telnet localhost 8080 -> 直接输入内容（只能发送单个字符）/按下Ctrl+]后输入 send + 内容（可以发送字符串） -> 查看idea控制台接收到的信息
+ * 1. cmd -> telnet 127.0.0.1 8080/telnet localhost 8080 -> 直接输入内容（只能发送单个字符）/按下 Ctrl+]后输入 send + 内容（可以发送字符串） -> 查看 idea 控制台接收到的信息
  * 2. 启动多个客户端
  *
  * @author lingwh
@@ -67,7 +67,7 @@ class ServerThread implements Runnable{
     public void run() {
         BufferedReader bufferedReader = null;
         try {
-            // 3. 从 Socket中获取输入流
+            // 3. 从 Socket 中获取输入流
             InputStream socketInputStream = socket.getInputStream();
             // 4. 获取包装流
             bufferedReader = new BufferedReader(new InputStreamReader(socketInputStream));

@@ -8,20 +8,20 @@ import io.netty.handler.codec.string.StringEncoder;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Channel常用方法 客户端
+ * Channel 常用方法 客户端
  *
- * close() 可以用来关闭Channel
+ * close() 可以用来关闭 Channel
  * closeFuture() 用来处理 Channel 的关闭
  * sync 方法作用是同步等待 Channel 关闭
  * addListener 方法是异步等待 Channel 关闭
  * pipeline() 方法用于添加处理器
  * write() 方法将数据写入
  *   因为缓冲机制，数据被写入到 Channel 中以后，不会立即被发送
- *   只有当缓冲满了或者调用了flush()方法后，才会将数据通过 Channel 发送出去
+ *   只有当缓冲满了或者调用了 flush()方法后，才会将数据通过 Channel 发送出去
  * writeAndFlush() 方法将数据写入并立即发送（刷出）
  *
  * 注意事项
- *   带有Future、Promise的类型都是和异步方法配套使用，用来处理结果
+ *   带有 Future、Promise 的类型都是和异步方法配套使用，用来处理结果
  *
  * @author lingwh
  * @date 2025/9/23 17:29
@@ -45,7 +45,7 @@ public class ChannelClient {
                 }
             })
             // 连接到服务器
-            // connect 是一个异步非阻塞方法(即发起调用的main线程不阻塞，把建立连接的任务交给NioEventLoopGroup线程执行，这个过程大概需要一秒的时间),主线程并不知道连接是否建立好了
+            // connect 是一个异步非阻塞方法(即发起调用的 main 线程不阻塞，把建立连接的任务交给 NioEventLoopGroup 线程执行，这个过程大概需要一秒的时间)，主线程并不知道连接是否建立好了
             .connect(HOST, PORT);
         log.info("{}", channelFuture);
         // 2.1 使用 sync 同步处理结果
@@ -62,7 +62,7 @@ public class ChannelClient {
             @Override
             public void operationComplete(ChannelFuture channelFuture) {
                 Channel channel = channelFuture.channel();
-                channel.writeAndFlush("建立好channel了......");
+                channel.writeAndFlush("建立好 channel 了......");
             }
         });
         */

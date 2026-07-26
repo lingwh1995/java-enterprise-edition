@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 /**
  * 使用 多线程 + selector 实现 Server
  *
- * V3.0 客户端与服务端可以建立连接，可以正常通信（单个worker版）
+ * V3.0 客户端与服务端可以建立连接，可以正常通信（单个 worker 版）
  *
  * tag:1 和 tag:2 处代码解决了问题
  *
@@ -50,7 +50,7 @@ public class Case_03_MultiThreadServer {
                     SocketChannel sc = ssc.accept();
                     sc.configureBlocking(false);
                     log.info("connected......{}", sc.getRemoteAddress());
-                    // 2. 关联 worker 中的selector
+                    // 2. 关联 worker 中的 selector
                     log.info("before register......{}", sc.getRemoteAddress());
                     worker.init(sc);
                     log.info("after register......{}", sc.getRemoteAddress());

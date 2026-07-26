@@ -113,7 +113,7 @@ public class GroupChatServer {
     }
 
     /**
-     * 把当前客户端的消息推送给当前全部在线注册的channel
+     * 把当前客户端的消息推送给当前全部在线注册的 channel
      *
      * @param msg
      * @param sChannel

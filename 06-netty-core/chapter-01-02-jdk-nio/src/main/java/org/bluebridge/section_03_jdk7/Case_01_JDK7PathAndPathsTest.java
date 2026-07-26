@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 public class Case_01_JDK7PathAndPathsTest {
 
     /**
-     * 测试JDK7 新增的 Path 和 Paths 类
+     * 测试 JDK7 新增的 Path 和 Paths 类
      */
     @Test
     public void testJDK7PathAndPaths() {
@@ -24,11 +24,11 @@ public class Case_01_JDK7PathAndPathsTest {
         Path path = Paths.get("1.txt");
         log.info("相对路径： {}", path.toAbsolutePath());
 
-        // 绝对路径1
+        // 绝对路径 1
         path = Paths.get("d:\\1.txt");
         log.info("绝对路径1： {}", path.toAbsolutePath());
 
-        // 绝对路径2
+        // 绝对路径 2
         path = Paths.get("d:/1.txt");
         log.info("绝对路径2： {}", path.toAbsolutePath());
 

@@ -11,6 +11,7 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 
 /**
+ * EventProducer
  *
  * @author lingwh
  * @date 2025/8/20 14:22

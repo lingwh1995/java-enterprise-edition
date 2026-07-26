@@ -69,7 +69,7 @@ public interface ICarMapper {
     /**
      * mybatis 动态 sql-使用 foreach 标签实现批量删除：使用 in 关键字拼接参数
      *
-     * @param ids 待删除的id数组
+     * @param ids 待删除的 id 数组
      * @return 受影响的行数
      */
     int deleteBatchByIdsUseForeachTagIn(@Param("ids") Long[] ids);
@@ -77,7 +77,7 @@ public interface ICarMapper {
     /**
      * mybatis 动态 sql-使用 foreach 标签实现批量删除：使用 or 关键字拼接参数
      *
-     * @param ids 待删除的id数组
+     * @param ids 待删除的 id 数组
      * @return 受影响的行数
      */
     int deleteBatchByIdsUseForeachTagOr(@Param("ids") Long[] ids);
@@ -100,7 +100,7 @@ public interface ICarMapper {
     /**
      * mybatis 动态 sql-使用 sql 和 include 标签抽取可重用 sql-根据 id 查询汽车
      *
-     * @param id 汽车id
+     * @param id 汽车 id
      * @return 汽车信息组成的集合
      */
     List<Car> selectAllCarsByIdUseSqlAndIncludeTag(long id);

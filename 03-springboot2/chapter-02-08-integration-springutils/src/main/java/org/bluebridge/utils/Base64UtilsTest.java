@@ -7,7 +7,7 @@ import org.springframework.util.Base64Utils;
 import java.io.UnsupportedEncodingException;
 
 /**
- * Base64工具类
+ * Base64 工具类
  *
  * @author lingwh
  * @date 2025/7/1 9:00

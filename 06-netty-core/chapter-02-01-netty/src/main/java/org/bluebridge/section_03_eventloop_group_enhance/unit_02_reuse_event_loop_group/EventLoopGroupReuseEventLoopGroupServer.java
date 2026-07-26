@@ -9,7 +9,7 @@ import io.netty.handler.codec.string.StringDecoder;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 使用独立的 EventLoopGroup 创建多个Server时复用EventLoopGroup 服务端
+ * 使用独立的 EventLoopGroup 创建多个 Server 时复用 EventLoopGroup 服务端
  *
  * @author lingwh
  * @date 2025/9/23 13:47
@@ -18,17 +18,17 @@ import lombok.extern.slf4j.Slf4j;
 public class EventLoopGroupReuseEventLoopGroupServer {
 
     /**
-     * 全局共享的EventLoopGroup（所有服务端端复用）
+     * 全局共享的 EventLoopGroup（所有服务端端复用）
      */
     private final EventLoopGroup sharedBossGroup = new NioEventLoopGroup();
 
     /**
-     * 全局共享的EventLoopGroup（所有服务端端复用）
+     * 全局共享的 EventLoopGroup（所有服务端端复用）
      */
     private final EventLoopGroup sharedWorkerGroup = new NioEventLoopGroup();
 
     /**
-     * 服务器的IP地址
+     * 服务器的 IP 地址
      */
     private static final String HOST = "127.0.0.1";
 

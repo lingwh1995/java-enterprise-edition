@@ -7,15 +7,15 @@ import java.net.Socket;
 import java.util.Scanner;
 
 /**
- * BIO聊天室(群聊)
+ * BIO 聊天室(群聊)
  *
- * 目标：BIO模式下的端口转发思想-Client实现
+ * 目标：BIO 模式下的端口转发思想-Client 实现
  *
  * 服务端实现需求：
  * 1. 注册端口
- * 2. 接收客户端的socket连接，交给一个独立的线程来处理
- * 3. 把当前连接的客户端socket存入到一个所谓的在线socket集合中保存
- * 4. 接收客户端的消息，然后推送给当前所有的在线socket接收
+ * 2. 接收客户端的 socket 连接，交给一个独立的线程来处理
+ * 3. 把当前连接的客户端 socket 存入到一个所谓的在线 socket 集合中保存
+ * 4. 接收客户端的消息，然后推送给当前所有的在线 socket 接收
  *
  * @author lingwh
  * @date 2025/9/23 14:35

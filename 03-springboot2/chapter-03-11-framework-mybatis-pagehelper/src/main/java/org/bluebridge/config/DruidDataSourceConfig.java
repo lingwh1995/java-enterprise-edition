@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Druid数据源配置类
+ * Druid 数据源配置类
  *
  * @author lingwh
  */
@@ -22,7 +22,7 @@ import java.util.Map;
 public class DruidDataSourceConfig {
 
     /**
-     * 把配置文件中关于Druid的配置和数据源绑定
+     * 把配置文件中关于 Druid 的配置和数据源绑定
      * @return
      */
     @Bean

@@ -107,7 +107,7 @@ public class GroupChatServer {
                 String message = new String(buffer.array());
                 // 输出该消息
                 System.out.println("from客户端:" + message);
-                // 同时将消息转发给其他客户端,转发时要要排除自身通道(本质是转发给其他通道)
+                // 同时将消息转发给其他客户端，转发时要要排除自身通道(本质是转发给其他通道)
                 sendMessageToOtherClient(message,socketChannel);
             }
         } catch (IOException e1) {

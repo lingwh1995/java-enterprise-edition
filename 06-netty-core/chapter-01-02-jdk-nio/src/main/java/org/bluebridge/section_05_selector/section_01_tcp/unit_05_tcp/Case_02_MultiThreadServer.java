@@ -13,7 +13,7 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
 /**
- * 使用 多线程 + selector 实现 Server（单个 worker 版）
+ * 使用 多线程 + selector 实现 Server （单个 worker 版）
  *
  * V2.0 客户端无法与服务端可以建立连接，多个客户端时从第二个客户端开始无法与服务端通信
  *
@@ -45,7 +45,7 @@ public class Case_02_MultiThreadServer {
         ssc.bind(new InetSocketAddress(HOST, PORT));
         log.info("非阻塞TCP Selector服务器启动，IP：{}，端口：{}......", HOST, PORT);
 
-        // 创建固定数量的worker
+        // 创建固定数量的 worker
         Worker worker = new Worker("worker-0");
         while (true) {
             boss.select();

@@ -62,7 +62,7 @@ public interface GroupSession {
      * 获取组成员的 Channel
      *
      * @param groupName 聊天组名称
-     * @return 聊天组成员的Channel
+     * @return 聊天组成员的 Channel
      */
     List<Channel> getMembersChannel(String groupName);
 
