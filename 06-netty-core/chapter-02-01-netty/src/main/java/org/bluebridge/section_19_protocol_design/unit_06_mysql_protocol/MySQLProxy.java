@@ -8,7 +8,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 /**
  * @author lingwh
- * @desc MySQL代理服务器
+ * @desc MySQL 代理服务器
  * @date 2025/10/27 17:25
  */
 public class MySQLProxy {
@@ -50,7 +50,7 @@ public class MySQLProxy {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        // 代理监听3307端口，转发到本地3306的MySQL
+        // 代理监听 3307 端口，转发到本地 3306 的 MySQL
         new MySQLProxy("localhost", 3306, 3307).start();
     }
 }

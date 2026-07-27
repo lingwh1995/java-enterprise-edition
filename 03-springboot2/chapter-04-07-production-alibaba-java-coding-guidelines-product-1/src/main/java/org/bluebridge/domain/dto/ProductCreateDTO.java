@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 /**
- * 创建商品数据DTO
+ * 创建商品数据 DTO
  *
  * @author lingwh
  * @date 2025/12/13 10:10

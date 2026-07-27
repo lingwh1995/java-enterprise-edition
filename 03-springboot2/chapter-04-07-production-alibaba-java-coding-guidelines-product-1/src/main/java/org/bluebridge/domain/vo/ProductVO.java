@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class ProductVO {
 
     /**
-     * 商品ID
+     * 商品 ID
      */
     private Long id;
 

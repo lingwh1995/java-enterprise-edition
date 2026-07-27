@@ -22,7 +22,7 @@ public class ProfileTest {
         // 1. 创建 AnnotationConfigApplicationContext 对象
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         // 2. 设置需要激活的环境
-        //context.getEnvironment().setActiveProfiles("test","default");
+        //context.getEnvironment().setActiveProfiles("test", "default");
         context.getEnvironment().setActiveProfiles("test");
         // 3. 设置主配置环境
         context.register(MainConfigProfile.class);

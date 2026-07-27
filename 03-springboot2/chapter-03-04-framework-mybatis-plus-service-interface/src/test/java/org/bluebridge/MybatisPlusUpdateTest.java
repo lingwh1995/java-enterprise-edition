@@ -55,7 +55,7 @@ public class MybatisPlusUpdateTest {
     }
 
     /**
-     * 测试根据 UpdateWrapper 条件，更新记录 需要设置sqlset
+     * 测试根据 UpdateWrapper 条件，更新记录 需要设置 sqlset
      *
      * boolean update(Wrapper<T> updateWrapper);
      */
@@ -98,7 +98,7 @@ public class MybatisPlusUpdateTest {
     }
 
     /**
-     * 测试根据ID 批量更新
+     * 测试根据 ID 批量更新
      *
      * boolean updateBatchById(Collection<T> entityList);
      */
@@ -113,7 +113,7 @@ public class MybatisPlusUpdateTest {
     }
 
     /**
-     * 测试根据ID 批量更新
+     * 测试根据 ID 批量更新
      *
      * boolean updateBatchById(Collection<T> entityList, int batchSize);
      */

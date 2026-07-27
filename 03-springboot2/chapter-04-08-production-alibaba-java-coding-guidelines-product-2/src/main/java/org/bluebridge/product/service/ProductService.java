@@ -35,9 +35,9 @@ public interface ProductService {
     int batchCreateProduct(List<ProductCreateDTO> productCreateDTOList);
 
     /**
-     * 根据ID删除商品（物理删除）
+     * 根据 ID 删除商品（物理删除）
      *
-     * @param id 商品ID
+     * @param id 商品 ID
      * @return 影响行数
      */
     int deleteProductById(Long id);
@@ -45,15 +45,15 @@ public interface ProductService {
     /**
      * 批量删除商品（物理删除）
      *
-     * @param ids 商品ID列表
+     * @param ids 商品 ID 列表
      * @return 影响行数
      */
     int batchDeleteProduct(List<Long> ids);
 
     /**
-     * 根据ID逻辑删除商品
+     * 根据 ID 逻辑删除商品
      *
-     * @param id 商品ID
+     * @param id 商品 ID
      * @return 影响行数
      */
     int softDeleteProductById(Long id);
@@ -61,33 +61,33 @@ public interface ProductService {
     /**
      * 批量逻辑删除商品
      *
-     * @param ids 商品ID列表
+     * @param ids 商品 ID 列表
      * @return 影响行数
      */
     int batchSoftDeleteProduct(List<Long> ids);
 
     /**
-     * 根据ID全量更新商品
+     * 根据 ID 全量更新商品
      *
-     * @param id               商品ID
+     * @param id 商品 ID
      * @param productUpdateDTO 商品更新传输对象
      * @return 影响行数
      */
     int updateProductById(Long id, ProductUpdateDTO productUpdateDTO);
 
     /**
-     * 根据ID部分更新商品
+     * 根据 ID 部分更新商品
      *
-     * @param id               商品ID
-     * @param productPatchDTO  商品部分更新传输对象
+     * @param id 商品 ID
+     * @param productPatchDTO 商品部分更新传输对象
      * @return 影响行数
      */
     int patchProductById(Long id, ProductPatchDTO productPatchDTO);
 
     /**
-     * 根据ID查询商品
+     * 根据 ID 查询商品
      *
-     * @param id 商品ID
+     * @param id 商品 ID
      * @return 商品展示对象
      */
     ProductVO getProductById(Long id);

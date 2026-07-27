@@ -16,7 +16,7 @@ import java.util.List;
  * @author lingwh
  * @date 2025/12/13 11:20
  */
-// 组件模型设置为Spring，使MapStruct生成的实现类可以被Spring管理
+// 组件模型设置为 Spring，使 MapStruct 生成的实现类可以被 Spring 管理
 @Mapper(componentModel = "spring")
 public interface ProductConverter {
 

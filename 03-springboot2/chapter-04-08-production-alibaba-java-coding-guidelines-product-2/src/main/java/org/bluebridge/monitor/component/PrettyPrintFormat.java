@@ -24,11 +24,11 @@ public class PrettyPrintFormat implements MessageFormattingStrategy {
         prepared = prepared.replaceAll("\\s+", " ").trim();
         sql = sql.replaceAll("\\s+", " ").trim();
 
-        // 3. 格式化SQL
+        // 3. 格式化 SQL
         prepared = SqlFormatterUtils.format(prepared);
         sql = SqlFormatterUtils.format(sql);
 
-        // 4. 构建SQL日志
+        // 4. 构建 SQL 日志
         StringBuilder sqlBuilder = new StringBuilder();
         sqlBuilder.append("\n--------------------------------------  SQL     START  --------------------------------------");
         if(SqlConstants.SHOW_ORIGINAL_SQL && prepared.length() != sql.length()) {
@@ -44,7 +44,7 @@ public class PrettyPrintFormat implements MessageFormattingStrategy {
         // 5. 高亮显示 SQL 日志
         sql = PrintUtils.highlight(sqlBuilder.toString());
 
-        // 6. 返回格式化并高亮后的SQL日志
+        // 6. 返回格式化并高亮后的 SQL 日志
         return sql;
     }
 }

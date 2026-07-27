@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 部分更新商品DTO
+ * 部分更新商品 DTO
  *
  * @author lingwh
  * @date 2025/12/13 10:20

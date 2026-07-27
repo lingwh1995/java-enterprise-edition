@@ -66,11 +66,11 @@ public class ProductController {
     }
 
     /**
-     * 根据ID删除商品（物理删除）（阿里规范：方法名 = delete + 资源名 + By + 主键，如 deleteProductById）
+     * 根据 ID 删除商品（物理删除）（阿里规范：方法名 = delete + 资源名 + By + 主键，如 deleteProductById）
      *
      * URL：/api/products/1
      *
-     * @param id 商品ID
+     * @param id 商品 ID
      * @return 统一响应结果
      */
     @DeleteMapping("/{id}")
@@ -86,7 +86,7 @@ public class ProductController {
      *
      * URL：/api/products
      *
-     * @param ids 商品ID列表
+     * @param ids 商品 ID 列表
      * @return 统一响应结果
      */
     @DeleteMapping("/batch")
@@ -96,11 +96,11 @@ public class ProductController {
     }
 
     /**
-     * 根据ID逻辑删除商品（阿里规范：方法名 = patch + 资源名 + 状态相关词汇，如 patchProductStatus）
+     * 根据 ID 逻辑删除商品（阿里规范：方法名 = patch + 资源名 + 状态相关词汇，如 patchProductStatus）
      *
      * URL：/api/products/1/status
      *
-     * @param id 商品ID
+     * @param id 商品 ID
      * @return 统一响应结果
      */
     @PatchMapping("/{id}/status")
@@ -116,7 +116,7 @@ public class ProductController {
      *
      * URL：/api/products/batch/status
      *
-     * @param ids 商品ID列表
+     * @param ids 商品 ID 列表
      * @return 统一响应结果
      */
     @PatchMapping("/batch/status")
@@ -126,11 +126,11 @@ public class ProductController {
     }
 
     /**
-     * 根据ID全量更新商品（阿里规范：方法名 = update + 资源名 + By + 主键，如 updateProductById）
+     * 根据 ID 全量更新商品（阿里规范：方法名 = update + 资源名 + By + 主键，如 updateProductById）
      *
      * URL：/api/products/1
      * 
-     * @param id 商品ID
+     * @param id 商品 ID
      * @param productUpdateDTO 商品更新传输对象
      * @return 统一响应结果
      */
@@ -144,11 +144,11 @@ public class ProductController {
     }
     
     /**
-     * 根据ID部分更新商品（阿里规范：方法名 = patch + 资源名，如 patchProduct）
+     * 根据 ID 部分更新商品（阿里规范：方法名 = patch + 资源名，如 patchProduct）
      *
      * URL：/api/products/1
      * 
-     * @param id 商品ID
+     * @param id 商品 ID
      * @param productPatchDTO 商品部分更新传输对象
      * @return 统一响应结果
      */
@@ -162,11 +162,11 @@ public class ProductController {
     }
     
     /**
-     * 主键查询-根据ID查询商品（阿里规范：方法名 = get + 资源名 + By + 主键，如 getProductById）
+     * 主键查询-根据 ID 查询商品（阿里规范：方法名 = get + 资源名 + By + 主键，如 getProductById）
      *
      * URL：/api/products/1
      * 
-     * @param id 商品ID
+     * @param id 商品 ID
      * @return 统一响应结果
      */
     @GetMapping("/{id}")

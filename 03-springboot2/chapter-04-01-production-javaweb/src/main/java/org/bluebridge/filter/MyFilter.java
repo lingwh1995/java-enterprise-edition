@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
- * SpringBoot整合Filter的第一种方式示例
+ * SpringBoot 整合 Filter 的第一种方式示例
  *
  * @author lingwh
  * @date 2025/2/27 15:10

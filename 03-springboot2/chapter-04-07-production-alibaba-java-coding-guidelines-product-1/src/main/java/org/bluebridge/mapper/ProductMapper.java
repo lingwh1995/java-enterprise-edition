@@ -31,9 +31,9 @@ public interface ProductMapper {
     int batchInsertProduct(@Param("productDOList") List<ProductDO> productDOList);
     
     /**
-     * 根据ID删除商品(物理删除)
+     * 根据 ID 删除商品(物理删除)
      *
-     * @param id 商品ID
+     * @param id 商品 ID
      * @return 影响行数
      */
     int deleteProductById(Long id);
@@ -41,15 +41,15 @@ public interface ProductMapper {
     /**
      * 批量删除商品(物理删除)
      *
-     * @param ids 商品ID列表
+     * @param ids 商品 ID 列表
      * @return 影响行数
      */
     int batchDeleteProduct(@Param("ids") List<Long> ids);
     
     /**
-     * 根据ID逻辑删除商品
+     * 根据 ID 逻辑删除商品
      *
-     * @param id 商品ID
+     * @param id 商品 ID
      * @return 影响行数
      */
     int softDeleteProductById(Long id);
@@ -57,13 +57,13 @@ public interface ProductMapper {
     /**
      * 批量逻辑删除商品
      *
-     * @param ids 商品ID列表
+     * @param ids 商品 ID 列表
      * @return 影响行数
      */
     int batchSoftDeleteProduct(List<Long> ids);
     
     /**
-     * 根据ID更新商品信息
+     * 根据 ID 更新商品信息
      *
      * @param productDO 商品实体
      * @return 影响行数
@@ -71,7 +71,7 @@ public interface ProductMapper {
     int updateProduct(ProductDO productDO);
     
     /**
-     * 根据ID部分更新商品信息
+     * 根据 ID 部分更新商品信息
      *
      * @param productDO 商品实体
      * @return 影响行数
@@ -79,9 +79,9 @@ public interface ProductMapper {
     int patchProduct(ProductDO productDO);
     
     /**
-     * 根据ID查询商品
+     * 根据 ID 查询商品
      *
-     * @param id 商品ID
+     * @param id 商品 ID
      * @return 商品实体
      */
     ProductDO selectProductById(Long id);

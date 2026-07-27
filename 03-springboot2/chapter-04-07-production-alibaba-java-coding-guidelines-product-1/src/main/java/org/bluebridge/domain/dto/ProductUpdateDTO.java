@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 /**
- * 更新商品DTO
+ * 更新商品 DTO
  *
  * @author lingwh
  * @date 2025/12/13 10:40

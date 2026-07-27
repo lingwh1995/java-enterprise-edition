@@ -51,7 +51,7 @@ public class NettyZeroCopyTest {
         byteBufDuplicate.setByte(0, 'A');
         ByteBufUtil.debugAll(byteBuf);
         ByteBufUtil.debugAll(byteBufDuplicate);
-        // 从截取的 ByteBuf 中读取一个字节，会改变截取 ByteBuf 的 readerIndex，不会改变原始 ByteBuf 的 readerIndex，因为调用duplicate()方法复制的 ByteBuf 读写指针是独立的
+        // 从截取的 ByteBuf 中读取一个字节，会改变截取 ByteBuf 的 readerIndex，不会改变原始 ByteBuf 的 readerIndex，因为调用 duplicate() 方法复制的 ByteBuf 读写指针是独立的
         char c = (char)byteBufDuplicate.readByte();
         log.info("c = {}", c);
         ByteBufUtil.debugAll(byteBuf);

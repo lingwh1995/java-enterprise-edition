@@ -9,7 +9,7 @@ import org.springframework.core.env.Environment;
 
 
 /**
- * MyBatis配置类
+ * MyBatis 配置类
  *
  * @author lingwh
  * @date 2025/11/23 18:00
@@ -35,7 +35,7 @@ public class MyBatisConfig {
             configuration.getTypeAliasRegistry().registerAlias("LocalDate", java.time.LocalDate.class);
             configuration.getTypeAliasRegistry().registerAlias("LocalTime", java.time.LocalTime.class);
             String activeProfile = environment.getActiveProfiles()[0];
-            // 根据当前环境决定启用什么日志实现，开发环境使用NoLoggingImpl.class，非开发环境则使用Slf4jImpl.class
+            // 根据当前环境决定启用什么日志实现，开发环境使用 NoLoggingImpl.class，非开发环境则使用 Slf4jImpl.class
             configuration.setLogImpl(EnvironmentConstants.DEV.equals(activeProfile) ? NoLoggingImpl.class : Slf4jImpl.class);
         };
     }

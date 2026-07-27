@@ -74,27 +74,27 @@ public class NettyRedisClientTest {
     }
 
     /**
-     * 根据key获取值
+     * 根据 key 获取值
      * @param ctx
      */
     private static void set(ChannelHandlerContext ctx) {
         ByteBuf buf = ctx.alloc().buffer();
-        // 命令字符串中子字符串个数 set name zhangsan，这里有3个子字符串，所以这里写入 *3
+        // 命令字符串中子字符串个数 set name zhangsan，这里有 3 个子字符串，所以这里写入 *3
         buf.writeBytes("*3".getBytes());
         buf.writeBytes(NEWLINE_CHARACTERS);
-        // set字符串的长度是3，所以写入 $3
+        // set 字符串的长度是 3，所以写入 $3
         buf.writeBytes("$3".getBytes());
         buf.writeBytes(NEWLINE_CHARACTERS);
         // 写入 set 字符串
         buf.writeBytes("set".getBytes());
         buf.writeBytes(NEWLINE_CHARACTERS);
-        // name字符串的长度是4，所以写入 $4
+        // name 字符串的长度是 4，所以写入 $4
         buf.writeBytes("$4".getBytes());
         buf.writeBytes(NEWLINE_CHARACTERS);
         // 写入 name 字符串
         buf.writeBytes("name".getBytes());
         buf.writeBytes(NEWLINE_CHARACTERS);
-        // zhangsan字符串的长度是7，所以写入 $7
+        // zhangsan 字符串的长度是 7，所以写入 $7
         buf.writeBytes("$7".getBytes());
         buf.writeBytes(NEWLINE_CHARACTERS);
         // 写入 zhangsan 字符串
@@ -104,21 +104,21 @@ public class NettyRedisClientTest {
     }
 
     /**
-     * 给某个key设置值
+     * 给某个 key 设置值
      * @param ctx
      */
     private static void get(ChannelHandlerContext ctx) {
         ByteBuf buf = ctx.alloc().buffer();
-        // 命令字符串中子字符串个数 get name，这里有2个子字符串，所以写入 *2
+        // 命令字符串中子字符串个数 get name，这里有 2 个子字符串，所以写入 *2
         buf.writeBytes("*2".getBytes());
         buf.writeBytes(NEWLINE_CHARACTERS);
-        // get字符串的长度是3，所以写入 $3
+        // get 字符串的长度是 3，所以写入 $3
         buf.writeBytes("$3".getBytes());
         buf.writeBytes(NEWLINE_CHARACTERS);
         // 写入 get 字符串
         buf.writeBytes("get".getBytes());
         buf.writeBytes(NEWLINE_CHARACTERS);
-        // name字符串的长度是4，所以写入 $4
+        // name 字符串的长度是 4，所以写入 $4
         buf.writeBytes("$4".getBytes());
         buf.writeBytes(NEWLINE_CHARACTERS);
         // 写入 name 字符串

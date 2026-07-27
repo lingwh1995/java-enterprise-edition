@@ -48,7 +48,7 @@ public class NettyHttpServer {
                         // 设置响应编码器
                         pipeline.addLast(new HttpResponseEncoder());
                         */
-                        // 一次设置请求解码器和响应编码器，这里使用HttpServerCodec，它包含了HttpRequestDecoder和HttpResponseEncoder
+                        // 一次设置请求解码器和响应编码器，这里使用 HttpServerCodec，它包含了 HttpRequestDecoder 和 HttpResponseEncoder
                         pipeline.addLast(new HttpServerCodec());
 
                         pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
@@ -71,14 +71,14 @@ public class NettyHttpServer {
                                 }
                                 log.info("请求成功数为：{}", successCount);
                                 log.info("请求失败数为：{}", errorCount);
-                                //传递给下一个handler
+                                //传递给下一个 handler
                                 ctx.fireChannelRead(msg);
                             }
                         });
                         pipeline.addLast(new ChannelInboundHandlerAdapter() {
                             @Override
                             public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-                                // netty中封装的http请求
+                                // netty 中封装的 http 请求
                                 FullHttpRequest httpRequest = (FullHttpRequest)msg;
                                 String uri = httpRequest.uri();
                                 log.info("请求的路径为：" + uri);
@@ -100,9 +100,9 @@ public class NettyHttpServer {
                         });
                     }
                 });
-            // 完成绑定，内部如果异步实现bind，因此需要阻塞拿到返回结果
+            // 完成绑定，内部如果异步实现 bind，因此需要阻塞拿到返回结果
             ChannelFuture future = bootstrap.bind().sync();
-            // 关闭future时也需要阻塞，内部也采用的是异步操作
+            // 关闭 future 时也需要阻塞，内部也采用的是异步操作
             future.channel().closeFuture().sync();
         }catch (Exception e){
             e.printStackTrace();

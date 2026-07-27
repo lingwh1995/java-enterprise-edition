@@ -82,7 +82,7 @@ public class ProductServiceImpl implements ProductService {
             throw new BusinessException(ResponseStatusEnum.NOT_FOUND, "商品不存在或已删除，ID: " + id);
         }
 
-        // 2. 转换DTO为实体（阿里手册：避免直接操作DTO）
+        // 2. 转换 DTO 为实体（阿里手册：避免直接操作 DTO）
         productDO = productConverter.toProductDO(productUpdateDTO);
         productDO.setId(id);
 

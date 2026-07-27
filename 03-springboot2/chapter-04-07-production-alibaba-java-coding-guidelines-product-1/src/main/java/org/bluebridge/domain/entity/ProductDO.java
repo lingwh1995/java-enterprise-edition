@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class ProductDO extends BaseEntity {
 
     /**
-     * 商品ID
+     * 商品 ID
      */
     private Long id;
 

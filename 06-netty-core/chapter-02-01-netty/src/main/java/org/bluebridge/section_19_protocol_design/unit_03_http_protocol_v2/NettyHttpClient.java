@@ -38,7 +38,7 @@ public class NettyHttpClient {
                 .option(ChannelOption.SO_KEEPALIVE,true)
                 // 和服务器不一样，这里只需要连接服务器地址即可
                 .remoteAddress(new InetSocketAddress(HOST, PORT))
-                // 和服务端不同，服务端使用的childHandler客户端只需要具体的 handler 即可
+                // 和服务端不同，服务端使用的 childHandler 客户端只需要具体的 handler 即可
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {

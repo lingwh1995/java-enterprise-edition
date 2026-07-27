@@ -52,7 +52,7 @@ public class NettyHttpServer {
                     pipeline.addLast(new HttpServerCodec());
 
                     pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
-                    // 如果需要读取POST请求的请求体数据，需要在 pipeline 中添加 HttpObjectAggregator，如果仅需读取 GET 请求，可以注释掉下面一行
+                    // 如果需要读取 POST 请求的请求体数据，需要在 pipeline 中添加 HttpObjectAggregator ，如果仅需读取 GET 请求，可以注释掉下面一行
                     pipeline.addLast(new HttpObjectAggregator(64 * 1024));
                     pipeline.addLast(new SimpleChannelInboundHandler<HttpRequest>() {
                         @Override

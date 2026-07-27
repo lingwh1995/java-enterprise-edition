@@ -39,7 +39,7 @@ public class MybatisPlusSaveOrUpdateTest {
     }
 
     /**
-     * 测试TableId 注解属性值存在则更新记录，否插入一条记录
+     * 测试 TableId 注解属性值存在则更新记录，否插入一条记录
      *
      * boolean saveOrUpdate(T entity);
      */
@@ -56,7 +56,7 @@ public class MybatisPlusSaveOrUpdateTest {
     }
 
     /**
-     * 测试根据updateWrapper尝试更新，否继续执行saveOrUpdate(T)方法
+     * 测试根据 updateWrapper 尝试更新，否继续执行 saveOrUpdate(T) 方法
      *
      * boolean saveOrUpdate(T entity, Wrapper<T> updateWrapper);
      */
@@ -103,7 +103,7 @@ public class MybatisPlusSaveOrUpdateTest {
                 new Employee(null,"张三三", "3333333333@qq.com", "男", "03"),
                 new Employee(null,"张四四", "44444444444@qq.com", "男", "03")
         );
-        // 设置批次大小为2
+        // 设置批次大小为 2
         boolean isSave = employeeService.saveOrUpdateBatch(employeeList,2);
         System.out.println(isSave);
     }

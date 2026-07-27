@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.net.InetSocketAddress;
 
 /**
- * Netty 客户端UDP版
+ * Netty 客户端 UDP 版
  *
  * @author lingwh
  * @date 2025/11/12 16:43
@@ -51,7 +51,7 @@ public class NettyClient {
                     new InetSocketAddress(HOST, PORT)
             )).sync();
 
-            // 等待2秒，给服务器响应时间
+            // 等待 2 秒，给服务器响应时间
             Thread.sleep(2000);
 
             // 发送第二条消息
@@ -60,7 +60,7 @@ public class NettyClient {
                     new InetSocketAddress(HOST, PORT)
             )).sync();
 
-            // 等待2秒，接收响应后再退出
+            // 等待 2 秒，接收响应后再退出
             Thread.sleep(2000);
 
         } catch (InterruptedException e) {

@@ -50,7 +50,7 @@ public class MybatisPlusGetTest {
     }
 
     /**
-     * 测试根据ID查询
+     * 测试根据 ID 查询
      */
     @Test
     public void testGetById() {

@@ -11,7 +11,7 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
- * redis序列化配置
+ * redis 序列化配置
  *
  * @author lingwh
  * @date 2025/11/22 17:40
@@ -20,33 +20,33 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class RedisConfig {
 
     /**
-     * 配置RedisTemplate实例，用于操作Redis数据库
+     * 配置 RedisTemplate 实例，用于操作 Redis 数据库
      *
-     * @param connectionFactory Redis连接工厂
-     * @return 配置好的RedisTemplate实例
+     * @param connectionFactory Redis 连接工厂
+     * @return 配置好的 RedisTemplate 实例
      */
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
-        // 创建RedisTemplate实例
+        // 创建 RedisTemplate 实例
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
         
-        // 获取全局共享的ObjectMapper并配置默认类型映射
+        // 获取全局共享的 ObjectMapper 并配置默认类型映射
         ObjectMapper objectMapper = JsonUtils.createMapper();
         objectMapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
         
-        // 创建基于Jackson的JSON序列化器用于序列化value值
+        // 创建基于 Jackson 的 JSON 序列化器用于序列化 value 值
         GenericJackson2JsonRedisSerializer valueSerializer = new GenericJackson2JsonRedisSerializer(objectMapper);
         template.setValueSerializer(valueSerializer);
         
-        // 使用StringRedisSerializer来序列化和反序列化redis的key值
+        // 使用 StringRedisSerializer 来序列化和反序列化 redis 的 key 值
         StringRedisSerializer keySerializer = new StringRedisSerializer();
         template.setKeySerializer(keySerializer);
         
-        // 初始化template属性
+        // 初始化 template 属性
         template.afterPropertiesSet();
         
-        // 设置hash数据结构的key和value序列化器
+        // 设置 hash 数据结构的 key 和 value 序列化器
         template.setHashKeySerializer(keySerializer);
         template.setHashValueSerializer(valueSerializer);
         

@@ -51,7 +51,7 @@ public class NettyWebSocketServer {
                          */
                         pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
 
-                        //自定义的handler
+                        //自定义的 handler
                         pipeline.addLast(new ChatHandler());
                     }
                 });

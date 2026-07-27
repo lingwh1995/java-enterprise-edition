@@ -14,7 +14,7 @@ public class Person {
      * 使用 @Value 赋值
      * 1. 基本数值
      * 2. 可以写 SpEL
-     * 3. 可以写${},取出配置文件中的值
+     * 3. 可以写 ${}，取出配置文件中的值
      */
     @Value("zhangsan")
     private String name;

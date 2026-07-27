@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * SpringBoot整合Servlet的第一种方式示例
+ * SpringBoot 整合 Servlet 的第一种方式示例
  *
  * @author lingwh
  * @date 2025/2/27 13:56

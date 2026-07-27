@@ -5,7 +5,7 @@ import org.springframework.boot.env.EnvironmentPostProcessor;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
- * Pbkdf2常量处理器
+ * Pbkdf2 常量处理器
  *
  * @author lingwh
  * @date 2025/12/31 17:53

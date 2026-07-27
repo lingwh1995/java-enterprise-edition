@@ -34,22 +34,22 @@ public class PasswordUtils {
     }
 
     /**
-     * 使用salt加密password
+     * 使用 salt 加密 password
      *
      * @param password 密码
-     * @param salt     盐值
+     * @param salt 盐值
      * @return
      * @throws NoSuchAlgorithmException
      * @throws InvalidKeySpecException
      */
     private static String getPBKDF2(String password, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        // 将16进制字符串形式的salt转换成byte数组
+        // 将 16 进制字符串形式的 salt 转换成 byte 数组
         byte[] saltHexBytes = HexUtil.decodeHex(salt);
         KeySpec spec = new PBEKeySpec(password.toCharArray(), saltHexBytes,
                 Pbkdf2Constants.ITERATION_COUNT, Pbkdf2Constants.KEY_SIZE_BITS);
         SecretKeyFactory secretKeyFactory = SecretKeyFactory.getInstance(Pbkdf2Constants.ALGORITHM);
         byte[] hashBytes = secretKeyFactory.generateSecret(spec).getEncoded();
-        // 将byte数组转换为16进制的字符串
+        // 将 byte 数组转换为 16 进制的字符串
         return HexUtil.encodeHexStr(hashBytes).toUpperCase();
     }
 

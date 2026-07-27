@@ -31,11 +31,12 @@ public class RequestMappingController {
     }
 
     /**
-     * RequestMapping 注解：
-     *      value：请求 url
-     *      method：请求方式 GET/POST
-     *      params：支持简单的表达式，必须有 name 参数而且 age 参数的值不等于 10
-     *      headers：支持简单的表达式
+     * RequestMapping 注解
+     *
+     * value：请求 url
+     * method：请求方式 GET/POST
+     * params：支持简单的表达式，必须有 name 参数而且 age 参数的值不等于 10
+     * headers：支持简单的表达式
      *
      * @return
      */
@@ -46,5 +47,4 @@ public class RequestMappingController {
         System.out.println("testRequestMappping!");
         return SUCCESS;
     }
-
 }

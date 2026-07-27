@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * SpringBoot整合Servelt第二种方式
+ * SpringBoot 整合 Servelt 第二种方式
  *
- * 1. 在Servelt类上加@WebServlet
+ * 1. 在 Servelt 类上加 @WebServlet
  * 2. 在启动类上加@ServletComponentScan
  *
  * @author lingwh

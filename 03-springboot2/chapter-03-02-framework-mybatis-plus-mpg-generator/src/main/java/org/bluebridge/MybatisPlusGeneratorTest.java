@@ -51,7 +51,6 @@ public class MybatisPlusGeneratorTest {
 
         FastAutoGenerator fastAutoGenerator = FastAutoGenerator.create(dataSourceConfigBuilder);
 
-
         // 2. 全局配置
         fastAutoGenerator.globalConfig(
                 globalConfigBuilder -> globalConfigBuilder
@@ -87,7 +86,6 @@ public class MybatisPlusGeneratorTest {
                         .addInclude(TBL_NAMES)  // 设置需要生成的表名
                         .addTablePrefix(TABLE_PREFIX)   // 设置过滤表前缀
         );
-
 
         // 4.1. Entity 策略配置
         fastAutoGenerator.strategyConfig(

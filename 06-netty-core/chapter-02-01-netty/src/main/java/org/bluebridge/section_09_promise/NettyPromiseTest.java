@@ -83,7 +83,7 @@ public class NettyPromiseTest {
     }
 
     /**
-     * await死锁检测
+     * await 死锁检测
      */
     private static void awaitDeadLock() {
         DefaultEventLoop eventExecutors = new DefaultEventLoop();
