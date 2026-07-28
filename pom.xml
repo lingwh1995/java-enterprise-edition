@@ -19,7 +19,7 @@
         <module>07-netty-line</module>
         <module>08-workflow</module>
         <module>09-bigdate</module>
-        <module>10-machine-learning</module>
+        <module>10-mach-learn</module>
     </modules>
 
     <properties>
