@@ -22,7 +22,7 @@ import java.net.URL;
  *    CombineTextInputFormat.setMaxInputSplitSize(job, 4 * 1024 * 1024);
  *    conf.set("mapreduce.job.inputformat.class", CombineTextInputFormat.class.getName());
  * 2. 查看配置效果
- *    在日志中搜索 number of splits 可以查看到 多个小文件被合并为一个大文件
+ *    在日志中搜索 number of splits 可以查看到 number of splits:1，说明多个小文件被合并为一个大文件然后再产生了一个切片
  * 2. 注意事项
  *    在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/part-r-00000 中，需要手动查看内容
  *
