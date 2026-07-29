@@ -34,21 +34,6 @@ import java.util.Arrays;
  * @author lingwh
  * @date 2026/7/29 15:39
  */
-
-
-
-不管内存来自哪里：
-
-JVM 堆内 byte []
-堆外操作系统内存（DirectBuffer）
-提供一套统一 API：position /limit/capacity、get/put、批量读写，方便 IO 通道（Channel）读写。
-
-        2. 视图功能 asIntBuffer () /asLongBuffer () 是什么角色？
-属于内置扩展能力：
-基于同一个底层内存，更换 “数据解析单位”
-
-ByteBuffer：单位 = 1 byte
-IntBuffer：单位 = 4 byte，自动完成 int ↔ 4 字节编解码
 @Slf4j
 public class Case_07_ByteBufferAsByteArrayView {
 
