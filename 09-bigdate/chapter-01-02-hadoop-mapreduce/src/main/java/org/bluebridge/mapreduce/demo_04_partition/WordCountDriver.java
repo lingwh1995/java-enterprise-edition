@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.case_01_wordcount;
+package org.bluebridge.mapreduce.demo_04_partition;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hadoop.conf.Configuration;
@@ -15,9 +15,13 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
- * Driver 类，用于提交 Job
+ * 修改 ReduceTask 数量进而修改分区数量
  *
- * 注意：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/part-r-00000 中，需要手动查看内容
+ * 1. 添加如下代码来设置 ReduceTask 数量为 2 个
+ *    job.setNumReduceTasks(2);
+ * 2. 注意事项
+ *    在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/part-r-00001 和 target/classes/hadoop/output/part-r-00002 中，需要手动查看内容
+ *
  * @author lingwh
  * @date 2025/8/20 09:17
  */
@@ -48,6 +52,9 @@ public class WordCountDriver {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
 
+        // 设置分区数为 2 个
+        job.setNumReduceTasks(2);
+
         // 7. 设置输入、输出路径
         // 默认从 args 获取（jar 包运行方式），未传参时使用 maven resources 路径（本地测试）
         Path inputPath;
@@ -59,9 +66,9 @@ public class WordCountDriver {
             outputPath = new Path(args[1]);
         } else {
             // 本地测试方式：使用 maven resources 中的输入文件
-            URL resource = WordCountDriver.class.getClassLoader().getResource("hadoop/input/input_wordcount.txt");
+            URL resource = WordCountDriver.class.getClassLoader().getResource("hadoop/input/demo_01_wordcount/");
             if (resource == null) {
-                System.err.println("未找到 input.txt，请检查 resources/hadoop/input/ 路径！");
+                System.err.println("未找到 input.txt，请检查 resources/hadoop/input/demo_01_wordcount/ 路径！");
                 return;
             }
             inputPath = new Path(resource.toURI());

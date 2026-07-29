@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.case_02_mobiledata;
+package org.bluebridge.mapreduce.demo_02_mobiledata;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.case_03_inputformat.combine_text_inputformat;
+package org.bluebridge.mapreduce.demo_03_inputformat.combine_text_inputformat;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hadoop.conf.Configuration;
@@ -16,11 +16,15 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
- * Driver 类，用于提交 Job
+*  使用 CombineTextInputFormat 来解决小文件场景下的问题，将多个小文件合并为一个大文件
  *
- * 注意
- * 1. 在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/part-r-00000 中，需要手动查看内容
- * 2. 在日志中搜索 number of splits 可以查看到 多个小文件被合并为一个大文件
+ * 1. 添加如下代码来解决小文件场景下 MapTask 数量过多问题
+ *    CombineTextInputFormat.setMaxInputSplitSize(job, 4 * 1024 * 1024);
+ *    conf.set("mapreduce.job.inputformat.class", CombineTextInputFormat.class.getName());
+ * 2. 查看配置效果
+ *    在日志中搜索 number of splits 可以查看到 多个小文件被合并为一个大文件
+ * 2. 注意事项
+ *    在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/part-r-00000 中，需要手动查看内容
  *
  * @author lingwh
  * @date 2025/8/20 09:17
@@ -67,9 +71,9 @@ public class WordCountDriver {
             outputPath = new Path(args[1]);
         } else {
             // 本地测试方式：使用 maven resources 中的输入文件
-            URL resource = WordCountDriver.class.getClassLoader().getResource("hadoop/input/case_03_set_inputformat");
+            URL resource = WordCountDriver.class.getClassLoader().getResource("hadoop/input/demo_03_set_inputformat");
             if (resource == null) {
-                System.err.println("未找到 input.txt，请检查 resources/hadoop/input/ 路径！");
+                System.err.println("未找到 input.txt，请检查 resources/hadoop/input/demo_03_set_inputformat/ 路径！");
                 return;
             }
             inputPath = new Path(resource.toURI());

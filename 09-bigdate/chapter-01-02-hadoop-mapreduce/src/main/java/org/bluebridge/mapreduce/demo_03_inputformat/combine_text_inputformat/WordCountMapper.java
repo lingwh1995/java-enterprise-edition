@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.case_01_wordcount;
+package org.bluebridge.mapreduce.demo_03_inputformat.combine_text_inputformat;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hadoop.io.IntWritable;

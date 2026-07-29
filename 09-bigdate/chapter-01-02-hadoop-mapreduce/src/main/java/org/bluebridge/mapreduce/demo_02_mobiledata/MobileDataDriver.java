@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.case_02_mobiledata;
+package org.bluebridge.mapreduce.demo_02_mobiledata;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -52,9 +52,9 @@ public class MobileDataDriver {
             outputPath = new Path(args[1]);
         } else {
             // 本地测试方式：使用 maven resources 中的输入文件
-            URL resource = MobileDataDriver.class.getClassLoader().getResource("hadoop/input/input_mobile_data.txt");
+            URL resource = MobileDataDriver.class.getClassLoader().getResource("hadoop/input/demo_02_mobiledata/");
             if (resource == null) {
-                System.err.println("未找到 input.txt，请检查 resources/hadoop/input/ 路径！");
+                System.err.println("未找到 input.txt，请检查 resources/hadoop/input/demo_02_mobiledata/ 路径！");
                 return;
             }
             inputPath = new Path(resource.toURI());
