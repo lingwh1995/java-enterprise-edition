@@ -1,4 +1,6 @@
-package org.bluebridge.mapreduce.case_04_ringbuffer;
+package org.bluebridge.section_01_ringbuffer.case_01;
+
+import org.bluebridge.mapreduce.case_04_ringbuffer.RingBuffer;
 
 /**
  * 简易环形缓冲区测试类
@@ -25,7 +27,7 @@ public class RingBufferTest {
             String key = keys[i];
             int partition = Math.floorMod(key.hashCode(), 3);
             String value = "value-" + i;
-            boolean spilled = ringBuffer.write(partition, key, value);
+            boolean spilled = ringBuffer.collect(partition, key, value);
             System.out.println("写入：" + key + " -> " + value
                     + "（分区 " + partition + "）"
                     + (spilled ? "，触发溢写" : "")
