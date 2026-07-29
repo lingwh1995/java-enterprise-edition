@@ -1,4 +1,4 @@
-package org.bluebridge.section_01_ringbuffer.case_02;
+package org.bluebridge.org.bluebridge.section_01_ringbuffer.case_02;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

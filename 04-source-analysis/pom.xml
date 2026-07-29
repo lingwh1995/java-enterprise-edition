@@ -30,6 +30,7 @@
     <modules>
         <module>chapter-01-01-mybatis-source</module>
         <module>chapter-01-02-mybatis-plus-source</module>
+        <module>chapter-02-01-hadoop-mapreduce</module>
     </modules>
 
     <dependencyManagement>
