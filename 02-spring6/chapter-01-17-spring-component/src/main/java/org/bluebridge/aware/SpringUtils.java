@@ -139,5 +139,4 @@ public class SpringUtils implements ApplicationContextAware, EnvironmentAware, B
     public static void publishEvent(ApplicationEvent event) {
         applicationContext.publishEvent(event);
     }
-
 }

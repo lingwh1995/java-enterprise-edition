@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * WebSocket 简介
  *
- * WebSocket 是一种在单个 TCP 连接上进行全双工通信的协议。WebSocket 使得客户端和服务器之间的数据交换变得更加简单，允许服务端主动向客户端
+ * WebSocket 是一种在单个 TCP 连接上进行全双工通信的协议。 WebSocket 使得客户端和服务器之间的数据交换变得更加简单，允许服务端主动向客户端
  * 推送数据。在 WebSocket API 中，浏览器和服务器只需要完成一次握手，两者之间就直接可以创建持久性的连接，并进行双向数据传输。
  *
  * WebSocket 特性

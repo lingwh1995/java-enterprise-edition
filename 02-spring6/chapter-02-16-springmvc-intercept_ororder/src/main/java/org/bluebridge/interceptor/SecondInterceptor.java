@@ -58,8 +58,8 @@ public class SecondInterceptor implements HandlerInterceptor {
 
     /**
      * 在视图渲染完成之后执行，通常用来释放资源
-     *      法执时机：   org.springframework.web.servlet.DispatcherServlet.processDispatchResult()中
-     *      具体位置：   mappedHandler.triggerAfterCompletion(request, response, null);执行时调用
+     *      法执时机：org.springframework.web.servlet.DispatcherServlet.processDispatchResult()中
+     *      具体位置：mappedHandler.triggerAfterCompletion(request, response, null);执行时调用
      * @param request current HTTP request
      * @param response current HTTP response
      * @param handler the handler (or {@link HandlerMethod}) that started asynchronous

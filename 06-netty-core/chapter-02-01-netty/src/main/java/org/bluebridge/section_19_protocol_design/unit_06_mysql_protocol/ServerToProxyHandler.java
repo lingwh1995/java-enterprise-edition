@@ -7,7 +7,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 服务器到代理的处理器：负责将MySQL响应转发给客户端
+ * 服务器到代理的处理器：负责将 MySQL 响应转发给客户端
  *
  * @author lingwh
  * @date 2025/10/27 17:30

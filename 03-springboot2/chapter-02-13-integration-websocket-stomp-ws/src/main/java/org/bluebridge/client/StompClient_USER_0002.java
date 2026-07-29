@@ -55,7 +55,7 @@ public class StompClient_USER_0002 {
             transports.add((Transport) Class.forName("org.springframework.web.socket.sockjs.client.XhrStreamingTransport")
                     .getDeclaredConstructor().newInstance());
         } catch (Exception e) {
-            log.warn("无法加载XhrStreamingTransport，将使用其他传输方式");
+            log.warn("无法加载 XhrStreamingTransport，将使用其他传输方式");
         }
         // 添加 RestTemplateXHR 传输（备选方式）
         transports.add(new RestTemplateXhrTransport());

@@ -66,7 +66,7 @@ public class SelectorServer {
                         }
                     }catch (IOException e) {
                         e.printStackTrace();
-                        // 因为客户端由于异常关闭断开了，所以要将key取消注册
+                        // 因为客户端由于异常关闭断开了，所以要将 key 取消注册
                         event.cancel();
                     }
                 }

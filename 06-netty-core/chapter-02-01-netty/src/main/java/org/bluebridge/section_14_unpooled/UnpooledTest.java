@@ -34,7 +34,7 @@ public class UnpooledTest {
         ByteBuf byteBuf2 = ByteBufAllocator.DEFAULT.buffer(5);
         byteBuf2.writeBytes(new byte[]{ 6, 7, 8, 9, 10 });
 
-        // 当包装 ByteBuf 个数超过一个时，底层使用了 CompositeByteBuf，wrappedBuffer()是零拷贝方法
+        // 当包装 ByteBuf 个数超过一个时，底层使用了 CompositeByteBuf，wrappedBuffer() 是零拷贝方法
         ByteBuf byteBuf3 = Unpooled.wrappedBuffer(byteBuf1, byteBuf2);
         System.out.println(ByteBufUtil.prettyHexDump(byteBuf3));
     }

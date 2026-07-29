@@ -15,11 +15,11 @@ import java.util.stream.IntStream;
 public class SortUtils {
 
     /**
-     * 将orderBy和order转换成List<SortDTO>对象
+     * 将 orderBy 和 order 转换成 List<SortDTO>对象
      *
      * @param orderBy 排序字段，多个字段用逗号分隔
-     * @param order   排序方向，多个方向用逗号分隔
-     * @return 排序DTO列表
+     * @param order 排序方向，多个方向用逗号分隔
+     * @return 排序 DTO 列表
      */
     public static List<Sort> toSortList(String orderBy, String order) {
         List<Sort> sortList = new ArrayList<>();
@@ -27,7 +27,7 @@ public class SortUtils {
             String[] orderBys = orderBy.split(",");
             String[] orders = order.split(",");
 
-            // 基于Stream把字符串数组转换成SortDTO对象
+            // 基于 Stream 把字符串数组转换成 SortDTO 对象
             sortList = IntStream.range(0, Math.min(orderBys.length, orders.length))
                     .mapToObj(i -> {
                         Sort dto = new Sort();
@@ -41,11 +41,11 @@ public class SortUtils {
     }
 
     /**
-     * 将orderBy和order转换成排序SQL语句
+     * 将 orderBy 和 order 转换成排序 SQL 语句
      *
      * @param orderBy 排序字段，多个字段用逗号分隔
-     * @param order   排序方向，多个方向用逗号分隔
-     * @return 排序SQL语句
+     * @param order 排序方向，多个方向用逗号分隔
+     * @return 排序 SQL 语句
      */
     public static String toSortSQL(String orderBy, String order) {
         List<Sort> sortList = toSortList(orderBy, order);

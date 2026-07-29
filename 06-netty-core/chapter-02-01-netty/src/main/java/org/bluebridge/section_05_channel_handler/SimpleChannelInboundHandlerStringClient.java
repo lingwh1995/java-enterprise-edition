@@ -30,7 +30,7 @@ public class SimpleChannelInboundHandlerStringClient {
                 @Override
                 protected void initChannel(NioSocketChannel ch) {
                     ChannelPipeline pipeline = ch.pipeline();
-                    // 内部使用CharBuffer.wrap(msg)
+                    // 内部使用 CharBuffer.wrap(msg)
                     pipeline.addLast(new StringEncoder());
                 }
             })

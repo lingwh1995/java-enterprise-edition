@@ -15,7 +15,7 @@ import java.util.Set;
 /**
  * Selector 对象、 SelectionKey 对象详解
  *
- * Selector方法详解（总共包含以下10个方法）
+ * Selector 方法详解（总共包含以下 10 个方法）
  *   Selector open(): 创建一个 Selector 对象
  *   boolean isOpen(): 是否是 open 状态，如果调用了 close() 方法则会返回 false
  *   SelectorProvider provider(): 获取当前 Selector 的 Provider
@@ -23,23 +23,23 @@ import java.util.Set;
  *   Set<SelectionKey> selectedKeys(): 获取当前 channel 就绪的事件列表（特别注意：是就绪事件，是事件，就是说一个 selectedKeys 代表一个事件）
  *   int selectNow(): 获取当前是否有事件就绪，该方法立即返回结果，不会阻塞；如果返回值>0，则代表存在一个或多个
  *   int select(long timeout): selectNow 的阻塞超时方法，超时时间内，有事件就绪时才会返回；否则超过时间也会返回
- *   int select(): selectNow的阻塞方法，直到有事件就绪时才会返回
+ *   int select(): selectNow 的阻塞方法，直到有事件就绪时才会返回
  *   Selector wakeup(): 唤醒阻塞的线程，不管在是 select() 方法之前调用 wakeup() 方法，还是在 select() 方法之后调用 wakeup()，都会唤醒阻塞的线程，有点类似与 LockSupport.park() 和 LockSupport.unpark() 的感觉
  *   void close(): 用完 Selector 后调用其 close() 方法会关闭该 Selector，且使注册到该 Selector 上的所有 SelectionKey 实例无效， channel 本身并不会关闭。
  *
  * SelectionKey
- * 1. SelectionKey是 Java NIO 中的一个重要类，用于表示一个通道在 Selector 上的注册关系。一个 SelectionKey 对象包含了如下内容：
+ * 1. SelectionKey 是 Java NIO 中的一个重要类，用于表示一个通道在 Selector 上的注册关系。一个 SelectionKey 对象包含了如下内容：
  *      interest set：当前 Channel 感兴趣的事件集，即在调用 register 方法设置的 interes set
  *      ready set
  *      channel
  *      selector
  *      attached object：可选的附加对象
  *      interest set
- * 2. SelectionKey方法详解
+ * 2. SelectionKey 方法详解
  *      int interestOps():   返回当前选择键的兴趣集，即通道感兴趣的操作
  *      SelectionKey interestOps(SelectionKey.OP_READ | SelectionKey.OP_WRITE):   设置通道的兴趣集，指定对哪些操作感兴趣
  *      int readyOps():  返回通道已经准备好的操作集
- *      SelectableChannel channel():  返回当前事件关联的通道，可转换的选项包括: ServerSocketChannel 和 SocketChannel
+ *      SelectableChannel channel():  返回当前事件关联的通道，可转换的选项包括： ServerSocketChannel 和 SocketChannel
  *      Selector selector():  返回当前事件所关联的 Selector 对象
  *      boolean isValid():    检查当前事件是否仍然有效
  *      void cancel():   取消选择键，使其无效
@@ -49,18 +49,18 @@ import java.util.Set;
  *      boolean isConnectable():   客户端连接事件是否就绪
  *      boolean isReadable():   读事件是否就绪
  *      boolean isWritable():   写事件是否就绪
- * 3. SelectionKey注意事项
+ * 3. SelectionKey 注意事项
  *      有效性：在处理完一个 SelectionKey 后，通常需要调用 keyIterator.remove() 来从集合中移除它，以避免重复处理
  *      附加对象：可以通过 attach() 和 attachment() 方法将上下文信息附加到选择键上，方便在事件处理时使用
  *      取消键：当通道不再需要时，可以调用 cancel() 方法取消选择键
  *
- * Selector和SelectionKey关系
- *   Selector和SelectionKey，两者是紧密关联，配合使用的，如上文所示，往 Selector 中注册 Channel 会返回一个 SelectionKey 对象
+ * Selector 和 SelectionKey 关系
+ *   Selector 和 SelectionKey，两者是紧密关联，配合使用的，如上文所示，往 Selector 中注册 Channel 会返回一个 SelectionKey 对象
  *
- * SelectionKey的事件类型包括
+ * SelectionKey 的事件类型包括
  *   OP_READ：可读事件，值为：1<<0                                                            =>  1
  *   OP_WRITE：可写事件，值为：1<<2                                                           =>  4
- *   OP_CONNECT：客户端连接服务端的事件(tcp连接)，一般为创建 SocketChannel 客户端 channel，值为：1<<3  =>  8
+ *   OP_CONNECT：客户端连接服务端的事件(tcp 连接)，一般为创建 SocketChannel 客户端 channel，值为：1<<3  =>  8
  *   OP_ACCEPT：服务端接收客户端连接的事件，一般为创建 ServerSocketChannel 服务端 channel，值为：1<<4  =>  16
  *
  * @author lingwh
@@ -91,7 +91,7 @@ public class SelectorServer {
 
         /*
          * 4. 把服务器对象注册到 Selector 对象中，第二个参数指定了 selector 对 Channel 的什么类型的事件感兴趣，此处为 OP_ACCEPT 事件
-         *  注意：一个 Channel 仅仅可以被注册到一个 Selector 一次，如果将Channel注册到 Selector 多次，那么其实就是相当于更新 SelectionKey 的 interest set.
+         *  注意：一个 Channel 仅仅可以被注册到一个 Selector 一次，如果将 Channel 注册到 Selector 多次，那么其实就是相当于更新 SelectionKey 的 interest set.
          */
         SelectionKey selectionKey = ssc.register(selector, SelectionKey.OP_ACCEPT);
         log.info("selectionKey: {}", selectionKey);
@@ -115,7 +115,7 @@ public class SelectorServer {
         log.info("isInterestedInAccept: {}, isInterestedInConnect: {}, isInterestedInRead: {}, isInterestedInWrite: {}",
                 isInterestedInAccept, isInterestedInConnect, isInterestedInRead, isInterestedInWrite);
 
-        // 返回当前事件关联的通道，可转换的选项包括: ServerSocketChannel 和 SocketChannel
+        // 返回当前事件关联的通道，可转换的选项包括： ServerSocketChannel 和 SocketChannel
         Channel selectionKeyBindChannel = selectionKey.channel();
         log.info("before connect with client => selectionKeyBindChannel: {}", selectionKeyBindChannel);
         // 返回当前事件所关联的 Selector 对象
@@ -124,10 +124,10 @@ public class SelectorServer {
         /*--------------测试 selectionKey api --------------*/
 
         /*--------------测试 selector api --------------*/
-        // 测试keys(): 获取当前 channel 注册在 Selector 上所有的 key
+        // 测试 keys(): 获取当前 channel 注册在 Selector 上所有的 key
         Set<SelectionKey> keys = selector.keys();
         log.info("before op_accept => keys: {}", keys);
-        // 测试selectedKeys(): 获取当前 channel 就绪的事件列表
+        // 测试 selectedKeys(): 获取当前 channel 就绪的事件列表
         Set<SelectionKey> selectionKeys = selector.selectedKeys();
         log.info("before op_accept => selectionKeys: {}", selectionKeys);
         /*--------------测试 selector api --------------*/
@@ -136,28 +136,28 @@ public class SelectorServer {
         log.info("非阻塞TCP Selector服务器启动，IP：{}，端口：{}......", HOST, PORT);
 
         /*--------------测试 selector api --------------*/
-        // 测试wakeup(): 唤醒 selector，使 selector 不再处于阻塞状态
+        // 测试 wakeup(): 唤醒 selector，使 selector 不再处于阻塞状态
         //selector.wakeup();
         /*--------------测试 selector api --------------*/
 
         while (true) {
             /*--------------测试 selector api --------------*/
-            // 测试 selectNow(): 获取当前是否有事件就绪，该方法立即返回结果，不会阻塞；如果返回值>0，则代表存在一个或多个
+            // 测试 selectNow(): 获取当前是否有事件就绪，该方法立即返回结果，不会阻塞；如果返回值>0 ，则代表存在一个或多个
             /*
             int selectNowSelected = selector.selectNow();
             log.info("selectNowSelected: {}", selectNowSelected);
              */
             /*--------------测试 selector api --------------*/
 
-            // 测试select(): selectNow 的阻塞方法，直到有事件就绪时才会返回
+            // 测试 select(): selectNow 的阻塞方法，直到有事件就绪时才会返回
             int selectSelected = selector.select();
             log.info("selectSelected: {}", selectSelected);
 
             /*--------------测试 selector api --------------*/
-            // 测试keys(): 获取当前 channel 注册在 Selector 上所有的key
+            // 测试 keys(): 获取当前 channel 注册在 Selector 上所有的 key
             keys = selector.keys();
             log.info("after op_accept => keys: {}", keys);
-            // 测试selectedKeys(): 获取当前 channel 就绪的事件列表
+            // 测试 selectedKeys(): 获取当前 channel 就绪的事件列表
             selectionKeys = selector.selectedKeys();
             log.info("after op_accept => selectionKeys: {}", selectionKeys);
             /*--------------测试 selector api --------------*/
@@ -169,7 +169,7 @@ public class SelectorServer {
                 log.info("beReadySelectionKey: {}", beReadySelectionKey);
 
                 /*--------------测试 selectionKey api --------------*/
-                // 返回当前事件关联的通道，可转换的选项包括: ServerSocketChannel 和 SocketChannel
+                // 返回当前事件关联的通道，可转换的选项包括：ServerSocketChannel 和 SocketChannel
                 selectionKeyBindChannel = selectionKey.channel();
                 log.info("after connect with client => selectionKeyBindChannel: {}", selectionKeyBindChannel);
                 // 返回当前事件所关联的 Selector 对象
@@ -204,7 +204,7 @@ public class SelectorServer {
                         }
                     }catch (IOException e) {
                         e.printStackTrace();
-                        // 因为客户端由于异常关闭断开了，所以要将key取消注册
+                        // 因为客户端由于异常关闭断开了，所以要将 key 取消注册
                         beReadySelectionKey.cancel();
                     }
                 }

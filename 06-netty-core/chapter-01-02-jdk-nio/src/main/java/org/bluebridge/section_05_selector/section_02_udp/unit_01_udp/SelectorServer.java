@@ -33,7 +33,7 @@ public class SelectorServer {
         Selector selector = Selector.open();
         channel.register(selector, SelectionKey.OP_READ);
 
-        // 通过选择器，查询IO事件
+        // 通过选择器，查询 IO 事件
         while (selector.select() > 0) {
             Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
             ByteBuffer buffer = ByteBuffer.allocate(1024);

@@ -57,7 +57,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
                 String url = requestUri.toString();
 
                 // 可以进一步解析 URL 的各个部分：
-                // 协议（ws 或 wss）
+                // 协议（ ws 或 wss）
                 String scheme = requestUri.getScheme();
                 // 域名/主机名（如 localhost）
                 String host = requestUri.getHost();

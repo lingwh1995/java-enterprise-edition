@@ -66,7 +66,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     }
 
     /**
-     * 添加@RequestMapping路径前缀
+     * 添加@RequestMapping 路径前缀
      *
      * @param configurer
      */

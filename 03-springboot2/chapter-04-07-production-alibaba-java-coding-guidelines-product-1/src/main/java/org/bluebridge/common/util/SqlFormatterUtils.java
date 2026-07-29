@@ -3,7 +3,7 @@ import cn.hutool.db.sql.SqlFormatter;
 import org.bluebridge.common.constant.SqlConstants;
 
 /**
- * SQL格式化工具类
+ * SQL 格式化工具类
  *
  * @author lingwh
  * @date 2025/12/27 20:16
@@ -11,7 +11,7 @@ import org.bluebridge.common.constant.SqlConstants;
 public class SqlFormatterUtils {
 
     /**
-     * 格式化SQL语句
+     * 格式化 SQL 语句
      *
      * @param sql
      * @return
@@ -31,7 +31,7 @@ public class SqlFormatterUtils {
     }
 
     /**
-     * 使用Hutool格式化SQL语句
+     * 使用 Hutool 格式化 SQL 语句
      *
      * @param sql
      * @return

@@ -12,9 +12,9 @@ import java.util.Arrays;
 /**
  * Spring 工具类
  *
- * 核心机制：ApplicationContextAware
+ * 核心机制： ApplicationContextAware
  * Spring 容器在启动时，会自动扫描所有实现了 ApplicationContextAware 接口的类。
- * 动作： 一旦扫描到，Spring 就会自动调用 setApplicationContext 方法。
+ * 动作： 一旦扫描到， Spring 就会自动调用 setApplicationContext 方法。
  * 结果： 它把整个 Spring 容器的引用（context）传给了你的静态变量 applicationContext。
  * 意义： 这样你就在这个类里拿到了一把打开 Spring 仓库的"万能钥匙"。
  *

@@ -27,7 +27,7 @@ public class StreamController {
      */
     @GetMapping(value = "/basic", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public ResponseBodyEmitter basicStream() {
-        // 30秒超时
+        // 30 秒超时
         // ResponseBodyEmitter emitter = new ResponseBodyEmitter(30 * 1000L);
         // 不超时，直接返回
         ResponseBodyEmitter emitter = new ResponseBodyEmitter();
@@ -71,7 +71,7 @@ public class StreamController {
     }
 
     /**
-     * JSON流式响应示例
+     * JSON 流式响应示例
      */
     @GetMapping(value = "/json", produces = MediaType.APPLICATION_NDJSON_VALUE)
     public ResponseBodyEmitter jsonStream() {

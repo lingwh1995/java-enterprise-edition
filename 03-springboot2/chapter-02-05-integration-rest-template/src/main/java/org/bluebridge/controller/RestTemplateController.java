@@ -67,7 +67,7 @@ public class RestTemplateController {
     /**
      * POST 方式的请求
      *
-     * @param user 前台传递的是json格式的参数
+     * @param user 前台传递的是 json 格式的参数
      * @return
      */
     @ResponseBody
@@ -93,7 +93,7 @@ public class RestTemplateController {
     /**
      * PUT 方式的请求
      *
-     * @param user 前台传递的是json格式的参数
+     * @param user 前台传递的是 json 格式的参数
      * @return
      */
     @ResponseBody

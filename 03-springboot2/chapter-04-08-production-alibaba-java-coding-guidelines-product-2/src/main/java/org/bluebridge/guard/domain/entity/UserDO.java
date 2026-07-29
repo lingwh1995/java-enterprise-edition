@@ -44,7 +44,7 @@ public class UserDO extends BaseEntity {
     private String salt;
 
     /**
-     * 创建人id
+     * 创建人 id
      */
     private Long createUser;
 }

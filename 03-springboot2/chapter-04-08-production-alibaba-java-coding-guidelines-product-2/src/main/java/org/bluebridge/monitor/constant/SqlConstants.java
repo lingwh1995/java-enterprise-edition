@@ -17,22 +17,22 @@ public final class SqlConstants {
     public static int SLOW_SQL_THRESHOLD = 1000;
 
     /**
-     * 是否打印未填充参数的原始SQL
+     * 是否打印未填充参数的原始 SQL
      */
     public static boolean SHOW_ORIGINAL_SQL = true;
 
     /**
-     * SQL 配置是否格式化打印SQL
+     * SQL 配置是否格式化打印 SQL
      */
     public static boolean PRETTY_PRINT_ENABLED = true;
 
     /**
-     * SQL 配置格式化打印SQL样式
+     * SQL 配置格式化打印 SQL 样式
      */
     public static SqlShowFormattedStyleEnum PRETTY_PRINT_STYLE = SqlShowFormattedStyleEnum.HUTOOL;
 
     /**
-     * SQL 配置格式化打印SQL颜色
+     * SQL 配置格式化打印 SQL 颜色
      */
     public static SqlHighlightColorEnum PRETTY_PRINT_COLOR = SqlHighlightColorEnum.BLUE;
 

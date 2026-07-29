@@ -11,7 +11,7 @@ import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
- * SQL常量配置处理器
+ * SQL 常量配置处理器
  *
  * @author lingwh
  * @date 2025/12/31 17:53

@@ -16,7 +16,7 @@ public class UserServiceImpl implements IUserService {
     /**
      * 使用 set 方式注入
      *
-     * @param userDao 用户DAO实例
+     * @param userDao 用户 DAO 实例
      */
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;

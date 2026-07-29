@@ -37,7 +37,7 @@ public class UserController {
     }
 
     /**
-     * 测试自定义生成缓存数据的key
+     * 测试自定义生成缓存数据的 key
      *
      * http://localhost:8080/keygenerator/001
      *
@@ -66,9 +66,9 @@ public class UserController {
      * 测试 @CachePut：同步更新缓存的功能(更新数据库中的数据，并且根据 id 更新缓存中的数据)
      *
      * 测试步骤
-     * 1. 先根据 id=001 查询     http://localhost:8080/select/001
-     * 2. 再根据 id=001 更新数据库中数据   http://localhost:8080/update/001
-     * 3. 此时再访问   http://localhost:8080/select/001，系统不会发送 sql 了，而是根据直接从缓存中获取 key=001 的缓存数据
+     * 1. 先根据 id=001 查询 http://localhost:8080/select/001
+     * 2. 再根据 id=001 更新数据库中数据 http://localhost:8080/update/001
+     * 3. 此时再访问 http://localhost:8080/select/001，系统不会发送 sql 了，而是根据直接从缓存中获取 key=001 的缓存数据
      *
      * @param id
      * @return

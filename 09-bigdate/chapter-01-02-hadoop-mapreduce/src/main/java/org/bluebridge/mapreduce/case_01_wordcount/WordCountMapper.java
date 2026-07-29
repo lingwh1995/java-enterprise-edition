@@ -39,7 +39,7 @@ public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritabl
      *
      * @param key
      * @param value
-     * @param context 上下文对象，在mr流程中起到了一个连接各个环节的作用
+     * @param context 上下文对象，在 mr 流程中起到了一个连接各个环节的作用
      * @throws IOException
      * @throws InterruptedException
      */

@@ -2,7 +2,7 @@ package org.bluebridge.common.enums;
 import lombok.Getter;
 
 /**
- * 慢SQL阈值类型枚举
+ * 慢 SQL 阈值类型枚举
  *
  * @author lingwh
  * @date 2025/12/31 23:06

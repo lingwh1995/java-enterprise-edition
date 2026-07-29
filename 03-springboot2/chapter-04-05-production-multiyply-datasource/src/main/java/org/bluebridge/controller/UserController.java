@@ -26,7 +26,7 @@ public class UserController {
     private IUserServiceSlave userServiceSlave;
 
     /**
-     * 访问   http://localhost:8080/user/master/1
+     * 访问 http://localhost:8080/user/master/1
      *
      * @param id
      * @return
@@ -38,7 +38,7 @@ public class UserController {
     }
 
     /**
-     * 访问   http://localhost:8080/user/slave/1
+     * 访问 http://localhost:8080/user/slave/1
      *
      * @param id
      * @return
