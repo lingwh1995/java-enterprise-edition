@@ -1,7 +1,7 @@
 package org.bluebridge.hdfs;
 
 import org.apache.hadoop.fs.FileStatus;
-import org.bluebridge.hdfs.case_01_helloworld.service.IHdfsService;
+import org.bluebridge.hdfs.demo_01_helloworld.service.IHdfsService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
