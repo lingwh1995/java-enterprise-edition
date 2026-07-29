@@ -10,6 +10,12 @@ import java.util.Arrays;
 /**
  * 使用 ByteBuffer 作为 byte 数组视图
  *
+ * 经典应用场景
+ * 1. 二进制协议解析
+ *    网络数据包是一串 byte，一会读 int、一会读 short、一会读字符串，来回切换视图，代码极其清爽。
+ * 2. Hadoop 环形缓冲区
+ *    双向对向写入得以实现，排序只操作索引（int 数组视图），不需要挪动大量 key-value 字节，大幅提升排序性能。
+ *
  * @author lingwh
  * @date 2026/7/29 15:39
  */
