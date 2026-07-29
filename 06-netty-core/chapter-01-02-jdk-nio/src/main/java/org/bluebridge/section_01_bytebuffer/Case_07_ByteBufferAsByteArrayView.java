@@ -33,7 +33,7 @@ public class Case_07_ByteBufferAsByteArrayView {
         // 创建一个 IntBuffer 作为 ByteBuffer 的视图
         IntBuffer intBuffer = byteBuffer.asIntBuffer();
         // 给 IntBuffer 写入数据
-        intBuffer.put(1);
+        intBuffer.put(8);
         // 这里不查看 IntBuffer 中的数据，而是查看 bytes 中的数据
         System.out.println(Arrays.toString(bytes));
     }
