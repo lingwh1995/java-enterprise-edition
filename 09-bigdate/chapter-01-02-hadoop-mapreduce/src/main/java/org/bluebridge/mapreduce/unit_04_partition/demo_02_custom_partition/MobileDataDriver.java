@@ -24,7 +24,7 @@ public class MobileDataDriver {
         Configuration conf = new Configuration();
 
         // 2. 创建 Job 对象
-        Job job = Job.getInstance(conf, "mobile data count");
+        Job job = Job.getInstance(conf, "mobile data partition");
 
         // 3. 设置 Job 类的驱动类
         job.setJarByClass(MobileDataDriver.class);
@@ -40,6 +40,10 @@ public class MobileDataDriver {
         // 6. 设置 Reduce 阶段输出键值对的类型
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(MobileData.class);
+
+        // --------------------- 设置自定义 Partition 开始 ---------------------
+        job.setPartitionerClass(MobileDataPartitioner.class);
+        // --------------------- 设置自定义 Partition 结束 ---------------------
 
         // 7. 设置输入、输出路径
         // 默认从 args 获取（jar 包运行方式），未传参时使用 maven resources 路径（本地测试）
