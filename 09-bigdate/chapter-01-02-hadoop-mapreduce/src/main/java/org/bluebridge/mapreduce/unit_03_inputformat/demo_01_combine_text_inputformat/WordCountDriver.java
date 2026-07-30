@@ -39,6 +39,7 @@ public class WordCountDriver {
         Configuration conf = new Configuration();
 
         // --------------------- 设置 InputFormat 实现类开始 ---------------------
+        // 设置 InputFormat 类为 CombineTextInputFormat 写法一
         conf.set("mapreduce.job.inputformat.class", CombineTextInputFormat.class.getName());
         // --------------------- 设置 InputFormat 实现类结束 ---------------------
 
@@ -87,6 +88,7 @@ public class WordCountDriver {
         }
 
         // 下面写法等价于上面 conf.set("mapreduce.job.inputformat.class", CombineTextInputFormat.class.getName()); 这种写法
+        // 设置 InputFormat 类为 CombineTextInputFormat 写法二（推荐）
         // job.setInputFormatClass(CombineTextInputFormat.class);
 
         // --------------------- 指定小文件场景文件大小开始 ---------------------
