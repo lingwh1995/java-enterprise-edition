@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.demo_04_partition;
+package org.bluebridge.mapreduce.unit_04_partition.demo_01_default_partition;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hadoop.io.IntWritable;

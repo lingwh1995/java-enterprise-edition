@@ -9,6 +9,9 @@ import java.net.URI;
 
 /**
  * HDFS 配置类
+ *
+ * @author lingwh
+ * @date 2025/7/10 10:02
  */
 @org.springframework.context.annotation.Configuration
 @EnableConfigurationProperties(HdfsProperties.class)

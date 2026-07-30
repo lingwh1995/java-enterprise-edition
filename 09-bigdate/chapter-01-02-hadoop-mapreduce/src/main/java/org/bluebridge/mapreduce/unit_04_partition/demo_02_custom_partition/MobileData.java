@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.demo_02_mobiledata;
+package org.bluebridge.mapreduce.unit_04_partition.demo_02_custom_partition;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

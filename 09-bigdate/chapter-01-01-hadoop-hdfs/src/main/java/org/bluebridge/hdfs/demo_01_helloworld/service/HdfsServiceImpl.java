@@ -13,6 +13,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * HDFS REST 演示接口
+ *
+ * @author lingwh
+ * @date 2025/7/10 11:13
+ */
 @Service
 public class HdfsServiceImpl implements IHdfsService {
 

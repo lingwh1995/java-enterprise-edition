@@ -7,6 +7,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
+/**
+ * HDFS REST 演示接口
+ *
+ * @author lingwh
+ * @date 2025/7/10 10:52
+ */
 public interface IHdfsService {
 
     void mkdir(String path) throws IOException;

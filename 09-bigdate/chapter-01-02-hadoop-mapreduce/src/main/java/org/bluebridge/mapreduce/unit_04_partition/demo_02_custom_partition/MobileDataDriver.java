@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.demo_02_mobiledata;
+package org.bluebridge.mapreduce.unit_04_partition.demo_02_custom_partition;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -52,13 +52,13 @@ public class MobileDataDriver {
             outputPath = new Path(args[1]);
         } else {
             // 本地测试方式：使用 maven resources 中的输入文件
-            URL resource = MobileDataDriver.class.getClassLoader().getResource("hadoop/input/demo_02_mobiledata/");
+            URL resource = MobileDataDriver.class.getClassLoader().getResource("hadoop/input/unit_04_partition/demo_02_custom_partition");
             if (resource == null) {
-                System.err.println("未找到 input.txt，请检查 resources/hadoop/input/demo_02_mobiledata/ 路径！");
+                System.err.println("未找到 input.txt，请检查 resources/hadoop/input/unit_04_partition/demo_02_custom_partition 路径！");
                 return;
             }
             inputPath = new Path(resource.toURI());
-            outputPath = new Path(inputPath.getParent().getParent(), "output");
+            outputPath = new Path(inputPath.getParent().getParent(), "output/unit_04_partition/demo_02_custom_partition");
         }
 
         // 8. 自动删除输出目录（避免已存在报错）

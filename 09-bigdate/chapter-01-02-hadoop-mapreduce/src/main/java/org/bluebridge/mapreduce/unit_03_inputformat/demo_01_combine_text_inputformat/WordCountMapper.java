@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.demo_03_inputformat.combine_text_inputformat;
+package org.bluebridge.mapreduce.unit_03_inputformat.demo_01_combine_text_inputformat;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hadoop.io.IntWritable;

@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.demo_03_inputformat.combine_text_inputformat;
+package org.bluebridge.mapreduce.unit_01_wordcount;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hadoop.io.IntWritable;
@@ -20,7 +20,7 @@ import java.io.IOException;
  * 3. 重写 Reducer 类的 reduce()，在此方法中实现 Reducer 阶段业务逻辑
  *
  * @author lingwh
- * @date 2025/8/20 08:42
+ * @date 2026/7/18 16:17
  */
 @Slf4j
 public class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritable> {

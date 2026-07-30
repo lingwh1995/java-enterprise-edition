@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.demo_01_wordcount;
+package org.bluebridge.mapreduce.unit_01_wordcount;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hadoop.io.IntWritable;
@@ -22,7 +22,7 @@ import java.io.IOException;
  *
  *
  * @author lingwh
- * @date 2025/8/20 10:33
+ * @date 2026/7/18 15:23
  */
 @Slf4j
 public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritable> {

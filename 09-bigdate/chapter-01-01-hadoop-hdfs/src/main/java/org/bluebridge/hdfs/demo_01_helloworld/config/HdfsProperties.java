@@ -5,6 +5,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * HDFS 配置属性
+ *
+ * @author lingwh
+ * @date 2025/7/10 10:27
  */
 @Data
 @ConfigurationProperties(prefix = "hdfs")

@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.demo_02_mobiledata;
+package org.bluebridge.mapreduce.unit_02_serializable.demo_01_mobiledata;
 
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -9,7 +9,7 @@ import java.io.IOException;
  * MobileDataReducer
  *
  * @author lingwh
- * @date 2025/8/20 13:28
+ * @date 2026/7/19 18:06
  */
 public class MobileDataReducer extends Reducer<Text, MobileData, Text, MobileData> {
 

@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.demo_01_wordcount;
+package org.bluebridge.mapreduce.unit_03_inputformat.demo_01_combine_text_inputformat;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hadoop.conf.Configuration;
@@ -7,6 +7,7 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.lib.input.CombineTextInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
@@ -15,9 +16,15 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
- * Driver 类，用于提交 Job
+*  使用 CombineTextInputFormat 来解决小文件场景下的问题，将多个小文件合并为一个大文件
  *
- * 注意：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/part-r-00000 中，需要手动查看内容
+ * 1. 添加如下代码来解决小文件场景下 MapTask 数量过多问题
+ *    CombineTextInputFormat.setMaxInputSplitSize(job, 4 * 1024 * 1024);
+ *    conf.set("mapreduce.job.inputformat.class", CombineTextInputFormat.class.getName());
+ * 2. 查看配置效果
+ *    在日志中搜索 number of splits 可以查看到 number of splits:1，说明多个小文件被合并为一个大文件然后再产生了一个切片
+ * 2. 注意事项
+ *    在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/part-r-00000 中，需要手动查看内容
  *
  * @author lingwh
  * @date 2025/8/20 09:17
@@ -30,6 +37,10 @@ public class WordCountDriver {
 
         // 1. 创建配置对象
         Configuration conf = new Configuration();
+
+        // --------------------- 设置 InputFormat 实现类开始 ---------------------
+        conf.set("mapreduce.job.inputformat.class", CombineTextInputFormat.class.getName());
+        // --------------------- 设置 InputFormat 实现类结束 ---------------------
 
         // 2. 创建 Job 对象
         Job job = Job.getInstance(conf, "word count");
@@ -60,13 +71,13 @@ public class WordCountDriver {
             outputPath = new Path(args[1]);
         } else {
             // 本地测试方式：使用 maven resources 中的输入文件
-            URL resource = WordCountDriver.class.getClassLoader().getResource("hadoop/input/demo_01_wordcount/");
+            URL resource = WordCountDriver.class.getClassLoader().getResource("hadoop/input/unit_03_inputformat/demo_01_combine_text_inputformat");
             if (resource == null) {
-                System.err.println("未找到 input.txt，请检查 resources/hadoop/input/demo_01_wordcount/ 路径！");
+                System.err.println("未找到 input.txt，请检查 resources/hadoop/input/unit_03_inputformat/demo_01_combine_text_inputformat 路径！");
                 return;
             }
             inputPath = new Path(resource.toURI());
-            outputPath = new Path(inputPath.getParent().getParent(), "output");
+            outputPath = new Path(inputPath.getParent().getParent(), "output/unit_03_inputformat/demo_01_combine_text_inputformat");
         }
 
         // 8. 自动删除输出目录（避免已存在报错）
@@ -74,6 +85,14 @@ public class WordCountDriver {
         if (fs.exists(outputPath)) {
             fs.delete(outputPath, true);
         }
+
+        // 下面写法等价于上面 conf.set("mapreduce.job.inputformat.class", CombineTextInputFormat.class.getName()); 这种写法
+        // job.setInputFormatClass(CombineTextInputFormat.class);
+
+        // --------------------- 指定小文件场景文件大小开始 ---------------------
+        CombineTextInputFormat.setMaxInputSplitSize(job, 4 * 1024 * 1024);
+        conf.set("mapreduce.job.inputformat.class", CombineTextInputFormat.class.getName());
+        // --------------------- 指定小文件场景文件大小结束 ---------------------
 
         // 9. 绑定输入输出
         FileInputFormat.addInputPath(job, inputPath);

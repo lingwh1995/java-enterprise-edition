@@ -1,10 +1,8 @@
-package org.bluebridge.mapreduce.demo_04_partition;
+package org.bluebridge.mapreduce.unit_02_serializable.demo_01_mobiledata;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -15,45 +13,34 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
- * 修改 ReduceTask 数量进而修改分区数量
- *
- * 1. 添加如下代码来设置 ReduceTask 数量为 2 个
- *    job.setNumReduceTasks(2);
- * 2. 注意事项
- *    在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/part-r-00001 和 target/classes/hadoop/output/part-r-00002 中，需要手动查看内容
+ * MobileDataDriver：移动数据统计驱动类
  *
  * @author lingwh
- * @date 2025/8/20 09:17
+ * @date 2026/7/19 20:29
  */
-@Slf4j
-public class WordCountDriver {
+public class MobileDataDriver {
 
     public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException, URISyntaxException {
-        log.info("执行链路 - 开始执行 WordCountDriver.main()......");
-
         // 1. 创建配置对象
         Configuration conf = new Configuration();
 
         // 2. 创建 Job 对象
-        Job job = Job.getInstance(conf, "word count");
+        Job job = Job.getInstance(conf, "mobile data count");
 
         // 3. 设置 Job 类的驱动类
-        job.setJarByClass(WordCountDriver.class);
+        job.setJarByClass(MobileDataDriver.class);
 
         // 4. 设置 Map 阶段输出键值对的类型
-        job.setMapperClass(WordCountMapper.class);
-        job.setReducerClass(WordCountReducer.class);
+        job.setMapperClass(MobileDataMapper.class);
+        job.setReducerClass(MobileDataReducer.class);
 
         // 5. 设置 Map 端输出 KV 类型
         job.setMapOutputKeyClass(Text.class);
-        job.setMapOutputValueClass(IntWritable.class);
+        job.setMapOutputValueClass(MobileData.class);
 
         // 6. 设置 Reduce 阶段输出键值对的类型
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(IntWritable.class);
-
-        // 设置分区数为 2 个
-        job.setNumReduceTasks(2);
+        job.setOutputValueClass(MobileData.class);
 
         // 7. 设置输入、输出路径
         // 默认从 args 获取（jar 包运行方式），未传参时使用 maven resources 路径（本地测试）
@@ -66,13 +53,13 @@ public class WordCountDriver {
             outputPath = new Path(args[1]);
         } else {
             // 本地测试方式：使用 maven resources 中的输入文件
-            URL resource = WordCountDriver.class.getClassLoader().getResource("hadoop/input/demo_01_wordcount/");
+            URL resource = MobileDataDriver.class.getClassLoader().getResource("hadoop/input/unit_02_serializable/demo_01_mobiledata");
             if (resource == null) {
-                System.err.println("未找到 input.txt，请检查 resources/hadoop/input/demo_01_wordcount/ 路径！");
+                System.err.println("未找到 input.txt，请检查 resources/hadoop/input/unit_02_serializable/demo_01_mobiledata 路径！");
                 return;
             }
             inputPath = new Path(resource.toURI());
-            outputPath = new Path(inputPath.getParent().getParent(), "output");
+            outputPath = new Path(inputPath.getParent().getParent(), "output/unit_02_serializable/demo_01_mobiledata");
         }
 
         // 8. 自动删除输出目录（避免已存在报错）
@@ -88,7 +75,5 @@ public class WordCountDriver {
         // 10. 提交任务并设置退出码
         boolean success = job.waitForCompletion(true);
         System.exit(success ? 0 : 1);
-
-        log.info("执行链路 - 结束执行 WordCountDriver.main()......");
     }
 }
