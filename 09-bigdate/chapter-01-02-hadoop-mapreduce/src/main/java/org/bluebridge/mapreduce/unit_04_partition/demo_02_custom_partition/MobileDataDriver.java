@@ -43,6 +43,7 @@ public class MobileDataDriver {
 
         // --------------------- 设置自定义 Partition 开始 ---------------------
         job.setPartitionerClass(MobileDataPartitioner.class);
+        job.setNumReduceTasks(5);
         // --------------------- 设置自定义 Partition 结束 ---------------------
 
         // 7. 设置输入、输出路径

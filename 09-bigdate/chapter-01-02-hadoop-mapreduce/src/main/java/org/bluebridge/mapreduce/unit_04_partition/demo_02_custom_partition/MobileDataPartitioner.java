@@ -24,6 +24,6 @@ public class MobileDataPartitioner extends Partitioner<Text, MobileData> {
         }else {
             partitions = 4;
         }
-        return 0;
+        return partitions;
     }
 }
