@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.unit_05_sort.demo_01_mobiledata;
+package org.bluebridge.mapreduce.unit_05_shuttle.demo_02_partsort;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +10,8 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 /**
+ * 对文件进行分区排序的 MobileData 类
+ *
  * 移动流量类（实现 WritableComparable，按总流量降序排序）
  *
  * @author lingwh

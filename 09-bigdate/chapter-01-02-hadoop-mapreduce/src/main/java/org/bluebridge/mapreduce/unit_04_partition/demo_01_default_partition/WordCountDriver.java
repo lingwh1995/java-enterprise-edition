@@ -16,13 +16,14 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
- * 修改 ReduceTask 数量进而修改分区数量
+ * 使用默认分区实现类进行分区的 WordCountDriver 类
  *
+ * 修改 ReduceTask 数量进而修改分区数量
  * 1. 添加如下代码来设置 ReduceTask 数量为 2 个
- * job.setNumReduceTasks(2);
+ *    job.setNumReduceTasks(2);
  * 2. 注意事项
- * 在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/part-r-00001 和
- * target/classes/hadoop/output/part-r-00002 中，需要手动查看内容
+ *    在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/part-r-00001 和
+ *    target/classes/hadoop/output/part-r-00002 中，需要手动查看内容
  *
  * @author lingwh
  * @date 2025/8/20 09:17

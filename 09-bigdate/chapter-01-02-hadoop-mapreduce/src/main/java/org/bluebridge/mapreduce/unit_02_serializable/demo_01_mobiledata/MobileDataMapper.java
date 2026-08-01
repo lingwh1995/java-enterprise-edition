@@ -7,7 +7,9 @@ import org.apache.hadoop.mapreduce.Mapper;
 import java.io.IOException;
 
 /**
- * Mapper 类，针对当前一行数据进行切割，切割后搜集手机号和流量信息，最后封装输出结果
+ * 自定义序列化对象实现合并相同手机号数据的 Mapper 类
+ *
+ * 针对当前一行数据进行切割，切割后搜集手机号和流量信息，最后封装输出结果
  *
  * @author lingwh
  * @date 2026/7/19 19:35

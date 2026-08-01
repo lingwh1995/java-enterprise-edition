@@ -13,6 +13,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
+ * 使用自定义分区实现类进行分区的 MobileDataDriver 类
  *
  * @author lingwh
  * @date 2025/8/20 14:51
@@ -55,7 +56,7 @@ public class MobileDataDriver {
 
         // --------------------- 设置自定义 Partition 开始 ---------------------
         job.setPartitionerClass(MobileDataPartitioner.class);
-        job.setNumReduceTasks(5);
+        job.setNumReduceTasks(4);
         // --------------------- 设置自定义 Partition 结束 ---------------------
 
         // 7. 设置输入、输出路径

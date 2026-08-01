@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.unit_05_sort.demo_01_mobiledata;
+package org.bluebridge.mapreduce.unit_05_shuttle.demo_01_fullsort;
 
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
@@ -7,6 +7,8 @@ import org.apache.hadoop.mapreduce.Reducer;
 import java.io.IOException;
 
 /**
+ * 对文件进行全排序的 MobileDataReducer 类
+ *
  * Reducer：接收已排序的 <MobileData, NullWritable>，输出 <手机号, MobileData>
  *
  * @author lingwh

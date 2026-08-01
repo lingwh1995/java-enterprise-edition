@@ -6,7 +6,7 @@ import org.apache.hadoop.mapreduce.Reducer;
 import java.io.IOException;
 
 /**
- * MobileDataReducer
+ * 使用自定义分区实现类进行分区的 MobileDataReducer 类
  *
  * @author lingwh
  * @date 2025/8/20 13:28

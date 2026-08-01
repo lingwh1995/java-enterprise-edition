@@ -14,7 +14,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
- * MobileDataDriver：移动数据统计驱动类
+ * 自定义序列化对象实现合并相同手机号数据的 MobileDataDriver 类
  *
  * @author lingwh
  * @date 2026/7/19 20:29

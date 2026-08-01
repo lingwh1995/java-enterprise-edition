@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.unit_05_sort.demo_01_mobiledata;
+package org.bluebridge.mapreduce.unit_05_shuttle.demo_02_partsort;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 /**
- * MobileDataDriver：按总流量从大到小排序驱动类
+ * 对文件进行分区排序的 MobileDataDriver 类
+ *
+ * 按总流量从大到小排序驱动类
  *
  * @author lingwh
  * @date 2026/7/19 20:29
@@ -56,6 +58,11 @@ public class MobileDataDriver {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(MobileData.class);
 
+        // --------------------- 设置自定义 Partition 开始 ---------------------
+        job.setPartitionerClass(MobileDataPartitioner.class);
+        job.setNumReduceTasks(4);
+        // --------------------- 设置自定义 Partition 结束 ---------------------
+
         // 7. 设置输入、输出路径
         Path inputPath;
         Path outputPath;
@@ -65,8 +72,8 @@ public class MobileDataDriver {
             outputPath = new Path(args[1]);
         } else {
             Path basePath = new Path(MobileDataDriver.class.getClassLoader().getResource("").toURI());
-            inputPath = new Path(basePath, "hadoop/input/unit_05_sort/demo_01_mobiledata");
-            outputPath = new Path(basePath, "hadoop/output/unit_05_sort/demo_01_mobiledata");
+            inputPath = new Path(basePath, "hadoop/input/unit_05_shuttle/demo_02_partsort");
+            outputPath = new Path(basePath, "hadoop/output/unit_05_shuttle/demo_02_partsort");
         }
 
         // 8. 自动删除输出目录（避免已存在报错）

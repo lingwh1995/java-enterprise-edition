@@ -17,16 +17,16 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
- * 使用 CombineTextInputFormat 来解决小文件场景下的问题，将多个小文件合并为一个大文件
+ * 使用CombineTextInputFormat先合并多个小文件再进行处理的 WordCountDriver 类
  *
  * 1. 添加如下代码来解决小文件场景下 MapTask 数量过多问题
- * CombineTextInputFormat.setMaxInputSplitSize(job, 4 * 1024 * 1024);
- * conf.set("mapreduce.job.inputformat.class",
- * CombineTextInputFormat.class.getName());
+ *    CombineTextInputFormat.setMaxInputSplitSize(job, 4 * 1024 * 1024);
+ *    conf.set("mapreduce.job.inputformat.class",
+ *    CombineTextInputFormat.class.getName());
  * 2. 查看配置效果
- * 在日志中搜索 number of splits 可以查看到 number of splits:1，说明多个小文件被合并为一个大文件然后再产生了一个切片
+ *    在日志中搜索 number of splits 可以查看到 number of splits:1，说明多个小文件被合并为一个大文件然后再产生了一个切片
  * 2. 注意事项
- * 在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/part-r-00000 中，需要手动查看内容
+ *    在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/part-r-00000 中，需要手动查看内容
  *
  * @author lingwh
  * @date 2025/8/20 09:17

@@ -6,7 +6,7 @@ import org.apache.hadoop.mapreduce.Reducer;
 import java.io.IOException;
 
 /**
- * MobileDataReducer
+ * 自定义序列化对象实现合并相同手机号数据的 MobileDataReducer 类
  *
  * @author lingwh
  * @date 2026/7/19 18:06

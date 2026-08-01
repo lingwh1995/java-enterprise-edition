@@ -9,8 +9,9 @@ import org.apache.hadoop.mapreduce.Mapper;
 import java.io.IOException;
 
 /**
- * 自定义 Mapper 类将输入的文本数据转换为键值对格式步骤
+ * 使用默认分区实现类进行分区的 WordCountMapper 类
  *
+ * 自定义 Mapper 类将输入的文本数据转换为键值对格式步骤
  * 1. 自定义 Mapper 类， 用需要继承 Hadoop 提供的 Mapper 类
  * 2. 自定义 Mapper 类的泛型参数
  *    Mapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT> 四大泛型参数

@@ -8,8 +8,9 @@ import org.apache.hadoop.mapreduce.Reducer;
 import java.io.IOException;
 
 /**
- * 自定义 Reducer 类将输入的文本数据转换为键值对格式步骤
+ * 统计单词出现次数的 Reducer 类
  *
+ * 自定义 Reducer 类将输入的文本数据转换为键值对格式步骤
  * 1. 定义 Reducer 类， 用需要继承 Hadoop 提供的 Reducer 类
  * 2. 自定义 Reducer 类的泛型参数
  *    Reducer<KEYIN, VALUEIN, KEYOUT, VALUEOUT> 四大泛型参数

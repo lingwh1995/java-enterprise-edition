@@ -10,7 +10,7 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 /**
- * 移动流量类
+ * 使用自定义分区实现类进行分区的 MobileData 类
  *
  * @author lingwh
  * @date 2025/8/20 15:07

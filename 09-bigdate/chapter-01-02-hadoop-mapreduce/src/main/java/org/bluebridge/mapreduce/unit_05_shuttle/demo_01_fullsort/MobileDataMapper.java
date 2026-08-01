@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.unit_05_sort.demo_01_mobiledata;
+package org.bluebridge.mapreduce.unit_05_shuttle.demo_01_fullsort;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
@@ -8,6 +8,8 @@ import org.apache.hadoop.mapreduce.Mapper;
 import java.io.IOException;
 
 /**
+ * 对文件进行全排序的 MobileDataMapper 类
+ *
  * Mapper：解析每行数据，封装为 MobileData 作为 key 输出，交由 Shuffle 按总流量排序
  *
  * @author lingwh

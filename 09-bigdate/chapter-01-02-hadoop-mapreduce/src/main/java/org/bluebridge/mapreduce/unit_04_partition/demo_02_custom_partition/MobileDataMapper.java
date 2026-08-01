@@ -7,6 +7,8 @@ import org.apache.hadoop.mapreduce.Mapper;
 import java.io.IOException;
 
 /**
+ * 使用自定义分区实现类进行分区的 MobileDataMapper 类
+ *
  * Mapper 类，针对当前一行数据进行切割，切割后搜集手机号和流量信息，最后封装输出结果
  *
  * @author lingwh

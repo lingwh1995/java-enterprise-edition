@@ -1,21 +1,23 @@
-package org.bluebridge.mapreduce.unit_04_partition.demo_02_custom_partition;
+package org.bluebridge.mapreduce.unit_05_shuttle.demo_02_partsort;
 
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Partitioner;
 
 /**
- * 使用自定义分区实现类进行分区的 MobileDataPartitioner 类
+ * 对文件进行分区排序的 MobileDataPartitioner 类
  *
  * 自定义分区实现类，根据手机号前两位进行分区
  *
  * @author lingwh
  * @date 2026/7/30 22:31
  */
-public class MobileDataPartitioner extends Partitioner<Text, MobileData> {
+public class MobileDataPartitioner extends Partitioner<MobileData, NullWritable> {
+
 
     @Override
-    public int getPartition(Text text, MobileData mobileData, int numPartitions) {
-        String phoneNumber = text.toString();
+    public int getPartition(MobileData mobileData, NullWritable nullWritable, int numPartitions) {
+        String phoneNumber = mobileData.getPhoneNumber();
         int partitions;
         if(phoneNumber.startsWith("13")) {
             partitions = 0;
