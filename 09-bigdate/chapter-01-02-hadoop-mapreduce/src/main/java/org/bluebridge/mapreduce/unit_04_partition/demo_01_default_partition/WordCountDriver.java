@@ -9,6 +9,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.bluebridge.mapreduce.unit_02_serializable.demo_01_mobiledata.MobileDataDriver;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -18,9 +19,10 @@ import java.net.URL;
  * 修改 ReduceTask 数量进而修改分区数量
  *
  * 1. 添加如下代码来设置 ReduceTask 数量为 2 个
- *    job.setNumReduceTasks(2);
+ * job.setNumReduceTasks(2);
  * 2. 注意事项
- *    在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/part-r-00001 和 target/classes/hadoop/output/part-r-00002 中，需要手动查看内容
+ * 在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/part-r-00001 和
+ * target/classes/hadoop/output/part-r-00002 中，需要手动查看内容
  *
  * @author lingwh
  * @date 2025/8/20 09:17
@@ -28,11 +30,23 @@ import java.net.URL;
 @Slf4j
 public class WordCountDriver {
 
-    public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException, URISyntaxException {
+    public static void main(String[] args)
+            throws IOException, InterruptedException, ClassNotFoundException, URISyntaxException {
         log.info("执行链路 - 开始执行 WordCountDriver.main()......");
 
         // 1. 创建配置对象
         Configuration conf = new Configuration();
+
+        // 检查 HDFS 连接是否正常（如果配置了 fs.defaultFS 指向 HDFS）
+        String defaultFS = conf.get("fs.defaultFS", "file:///");
+        if (defaultFS.startsWith("hdfs://")) {
+            try {
+                FileSystem.get(conf).getStatus();
+            } catch (IOException e) {
+                System.err.println("无法连接 HDFS: " + defaultFS + "，请确认 Hadoop 已启动");
+                System.exit(1);
+            }
+        }
 
         // 2. 创建 Job 对象
         Job job = Job.getInstance(conf, "word count");
@@ -67,18 +81,13 @@ public class WordCountDriver {
             inputPath = new Path(args[0]);
             outputPath = new Path(args[1]);
         } else {
-            // 本地测试方式：使用 maven resources 中的输入文件
-            URL resource = WordCountDriver.class.getClassLoader().getResource("hadoop/input/unit_04_partition/demo_01_default_partition");
-            if (resource == null) {
-                System.err.println("未找到 input.txt，请检查 resources/hadoop/input/unit_04_partition/demo_01_default_partition 路径！");
-                return;
-            }
-            inputPath = new Path(resource.toURI());
-            outputPath = new Path(inputPath.getParent().getParent(), "output/unit_04_partition/demo_01_default_partition");
+            Path basePath = new Path(MobileDataDriver.class.getClassLoader().getResource("").toURI());
+            inputPath = new Path(basePath, "hadoop/input/unit_04_partition/demo_01_default_partition");
+            outputPath = new Path(basePath, "hadoop/output/unit_04_partition/demo_01_default_partition");
         }
 
         // 8. 自动删除输出目录（避免已存在报错）
-        FileSystem fs = FileSystem.get(conf);
+        FileSystem fs = outputPath.getFileSystem(conf);
         if (fs.exists(outputPath)) {
             fs.delete(outputPath, true);
         }

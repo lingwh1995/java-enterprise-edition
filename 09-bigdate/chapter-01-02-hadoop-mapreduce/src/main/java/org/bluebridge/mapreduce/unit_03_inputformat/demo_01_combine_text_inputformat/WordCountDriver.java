@@ -10,21 +10,23 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.CombineTextInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.bluebridge.mapreduce.unit_02_serializable.demo_01_mobiledata.MobileDataDriver;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
-*  使用 CombineTextInputFormat 来解决小文件场景下的问题，将多个小文件合并为一个大文件
+ * 使用 CombineTextInputFormat 来解决小文件场景下的问题，将多个小文件合并为一个大文件
  *
  * 1. 添加如下代码来解决小文件场景下 MapTask 数量过多问题
- *    CombineTextInputFormat.setMaxInputSplitSize(job, 4 * 1024 * 1024);
- *    conf.set("mapreduce.job.inputformat.class", CombineTextInputFormat.class.getName());
+ * CombineTextInputFormat.setMaxInputSplitSize(job, 4 * 1024 * 1024);
+ * conf.set("mapreduce.job.inputformat.class",
+ * CombineTextInputFormat.class.getName());
  * 2. 查看配置效果
- *    在日志中搜索 number of splits 可以查看到 number of splits:1，说明多个小文件被合并为一个大文件然后再产生了一个切片
+ * 在日志中搜索 number of splits 可以查看到 number of splits:1，说明多个小文件被合并为一个大文件然后再产生了一个切片
  * 2. 注意事项
- *    在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/part-r-00000 中，需要手动查看内容
+ * 在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/part-r-00000 中，需要手动查看内容
  *
  * @author lingwh
  * @date 2025/8/20 09:17
@@ -32,15 +34,28 @@ import java.net.URL;
 @Slf4j
 public class WordCountDriver {
 
-    public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException, URISyntaxException {
+    public static void main(String[] args)
+            throws IOException, InterruptedException, ClassNotFoundException, URISyntaxException {
         log.info("执行链路 - 开始执行 WordCountDriver.main()......");
 
         // 1. 创建配置对象
         Configuration conf = new Configuration();
 
+        // 检查 HDFS 连接是否正常（如果配置了 fs.defaultFS 指向 HDFS）
+        String defaultFS = conf.get("fs.defaultFS", "file:///");
+        if (defaultFS.startsWith("hdfs://")) {
+            try {
+                FileSystem.get(conf).getStatus();
+            } catch (IOException e) {
+                System.err.println("无法连接 HDFS: " + defaultFS + "，请确认 Hadoop 已启动");
+                System.exit(1);
+            }
+        }
+
         // --------------------- 设置 InputFormat 实现类开始 ---------------------
         // 设置 InputFormat 类为 CombineTextInputFormat 写法一
-        // conf.set("mapreduce.job.inputformat.class", CombineTextInputFormat.class.getName());
+        // conf.set("mapreduce.job.inputformat.class",
+        // CombineTextInputFormat.class.getName());
         // --------------------- 设置 InputFormat 实现类结束 ---------------------
 
         // 2. 创建 Job 对象
@@ -71,18 +86,13 @@ public class WordCountDriver {
             inputPath = new Path(args[0]);
             outputPath = new Path(args[1]);
         } else {
-            // 本地测试方式：使用 maven resources 中的输入文件
-            URL resource = WordCountDriver.class.getClassLoader().getResource("hadoop/input/unit_03_inputformat/demo_01_combine_text_inputformat");
-            if (resource == null) {
-                System.err.println("未找到 input.txt，请检查 resources/hadoop/input/unit_03_inputformat/demo_01_combine_text_inputformat 路径！");
-                return;
-            }
-            inputPath = new Path(resource.toURI());
-            outputPath = new Path(inputPath.getParent().getParent(), "output/unit_03_inputformat/demo_01_combine_text_inputformat");
+            Path basePath = new Path(MobileDataDriver.class.getClassLoader().getResource("").toURI());
+            inputPath = new Path(basePath, "hadoop/input/unit_03_inputformat/demo_01_combine_text_inputformat");
+            outputPath = new Path(basePath, "hadoop/output/unit_03_inputformat/demo_01_combine_text_inputformat");
         }
 
         // 8. 自动删除输出目录（避免已存在报错）
-        FileSystem fs = FileSystem.get(conf);
+        FileSystem fs = outputPath.getFileSystem(conf);
         if (fs.exists(outputPath)) {
             fs.delete(outputPath, true);
         }

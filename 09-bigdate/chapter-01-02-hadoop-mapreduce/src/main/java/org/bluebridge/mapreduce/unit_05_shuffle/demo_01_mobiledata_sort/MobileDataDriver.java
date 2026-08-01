@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.unit_02_serializable.demo_01_mobiledata;
+package org.bluebridge.mapreduce.unit_05_shuffle.demo_01_mobiledata_sort;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -7,7 +7,6 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import org.bluebridge.mapreduce.unit_01_wordcount.WordCountDriver;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -65,9 +64,9 @@ public class MobileDataDriver {
             inputPath = new Path(args[0]);
             outputPath = new Path(args[1]);
         } else {
-            Path basePath = new Path(MobileDataDriver.class.getClassLoader().getResource("").toURI());
-            inputPath = new Path(basePath, "hadoop/input/unit_02_serializable/demo_01_mobiledata");
-            outputPath = new Path(basePath, "hadoop/output/unit_02_serializable/demo_01_mobiledata");
+            Path basePath = new Path(org.bluebridge.mapreduce.unit_02_serializable.demo_01_mobiledata.MobileDataDriver.class.getClassLoader().getResource("").toURI());
+            inputPath = new Path(basePath, "hadoop/input/unit_05_shuffle/demo_01_mobiledata_sort");
+            outputPath = new Path(basePath, "hadoop/output/unit_05_shuffle/demo_01_mobiledata_sort");
         }
 
         // 8. 自动删除输出目录（避免已存在报错）

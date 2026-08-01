@@ -19,9 +19,21 @@ import java.net.URL;
  */
 public class MobileDataDriver {
 
-    public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException, URISyntaxException {
+    public static void main(String[] args)
+            throws IOException, InterruptedException, ClassNotFoundException, URISyntaxException {
         // 1. 创建配置对象
         Configuration conf = new Configuration();
+
+        // 检查 HDFS 连接是否正常（如果配置了 fs.defaultFS 指向 HDFS）
+        String defaultFS = conf.get("fs.defaultFS", "file:///");
+        if (defaultFS.startsWith("hdfs://")) {
+            try {
+                FileSystem.get(conf).getStatus();
+            } catch (IOException e) {
+                System.err.println("无法连接 HDFS: " + defaultFS + "，请确认 Hadoop 已启动");
+                System.exit(1);
+            }
+        }
 
         // 2. 创建 Job 对象
         Job job = Job.getInstance(conf, "mobile data partition");
@@ -57,17 +69,19 @@ public class MobileDataDriver {
             outputPath = new Path(args[1]);
         } else {
             // 本地测试方式：使用 maven resources 中的输入文件
-            URL resource = MobileDataDriver.class.getClassLoader().getResource("hadoop/input/unit_04_partition/demo_02_custom_partition");
+            URL resource = MobileDataDriver.class.getClassLoader()
+                    .getResource("hadoop/input/unit_04_partition/demo_02_custom_partition");
             if (resource == null) {
-                System.err.println("未找到 input.txt，请检查 resources/hadoop/input/unit_04_partition/demo_02_custom_partition 路径！");
+                System.err.println(
+                        "未找到 input.txt，请检查 resources/hadoop/input/unit_04_partition/demo_02_custom_partition 路径！");
                 return;
             }
             inputPath = new Path(resource.toURI());
-            outputPath = new Path(inputPath.getParent().getParent(), "output/unit_04_partition/demo_02_custom_partition");
+            outputPath = new Path(inputPath.toString().replace("/input/", "/output/"));
         }
 
         // 8. 自动删除输出目录（避免已存在报错）
-        FileSystem fs = FileSystem.get(conf);
+        FileSystem fs = outputPath.getFileSystem(conf);
         if (fs.exists(outputPath)) {
             fs.delete(outputPath, true);
         }
