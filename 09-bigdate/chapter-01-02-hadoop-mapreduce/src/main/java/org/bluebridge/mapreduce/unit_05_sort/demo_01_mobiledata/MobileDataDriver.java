@@ -1,8 +1,9 @@
-package org.bluebridge.mapreduce.unit_05_shuffle.demo_01_mobiledata_sort;
+package org.bluebridge.mapreduce.unit_05_sort.demo_01_mobiledata;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -10,10 +11,9 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
 
 /**
- * MobileDataDriver：移动数据统计驱动类
+ * MobileDataDriver：按总流量从大到小排序驱动类
  *
  * @author lingwh
  * @date 2026/7/19 20:29
@@ -37,7 +37,7 @@ public class MobileDataDriver {
         }
 
         // 2. 创建 Job 对象
-        Job job = Job.getInstance(conf, "mobile data count");
+        Job job = Job.getInstance(conf, "mobile data sort");
 
         // 3. 设置 Job 类的驱动类
         job.setJarByClass(MobileDataDriver.class);
@@ -45,28 +45,28 @@ public class MobileDataDriver {
         // 4. 设置 Map 阶段输出键值对的类型
         job.setMapperClass(MobileDataMapper.class);
         job.setReducerClass(MobileDataReducer.class);
+        // 使用 1 个 Reducer 确保全局有序
+        job.setNumReduceTasks(1);
 
         // 5. 设置 Map 端输出 KV 类型
-        job.setMapOutputKeyClass(Text.class);
-        job.setMapOutputValueClass(MobileData.class);
+        job.setMapOutputKeyClass(MobileData.class);
+        job.setMapOutputValueClass(NullWritable.class);
 
         // 6. 设置 Reduce 阶段输出键值对的类型
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(MobileData.class);
 
         // 7. 设置输入、输出路径
-        // 默认从 args 获取（jar 包运行方式），未传参时使用 maven resources 路径（本地测试）
         Path inputPath;
         Path outputPath;
 
         if (args.length >= 2) {
-            // jar 包运行方式：通过命令行参数指定输入、输出路径
             inputPath = new Path(args[0]);
             outputPath = new Path(args[1]);
         } else {
-            Path basePath = new Path(org.bluebridge.mapreduce.unit_02_serializable.demo_01_mobiledata.MobileDataDriver.class.getClassLoader().getResource("").toURI());
-            inputPath = new Path(basePath, "hadoop/input/unit_05_shuffle/demo_01_mobiledata_sort");
-            outputPath = new Path(basePath, "hadoop/output/unit_05_shuffle/demo_01_mobiledata_sort");
+            Path basePath = new Path(MobileDataDriver.class.getClassLoader().getResource("").toURI());
+            inputPath = new Path(basePath, "hadoop/input/unit_05_sort/demo_01_mobiledata");
+            outputPath = new Path(basePath, "hadoop/output/unit_05_sort/demo_01_mobiledata");
         }
 
         // 8. 自动删除输出目录（避免已存在报错）

@@ -1,16 +1,16 @@
-package org.bluebridge.mapreduce.unit_05_shuffle.demo_01_mobiledata_sort;
+package org.bluebridge.mapreduce.unit_05_sort.demo_01_mobiledata;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.hadoop.io.Writable;
+import org.apache.hadoop.io.WritableComparable;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
 /**
- * 移动流量类
+ * 移动流量类（实现 WritableComparable，按总流量降序排序）
  *
  * @author lingwh
  * @date 2026/7/19 19:05
@@ -18,7 +18,12 @@ import java.io.IOException;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class MobileData implements Writable {
+public class MobileData implements WritableComparable<MobileData> {
+
+    /**
+     * 手机号
+     */
+    private String phoneNumber;
 
     /**
      * 上行流量
@@ -46,15 +51,23 @@ public class MobileData implements Writable {
 
     @Override
     public void write(DataOutput out) throws IOException {
-        out.writeInt(uplinkData);
-        out.writeInt(downlinkData);
-        out.writeInt(sumData);
+        out.writeUTF(phoneNumber == null ? "" : phoneNumber);
+        out.writeInt(uplinkData == null ? 0 : uplinkData);
+        out.writeInt(downlinkData == null ? 0 : downlinkData);
+        out.writeInt(sumData == null ? 0 : sumData);
     }
 
     @Override
     public void readFields(DataInput in) throws IOException {
+        phoneNumber = in.readUTF();
         uplinkData = in.readInt();
-        downlinkData= in.readInt();
+        downlinkData = in.readInt();
         sumData = in.readInt();
+    }
+
+    @Override
+    public int compareTo(MobileData o) {
+        // 按总流量降序排序
+        return o.getSumData().compareTo(this.getSumData());
     }
 }

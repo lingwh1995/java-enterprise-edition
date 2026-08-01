@@ -46,15 +46,15 @@ public class MobileData implements Writable {
 
     @Override
     public void write(DataOutput out) throws IOException {
-        out.writeInt(uplinkData);
-        out.writeInt(downlinkData);
-        out.writeInt(sumData);
+        out.writeInt(uplinkData == null ? 0 : uplinkData);
+        out.writeInt(downlinkData == null ? 0 : downlinkData);
+        out.writeInt(sumData == null ? 0 : sumData);
     }
 
     @Override
     public void readFields(DataInput in) throws IOException {
         uplinkData = in.readInt();
-        downlinkData= in.readInt();
+        downlinkData = in.readInt();
         sumData = in.readInt();
     }
 }
