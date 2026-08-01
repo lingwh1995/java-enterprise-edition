@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.unit_05_shuttle.demo_01_fullsort;
+package org.bluebridge.mapreduce.unit_05_shuttle.demo_02_comparator_1_partsort;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,7 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 /**
- * 对文件进行全排序的 MobileData 类
+ * shuttle时使用实体类实现接口 WritableComparable 方式对文件进行分区内排序的 MobileData 类
  *
  * 移动流量类（实现 WritableComparable，按总流量降序排序）
  *

@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.unit_05_shuttle.demo_02_partsort;
+package org.bluebridge.mapreduce.unit_05_shuttle.demo_03_comparator_2_fullsort;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
@@ -8,7 +8,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 import java.io.IOException;
 
 /**
- * 对文件进行分区排序的 MobileDataMapper 类
+ * shuttle 时使用新创建类继承 WritableComparator 方式对文件进行全排序的 MobileDataMapper 类
  *
  * Mapper：解析每行数据，封装为 MobileData 作为 key 输出，交由 Shuffle 按总流量排序
  *

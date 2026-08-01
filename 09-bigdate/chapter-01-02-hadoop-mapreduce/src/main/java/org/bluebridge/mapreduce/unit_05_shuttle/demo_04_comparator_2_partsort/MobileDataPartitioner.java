@@ -1,11 +1,10 @@
-package org.bluebridge.mapreduce.unit_05_shuttle.demo_02_partsort;
+package org.bluebridge.mapreduce.unit_05_shuttle.demo_04_comparator_2_partsort;
 
 import org.apache.hadoop.io.NullWritable;
-import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Partitioner;
 
 /**
- * 对文件进行分区排序的 MobileDataPartitioner 类
+ * shuttle 时使用新创建类继承 WritableComparator 方式对文件进行分区内排序的 MobileDataPartitioner 类
  *
  * 自定义分区实现类，根据手机号前两位进行分区
  *

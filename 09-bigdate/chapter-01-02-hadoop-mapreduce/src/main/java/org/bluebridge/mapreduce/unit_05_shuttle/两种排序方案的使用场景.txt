@@ -1,0 +1,6 @@
+方案一
+    实现接口 WritableComparable 方式
+    适用场景：对文件进行全排序，且排序字段为单个字段时
+方案二
+    实现接口 WritableComparable + 继承 WritableComparator 方式
+    适用场景：对文件进行全排序，且排序字段为多个字段时，用比较器比改实体中 compareTo() 更合适

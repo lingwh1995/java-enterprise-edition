@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.unit_05_shuttle.demo_02_partsort;
+package org.bluebridge.mapreduce.unit_05_shuttle.demo_02_comparator_1_partsort;
 
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
@@ -7,7 +7,7 @@ import org.apache.hadoop.mapreduce.Reducer;
 import java.io.IOException;
 
 /**
- * 对文件进行分区排序的 MobileDataReducer 类
+ * shuttle时使用实体类实现接口 WritableComparable 方式对文件进行分区内排序的 MobileDataReducer 类
  *
  * Reducer：接收已排序的 <MobileData, NullWritable>，输出 <手机号, MobileData>
  *

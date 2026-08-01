@@ -9,7 +9,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 import java.io.IOException;
 
 /**
- * 使用CombineTextInputFormat先合并多个小文件再进行处理的 Mapper 类
+ * 使用 CombineTextInputFormat 先合并多个小文件再进行处理的 Mapper 类
  *
  * 自定义 Mapper 类将输入的文本数据转换为键值对格式步骤
  * 1. 自定义 Mapper 类， 用需要继承 Hadoop 提供的 Mapper 类
