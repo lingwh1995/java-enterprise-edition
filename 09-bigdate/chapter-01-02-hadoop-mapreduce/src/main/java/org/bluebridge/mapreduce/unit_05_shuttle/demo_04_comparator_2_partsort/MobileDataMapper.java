@@ -8,12 +8,12 @@ import org.apache.hadoop.mapreduce.Mapper;
 import java.io.IOException;
 
 /**
- * shuttle 时使用新创建类继承 WritableComparator 方式对文件进行全排序的 MobileDataMapper 类
+ * shuttle 时使用新创建类继承 WritableComparator 方式对文件进行分区内排序的 MobileDataMapper 类
  *
  * Mapper：解析每行数据，封装为 MobileData 作为 key 输出，交由 Shuffle 按总流量排序
  *
  * @author lingwh
- * @date 2026/7/19 19:35
+ * @date 2026/8/1 21:52
  */
 public class MobileDataMapper extends Mapper<LongWritable, Text, MobileData, NullWritable> {
 

@@ -14,14 +14,14 @@ import java.io.IOException;
  * 1. 定义 Reducer 类， 用需要继承 Hadoop 提供的 Reducer 类
  * 2. 自定义 Reducer 类的泛型参数
  *    Reducer<KEYIN, VALUEIN, KEYOUT, VALUEOUT> 四大泛型参数
- *    KEYIN：输入的键类型，这里为 LongWritable，表示输入的键是行偏移量
- *    VALUEIN：输入的值类型，这里为 Text，表示输入的值是文本行
+ *    KEYIN：输入的键类型，这里为 Text，表示输入的键是单词
+ *    VALUEIN：输入的值类型，这里为 IntWritable，表示输入的值是单词出现次数
  *    KEYOUT：输出的键类型，这里为 Text，表示输出的键是单词
  *    VALUEOUT：输出的值类型，这里为 IntWritable，表示输出的值是 1，表示单词出现一次
  * 3. 重写 Reducer 类的 reduce()，在此方法中实现 Reducer 阶段业务逻辑
  *
  * @author lingwh
- * @date 2025/8/20 08:42
+ * @date 2026/8/1 11:42
  */
 @Slf4j
 public class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritable> {

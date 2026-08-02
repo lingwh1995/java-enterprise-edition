@@ -9,7 +9,7 @@ import java.io.IOException;
  * 使用自定义分区实现类进行分区的 MobileDataReducer 类
  *
  * @author lingwh
- * @date 2025/8/20 13:28
+ * @date 2026/8/1 15:13
  */
 public class MobileDataReducer extends Reducer<Text, MobileData, Text, MobileData> {
 

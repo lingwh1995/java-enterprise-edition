@@ -12,7 +12,7 @@ import java.io.IOException;
  * Reducer：接收已排序的 <MobileData, NullWritable>，输出 <手机号, MobileData>
  *
  * @author lingwh
- * @date 2026/7/19 18:06
+ * @date 2026/8/1 18:38
  */
 public class MobileDataReducer extends Reducer<MobileData, NullWritable, Text, MobileData> {
 

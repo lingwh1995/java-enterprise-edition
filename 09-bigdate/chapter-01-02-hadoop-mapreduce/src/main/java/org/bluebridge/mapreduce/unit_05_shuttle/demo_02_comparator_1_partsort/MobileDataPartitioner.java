@@ -9,7 +9,7 @@ import org.apache.hadoop.mapreduce.Partitioner;
  * 自定义分区实现类，根据手机号前两位进行分区
  *
  * @author lingwh
- * @date 2026/7/30 22:31
+ * @date 2026/8/1 19:49
  */
 public class MobileDataPartitioner extends Partitioner<MobileData, NullWritable> {
 

@@ -9,7 +9,7 @@ import org.apache.hadoop.io.WritableComparator;
  * 先根据总流量进行降序排序，总流量相同时再根据上行流量降序排序比较器
  *
  * @author lingwh
- * @date 2026/8/1 20:41
+ * @date 2026/8/1 22:19
  */
 public class SortBySumDataDescAndUplinkDataDescComparator extends WritableComparator {
 

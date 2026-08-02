@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.unit_03_inputformat.demo_01_combine_text_inputformat;
+package org.bluebridge.mapreduce.unit_05_shuttle.demo_05_maptask_combiner;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hadoop.io.IntWritable;
@@ -8,7 +8,7 @@ import org.apache.hadoop.mapreduce.Reducer;
 import java.io.IOException;
 
 /**
- * 使用 CombineTextInputFormat 先合并多个小文件再进行处理的 Reducer 类
+ * 在 MapTask 阶段额外执行 combiner 操作的 WordCountReducer 类
  *
  * 自定义 Reducer 类将输入的文本数据转换为键值对格式步骤
  * 1. 定义 Reducer 类， 用需要继承 Hadoop 提供的 Reducer 类
@@ -21,7 +21,7 @@ import java.io.IOException;
  * 3. 重写 Reducer 类的 reduce()，在此方法中实现 Reducer 阶段业务逻辑
  *
  * @author lingwh
- * @date 2025/8/20 08:42
+ * @date 2026/8/2 11:21
  */
 @Slf4j
 public class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritable> {

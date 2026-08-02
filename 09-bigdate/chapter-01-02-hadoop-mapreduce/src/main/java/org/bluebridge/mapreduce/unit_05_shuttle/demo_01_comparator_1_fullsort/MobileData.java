@@ -15,7 +15,7 @@ import java.io.IOException;
  * 移动流量类（实现 WritableComparable，按总流量降序排序）
  *
  * @author lingwh
- * @date 2026/7/19 19:05
+ * @date 2026/8/1 18:05
  */
 @NoArgsConstructor
 @AllArgsConstructor

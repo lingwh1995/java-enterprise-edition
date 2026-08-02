@@ -28,7 +28,7 @@ import java.net.URL;
  *    在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/part-r-00000 中，需要手动查看内容
  *
  * @author lingwh
- * @date 2025/8/20 09:17
+ * @date 2026/7/20 09:17
  */
 @Slf4j
 public class WordCountDriver {

@@ -10,13 +10,13 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 /**
- * shuttle 时使用新创建类继承 WritableComparator 方式对文件进行全排序的 MobileData 类
+ * shuttle 时使用新创建类继承 WritableComparator 方式对文件进行分区内排序的 MobileData 类
  *
  * 1. 移动流量类（实现 WritableComparable，按总流量降序排序）
  * 2. 使用自定义比较器的时候，需要在 Job 配置中指定比较器类，本实体中的 compareTo() 方法不要返回0，就保持原有逻辑，作为兜底逻辑
  *
  * @author lingwh
- * @date 2026/7/19 19:05
+ * @date 2026/8/1 21:36
  */
 @NoArgsConstructor
 @AllArgsConstructor

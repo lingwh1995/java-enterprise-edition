@@ -1,0 +1,61 @@
+1. 不添加额外的 Combiner 操作控制台输出日志
+   Map-Reduce Framework
+       Map input records=5
+       Map output records=25
+       Map output bytes=269
+       Map output materialized bytes=325    - Map 阶段输出落地磁盘的字节数
+       Input split bytes=266
+       Combine input records=0              - Combiner 聚合器读取的输入记录条数
+       Combine output records=0             - Combiner 聚合器处理完成后向外输出的记录条数
+       Reduce input groups=10
+       Reduce shuffle bytes=325             - Reduce 任务从各个 Map 节点拉取 Shuffle 数据的总字节大小
+       Reduce input records=25
+       Reduce output records=10
+       Spilled Records=50
+       Shuffled Maps =1
+       Failed Shuffles=0
+       Merged Map outputs=1
+       GC time elapsed (ms)=0
+       Total committed heap usage (bytes)=503316480
+2. 添加额外的 Combiner 操作控制台输出日志
+   Map-Reduce Framework
+       Map input records=5
+       Map output records=25
+       Map output bytes=269
+       Map output materialized bytes=132     - Map 阶段输出落地磁盘的字节数
+       Input split bytes=266
+       Combine input records=25              - Combiner 聚合器读取的输入记录条数
+       Combine output records=10             - Combiner 聚合器处理完成后向外输出的记录条数
+       Reduce input groups=10
+       Reduce shuffle bytes=132              - Reduce 任务从各个 Map 节点拉取 Shuffle 数据的总字节大小
+       Reduce input records=10
+       Reduce output records=10
+       Spilled Records=20
+       Shuffled Maps =1
+       Failed Shuffles=0
+       Merged Map outputs=1
+       GC time elapsed (ms)=0
+       Total committed heap usage (bytes)=503316480
+
+日志分析
+1. 开启 Combiner 后 Map output materialized bytes 值变小?
+   开启 Combiner 并且成功执行后：Map output materialized bytes（Map 溢写到磁盘的数据大小）下降到 132
+   本质：Combiner 在溢写磁盘前先做本地聚合，相同 key 多条记录合并成少量记录，写入磁盘的数据变少。
+2. Map 溢写完整流程
+   Map 输出 KV → 环形内存缓冲区 -> 缓冲区满 → 触发 Spill（溢写）
+3. Map 溢写步骤
+   1. 对缓冲区数据分区、排序
+   2. 执行 Combiner（如果配置了）
+   3. 压缩 → 写入本地磁盘（materialized 文件）
+        - 没有 Combiner：多条同 key 数据原样全部写入磁盘
+        - 开启 Combiner：同 key 多条记录先聚合合并，再写入磁盘
+4. Combine input records = 0 的两个典型场景
+   数据全部存在环形缓冲区，没有发生 Spill，Combiner只有 spill 溢写的时候才会执行。
+   整个 map 任务所有输出都待在内存，不用刷磁盘 → 不触发 combiner。
+5. Combine 注意事项
+   - Hadoop MR 不保证 Combiner 一定执行，有可能这次运行生效、下次不生效。
+   - 所以业务逻辑绝对不能依赖 Combiner，它只是 shuffle 优化手段。
+6. Combiner 触发时机
+   Combiner 在 spill 之前 执行，有两种触发情况：
+   1. 缓冲区达到阈值 （默认 80%）-> spill -> Combiner
+   2. Map 结束时 flush -> spill -> Combiner（即使数据量很小）

@@ -26,7 +26,7 @@ import java.net.URL;
  *    target/classes/hadoop/output/part-r-00002 中，需要手动查看内容
  *
  * @author lingwh
- * @date 2025/8/20 09:17
+ * @date 2026/8/1 09:17
  */
 @Slf4j
 public class WordCountDriver {

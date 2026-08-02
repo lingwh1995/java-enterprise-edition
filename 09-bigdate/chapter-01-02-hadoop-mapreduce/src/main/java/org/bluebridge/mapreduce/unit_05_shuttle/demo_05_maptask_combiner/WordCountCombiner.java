@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.unit_03_inputformat.demo_01_combine_text_inputformat;
+package org.bluebridge.mapreduce.unit_05_shuttle.demo_05_maptask_combiner;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hadoop.io.IntWritable;
@@ -8,23 +8,14 @@ import org.apache.hadoop.mapreduce.Reducer;
 import java.io.IOException;
 
 /**
- * 使用 CombineTextInputFormat 先合并多个小文件再进行处理的 Reducer 类
+ * 在 MapTask 阶段额外执行 combiner 操作的 WordCountCombiner 类
  *
- * 自定义 Reducer 类将输入的文本数据转换为键值对格式步骤
- * 1. 定义 Reducer 类， 用需要继承 Hadoop 提供的 Reducer 类
- * 2. 自定义 Reducer 类的泛型参数
- *    Reducer<KEYIN, VALUEIN, KEYOUT, VALUEOUT> 四大泛型参数
- *    KEYIN：输入的键类型，这里为 Text，表示输入的键是单词
- *    VALUEIN：输入的值类型，这里为 IntWritable，表示输入的值是单词出现次数
- *    KEYOUT：输出的键类型，这里为 Text，表示输出的键是单词
- *    VALUEOUT：输出的值类型，这里为 IntWritable，表示输出的值是 1，表示单词出现一次
- * 3. 重写 Reducer 类的 reduce()，在此方法中实现 Reducer 阶段业务逻辑
- *
+ * 在当前 MapTask 阶段额外执行 combiner 操作，将相同键的值进行聚合处理，其工作流程和 Reducer 阶段相同
  * @author lingwh
- * @date 2025/8/20 08:42
+ * @date 2026/8/2 11:33
  */
 @Slf4j
-public class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+public class WordCountCombiner extends Reducer<Text, IntWritable, Text, IntWritable> {
 
     /**
      * Reduce 任务是高频循环，大量短生命周期对象会加重 JVM 垃圾回收 (GC)，拖慢 MR 运行效率。
@@ -58,4 +49,5 @@ public class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritab
 
         log.info("执行链路 - 结束执行 WordCountReducer.reduce()......");
     }
+
 }

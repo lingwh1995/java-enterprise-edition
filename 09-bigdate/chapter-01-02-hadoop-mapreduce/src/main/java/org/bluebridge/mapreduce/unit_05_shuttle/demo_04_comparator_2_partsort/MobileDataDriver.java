@@ -14,12 +14,12 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 /**
- * shuttle 时使用新创建类继承 WritableComparator 方式对文件进行全排序的 MobileDataDriver 类
+ * shuttle 时使用新创建类继承 WritableComparator 方式对文件进行分区内排序的 MobileDataDriver 类
  *
  * 按总流量从大到小排序驱动类
  *
  * @author lingwh
- * @date 2026/7/19 20:29
+ * @date 2026/8/1 23:05
  */
 public class MobileDataDriver {
 

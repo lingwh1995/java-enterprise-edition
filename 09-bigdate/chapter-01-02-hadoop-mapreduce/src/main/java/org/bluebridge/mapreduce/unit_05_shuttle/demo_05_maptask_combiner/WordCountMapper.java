@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.unit_04_partition.demo_01_default_partition;
+package org.bluebridge.mapreduce.unit_05_shuttle.demo_05_maptask_combiner;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hadoop.io.IntWritable;
@@ -9,7 +9,7 @@ import org.apache.hadoop.mapreduce.Mapper;
 import java.io.IOException;
 
 /**
- * 使用默认分区实现类进行分区的 WordCountMapper 类
+ * 在 MapTask 阶段额外执行 combiner 操作的 WordCountMapper 类
  *
  * 自定义 Mapper 类将输入的文本数据转换为键值对格式步骤
  * 1. 自定义 Mapper 类， 用需要继承 Hadoop 提供的 Mapper 类
@@ -23,7 +23,7 @@ import java.io.IOException;
  *
  *
  * @author lingwh
- * @date 2026/8/1 10:33
+ * @date 2026/8/2 11:01
  */
 @Slf4j
 public class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritable> {

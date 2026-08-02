@@ -13,7 +13,7 @@ import java.io.IOException;
  * Mapper：解析每行数据，封装为 MobileData 作为 key 输出，交由 Shuffle 按总流量排序
  *
  * @author lingwh
- * @date 2026/7/19 19:35
+ * @date 2026/8/1 18:23
  */
 public class MobileDataMapper extends Mapper<LongWritable, Text, MobileData, NullWritable> {
 

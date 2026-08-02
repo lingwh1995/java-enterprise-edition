@@ -16,7 +16,7 @@ import java.io.IOException;
  * 2. 使用自定义比较器的时候，需要在 Job 配置中指定比较器类，本实体中的 compareTo() 方法不要返回0，就保持原有逻辑，作为兜底逻辑
  *
  * @author lingwh
- * @date 2026/7/19 19:05
+ * @date 2026/8/1 20:01
  */
 @NoArgsConstructor
 @AllArgsConstructor

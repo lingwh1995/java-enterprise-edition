@@ -12,7 +12,7 @@ import java.io.IOException;
  * Mapper 类，针对当前一行数据进行切割，切割后搜集手机号和流量信息，最后封装输出结果
  *
  * @author lingwh
- * @date 2025/8/20 16:44
+ * @date 2026/8/1 14:57
  */
 public class MobileDataMapper extends Mapper<LongWritable, Text, Text, MobileData> {
 
