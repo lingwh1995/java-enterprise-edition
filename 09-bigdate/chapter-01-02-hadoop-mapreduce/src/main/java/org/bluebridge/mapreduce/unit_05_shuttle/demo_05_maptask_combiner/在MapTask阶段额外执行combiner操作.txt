@@ -42,20 +42,20 @@
    开启 Combiner 并且成功执行后：Map output materialized bytes（Map 溢写到磁盘的数据大小）下降到 132
    本质：Combiner 在溢写磁盘前先做本地聚合，相同 key 多条记录合并成少量记录，写入磁盘的数据变少。
 2. Map 溢写完整流程
-   Map 输出 KV → 环形内存缓冲区 -> 缓冲区满 → 触发 Spill（溢写）
+   Map 输出 KV -> 环形内存缓冲区 -> 缓冲区满 -> 触发 Spill（溢写）
 3. Map 溢写步骤
-   1. 对缓冲区数据分区、排序
-   2. 执行 Combiner（如果配置了）
-   3. 压缩 → 写入本地磁盘（materialized 文件）
-        - 没有 Combiner：多条同 key 数据原样全部写入磁盘
-        - 开启 Combiner：同 key 多条记录先聚合合并，再写入磁盘
+   - 对缓冲区数据分区、排序
+   - 执行 Combiner（如果配置了）
+   - 压缩 -> 写入本地磁盘（materialized 文件）
+      - 没有 Combiner：多条同 key 数据原样全部写入磁盘
+      - 开启 Combiner：同 key 多条记录先聚合合并，再写入磁盘
 4. Combine input records = 0 的两个典型场景
-   数据全部存在环形缓冲区，没有发生 Spill，Combiner只有 spill 溢写的时候才会执行。
-   整个 map 任务所有输出都待在内存，不用刷磁盘 → 不触发 combiner。
+   数据全部存在环形缓冲区，没有发生 Spill，Combiner 只有 spill 溢写的时候才会执行。
+   整个 map 任务所有输出都待在内存，不用刷磁盘 -> 不触发 combiner。
 5. Combine 注意事项
    - Hadoop MR 不保证 Combiner 一定执行，有可能这次运行生效、下次不生效。
    - 所以业务逻辑绝对不能依赖 Combiner，它只是 shuffle 优化手段。
 6. Combiner 触发时机
    Combiner 在 spill 之前 执行，有两种触发情况：
-   1. 缓冲区达到阈值 （默认 80%）-> spill -> Combiner
-   2. Map 结束时 flush -> spill -> Combiner（即使数据量很小）
+   - 缓冲区达到阈值（默认 80%）-> spill -> Combiner
+   - Map 结束时 flush -> spill -> Combiner（即使数据量很小）
