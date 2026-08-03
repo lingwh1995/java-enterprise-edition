@@ -14,7 +14,7 @@ import java.net.URISyntaxException;
 /**
  * 自定义序列化对象实现合并相同手机号数据的 MobileDataDriver 类
  *
- * 注意：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/ 目录中，需要手动查看内容
+ * 注意：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/unit_02_serializable/demo_01_mobiledata 目录中，需要手动查看运行结果
  *
  * @author lingwh
  * @date 2026/7/19 20:29

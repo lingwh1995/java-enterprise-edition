@@ -17,7 +17,7 @@ import java.net.URISyntaxException;
  * 在 MapTask 阶段额外执行 combiner 操作的 WordCountDriver 类
  *
  * 1. 功能描述：使用自定义的 Combiner 实现 MapTask 阶段额外执行 combiner 操作
- * 2. 注意事项：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/ 目录中，需要手动查看内容
+ * 2. 注意事项：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/unit_06_shuffle_combiner/demo_01_maptask_combiner 目录中，需要手动查看运行结果
  *
  * @author lingwh
  * @date 2026/8/2 11:42

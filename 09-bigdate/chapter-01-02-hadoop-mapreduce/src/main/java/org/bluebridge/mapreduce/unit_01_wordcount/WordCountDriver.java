@@ -17,7 +17,7 @@ import java.net.URL;
 /**
  * 统计单词出现次数的 Driver 类
  *
- * 注意：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/ 目录中，需要手动查看内容
+ * 注意：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/unit_01_wordcount 目录中，需要手动查看运行结果
  *
  * @author lingwh
  * @date 2026/7/18 16:53

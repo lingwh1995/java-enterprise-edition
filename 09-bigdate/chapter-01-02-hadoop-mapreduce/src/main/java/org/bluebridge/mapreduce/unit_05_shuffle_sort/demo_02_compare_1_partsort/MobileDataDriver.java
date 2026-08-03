@@ -16,7 +16,7 @@ import java.net.URISyntaxException;
  * shuttle 时使用实体类实现接口 WritableComparable 方式对文件进行分区内排序的 MobileDataDriver 类
  *
  * 1. 功能描述：按总流量从大到小排序驱动类
- * 2. 注意事项：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/ 目录中，需要手动查看内容
+ * 2. 注意事项：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/unit_05_shuffle_sort/demo_02_compare_1_partsort 目录中，需要手动查看运行结果
  *
  * @author lingwh
  * @date 2026/8/1 19:51

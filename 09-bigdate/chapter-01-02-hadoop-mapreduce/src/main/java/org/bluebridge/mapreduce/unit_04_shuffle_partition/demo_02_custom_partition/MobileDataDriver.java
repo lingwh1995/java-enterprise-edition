@@ -15,7 +15,7 @@ import java.net.URL;
 /**
  * 使用自定义分区实现类进行分区的 MobileDataDriver 类
  *
- * 注意：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/ 目录中，需要手动查看内容
+ * 注意：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/unit_04_shuffle_partition/demo_02_custom_partition 目录中，需要手动查看运行结果
  *
  * @author lingwh
  * @date 2026/8/1 14:29

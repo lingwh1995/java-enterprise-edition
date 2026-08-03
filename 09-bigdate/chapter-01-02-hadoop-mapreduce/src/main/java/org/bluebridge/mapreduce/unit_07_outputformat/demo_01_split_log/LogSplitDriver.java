@@ -17,7 +17,7 @@ import java.net.URISyntaxException;
  * 按需求分割日志到不同文件的 Driver 类
  *
  * 1. 功能描述：使用自定义的 OutputFormat 实现按需求分割日志到不同文件中
- * 2. 注意事项：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/ 目录中，需要手动查看内容
+ * 2. 注意事项：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/unit_07_outputformat/demo_01_split_log 目录中，需要手动查看运行结果
  *
  * @author lingwh
  * @date 2026/8/2 18:48
