@@ -48,11 +48,11 @@ public class MobileDataDriver {
 
         // 5. 设置 Map 端输出 KV 类型
         job.setMapOutputKeyClass(Text.class);
-        job.setMapOutputValueClass(MobileData.class);
+        job.setMapOutputValueClass(MobileDataWritable.class);
 
         // 6. 设置 Reduce 阶段输出键值对的类型
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(MobileData.class);
+        job.setOutputValueClass(MobileDataWritable.class);
 
         // --------------------- 设置自定义 Partition 开始 ---------------------
         job.setPartitionerClass(MobileDataPartitioner.class);

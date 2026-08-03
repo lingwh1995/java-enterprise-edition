@@ -1,24 +1,31 @@
-package org.bluebridge.mapreduce.unit_02_serializable.demo_01_mobiledata;
+package org.bluebridge.mapreduce.unit_05_shuttle.demo_02_comparator_1_partsort;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.hadoop.io.Writable;
+import org.apache.hadoop.io.WritableComparable;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
 /**
- * 自定义序列化对象实现合并相同手机号数据的 MobileData 类
+ * shuttle时使用实体类实现接口 WritableComparable 方式对文件进行分区内排序的 MobileData 类
+ *
+ * 移动流量类（实现 WritableComparable，按总流量降序排序）
  *
  * @author lingwh
- * @date 2026/7/19 19:05
+ * @date 2026/8/1 19:02
  */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class MobileData implements Writable {
+public class MobileDataWritable implements WritableComparable<MobileDataWritable> {
+
+    /**
+     * 手机号
+     */
+    private String phoneNumber;
 
     /**
      * 上行流量
@@ -46,6 +53,7 @@ public class MobileData implements Writable {
 
     @Override
     public void write(DataOutput out) throws IOException {
+        out.writeUTF(phoneNumber == null ? "" : phoneNumber);
         out.writeInt(uplinkData == null ? 0 : uplinkData);
         out.writeInt(downlinkData == null ? 0 : downlinkData);
         out.writeInt(sumData == null ? 0 : sumData);
@@ -53,8 +61,15 @@ public class MobileData implements Writable {
 
     @Override
     public void readFields(DataInput in) throws IOException {
+        phoneNumber = in.readUTF();
         uplinkData = in.readInt();
         downlinkData = in.readInt();
         sumData = in.readInt();
+    }
+
+    @Override
+    public int compareTo(MobileDataWritable o) {
+        // 按总流量降序排序
+        return o.getSumData().compareTo(this.getSumData());
     }
 }

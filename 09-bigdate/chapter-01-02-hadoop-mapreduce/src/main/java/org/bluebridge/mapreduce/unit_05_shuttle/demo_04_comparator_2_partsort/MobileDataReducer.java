@@ -14,12 +14,12 @@ import java.io.IOException;
  * @author lingwh
  * @date 2026/8/2 22:07
  */
-public class MobileDataReducer extends Reducer<MobileData, NullWritable, Text, MobileData> {
+public class MobileDataReducer extends Reducer<MobileDataWritable, NullWritable, Text, MobileDataWritable> {
 
     private Text outKey = new Text();
 
     @Override
-    protected void reduce(MobileData key, Iterable<NullWritable> values, Context context) throws IOException, InterruptedException {
+    protected void reduce(MobileDataWritable key, Iterable<NullWritable> values, Context context) throws IOException, InterruptedException {
         outKey.set(key.getPhoneNumber());
         context.write(outKey, key);
     }

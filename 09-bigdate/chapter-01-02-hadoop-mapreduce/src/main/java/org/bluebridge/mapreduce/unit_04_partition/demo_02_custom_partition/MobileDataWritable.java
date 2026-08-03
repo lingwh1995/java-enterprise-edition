@@ -18,7 +18,7 @@ import java.io.IOException;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class MobileData implements Writable {
+public class MobileDataWritable implements Writable {
 
     /**
      * 上行流量

@@ -19,7 +19,7 @@ import java.io.IOException;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class OrderProductVO implements Writable {
+public class OrderProductVOWritable implements Writable {
 
     /**
      * 数据来源标记：order 表示来自订单表，product 表示来自产品表

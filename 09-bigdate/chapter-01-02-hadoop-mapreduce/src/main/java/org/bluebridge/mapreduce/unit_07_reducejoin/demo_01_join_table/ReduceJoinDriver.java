@@ -49,11 +49,11 @@ public class ReduceJoinDriver {
 
         // 5. 设置 Map 端输出 KV 类型
         job.setMapOutputKeyClass(Text.class);
-        job.setMapOutputValueClass(OrderProductVO.class);
+        job.setMapOutputValueClass(OrderProductVOWritable.class);
 
         // 6. 设置 Reduce 阶段输出键值对的类型
         job.setOutputKeyClass(NullWritable.class);
-        job.setOutputValueClass(OrderProductVO.class);
+        job.setOutputValueClass(OrderProductVOWritable.class);
 
         // 7. 设置输入、输出路径
         Path inputPath;

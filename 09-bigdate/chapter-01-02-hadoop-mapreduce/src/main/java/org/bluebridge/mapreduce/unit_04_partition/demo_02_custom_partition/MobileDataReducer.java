@@ -11,7 +11,7 @@ import java.io.IOException;
  * @author lingwh
  * @date 2026/8/1 15:13
  */
-public class MobileDataReducer extends Reducer<Text, MobileData, Text, MobileData> {
+public class MobileDataReducer extends Reducer<Text, MobileDataWritable, Text, MobileDataWritable> {
 
     /**
      * Reducer 阶段业务逻辑
@@ -23,7 +23,7 @@ public class MobileDataReducer extends Reducer<Text, MobileData, Text, MobileDat
      * @throws InterruptedException
      */
     @Override
-    protected void reduce(Text key, Iterable<MobileData> values, Reducer<Text, MobileData, Text, MobileData>.Context context) throws IOException, InterruptedException {
+    protected void reduce(Text key, Iterable<MobileDataWritable> values, Reducer<Text, MobileDataWritable, Text, MobileDataWritable>.Context context) throws IOException, InterruptedException {
         // 上行流量
         int totalUplinkData = 0;
         // 下行流量
@@ -32,7 +32,7 @@ public class MobileDataReducer extends Reducer<Text, MobileData, Text, MobileDat
         int totalSumData = 0;
 
         // 遍历当前相同手机号的一组流量信息
-        for (MobileData mobileData : values) {
+        for (MobileDataWritable mobileData : values) {
             // 累加当前手机号的上行流量
             totalUplinkData += mobileData.getUplinkData();
             // 累加当前手机号的下行流量
@@ -42,7 +42,7 @@ public class MobileDataReducer extends Reducer<Text, MobileData, Text, MobileDat
         }
 
         // 封装输出结果
-        MobileData outValue = new MobileData(totalUplinkData, totalDownlinkData, totalSumData);
+        MobileDataWritable outValue = new MobileDataWritable(totalUplinkData, totalDownlinkData, totalSumData);
         context.write(key, outValue);
     }
 }

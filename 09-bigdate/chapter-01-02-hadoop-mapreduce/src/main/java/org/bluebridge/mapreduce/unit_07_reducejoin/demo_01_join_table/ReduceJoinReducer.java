@@ -13,17 +13,17 @@ import java.io.IOException;
  * @author lingwh
  * @date 2026/8/2 20:30
  */
-public class ReduceJoinReducer extends Reducer<Text, OrderProductVO, NullWritable, OrderProductVO> {
+public class ReduceJoinReducer extends Reducer<Text, OrderProductVOWritable, NullWritable, OrderProductVOWritable> {
 
-    private OrderProductVO outValue = new OrderProductVO();
+    private OrderProductVOWritable outValue = new OrderProductVOWritable();
 
     @Override
-    protected void reduce(Text key, Iterable<OrderProductVO> values, Context context)
+    protected void reduce(Text key, Iterable<OrderProductVOWritable> values, Context context)
             throws IOException, InterruptedException {
         String productName = "";
 
         // 第一轮遍历：先找到产品名称
-        for (OrderProductVO bean : values) {
+        for (OrderProductVOWritable bean : values) {
             if ("product".equals(bean.getSource())) {
                 productName = bean.getProductName();
                 break;
@@ -31,7 +31,7 @@ public class ReduceJoinReducer extends Reducer<Text, OrderProductVO, NullWritabl
         }
 
         // 第二轮遍历：输出每条订单合并产品名称
-        for (OrderProductVO bean : values) {
+        for (OrderProductVOWritable bean : values) {
             if ("order".equals(bean.getSource())) {
                 outValue.set("order", bean.getOrderId(), bean.getAmount(), productName);
                 context.write(NullWritable.get(), outValue);

@@ -11,10 +11,10 @@ import org.apache.hadoop.mapreduce.Partitioner;
  * @author lingwh
  * @date 2026/8/1 15:23
  */
-public class MobileDataPartitioner extends Partitioner<Text, MobileData> {
+public class MobileDataPartitioner extends Partitioner<Text, MobileDataWritable> {
 
     @Override
-    public int getPartition(Text text, MobileData mobileData, int numPartitions) {
+    public int getPartition(Text text, MobileDataWritable mobileData, int numPartitions) {
         String phoneNumber = text.toString();
         int partitions;
         if(phoneNumber.startsWith("13")) {

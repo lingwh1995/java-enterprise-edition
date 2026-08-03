@@ -1,0 +1,1 @@
+因为 MapReduce 的排序机制： Shuffle 阶段只对 key 排序，不对 value 排序 。

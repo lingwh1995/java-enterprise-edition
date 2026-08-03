@@ -14,7 +14,7 @@ import java.io.IOException;
  * @author lingwh
  * @date 2026/8/1 14:57
  */
-public class MobileDataMapper extends Mapper<LongWritable, Text, Text, MobileData> {
+public class MobileDataMapper extends Mapper<LongWritable, Text, Text, MobileDataWritable> {
 
     private Text outKey = new Text();
 
@@ -28,7 +28,7 @@ public class MobileDataMapper extends Mapper<LongWritable, Text, Text, MobileDat
         // 使用手机号作为键
         outKey.set(words[1]);
         // 使用 MobileData 类封装流量信息
-        MobileData mobileData = new MobileData();
+        MobileDataWritable mobileData = new MobileDataWritable();
         mobileData.setUplinkData(Integer.parseInt(words[words.length - 3]));
         mobileData.setDownlinkData(Integer.parseInt(words[words.length - 2]));
         mobileData.setSumData();

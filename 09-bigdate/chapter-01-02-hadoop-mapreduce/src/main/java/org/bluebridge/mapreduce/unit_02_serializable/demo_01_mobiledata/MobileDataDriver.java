@@ -7,11 +7,9 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import org.bluebridge.mapreduce.unit_01_wordcount.WordCountDriver;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
 
 /**
  * 自定义序列化对象实现合并相同手机号数据的 MobileDataDriver 类
@@ -49,11 +47,11 @@ public class MobileDataDriver {
 
         // 5. 设置 Map 端输出 KV 类型
         job.setMapOutputKeyClass(Text.class);
-        job.setMapOutputValueClass(MobileData.class);
+        job.setMapOutputValueClass(MobileDataWritable.class);
 
         // 6. 设置 Reduce 阶段输出键值对的类型
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(MobileData.class);
+        job.setOutputValueClass(MobileDataWritable.class);
 
         // 7. 设置输入、输出路径
         // 默认从 args 获取（jar 包运行方式），未传参时使用 maven resources 路径（本地测试）

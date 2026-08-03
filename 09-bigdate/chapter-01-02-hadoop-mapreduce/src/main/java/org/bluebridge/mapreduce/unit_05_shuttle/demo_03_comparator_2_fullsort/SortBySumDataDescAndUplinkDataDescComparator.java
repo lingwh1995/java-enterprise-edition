@@ -14,13 +14,13 @@ import org.apache.hadoop.io.WritableComparator;
 public class SortBySumDataDescAndUplinkDataDescComparator extends WritableComparator {
 
     public SortBySumDataDescAndUplinkDataDescComparator() {
-        super(MobileData.class, true);
+        super(MobileDataWritable.class, true);
     }
 
     @Override
     public int compare(WritableComparable a, WritableComparable b) {
-        MobileData aBean = (MobileData) a;
-        MobileData bBean = (MobileData) b;
+        MobileDataWritable aBean = (MobileDataWritable) a;
+        MobileDataWritable bBean = (MobileDataWritable) b;
         // 第一排序：总流量降序
         int result = bBean.getSumData().compareTo(aBean.getSumData());
         // 总流量相同时，第二排序：上行流量降序

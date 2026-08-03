@@ -15,9 +15,9 @@ import java.io.IOException;
  * @author lingwh
  * @date 2026/8/1 19:17
  */
-public class MobileDataMapper extends Mapper<LongWritable, Text, MobileData, NullWritable> {
+public class MobileDataMapper extends Mapper<LongWritable, Text, MobileDataWritable, NullWritable> {
 
-    private MobileData outKey = new MobileData();
+    private MobileDataWritable outKey = new MobileDataWritable();
 
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {

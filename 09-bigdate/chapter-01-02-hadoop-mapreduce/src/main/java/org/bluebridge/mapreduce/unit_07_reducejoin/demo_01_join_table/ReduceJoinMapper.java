@@ -14,10 +14,10 @@ import java.io.IOException;
  * @author lingwh
  * @date 2026/8/2 20:30
  */
-public class ReduceJoinMapper extends Mapper<LongWritable, Text, Text, OrderProductVO> {
+public class ReduceJoinMapper extends Mapper<LongWritable, Text, Text, OrderProductVOWritable> {
 
     private Text outKey = new Text();
-    private OrderProductVO outValue = new OrderProductVO();
+    private OrderProductVOWritable outValue = new OrderProductVOWritable();
     private String fileName;
 
     @Override
