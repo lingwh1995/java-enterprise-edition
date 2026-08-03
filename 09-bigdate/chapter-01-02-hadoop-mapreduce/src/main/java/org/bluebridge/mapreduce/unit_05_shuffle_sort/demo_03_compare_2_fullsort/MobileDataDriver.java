@@ -76,7 +76,7 @@ public class MobileDataDriver {
             outputPath = new Path(args[1]);
         } else {
             Path basePath = new Path(MobileDataDriver.class.getClassLoader().getResource("").toURI());
-            inputPath = new Path(basePath, "hadoop/input/unit_05_shuttle_sort/demo_03_compare_2_fullsort");
+            inputPath = new Path(basePath, "hadoop/input/unit_05_shuffle_sort/demo_03_compare_2_fullsort");
             outputPath = new Path(basePath, "hadoop/output/unit_05_shuttle_sort/demo_03_compare_2_fullsort");
         }
 
