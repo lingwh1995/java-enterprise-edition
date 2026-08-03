@@ -23,17 +23,17 @@ public class ReduceJoinReducer extends Reducer<Text, OrderProductVOWritable, Nul
         String productName = "";
 
         // 第一轮遍历：先找到产品名称
-        for (OrderProductVOWritable bean : values) {
-            if ("product".equals(bean.getSource())) {
-                productName = bean.getProductName();
+        for (OrderProductVOWritable value : values) {
+            if ("product".equals(value.getSource())) {
+                productName = value.getProductName();
                 break;
             }
         }
 
         // 第二轮遍历：输出每条订单合并产品名称
-        for (OrderProductVOWritable bean : values) {
-            if ("order".equals(bean.getSource())) {
-                outValue.set("order", bean.getOrderId(), bean.getAmount(), productName);
+        for (OrderProductVOWritable value : values) {
+            if ("order".equals(value.getSource())) {
+                outValue.set("order", value.getOrderId(), value.getAmount(), productName);
                 context.write(NullWritable.get(), outValue);
             }
         }
