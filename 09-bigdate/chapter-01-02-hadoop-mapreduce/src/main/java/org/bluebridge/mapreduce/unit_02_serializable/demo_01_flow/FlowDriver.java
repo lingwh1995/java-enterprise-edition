@@ -1,38 +1,28 @@
-package org.bluebridge.mapreduce.unit_04_shuffle_partition.demo_01_default_partition;
+package org.bluebridge.mapreduce.unit_02_serializable.demo_01_flow;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import org.bluebridge.mapreduce.unit_02_serializable.demo_01_flow.FlowDriver;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 /**
- * 使用默认分区实现类进行分区的 WordCountDriver 类
+ * 自定义序列化对象实现合并相同手机号数据的 FlowDriver 类
  *
- * 修改 ReduceTask 数量进而修改分区数量
- * 1. 添加如下代码来设置 ReduceTask 数量为 2 个
- *    job.setNumReduceTasks(2);
- * 2. 注意事项
- *    注意：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/unit_04_shuffle_partition/demo_01_default_partition 目录中，需要手动查看运行结果
+ * 注意：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/unit_02_serializable/demo_01_flow 目录中，需要手动查看运行结果
  *
  * @author lingwh
- * @date 2026/8/1 09:17
+ * @date 2026/7/19 20:29
  */
-@Slf4j
-public class WordCountDriver {
+public class FlowDriver {
 
     public static void main(String[] args)
             throws IOException, InterruptedException, ClassNotFoundException, URISyntaxException {
-        log.info("执行链路 - 开始执行 WordCountDriver.main()......");
-
         // 1. 创建配置对象
         Configuration conf = new Configuration();
 
@@ -48,27 +38,22 @@ public class WordCountDriver {
         }
 
         // 2. 创建 Job 对象
-        Job job = Job.getInstance(conf, "word count");
+        Job job = Job.getInstance(conf, "flow count");
 
         // 3. 设置 Job 类的驱动类
-        job.setJarByClass(WordCountDriver.class);
+        job.setJarByClass(FlowDriver.class);
 
         // 4. 设置 Map 阶段输出键值对的类型
-        job.setMapperClass(WordCountMapper.class);
-        job.setReducerClass(WordCountReducer.class);
+        job.setMapperClass(FlowMapper.class);
+        job.setReducerClass(FlowReducer.class);
 
         // 5. 设置 Map 端输出 KV 类型
         job.setMapOutputKeyClass(Text.class);
-        job.setMapOutputValueClass(IntWritable.class);
+        job.setMapOutputValueClass(FlowWritable.class);
 
         // 6. 设置 Reduce 阶段输出键值对的类型
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(IntWritable.class);
-
-        // --------------------- 设置 ReduceTask 数量开始 ---------------------
-        // 设置 ReduceTask 数量为 2 个，这个设置同时也会影响分区数为 2 个
-        job.setNumReduceTasks(2);
-        // --------------------- 设置 teduceTask 数量结束 ---------------------
+        job.setOutputValueClass(FlowWritable.class);
 
         // 7. 设置输入、输出路径
         // 默认从 args 获取（jar 包运行方式），未传参时使用 maven resources 路径（本地测试）
@@ -81,8 +66,8 @@ public class WordCountDriver {
             outputPath = new Path(args[1]);
         } else {
             Path basePath = new Path(FlowDriver.class.getClassLoader().getResource("").toURI());
-            inputPath = new Path(basePath, "hadoop/input/unit_04_shuffle_partition/demo_01_default_partition");
-            outputPath = new Path(basePath, "hadoop/output/unit_04_shuffle_partition/demo_01_default_partition");
+            inputPath = new Path(basePath, "hadoop/input/unit_02_serializable/demo_01_flow");
+            outputPath = new Path(basePath, "hadoop/output/unit_02_serializable/demo_01_flow");
         }
 
         // 8. 自动删除输出目录（避免已存在报错）
@@ -98,7 +83,5 @@ public class WordCountDriver {
         // 10. 提交任务并设置退出码
         boolean success = job.waitForCompletion(true);
         System.exit(success ? 0 : 1);
-
-        log.info("执行链路 - 结束执行 WordCountDriver.main()......");
     }
 }

@@ -14,13 +14,13 @@ import org.apache.hadoop.io.WritableComparator;
 public class SortByUplinkDataDescComparator extends WritableComparator {
 
     public SortByUplinkDataDescComparator() {
-        super(MobileDataWritable.class, true);
+        super(FlowWritable.class, true);
     }
 
     @Override
     public int compare(WritableComparable a, WritableComparable b) {
-        MobileDataWritable aBean = (MobileDataWritable) a;
-        MobileDataWritable bBean = (MobileDataWritable) b;
+        FlowWritable aBean = (FlowWritable) a;
+        FlowWritable bBean = (FlowWritable) b;
         return bBean.getUplinkData().compareTo(aBean.getUplinkData());
     }
 }

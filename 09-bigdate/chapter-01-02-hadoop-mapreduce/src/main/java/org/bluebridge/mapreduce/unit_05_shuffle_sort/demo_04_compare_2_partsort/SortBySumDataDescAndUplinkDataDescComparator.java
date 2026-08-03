@@ -4,7 +4,7 @@ import org.apache.hadoop.io.WritableComparable;
 import org.apache.hadoop.io.WritableComparator;
 
 /**
- * shuttle 时使用新创建类继承 WritableComparator 方式对文件进行全排序的 MobileDataComparator 类
+ * shuttle 时使用新创建类继承 WritableComparator 方式对文件进行全排序的 FlowComparator 类
  *
  * 先根据总流量进行降序排序，总流量相同时再根据上行流量降序排序比较器
  *
@@ -14,13 +14,13 @@ import org.apache.hadoop.io.WritableComparator;
 public class SortBySumDataDescAndUplinkDataDescComparator extends WritableComparator {
 
     public SortBySumDataDescAndUplinkDataDescComparator() {
-        super(org.bluebridge.mapreduce.unit_05_shuffle_sort.demo_03_compare_2_fullsort.MobileDataWritable.class, true);
+        super(org.bluebridge.mapreduce.unit_05_shuffle_sort.demo_03_compare_2_fullsort.FlowWritable.class, true);
     }
 
     @Override
     public int compare(WritableComparable a, WritableComparable b) {
-        MobileDataWritable aBean = (MobileDataWritable) a;
-        MobileDataWritable bBean = (MobileDataWritable) b;
+        FlowWritable aBean = (FlowWritable) a;
+        FlowWritable bBean = (FlowWritable) b;
         // 第一排序：总流量降序
         int result = bBean.getSumData().compareTo(aBean.getSumData());
         // 总流量相同时，第二排序：上行流量降序
