@@ -25,10 +25,13 @@ public class ReduceJoinReducer extends Reducer<Text, OrderProductVOWritable, Nul
 
         // 单轮遍历：缓存订单数据，同时找产品名称
         for (OrderProductVOWritable value : values) {
+            System.out.println("Hadoop 对象复用验证 - value 的 hash 值: " + System.identityHashCode(value)
+                    + "，orderId: " + value.getOrderId());
             if ("product".equals(value.getSource())) {
                 productName = value.getProductName();
             } else if ("order".equals(value.getSource())) {
                 // 手动复制字段，避免 Hadoop 对象复用问题
+                // 如果直接 orderList.add(value)，遍历结束后 List 中所有元素都指向同一个对象，内容全变成最后一条记录
                 OrderProductVOWritable order = new OrderProductVOWritable();
                 order.set("order", value.getOrderId(), value.getAmount(), "");
                 orderList.add(order);
