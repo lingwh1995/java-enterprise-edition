@@ -16,7 +16,8 @@ import java.net.URISyntaxException;
 /**
  * shuttle 时使用新创建类继承 WritableComparator 方式对文件进行分区内排序的 MobileDataDriver 类
  *
- * 按总流量从大到小排序驱动类
+ * 1. 功能描述：按总流量从大到小排序驱动类
+ * 2. 注意事项：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/ 目录中，需要手动查看内容
  *
  * @author lingwh
  * @date 2026/8/1 23:05

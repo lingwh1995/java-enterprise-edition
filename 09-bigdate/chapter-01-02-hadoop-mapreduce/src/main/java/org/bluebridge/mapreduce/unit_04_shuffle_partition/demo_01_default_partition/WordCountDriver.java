@@ -21,8 +21,7 @@ import java.net.URISyntaxException;
  * 1. 添加如下代码来设置 ReduceTask 数量为 2 个
  *    job.setNumReduceTasks(2);
  * 2. 注意事项
- *    在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/part-r-00001 和
- *    target/classes/hadoop/output/part-r-00002 中，需要手动查看内容
+ *    注意：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/ 目录中，需要手动查看内容
  *
  * @author lingwh
  * @date 2026/8/1 09:17
