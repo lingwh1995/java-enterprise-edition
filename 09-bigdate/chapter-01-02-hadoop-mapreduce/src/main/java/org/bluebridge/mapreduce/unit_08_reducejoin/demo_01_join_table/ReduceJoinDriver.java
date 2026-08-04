@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.unit_08_reducejoin.demo_02_join_table_v2;
+package org.bluebridge.mapreduce.unit_08_reducejoin.demo_01_join_table;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -16,10 +16,10 @@ import java.net.URISyntaxException;
  * JoinDriver：Reduce Join 驱动类
  *
  * 1. 功能描述：合并订单表和产品表，以产品编号关联
- * 2. 注意事项：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/unit_08_reducejoin/demo_02_join_table_v2 目录中，需要手动查看运行结果
+ * 2. 注意事项：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/unit_08_reducejoin/demo_03_join_table_v3 目录中，需要手动查看运行结果
  *
  * @author lingwh
- * @date 2026/8/3 23:15
+ * @date 2026/8/2 20:30
  */
 public class ReduceJoinDriver {
 
@@ -54,8 +54,8 @@ public class ReduceJoinDriver {
         job.setMapOutputValueClass(OrderProductVOWritable.class);
 
         // 6. 设置 Reduce 阶段输出键值对的类型
-        job.setOutputKeyClass(OrderProductVOWritable.class);
-        job.setOutputValueClass(NullWritable.class);
+        job.setOutputKeyClass(NullWritable.class);
+        job.setOutputValueClass(OrderProductVOWritable.class);
 
         // 7. 设置输入、输出路径
         Path inputPath;
@@ -66,8 +66,8 @@ public class ReduceJoinDriver {
             outputPath = new Path(args[1]);
         } else {
             Path basePath = new Path(ReduceJoinDriver.class.getClassLoader().getResource("").toURI());
-            inputPath = new Path(basePath, "hadoop/input/unit_08_reducejoin/demo_02_join_table_v2");
-            outputPath = new Path(basePath, "hadoop/output/unit_08_reducejoin/demo_02_join_table_v2");
+            inputPath = new Path(basePath, "hadoop/input/unit_08_reducejoin/demo_01_join_table");
+            outputPath = new Path(basePath, "hadoop/output/unit_08_reducejoin/demo_01_join_table");
         }
 
         // 8. 自动删除输出目录（避免已存在报错）

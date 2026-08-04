@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.unit_08_reducejoin.demo_03_join_table_v3;
+package org.bluebridge.mapreduce.unit_08_reducejoin.demo_01_join_table;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
