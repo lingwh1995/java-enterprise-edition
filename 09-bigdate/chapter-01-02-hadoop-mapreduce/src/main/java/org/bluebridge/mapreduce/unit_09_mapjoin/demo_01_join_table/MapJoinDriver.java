@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.unit_09_mapjoin.demo_01_mapjoin;
+package org.bluebridge.mapreduce.unit_09_mapjoin.demo_01_join_table;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -63,8 +63,12 @@ public class MapJoinDriver {
         // --------------------- 设置分布式缓存文件的路径开始 ---------------------
         // 使用相对路径设置分布式缓存文件的路径
         Path basePath = new Path(MapJoinDriver.class.getClassLoader().getResource("").toURI());
-        Path cacheFilePath = new Path(basePath, "hadoop/input/unit_09_mapjoin/demo_01_mapjoin/product.txt");
+        Path cacheFilePath = new Path(basePath, "hadoop/input/unit_09_mapjoin/demo_01_cache_file/product.txt");
         File cacheFile = new File(cacheFilePath.toUri());
+        /**
+         * 关于分布式缓存的解释?
+         * Hadoop 会把 addCacheFile 声明的文件自动分发到每个运行 MapTask 的节点本地，副本随节点分布——所以叫"分布式缓存"。addCacheFile 只是声明，MapTask 的分布式调度才是"分布式"的根源。
+         */
         job.addCacheFile(cacheFile.toURI());
 
         // 使用绝对路径设置分布式缓存文件的路径

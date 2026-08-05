@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.unit_09_mapjoin.demo_01_mapjoin;
+package org.bluebridge.mapreduce.unit_09_mapjoin.demo_01_join_table;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.hadoop.fs.FSDataInputStream;
@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * MapJoinMapper：读取订单和产品两个文件，以产品编号为 key 输出
@@ -26,23 +27,37 @@ import java.util.HashMap;
  */
 public class MapJoinMapper extends Mapper<LongWritable, Text, Text, NullWritable> {
 
-    private HashMap<String, String> productMap = new HashMap<>();
+    private Map<String, String> productMap = new HashMap<>();
     private Text outk = new Text();
 
-    // 在 MapTask 执行开始之前执行一次，将产品表的数据读取到内存中
+    /**
+     * 在 MapTask 执行开始之前执行一次，将产品表的数据读取到内存中
+     *
+     * @param context
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @Override
     protected void setup(Context context) throws IOException, InterruptedException {
         // 获取分布式缓存文件的路径
         URI[] cacheFiles = context.getCacheFiles();
         URI cacheFile = cacheFiles[0];
-        // 获取文件系统对象
-        FileSystem fileSystem = FileSystem.get(context.getConfiguration());
+        /**
+         * 1. FileSystem.get() 的作用?
+         *    根据缓存文件自身的 URI scheme 获取对应的文件系统对象（本地文件用 LocalFileSystem，HDFS 文件用 DistributedFileSystem）
+         * 2. FileSystem.get() 两个重载方法的区别?
+         *    - FileSystem.get(cacheFile, conf)：用缓存文件自身 URI 的 scheme 选文件系统，不管集群默认 fs，适配 hdfs/file，读分布式缓存推荐用，不会报 Wrong FS。
+         *    - FileSystem.get(conf)：读取配置里fs.defaultFS拿默认文件系统，如果缓存文件不在默认 fs，就会报错。
+         */
+        FileSystem fileSystem = FileSystem.get(cacheFile, context.getConfiguration());
         // 获取输入流对象
         FSDataInputStream inputStream = fileSystem.open(new Path(cacheFile));
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
 
         String line;
         while (StringUtils.isNotEmpty(line = bufferedReader.readLine())){
+            // 去除行首 BOM 字符（UTF-8 文件第一行可能带 \uFEFF），并 trim 掉末尾多余空白
+            line = line.replace("\uFEFF", "").trim();
             // 切割  01	小米
             String[] datas = line.split("\t");
             productMap.put(datas[0], datas[1]);
