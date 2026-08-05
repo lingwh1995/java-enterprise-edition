@@ -47,11 +47,11 @@ public class LogSplitDriver {
         // 3. 设置 Job 类的驱动类
         job.setJarByClass(LogSplitDriver.class);
 
-        // 4. 设置 Map 阶段输出键值对的类型
+        // 4. 指定 Mapper 和 Reducer 处理类
         job.setMapperClass(LogSplitMapper.class);
         job.setReducerClass(LogSplitReducer.class);
 
-        // 5. 设置 Map 端输出 KV 类型
+        // 5. 设置 Map 阶段输出键值对的类型
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(NullWritable.class);
 

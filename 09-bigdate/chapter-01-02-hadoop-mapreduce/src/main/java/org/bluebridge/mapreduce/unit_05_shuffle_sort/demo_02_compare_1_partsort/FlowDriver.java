@@ -45,13 +45,13 @@ public class FlowDriver {
         // 3. 设置 Job 类的驱动类
         job.setJarByClass(FlowDriver.class);
 
-        // 4. 设置 Map 阶段输出键值对的类型
+        // 4. 指定 Mapper 和 Reducer 处理类
         job.setMapperClass(FlowMapper.class);
         job.setReducerClass(FlowReducer.class);
         // 使用 1 个 Reducer 确保全局有序
         job.setNumReduceTasks(1);
 
-        // 5. 设置 Map 端输出 KV 类型
+        // 5. 设置 Map 阶段输出键值对的类型
         job.setMapOutputKeyClass(FlowWritable.class);
         job.setMapOutputValueClass(NullWritable.class);
 

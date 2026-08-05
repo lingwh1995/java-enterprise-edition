@@ -16,12 +16,20 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.HashMap;
 
+/**
+ * MapJoinMapper：读取订单和产品两个文件，以产品编号为 key 输出
+ *
+ * 通过 FileSplit 判断当前读取的是哪个文件
+ *
+ * @author lingwh
+ * @date 2026/8/4 22:36
+ */
 public class MapJoinMapper extends Mapper<LongWritable, Text, Text, NullWritable> {
 
-    private HashMap<String, String> pdMap = new HashMap<>();
+    private HashMap<String, String> productMap = new HashMap<>();
     private Text outk = new Text();
 
-    // 在MapTask任务执行开始之前执行一次，将pd的数据读取到内存中
+    // 在 MapTask 执行开始之前执行一次，将产品表的数据读取到内存中
     @Override
     protected void setup(Context context) throws IOException, InterruptedException {
         // 获取分布式缓存文件的路径
@@ -31,14 +39,13 @@ public class MapJoinMapper extends Mapper<LongWritable, Text, Text, NullWritable
         FileSystem fileSystem = FileSystem.get(context.getConfiguration());
         // 获取输入流对象
         FSDataInputStream inputStream = fileSystem.open(new Path(cacheFile));
-        BufferedReader bufferedReader = new BufferedReader(
-                new InputStreamReader(inputStream, "utf-8"));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
 
         String line;
         while (StringUtils.isNotEmpty(line = bufferedReader.readLine())){
             // 切割  01	小米
             String[] datas = line.split("\t");
-            pdMap.put(datas[0], datas[1]);
+            productMap.put(datas[0], datas[1]);
         }
 
         // 关闭资源
@@ -61,11 +68,11 @@ public class MapJoinMapper extends Mapper<LongWritable, Text, Text, NullWritable
         // 切割   1001	01	1
         String[] datas = lineData.split("\t");
         // 获取pid
-        String pid = datas[1];
+        String productId = datas[1];
         // 根据pid到内存中的容器中获取pname
-        String pname = pdMap.get(pid);
+        String productName = productMap.get(productId);
         // 封装输出结果
-        String result = datas[0] + "\t" + pname + "\t" + datas[2];
+        String result = datas[0] + "\t" + productName + "\t" + datas[2];
         outk.set(result);
         context.write(outk, NullWritable.get());
     }
