@@ -2,8 +2,7 @@
 
 ## 输入文件
 
-`input_words.txt`：
-
+**input_words.txt**
 ```
 hadoop ubuntu suse centos linux       ← 行1
 macos freebsd windows arch redhat     ← 行2
@@ -14,9 +13,9 @@ hadoop freebsd windows centos redhat  ← 行5
 
 ---
 
-## 阶段 1：InputFormat + RecordReader
+## 阶段 1 - Read阶段：InputFormat + RecordReader
 
-`TextInputFormat` + `LineRecordReader` 按行读取，产生 `(字节偏移量, 行内容)` 对：
+**TextInputFormat + LineRecordReader 按行读取，产生 (字节偏移量, 行内容) 对**
 
 | Key (LongWritable) | Value (Text) |
 |---|---|
@@ -28,10 +27,8 @@ hadoop freebsd windows centos redhat  ← 行5
 
 ---
 
-## 阶段 2：Map（用户 map 方法）
-
-每行按空格切分，每个单词输出 `(word, 1)`：
-
+## 阶段 2 - Map阶段：Map（用户 map 方法）
+**每行按空格切分，每个单词输出 (word, 1)**
 ```
 行1 → (hadoop,1) (ubuntu,1) (suse,1) (centos,1) (linux,1)
 行2 → (macos,1) (freebsd,1) (windows,1) (arch,1) (redhat,1)
@@ -44,9 +41,9 @@ hadoop freebsd windows centos redhat  ← 行5
 
 ---
 
-## 阶段 3：写入环形缓冲区（collect）
+## 阶段 3 - Collect阶段：写入环形缓冲区
 
-每条 `(word, 1)` 被**序列化**后写入环形缓冲区。
+**每条 (word, 1) 被序列化后写入环形缓冲区**
 
 假设 `numReduceTasks=1`，`HashPartitioner` 将所有记录分到 partition 0。
 
@@ -115,16 +112,14 @@ kvend  = kvindex    ← 索引区终点
 
 ### 4.2 排序（按 partition → key 字节）
 
-排序前（写入顺序）：
-
+**排序前（写入顺序）：**
 ```
 hadoop, ubuntu, suse, centos, linux, macos, freebsd, windows, arch, redhat,
 ubuntu, centos, linux, freebsd, windows, arch, redhat, hadoop, suse, macos,
 hadoop, freebsd, windows, centos, redhat
 ```
 
-排序后（按 key 字节升序）：
-
+**排序后（按 key 字节升序）：**
 ```
 arch, arch, centos, centos, centos, freebsd, freebsd, freebsd,
 hadoop, hadoop, hadoop, linux, linux, macos, macos, redhat, redhat, redhat,
