@@ -13,6 +13,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/**
+ * HDFS API 测试客户端
+ *
+ * @author lingwh
+ * @date 2025/7/10 15:41
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class Client {
@@ -25,7 +31,7 @@ public class Client {
      */
     @Test
     public void testMkdir() throws IOException {
-        hdfsService.mkdir("/test");
+        hdfsService.mkdir("/input");
     }
 
     /**
@@ -33,7 +39,7 @@ public class Client {
      */
     @Test
     public void testExists() throws IOException {
-        System.out.println(hdfsService.exists("/test"));
+        System.out.println(hdfsService.exists("/input"));
     }
 
     /**
@@ -49,8 +55,8 @@ public class Client {
      */
     @Test
     public void testUploadFile() throws IOException {
-        String localPath = this.getClass().getClassLoader().getResource("test.txt").getPath();
-        hdfsService.uploadFile(localPath, "/test/test.txt");
+        String localPath = this.getClass().getClassLoader().getResource("input.txt").getPath();
+        hdfsService.uploadFile(localPath, "/input/input.txt");
     }
 
     /**
@@ -58,8 +64,8 @@ public class Client {
      */
     @Test
     public void testUploadFileByInputStream() throws IOException {
-        try (InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("test.txt")) {
-            hdfsService.uploadFile(inputStream, "/test/test.txt");
+        try (InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("input.txt")) {
+            hdfsService.uploadFile(inputStream, "/input/input.txt");
         }
     }
 
@@ -68,8 +74,8 @@ public class Client {
      */
     @Test
     public void testCopyFromLocal() throws IOException {
-        String localPath = this.getClass().getClassLoader().getResource("test.txt").getPath();
-        hdfsService.copyFromLocal(localPath, "/test/test_copyfromlocal.txt");
+        String localPath = this.getClass().getClassLoader().getResource("input.txt").getPath();
+        hdfsService.copyFromLocal(localPath, "/input/input_copyfromlocal.txt");
     }
 
     /**
@@ -78,7 +84,7 @@ public class Client {
     @Test
     public void testDownloadFile() throws IOException {
         String localPath = System.getProperty("java.io.tmpdir") + "downloaded.txt";
-        hdfsService.downloadFile("/test/test.txt", localPath);
+        hdfsService.downloadFile("/input/input.txt", localPath);
         System.out.println("下载到: " + localPath);
     }
 
@@ -89,7 +95,7 @@ public class Client {
     public void testDownloadFileByOutputStream() throws IOException {
         String localPath = System.getProperty("java.io.tmpdir") + "downloaded.txt";
         try (OutputStream outputStream = new FileOutputStream(localPath)) {
-            hdfsService.downloadFile("/test/test.txt", outputStream);
+            hdfsService.downloadFile("/input/input.txt", outputStream);
         }
         System.out.println("下载到: " + localPath);
     }
@@ -99,7 +105,7 @@ public class Client {
      */
     @Test
     public void testDelete() throws IOException {
-        boolean result = hdfsService.delete("/test", true);
+        boolean result = hdfsService.delete("/input", true);
         System.out.println(result ? "删除成功" : "删除失败");
     }
 
@@ -108,7 +114,7 @@ public class Client {
      */
     @Test
     public void testRename() throws IOException {
-        hdfsService.rename("/test/test.txt", "/test/test_renamed.txt");
+        hdfsService.rename("/input/input.txt", "/input/input_renamed.txt");
     }
 
     /**
@@ -116,7 +122,7 @@ public class Client {
      */
     @Test
     public void testCopy() throws IOException {
-        hdfsService.copy("/test/test.txt", "/test/test_copy.txt");
+        hdfsService.copy("/input/input.txt", "/input/input_copy.txt");
     }
 
     /**
@@ -124,7 +130,7 @@ public class Client {
      */
     @Test
     public void testGetFileStatus() throws IOException {
-        FileStatus fileStatus = hdfsService.getFileStatus("/test/test.txt");
+        FileStatus fileStatus = hdfsService.getFileStatus("/input/input.txt");
         System.out.println(fileStatus);
     }
 
@@ -133,7 +139,7 @@ public class Client {
      */
     @Test
     public void testWriteFile() throws IOException {
-        hdfsService.writeFile("/test/hello.txt", "Hello HDFS!");
+        hdfsService.writeFile("/input/hello.txt", "Hello HDFS!");
     }
 
     /**
@@ -141,7 +147,7 @@ public class Client {
      */
     @Test
     public void testReadFile() throws IOException {
-        String content = hdfsService.readFile("/test/hello.txt");
+        String content = hdfsService.readFile("/input/hello.txt");
         System.out.println(content);
     }
 }

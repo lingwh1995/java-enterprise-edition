@@ -63,7 +63,7 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
      * @return The bytes for email.
      */
     com.google.protobuf.ByteString
-        getEmailBytes();
+    getEmailBytes();
 
     /**
      * <code>string address = 4;</code>
@@ -75,7 +75,7 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
      * @return The bytes for address.
      */
     com.google.protobuf.ByteString
-        getAddressBytes();
+    getAddressBytes();
   }
   /**
    * <pre>
@@ -85,18 +85,18 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
    * Protobuf type {@code org.bluebridge.Person}
    */
   public static final class Person extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:org.bluebridge.Person)
-      PersonOrBuilder {
-  private static final long serialVersionUID = 0L;
+          com.google.protobuf.GeneratedMessage implements
+          // @@protoc_insertion_point(message_implements:org.bluebridge.Person)
+          PersonOrBuilder {
+    private static final long serialVersionUID = 0L;
     static {
       com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
-        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
-        /* major= */ 4,
-        /* minor= */ 33,
-        /* patch= */ 0,
-        /* suffix= */ "",
-        "Person");
+              com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+              /* major= */ 4,
+              /* minor= */ 33,
+              /* patch= */ 0,
+              /* suffix= */ "",
+              "Person");
     }
     // Use Person.newBuilder() to construct.
     private Person(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
@@ -109,16 +109,16 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
     }
 
     public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
+    getDescriptor() {
       return org.bluebridge.domain.PersonProto.internal_static_org_bluebridge_Person_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
+    internalGetFieldAccessorTable() {
       return org.bluebridge.domain.PersonProto.internal_static_org_bluebridge_Person_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              org.bluebridge.domain.PersonProto.Person.class, org.bluebridge.domain.PersonProto.Person.Builder.class);
+              .ensureFieldAccessorsInitialized(
+                      org.bluebridge.domain.PersonProto.Person.class, org.bluebridge.domain.PersonProto.Person.Builder.class);
     }
 
     public static final int ID_FIELD_NUMBER = 1;
@@ -150,8 +150,8 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         name_ = s;
         return s;
@@ -163,12 +163,12 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getNameBytes() {
+    getNameBytes() {
       java.lang.Object ref = name_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         name_ = b;
         return b;
       } else {
@@ -189,8 +189,8 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         email_ = s;
         return s;
@@ -202,12 +202,12 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getEmailBytes() {
+    getEmailBytes() {
       java.lang.Object ref = email_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         email_ = b;
         return b;
       } else {
@@ -228,8 +228,8 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
+        com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         address_ = s;
         return s;
@@ -241,12 +241,12 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getAddressBytes() {
+    getAddressBytes() {
       java.lang.Object ref = address_;
       if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+        com.google.protobuf.ByteString b =
+                com.google.protobuf.ByteString.copyFromUtf8(
+                        (java.lang.String) ref);
         address_ = b;
         return b;
       } else {
@@ -267,7 +267,7 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
 
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
+            throws java.io.IOException {
       if (id_ != 0) {
         output.writeInt32(1, id_);
       }
@@ -291,7 +291,7 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
       size = 0;
       if (id_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, id_);
+                .computeInt32Size(1, id_);
       }
       if (!com.google.protobuf.GeneratedMessage.isStringEmpty(name_)) {
         size += com.google.protobuf.GeneratedMessage.computeStringSize(2, name_);
@@ -310,7 +310,7 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
-       return true;
+        return true;
       }
       if (!(obj instanceof org.bluebridge.domain.PersonProto.Person)) {
         return super.equals(obj);
@@ -318,13 +318,13 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
       org.bluebridge.domain.PersonProto.Person other = (org.bluebridge.domain.PersonProto.Person) obj;
 
       if (getId()
-          != other.getId()) return false;
+              != other.getId()) return false;
       if (!getName()
-          .equals(other.getName())) return false;
+              .equals(other.getName())) return false;
       if (!getEmail()
-          .equals(other.getEmail())) return false;
+              .equals(other.getEmail())) return false;
       if (!getAddress()
-          .equals(other.getAddress())) return false;
+              .equals(other.getAddress())) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -350,75 +350,75 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
     }
 
     public static org.bluebridge.domain.PersonProto.Person parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.bluebridge.domain.PersonProto.Person parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.bluebridge.domain.PersonProto.Person parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.bluebridge.domain.PersonProto.Person parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.bluebridge.domain.PersonProto.Person parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.bluebridge.domain.PersonProto.Person parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.bluebridge.domain.PersonProto.Person parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static org.bluebridge.domain.PersonProto.Person parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     public static org.bluebridge.domain.PersonProto.Person parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input);
+              .parseDelimitedWithIOException(PARSER, input);
     }
 
     public static org.bluebridge.domain.PersonProto.Person parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+              .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static org.bluebridge.domain.PersonProto.Person parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input);
+              .parseWithIOException(PARSER, input);
     }
     public static org.bluebridge.domain.PersonProto.Person parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
       return com.google.protobuf.GeneratedMessage
-          .parseWithIOException(PARSER, input, extensionRegistry);
+              .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
     @java.lang.Override
@@ -432,12 +432,12 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
     @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
+              ? new Builder() : new Builder().mergeFrom(this);
     }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -449,20 +449,20 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
      * Protobuf type {@code org.bluebridge.Person}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:org.bluebridge.Person)
-        org.bluebridge.domain.PersonProto.PersonOrBuilder {
+            com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:org.bluebridge.Person)
+            org.bluebridge.domain.PersonProto.PersonOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
+      getDescriptor() {
         return org.bluebridge.domain.PersonProto.internal_static_org_bluebridge_Person_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
+      internalGetFieldAccessorTable() {
         return org.bluebridge.domain.PersonProto.internal_static_org_bluebridge_Person_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                org.bluebridge.domain.PersonProto.Person.class, org.bluebridge.domain.PersonProto.Person.Builder.class);
+                .ensureFieldAccessorsInitialized(
+                        org.bluebridge.domain.PersonProto.Person.class, org.bluebridge.domain.PersonProto.Person.Builder.class);
       }
 
       // Construct using org.bluebridge.domain.PersonProto.Person.newBuilder()
@@ -471,7 +471,7 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+              com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
 
       }
@@ -488,7 +488,7 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
 
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
+      getDescriptorForType() {
         return org.bluebridge.domain.PersonProto.internal_static_org_bluebridge_Person_descriptor;
       }
 
@@ -572,9 +572,9 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
 
       @java.lang.Override
       public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
         if (extensionRegistry == null) {
           throw new java.lang.NullPointerException();
         }
@@ -679,7 +679,7 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
         java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           name_ = s;
           return s;
@@ -692,12 +692,12 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
        * @return The bytes for name.
        */
       public com.google.protobuf.ByteString
-          getNameBytes() {
+      getNameBytes() {
         java.lang.Object ref = name_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           name_ = b;
           return b;
         } else {
@@ -710,7 +710,7 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
        * @return This builder for chaining.
        */
       public Builder setName(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         name_ = value;
         bitField0_ |= 0x00000002;
@@ -733,7 +733,7 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
        * @return This builder for chaining.
        */
       public Builder setNameBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         name_ = value;
@@ -751,7 +751,7 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
         java.lang.Object ref = email_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           email_ = s;
           return s;
@@ -764,12 +764,12 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
        * @return The bytes for email.
        */
       public com.google.protobuf.ByteString
-          getEmailBytes() {
+      getEmailBytes() {
         java.lang.Object ref = email_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           email_ = b;
           return b;
         } else {
@@ -782,7 +782,7 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
        * @return This builder for chaining.
        */
       public Builder setEmail(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         email_ = value;
         bitField0_ |= 0x00000004;
@@ -805,7 +805,7 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
        * @return This builder for chaining.
        */
       public Builder setEmailBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         email_ = value;
@@ -823,7 +823,7 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
         java.lang.Object ref = address_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
+                  (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           address_ = s;
           return s;
@@ -836,12 +836,12 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
        * @return The bytes for address.
        */
       public com.google.protobuf.ByteString
-          getAddressBytes() {
+      getAddressBytes() {
         java.lang.Object ref = address_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+          com.google.protobuf.ByteString b =
+                  com.google.protobuf.ByteString.copyFromUtf8(
+                          (java.lang.String) ref);
           address_ = b;
           return b;
         } else {
@@ -854,7 +854,7 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
        * @return This builder for chaining.
        */
       public Builder setAddress(
-          java.lang.String value) {
+              java.lang.String value) {
         if (value == null) { throw new NullPointerException(); }
         address_ = value;
         bitField0_ |= 0x00000008;
@@ -877,7 +877,7 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
        * @return This builder for chaining.
        */
       public Builder setAddressBytes(
-          com.google.protobuf.ByteString value) {
+              com.google.protobuf.ByteString value) {
         if (value == null) { throw new NullPointerException(); }
         checkByteStringIsUtf8(value);
         address_ = value;
@@ -900,12 +900,12 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
     }
 
     private static final com.google.protobuf.Parser<Person>
-        PARSER = new com.google.protobuf.AbstractParser<Person>() {
+            PARSER = new com.google.protobuf.AbstractParser<Person>() {
       @java.lang.Override
       public Person parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws com.google.protobuf.InvalidProtocolBufferException {
         Builder builder = newBuilder();
         try {
           builder.mergeFrom(input, extensionRegistry);
@@ -915,7 +915,7 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
           throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
         } catch (java.io.IOException e) {
           throw new com.google.protobuf.InvalidProtocolBufferException(e)
-              .setUnfinishedMessage(builder.buildPartial());
+                  .setUnfinishedMessage(builder.buildPartial());
         }
         return builder.buildPartial();
       }
@@ -938,34 +938,34 @@ public final class PersonProto extends com.google.protobuf.GeneratedFile {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_org_bluebridge_Person_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_org_bluebridge_Person_fieldAccessorTable;
+          internal_static_org_bluebridge_Person_descriptor;
+  private static final
+  com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internal_static_org_bluebridge_Person_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
+  getDescriptor() {
     return descriptor;
   }
   private static  com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
+          descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014Person.proto\022\016org.bluebridge\"B\n\006Person" +
-      "\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005email\030\003 \001(" +
-      "\t\022\017\n\007address\030\004 \001(\tB&\n\025org.bluebridge.dom" +
-      "ainB\013PersonProtoP\000b\006proto3"
+            "\n\014Person.proto\022\016org.bluebridge\"B\n\006Person" +
+                    "\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005email\030\003 \001(" +
+                    "\t\022\017\n\007address\030\004 \001(\tB&\n\025org.bluebridge.dom" +
+                    "ainB\013PersonProtoP\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-        });
+            .internalBuildGeneratedFileFrom(descriptorData,
+                    new com.google.protobuf.Descriptors.FileDescriptor[] {
+                    });
     internal_static_org_bluebridge_Person_descriptor =
-      getDescriptor().getMessageType(0);
+            getDescriptor().getMessageType(0);
     internal_static_org_bluebridge_Person_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_org_bluebridge_Person_descriptor,
-        new java.lang.String[] { "Id", "Name", "Email", "Address", });
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+            internal_static_org_bluebridge_Person_descriptor,
+            new java.lang.String[] { "Id", "Name", "Email", "Address", });
     descriptor.resolveAllFeaturesImmutable();
   }
 

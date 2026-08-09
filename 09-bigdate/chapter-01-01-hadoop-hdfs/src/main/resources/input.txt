@@ -1,0 +1,5 @@
+hadoop ubuntu suse centos linux
+macos freebsd windows arch redhat
+ubuntu centos linux freebsd windows
+arch redhat hadoop suse macos
+hadoop freebsd windows centos redhat
