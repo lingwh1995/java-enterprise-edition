@@ -13,7 +13,7 @@
         <module>01-spring5</module>
         <module>02-spring6</module>
         <module>03-springboot2</module>
-        <module>04-source-analysis</module>
+        <module>04-source-code</module>
         <module>05-auth-security</module>
         <module>06-netty-core</module>
         <module>07-netty-line</module>
