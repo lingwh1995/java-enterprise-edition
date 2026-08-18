@@ -15,7 +15,7 @@
         <module>03-springboot2</module>
         <module>04-source-code</module>
         <module>05-auth-security</module>
-        <module>06-netty-core</module>
+        <module>06-netty-guide</module>
         <module>07-netty-line</module>
         <module>08-workflow</module>
         <module>09-bigdate</module>

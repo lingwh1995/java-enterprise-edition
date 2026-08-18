@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>06-netty-core</artifactId>
+    <artifactId>06-netty-guide</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>chapter-01-01-jdk-bio</module>

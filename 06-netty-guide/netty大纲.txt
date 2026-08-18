@@ -1,0 +1,12 @@
+当前项目中的内容和下面大纲有重合，但是不是完全一致的。后面把大纲中提到的没有实现的内容添加到项目中。
+
+netty‑lab (pom父项目)
+├─ netty‑lab‑01‑echo                # Echo入门，服务端客户端
+├─ netty‑lab‑02‑decoder‑sticky      # 拆包粘包、自定义编解码
+├─ netty‑lab‑03‑pipeline‑handler    # Pipeline，入站出站Handler执行顺序
+├─ netty‑lab‑04‑heartbeat           # IdleStateHandler心跳检测
+├─ netty‑lab‑05‑protobuf‑demo       # Protobuf序列化传输
+├─ netty‑lab‑06‑io‑model            # NIO / Epoll / IoUring 传输切换
+├─ netty‑lab‑07‑bytebuf‑mem          # ByteBuf，池化/非池化，内存泄漏检测
+├─ netty‑lab‑08‑virtual‑thread       # Netty + JDK21虚拟线程（业务层）
+└─ netty‑lab‑09‑exception‑close     # 异常处理、资源释放、优雅关闭

@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.bluebridge</groupId>
-        <artifactId>06-netty-core</artifactId>
+        <artifactId>06-netty-guide</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>chapter-01-01-jdk-bio</artifactId>
+    <artifactId>chapter-02-01-netty</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -18,6 +18,13 @@
     </properties>
 
     <dependencies>
+        <!-- netty开始 -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+        </dependency>
+        <!-- netty结束 -->
+
         <!-- lombok开始 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -38,5 +45,27 @@
             <artifactId>junit</artifactId>
         </dependency>
         <!-- junit结束 -->
+
+        <!-- hutool开始 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+        <!-- hutool开始 -->
+
+        <!-- gson开始 -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+        <!-- gson结束 -->
+
+        <!-- guava开始 -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <!-- guava结束 -->
     </dependencies>
+
 </project>
