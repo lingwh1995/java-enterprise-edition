@@ -12,7 +12,7 @@ import java.util.List;
  * ReduceJoinReducer：按产品编号分组，合并订单和产品数据
  *
  * 为什么这里在循环之外定义了一个 productName 变量，不怕在循环中反复赋值吗？
- *   shuffle 是按产 ey） 组 ，，一个 ReducerTask 中处理的所有数据的 key 是相同的，这里的 key 是产品编号，一个产品编号对应的产品名称只有一个，找到这个产品名称就可以了。
+ *   shuffle 是按 key 分组，一个 ReducerTask 中处理的所有数据的 key 是相同的，这里的 key 是产品编号，一个产品编号对应的产品名称只有一个，找到这个产品名称就可以了。
  *
  * @author lingwh
  * @date 2026/8/2 20:30
