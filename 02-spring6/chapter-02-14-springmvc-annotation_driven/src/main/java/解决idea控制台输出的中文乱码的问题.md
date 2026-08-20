@@ -1,1 +1,0 @@
-VM Options: -Dfile.encoding=UTF-8
