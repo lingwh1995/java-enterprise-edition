@@ -1,3 +1,4 @@
-1.定义完后，可以直接mvn install 或  mvn protobuf:compile，可以生成响应的proto文件对应的java代码。
-2.启动程序
-3.使用Postman或test目录中ProtobufControllerTest测试接口
+SpringBoot 集成 Protobuf 测试步骤
+1. 定义完后，可以直接 mvn install 或 mvn protobuf:compile，可以生成相应的 proto 文件对应的 java 代码
+2. 启动程序
+3. 使用 Postman 或 test 目录中 ProtobufControllerTest 测试接口

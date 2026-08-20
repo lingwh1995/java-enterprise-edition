@@ -1,1 +1,3 @@
-当系统中需要配置多个具有相同类型的bean时，@Primary可以定义这些Bean的优先级，如果不使用@Primary注解标注优先级，使用@Resource注解注入时会报错
+使用 @Primary 注解提交实现类的优先级
+1. 当系统中需要配置多个具有相同类型的 bean 时，@Primary 可以定义这些 Bean 的优先级，
+   如果不使用 @Primary 注解标注优先级，使用 @Resource 注解注入时会报错

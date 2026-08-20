@@ -1,76 +1,68 @@
-WebSocket—STOMP详解(官方原版)
-https://blog.csdn.net/leesinbad/article/details/133993369?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-4-133993369-blog-89328336.235^v43^pc_blog_bottom_relevance_base9&spm=1001.2101.3001.4242.3&utm_relevant_index=7
+WebSocket 相关参考资料
+1. WebSocket—STOMP 详解(官方原版)
+   - https://blog.csdn.net/leesinbad/article/details/133993369
+2. SpringBoot+WebSocket 实现 IM 及时通讯的代码示例
+   - https://www.jb51.net/program/303214psv.htm
+3. WebSocket 多人在线聊天室(SpringBoot+WebSocket)
+   - https://cloud.tencent.com/developer/article/1488423
+4. PostMan 发送 Websocket 请求
+   - https://zhuanlan.zhihu.com/p/706033356
+   - https://zhuanlan.zhihu.com/p/706033089
+5. Spring Boot WebSocket 方案终极指南:Netty 与官方 Starter 对比与实践
+   - https://juejin.cn/post/7521721402527301641
+6. 三分钟构建高性能 WebSocket 服务 | 超优雅的 SpringBoot 整合 Netty 方案
+   - https://cloud.tencent.com/developer/article/1370821
+7. Java Web 心跳机制实现与实战代码解析
+   - https://blog.51cto.com/u_16213634/14250900
+8. websocket 鉴权
+   - https://blog.csdn.net/m0_60259116/article/details/137680824
+   - https://blog.ning.moe/posts/springboot-websocket-springSecurity/
+9. 配置类示例
+     //    @Configuration
+     //    public class WebSocketConfig {
+     //
+     //        @Bean
+     //        public WebSocketClient webSocketClient() {
+     //            return new StandardWebSocketClient();
+     //        }
+     //
+     //        @Bean
+     //        public WebSocketStompClient webSocketStompClient(WebSocketClient webSocketClient) {
+     //            return new WebSocketStompClient(webSocketClient);
+     //        }
+     //
+     //    }
 
-SpringBoot+WebSocket实现IM及时通讯的代码示例
-https://www.jb51.net/program/303214psv.htm
+     /**
+      * 抽时间研究一下  .setHeartbeatTime(10000);               // 心跳间隔
+      */
+     @Configuration
+     @EnableWebSocketMessageBroker
+     public class WebSocketStompConfig implements WebSocketMessageBrokerConfigurer {
+         @Override
+         public void registerStompEndpoints(StompEndpointRegistry registry) {
+             // 注册STOMP端点，客户端将使用这个端点连接到STOMP服务器
+             // 前端 const socket = new SockJS('/publicServer');
+             registry.addEndpoint("/publicServer")    //广播
+                     .withSockJS()                           // 启用SockJS降级支持
+                     .setHeartbeatTime(10000);               // 心跳间隔
 
-WebSocket多人在线聊天室（SpringBoot+WebSocket）
-https://cloud.tencent.com/developer/article/1488423
+             registry.addEndpoint("/privateServer")  //点对点
+                     .withSockJS()
+                     .setHeartbeatTime(10000);
+         }
 
-PostMan发送Websocket请求
-https://zhuanlan.zhihu.com/p/706033356
-https://zhuanlan.zhihu.com/p/706033089
+         @Override
+         public void configureMessageBroker(MessageBrokerRegistry config) {
+             // 后端推送给前端路径前缀
+             // 后端@SendTo("/topic/public")
+             // 前端需要订阅stompClient.subscribe('/topic/public', onMessageReceived);
+             config.enableSimpleBroker("/topic", "/user");
 
-Spring Boot WebSocket方案终极指南：Netty与官方Starter对比与实践
-https://juejin.cn/post/7521721402527301641
+             // 前端发送消息给后端路径前缀
+             // 前端 stompClient.send("/app/addUser",{},JSON.stringify({sender: sid, type: 'JOIN'}));
+             // 后端默认会带上app前缀 @MessageMapping("/publicSendMessage")
+             config.setApplicationDestinationPrefixes("/app");
+         }
 
-三分钟构建高性能 WebSocket 服务 | 超优雅的 SpringBoot 整合 Netty 方案
-https://cloud.tencent.com/developer/article/1370821
-
-Java Web心跳机制实现与实战代码解析
-https://blog.51cto.com/u_16213634/14250900
-
-websocket鉴权
-https://blog.csdn.net/m0_60259116/article/details/137680824
-https://blog.ning.moe/posts/springboot-websocket-springSecurity/
-
-
-//    @Configuration
-//    public class WebSocketConfig {
-//
-//        @Bean
-//        public WebSocketClient webSocketClient() {
-//            return new StandardWebSocketClient();
-//        }
-//
-//        @Bean
-//        public WebSocketStompClient webSocketStompClient(WebSocketClient webSocketClient) {
-//            return new WebSocketStompClient(webSocketClient);
-//        }
-//
-//    }
-
-/**
-  * 抽时间研究一下  .setHeartbeatTime(10000);               // 心跳间隔
-  */
-@Configuration
-@EnableWebSocketMessageBroker
-public class WebSocketStompConfig implements WebSocketMessageBrokerConfigurer {
-    @Override
-    public void registerStompEndpoints(StompEndpointRegistry registry) {
-        // 注册STOMP端点，客户端将使用这个端点连接到STOMP服务器
-        // 前端 const socket = new SockJS('/publicServer');
-        registry.addEndpoint("/publicServer")    //广播
-                .withSockJS()                           // 启用SockJS降级支持
-                .setHeartbeatTime(10000);               // 心跳间隔
-
-
-        registry.addEndpoint("/privateServer")  //点对点
-                .withSockJS()
-                .setHeartbeatTime(10000);
-    }
-
-    @Override
-    public void configureMessageBroker(MessageBrokerRegistry config) {
-        // 后端推送给前端路径前缀
-        // 后端@SendTo("/topic/public")
-        // 前端需要订阅stompClient.subscribe('/topic/public', onMessageReceived);
-        config.enableSimpleBroker("/topic", "/user");
-
-        // 前端发送消息给后端路径前缀
-        // 前端 stompClient.send("/app/addUser",{},JSON.stringify({sender: sid, type: 'JOIN'}));
-        // 后端默认会带上app前缀 @MessageMapping("/publicSendMessage")
-        config.setApplicationDestinationPrefixes("/app");
-    }
-
-}
+     }

@@ -1,6 +1,7 @@
-1.@Autowired可以标注的位置:构造器、方法、参数、属性
-    ElementType.CONSTRUCTOR,
-    ElementType.METHOD,
-    ElementType.PARAMETER,
-    ElementType.FIELD,
-    ElementType.ANNOTATION_TYPE
+Autowired 标注位置
+1. @Autowired可以标注的位置:构造器、方法、参数、属性
+   - ElementType.CONSTRUCTOR
+   - ElementType.METHOD
+   - ElementType.PARAMETER
+   - ElementType.FIELD
+   - ElementType.ANNOTATION_TYPE

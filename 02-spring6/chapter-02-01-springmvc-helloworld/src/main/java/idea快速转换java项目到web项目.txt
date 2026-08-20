@@ -1,1 +1,1 @@
-使用JBLJavaToWeb插件进行快速转换
+IDEA 使用 JBLJavaToWeb 插件将 Java 项目转换为到 Web 项目

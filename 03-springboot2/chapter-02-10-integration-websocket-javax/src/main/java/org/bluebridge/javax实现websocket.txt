@@ -1,3 +1,4 @@
-1.不支持sockjs库，建议使用spring提供的websocket
-2.前端页面访问地址
-    http://localhost:8080/
+javax 实现 websocket
+1. 不支持 sockjs 库，建议使用 spring 提供的 websocket
+2. 前端页面访问地址
+   - http://localhost:8080/

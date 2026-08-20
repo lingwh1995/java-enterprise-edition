@@ -1,18 +1,19 @@
-1.Spring资源访问Resource接口简介
-  Resource接口是Spring资源访问策略的抽象，它本身并不提供任何资源访问实现，具体的资源访问由该接口的实现类完成——每个实现类代表一种资源访问策略。
-  Resource一般包括这些实现类：
-      UrlResource(访问网络资源)
-          Resource的一个实现类，用来访问网络资源，它支持URL的绝对路径。
-          http        该前缀用于访问基于HTTP协议的网络资源。
-          ftp         该前缀用于访问基于FTP协议的网络资源
-          file        该前缀用于从文件系统中读取资源
-      ClassPathResource(访问类路径下资源)
-          就是meaven工程中resource下的文件
-      FileSystemResource      访问文件系统资源
-      ServletContextResource  访问文件系统资源
-      InputStreamResource
-      ByteArrayResource
-2.ResourceLoader
-    Spring将采用和ApplicationContext相同的策略来访问资源。也就是说，如果ApplicationContext是FileSystemXmlApplicationContext，res就是FileSystemResource实例；如果ApplicationContext是ClassPathXmlApplicationContext，res就是ClassPathResource实例
-    当Spring应用需要进行资源访问时，实际上并不需要直接使用Resource实现类，而是调用ResourceLoader实例的getResource()方法来获得资源，ReosurceLoader将会负责选择Reosurce实现类，也就是确定具体的资源访问策略，从而将应用程序和具体的资源访问策略分离开来
-    另外，使用ApplicationContext访问资源时，可通过不同前缀指定强制使用指定的ClassPathResource、FileSystemResource等实现类
+Spring 资源访问工具
+1. Spring 资源访问 Resource 接口简介
+   - Resource 接口是 Spring 资源访问策略的抽象，它本身并不提供任何资源访问实现，具体的资源访问由该接口的实现类完成--每个实现类代表一种资源访问策略
+   - Resource 一般包括这些实现类:
+     a. UrlResource(访问网络资源)
+        - Resource 的一个实现类，用来访问网络资源，它支持 URL 的绝对路径
+        - http:该前缀用于访问基于 HTTP 协议的网络资源
+        - ftp:该前缀用于访问基于 FTP 协议的网络资源
+        - file:该前缀用于从文件系统中读取资源
+     b. ClassPathResource(访问类路径下资源)
+        - 就是 maven 工程中 resource 下的文件
+     c. FileSystemResource:访问文件系统资源
+     d. ServletContextResource:访问文件系统资源
+     e. InputStreamResource
+     f. ByteArrayResource
+2. ResourceLoader
+   - Spring 将采用和 ApplicationContext 相同的策略来访问资源。也就是说，如果 ApplicationContext 是 FileSystemXmlApplicationContext，res 就是 FileSystemResource 实例；如果 ApplicationContext 是 ClassPathXmlApplicationContext，res 就是 ClassPathResource 实例
+   - 当 Spring 应用需要进行资源访问时，实际上并不需要直接使用 Resource 实现类，而是调用 ResourceLoader 实例的 getResource() 方法来获得资源，ResourceLoader 将会负责选择 Resource 实现类，也就是确定具体的资源访问策略，从而将应用程序和具体的资源访问策略分离开来
+   - 另外，使用 ApplicationContext 访问资源时，可通过不同前缀指定强制使用指定的 ClassPathResource、FileSystemResource 等实现类

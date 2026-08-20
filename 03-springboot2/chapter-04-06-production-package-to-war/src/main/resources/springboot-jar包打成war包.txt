@@ -1,33 +1,34 @@
-一.用途
-    常用于前后端分离开发时合并前端和后端部署文件，最终将前后端部署文件打成一个war包，可以部署在tomact容器中
-二.步骤
-    1.在pom.xml artifactId 下配置 <packaging>war</packaging>
-    2.引入maven依赖
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
-        </dependency>
-    3.在pom.xml中build节点添加如下配置
-        <build>
-            <plugins>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                </plugin>
-            </plugins>
-        </build>
-    4.修改Application.java
-        @SpringBootApplication
-        public class Application extends SpringBootServletInitializer {
-            public static void main(String[] args) {
-                SpringApplication.run(Application.class, args);
-            }
+SpringBoot jar 包打成 war 包
+1. 用途
+   - 常用于前后端分离开发时合并前端和后端部署文件，最终将前后端部署文件打成一个 war 包，可以部署在 tomcat 容器中
+2. 步骤
+   a. 在 pom.xml artifactId 下配置 <packaging>war</packaging>
+   b. 引入 maven 依赖
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-tomcat</artifactId>
+                <scope>provided</scope>
+            </dependency>
+   c. 在 pom.xml 中 build 节点添加如下配置
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+   d. 修改 Application.java
+            @SpringBootApplication
+            public class Application extends SpringBootServletInitializer {
+                public static void main(String[] args) {
+                    SpringApplication.run(Application.class, args);
+                }
 
-            @Override
-            protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-                return application.sources(Application.class);
+                @Override
+                protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+                    return application.sources(Application.class);
+                }
             }
-        }
-    5.将war包部署到tomcat后访问如下地址测试部署效果:
-        http://localhost:8080/springboot-jar-package-to-war/package-to-war
+   e. 将 war 包部署到 tomcat 后访问如下地址测试部署效果:
+      http://localhost:8080/springboot-jar-package-to-war/package-to-war

@@ -1,7 +1,8 @@
+按需求分割日志到不同文件
 1. 需求分析
-   - 把日志中包含hadoop的网站日志提取出来，每个网站日志占一行，放在log_hadoop.txt文件中
-   - 把不包含hadoop的其他日志放在log_other.txt文件中，每个日志占一行
-2. 为什么不使用 Partition 实现？
+   - 把日志中包含 hadoop 的网站日志提取出来，每个网站日志占一行，放在 log_hadoop.txt 文件中
+   - 把不包含 hadoop 的其他日志放在 log_other.txt 文件中，每个日志占一行
+2. 为什么不使用 Partition 实现?
    - Partition 无法控制生成文件名称，只能把内容划分开
-   - Partition 无法控制输出文件了路径，生成的所有文件都只能在一个目录下，不够灵活
+   - Partition 无法控制输出文件路径，生成的所有文件都只能在一个目录下，不够灵活
 

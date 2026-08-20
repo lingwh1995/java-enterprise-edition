@@ -1,13 +1,15 @@
-public interface Model {
-}
+Model、ModelMap、Map 之间的关系
+1. 继承结构
+     public interface Model {
+     }
 
-public class ModelMap extends LinkedHashMap<String, Object> {
-}
+     public class ModelMap extends LinkedHashMap<String, Object> {
+     }
 
-public class ExtendedModelMap extends ModelMap implements Model {
+     public class ExtendedModelMap extends ModelMap implements Model {
 
-}
+     }
 
-public class BindingAwareModelMap extends ExtendedModelMap {
+     public class BindingAwareModelMap extends ExtendedModelMap {
 
-}
+     }

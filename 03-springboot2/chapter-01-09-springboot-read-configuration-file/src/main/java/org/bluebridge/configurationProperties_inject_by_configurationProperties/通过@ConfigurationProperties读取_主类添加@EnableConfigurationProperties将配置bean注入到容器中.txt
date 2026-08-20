@@ -1,15 +1,15 @@
-1.在LibraryProperties上添加注解
-    @ConfigurationProperties(prefix = "library")
-    public class LibraryProperties {}
-2.在主启动类Application上添加注解@EnableConfigurationProperties(LibraryBindWithoutBean.class)
-    @SpringBootApplication
-    @EnableConfigurationProperties(LibraryProperties.class)
-    public class org.bluebridge.Application1 {
-        public static void main(String[] args) {
-            SpringApplication.run(org.bluebridge.Application1.class,args);
+通过 @ConfigurationProperties 读取_主类添加 @EnableConfigurationProperties 将配置 bean 注入到容器中
+1. 在 LibraryProperties 上添加注解
+        @ConfigurationProperties(prefix = "library")
+        public class LibraryProperties {}
+2. 在主启动类 Application 上添加注解 @EnableConfigurationProperties(LibraryBindWithoutBean.class)
+        @SpringBootApplication
+        @EnableConfigurationProperties(LibraryProperties.class)
+        public class org.bluebridge.Application1 {
+            public static void main(String[] args) {
+                SpringApplication.run(org.bluebridge.Application1.class,args);
+            }
         }
-    }
-
-
-注意：
-    如果不在POJO中使用@Configuration，需要在主Spring应用程序主启动类中添加@EnableConfigurationProperties(LibraryBindWithoutBean.class)以将属性绑定到POJO中
+3. 注意:
+   - 如果不在 POJO 中使用 @Configuration，需要在主 Spring 应用程序主启动类中添加
+     @EnableConfigurationProperties(LibraryBindWithoutBean.class) 以将属性绑定到 POJO 中

@@ -1,1 +1,2 @@
-使用@Configuration + @Bean + @Scope 代替XML配置
+springboot 注解驱动配置
+1. 使用 @Configuration + @Bean + @Scope 代替 XML 配置
