@@ -59,7 +59,6 @@
       YARN 平台中针对当前队列，指定额定容量，也叫资源的最低保障，如果上面新配置了 hello 队列，这里也要给 hello 队列配置
       注意事项：yarn.scheduler.capacity.root.xxx.capacity 是百分比数值，同层级所有子队列加起来必须 = 100。
   -->
-
   <property>
     <name>yarn.scheduler.capacity.root.default.capacity</name>
     <value>50</value>
