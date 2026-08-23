@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.unit_10_set_submit_queue;
+package org.bluebridge.mapreduce.unit_11_set_submit_queue;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hadoop.io.IntWritable;

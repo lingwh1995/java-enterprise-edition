@@ -46,17 +46,17 @@
     </description>
   </property>
 
-  <!-- YARN 平台中多队列时，每个队列的名称，多个之间用,隔开，这里我们在原有基础上多配置一个 hello 队列 -->
+  <!-- YARN 平台中多队列时，每个队列的名称，多个之间用,隔开，这里我们在原有基础上多配置一个 hive 队列 -->
   <property>
     <name>yarn.scheduler.capacity.root.queues</name>
-    <value>default,hello</value>
+    <value>default,hive</value>
     <description>
       The queues at the this level (root is the root queue).
     </description>
   </property>
 
   <!--
-      YARN 平台中针对当前队列，指定额定容量，也叫资源的最低保障，如果上面新配置了 hello 队列，这里也要给 hello 队列配置
+      YARN 平台中针对当前队列，指定额定容量，也叫资源的最低保障，如果上面新配置了 hive 队列，这里也要给 hive 队列配置
       注意事项：yarn.scheduler.capacity.root.xxx.capacity 是百分比数值，同层级所有子队列加起来必须 = 100。
   -->
   <property>
@@ -64,15 +64,15 @@
     <value>50</value>
     <description>Default queue target capacity.</description>
   </property>
-  <!-- 这里我们给 hello 队列也配置一个，因为上面我们新添加了 hello 队列 -->
+  <!-- 这里我们给 hive 队列也配置一个，因为上面我们新添加了 hive 队列 -->
   <property>
-    <name>yarn.scheduler.capacity.root.hello.capacity</name>
+    <name>yarn.scheduler.capacity.root.hive.capacity</name>
     <value>50</value>
     <description>Default queue target capacity.</description>
   </property>
 
 
-  <!-- YARN 平台中限定当前队列的提交应用的用户可用资源比例，默认只给 default 队列配置了，如果上面新配置了 hello 队列，这里也要给 hello 队列配置 -->
+  <!-- YARN 平台中限定当前队列的提交应用的用户可用资源比例，默认只给 default 队列配置了，如果上面新配置了 hive 队列，这里也要给 hive 队列配置 -->
   <property>
     <name>yarn.scheduler.capacity.root.default.user-limit-factor</name>
     <value>1</value>
@@ -80,9 +80,9 @@
       Default queue user limit a percentage from 0.0 to 1.0.
     </description>
   </property>
-  <!-- 这里我们给 hello 队列也配置一个，因为上面我们新添加了 hello 队列 -->
+  <!-- 这里我们给 hive 队列也配置一个，因为上面我们新添加了 hive 队列 -->
   <property>
-    <name>yarn.scheduler.capacity.root.hello.user-limit-factor</name>
+    <name>yarn.scheduler.capacity.root.hive.user-limit-factor</name>
     <value>1</value>
     <description>
       Default queue user limit a percentage from 0.0 to 1.0.
@@ -90,7 +90,7 @@
   </property>
 
 
-  <!-- YARN 平台中针对当前队列，指定最大容量，也叫资源的最高限制，如果上面新配置了 hello 队列，这里也要给 hello 队列配置  -->
+  <!-- YARN 平台中针对当前队列，指定最大容量，也叫资源的最高限制，如果上面新配置了 hive 队列，这里也要给 hive 队列配置  -->
   <property>
     <name>yarn.scheduler.capacity.root.default.maximum-capacity</name>
     <value>100</value>
@@ -98,17 +98,17 @@
       The maximum capacity of the default queue. 
     </description>
   </property>
-  <!-- 这里我们给 hello 队列也配置一个，因为上面我们新添加了 hello 队列 -->
+  <!-- 这里我们给 hive 队列也配置一个，因为上面我们新添加了 hive 队列 -->
   <property>
-    <name>yarn.scheduler.capacity.root.hello.maximum-capacity</name>
+    <name>yarn.scheduler.capacity.root.hive.maximum-capacity</name>
     <value>100</value>
     <description>
-      The maximum capacity of the hello queue.
+      The maximum capacity of the hive queue.
     </description>
   </property>
 
 
-  <!-- YARN 平台中指定当前队列的运行状态，如果上面新配置了 hello 队列，这里也要给 hello 队列配置 -->
+  <!-- YARN 平台中指定当前队列的运行状态，如果上面新配置了 hive 队列，这里也要给 hive 队列配置 -->
   <property>
     <name>yarn.scheduler.capacity.root.default.state</name>
     <value>RUNNING</value>
@@ -116,9 +116,9 @@
       The state of the default queue. State can be one of RUNNING or STOPPED.
     </description>
   </property>
-  <!-- 这里我们给 hello 队列也配置一个，因为上面我们新添加了 hello 队列 -->
+  <!-- 这里我们给 hive 队列也配置一个，因为上面我们新添加了 hive 队列 -->
   <property>
-    <name>yarn.scheduler.capacity.root.hello.state</name>
+    <name>yarn.scheduler.capacity.root.hive.state</name>
     <value>RUNNING</value>
     <description>
       The state of the default queue. State can be one of RUNNING or STOPPED.
@@ -126,7 +126,7 @@
   </property>
 
 
-  <!-- YARN 平台中哪些用户可以给默认队列中提价任务，多个用户用,分隔，*代表全部用户，如果上面新配置了 hello 队列，这里也要给 hello 队列配置  -->
+  <!-- YARN 平台中哪些用户可以给默认队列中提价任务，多个用户用,分隔，*代表全部用户，如果上面新配置了 hive 队列，这里也要给 hive 队列配置  -->
   <property>
     <name>yarn.scheduler.capacity.root.default.acl_submit_applications</name>
     <value>*</value>
@@ -134,9 +134,9 @@
       The ACL of who can submit jobs to the default queue.
     </description>
   </property>
-  <!-- 这里我们给 hello 队列也配置一个，因为上面我们新添加了 hello 队列 -->
+  <!-- 这里我们给 hive 队列也配置一个，因为上面我们新添加了 hive 队列 -->
   <property>
-    <name>yarn.scheduler.capacity.root.hello.acl_submit_applications</name>
+    <name>yarn.scheduler.capacity.root.hive.acl_submit_applications</name>
     <value>*</value>
     <description>
       The ACL of who can submit jobs to the default queue.
@@ -144,7 +144,7 @@
   </property>
 
 
-  <!-- YARN 平台中当前队列的管理者用户，多个用户用,分隔，*代表全部用户，如果上面新配置了 hello 队列，这里也要给 hello 队列配置  -->
+  <!-- YARN 平台中当前队列的管理者用户，多个用户用,分隔，*代表全部用户，如果上面新配置了 hive 队列，这里也要给 hive 队列配置  -->
   <property>
     <name>yarn.scheduler.capacity.root.default.acl_administer_queue</name>
     <value>*</value>
@@ -152,9 +152,9 @@
       The ACL of who can administer jobs on the default queue.
     </description>
   </property>
-  <!-- 这里我们给 hello 队列也配置一个，因为上面我们新添加了 hello 队列 -->
+  <!-- 这里我们给 hive 队列也配置一个，因为上面我们新添加了 hive 队列 -->
   <property>
-    <name>yarn.scheduler.capacity.root.hello.acl_administer_queue</name>
+    <name>yarn.scheduler.capacity.root.hive.acl_administer_queue</name>
     <value>*</value>
     <description>
       The ACL of who can administer jobs on the default queue.
@@ -162,7 +162,7 @@
   </property>
 
 
-  <!-- YARN 平台中当前队列哪些用户有执行Job的跟高优先级，多个用户用,分隔，*代表全部用户，如果上面新配置了 hello 队列，这里也要给 hello 队列配置  -->
+  <!-- YARN 平台中当前队列哪些用户有执行Job的跟高优先级，多个用户用,分隔，*代表全部用户，如果上面新配置了 hive 队列，这里也要给 hive 队列配置  -->
   <property>
     <name>yarn.scheduler.capacity.root.default.acl_application_max_priority</name>
     <value>*</value>
@@ -171,9 +171,9 @@
       For e.g, [user={name} group={name} max_priority={priority} default_priority={priority}]
     </description>
   </property>
-  <!-- 这里我们给 hello 队列也配置一个，因为上面我们新添加了 hello 队列 -->
+  <!-- 这里我们给 hive 队列也配置一个，因为上面我们新添加了 hive 队列 -->
   <property>
-    <name>yarn.scheduler.capacity.root.hello.acl_application_max_priority</name>
+    <name>yarn.scheduler.capacity.root.hive.acl_application_max_priority</name>
     <value>*</value>
     <description>
       The ACL of who can submit applications with configured priority.
@@ -182,7 +182,7 @@
   </property>
 
 
-  <!-- YARN 平台中当前队列中Job的最大存活时间，如果上面新配置了 hello 队列，这里也要给 hello 队列配置  -->
+  <!-- YARN 平台中当前队列中Job的最大存活时间，如果上面新配置了 hive 队列，这里也要给 hive 队列配置  -->
    <property>
      <name>yarn.scheduler.capacity.root.default.maximum-application-lifetime
      </name>
@@ -202,9 +202,9 @@
         sooner. This feature is applicable only for leaf queue.
      </description>
    </property>
-  <!-- 这里我们给 hello 队列也配置一个，因为上面我们新添加了 hello 队列 -->
+  <!-- 这里我们给 hive 队列也配置一个，因为上面我们新添加了 hive 队列 -->
   <property>
-    <name>yarn.scheduler.capacity.root.hello.maximum-application-lifetime
+    <name>yarn.scheduler.capacity.root.hive.maximum-application-lifetime
     </name>
     <value>-1</value>
     <description>
@@ -224,7 +224,7 @@
   </property>
 
 
-  <!-- YARN 平台中当前队列中Job的默认存活时间，如果上面新配置了 hello 队列，这里也要给 hello 队列配置  -->
+  <!-- YARN 平台中当前队列中Job的默认存活时间，如果上面新配置了 hive 队列，这里也要给 hive 队列配置  -->
    <property>
      <name>yarn.scheduler.capacity.root.default.default-application-lifetime
      </name>
@@ -239,9 +239,9 @@
         applicable only for leaf queue.
      </description>
    </property>
-  <!-- 这里我们给 hello 队列也配置一个，因为上面我们新添加了 hello 队列 -->
+  <!-- 这里我们给 hive 队列也配置一个，因为上面我们新添加了 hive 队列 -->
   <property>
-    <name>yarn.scheduler.capacity.root.hello.default-application-lifetime
+    <name>yarn.scheduler.capacity.root.hive.default-application-lifetime
     </name>
     <value>-1</value>
     <description>

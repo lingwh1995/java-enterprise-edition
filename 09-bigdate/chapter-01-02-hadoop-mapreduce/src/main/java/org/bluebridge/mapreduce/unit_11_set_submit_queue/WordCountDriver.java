@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.unit_10_set_submit_queue;
+package org.bluebridge.mapreduce.unit_11_set_submit_queue;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hadoop.conf.Configuration;
@@ -75,7 +75,7 @@ public class WordCountDriver {
             outputPath = new Path(args[1]);
         } else {
             Path basePath = new Path(WordCountDriver.class.getClassLoader().getResource("").toURI());
-            inputPath = new Path(basePath, "hadoop/input/unit_10_set_submit_queue");
+            inputPath = new Path(basePath, "hadoop/input/unit_11_set_submit_queue");
             outputPath = new Path(basePath, "hadoop/output/unit_10_set_submit_queue");
         }
 
