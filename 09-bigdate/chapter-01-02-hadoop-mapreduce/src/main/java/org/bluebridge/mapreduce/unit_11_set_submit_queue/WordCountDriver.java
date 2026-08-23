@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 /**
- * 统计单词出现次数的 Driver 类
+ * 统计单词出现次数的 Driver 类 + 配置 Job 提交到哪个队列中
  *
  * 注意：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/unit_01_wordcount 目录中，需要手动查看运行结果
  *
@@ -32,7 +32,7 @@ public class WordCountDriver {
         Configuration conf = new Configuration();
 
         // --------------------- 设置要提交的队列开始 ---------------------
-        conf.set("mapreduce.job.queuename", "hello");
+        conf.set("mapreduce.job.queuename", "hive");
         // --------------------- 设置要提交的队列结束 ---------------------
 
         // 检查 HDFS 连接是否正常（如果配置了 fs.defaultFS 指向 HDFS）

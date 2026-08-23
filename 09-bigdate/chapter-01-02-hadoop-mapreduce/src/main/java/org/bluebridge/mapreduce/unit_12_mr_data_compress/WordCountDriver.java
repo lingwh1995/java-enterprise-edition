@@ -1,4 +1,4 @@
-package org.bluebridge.mapreduce.unit_10_multiple_queues;
+package org.bluebridge.mapreduce.unit_12_mr_data_compress;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hadoop.conf.Configuration;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 /**
- * 统计单词出现次数的 Driver 类
+ * 统计单词出现次数的 Driver 类 + 配置 MR 数据压缩
  *
  * 注意：在本地 IDEA 中测试时，输出结果文件路径在 target/classes/hadoop/output/unit_01_wordcount 目录中，需要手动查看运行结果
  *
@@ -30,6 +30,13 @@ public class WordCountDriver {
 
         // 1. 创建配置对象
         Configuration conf = new Configuration();
+
+        // --------------------- 设置 MR 数据压缩算法开始 ---------------------
+        // 设置开启 map 输出阶段压缩
+        conf.set("mapreduce.map.output.compress", "true");
+        conf.set("mapreduce.map.output.compress.codec", "org.apache.hadoop.io.compress.DefaultCodec");
+        // 设置开启 map 输出阶段压缩用的算法
+        // --------------------- 设置 MR 数据压缩算法结束 ---------------------
 
         // 检查 HDFS 连接是否正常（如果配置了 fs.defaultFS 指向 HDFS）
         String defaultFS = conf.get("fs.defaultFS", "file:///");
@@ -71,8 +78,8 @@ public class WordCountDriver {
             outputPath = new Path(args[1]);
         } else {
             Path basePath = new Path(WordCountDriver.class.getClassLoader().getResource("").toURI());
-            inputPath = new Path(basePath, "hadoop/input/unit_10_multiple_queues");
-            outputPath = new Path(basePath, "hadoop/output/unit_10_multiple_queues");
+            inputPath = new Path(basePath, "hadoop/input/unit_12_mr_data_compress");
+            outputPath = new Path(basePath, "hadoop/output/unit_12_mr_data_compress");
         }
 
         // 8. 自动删除输出目录（避免已存在报错）

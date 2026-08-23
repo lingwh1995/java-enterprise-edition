@@ -61,14 +61,14 @@
   -->
   <property>
     <name>yarn.scheduler.capacity.root.default.capacity</name>
-    <value>50</value>
+    <value>40</value>
     <description>Default queue target capacity.</description>
   </property>
   <!-- 这里我们给 hive 队列也配置一个，因为上面我们新添加了 hive 队列 -->
   <property>
     <name>yarn.scheduler.capacity.root.hive.capacity</name>
-    <value>50</value>
-    <description>Default queue target capacity.</description>
+    <value>60</value>
+    <description>Hive queue target capacity.</description>
   </property>
 
 
