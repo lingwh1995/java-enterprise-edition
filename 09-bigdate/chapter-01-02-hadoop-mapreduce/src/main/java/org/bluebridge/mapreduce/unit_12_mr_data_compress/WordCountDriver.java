@@ -32,10 +32,15 @@ public class WordCountDriver {
         Configuration conf = new Configuration();
 
         // --------------------- 设置 MR 数据压缩算法开始 ---------------------
-        // 设置开启 map 输出阶段压缩
-        conf.set("mapreduce.map.output.compress", "true");
-        conf.set("mapreduce.map.output.compress.codec", "org.apache.hadoop.io.compress.DefaultCodec");
-        // 设置开启 map 输出阶段压缩用的算法
+//        // 设置开启 map 输出阶段压缩
+//        conf.set("mapreduce.map.output.compress", "true");
+//        // 设置开启 map 输出阶段压缩用的算法
+//        conf.set("mapreduce.map.output.compress.codec", "org.apache.hadoop.io.compress.DefaultCodec");
+
+        // 设置开启 reduce 输出阶段压缩
+        conf.set("mapreduce.output.fileoutputformat.compress", "true");
+        // 设置开启 reduce 输出阶段压缩用的算法
+        conf.set("mapreduce.output.fileoutputformat.compress.codec", "org.apache.hadoop.io.compress.DefaultCodec");
         // --------------------- 设置 MR 数据压缩算法结束 ---------------------
 
         // 检查 HDFS 连接是否正常（如果配置了 fs.defaultFS 指向 HDFS）
