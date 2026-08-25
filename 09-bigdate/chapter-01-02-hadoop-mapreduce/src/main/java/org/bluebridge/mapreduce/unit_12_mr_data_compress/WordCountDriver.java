@@ -6,6 +6,7 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.compress.BZip2Codec;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
@@ -37,10 +38,13 @@ public class WordCountDriver {
 //        // 设置开启 map 输出阶段压缩用的算法
 //        conf.set("mapreduce.map.output.compress.codec", "org.apache.hadoop.io.compress.DefaultCodec");
 
+        // ------------------- 设置 reduce 输出压缩方式一 -------------------
         // 设置开启 reduce 输出阶段压缩
         conf.set("mapreduce.output.fileoutputformat.compress", "true");
         // 设置开启 reduce 输出阶段压缩用的算法
         conf.set("mapreduce.output.fileoutputformat.compress.codec", "org.apache.hadoop.io.compress.DefaultCodec");
+        // ------------------- 设置 reduce 输出压缩方式一 -------------------
+
         // --------------------- 设置 MR 数据压缩算法结束 ---------------------
 
         // 检查 HDFS 连接是否正常（如果配置了 fs.defaultFS 指向 HDFS）
@@ -96,6 +100,18 @@ public class WordCountDriver {
         // 9. 绑定输入输出
         FileInputFormat.addInputPath(job, inputPath);
         FileOutputFormat.setOutputPath(job, outputPath);
+
+        // ------------------- 设置 reduce 输出压缩方式二 -------------------
+        /*
+        // 设置开启 reduce 输出阶段压缩
+        FileOutputFormat.setCompressOutput(job,true);
+        // 设置开启 reduce 输出阶段压缩用的算法
+        FileOutputFormat.setOutputCompressorClass(job, BZip2Codec.class);
+        //FileOutputFormat.setOutputCompressorClass(job, GzipCodec.class);
+        //FileOutputFormat.setOutputCompressorClass(job, DefaultCodec.class);
+        */
+        // ------------------- 设置 reduce 输出压缩方式二 -------------------
+
 
         // 10. 提交任务并设置退出码
         boolean success = job.waitForCompletion(true);
