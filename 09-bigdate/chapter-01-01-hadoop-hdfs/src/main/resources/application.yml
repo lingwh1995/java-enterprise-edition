@@ -3,6 +3,6 @@ server:
 
 hdfs:
   # hdfs getconf -confKey fs.defaultFS 可以查看这里应该配置的值
-  uri: hdfs://hadoop21:8021
+  uri: hdfs://hadoop21:8020
   # 访问 HDFS 的用户
   user: hadoop
