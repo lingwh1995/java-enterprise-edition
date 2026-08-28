@@ -1,0 +1,3 @@
+mapreduce shuffle partition sort combiner
+mapreduce inputformat outputformat
+mapreduce driver mapper reducer

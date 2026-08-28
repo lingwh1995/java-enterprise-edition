@@ -1,0 +1,3 @@
+hello distcp hadoop mapreduce
+my distcp based on mapreduce
+copy files between file systems
