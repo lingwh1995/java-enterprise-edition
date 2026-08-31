@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>chapter-02-01-mq-kafka</artifactId>
+    <artifactId>chapter-03-01-mq-kafka</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
