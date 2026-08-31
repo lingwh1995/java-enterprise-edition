@@ -26,7 +26,8 @@
     <modules>
         <module>chapter-01-01-hadoop-hdfs</module>
         <module>chapter-01-02-hadoop-mapreduce</module>
-        <module>chapter-02-01-zookeeper</module>
+        <module>chapter-02-01-zookeeper-official</module>
+        <module>chapter-02-02-zookeeper-curator</module>
         <module>chapter-03-01-mq-kafka</module>
         <module>chapter-03-02-mq-mqtt</module>
     </modules>

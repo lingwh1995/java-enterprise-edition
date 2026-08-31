@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>chapter-02-01-zookeeper</artifactId>
+    <artifactId>chapter-02-02-zookeeper-curator</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -37,6 +37,19 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- Curator 核心：封装了连接管理、重连、fluent API -->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>5.4.0</version>
+        </dependency>
+        <!-- Curator recipes：锁、选举、缓存等高级配方 -->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>5.4.0</version>
+        </dependency>
+        <!-- 显式声明 ZooKeeper 客户端版本，与 chapter-02-01 保持一致 -->
         <dependency>
             <groupId>org.apache.zookeeper</groupId>
             <artifactId>zookeeper</artifactId>
@@ -53,6 +66,5 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
     </dependencies>
 </project>

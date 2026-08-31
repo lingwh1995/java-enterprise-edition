@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+curator:
+  # ZooKeeper 地址，集群用逗号分隔
+  connect-string: hadoop21:2181
+  # 会话超时时间(毫秒)
+  session-timeout: 60000
+  # 连接超时时间(毫秒)
+  connection-timeout: 15000
+  # 重试基础间隔(毫秒)
+  base-sleep-time: 1000
+  # 最大重试次数
+  max-retries: 3
