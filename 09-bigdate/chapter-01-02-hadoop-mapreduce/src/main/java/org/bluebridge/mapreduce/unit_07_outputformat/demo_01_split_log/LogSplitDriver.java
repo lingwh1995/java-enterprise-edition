@@ -42,7 +42,7 @@ public class LogSplitDriver {
         }
 
         // 2. 创建 Job 对象
-        Job job = Job.getInstance(conf, "word count");
+        Job job = Job.getInstance(conf, "WordCount");
 
         // 3. 设置 Job 类的驱动类
         job.setJarByClass(LogSplitDriver.class);
@@ -74,8 +74,8 @@ public class LogSplitDriver {
             outputPath = new Path(args[1]);
         } else {
             Path basePath = new Path(LogSplitDriver.class.getClassLoader().getResource("").toURI());
-            inputPath = new Path(basePath, "hadoop/input/unit_06_outputformat/demo_01_split_log");
-            outputPath = new Path(basePath, "hadoop/output/unit_06_outputformat/demo_01_split_log");
+            inputPath = new Path(basePath, "hadoop/input/unit_07_outputformat/demo_01_split_log");
+            outputPath = new Path(basePath, "hadoop/output/unit_07_outputformat/demo_01_split_log");
         }
 
         // 8. 自动删除输出目录（避免已存在报错）

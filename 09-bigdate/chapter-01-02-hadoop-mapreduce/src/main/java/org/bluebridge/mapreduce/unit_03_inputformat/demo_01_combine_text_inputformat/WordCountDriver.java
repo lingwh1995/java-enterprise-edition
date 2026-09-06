@@ -58,7 +58,7 @@ public class WordCountDriver {
         // --------------------- 设置 InputFormat 实现类结束 ---------------------
 
         // 2. 创建 Job 对象
-        Job job = Job.getInstance(conf, "word count");
+        Job job = Job.getInstance(conf, "WordCount");
 
         // 3. 设置 Job 类的驱动类
         job.setJarByClass(WordCountDriver.class);

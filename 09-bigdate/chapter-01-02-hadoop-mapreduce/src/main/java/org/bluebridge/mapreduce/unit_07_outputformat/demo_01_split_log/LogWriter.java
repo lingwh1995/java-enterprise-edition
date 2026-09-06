@@ -22,12 +22,12 @@ public class LogWriter extends RecordWriter<Text, NullWritable> {
     /**
      * Hadoop 日志文件路径 - 会生成到当前项目根目录下的 hadoop 目录下
      */
-    private String hadoopLogPath = "hadoop/output/unit_06_outputformat/demo_01_split_log/hadoop.log";
+    private String hadoopLogPath = "hadoop/output/unit_07_outputformat/demo_01_split_log/hadoop.log";
 
     /**
      * other 日志文件路径 - 会生成到当前项目根目录下的 hadoop 目录下
      */
-    private String otherLogPath = "hadoop/output/unit_06_outputformat/demo_01_split_log/other.log";
+    private String otherLogPath = "hadoop/output/unit_07_outputformat/demo_01_split_log/other.log";
 
     FileSystem fileSystem;
     FSDataOutputStream hadoopLogOutputStream;
