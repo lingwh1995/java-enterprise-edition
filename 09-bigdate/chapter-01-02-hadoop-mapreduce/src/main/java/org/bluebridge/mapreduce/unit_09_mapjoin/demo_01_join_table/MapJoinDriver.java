@@ -41,7 +41,7 @@ public class MapJoinDriver {
         }
 
         // 2. 创建 Job 对象
-        Job job = Job.getInstance(conf, "map join");
+        Job job = Job.getInstance(conf, "MapJoin");
 
         // 3. 设置 Job 类的驱动类
         job.setJarByClass(MapJoinDriver.class);
@@ -61,34 +61,37 @@ public class MapJoinDriver {
         // --------------------- 设置 ReduceTask 数量结束 ---------------------
 
         // --------------------- 设置分布式缓存文件的路径开始 ---------------------
-        // 使用相对路径设置分布式缓存文件的路径
-        Path basePath = new Path(MapJoinDriver.class.getClassLoader().getResource("").toURI());
-        Path cacheFilePath = new Path(basePath, "hadoop/input/unit_09_mapjoin/demo_01_cache_file/product.txt");
-        File cacheFile = new File(cacheFilePath.toUri());
-        /**
-         * 关于分布式缓存的解释?
-         * Hadoop 会把 addCacheFile 声明的文件自动分发到每个运行 MapTask 的节点本地，副本随节点分布——所以叫"分布式缓存"。addCacheFile 只是声明，MapTask 的分布式调度才是"分布式"的根源。
-         */
-        job.addCacheFile(cacheFile.toURI());
-
-        // 使用绝对路径设置分布式缓存文件的路径
-        // job.addCacheFile(URI.create("file:///D:/input/cachefile/pd.txt"));
-        // --------------------- 设置分布式缓存文件的路径结束 ---------------------
-
-
-        // 7. 设置输入、输出路径
         Path inputPath;
         Path outputPath;
+        if (args.length >= 2) {
+            //集群运行，使用HDFS路径设置分布式缓存文件的路径
+            Path hdfsCacheFilePath = new Path("/input/unit_09_mapjoin/demo_01_cache_file/product.txt");
+            job.addCacheFile(hdfsCacheFilePath.toUri());
+        } else {
+            // 使用相对路径设置分布式缓存文件的路径
+            Path basePath = new Path(MapJoinDriver.class.getClassLoader().getResource("").toURI());
+            Path cacheFilePath = new Path(basePath, "hadoop/input/unit_09_mapjoin/demo_01_cache_file/product.txt");
+            File cacheFile = new File(cacheFilePath.toUri());
+            /**
+             * 关于分布式缓存的解释?
+             * Hadoop 会把 addCacheFile 声明的文件自动分发到每个运行 MapTask 的节点本地，副本随节点分布——所以叫"分布式缓存"。addCacheFile 只是声明，MapTask 的分布式调度才是"分布式"的根源。
+             */
+            job.addCacheFile(cacheFile.toURI());
 
+            // 使用绝对路径设置分布式缓存文件的路径
+            // job.addCacheFile(URI.create("file:///D:/input/cachefile/pd.txt"));
+        }
+        // --------------------- 设置分布式缓存文件的路径结束 ---------------------
+
+        // 7. 设置输入、输出路径，自动删除输出目录（避免已存在报错）
         if (args.length >= 2) {
             inputPath = new Path(args[0]);
             outputPath = new Path(args[1]);
         } else {
+            Path basePath = new Path(MapJoinDriver.class.getClassLoader().getResource("").toURI());
             inputPath = new Path(basePath, "hadoop/input/unit_09_mapjoin/demo_01_join_table");
             outputPath = new Path(basePath, "hadoop/output/unit_09_mapjoin/demo_01_join_table");
         }
-
-        // 8. 自动删除输出目录（避免已存在报错）
         FileSystem fs = outputPath.getFileSystem(conf);
         if (fs.exists(outputPath)) {
             fs.delete(outputPath, true);

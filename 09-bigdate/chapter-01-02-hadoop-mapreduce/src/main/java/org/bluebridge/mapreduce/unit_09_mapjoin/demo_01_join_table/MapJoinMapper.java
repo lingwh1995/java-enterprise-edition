@@ -58,14 +58,15 @@ public class MapJoinMapper extends Mapper<LongWritable, Text, Text, NullWritable
         while (StringUtils.isNotEmpty(line = bufferedReader.readLine())){
             // 去除行首 BOM 字符（UTF-8 文件第一行可能带 \uFEFF），并 trim 掉末尾多余空白
             line = line.replace("\uFEFF", "").trim();
-            // 切割  01	小米
+            // 切割  01   小米
             String[] datas = line.split("\t");
             productMap.put(datas[0], datas[1]);
         }
 
-        // 关闭资源
-        IOUtils.closeStream(fileSystem);
+        // 关闭资源：只关闭流，不要关闭FileSystem！
+        IOUtils.closeStream(inputStream);
         IOUtils.closeStream(bufferedReader);
+        // IOUtils.closeStream(fileSystem); // 删掉/注释掉这一行！！
     }
 
     /**

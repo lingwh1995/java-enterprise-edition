@@ -40,7 +40,7 @@ public class ReduceJoinDriver {
         }
 
         // 2. 创建 Job 对象
-        Job job = Job.getInstance(conf, "reduce join");
+        Job job = Job.getInstance(conf, "ReduceJoin");
 
         // 3. 设置 Job 类的驱动类
         job.setJarByClass(ReduceJoinDriver.class);

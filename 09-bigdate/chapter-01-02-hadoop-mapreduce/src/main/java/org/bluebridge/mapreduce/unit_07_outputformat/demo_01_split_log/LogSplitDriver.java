@@ -42,7 +42,7 @@ public class LogSplitDriver {
         }
 
         // 2. 创建 Job 对象
-        Job job = Job.getInstance(conf, "WordCount");
+        Job job = Job.getInstance(conf, "SplitLog");
 
         // 3. 设置 Job 类的驱动类
         job.setJarByClass(LogSplitDriver.class);
